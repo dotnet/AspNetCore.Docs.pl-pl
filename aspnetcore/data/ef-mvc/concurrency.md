@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -83,7 +83,7 @@ ms.locfileid: "93054375"
 
 * <span data-ttu-id="031bc-150">Można śledzić, która właściwość została zmodyfikowana przez użytkownika i zaktualizować tylko odpowiednie kolumny w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="031bc-150">You can keep track of which property a user has modified and update only the corresponding columns in the database.</span></span>
 
-     <span data-ttu-id="031bc-151">W przykładowym scenariuszu żadne dane nie zostaną utracone, ponieważ różne właściwości zostały zaktualizowane przez dwóch użytkowników.</span><span class="sxs-lookup"><span data-stu-id="031bc-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="031bc-152">Następnym razem, gdy ktoś przegląda ten dział w języku angielskim, zobaczy zmiany w kategorii Janina i Jan — datę początkową 9/1/2013 i budżet zerowych dolarów.</span><span class="sxs-lookup"><span data-stu-id="031bc-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="031bc-153">Ta metoda aktualizacji może zmniejszyć liczbę konfliktów, które mogłyby spowodować utratę danych, ale nie może uniknąć utraty danych, jeśli wprowadzono konkurencyjne zmiany w tej samej właściwości jednostki.</span><span class="sxs-lookup"><span data-stu-id="031bc-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="031bc-154">Czy Entity Framework działa w ten sposób, zależy od sposobu implementacji kodu aktualizacji.</span><span class="sxs-lookup"><span data-stu-id="031bc-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="031bc-155">Często nie jest to praktyczne w aplikacji sieci Web, ponieważ może wymagać utrzymania dużej ilości danych w celu śledzenia wszystkich oryginalnych wartości właściwości dla jednostki, a także nowych wartości.</span><span class="sxs-lookup"><span data-stu-id="031bc-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="031bc-156">Utrzymywanie dużej ilości stanu może wpłynąć na wydajność aplikacji, ponieważ wymaga ona zasobów serwera lub musi być uwzględniona na stronie sieci Web (na przykład w ukrytych polach) lub w :::no-loc(cookie)::: .</span><span class="sxs-lookup"><span data-stu-id="031bc-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a :::no-loc(cookie):::.</span></span>
+     <span data-ttu-id="031bc-151">W przykładowym scenariuszu żadne dane nie zostaną utracone, ponieważ różne właściwości zostały zaktualizowane przez dwóch użytkowników.</span><span class="sxs-lookup"><span data-stu-id="031bc-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="031bc-152">Następnym razem, gdy ktoś przegląda ten dział w języku angielskim, zobaczy zmiany w kategorii Janina i Jan — datę początkową 9/1/2013 i budżet zerowych dolarów.</span><span class="sxs-lookup"><span data-stu-id="031bc-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="031bc-153">Ta metoda aktualizacji może zmniejszyć liczbę konfliktów, które mogłyby spowodować utratę danych, ale nie może uniknąć utraty danych, jeśli wprowadzono konkurencyjne zmiany w tej samej właściwości jednostki.</span><span class="sxs-lookup"><span data-stu-id="031bc-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="031bc-154">Czy Entity Framework działa w ten sposób, zależy od sposobu implementacji kodu aktualizacji.</span><span class="sxs-lookup"><span data-stu-id="031bc-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="031bc-155">Często nie jest to praktyczne w aplikacji sieci Web, ponieważ może wymagać utrzymania dużej ilości danych w celu śledzenia wszystkich oryginalnych wartości właściwości dla jednostki, a także nowych wartości.</span><span class="sxs-lookup"><span data-stu-id="031bc-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="031bc-156">Utrzymywanie dużej ilości stanu może wpłynąć na wydajność aplikacji, ponieważ wymaga ona zasobów serwera lub musi być uwzględniona na stronie sieci Web (na przykład w ukrytych polach) lub w cookie .</span><span class="sxs-lookup"><span data-stu-id="031bc-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a cookie.</span></span>
 
 * <span data-ttu-id="031bc-157">Możesz pozwolić, aby zmiana została zastąpiona przez Jan.</span><span class="sxs-lookup"><span data-stu-id="031bc-157">You can let John's change overwrite Jane's change.</span></span>
 

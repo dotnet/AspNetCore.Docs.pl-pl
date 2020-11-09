@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/introduction
 ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93051697"
 
 <span data-ttu-id="68a01-110">Ogólna Instrukcja problemu może być zwięzłie określona w jednym zdaniu: Chcę utrzymać zaufane informacje do późniejszego pobrania, ale nie mam zaufania mechanizmu trwałości.</span><span class="sxs-lookup"><span data-stu-id="68a01-110">The overall problem statement can be succinctly stated in a single sentence: I need to persist trusted information for later retrieval, but I don't trust the persistence mechanism.</span></span> <span data-ttu-id="68a01-111">W przypadku terminów sieci Web może to być napisano jako "muszę przeprowadzić dwukierunkową relację zaufania za pośrednictwem niezaufanego klienta".</span><span class="sxs-lookup"><span data-stu-id="68a01-111">In web terms, this might be written as "I need to round-trip trusted state via an untrusted client."</span></span>
 
-<span data-ttu-id="68a01-112">Przykładem kanonicznym jest :::no-loc(cookie)::: token uwierzytelniania lub okaziciela.</span><span class="sxs-lookup"><span data-stu-id="68a01-112">The canonical example of this is an authentication :::no-loc(cookie)::: or bearer token.</span></span> <span data-ttu-id="68a01-113">Serwer generuje "jestem Groot i ma uprawnienia XYZ" i udostępnia go klientowi.</span><span class="sxs-lookup"><span data-stu-id="68a01-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="68a01-114">W przyszłości klient będzie zaprezentować ten token z powrotem do serwera, ale serwer wymaga pewnego rodzaju pewności, że klient nie wykonał sfałszowanego tokenu.</span><span class="sxs-lookup"><span data-stu-id="68a01-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="68a01-115">W rezultacie pierwsze wymaganie: autentyczność (vel</span><span class="sxs-lookup"><span data-stu-id="68a01-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="68a01-116">integralność, nieautoryzowane sprawdzanie poprawności).</span><span class="sxs-lookup"><span data-stu-id="68a01-116">integrity, tamper-proofing).</span></span>
+<span data-ttu-id="68a01-112">Przykładem kanonicznym jest cookie token uwierzytelniania lub okaziciela.</span><span class="sxs-lookup"><span data-stu-id="68a01-112">The canonical example of this is an authentication cookie or bearer token.</span></span> <span data-ttu-id="68a01-113">Serwer generuje "jestem Groot i ma uprawnienia XYZ" i udostępnia go klientowi.</span><span class="sxs-lookup"><span data-stu-id="68a01-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="68a01-114">W przyszłości klient będzie zaprezentować ten token z powrotem do serwera, ale serwer wymaga pewnego rodzaju pewności, że klient nie wykonał sfałszowanego tokenu.</span><span class="sxs-lookup"><span data-stu-id="68a01-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="68a01-115">W rezultacie pierwsze wymaganie: autentyczność (vel</span><span class="sxs-lookup"><span data-stu-id="68a01-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="68a01-116">integralność, nieautoryzowane sprawdzanie poprawności).</span><span class="sxs-lookup"><span data-stu-id="68a01-116">integrity, tamper-proofing).</span></span>
 
 <span data-ttu-id="68a01-117">Ponieważ trwały stan jest traktowany jako zaufany przez serwer, przewidujemy, że ten stan może zawierać informacje specyficzne dla środowiska operacyjnego.</span><span class="sxs-lookup"><span data-stu-id="68a01-117">Since the persisted state is trusted by the server, we anticipate that this state might contain information that's specific to the operating environment.</span></span> <span data-ttu-id="68a01-118">Może to być w postaci ścieżki pliku, uprawnienia, uchwytu lub innego odwołania pośredniego lub innego elementu danych specyficznych dla serwera.</span><span class="sxs-lookup"><span data-stu-id="68a01-118">This could be in the form of a file path, a permission, a handle or other indirect reference, or some other piece of server-specific data.</span></span> <span data-ttu-id="68a01-119">Takie informacje nie powinny być zwykle ujawniane niezaufanym klientom.</span><span class="sxs-lookup"><span data-stu-id="68a01-119">Such information should generally not be disclosed to an untrusted client.</span></span> <span data-ttu-id="68a01-120">W tym przypadku drugie wymaganie: poufność.</span><span class="sxs-lookup"><span data-stu-id="68a01-120">Thus the second requirement: confidentiality.</span></span>
 

@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/startup
 ms.openlocfilehash: 747b13abb0ce3fed2d1dc018c6dbf82db1ae7130
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -45,7 +45,7 @@ ms.locfileid: "93052243"
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="8809f-114">Powyższy przykład dotyczy [ :::no-loc(Razor)::: stron](xref:razor-pages/index); wersja MVC jest podobna.</span><span class="sxs-lookup"><span data-stu-id="8809f-114">The preceding sample is for [:::no-loc(Razor)::: Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
+<span data-ttu-id="8809f-114">Powyższy przykład dotyczy [ Razor stron](xref:razor-pages/index); wersja MVC jest podobna.</span><span class="sxs-lookup"><span data-stu-id="8809f-114">The preceding sample is for [Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
 
 
 <span data-ttu-id="8809f-115">`Startup`Klasa jest określana podczas kompilowania [hosta](xref:fundamentals/index#host) aplikacji.</span><span class="sxs-lookup"><span data-stu-id="8809f-115">The `Startup` class is specified when the app's [host](xref:fundamentals/index#host) is built.</span></span> <span data-ttu-id="8809f-116">`Startup`Klasa jest zwykle określona przez wywołanie metody [WebHostBuilderExtensions. UseStartup \<TStartup> ](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) w konstruktorze hosta:</span><span class="sxs-lookup"><span data-stu-id="8809f-116">The `Startup` class is typically specified by calling the [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) method on the host builder:</span></span>
@@ -80,9 +80,9 @@ ms.locfileid: "93052243"
 
 <span data-ttu-id="8809f-134">Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` .</span><span class="sxs-lookup"><span data-stu-id="8809f-134">The host may configure some services before `Startup` methods are called.</span></span> <span data-ttu-id="8809f-135">Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).</span><span class="sxs-lookup"><span data-stu-id="8809f-135">For more information, see [The host](xref:fundamentals/index#host).</span></span>
 
-<span data-ttu-id="8809f-136">W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> .</span><span class="sxs-lookup"><span data-stu-id="8809f-136">For features that require substantial setup, there are `Add{Service}` extension methods on <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>.</span></span> <span data-ttu-id="8809f-137">Na przykład **Dodaj** DbContext, **Dodaj** domyślne :::no-loc(Identity)::: , **Dodaj** EntityFrameworkStores i **Dodaj** :::no-loc(Razor)::: strony:</span><span class="sxs-lookup"><span data-stu-id="8809f-137">For example, **Add** DbContext, **Add** Default:::no-loc(Identity):::, **Add** EntityFrameworkStores, and **Add**:::no-loc(Razor):::Pages:</span></span>
+<span data-ttu-id="8809f-136">W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> .</span><span class="sxs-lookup"><span data-stu-id="8809f-136">For features that require substantial setup, there are `Add{Service}` extension methods on <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>.</span></span> <span data-ttu-id="8809f-137">Na przykład **Dodaj** DbContext, **Dodaj** domyślne Identity , **Dodaj** EntityFrameworkStores i **Dodaj** Razor strony:</span><span class="sxs-lookup"><span data-stu-id="8809f-137">For example, **Add** DbContext, **Add** DefaultIdentity, **Add** EntityFrameworkStores, and **Add**RazorPages:</span></span>
 
-[!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup:::no-loc(Identity):::.cs?name=snippet)]
+[!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
 <span data-ttu-id="8809f-138">Dodanie usług do kontenera usług sprawia, że są one dostępne w aplikacji i w `Configure` metodzie.</span><span class="sxs-lookup"><span data-stu-id="8809f-138">Adding services to the service container makes them available within the app and in the `Configure` method.</span></span> <span data-ttu-id="8809f-139">Usługi są rozwiązywane za pośrednictwem [iniekcji zależności](xref:fundamentals/dependency-injection) lub z <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .</span><span class="sxs-lookup"><span data-stu-id="8809f-139">The services are resolved via [dependency injection](xref:fundamentals/dependency-injection) or from <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>.</span></span>
 
@@ -97,12 +97,12 @@ ms.locfileid: "93052243"
 * [<span data-ttu-id="8809f-148">Zabezpieczenia protokołu HTTP Strict Transport (HSTS)</span><span class="sxs-lookup"><span data-stu-id="8809f-148">HTTP Strict Transport Security (HSTS)</span></span>](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [<span data-ttu-id="8809f-149">Przekierowanie HTTPS</span><span class="sxs-lookup"><span data-stu-id="8809f-149">HTTPS redirection</span></span>](xref:security/enforcing-ssl)
 * [<span data-ttu-id="8809f-150">Pliki statyczne</span><span class="sxs-lookup"><span data-stu-id="8809f-150">Static files</span></span>](xref:fundamentals/static-files)
-* <span data-ttu-id="8809f-151">ASP.NET Core [MVC](xref:mvc/overview) i [ :::no-loc(Razor)::: strony](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="8809f-151">ASP.NET Core [MVC](xref:mvc/overview) and [:::no-loc(Razor)::: Pages](xref:razor-pages/index)</span></span>
+* <span data-ttu-id="8809f-151">ASP.NET Core [MVC](xref:mvc/overview) i [ Razor strony](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="8809f-151">ASP.NET Core [MVC](xref:mvc/overview) and [Razor Pages](xref:razor-pages/index)</span></span>
 
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="8809f-152">Powyższy przykład dotyczy [ :::no-loc(Razor)::: stron](xref:razor-pages/index); wersja MVC jest podobna.</span><span class="sxs-lookup"><span data-stu-id="8809f-152">The preceding sample is for [:::no-loc(Razor)::: Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
+<span data-ttu-id="8809f-152">Powyższy przykład dotyczy [ Razor stron](xref:razor-pages/index); wersja MVC jest podobna.</span><span class="sxs-lookup"><span data-stu-id="8809f-152">The preceding sample is for [Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
 
 <span data-ttu-id="8809f-153">Każda `Use` Metoda rozszerzenia dodaje jeden lub więcej składników pośredniczących do potoku żądania.</span><span class="sxs-lookup"><span data-stu-id="8809f-153">Each `Use` extension method adds one or more middleware components to the request pipeline.</span></span> <span data-ttu-id="8809f-154">Na przykład program <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> skonfiguruje [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) , aby obsługiwało [pliki statyczne](xref:fundamentals/static-files).</span><span class="sxs-lookup"><span data-stu-id="8809f-154">For instance, <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> configures [middleware](xref:fundamentals/middleware/index) to serve [static files](xref:fundamentals/static-files).</span></span>
 
@@ -212,7 +212,7 @@ ms.locfileid: "93052243"
 
 <span data-ttu-id="8809f-223">Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` .</span><span class="sxs-lookup"><span data-stu-id="8809f-223">The host may configure some services before `Startup` methods are called.</span></span> <span data-ttu-id="8809f-224">Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).</span><span class="sxs-lookup"><span data-stu-id="8809f-224">For more information, see [The host](xref:fundamentals/index#host).</span></span>
 
-<span data-ttu-id="8809f-225">W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> .</span><span class="sxs-lookup"><span data-stu-id="8809f-225">For features that require substantial setup, there are `Add{Service}` extension methods on <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>.</span></span> <span data-ttu-id="8809f-226">Na przykład **Dodaj** DbContext, **Dodaj** domyślne :::no-loc(Identity)::: , **Dodaj** EntityFrameworkStores i **Dodaj** :::no-loc(Razor)::: strony:</span><span class="sxs-lookup"><span data-stu-id="8809f-226">For example, **Add** DbContext, **Add** Default:::no-loc(Identity):::, **Add** EntityFrameworkStores, and **Add**:::no-loc(Razor):::Pages:</span></span>
+<span data-ttu-id="8809f-225">W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> .</span><span class="sxs-lookup"><span data-stu-id="8809f-225">For features that require substantial setup, there are `Add{Service}` extension methods on <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>.</span></span> <span data-ttu-id="8809f-226">Na przykład **Dodaj** DbContext, **Dodaj** domyślne Identity , **Dodaj** EntityFrameworkStores i **Dodaj** Razor strony:</span><span class="sxs-lookup"><span data-stu-id="8809f-226">For example, **Add** DbContext, **Add** DefaultIdentity, **Add** EntityFrameworkStores, and **Add**RazorPages:</span></span>
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 
@@ -231,7 +231,7 @@ ms.locfileid: "93052243"
 * [<span data-ttu-id="8809f-238">Zabezpieczenia protokołu HTTP Strict Transport (HSTS)</span><span class="sxs-lookup"><span data-stu-id="8809f-238">HTTP Strict Transport Security (HSTS)</span></span>](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [<span data-ttu-id="8809f-239">Przekierowanie HTTPS</span><span class="sxs-lookup"><span data-stu-id="8809f-239">HTTPS redirection</span></span>](xref:security/enforcing-ssl)
 * [<span data-ttu-id="8809f-240">Pliki statyczne</span><span class="sxs-lookup"><span data-stu-id="8809f-240">Static files</span></span>](xref:fundamentals/static-files)
-* <span data-ttu-id="8809f-241">ASP.NET Core [MVC](xref:mvc/overview) i [ :::no-loc(Razor)::: strony](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="8809f-241">ASP.NET Core [MVC](xref:mvc/overview) and [:::no-loc(Razor)::: Pages](xref:razor-pages/index)</span></span>
+* <span data-ttu-id="8809f-241">ASP.NET Core [MVC](xref:mvc/overview) i [ Razor strony](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="8809f-241">ASP.NET Core [MVC](xref:mvc/overview) and [Razor Pages](xref:razor-pages/index)</span></span>
 * [<span data-ttu-id="8809f-242">Ogólne rozporządzenie o ochronie danych (RODO)</span><span class="sxs-lookup"><span data-stu-id="8809f-242">General Data Protection Regulation (GDPR)</span></span>](xref:security/gdpr)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]

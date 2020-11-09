@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/working-with-forms
 ms.openlocfilehash: a568ad481eb09587e2ddce8e84d0ac3eff01e990
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -90,8 +90,8 @@ ms.locfileid: "93060901"
 |[<span data-ttu-id="788b3-137">ASP-Controller</span><span class="sxs-lookup"><span data-stu-id="788b3-137">asp-controller</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|<span data-ttu-id="788b3-138">Nazwa kontrolera.</span><span class="sxs-lookup"><span data-stu-id="788b3-138">The name of the controller.</span></span>|
 |[<span data-ttu-id="788b3-139">ASP — akcja</span><span class="sxs-lookup"><span data-stu-id="788b3-139">asp-action</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|<span data-ttu-id="788b3-140">Nazwa metody akcji.</span><span class="sxs-lookup"><span data-stu-id="788b3-140">The name of the action method.</span></span>|
 |[<span data-ttu-id="788b3-141">obszar ASP</span><span class="sxs-lookup"><span data-stu-id="788b3-141">asp-area</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|<span data-ttu-id="788b3-142">Nazwa obszaru.</span><span class="sxs-lookup"><span data-stu-id="788b3-142">The name of the area.</span></span>|
-|[<span data-ttu-id="788b3-143">ASP — Strona</span><span class="sxs-lookup"><span data-stu-id="788b3-143">asp-page</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|<span data-ttu-id="788b3-144">Nazwa :::no-loc(Razor)::: strony.</span><span class="sxs-lookup"><span data-stu-id="788b3-144">The name of the :::no-loc(Razor)::: page.</span></span>|
-|[<span data-ttu-id="788b3-145">ASP — obsługa stron</span><span class="sxs-lookup"><span data-stu-id="788b3-145">asp-page-handler</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|<span data-ttu-id="788b3-146">Nazwa :::no-loc(Razor)::: procedury obsługi strony.</span><span class="sxs-lookup"><span data-stu-id="788b3-146">The name of the :::no-loc(Razor)::: page handler.</span></span>|
+|[<span data-ttu-id="788b3-143">ASP — Strona</span><span class="sxs-lookup"><span data-stu-id="788b3-143">asp-page</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|<span data-ttu-id="788b3-144">Nazwa Razor strony.</span><span class="sxs-lookup"><span data-stu-id="788b3-144">The name of the Razor page.</span></span>|
+|[<span data-ttu-id="788b3-145">ASP — obsługa stron</span><span class="sxs-lookup"><span data-stu-id="788b3-145">asp-page-handler</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|<span data-ttu-id="788b3-146">Nazwa Razor procedury obsługi strony.</span><span class="sxs-lookup"><span data-stu-id="788b3-146">The name of the Razor page handler.</span></span>|
 |[<span data-ttu-id="788b3-147">ASP — Route</span><span class="sxs-lookup"><span data-stu-id="788b3-147">asp-route</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|<span data-ttu-id="788b3-148">Nazwa trasy.</span><span class="sxs-lookup"><span data-stu-id="788b3-148">The name of the route.</span></span>|
 |[<span data-ttu-id="788b3-149">ASP-Route-{Value}</span><span class="sxs-lookup"><span data-stu-id="788b3-149">asp-route-{value}</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|<span data-ttu-id="788b3-150">Wartość trasy pojedynczego adresu URL.</span><span class="sxs-lookup"><span data-stu-id="788b3-150">A single URL route value.</span></span> <span data-ttu-id="788b3-151">Na przykład `asp-route-id="1234"`.</span><span class="sxs-lookup"><span data-stu-id="788b3-151">For example, `asp-route-id="1234"`.</span></span>|
 |[<span data-ttu-id="788b3-152">ASP — wszystkie trasy — dane</span><span class="sxs-lookup"><span data-stu-id="788b3-152">asp-all-route-data</span></span>](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|<span data-ttu-id="788b3-153">Wszystkie wartości trasy.</span><span class="sxs-lookup"><span data-stu-id="788b3-153">All route values.</span></span>|
@@ -120,7 +120,7 @@ ms.locfileid: "93060901"
 
 ### <a name="submit-to-page-example"></a><span data-ttu-id="788b3-159">Prześlij do przykładowej strony</span><span class="sxs-lookup"><span data-stu-id="788b3-159">Submit to page example</span></span>
 
-<span data-ttu-id="788b3-160">Następujący znak przesłania formularz do `About` :::no-loc(Razor)::: strony:</span><span class="sxs-lookup"><span data-stu-id="788b3-160">The following markup submits the form to the `About` :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="788b3-160">Następujący znak przesłania formularz do `About` Razor strony:</span><span class="sxs-lookup"><span data-stu-id="788b3-160">The following markup submits the form to the `About` Razor Page:</span></span>
 
 ```cshtml
 <form method="post">
@@ -327,7 +327,7 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-<span data-ttu-id="788b3-251">Poniżej :::no-loc(Razor)::: pokazano, jak uzyskać dostęp do określonego `Color` elementu:</span><span class="sxs-lookup"><span data-stu-id="788b3-251">The following :::no-loc(Razor)::: shows how you access a specific `Color` element:</span></span>
+<span data-ttu-id="788b3-251">Poniżej Razor pokazano, jak uzyskać dostęp do określonego `Color` elementu:</span><span class="sxs-lookup"><span data-stu-id="788b3-251">The following Razor shows how you access a specific `Color` element:</span></span>
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
@@ -339,7 +339,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
 
-<span data-ttu-id="788b3-254">Poniżej :::no-loc(Razor)::: pokazano, jak wykonać iterację kolekcji:</span><span class="sxs-lookup"><span data-stu-id="788b3-254">The following :::no-loc(Razor)::: shows how to iterate over a collection:</span></span>
+<span data-ttu-id="788b3-254">Poniżej Razor pokazano, jak wykonać iterację kolekcji:</span><span class="sxs-lookup"><span data-stu-id="788b3-254">The following Razor shows how to iterate over a collection:</span></span>
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 

@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/mvc2
 ms.openlocfilehash: cf7d2e3a94c14fb752180d9349536d17b4557e0a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -88,7 +88,7 @@ ms.locfileid: "93051333"
 * <span data-ttu-id="a0712-152">Strony błędów</span><span class="sxs-lookup"><span data-stu-id="a0712-152">Error pages</span></span>
 * <span data-ttu-id="a0712-153">Pliki statyczne</span><span class="sxs-lookup"><span data-stu-id="a0712-153">Static files</span></span>
 * <span data-ttu-id="a0712-154">ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="a0712-154">ASP.NET Core MVC</span></span>
-* :::no-loc(Identity):::
+* Identity
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
@@ -106,7 +106,7 @@ ms.locfileid: "93051333"
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-<span data-ttu-id="a0712-162">ASP.NET Core może przechowywać dane konfiguracyjne dla aplikacji w dowolnym pliku i ładować je w ramach uruchamiania oprogramowania pośredniczącego.</span><span class="sxs-lookup"><span data-stu-id="a0712-162">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="a0712-163">Domyślny plik używany w szablonach projektu to *:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="a0712-163">The default file used in the project templates is *:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="a0712-162">ASP.NET Core może przechowywać dane konfiguracyjne dla aplikacji w dowolnym pliku i ładować je w ramach uruchamiania oprogramowania pośredniczącego.</span><span class="sxs-lookup"><span data-stu-id="a0712-162">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="a0712-163">Domyślny plik używany w szablonach projektu to *appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="a0712-163">The default file used in the project templates is *appsettings.json* :</span></span>
 
 [!code-json[](samples/appsettings-sample.json)]
 

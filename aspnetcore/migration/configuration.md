@@ -5,17 +5,17 @@ description: Dowiedz się, jak przeprowadzić migrację konfiguracji z projektu 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/configuration
 ms.openlocfilehash: d84204c8c791bfaf36432462cde3a42c294c7966
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -36,7 +36,7 @@ ms.locfileid: "93059796"
 
 <span data-ttu-id="cba67-109">ASP.NET Core nie używa już plików *Global. asax* i *web.config* , które zostały wykorzystane przez poprzednie wersje ASP.NET.</span><span class="sxs-lookup"><span data-stu-id="cba67-109">ASP.NET Core no longer uses the *Global.asax* and *web.config* files that previous versions of ASP.NET utilized.</span></span> <span data-ttu-id="cba67-110">We wcześniejszych wersjach programu ASP.NET logika uruchamiania aplikacji została umieszczona w `Application_StartUp` metodzie w *Global. asax* .</span><span class="sxs-lookup"><span data-stu-id="cba67-110">In the earlier versions of ASP.NET, application startup logic was placed in an `Application_StartUp` method within *Global.asax* .</span></span> <span data-ttu-id="cba67-111">Później w ASP.NET MVC plik *Startup.cs* został uwzględniony w katalogu głównym projektu; i, został wywołany podczas uruchamiania aplikacji.</span><span class="sxs-lookup"><span data-stu-id="cba67-111">Later, in ASP.NET MVC, a *Startup.cs* file was included in the root of the project; and, it was called when the application started.</span></span> <span data-ttu-id="cba67-112">ASP.NET Core częściowo przyjęła to podejście, umieszczając w pliku *Startup.cs* wszystkie logikę uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="cba67-112">ASP.NET Core has adopted this approach completely by placing all startup logic in the *Startup.cs* file.</span></span>
 
-<span data-ttu-id="cba67-113">Plik *web.config* został również zastąpiony przez ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="cba67-113">The *web.config* file has also been replaced in ASP.NET Core.</span></span> <span data-ttu-id="cba67-114">Konfigurację można teraz skonfigurować w ramach procedury uruchamiania aplikacji opisanej w *Startup.cs* .</span><span class="sxs-lookup"><span data-stu-id="cba67-114">Configuration itself can now be configured, as part of the application startup procedure described in *Startup.cs* .</span></span> <span data-ttu-id="cba67-115">Konfiguracja może nadal korzystać z plików XML, ale zazwyczaj projekty ASP.NET Core umieściją wartości konfiguracyjne w pliku w formacie JSON, na przykład *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="cba67-115">Configuration can still utilize XML files, but typically ASP.NET Core projects will place configuration values in a JSON-formatted file, such as *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="cba67-116">System konfiguracji ASP.NET Core może również łatwo uzyskać dostęp do zmiennych środowiskowych, co może zapewnić bezpieczniejsze [i niezawodne lokalizację](xref:security/app-secrets) dla wartości specyficznych dla środowiska.</span><span class="sxs-lookup"><span data-stu-id="cba67-116">ASP.NET Core's configuration system can also easily access environment variables, which can provide a [more secure and robust location](xref:security/app-secrets) for environment-specific values.</span></span> <span data-ttu-id="cba67-117">Jest to szczególnie prawdziwe w przypadku wpisów tajnych, takich jak parametry połączenia i klucze interfejsu API, które nie powinny być zaewidencjonowane do kontroli źródła.</span><span class="sxs-lookup"><span data-stu-id="cba67-117">This is especially true for secrets like connection strings and API keys that shouldn't be checked into source control.</span></span> <span data-ttu-id="cba67-118">Zobacz [Konfiguracja](xref:fundamentals/configuration/index) , aby dowiedzieć się więcej o konfiguracji w ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="cba67-118">See [Configuration](xref:fundamentals/configuration/index) to learn more about configuration in ASP.NET Core.</span></span>
+<span data-ttu-id="cba67-113">Plik *web.config* został również zastąpiony przez ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="cba67-113">The *web.config* file has also been replaced in ASP.NET Core.</span></span> <span data-ttu-id="cba67-114">Konfigurację można teraz skonfigurować w ramach procedury uruchamiania aplikacji opisanej w *Startup.cs* .</span><span class="sxs-lookup"><span data-stu-id="cba67-114">Configuration itself can now be configured, as part of the application startup procedure described in *Startup.cs* .</span></span> <span data-ttu-id="cba67-115">Konfiguracja może nadal korzystać z plików XML, ale zazwyczaj projekty ASP.NET Core umieściją wartości konfiguracyjne w pliku w formacie JSON, na przykład *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="cba67-115">Configuration can still utilize XML files, but typically ASP.NET Core projects will place configuration values in a JSON-formatted file, such as *appsettings.json* .</span></span> <span data-ttu-id="cba67-116">System konfiguracji ASP.NET Core może również łatwo uzyskać dostęp do zmiennych środowiskowych, co może zapewnić bezpieczniejsze [i niezawodne lokalizację](xref:security/app-secrets) dla wartości specyficznych dla środowiska.</span><span class="sxs-lookup"><span data-stu-id="cba67-116">ASP.NET Core's configuration system can also easily access environment variables, which can provide a [more secure and robust location](xref:security/app-secrets) for environment-specific values.</span></span> <span data-ttu-id="cba67-117">Jest to szczególnie prawdziwe w przypadku wpisów tajnych, takich jak parametry połączenia i klucze interfejsu API, które nie powinny być zaewidencjonowane do kontroli źródła.</span><span class="sxs-lookup"><span data-stu-id="cba67-117">This is especially true for secrets like connection strings and API keys that shouldn't be checked into source control.</span></span> <span data-ttu-id="cba67-118">Zobacz [Konfiguracja](xref:fundamentals/configuration/index) , aby dowiedzieć się więcej o konfiguracji w ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="cba67-118">See [Configuration](xref:fundamentals/configuration/index) to learn more about configuration in ASP.NET Core.</span></span>
 
 <span data-ttu-id="cba67-119">W tym artykule zaczynamy od częściowo zmigrowanego projektu ASP.NET Core z [poprzedniego artykułu](xref:migration/mvc).</span><span class="sxs-lookup"><span data-stu-id="cba67-119">For this article, we are starting with the partially migrated ASP.NET Core project from [the previous article](xref:migration/mvc).</span></span> <span data-ttu-id="cba67-120">Aby skonfigurować konfigurację, Dodaj następujący Konstruktor i właściwość do pliku *Startup.cs* znajdującego się w katalogu głównym projektu:</span><span class="sxs-lookup"><span data-stu-id="cba67-120">To setup configuration, add the following constructor and property to the *Startup.cs* file located in the root of the project:</span></span>
 
@@ -48,15 +48,15 @@ ms.locfileid: "93059796"
 using Microsoft.Extensions.Configuration;
 ```
 
-<span data-ttu-id="cba67-122">Dodaj *:::no-loc(appsettings.json):::* plik do katalogu głównego projektu przy użyciu odpowiedniego szablonu elementu:</span><span class="sxs-lookup"><span data-stu-id="cba67-122">Add an *:::no-loc(appsettings.json):::* file to the root of the project using the appropriate item template:</span></span>
+<span data-ttu-id="cba67-122">Dodaj *appsettings.json* plik do katalogu głównego projektu przy użyciu odpowiedniego szablonu elementu:</span><span class="sxs-lookup"><span data-stu-id="cba67-122">Add an *appsettings.json* file to the root of the project using the appropriate item template:</span></span>
 
 ![Dodawanie pliku JSON AppSettings](configuration/_static/add-appsettings-json.png)
 
 ## <a name="migrate-configuration-settings-from-webconfig"></a><span data-ttu-id="cba67-124">Migrowanie ustawień konfiguracji z web.config</span><span class="sxs-lookup"><span data-stu-id="cba67-124">Migrate configuration settings from web.config</span></span>
 
-<span data-ttu-id="cba67-125">Nasze projekty MVC ASP.NET zawierają wymagane parametry połączenia z bazą danych w *web.config* w `<connectionStrings>` elemencie.</span><span class="sxs-lookup"><span data-stu-id="cba67-125">Our ASP.NET MVC project included the required database connection string in *web.config* , in the `<connectionStrings>` element.</span></span> <span data-ttu-id="cba67-126">W naszym ASP.NET Core projekcie będziemy przechowywać te informacje w *:::no-loc(appsettings.json):::* pliku.</span><span class="sxs-lookup"><span data-stu-id="cba67-126">In our ASP.NET Core project, we are going to store this information in the *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="cba67-127">Otwórz *:::no-loc(appsettings.json):::* program i zwróć uwagę, że zawiera on już następujące elementy:</span><span class="sxs-lookup"><span data-stu-id="cba67-127">Open *:::no-loc(appsettings.json):::* , and note that it already includes the following:</span></span>
+<span data-ttu-id="cba67-125">Nasze projekty MVC ASP.NET zawierają wymagane parametry połączenia z bazą danych w *web.config* w `<connectionStrings>` elemencie.</span><span class="sxs-lookup"><span data-stu-id="cba67-125">Our ASP.NET MVC project included the required database connection string in *web.config* , in the `<connectionStrings>` element.</span></span> <span data-ttu-id="cba67-126">W naszym ASP.NET Core projekcie będziemy przechowywać te informacje w *appsettings.json* pliku.</span><span class="sxs-lookup"><span data-stu-id="cba67-126">In our ASP.NET Core project, we are going to store this information in the *appsettings.json* file.</span></span> <span data-ttu-id="cba67-127">Otwórz *appsettings.json* program i zwróć uwagę, że zawiera on już następujące elementy:</span><span class="sxs-lookup"><span data-stu-id="cba67-127">Open *appsettings.json* , and note that it already includes the following:</span></span>
 
-[!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/:::no-loc(appsettings.json):::?highlight=4)]
+[!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 
 <span data-ttu-id="cba67-128">W wyróżnionym wierszu poniżej Zmień nazwę bazy danych z **_CHANGE_ME** na nazwę bazy danych.</span><span class="sxs-lookup"><span data-stu-id="cba67-128">In the highlighted line depicted above, change the name of the database from **_CHANGE_ME** to the name of your database.</span></span>
 

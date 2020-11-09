@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -105,7 +105,7 @@ ms.locfileid: "93054388"
 
 <span data-ttu-id="8f8e2-160">W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *widoki/kursy* , a następnie kliknij polecenie **Dodaj > nowy element** .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-160">In **Solution Explorer** , right-click the *Views/Courses* folder, and then click **Add > New Item** .</span></span>
 
-<span data-ttu-id="8f8e2-161">W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję **:::no-loc(Razor)::: Wyświetl** i nazwij nowy widok *UpdateCourseCredits. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **:::no-loc(Razor)::: View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
+<span data-ttu-id="8f8e2-161">W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję **Razor Wyświetl** i nazwij nowy widok *UpdateCourseCredits. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-161">In the **Add New Item** dialog, click **ASP.NET Core** under **Installed** in the left pane, click **Razor View** , and name the new view *UpdateCourseCredits.cshtml* .</span></span>
 
 <span data-ttu-id="8f8e2-162">W obszarze *widoki/kursy/UpdateCourseCredits. cshtml* Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="8f8e2-162">In *Views/Courses/UpdateCourseCredits.cshtml* , replace the template code with the following code:</span></span>
 
@@ -241,7 +241,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 <span data-ttu-id="8f8e2-241">Podczas wprowadzania zmian schematu w bazie danych, która ma istniejące dane, można uzyskać inne błędy.</span><span class="sxs-lookup"><span data-stu-id="8f8e2-241">It's possible to get other errors when making schema changes in a database that has existing data.</span></span> <span data-ttu-id="8f8e2-242">Jeśli wystąpią błędy migracji, nie można rozwiązać tego problemu, możesz zmienić nazwę bazy danych w parametrach połączenia lub usunąć bazę danych.</span><span class="sxs-lookup"><span data-stu-id="8f8e2-242">If you get migration errors you can't resolve, you can either change the database name in the connection string or delete the database.</span></span> <span data-ttu-id="8f8e2-243">W przypadku nowej bazy danych nie ma żadnych danych do migracji, a polecenie Update-Database jest znacznie bardziej gotowe do wykonania bez błędów.</span><span class="sxs-lookup"><span data-stu-id="8f8e2-243">With a new database, there's no data to migrate, and the update-database command is much more likely to complete without errors.</span></span>
 
-<span data-ttu-id="8f8e2-244">Najprostszym podejściem jest zmiana nazwy bazy danych w programie *:::no-loc(appsettings.json):::* .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-244">The simplest approach is to rename the database in *:::no-loc(appsettings.json):::* .</span></span> <span data-ttu-id="8f8e2-245">Przy następnym uruchomieniu `database update` zostanie utworzona nowa baza danych.</span><span class="sxs-lookup"><span data-stu-id="8f8e2-245">The next time you run `database update`, a new database will be created.</span></span>
+<span data-ttu-id="8f8e2-244">Najprostszym podejściem jest zmiana nazwy bazy danych w programie *appsettings.json* .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-244">The simplest approach is to rename the database in *appsettings.json* .</span></span> <span data-ttu-id="8f8e2-245">Przy następnym uruchomieniu `database update` zostanie utworzona nowa baza danych.</span><span class="sxs-lookup"><span data-stu-id="8f8e2-245">The next time you run `database update`, a new database will be created.</span></span>
 
 <span data-ttu-id="8f8e2-246">Aby usunąć bazę danych w programie SSOX, kliknij prawym przyciskiem myszy bazę danych, kliknij polecenie **Usuń** , a następnie w oknie dialogowym **Usuwanie bazy danych** wybierz pozycję **Zamknij istniejące połączenia** i kliknij przycisk **OK** .</span><span class="sxs-lookup"><span data-stu-id="8f8e2-246">To delete a database in SSOX, right-click the database, click **Delete** , and then in the **Delete Database** dialog box select **Close existing connections** and click **OK** .</span></span>
 

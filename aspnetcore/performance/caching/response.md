@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/caching/response
 ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -84,13 +84,13 @@ ms.locfileid: "93059016"
 
 ### <a name="cache-tag-helper"></a><span data-ttu-id="d07c0-169">Pomocnik tagu pamięci podręcznej</span><span class="sxs-lookup"><span data-stu-id="d07c0-169">Cache Tag Helper</span></span>
 
-<span data-ttu-id="d07c0-170">Zawartość pamięci podręcznej ze widoku MVC lub :::no-loc(Razor)::: strony z pomocnikiem znacznika pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="d07c0-170">Cache the content from an MVC view or :::no-loc(Razor)::: Page with the Cache Tag Helper.</span></span> <span data-ttu-id="d07c0-171">Pomocnik tagu pamięci podręcznej używa buforowania w pamięci do przechowywania danych.</span><span class="sxs-lookup"><span data-stu-id="d07c0-171">The Cache Tag Helper uses in-memory caching to store data.</span></span>
+<span data-ttu-id="d07c0-170">Zawartość pamięci podręcznej ze widoku MVC lub Razor strony z pomocnikiem znacznika pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="d07c0-170">Cache the content from an MVC view or Razor Page with the Cache Tag Helper.</span></span> <span data-ttu-id="d07c0-171">Pomocnik tagu pamięci podręcznej używa buforowania w pamięci do przechowywania danych.</span><span class="sxs-lookup"><span data-stu-id="d07c0-171">The Cache Tag Helper uses in-memory caching to store data.</span></span>
 
 <span data-ttu-id="d07c0-172">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>.</span><span class="sxs-lookup"><span data-stu-id="d07c0-172">For more information, see <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>.</span></span>
 
 ### <a name="distributed-cache-tag-helper"></a><span data-ttu-id="d07c0-173">Pomocnik tagu rozproszonej pamięci podręcznej</span><span class="sxs-lookup"><span data-stu-id="d07c0-173">Distributed Cache Tag Helper</span></span>
 
-<span data-ttu-id="d07c0-174">Zawartość pamięci podręcznej ze widoku MVC lub ze :::no-loc(Razor)::: strony w scenariuszach rozproszonej chmury lub kolektywu serwerów sieci Web za pomocą pomocnika tagów rozproszonej pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="d07c0-174">Cache the content from an MVC view or :::no-loc(Razor)::: Page in distributed cloud or web farm scenarios with the Distributed Cache Tag Helper.</span></span> <span data-ttu-id="d07c0-175">Pomocnik tagów rozproszonej pamięci podręcznej używa SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)lub [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) do przechowywania danych.</span><span class="sxs-lookup"><span data-stu-id="d07c0-175">The Distributed Cache Tag Helper uses SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis), or [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) to store data.</span></span>
+<span data-ttu-id="d07c0-174">Zawartość pamięci podręcznej ze widoku MVC lub ze Razor strony w scenariuszach rozproszonej chmury lub kolektywu serwerów sieci Web za pomocą pomocnika tagów rozproszonej pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="d07c0-174">Cache the content from an MVC view or Razor Page in distributed cloud or web farm scenarios with the Distributed Cache Tag Helper.</span></span> <span data-ttu-id="d07c0-175">Pomocnik tagów rozproszonej pamięci podręcznej używa SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)lub [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) do przechowywania danych.</span><span class="sxs-lookup"><span data-stu-id="d07c0-175">The Distributed Cache Tag Helper uses SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis), or [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) to store data.</span></span>
 
 <span data-ttu-id="d07c0-176">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.</span><span class="sxs-lookup"><span data-stu-id="d07c0-176">For more information, see <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>.</span></span>
 
@@ -176,7 +176,7 @@ Cache-Control: public,max-age=10
 
 ### <a name="cache-profiles"></a><span data-ttu-id="d07c0-232">Profile pamięci podręcznej</span><span class="sxs-lookup"><span data-stu-id="d07c0-232">Cache profiles</span></span>
 
-<span data-ttu-id="d07c0-233">Zamiast duplikowania ustawień pamięci podręcznej odpowiedzi w wielu atrybutach akcji kontrolera, profile pamięci podręcznej można skonfigurować jako opcje podczas konfigurowania MVC/ :::no-loc(Razor)::: Pages in `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="d07c0-233">Instead of duplicating response cache settings on many controller action attributes, cache profiles can be configured as options when setting up MVC/:::no-loc(Razor)::: Pages in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="d07c0-234">Wartości Znalezione w profilu pamięci podręcznej, do którego istnieje odwołanie, są używane jako wartości domyślne przez <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> i są zastępowane przez wszystkie właściwości określone w atrybucie.</span><span class="sxs-lookup"><span data-stu-id="d07c0-234">Values found in a referenced cache profile are used as the defaults by the <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> and are overridden by any properties specified on the attribute.</span></span>
+<span data-ttu-id="d07c0-233">Zamiast duplikowania ustawień pamięci podręcznej odpowiedzi w wielu atrybutach akcji kontrolera, profile pamięci podręcznej można skonfigurować jako opcje podczas konfigurowania MVC/ Razor Pages in `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="d07c0-233">Instead of duplicating response cache settings on many controller action attributes, cache profiles can be configured as options when setting up MVC/Razor Pages in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="d07c0-234">Wartości Znalezione w profilu pamięci podręcznej, do którego istnieje odwołanie, są używane jako wartości domyślne przez <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> i są zastępowane przez wszystkie właściwości określone w atrybucie.</span><span class="sxs-lookup"><span data-stu-id="d07c0-234">Values found in a referenced cache profile are used as the defaults by the <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> and are overridden by any properties specified on the attribute.</span></span>
 
 <span data-ttu-id="d07c0-235">Skonfiguruj profil pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="d07c0-235">Set up a cache profile.</span></span> <span data-ttu-id="d07c0-236">Poniższy przykład przedstawia 30-sekundowy profil pamięci podręcznej w przykładowej aplikacji `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d07c0-236">The following example shows a 30 second cache profile in the sample app's `Startup.ConfigureServices`:</span></span>
 
@@ -198,7 +198,7 @@ Cache-Control: public,max-age=10
 
 <span data-ttu-id="d07c0-238"><xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Można zastosować do:</span><span class="sxs-lookup"><span data-stu-id="d07c0-238">The <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> can be applied to:</span></span>
 
-* <span data-ttu-id="d07c0-239">:::no-loc(Razor)::: Strony: nie można zastosować atrybutów do metod obsługi.</span><span class="sxs-lookup"><span data-stu-id="d07c0-239">:::no-loc(Razor)::: Pages: Attributes can't be applied to handler methods.</span></span>
+* <span data-ttu-id="d07c0-239">Razor Strony: nie można zastosować atrybutów do metod obsługi.</span><span class="sxs-lookup"><span data-stu-id="d07c0-239">Razor Pages: Attributes can't be applied to handler methods.</span></span>
 * <span data-ttu-id="d07c0-240">Kontrolery MVC.</span><span class="sxs-lookup"><span data-stu-id="d07c0-240">MVC controllers.</span></span>
 * <span data-ttu-id="d07c0-241">Metody akcji MVC: atrybuty poziomu metody zastępują ustawienia określone w atrybutach na poziomie klasy.</span><span class="sxs-lookup"><span data-stu-id="d07c0-241">MVC action methods: Method-level attributes override the settings specified in class-level attributes.</span></span>
 

@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(Blazor):::Środowiska ASP.NET Core
+title: BlazorŚrodowiska ASP.NET Core
 author: guardrex
-description: 'Dowiedz się więcej o środowiskach w programie :::no-loc(Blazor)::: , w tym o sposobie ustawiania środowiska :::no-loc(Blazor WebAssembly)::: aplikacji.'
+description: 'Dowiedz się więcej o środowiskach w programie Blazor , w tym o sposobie ustawiania środowiska Blazor WebAssembly aplikacji.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/environments
 ms.openlocfilehash: 61d46e0bd83d8bd82bf7faaf9d8f2fecbacc2ffa
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,14 +26,14 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056039"
 ---
-# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="00fa8-103">:::no-loc(Blazor):::Środowiska ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="00fa8-103">ASP.NET Core :::no-loc(Blazor)::: environments</span></span>
+# <a name="aspnet-core-no-locblazor-environments"></a><span data-ttu-id="00fa8-103">BlazorŚrodowiska ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="00fa8-103">ASP.NET Core Blazor environments</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="00fa8-104">Ten temat ma zastosowanie do programu :::no-loc(Blazor WebAssembly)::: .</span><span class="sxs-lookup"><span data-stu-id="00fa8-104">This topic applies to :::no-loc(Blazor WebAssembly):::.</span></span> <span data-ttu-id="00fa8-105">Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/environments> .</span><span class="sxs-lookup"><span data-stu-id="00fa8-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/environments>.</span></span>
+> <span data-ttu-id="00fa8-104">Ten temat ma zastosowanie do programu Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="00fa8-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="00fa8-105">Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/environments> .</span><span class="sxs-lookup"><span data-stu-id="00fa8-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/environments>.</span></span>
 
 <span data-ttu-id="00fa8-106">Podczas lokalnego uruchamiania aplikacji środowisko jest domyślnie opracowywane.</span><span class="sxs-lookup"><span data-stu-id="00fa8-106">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="00fa8-107">Gdy aplikacja zostanie opublikowana, środowisko jest domyślne dla środowiska produkcyjnego.</span><span class="sxs-lookup"><span data-stu-id="00fa8-107">When the app is published, the environment defaults to Production.</span></span>
 
-<span data-ttu-id="00fa8-108">Aplikacja hostowana :::no-loc(Blazor WebAssembly)::: Pobiera środowisko z serwera za pośrednictwem oprogramowania pośredniczącego, które komunikuje środowisko z przeglądarką przez dodanie `blazor-environment` nagłówka.</span><span class="sxs-lookup"><span data-stu-id="00fa8-108">A hosted :::no-loc(Blazor WebAssembly)::: app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="00fa8-109">Wartość nagłówka to środowisko.</span><span class="sxs-lookup"><span data-stu-id="00fa8-109">The value of the header is the environment.</span></span> <span data-ttu-id="00fa8-110">Hostowana :::no-loc(Blazor)::: aplikacja i aplikacja serwera współużytkują to samo środowisko.</span><span class="sxs-lookup"><span data-stu-id="00fa8-110">The hosted :::no-loc(Blazor)::: app and the server app share the same environment.</span></span> <span data-ttu-id="00fa8-111">Aby uzyskać więcej informacji, w tym o sposobie konfigurowania środowiska, zobacz <xref:fundamentals/environments> .</span><span class="sxs-lookup"><span data-stu-id="00fa8-111">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
+<span data-ttu-id="00fa8-108">Aplikacja hostowana Blazor WebAssembly Pobiera środowisko z serwera za pośrednictwem oprogramowania pośredniczącego, które komunikuje środowisko z przeglądarką przez dodanie `blazor-environment` nagłówka.</span><span class="sxs-lookup"><span data-stu-id="00fa8-108">A hosted Blazor WebAssembly app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="00fa8-109">Wartość nagłówka to środowisko.</span><span class="sxs-lookup"><span data-stu-id="00fa8-109">The value of the header is the environment.</span></span> <span data-ttu-id="00fa8-110">Hostowana Blazor aplikacja i aplikacja serwera współużytkują to samo środowisko.</span><span class="sxs-lookup"><span data-stu-id="00fa8-110">The hosted Blazor app and the server app share the same environment.</span></span> <span data-ttu-id="00fa8-111">Aby uzyskać więcej informacji, w tym o sposobie konfigurowania środowiska, zobacz <xref:fundamentals/environments> .</span><span class="sxs-lookup"><span data-stu-id="00fa8-111">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
 
 <span data-ttu-id="00fa8-112">W przypadku aplikacji autonomicznej uruchomionej lokalnie serwer programistyczny dodaje `blazor-environment` nagłówek, aby określić środowisko programistyczne.</span><span class="sxs-lookup"><span data-stu-id="00fa8-112">For a standalone app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="00fa8-113">Aby określić środowisko dla innych środowisk hostingu, Dodaj `blazor-environment` nagłówek.</span><span class="sxs-lookup"><span data-stu-id="00fa8-113">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
 

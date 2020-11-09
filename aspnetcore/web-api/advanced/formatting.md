@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: web-api/advanced/formatting
 ms.openlocfilehash: 89e3e51373db5f7cff974b7a8c69d06bedf856ca
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -165,7 +165,7 @@ public IActionResult Get()
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
 
-<span data-ttu-id="4c394-189">W powyższym kodzie, wywołanie do `AddNewtonsoftJson` konfigurowania następujących funkcji Web API, MVC i :::no-loc(Razor)::: Pages do użycia `Newtonsoft.Json` :</span><span class="sxs-lookup"><span data-stu-id="4c394-189">In the preceding code, the call to `AddNewtonsoftJson` configures the following Web API, MVC, and :::no-loc(Razor)::: Pages features to use `Newtonsoft.Json`:</span></span>
+<span data-ttu-id="4c394-189">W powyższym kodzie, wywołanie do `AddNewtonsoftJson` konfigurowania następujących funkcji Web API, MVC i Razor Pages do użycia `Newtonsoft.Json` :</span><span class="sxs-lookup"><span data-stu-id="4c394-189">In the preceding code, the call to `AddNewtonsoftJson` configures the following Web API, MVC, and Razor Pages features to use `Newtonsoft.Json`:</span></span>
 
 * <span data-ttu-id="4c394-190">Wejściowe i wyjściowe elementy formatujące, które odczytują i zapisują kod JSON</span><span class="sxs-lookup"><span data-stu-id="4c394-190">Input and output formatters that read and write JSON</span></span>
 * <xref:Microsoft.AspNetCore.Mvc.JsonResult>

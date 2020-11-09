@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
 ms.openlocfilehash: 95ac4784634d38add5e28644d42b0182e15c6de9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ ms.locfileid: "93060030"
 | <span data-ttu-id="c764a-112">ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="c764a-112">ASP.NET Core</span></span> | <span data-ttu-id="c764a-113">ASP.NET 4.x</span><span class="sxs-lookup"><span data-stu-id="c764a-113">ASP.NET 4.x</span></span> |
 |---|---|
 |<span data-ttu-id="c764a-114">Kompilacja dla systemu Windows, macOS lub Linux</span><span class="sxs-lookup"><span data-stu-id="c764a-114">Build for Windows, macOS, or Linux</span></span>|<span data-ttu-id="c764a-115">Kompiluj dla systemu Windows</span><span class="sxs-lookup"><span data-stu-id="c764a-115">Build for Windows</span></span>|
-|<span data-ttu-id="c764a-116">[ :::no-loc(Razor)::: Strony](xref:razor-pages/index) to zalecane podejście do tworzenia interfejsu użytkownika sieci Web w ASP.NET Core 2. x.</span><span class="sxs-lookup"><span data-stu-id="c764a-116">[:::no-loc(Razor)::: Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="c764a-117">Zobacz również [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api)i [:::no-loc(SignalR):::](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="c764a-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [:::no-loc(SignalR):::](xref:signalr/introduction).</span></span>|<span data-ttu-id="c764a-118">Korzystanie z [formularzy sieci Web](/aspnet/web-forms), [:::no-loc(SignalR):::](/aspnet/signalr) , [MVC](/aspnet/mvc), internetowego [interfejsu API](/aspnet/web-api/), elementów [webhook](/aspnet/webhooks/)lub [stron sieci Web](/aspnet/web-pages)</span><span class="sxs-lookup"><span data-stu-id="c764a-118">Use [Web Forms](/aspnet/web-forms), [:::no-loc(SignalR):::](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
+|<span data-ttu-id="c764a-116">[ Razor Strony](xref:razor-pages/index) to zalecane podejście do tworzenia interfejsu użytkownika sieci Web w ASP.NET Core 2. x.</span><span class="sxs-lookup"><span data-stu-id="c764a-116">[Razor Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="c764a-117">Zobacz również [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api)i [SignalR](xref:signalr/introduction) .</span><span class="sxs-lookup"><span data-stu-id="c764a-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [SignalR](xref:signalr/introduction).</span></span>|<span data-ttu-id="c764a-118">Korzystanie z [formularzy sieci Web](/aspnet/web-forms), [SignalR](/aspnet/signalr) , [MVC](/aspnet/mvc), internetowego [interfejsu API](/aspnet/web-api/), elementów [webhook](/aspnet/webhooks/)lub [stron sieci Web](/aspnet/web-pages)</span><span class="sxs-lookup"><span data-stu-id="c764a-118">Use [Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
 |<span data-ttu-id="c764a-119">Wiele wersji na maszynę</span><span class="sxs-lookup"><span data-stu-id="c764a-119">Multiple versions per machine</span></span>|<span data-ttu-id="c764a-120">Jedna wersja na maszynę</span><span class="sxs-lookup"><span data-stu-id="c764a-120">One version per machine</span></span>|
 |<span data-ttu-id="c764a-121">Programowanie za pomocą [programu Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/)lub [Visual Studio Code](https://code.visualstudio.com/) przy użyciu języka C# lub F #</span><span class="sxs-lookup"><span data-stu-id="c764a-121">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/), or [Visual Studio Code](https://code.visualstudio.com/) using C# or F#</span></span>|<span data-ttu-id="c764a-122">Programowanie za pomocą [programu Visual Studio](https://visualstudio.microsoft.com/vs/) przy użyciu języka C#, VB lub F #</span><span class="sxs-lookup"><span data-stu-id="c764a-122">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/) using C#, VB, or F#</span></span>|
 |<span data-ttu-id="c764a-123">Wyższa wydajność niż ASP.NET 4. x</span><span class="sxs-lookup"><span data-stu-id="c764a-123">Higher performance than ASP.NET 4.x</span></span>|<span data-ttu-id="c764a-124">Dobra wydajność</span><span class="sxs-lookup"><span data-stu-id="c764a-124">Good performance</span></span>|

@@ -1,5 +1,5 @@
 ---
-title: 'Używanie przesyłania strumieniowego w ASP.NET Core :::no-loc(SignalR):::'
+title: 'Używanie przesyłania strumieniowego w ASP.NET Core SignalR'
 author: bradygaster
 description: Dowiedz się, jak przesyłać strumieniowo dane między klientem a serwerem.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,17 +7,17 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 10/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/streaming
 ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
 ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
@@ -26,19 +26,19 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93062444"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="0a520-103">Używanie przesyłania strumieniowego w ASP.NET Core :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="0a520-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="0a520-103">Używanie przesyłania strumieniowego w ASP.NET Core SignalR</span><span class="sxs-lookup"><span data-stu-id="0a520-103">Use streaming in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="0a520-104">Autor [Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="0a520-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="0a520-105">ASP.NET Core :::no-loc(SignalR)::: obsługuje przesyłanie strumieniowe z klienta do serwera i z serwera do klienta.</span><span class="sxs-lookup"><span data-stu-id="0a520-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="0a520-106">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="0a520-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="0a520-107">Podczas przesyłania strumieniowego każdy fragment jest wysyłany do klienta lub serwera zaraz po jego udostępnieniu, a nie w celu uzyskania dostępu do wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="0a520-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="0a520-105">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe z klienta do serwera i z serwera do klienta.</span><span class="sxs-lookup"><span data-stu-id="0a520-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="0a520-106">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="0a520-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="0a520-107">Podczas przesyłania strumieniowego każdy fragment jest wysyłany do klienta lub serwera zaraz po jego udostępnieniu, a nie w celu uzyskania dostępu do wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="0a520-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="0a520-108">ASP.NET Core :::no-loc(SignalR)::: obsługuje przesyłanie strumieniowe zwracanych wartości metod serwera.</span><span class="sxs-lookup"><span data-stu-id="0a520-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="0a520-109">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="0a520-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="0a520-110">Gdy wartość zwracana jest przesyłana strumieniowo do klienta, każdy fragment jest wysyłany do klienta natychmiast po jego udostępnieniu, a nie czeka na udostępnienie wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="0a520-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="0a520-108">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe zwracanych wartości metod serwera.</span><span class="sxs-lookup"><span data-stu-id="0a520-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="0a520-109">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="0a520-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="0a520-110">Gdy wartość zwracana jest przesyłana strumieniowo do klienta, każdy fragment jest wysyłany do klienta natychmiast po jego udostępnieniu, a nie czeka na udostępnienie wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="0a520-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
@@ -305,7 +305,7 @@ channel.Writer.Complete();
 
 ### <a name="server-to-client-streaming"></a><span data-ttu-id="0a520-177">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="0a520-177">Server-to-client streaming</span></span>
 
-<span data-ttu-id="0a520-178">:::no-loc(SignalR):::Klient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="0a520-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="0a520-179">`stream` akceptuje trzy lub więcej argumentów:</span><span class="sxs-lookup"><span data-stu-id="0a520-179">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="0a520-178">SignalRKlient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="0a520-178">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="0a520-179">`stream` akceptuje trzy lub więcej argumentów:</span><span class="sxs-lookup"><span data-stu-id="0a520-179">`stream` accepts three or more arguments:</span></span>
 
 * <span data-ttu-id="0a520-180">Oczekiwany typ elementów strumienia.</span><span class="sxs-lookup"><span data-stu-id="0a520-180">The expected type of the stream items.</span></span>
 * <span data-ttu-id="0a520-181">Nazwa metody centrum.</span><span class="sxs-lookup"><span data-stu-id="0a520-181">The name of the hub method.</span></span>
@@ -323,7 +323,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ### <a name="client-to-server-streaming"></a><span data-ttu-id="0a520-185">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="0a520-185">Client-to-server streaming</span></span>
 
-<span data-ttu-id="0a520-186">:::no-loc(SignalR):::Klient Java może wywoływać metody przesyłania strumieniowego między serwerami w centrach, przekazując [zauważalny](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) argument do `send` , `invoke` , lub, w zależności od `stream` wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="0a520-186">The :::no-loc(SignalR)::: Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="0a520-186">SignalRKlient Java może wywoływać metody przesyłania strumieniowego między serwerami w centrach, przekazując [zauważalny](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) argument do `send` , `invoke` , lub, w zależności od `stream` wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="0a520-186">The SignalR Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
 
 ```java
 ReplaySubject<String> stream = ReplaySubject.create();

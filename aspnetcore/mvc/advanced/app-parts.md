@@ -1,21 +1,21 @@
 ---
-title: 'Udostępnianie kontrolerów, widoków, :::no-loc(Razor)::: stron i nie tylko za pomocą części aplikacji w ASP.NET Core'
+title: 'Udostępnianie kontrolerów, widoków, Razor stron i nie tylko za pomocą części aplikacji w ASP.NET Core'
 author: rick-anderson
-description: 'Udostępnianie kontrolerów, widoku, :::no-loc(Razor)::: stron i innych elementów przy użyciu części aplikacji w ASP.NET Core'
+description: 'Udostępnianie kontrolerów, widoku, Razor stron i innych elementów przy użyciu części aplikacji w ASP.NET Core'
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/extensibility/app-parts
 ms.openlocfilehash: 33deb5ff794982e0c074186bb2abb88344e8a116
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061187"
 ---
-# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="052ce-103">Udostępnianie kontrolerów, widoków, :::no-loc(Razor)::: stron i nie tylko za pomocą części aplikacji</span><span class="sxs-lookup"><span data-stu-id="052ce-103">Share controllers, views, :::no-loc(Razor)::: Pages and more with Application Parts</span></span>
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="052ce-103">Udostępnianie kontrolerów, widoków, Razor stron i nie tylko za pomocą części aplikacji</span><span class="sxs-lookup"><span data-stu-id="052ce-103">Share controllers, views, Razor Pages and more with Application Parts</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,9 +32,9 @@ ms.locfileid: "93061187"
 
 <span data-ttu-id="052ce-105">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="052ce-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="052ce-106">*Część aplikacji* to Abstrakcja zasobów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="052ce-107">Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, :::no-loc(Razor)::: stron, źródeł kompilacji Razor i nie tylko.</span><span class="sxs-lookup"><span data-stu-id="052ce-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="052ce-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> jest częścią aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="052ce-109">`AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="052ce-106">*Część aplikacji* to Abstrakcja zasobów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="052ce-107">Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor stron, źródeł kompilacji Razor i nie tylko.</span><span class="sxs-lookup"><span data-stu-id="052ce-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="052ce-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> jest częścią aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="052ce-109">`AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="052ce-110">[Dostawcy funkcji](#fp) pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="052ce-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="052ce-111">Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu.</span><span class="sxs-lookup"><span data-stu-id="052ce-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="052ce-112">Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="052ce-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="052ce-113">Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, :::no-loc(Razor)::: strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="052ce-114">Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.</span><span class="sxs-lookup"><span data-stu-id="052ce-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="052ce-110">[Dostawcy funkcji](#fp) pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="052ce-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="052ce-111">Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu.</span><span class="sxs-lookup"><span data-stu-id="052ce-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="052ce-112">Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="052ce-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="052ce-113">Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="052ce-114">Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.</span><span class="sxs-lookup"><span data-stu-id="052ce-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="052ce-115">ASP.NET Core aplikacje ładują funkcje z programu <xref:System.Web.WebPages.ApplicationPart> .</span><span class="sxs-lookup"><span data-stu-id="052ce-115">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="052ce-116"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>Klasa reprezentuje część aplikacji, która jest obsługiwana przez zestaw.</span><span class="sxs-lookup"><span data-stu-id="052ce-116">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "93061187"
 
 ### <a name="include-views"></a><span data-ttu-id="052ce-125">Dołącz widoki</span><span class="sxs-lookup"><span data-stu-id="052ce-125">Include views</span></span>
 
-<span data-ttu-id="052ce-126">Użyj [ :::no-loc(Razor)::: biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.</span><span class="sxs-lookup"><span data-stu-id="052ce-126">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="052ce-126">Użyj [ Razor biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.</span><span class="sxs-lookup"><span data-stu-id="052ce-126">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="052ce-127">Zapobiegaj ładowaniu zasobów</span><span class="sxs-lookup"><span data-stu-id="052ce-127">Prevent loading resources</span></span>
 
@@ -61,10 +61,10 @@ ms.locfileid: "93061187"
 <span data-ttu-id="052ce-134">`ApplicationPartManager`Zawiera części dla:</span><span class="sxs-lookup"><span data-stu-id="052ce-134">The `ApplicationPartManager` includes parts for:</span></span>
 
 * <span data-ttu-id="052ce-135">Zestaw aplikacji i zestawy zależne.</span><span class="sxs-lookup"><span data-stu-id="052ce-135">The app's assembly and dependent assemblies.</span></span>
-* `Microsoft.AspNetCore.Mvc.ApplicationParts.Compiled:::no-loc(Razor):::AssemblyPart`
-* `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.RuntimeCompilation`
+* `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
+* `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
 * <span data-ttu-id="052ce-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="052ce-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="052ce-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="052ce-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="052ce-137">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="052ce-137">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 <a name="fp"></a>
 
@@ -73,10 +73,10 @@ ms.locfileid: "93061187"
 <span data-ttu-id="052ce-139">Dostawcy funkcji aplikacji badają części aplikacji i udostępniają funkcje dla tych części.</span><span class="sxs-lookup"><span data-stu-id="052ce-139">Application feature providers examine application parts and provide features for those parts.</span></span> <span data-ttu-id="052ce-140">Istnieją Wbudowani dostawcy funkcji dla następujących funkcji ASP.NET Core:</span><span class="sxs-lookup"><span data-stu-id="052ce-140">There are built-in feature providers for the following ASP.NET Core features:</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.Controllers.ControllerFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.TagHelpers.TagHelperFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.MetadataReferenceFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.ViewsFeatureProvider>
-* <span data-ttu-id="052ce-141">`internal class`[ :::no-loc(Razor)::: CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="052ce-141">`internal class` [:::no-loc(Razor):::CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span></span>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
+* <span data-ttu-id="052ce-141">`internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="052ce-141">`internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span></span>
 
 <span data-ttu-id="052ce-142">Dostawcy funkcji dziedziczą z <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1> , gdzie `T` jest typem funkcji.</span><span class="sxs-lookup"><span data-stu-id="052ce-142">Feature providers inherit from <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, where `T` is the type of the feature.</span></span> <span data-ttu-id="052ce-143">Dostawców funkcji można zaimplementować dla dowolnego z wcześniej wymienionych typów funkcji.</span><span class="sxs-lookup"><span data-stu-id="052ce-143">Feature providers can be implemented for any of the previously listed feature types.</span></span> <span data-ttu-id="052ce-144">Kolejność dostawców funkcji w programie `ApplicationPartManager.FeatureProviders` może mieć wpływ na zachowanie.</span><span class="sxs-lookup"><span data-stu-id="052ce-144">The order of feature providers in the `ApplicationPartManager.FeatureProviders` can impact run time behavior.</span></span> <span data-ttu-id="052ce-145">Później dodani dostawcy mogą reagować na akcje podejmowane przez wcześniej dodanych dostawców.</span><span class="sxs-lookup"><span data-stu-id="052ce-145">Later added providers can react to actions taken by earlier added providers.</span></span>
 
@@ -122,9 +122,9 @@ View Components:
 
 <span data-ttu-id="052ce-160">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="052ce-160">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="052ce-161">*Część aplikacji* to Abstrakcja zasobów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="052ce-162">Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, :::no-loc(Razor)::: stron, źródeł kompilacji Razor i nie tylko.</span><span class="sxs-lookup"><span data-stu-id="052ce-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="052ce-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) jest częścią aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="052ce-164">`AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="052ce-161">*Część aplikacji* to Abstrakcja zasobów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="052ce-162">Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor stron, źródeł kompilacji Razor i nie tylko.</span><span class="sxs-lookup"><span data-stu-id="052ce-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="052ce-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) jest częścią aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="052ce-164">`AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="052ce-165">*Dostawcy funkcji* pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="052ce-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="052ce-166">Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu.</span><span class="sxs-lookup"><span data-stu-id="052ce-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="052ce-167">Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="052ce-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="052ce-168">Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, :::no-loc(Razor)::: strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="052ce-169">Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.</span><span class="sxs-lookup"><span data-stu-id="052ce-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="052ce-165">*Dostawcy funkcji* pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="052ce-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="052ce-166">Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu.</span><span class="sxs-lookup"><span data-stu-id="052ce-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="052ce-167">Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="052ce-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="052ce-168">Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="052ce-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="052ce-169">Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.</span><span class="sxs-lookup"><span data-stu-id="052ce-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="052ce-170">ASP.NET Core aplikacje ładują funkcje z programu <xref:System.Web.WebPages.ApplicationPart> .</span><span class="sxs-lookup"><span data-stu-id="052ce-170">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="052ce-171"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>Klasa reprezentuje część aplikacji, która jest obsługiwana przez zestaw.</span><span class="sxs-lookup"><span data-stu-id="052ce-171">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -142,7 +142,7 @@ View Components:
 
 ### <a name="include-views"></a><span data-ttu-id="052ce-180">Dołącz widoki</span><span class="sxs-lookup"><span data-stu-id="052ce-180">Include views</span></span>
 
-<span data-ttu-id="052ce-181">Użyj [ :::no-loc(Razor)::: biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.</span><span class="sxs-lookup"><span data-stu-id="052ce-181">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="052ce-181">Użyj [ Razor biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.</span><span class="sxs-lookup"><span data-stu-id="052ce-181">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="052ce-182">Zapobiegaj ładowaniu zasobów</span><span class="sxs-lookup"><span data-stu-id="052ce-182">Prevent loading resources</span></span>
 
@@ -154,7 +154,7 @@ View Components:
 
 * <span data-ttu-id="052ce-191">Zestaw aplikacji i zestawy zależne.</span><span class="sxs-lookup"><span data-stu-id="052ce-191">The app's assembly and dependent assemblies.</span></span>
 * <span data-ttu-id="052ce-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="052ce-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="052ce-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="052ce-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="052ce-193">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="052ce-193">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 ## <a name="application-feature-providers"></a><span data-ttu-id="052ce-194">Dostawcy funkcji aplikacji</span><span class="sxs-lookup"><span data-stu-id="052ce-194">Application feature providers</span></span>
 

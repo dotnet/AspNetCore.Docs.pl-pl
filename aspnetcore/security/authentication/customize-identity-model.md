@@ -1,21 +1,21 @@
 ---
-title: ':::no-loc(Identity)::: dostosowanie modelu w ASP.NET Core'
+title: 'Identity dostosowanie modelu w ASP.NET Core'
 author: ajcvickers
-description: 'W tym artykule opisano sposób dostosowywania bazowego Entity Framework Core modelu danych dla programu :::no-loc(ASP.NET Core Identity)::: .'
+description: 'W tym artykule opisano sposób dostosowywania bazowego Entity Framework Core modelu danych dla programu ASP.NET Core Identity .'
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/customize_identity_model
 ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,15 +24,15 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93052048"
 ---
-# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="68ecd-103">:::no-loc(Identity)::: dostosowanie modelu w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="68ecd-103">:::no-loc(Identity)::: model customization in ASP.NET Core</span></span>
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="68ecd-103">Identity dostosowanie modelu w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="68ecd-103">Identity model customization in ASP.NET Core</span></span>
 
 <span data-ttu-id="68ecd-104">Autor [Arthur Vickers](https://github.com/ajcvickers)</span><span class="sxs-lookup"><span data-stu-id="68ecd-104">By [Arthur Vickers](https://github.com/ajcvickers)</span></span>
 
-<span data-ttu-id="68ecd-105">:::no-loc(ASP.NET Core Identity)::: zapewnia platformę do zarządzania kontami użytkowników i ich przechowywania w aplikacjach ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="68ecd-105">:::no-loc(ASP.NET Core Identity)::: provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="68ecd-106">:::no-loc(Identity)::: jest dodawany do projektu, gdy wybrane są **indywidualne konta użytkowników** jako mechanizm uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="68ecd-106">:::no-loc(Identity)::: is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="68ecd-107">Domyślnie program :::no-loc(Identity)::: korzysta z podstawowego modelu danych Entity Framework (EF).</span><span class="sxs-lookup"><span data-stu-id="68ecd-107">By default, :::no-loc(Identity)::: makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="68ecd-108">W tym artykule opisano sposób dostosowywania :::no-loc(Identity)::: modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-108">This article describes how to customize the :::no-loc(Identity)::: model.</span></span>
+<span data-ttu-id="68ecd-105">ASP.NET Core Identity zapewnia platformę do zarządzania kontami użytkowników i ich przechowywania w aplikacjach ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="68ecd-105">ASP.NET Core Identity provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="68ecd-106">Identity jest dodawany do projektu, gdy wybrane są **indywidualne konta użytkowników** jako mechanizm uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="68ecd-106">Identity is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="68ecd-107">Domyślnie program Identity korzysta z podstawowego modelu danych Entity Framework (EF).</span><span class="sxs-lookup"><span data-stu-id="68ecd-107">By default, Identity makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="68ecd-108">W tym artykule opisano sposób dostosowywania Identity modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-108">This article describes how to customize the Identity model.</span></span>
 
-## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="68ecd-109">:::no-loc(Identity)::: i EF Core migracji</span><span class="sxs-lookup"><span data-stu-id="68ecd-109">:::no-loc(Identity)::: and EF Core Migrations</span></span>
+## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="68ecd-109">Identity i EF Core migracji</span><span class="sxs-lookup"><span data-stu-id="68ecd-109">Identity and EF Core Migrations</span></span>
 
-<span data-ttu-id="68ecd-110">Przed zbadaniem modelu warto zrozumieć, jak :::no-loc(Identity)::: działa [EF Core migracji](/ef/core/managing-schemas/migrations/) w celu utworzenia i zaktualizowania bazy danych.</span><span class="sxs-lookup"><span data-stu-id="68ecd-110">Before examining the model, it's useful to understand how :::no-loc(Identity)::: works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="68ecd-111">Na najwyższego poziomu proces jest:</span><span class="sxs-lookup"><span data-stu-id="68ecd-111">At the top level, the process is:</span></span>
+<span data-ttu-id="68ecd-110">Przed zbadaniem modelu warto zrozumieć, jak Identity działa [EF Core migracji](/ef/core/managing-schemas/migrations/) w celu utworzenia i zaktualizowania bazy danych.</span><span class="sxs-lookup"><span data-stu-id="68ecd-110">Before examining the model, it's useful to understand how Identity works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="68ecd-111">Na najwyższego poziomu proces jest:</span><span class="sxs-lookup"><span data-stu-id="68ecd-111">At the top level, the process is:</span></span>
 
 1. <span data-ttu-id="68ecd-112">Zdefiniuj lub zaktualizuj [model danych w kodzie](/ef/core/modeling/).</span><span class="sxs-lookup"><span data-stu-id="68ecd-112">Define or update a [data model in code](/ef/core/modeling/).</span></span>
 1. <span data-ttu-id="68ecd-113">Dodaj migrację, aby przetłumaczyć ten model na zmiany, które można zastosować do bazy danych programu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-113">Add a Migration to translate this model into changes that can be applied to the database.</span></span>
@@ -48,7 +48,7 @@ ms.locfileid: "93052048"
 
 <span data-ttu-id="68ecd-123">ASP.NET Core ma program obsługi stron błędów czasu projektowania.</span><span class="sxs-lookup"><span data-stu-id="68ecd-123">ASP.NET Core has a development-time error page handler.</span></span> <span data-ttu-id="68ecd-124">Program obsługi może zastosować migracje, gdy aplikacja jest uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="68ecd-124">The handler can apply migrations when the app is run.</span></span> <span data-ttu-id="68ecd-125">Aplikacje produkcyjne zwykle generują skrypty SQL z migracji i wdrażają zmiany w bazie danych w ramach kontrolowanego wdrożenia aplikacji i bazy danych.</span><span class="sxs-lookup"><span data-stu-id="68ecd-125">Production apps typically generate SQL scripts from the migrations and deploy database changes as part of a controlled app and database deployment.</span></span>
 
-<span data-ttu-id="68ecd-126">Po utworzeniu nowej aplikacji :::no-loc(Identity)::: , kroki 1 i 2 powyżej zostały już ukończone.</span><span class="sxs-lookup"><span data-stu-id="68ecd-126">When a new app using :::no-loc(Identity)::: is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="68ecd-127">Oznacza to, że początkowy model danych już istnieje, a migracja początkowa została dodana do projektu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="68ecd-128">Migracja początkowa nadal musi zostać zastosowana do bazy danych programu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="68ecd-129">Migrację początkową można zastosować przy użyciu jednej z następujących metod:</span><span class="sxs-lookup"><span data-stu-id="68ecd-129">The initial migration can be applied via one of the following approaches:</span></span>
+<span data-ttu-id="68ecd-126">Po utworzeniu nowej aplikacji Identity , kroki 1 i 2 powyżej zostały już ukończone.</span><span class="sxs-lookup"><span data-stu-id="68ecd-126">When a new app using Identity is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="68ecd-127">Oznacza to, że początkowy model danych już istnieje, a migracja początkowa została dodana do projektu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="68ecd-128">Migracja początkowa nadal musi zostać zastosowana do bazy danych programu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="68ecd-129">Migrację początkową można zastosować przy użyciu jednej z następujących metod:</span><span class="sxs-lookup"><span data-stu-id="68ecd-129">The initial migration can be applied via one of the following approaches:</span></span>
 
 * <span data-ttu-id="68ecd-130">Uruchamiany `Update-Database` w PMC.</span><span class="sxs-lookup"><span data-stu-id="68ecd-130">Run `Update-Database` in PMC.</span></span>
 * <span data-ttu-id="68ecd-131">Uruchom `dotnet ef database update` w powłoce poleceń.</span><span class="sxs-lookup"><span data-stu-id="68ecd-131">Run `dotnet ef database update` in a command shell.</span></span>
@@ -56,11 +56,11 @@ ms.locfileid: "93052048"
 
 <span data-ttu-id="68ecd-133">Powtórz powyższe kroki, ponieważ wprowadzono zmiany w modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-133">Repeat the preceding steps as changes are made to the model.</span></span>
 
-## <a name="the-no-locidentity-model"></a><span data-ttu-id="68ecd-134">:::no-loc(Identity):::Model</span><span class="sxs-lookup"><span data-stu-id="68ecd-134">The :::no-loc(Identity)::: model</span></span>
+## <a name="the-no-locidentity-model"></a><span data-ttu-id="68ecd-134">IdentityModel</span><span class="sxs-lookup"><span data-stu-id="68ecd-134">The Identity model</span></span>
 
 ### <a name="entity-types"></a><span data-ttu-id="68ecd-135">Typy jednostek</span><span class="sxs-lookup"><span data-stu-id="68ecd-135">Entity types</span></span>
 
-<span data-ttu-id="68ecd-136">:::no-loc(Identity):::Model składa się z następujących typów jednostek.</span><span class="sxs-lookup"><span data-stu-id="68ecd-136">The :::no-loc(Identity)::: model consists of the following entity types.</span></span>
+<span data-ttu-id="68ecd-136">IdentityModel składa się z następujących typów jednostek.</span><span class="sxs-lookup"><span data-stu-id="68ecd-136">The Identity model consists of the following entity types.</span></span>
 
 |<span data-ttu-id="68ecd-137">Typ jednostki</span><span class="sxs-lookup"><span data-stu-id="68ecd-137">Entity type</span></span>|<span data-ttu-id="68ecd-138">Opis</span><span class="sxs-lookup"><span data-stu-id="68ecd-138">Description</span></span>                                                  |
 |-----------|-------------------------------------------------------------|
@@ -84,7 +84,7 @@ ms.locfileid: "93052048"
 
 ### <a name="default-model-configuration"></a><span data-ttu-id="68ecd-155">Domyślna konfiguracja modelu</span><span class="sxs-lookup"><span data-stu-id="68ecd-155">Default model configuration</span></span>
 
-<span data-ttu-id="68ecd-156">:::no-loc(Identity)::: definiuje wiele *klas kontekstu* , które dziedziczą z [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) , aby skonfigurować model i korzystać z niego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-156">:::no-loc(Identity)::: defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="68ecd-157">Ta konfiguracja odbywa się przy użyciu [interfejsu API EF Core Code First Fluent](/ef/core/modeling/) w metodzie [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) klasy Context.</span><span class="sxs-lookup"><span data-stu-id="68ecd-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="68ecd-158">Domyślna konfiguracja to:</span><span class="sxs-lookup"><span data-stu-id="68ecd-158">The default configuration is:</span></span>
+<span data-ttu-id="68ecd-156">Identity definiuje wiele *klas kontekstu* , które dziedziczą z [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) , aby skonfigurować model i korzystać z niego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-156">Identity defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="68ecd-157">Ta konfiguracja odbywa się przy użyciu [interfejsu API EF Core Code First Fluent](/ef/core/modeling/) w metodzie [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) klasy Context.</span><span class="sxs-lookup"><span data-stu-id="68ecd-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="68ecd-158">Domyślna konfiguracja to:</span><span class="sxs-lookup"><span data-stu-id="68ecd-158">The default configuration is:</span></span>
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -209,92 +209,92 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a><span data-ttu-id="68ecd-159">Typy ogólne modelu</span><span class="sxs-lookup"><span data-stu-id="68ecd-159">Model generic types</span></span>
 
-<span data-ttu-id="68ecd-160">:::no-loc(Identity)::: definiuje domyślne typy [środowiska uruchomieniowego języka wspólnego](/dotnet/standard/glossary#clr) (CLR) dla każdego z wymienionych powyżej typów jednostek.</span><span class="sxs-lookup"><span data-stu-id="68ecd-160">:::no-loc(Identity)::: defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="68ecd-161">Wszystkie te typy są poprzedzone prefiksem *:::no-loc(Identity):::* :</span><span class="sxs-lookup"><span data-stu-id="68ecd-161">These types are all prefixed with *:::no-loc(Identity):::* :</span></span>
+<span data-ttu-id="68ecd-160">Identity definiuje domyślne typy [środowiska uruchomieniowego języka wspólnego](/dotnet/standard/glossary#clr) (CLR) dla każdego z wymienionych powyżej typów jednostek.</span><span class="sxs-lookup"><span data-stu-id="68ecd-160">Identity defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="68ecd-161">Wszystkie te typy są poprzedzone prefiksem *Identity* :</span><span class="sxs-lookup"><span data-stu-id="68ecd-161">These types are all prefixed with *Identity* :</span></span>
 
-* `:::no-loc(Identity):::User`
-* `:::no-loc(Identity):::Role`
-* `:::no-loc(Identity):::UserClaim`
-* `:::no-loc(Identity):::UserToken`
-* `:::no-loc(Identity):::UserLogin`
-* `:::no-loc(Identity):::RoleClaim`
-* `:::no-loc(Identity):::UserRole`
+* `IdentityUser`
+* `IdentityRole`
+* `IdentityUserClaim`
+* `IdentityUserToken`
+* `IdentityUserLogin`
+* `IdentityRoleClaim`
+* `IdentityUserRole`
 
-<span data-ttu-id="68ecd-162">Zamiast bezpośrednio używać tych typów, typy mogą służyć jako klasy bazowe dla własnych typów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="68ecd-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="68ecd-163">`DbContext`Klasy zdefiniowane przez :::no-loc(Identity)::: są ogólne, w taki sposób, aby można było używać różnych typów CLR dla co najmniej jednego typu jednostki w modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-163">The `DbContext` classes defined by :::no-loc(Identity)::: are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="68ecd-164">Te typy ogólne umożliwiają `User` zmianę typu danych klucza podstawowego (PK).</span><span class="sxs-lookup"><span data-stu-id="68ecd-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
+<span data-ttu-id="68ecd-162">Zamiast bezpośrednio używać tych typów, typy mogą służyć jako klasy bazowe dla własnych typów aplikacji.</span><span class="sxs-lookup"><span data-stu-id="68ecd-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="68ecd-163">`DbContext`Klasy zdefiniowane przez Identity są ogólne, w taki sposób, aby można było używać różnych typów CLR dla co najmniej jednego typu jednostki w modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-163">The `DbContext` classes defined by Identity are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="68ecd-164">Te typy ogólne umożliwiają `User` zmianę typu danych klucza podstawowego (PK).</span><span class="sxs-lookup"><span data-stu-id="68ecd-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
 
-<span data-ttu-id="68ecd-165">W przypadku używania :::no-loc(Identity)::: z obsługą ról, <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext> należy użyć klasy.</span><span class="sxs-lookup"><span data-stu-id="68ecd-165">When using :::no-loc(Identity)::: with support for roles, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext> class should be used.</span></span> <span data-ttu-id="68ecd-166">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-166">For example:</span></span>
+<span data-ttu-id="68ecd-165">W przypadku używania Identity z obsługą ról, <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> należy użyć klasy.</span><span class="sxs-lookup"><span data-stu-id="68ecd-165">When using Identity with support for roles, an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> class should be used.</span></span> <span data-ttu-id="68ecd-166">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-166">For example:</span></span>
 
 ```csharp
-// Uses all the built-in :::no-loc(Identity)::: types
+// Uses all the built-in Identity types
 // Uses `string` as the key type
-public class :::no-loc(Identity):::DbContext
-    : :::no-loc(Identity):::DbContext<:::no-loc(Identity):::User, :::no-loc(Identity):::Role, string>
+public class IdentityDbContext
+    : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
 }
 
-// Uses the built-in :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in Identity types except with a custom User type
 // Uses `string` as the key type
-public class :::no-loc(Identity):::DbContext<TUser>
-    : :::no-loc(Identity):::DbContext<TUser, :::no-loc(Identity):::Role, string>
-        where TUser : :::no-loc(Identity):::User
+public class IdentityDbContext<TUser>
+    : IdentityDbContext<TUser, IdentityRole, string>
+        where TUser : IdentityUser
 {
 }
 
-// Uses the built-in :::no-loc(Identity)::: types except with custom User and Role types
+// Uses the built-in Identity types except with custom User and Role types
 // The key type is defined by TKey
-public class :::no-loc(Identity):::DbContext<TUser, TRole, TKey> : :::no-loc(Identity):::DbContext<
-    TUser, TRole, TKey, :::no-loc(Identity):::UserClaim<TKey>, :::no-loc(Identity):::UserRole<TKey>,
-    :::no-loc(Identity):::UserLogin<TKey>, :::no-loc(Identity):::RoleClaim<TKey>, :::no-loc(Identity):::UserToken<TKey>>
-        where TUser : :::no-loc(Identity):::User<TKey>
-        where TRole : :::no-loc(Identity):::Role<TKey>
+public class IdentityDbContext<TUser, TRole, TKey> : IdentityDbContext<
+    TUser, TRole, TKey, IdentityUserClaim<TKey>, IdentityUserRole<TKey>,
+    IdentityUserLogin<TKey>, IdentityRoleClaim<TKey>, IdentityUserToken<TKey>>
+        where TUser : IdentityUser<TKey>
+        where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
 {
 }
 
-// No built-in :::no-loc(Identity)::: types are used; all are specified by generic arguments
+// No built-in Identity types are used; all are specified by generic arguments
 // The key type is defined by TKey
-public abstract class :::no-loc(Identity):::DbContext<
+public abstract class IdentityDbContext<
     TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
-    : :::no-loc(Identity):::UserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
-         where TUser : :::no-loc(Identity):::User<TKey>
-         where TRole : :::no-loc(Identity):::Role<TKey>
+    : IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
+         where TUser : IdentityUser<TKey>
+         where TRole : IdentityRole<TKey>
          where TKey : IEquatable<TKey>
-         where TUserClaim : :::no-loc(Identity):::UserClaim<TKey>
-         where TUserRole : :::no-loc(Identity):::UserRole<TKey>
-         where TUserLogin : :::no-loc(Identity):::UserLogin<TKey>
-         where TRoleClaim : :::no-loc(Identity):::RoleClaim<TKey>
-         where TUserToken : :::no-loc(Identity):::UserToken<TKey>
+         where TUserClaim : IdentityUserClaim<TKey>
+         where TUserRole : IdentityUserRole<TKey>
+         where TUserLogin : IdentityUserLogin<TKey>
+         where TRoleClaim : IdentityRoleClaim<TKey>
+         where TUserToken : IdentityUserToken<TKey>
 ```
 
-<span data-ttu-id="68ecd-167">Jest również możliwe użycie :::no-loc(Identity)::: bez ról (tylko oświadczenia), w którym przypadku <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::UserContext%601> należy użyć klasy:</span><span class="sxs-lookup"><span data-stu-id="68ecd-167">It's also possible to use :::no-loc(Identity)::: without roles (only claims), in which case an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::UserContext%601> class should be used:</span></span>
+<span data-ttu-id="68ecd-167">Jest również możliwe użycie Identity bez ról (tylko oświadczenia), w którym przypadku <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> należy użyć klasy:</span><span class="sxs-lookup"><span data-stu-id="68ecd-167">It's also possible to use Identity without roles (only claims), in which case an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> class should be used:</span></span>
 
 ```csharp
-// Uses the built-in non-role :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in non-role Identity types except with a custom User type
 // Uses `string` as the key type
-public class :::no-loc(Identity):::UserContext<TUser>
-    : :::no-loc(Identity):::UserContext<TUser, string>
-        where TUser : :::no-loc(Identity):::User
+public class IdentityUserContext<TUser>
+    : IdentityUserContext<TUser, string>
+        where TUser : IdentityUser
 {
 }
 
-// Uses the built-in non-role :::no-loc(Identity)::: types except with a custom User type
+// Uses the built-in non-role Identity types except with a custom User type
 // The key type is defined by TKey
-public class :::no-loc(Identity):::UserContext<TUser, TKey> : :::no-loc(Identity):::UserContext<
-    TUser, TKey, :::no-loc(Identity):::UserClaim<TKey>, :::no-loc(Identity):::UserLogin<TKey>,
-    :::no-loc(Identity):::UserToken<TKey>>
-        where TUser : :::no-loc(Identity):::User<TKey>
+public class IdentityUserContext<TUser, TKey> : IdentityUserContext<
+    TUser, TKey, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>,
+    IdentityUserToken<TKey>>
+        where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
 {
 }
 
-// No built-in :::no-loc(Identity)::: types are used; all are specified by generic arguments, with no roles
+// No built-in Identity types are used; all are specified by generic arguments, with no roles
 // The key type is defined by TKey
-public abstract class :::no-loc(Identity):::UserContext<
+public abstract class IdentityUserContext<
     TUser, TKey, TUserClaim, TUserLogin, TUserToken> : DbContext
-        where TUser : :::no-loc(Identity):::User<TKey>
+        where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
-        where TUserClaim : :::no-loc(Identity):::UserClaim<TKey>
-        where TUserLogin : :::no-loc(Identity):::UserLogin<TKey>
-        where TUserToken : :::no-loc(Identity):::UserToken<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
+        where TUserToken : IdentityUserToken<TKey>
 {
 }
 ```
@@ -318,14 +318,14 @@ dotnet new webapp -o %projNam%
 cd %projNam%
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
 dotnet aspnet-codegenerator identity  -dc ApplicationDbContext --useDefaultUI 
-dotnet ef migrations add Create:::no-loc(Identity):::Schema
+dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-<span data-ttu-id="68ecd-179">[Niestandardowe dane użytkownika](xref:security/authentication/add-user-data) są obsługiwane przez dziedziczenie z `:::no-loc(Identity):::User` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `:::no-loc(Identity):::User`.</span></span> <span data-ttu-id="68ecd-180">Nazwa tego typu jest niestandardowa `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-180">It's customary to name this type `ApplicationUser`:</span></span>
+<span data-ttu-id="68ecd-179">[Niestandardowe dane użytkownika](xref:security/authentication/add-user-data) są obsługiwane przez dziedziczenie z `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `IdentityUser`.</span></span> <span data-ttu-id="68ecd-180">Nazwa tego typu jest niestandardowa `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-180">It's customary to name this type `ApplicationUser`:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
     public string CustomTag { get; set; }
 }
@@ -334,7 +334,7 @@ public class ApplicationUser : :::no-loc(Identity):::User
 <span data-ttu-id="68ecd-181">Użyj `ApplicationUser` typu jako argumentu ogólnego dla kontekstu:</span><span class="sxs-lookup"><span data-stu-id="68ecd-181">Use the `ApplicationUser` type as a generic argument for the context:</span></span>
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -348,29 +348,29 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 }
 ```
 
-<span data-ttu-id="68ecd-182">Nie ma potrzeby przesłonięcia `OnModelCreating` `ApplicationDbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="68ecd-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="68ecd-183">EF Core mapuje `CustomTag` Właściwość według Konwencji.</span><span class="sxs-lookup"><span data-stu-id="68ecd-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="68ecd-184">Bazę danych należy jednak zaktualizować, aby utworzyć nową `CustomTag` kolumnę.</span><span class="sxs-lookup"><span data-stu-id="68ecd-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="68ecd-185">Aby utworzyć kolumnę, Dodaj migrację, a następnie zaktualizuj bazę danych zgodnie z opisem w temacie [ :::no-loc(Identity)::: i EF Core migracji](#identity-and-ef-core-migrations).</span><span class="sxs-lookup"><span data-stu-id="68ecd-185">To create the column, add a migration, and then update the database as described in [:::no-loc(Identity)::: and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
+<span data-ttu-id="68ecd-182">Nie ma potrzeby przesłonięcia `OnModelCreating` `ApplicationDbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="68ecd-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="68ecd-183">EF Core mapuje `CustomTag` Właściwość według Konwencji.</span><span class="sxs-lookup"><span data-stu-id="68ecd-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="68ecd-184">Bazę danych należy jednak zaktualizować, aby utworzyć nową `CustomTag` kolumnę.</span><span class="sxs-lookup"><span data-stu-id="68ecd-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="68ecd-185">Aby utworzyć kolumnę, Dodaj migrację, a następnie zaktualizuj bazę danych zgodnie z opisem w temacie [ Identity i EF Core migracji](#identity-and-ef-core-migrations).</span><span class="sxs-lookup"><span data-stu-id="68ecd-185">To create the column, add a migration, and then update the database as described in [Identity and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
 
-<span data-ttu-id="68ecd-186">Aktualizowanie *stron/Shared/_LoginPartial. cshtml* i zastępowanie `:::no-loc(Identity):::User` `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `:::no-loc(Identity):::User` with `ApplicationUser`:</span></span>
+<span data-ttu-id="68ecd-186">Aktualizowanie *stron/Shared/_LoginPartial. cshtml* i zastępowanie `IdentityUser` `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `IdentityUser` with `ApplicationUser`:</span></span>
 
 ```cshtml
-@using Microsoft.AspNetCore.:::no-loc(Identity):::
-@using WebApp1.Areas.:::no-loc(Identity):::.Data
+@using Microsoft.AspNetCore.Identity
+@using WebApp1.Areas.Identity.Data
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-<span data-ttu-id="68ecd-187">Zaktualizuj *obszary/ :::no-loc(Identity)::: / :::no-loc(Identity)::: HostingStartup.cs* lub `Startup.ConfigureServices` Zastąp `:::no-loc(Identity):::User` ciąg `ApplicationUser` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-187">Update *Areas/:::no-loc(Identity):::/:::no-loc(Identity):::HostingStartup.cs*  or `Startup.ConfigureServices` and replace `:::no-loc(Identity):::User` with `ApplicationUser`.</span></span>
+<span data-ttu-id="68ecd-187">Zaktualizuj *obszary/ Identity / Identity HostingStartup.cs* lub `Startup.ConfigureServices` Zastąp `IdentityUser` ciąg `ApplicationUser` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-187">Update *Areas/Identity/IdentityHostingStartup.cs*  or `Startup.ConfigureServices` and replace `IdentityUser` with `ApplicationUser`.</span></span>
 
 ```csharp
-services.Add:::no-loc(Identity):::<ApplicationUser>()
+services.AddIdentity<ApplicationUser>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI();
 ```
 
-<span data-ttu-id="68ecd-188">W ASP.NET Core 2,1 lub nowszej :::no-loc(Identity)::: jest dostarczany jako :::no-loc(Razor)::: Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-188">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="68ecd-189">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-190">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-191">Jeśli :::no-loc(Identity)::: szkielet został użyty do dodawania :::no-loc(Identity)::: plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-191">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="68ecd-192">Aby uzyskać więcej informacji, zobacz:</span><span class="sxs-lookup"><span data-stu-id="68ecd-192">For more information, see:</span></span>
+<span data-ttu-id="68ecd-188">W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako Razor Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-188">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="68ecd-189">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-190">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-191">Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-191">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="68ecd-192">Aby uzyskać więcej informacji, zobacz:</span><span class="sxs-lookup"><span data-stu-id="68ecd-192">For more information, see:</span></span>
 
-* [<span data-ttu-id="68ecd-193">Funkcja :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="68ecd-193">Scaffold :::no-loc(Identity):::</span></span>](xref:security/authentication/scaffold-identity)
-* [<span data-ttu-id="68ecd-194">Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="68ecd-194">Add, download, and delete custom user data to :::no-loc(Identity):::</span></span>](xref:security/authentication/add-user-data)
+* [<span data-ttu-id="68ecd-193">Funkcja Identity</span><span class="sxs-lookup"><span data-stu-id="68ecd-193">Scaffold Identity</span></span>](xref:security/authentication/scaffold-identity)
+* [<span data-ttu-id="68ecd-194">Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity</span><span class="sxs-lookup"><span data-stu-id="68ecd-194">Add, download, and delete custom user data to Identity</span></span>](xref:security/authentication/add-user-data)
 
 ### <a name="change-the-primary-key-type"></a><span data-ttu-id="68ecd-195">Zmień typ klucza podstawowego</span><span class="sxs-lookup"><span data-stu-id="68ecd-195">Change the primary key type</span></span>
 
@@ -380,11 +380,11 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
 1. <span data-ttu-id="68ecd-200">Jeśli baza danych została utworzona przed zmianą PK, uruchom polecenie `Drop-Database` (PMC) lub `dotnet ef database drop` (interfejs wiersza polecenia platformy .NET Core), aby je usunąć.</span><span class="sxs-lookup"><span data-stu-id="68ecd-200">If the database was created before the PK change, run `Drop-Database` (PMC) or `dotnet ef database drop` (.NET Core CLI) to delete it.</span></span>
 2. <span data-ttu-id="68ecd-201">Po potwierdzeniu usunięcia bazy danych Usuń migrację początkową z `Remove-Migration` (PMC) lub `dotnet ef migrations remove` (interfejs wiersza polecenia platformy .NET Core).</span><span class="sxs-lookup"><span data-stu-id="68ecd-201">After confirming deletion of the database, remove the initial migration with `Remove-Migration` (PMC) or `dotnet ef migrations remove` (.NET Core CLI).</span></span>
-3. <span data-ttu-id="68ecd-202">Zaktualizuj `ApplicationDbContext` klasę, aby dziedziczyć z <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext%603> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::DbContext%603>.</span></span> <span data-ttu-id="68ecd-203">Określ nowy typ klucza `TKey` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="68ecd-204">Na przykład, aby użyć `Guid` typu klucza:</span><span class="sxs-lookup"><span data-stu-id="68ecd-204">For example, to use a `Guid` key type:</span></span>
+3. <span data-ttu-id="68ecd-202">Zaktualizuj `ApplicationDbContext` klasę, aby dziedziczyć z <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>.</span></span> <span data-ttu-id="68ecd-203">Określ nowy typ klucza `TKey` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="68ecd-204">Na przykład, aby użyć `Guid` typu klucza:</span><span class="sxs-lookup"><span data-stu-id="68ecd-204">For example, to use a `Guid` key type:</span></span>
 
     ```csharp
     public class ApplicationDbContext
-        : :::no-loc(Identity):::DbContext<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role<Guid>, Guid>
+        : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -395,13 +395,13 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    <span data-ttu-id="68ecd-205">W poprzednim kodzie klasy generyczne <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User%601> i <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Role%601> muszą być określone do użycia nowego typu klucza.</span><span class="sxs-lookup"><span data-stu-id="68ecd-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User%601> and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::Role%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="68ecd-205">W poprzednim kodzie klasy generyczne <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> i <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> muszą być określone do użycia nowego typu klucza.</span><span class="sxs-lookup"><span data-stu-id="68ecd-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    <span data-ttu-id="68ecd-206">W poprzednim kodzie klasy generyczne <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::User%601> i <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::Role%601> muszą być określone do użycia nowego typu klucza.</span><span class="sxs-lookup"><span data-stu-id="68ecd-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::User%601> and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore.:::no-loc(Identity):::Role%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="68ecd-206">W poprzednim kodzie klasy generyczne <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> i <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> muszą być określone do użycia nowego typu klucza.</span><span class="sxs-lookup"><span data-stu-id="68ecd-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
@@ -410,7 +410,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
-    services.AddDefault:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>>()
+    services.AddDefaultIdentity<IdentityUser<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -419,7 +419,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="= aspnetcore-2.0"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role>()
+    services.AddIdentity<IdentityUser<Guid>, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
     ```
@@ -429,14 +429,14 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="<= aspnetcore-1.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<:::no-loc(Identity):::User<Guid>, :::no-loc(Identity):::Role>()
+    services.AddIdentity<IdentityUser<Guid>, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
             .AddDefaultTokenProviders();
     ```
 
     ::: moniker-end
 
-4. <span data-ttu-id="68ecd-208">Jeśli `ApplicationUser` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `:::no-loc(Identity):::User` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `:::no-loc(Identity):::User`.</span></span> <span data-ttu-id="68ecd-209">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-209">For example:</span></span>
+4. <span data-ttu-id="68ecd-208">Jeśli `ApplicationUser` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `IdentityUser`.</span></span> <span data-ttu-id="68ecd-209">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-209">For example:</span></span>
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -446,7 +446,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationUser.cs?name=snippet_ApplicationUser&highlight=4)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationUser.cs?name=snippet_ApplicationUser&highlight=4)]
 
     ::: moniker-end
 
@@ -454,7 +454,7 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     ```csharp
     public class ApplicationDbContext
-        : :::no-loc(Identity):::DbContext<ApplicationUser, :::no-loc(Identity):::Role<Guid>, Guid>
+        : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -463,12 +463,12 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     }
     ```
 
-    <span data-ttu-id="68ecd-211">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania :::no-loc(Identity)::: usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-211">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="68ecd-211">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-211">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser>()
+    services.AddIdentity<ApplicationUser>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
@@ -476,14 +476,14 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     <span data-ttu-id="68ecd-212">Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .</span><span class="sxs-lookup"><span data-stu-id="68ecd-212">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="68ecd-213">W ASP.NET Core 2,1 lub nowszej :::no-loc(Identity)::: jest dostarczany jako :::no-loc(Razor)::: Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-213">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="68ecd-214">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-215">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-216">Jeśli :::no-loc(Identity)::: szkielet został użyty do dodawania :::no-loc(Identity)::: plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-216">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="68ecd-213">W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako Razor Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-213">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="68ecd-214">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-215">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-216">Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-216">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="= aspnetcore-2.0"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
     ```
@@ -495,42 +495,42 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
     ::: moniker range="<= aspnetcore-1.1"
 
     ```csharp
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
             .AddDefaultTokenProviders();
     ```
 
-    <span data-ttu-id="68ecd-218"><xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Metoda akceptuje `TKey` Typ wskazujący typ danych klucza podstawowego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-218">The <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="68ecd-218"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Metoda akceptuje `TKey` Typ wskazujący typ danych klucza podstawowego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-218">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
-5. <span data-ttu-id="68ecd-219">Jeśli `ApplicationRole` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `:::no-loc(Identity):::Role<TKey>` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `:::no-loc(Identity):::Role<TKey>`.</span></span> <span data-ttu-id="68ecd-220">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-220">For example:</span></span>
+5. <span data-ttu-id="68ecd-219">Jeśli `ApplicationRole` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityRole<TKey>` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `IdentityRole<TKey>`.</span></span> <span data-ttu-id="68ecd-220">Przykład:</span><span class="sxs-lookup"><span data-stu-id="68ecd-220">For example:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
     <span data-ttu-id="68ecd-221">Zaktualizuj `ApplicationDbContext` , aby odwołać się do `ApplicationRole` klasy niestandardowej.</span><span class="sxs-lookup"><span data-stu-id="68ecd-221">Update `ApplicationDbContext` to reference the custom `ApplicationRole` class.</span></span> <span data-ttu-id="68ecd-222">Na przykład następująca Klasa odwołuje się do niestandardowego `ApplicationUser` i niestandardowego `ApplicationRole` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-222">For example, the following class references a custom `ApplicationUser` and a custom `ApplicationRole`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="68ecd-223">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania :::no-loc(Identity)::: usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-223">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="68ecd-223">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-223">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.1/:::no-loc(Razor):::PagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
+    [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
     <span data-ttu-id="68ecd-224">Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .</span><span class="sxs-lookup"><span data-stu-id="68ecd-224">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="68ecd-225">W ASP.NET Core 2,1 lub nowszej :::no-loc(Identity)::: jest dostarczany jako :::no-loc(Razor)::: Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-225">In ASP.NET Core 2.1 or later, :::no-loc(Identity)::: is provided as a :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="68ecd-226">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-227">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::BuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-228">Jeśli :::no-loc(Identity)::: szkielet został użyty do dodawania :::no-loc(Identity)::: plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-228">If the :::no-loc(Identity)::: scaffolder was used to add :::no-loc(Identity)::: files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="68ecd-225">W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako Razor Biblioteka klas.</span><span class="sxs-lookup"><span data-stu-id="68ecd-225">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="68ecd-226">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="68ecd-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="68ecd-227">W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="68ecd-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="68ecd-228">Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-228">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="= aspnetcore-2.0"
 
-    [!code-csharp[](customize-identity-model/samples/2.0/:::no-loc(Razor):::PagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
+    [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="68ecd-229">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania :::no-loc(Identity)::: usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-229">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="68ecd-229">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-229">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
-    [!code-csharp[](customize-identity-model/samples/2.0/:::no-loc(Razor):::PagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
+    [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
     <span data-ttu-id="68ecd-230">Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .</span><span class="sxs-lookup"><span data-stu-id="68ecd-230">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
@@ -540,11 +540,11 @@ services.Add:::no-loc(Identity):::<ApplicationUser>()
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="68ecd-231">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania :::no-loc(Identity)::: usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-231">Register the custom database context class when adding the :::no-loc(Identity)::: service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="68ecd-231">Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w programie `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-231">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    <span data-ttu-id="68ecd-232"><xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Metoda akceptuje `TKey` Typ wskazujący typ danych klucza podstawowego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-232">The <xref:Microsoft.Extensions.DependencyInjection.:::no-loc(Identity):::EntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="68ecd-232"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Metoda akceptuje `TKey` Typ wskazujący typ danych klucza podstawowego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-232">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
@@ -568,18 +568,18 @@ builder.Entity<TUser>(b =>
 <span data-ttu-id="68ecd-240">Dodaj właściwość nawigacji do `ApplicationUser` , która umożliwia `UserClaims` odwołanie od użytkownika:</span><span class="sxs-lookup"><span data-stu-id="68ecd-240">Add a navigation property to `ApplicationUser` that allows associated `UserClaims` to be referenced from the user:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 }
 ```
 
-<span data-ttu-id="68ecd-241">Wartość `TKey` dla `:::no-loc(Identity):::UserClaim<TKey>` jest typu określonego dla klucza PK dla użytkowników.</span><span class="sxs-lookup"><span data-stu-id="68ecd-241">The `TKey` for `:::no-loc(Identity):::UserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="68ecd-242">W tym przypadku `TKey` jest to `string` spowodowane tym, że są używane wartości domyślne.</span><span class="sxs-lookup"><span data-stu-id="68ecd-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="68ecd-243">To **nie** jest typ PK dla `UserClaim` typu jednostki.</span><span class="sxs-lookup"><span data-stu-id="68ecd-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
+<span data-ttu-id="68ecd-241">Wartość `TKey` dla `IdentityUserClaim<TKey>` jest typu określonego dla klucza PK dla użytkowników.</span><span class="sxs-lookup"><span data-stu-id="68ecd-241">The `TKey` for `IdentityUserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="68ecd-242">W tym przypadku `TKey` jest to `string` spowodowane tym, że są używane wartości domyślne.</span><span class="sxs-lookup"><span data-stu-id="68ecd-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="68ecd-243">To **nie** jest typ PK dla `UserClaim` typu jednostki.</span><span class="sxs-lookup"><span data-stu-id="68ecd-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
 
 <span data-ttu-id="68ecd-244">Teraz, gdy istnieje właściwość nawigacji, należy ją skonfigurować w `OnModelCreating` :</span><span class="sxs-lookup"><span data-stu-id="68ecd-244">Now that the navigation property exists, it must be configured in `OnModelCreating`:</span></span>
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -611,17 +611,17 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 <span data-ttu-id="68ecd-251">Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje jednokierunkowe właściwości nawigacji dla wszystkich relacji na użytkowniku:</span><span class="sxs-lookup"><span data-stu-id="68ecd-251">Using the section above as guidance, the following example configures unidirectional navigation properties for all relationships on User:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserLogin<string>> Logins { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserToken<string>> Tokens { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserRole<string>> UserRoles { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+    public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
+    public virtual ICollection<IdentityUserRole<string>> UserRoles { get; set; }
 }
 ```
 
 ```csharp
-public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -667,20 +667,20 @@ public class ApplicationDbContext : :::no-loc(Identity):::DbContext<ApplicationU
 <span data-ttu-id="68ecd-253">Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje właściwości nawigacji dla wszystkich relacji dla użytkownika i roli:</span><span class="sxs-lookup"><span data-stu-id="68ecd-253">Using the section above as guidance, the following example configures navigation properties for all relationships on User and Role:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
-    public virtual ICollection<:::no-loc(Identity):::UserClaim<string>> Claims { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserLogin<string>> Logins { get; set; }
-    public virtual ICollection<:::no-loc(Identity):::UserToken<string>> Tokens { get; set; }
+    public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+    public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+    public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationRole : :::no-loc(Identity):::Role
+public class ApplicationRole : IdentityRole
 {
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
+public class ApplicationUserRole : IdentityUserRole<string>
 {
     public virtual ApplicationUser User { get; set; }
     public virtual ApplicationRole Role { get; set; }
@@ -689,10 +689,10 @@ public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
 
 ```csharp
 public class ApplicationDbContext
-    : :::no-loc(Identity):::DbContext<
+    : IdentityDbContext<
         ApplicationUser, ApplicationRole, string,
-        :::no-loc(Identity):::UserClaim<string>, ApplicationUserRole, :::no-loc(Identity):::UserLogin<string>,
-        :::no-loc(Identity):::RoleClaim<string>, :::no-loc(Identity):::UserToken<string>>
+        IdentityUserClaim<string>, ApplicationUserRole, IdentityUserLogin<string>,
+        IdentityRoleClaim<string>, IdentityUserToken<string>>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -746,7 +746,7 @@ public class ApplicationDbContext
 <span data-ttu-id="68ecd-254">Uwagi:</span><span class="sxs-lookup"><span data-stu-id="68ecd-254">Notes:</span></span>
 
 * <span data-ttu-id="68ecd-255">Ten przykład zawiera również `UserRole` jednostkę join, która jest wymagana do nawigowania po relacji wiele-do-wielu od użytkowników do ról.</span><span class="sxs-lookup"><span data-stu-id="68ecd-255">This example also includes the `UserRole` join entity, which is needed to navigate the many-to-many relationship from Users to Roles.</span></span>
-* <span data-ttu-id="68ecd-256">Pamiętaj, aby zmienić typy właściwości nawigacji, aby odzwierciedlić, że `Application{...}` typy są teraz używane zamiast `:::no-loc(Identity):::{...}` typów.</span><span class="sxs-lookup"><span data-stu-id="68ecd-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `:::no-loc(Identity):::{...}` types.</span></span>
+* <span data-ttu-id="68ecd-256">Pamiętaj, aby zmienić typy właściwości nawigacji, aby odzwierciedlić, że `Application{...}` typy są teraz używane zamiast `Identity{...}` typów.</span><span class="sxs-lookup"><span data-stu-id="68ecd-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `Identity{...}` types.</span></span>
 * <span data-ttu-id="68ecd-257">Należy pamiętać, aby użyć `Application{...}` w definicji generycznej `ApplicationContext` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-257">Remember to use the `Application{...}` in the generic `ApplicationContext` definition.</span></span>
 
 ### <a name="add-all-navigation-properties"></a><span data-ttu-id="68ecd-258">Dodaj wszystkie właściwości nawigacji</span><span class="sxs-lookup"><span data-stu-id="68ecd-258">Add all navigation properties</span></span>
@@ -754,7 +754,7 @@ public class ApplicationDbContext
 <span data-ttu-id="68ecd-259">Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje właściwości nawigacji dla wszystkich relacji dla wszystkich typów jednostek:</span><span class="sxs-lookup"><span data-stu-id="68ecd-259">Using the section above as guidance, the following example configures navigation properties for all relationships on all entity types:</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
     public virtual ICollection<ApplicationUserClaim> Claims { get; set; }
     public virtual ICollection<ApplicationUserLogin> Logins { get; set; }
@@ -762,34 +762,34 @@ public class ApplicationUser : :::no-loc(Identity):::User
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
 }
 
-public class ApplicationRole : :::no-loc(Identity):::Role
+public class ApplicationRole : IdentityRole
 {
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
     public virtual ICollection<ApplicationRoleClaim> RoleClaims { get; set; }
 }
 
-public class ApplicationUserRole : :::no-loc(Identity):::UserRole<string>
+public class ApplicationUserRole : IdentityUserRole<string>
 {
     public virtual ApplicationUser User { get; set; }
     public virtual ApplicationRole Role { get; set; }
 }
 
-public class ApplicationUserClaim : :::no-loc(Identity):::UserClaim<string>
+public class ApplicationUserClaim : IdentityUserClaim<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
 
-public class ApplicationUserLogin : :::no-loc(Identity):::UserLogin<string>
+public class ApplicationUserLogin : IdentityUserLogin<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
 
-public class ApplicationRoleClaim : :::no-loc(Identity):::RoleClaim<string>
+public class ApplicationRoleClaim : IdentityRoleClaim<string>
 {
     public virtual ApplicationRole Role { get; set; }
 }
 
-public class ApplicationUserToken : :::no-loc(Identity):::UserToken<string>
+public class ApplicationUserToken : IdentityUserToken<string>
 {
     public virtual ApplicationUser User { get; set; }
 }
@@ -797,7 +797,7 @@ public class ApplicationUserToken : :::no-loc(Identity):::UserToken<string>
 
 ```csharp
 public class ApplicationDbContext
-    : :::no-loc(Identity):::DbContext<
+    : IdentityDbContext<
         ApplicationUser, ApplicationRole, string,
         ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin,
         ApplicationRoleClaim, ApplicationUserToken>
@@ -858,55 +858,55 @@ public class ApplicationDbContext
 
 ### <a name="use-composite-keys"></a><span data-ttu-id="68ecd-260">Użyj kluczy złożonych</span><span class="sxs-lookup"><span data-stu-id="68ecd-260">Use composite keys</span></span>
 
-<span data-ttu-id="68ecd-261">Poprzednie sekcje przedstawiają zmianę typu klucza używanego w :::no-loc(Identity)::: modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-261">The preceding sections demonstrated changing the type of key used in the :::no-loc(Identity)::: model.</span></span> <span data-ttu-id="68ecd-262">Zmiana :::no-loc(Identity)::: modelu kluczy na używanie kluczy złożonych nie jest obsługiwana lub zalecana.</span><span class="sxs-lookup"><span data-stu-id="68ecd-262">Changing the :::no-loc(Identity)::: key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="68ecd-263">Użycie klucza złożonego z :::no-loc(Identity)::: wymaga zmiany sposobu, w jaki :::no-loc(Identity)::: kod Menedżera współdziała z modelem.</span><span class="sxs-lookup"><span data-stu-id="68ecd-263">Using a composite key with :::no-loc(Identity)::: involves changing how the :::no-loc(Identity)::: manager code interacts with the model.</span></span> <span data-ttu-id="68ecd-264">To dostosowanie wykracza poza zakres tego dokumentu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-264">This customization is beyond the scope of this document.</span></span>
+<span data-ttu-id="68ecd-261">Poprzednie sekcje przedstawiają zmianę typu klucza używanego w Identity modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-261">The preceding sections demonstrated changing the type of key used in the Identity model.</span></span> <span data-ttu-id="68ecd-262">Zmiana Identity modelu kluczy na używanie kluczy złożonych nie jest obsługiwana lub zalecana.</span><span class="sxs-lookup"><span data-stu-id="68ecd-262">Changing the Identity key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="68ecd-263">Użycie klucza złożonego z Identity wymaga zmiany sposobu, w jaki Identity kod Menedżera współdziała z modelem.</span><span class="sxs-lookup"><span data-stu-id="68ecd-263">Using a composite key with Identity involves changing how the Identity manager code interacts with the model.</span></span> <span data-ttu-id="68ecd-264">To dostosowanie wykracza poza zakres tego dokumentu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-264">This customization is beyond the scope of this document.</span></span>
 
 ### <a name="change-tablecolumn-names-and-facets"></a><span data-ttu-id="68ecd-265">Zmiana nazw tabel/kolumn i aspektów</span><span class="sxs-lookup"><span data-stu-id="68ecd-265">Change table/column names and facets</span></span>
 
-<span data-ttu-id="68ecd-266">Aby zmienić nazwy tabel i kolumn, wywołaj `base.OnModelCreating` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="68ecd-267">Następnie Dodaj konfigurację, aby zastąpić dowolne ustawienia domyślne.</span><span class="sxs-lookup"><span data-stu-id="68ecd-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="68ecd-268">Na przykład, aby zmienić nazwę wszystkich :::no-loc(Identity)::: tabel:</span><span class="sxs-lookup"><span data-stu-id="68ecd-268">For example, to change the name of all the :::no-loc(Identity)::: tables:</span></span>
+<span data-ttu-id="68ecd-266">Aby zmienić nazwy tabel i kolumn, wywołaj `base.OnModelCreating` .</span><span class="sxs-lookup"><span data-stu-id="68ecd-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="68ecd-267">Następnie Dodaj konfigurację, aby zastąpić dowolne ustawienia domyślne.</span><span class="sxs-lookup"><span data-stu-id="68ecd-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="68ecd-268">Na przykład, aby zmienić nazwę wszystkich Identity tabel:</span><span class="sxs-lookup"><span data-stu-id="68ecd-268">For example, to change the name of all the Identity tables:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.ToTable("MyUsers");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserClaim<string>>(b =>
+    modelBuilder.Entity<IdentityUserClaim<string>>(b =>
     {
         b.ToTable("MyUserClaims");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserLogin<string>>(b =>
+    modelBuilder.Entity<IdentityUserLogin<string>>(b =>
     {
         b.ToTable("MyUserLogins");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserToken<string>>(b =>
+    modelBuilder.Entity<IdentityUserToken<string>>(b =>
     {
         b.ToTable("MyUserTokens");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::Role>(b =>
+    modelBuilder.Entity<IdentityRole>(b =>
     {
         b.ToTable("MyRoles");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::RoleClaim<string>>(b =>
+    modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
     {
         b.ToTable("MyRoleClaims");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserRole<string>>(b =>
+    modelBuilder.Entity<IdentityUserRole<string>>(b =>
     {
         b.ToTable("MyUserRoles");
     });
 }
 ```
 
-<span data-ttu-id="68ecd-269">Te przykłady używają typów domyślnych :::no-loc(Identity)::: .</span><span class="sxs-lookup"><span data-stu-id="68ecd-269">These examples use the default :::no-loc(Identity)::: types.</span></span> <span data-ttu-id="68ecd-270">Jeśli używasz typu aplikacji, takiego jak `ApplicationUser` , skonfiguruj ten typ zamiast typu domyślnego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
+<span data-ttu-id="68ecd-269">Te przykłady używają typów domyślnych Identity .</span><span class="sxs-lookup"><span data-stu-id="68ecd-269">These examples use the default Identity types.</span></span> <span data-ttu-id="68ecd-270">Jeśli używasz typu aplikacji, takiego jak `ApplicationUser` , skonfiguruj ten typ zamiast typu domyślnego.</span><span class="sxs-lookup"><span data-stu-id="68ecd-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
 
 <span data-ttu-id="68ecd-271">Poniższy przykład zmienia nazwy niektórych kolumn:</span><span class="sxs-lookup"><span data-stu-id="68ecd-271">The following example changes some column names:</span></span>
 
@@ -915,12 +915,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.Property(e => e.Email).HasColumnName("EMail");
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserClaim<string>>(b =>
+    modelBuilder.Entity<IdentityUserClaim<string>>(b =>
     {
         b.Property(e => e.ClaimType).HasColumnName("CType");
         b.Property(e => e.ClaimValue).HasColumnName("CValue");
@@ -935,7 +935,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<:::no-loc(Identity):::User>(b =>
+    modelBuilder.Entity<IdentityUser>(b =>
     {
         b.Property(u => u.UserName).HasMaxLength(128);
         b.Property(u => u.NormalizedUserName).HasMaxLength(128);
@@ -943,7 +943,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         b.Property(u => u.NormalizedEmail).HasMaxLength(128);
     });
 
-    modelBuilder.Entity<:::no-loc(Identity):::UserToken<string>>(b =>
+    modelBuilder.Entity<IdentityUserToken<string>>(b =>
     {
         b.Property(t => t.LoginProvider).HasMaxLength(128);
         b.Property(t => t.Name).HasMaxLength(128);
@@ -968,7 +968,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="lazy-loading"></a><span data-ttu-id="68ecd-279">Ładowanie opóźnione</span><span class="sxs-lookup"><span data-stu-id="68ecd-279">Lazy loading</span></span>
 
-<span data-ttu-id="68ecd-280">W tej sekcji zostanie dodana obsługa serwerów proxy ładowania opóźnionego w :::no-loc(Identity)::: modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-280">In this section, support for lazy-loading proxies in the :::no-loc(Identity)::: model is added.</span></span> <span data-ttu-id="68ecd-281">Ładowanie z opóźnieniem jest przydatne, ponieważ umożliwia korzystanie z właściwości nawigacji bez uprzedniego załadowania.</span><span class="sxs-lookup"><span data-stu-id="68ecd-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
+<span data-ttu-id="68ecd-280">W tej sekcji zostanie dodana obsługa serwerów proxy ładowania opóźnionego w Identity modelu.</span><span class="sxs-lookup"><span data-stu-id="68ecd-280">In this section, support for lazy-loading proxies in the Identity model is added.</span></span> <span data-ttu-id="68ecd-281">Ładowanie z opóźnieniem jest przydatne, ponieważ umożliwia korzystanie z właściwości nawigacji bez uprzedniego załadowania.</span><span class="sxs-lookup"><span data-stu-id="68ecd-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
 
 <span data-ttu-id="68ecd-282">Typy jednostek mogą być odpowiednie do ładowania z opóźnieniem na kilka sposobów, zgodnie z opisem w [dokumentacji EF Core](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="68ecd-282">Entity types can be made suitable for lazy-loading in several ways, as described in the [EF Core documentation](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="68ecd-283">Dla uproszczenia Użyj serwerów proxy ładowania z opóźnieniem, które wymagają:</span><span class="sxs-lookup"><span data-stu-id="68ecd-283">For simplicity, use lazy-loading proxies, which requires:</span></span>
 
@@ -983,7 +983,7 @@ services
     .AddDbContext<ApplicationDbContext>(
         b => b.UseSqlServer(connectionString)
               .UseLazyLoadingProxies())
-    .AddDefault:::no-loc(Identity):::<ApplicationUser>()
+    .AddDefaultIdentity<ApplicationUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 

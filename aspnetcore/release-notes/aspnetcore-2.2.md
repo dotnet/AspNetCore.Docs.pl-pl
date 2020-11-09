@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-2.2
 ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -50,7 +50,7 @@ ms.locfileid: "93059705"
 <span data-ttu-id="a5458-122">Więcej informacji można znaleźć w następujących zasobach:</span><span class="sxs-lookup"><span data-stu-id="a5458-122">For more information, see the following resources:</span></span>
 
 * [<span data-ttu-id="a5458-123">Routing punktów końcowych w 2,2</span><span class="sxs-lookup"><span data-stu-id="a5458-123">Endpoint routing in 2.2</span></span>](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
-* <span data-ttu-id="a5458-124">[Transformatory parametrów trasy](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsIn:::no-loc(Razor):::PagesOrMVC.aspx) (zobacz sekcję **routingu** )</span><span class="sxs-lookup"><span data-stu-id="a5458-124">[Route parameter transformers](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsIn:::no-loc(Razor):::PagesOrMVC.aspx) (see **Routing** section)</span></span>
+* <span data-ttu-id="a5458-124">[Transformatory parametrów trasy](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (zobacz sekcję **routingu** )</span><span class="sxs-lookup"><span data-stu-id="a5458-124">[Route parameter transformers](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (see **Routing** section)</span></span>
 * [<span data-ttu-id="a5458-125">Różnice między IRouter i routingu opartego na punktach końcowych</span><span class="sxs-lookup"><span data-stu-id="a5458-125">Differences between IRouter- and endpoint-based routing</span></span>](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
 
 ## <a name="health-checks"></a><span data-ttu-id="a5458-126">Kontrole kondycji</span><span class="sxs-lookup"><span data-stu-id="a5458-126">Health checks</span></span>
@@ -91,11 +91,11 @@ ms.locfileid: "93059705"
 
 <span data-ttu-id="a5458-159">Aby uzyskać więcej informacji, zobacz [hosting w procesie dla usług IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).</span><span class="sxs-lookup"><span data-stu-id="a5458-159">For more information, see [in-process hosting for IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).</span></span>
 
-## <a name="no-locsignalr-java-client"></a><span data-ttu-id="a5458-160">:::no-loc(SignalR)::: Klient Java</span><span class="sxs-lookup"><span data-stu-id="a5458-160">:::no-loc(SignalR)::: Java client</span></span>
+## <a name="no-locsignalr-java-client"></a><span data-ttu-id="a5458-160">SignalR Klient Java</span><span class="sxs-lookup"><span data-stu-id="a5458-160">SignalR Java client</span></span>
 
-<span data-ttu-id="a5458-161">ASP.NET Core 2,2 wprowadza klienta Java dla programu :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="a5458-161">ASP.NET Core 2.2 introduces a Java Client for :::no-loc(SignalR):::.</span></span> <span data-ttu-id="a5458-162">Ten klient obsługuje łączenie z serwerem ASP.NET Core :::no-loc(SignalR)::: przy użyciu kodu Java, w tym aplikacji dla systemu Android.</span><span class="sxs-lookup"><span data-stu-id="a5458-162">This client supports connecting to an ASP.NET Core :::no-loc(SignalR)::: Server from Java code, including Android apps.</span></span>
+<span data-ttu-id="a5458-161">ASP.NET Core 2,2 wprowadza klienta Java dla programu SignalR .</span><span class="sxs-lookup"><span data-stu-id="a5458-161">ASP.NET Core 2.2 introduces a Java Client for SignalR.</span></span> <span data-ttu-id="a5458-162">Ten klient obsługuje łączenie z serwerem ASP.NET Core SignalR przy użyciu kodu Java, w tym aplikacji dla systemu Android.</span><span class="sxs-lookup"><span data-stu-id="a5458-162">This client supports connecting to an ASP.NET Core SignalR Server from Java code, including Android apps.</span></span>
 
-<span data-ttu-id="a5458-163">Aby uzyskać więcej informacji, zobacz [ASP.NET Core :::no-loc(SignalR)::: klienta Java](../signalr/java-client.md?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="a5458-163">For more information, see [ASP.NET Core :::no-loc(SignalR)::: Java client](../signalr/java-client.md?view=aspnetcore-2.2).</span></span>
+<span data-ttu-id="a5458-163">Aby uzyskać więcej informacji, zobacz [ASP.NET Core SignalR klienta Java](../signalr/java-client.md?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="a5458-163">For more information, see [ASP.NET Core SignalR Java client](../signalr/java-client.md?view=aspnetcore-2.2).</span></span>
 
 ## <a name="cors-improvements"></a><span data-ttu-id="a5458-164">Ulepszenia funkcji CORS</span><span class="sxs-lookup"><span data-stu-id="a5458-164">CORS improvements</span></span>
 

@@ -6,16 +6,16 @@ description: Odkryj atrybuty pomocnika tagów ASP.NET Core i rolę, jaką każdy
 ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
 ms.openlocfilehash: f5856bf19681a42551f82bb15c769f192f338b4a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,7 +34,7 @@ ms.locfileid: "93053504"
 
 <span data-ttu-id="2c622-107">Pomocnik tagu skryptu pozwala określić sieć CDN dla pliku skryptu i rezerwę, gdy sieć CDN nie jest dostępna.</span><span class="sxs-lookup"><span data-stu-id="2c622-107">The Script Tag Helper allows you to specify a CDN for the script file and a fallback when the CDN is not available.</span></span> <span data-ttu-id="2c622-108">Pomocnik tagów skryptu zapewnia wydajność sieci CDN z niezawodną obsługą hostingu lokalnego.</span><span class="sxs-lookup"><span data-stu-id="2c622-108">The Script Tag Helper provides the performance advantage of a CDN with the robustness of local hosting.</span></span>
 
-<span data-ttu-id="2c622-109">Poniższy :::no-loc(Razor)::: znacznik pokazuje `script` element z rezerwą:</span><span class="sxs-lookup"><span data-stu-id="2c622-109">The following :::no-loc(Razor)::: markup shows a `script` element with a fallback:</span></span>
+<span data-ttu-id="2c622-109">Poniższy Razor znacznik pokazuje `script` element z rezerwą:</span><span class="sxs-lookup"><span data-stu-id="2c622-109">The following Razor markup shows a `script` element with a fallback:</span></span>
 
 ```html
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"

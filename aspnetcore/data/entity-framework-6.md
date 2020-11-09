@@ -6,15 +6,15 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/entity-framework-6
 ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -107,7 +107,7 @@ ms.locfileid: "93059458"
 
 * <span data-ttu-id="f1ef4-154">W projekcie podstawowym w *Startup.cs* Zarejestruj kontekst dla di.</span><span class="sxs-lookup"><span data-stu-id="f1ef4-154">In the Core project, in *Startup.cs* , register the context for DI.</span></span>    
 
-* <span data-ttu-id="f1ef4-155">W projekcie podstawowym w programie *:::no-loc(appsettings.json):::* Dodaj parametry połączenia.</span><span class="sxs-lookup"><span data-stu-id="f1ef4-155">In the Core project, in *:::no-loc(appsettings.json):::* , add the connection string.</span></span>  
+* <span data-ttu-id="f1ef4-155">W projekcie podstawowym w programie *appsettings.json* Dodaj parametry połączenia.</span><span class="sxs-lookup"><span data-stu-id="f1ef4-155">In the Core project, in *appsettings.json* , add the connection string.</span></span>  
 
 * <span data-ttu-id="f1ef4-156">W projekcie podstawowym Dodaj kontroler i widok, aby sprawdzić, czy można odczytywać i zapisywać dane.</span><span class="sxs-lookup"><span data-stu-id="f1ef4-156">In the Core project, add a controller and view(s) to verify that you can read and write data.</span></span> <span data-ttu-id="f1ef4-157">(Należy zauważyć, że ASP.NET Core tworzenie szkieletu MVC nie będzie współpracowało z kontekstem EF6, do którego odwołuje się Biblioteka klas).</span><span class="sxs-lookup"><span data-stu-id="f1ef4-157">(Note that ASP.NET Core MVC scaffolding won't work with the EF6 context referenced from the class library.)</span></span>
 

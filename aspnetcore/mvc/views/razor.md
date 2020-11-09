@@ -1,21 +1,21 @@
 ---
 title: odwołanie do składni Razor dla ASP.NET Core
 author: rick-anderson
-description: 'Dowiedz się więcej o :::no-loc(Razor)::: składni znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.'
+description: 'Dowiedz się więcej o Razor składni znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/razor
 ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,23 +24,23 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93059198"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a><span data-ttu-id="6fa13-103">:::no-loc(Razor)::: odwołanie do składni dla ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="6fa13-103">:::no-loc(Razor)::: syntax reference for ASP.NET Core</span></span>
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a><span data-ttu-id="6fa13-103">Razor odwołanie do składni dla ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="6fa13-103">Razor syntax reference for ASP.NET Core</span></span>
 
 <span data-ttu-id="6fa13-104">Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)i [Dan Vicarel](https://github.com/Rabadash8820)</span><span class="sxs-lookup"><span data-stu-id="6fa13-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen), and [Dan Vicarel](https://github.com/Rabadash8820)</span></span>
 
-<span data-ttu-id="6fa13-105">:::no-loc(Razor)::: jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.</span><span class="sxs-lookup"><span data-stu-id="6fa13-105">:::no-loc(Razor)::: is a markup syntax for embedding server-based code into webpages.</span></span> <span data-ttu-id="6fa13-106">:::no-loc(Razor):::Składnia składa się z :::no-loc(Razor)::: znaczników, C# i HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-106">The :::no-loc(Razor)::: syntax consists of :::no-loc(Razor)::: markup, C#, and HTML.</span></span> <span data-ttu-id="6fa13-107">Pliki zawierające :::no-loc(Razor)::: generalnie mają rozszerzenie *. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="6fa13-107">Files containing :::no-loc(Razor)::: generally have a *.cshtml* file extension.</span></span> <span data-ttu-id="6fa13-108">:::no-loc(Razor):::znajduje się również w plikach [ :::no-loc(Razor)::: składników](xref:blazor/components/index) ( *. Razor* ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-108">:::no-loc(Razor)::: is also found in [:::no-loc(Razor)::: components](xref:blazor/components/index) files ( *.razor* ).</span></span>
+<span data-ttu-id="6fa13-105">Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.</span><span class="sxs-lookup"><span data-stu-id="6fa13-105">Razor is a markup syntax for embedding server-based code into webpages.</span></span> <span data-ttu-id="6fa13-106">RazorSkładnia składa się z Razor znaczników, C# i HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-106">The Razor syntax consists of Razor markup, C#, and HTML.</span></span> <span data-ttu-id="6fa13-107">Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="6fa13-107">Files containing Razor generally have a *.cshtml* file extension.</span></span> <span data-ttu-id="6fa13-108">Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) ( *. Razor* ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-108">Razor is also found in [Razor components](xref:blazor/components/index) files ( *.razor* ).</span></span>
 
 ## <a name="rendering-html"></a><span data-ttu-id="6fa13-109">Renderowanie HTML</span><span class="sxs-lookup"><span data-stu-id="6fa13-109">Rendering HTML</span></span>
 
-<span data-ttu-id="6fa13-110">:::no-loc(Razor):::Językiem domyślnym jest HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-110">The default :::no-loc(Razor)::: language is HTML.</span></span> <span data-ttu-id="6fa13-111">Renderowanie kodu HTML z :::no-loc(Razor)::: znaczników nie różni się od renderowania kodu HTML z pliku HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-111">Rendering HTML from :::no-loc(Razor)::: markup is no different than rendering HTML from an HTML file.</span></span> <span data-ttu-id="6fa13-112">Znaczniki HTML w plikach *. cshtml* :::no-loc(Razor)::: są renderowane przez serwer bez zmian.</span><span class="sxs-lookup"><span data-stu-id="6fa13-112">HTML markup in *.cshtml* :::no-loc(Razor)::: files is rendered by the server unchanged.</span></span>
+<span data-ttu-id="6fa13-110">RazorJęzykiem domyślnym jest HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-110">The default Razor language is HTML.</span></span> <span data-ttu-id="6fa13-111">Renderowanie kodu HTML z Razor znaczników nie różni się od renderowania kodu HTML z pliku HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-111">Rendering HTML from Razor markup is no different than rendering HTML from an HTML file.</span></span> <span data-ttu-id="6fa13-112">Znaczniki HTML w plikach *. cshtml* Razor są renderowane przez serwer bez zmian.</span><span class="sxs-lookup"><span data-stu-id="6fa13-112">HTML markup in *.cshtml* Razor files is rendered by the server unchanged.</span></span>
 
-## <a name="no-locrazor-syntax"></a><span data-ttu-id="6fa13-113">:::no-loc(Razor)::: obowiązuje</span><span class="sxs-lookup"><span data-stu-id="6fa13-113">:::no-loc(Razor)::: syntax</span></span>
+## <a name="no-locrazor-syntax"></a><span data-ttu-id="6fa13-113">Razor obowiązuje</span><span class="sxs-lookup"><span data-stu-id="6fa13-113">Razor syntax</span></span>
 
-<span data-ttu-id="6fa13-114">:::no-loc(Razor)::: obsługuje język C# i używa `@` symbolu do przejścia z HTML do języka c#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-114">:::no-loc(Razor)::: supports C# and uses the `@` symbol to transition from HTML to C#.</span></span> <span data-ttu-id="6fa13-115">:::no-loc(Razor)::: oblicza wyrażenia języka C# i renderuje je w danych wyjściowych w formacie HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-115">:::no-loc(Razor)::: evaluates C# expressions and renders them in the HTML output.</span></span>
+<span data-ttu-id="6fa13-114">Razor obsługuje język C# i używa `@` symbolu do przejścia z HTML do języka c#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-114">Razor supports C# and uses the `@` symbol to transition from HTML to C#.</span></span> <span data-ttu-id="6fa13-115">Razor oblicza wyrażenia języka C# i renderuje je w danych wyjściowych w formacie HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-115">Razor evaluates C# expressions and renders them in the HTML output.</span></span>
 
-<span data-ttu-id="6fa13-116">Gdy `@` po symbolu następuje [ :::no-loc(Razor)::: zastrzeżone słowo kluczowe](#razor-reserved-keywords), przechodzi do :::no-loc(Razor)::: specyficznego znacznika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-116">When an `@` symbol is followed by a [:::no-loc(Razor)::: reserved keyword](#razor-reserved-keywords), it transitions into :::no-loc(Razor):::-specific markup.</span></span> <span data-ttu-id="6fa13-117">W przeciwnym razie przechodzi do zwykłego języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-117">Otherwise, it transitions into plain C#.</span></span>
+<span data-ttu-id="6fa13-116">Gdy `@` po symbolu następuje [ Razor zastrzeżone słowo kluczowe](#razor-reserved-keywords), przechodzi do Razor specyficznego znacznika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-116">When an `@` symbol is followed by a [Razor reserved keyword](#razor-reserved-keywords), it transitions into Razor-specific markup.</span></span> <span data-ttu-id="6fa13-117">W przeciwnym razie przechodzi do zwykłego języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-117">Otherwise, it transitions into plain C#.</span></span>
 
-<span data-ttu-id="6fa13-118">Aby wypróbować `@` symbol w :::no-loc(Razor)::: znaczniku, użyj drugiego `@` symbolu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-118">To escape an `@` symbol in :::no-loc(Razor)::: markup, use a second `@` symbol:</span></span>
+<span data-ttu-id="6fa13-118">Aby wypróbować `@` symbol w Razor znaczniku, użyj drugiego `@` symbolu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-118">To escape an `@` symbol in Razor markup, use a second `@` symbol:</span></span>
 
 ```cshtml
 <p>@@Username</p>
@@ -52,15 +52,15 @@ ms.locfileid: "93059198"
 <p>@Username</p>
 ```
 
-<span data-ttu-id="6fa13-120">Atrybuty i zawartość HTML zawierające adresy e-mail nie traktują `@` symbolu jako znaku przejścia.</span><span class="sxs-lookup"><span data-stu-id="6fa13-120">HTML attributes and content containing email addresses don't treat the `@` symbol as a transition character.</span></span> <span data-ttu-id="6fa13-121">W poniższym przykładzie adresy e-mail są nienaruszone, :::no-loc(Razor)::: Analiza:</span><span class="sxs-lookup"><span data-stu-id="6fa13-121">The email addresses in the following example are untouched by :::no-loc(Razor)::: parsing:</span></span>
+<span data-ttu-id="6fa13-120">Atrybuty i zawartość HTML zawierające adresy e-mail nie traktują `@` symbolu jako znaku przejścia.</span><span class="sxs-lookup"><span data-stu-id="6fa13-120">HTML attributes and content containing email addresses don't treat the `@` symbol as a transition character.</span></span> <span data-ttu-id="6fa13-121">W poniższym przykładzie adresy e-mail są nienaruszone, Razor Analiza:</span><span class="sxs-lookup"><span data-stu-id="6fa13-121">The email addresses in the following example are untouched by Razor parsing:</span></span>
 
 ```cshtml
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-no-locrazor-expressions"></a><span data-ttu-id="6fa13-122">Wyrażenia niejawne :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="6fa13-122">Implicit :::no-loc(Razor)::: expressions</span></span>
+## <a name="implicit-no-locrazor-expressions"></a><span data-ttu-id="6fa13-122">Wyrażenia niejawne Razor</span><span class="sxs-lookup"><span data-stu-id="6fa13-122">Implicit Razor expressions</span></span>
 
-<span data-ttu-id="6fa13-123">Wyrażenia niejawne :::no-loc(Razor)::: zaczynają się od `@` kodu C#:</span><span class="sxs-lookup"><span data-stu-id="6fa13-123">Implicit :::no-loc(Razor)::: expressions start with `@` followed by C# code:</span></span>
+<span data-ttu-id="6fa13-123">Wyrażenia niejawne Razor zaczynają się od `@` kodu C#:</span><span class="sxs-lookup"><span data-stu-id="6fa13-123">Implicit Razor expressions start with `@` followed by C# code:</span></span>
 
 ```cshtml
 <p>@DateTime.Now</p>
@@ -84,11 +84,11 @@ ms.locfileid: "93059198"
 * <span data-ttu-id="6fa13-129">Element "int" nie został zamknięty.</span><span class="sxs-lookup"><span data-stu-id="6fa13-129">The "int" element wasn't closed.</span></span> <span data-ttu-id="6fa13-130">Wszystkie elementy muszą być albo zamykane samodzielnie lub mieć pasujący tag końcowy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-130">All elements must be either self-closing or have a matching end tag.</span></span>
 * <span data-ttu-id="6fa13-131">Nie można przekonwertować grupy metod "GenericMethod" na typ inny niż delegatd "Object".</span><span class="sxs-lookup"><span data-stu-id="6fa13-131">Cannot convert method group 'GenericMethod' to non-delegate type 'object'.</span></span> <span data-ttu-id="6fa13-132">Czy chodziło o wywołanie metody?</span><span class="sxs-lookup"><span data-stu-id="6fa13-132">Did you intend to invoke the method?\`</span></span>
 
-<span data-ttu-id="6fa13-133">Wywołania metody ogólnej muszą być opakowane w [jawne :::no-loc(Razor)::: wyrażenie](#explicit-razor-expressions) lub [ :::no-loc(Razor)::: blok kodu](#razor-code-blocks).</span><span class="sxs-lookup"><span data-stu-id="6fa13-133">Generic method calls must be wrapped in an [explicit :::no-loc(Razor)::: expression](#explicit-razor-expressions) or a [:::no-loc(Razor)::: code block](#razor-code-blocks).</span></span>
+<span data-ttu-id="6fa13-133">Wywołania metody ogólnej muszą być opakowane w [jawne Razor wyrażenie](#explicit-razor-expressions) lub [ Razor blok kodu](#razor-code-blocks).</span><span class="sxs-lookup"><span data-stu-id="6fa13-133">Generic method calls must be wrapped in an [explicit Razor expression](#explicit-razor-expressions) or a [Razor code block](#razor-code-blocks).</span></span>
 
-## <a name="explicit-no-locrazor-expressions"></a><span data-ttu-id="6fa13-134">:::no-loc(Razor):::Wyrażenia jawne</span><span class="sxs-lookup"><span data-stu-id="6fa13-134">Explicit :::no-loc(Razor)::: expressions</span></span>
+## <a name="explicit-no-locrazor-expressions"></a><span data-ttu-id="6fa13-134">RazorWyrażenia jawne</span><span class="sxs-lookup"><span data-stu-id="6fa13-134">Explicit Razor expressions</span></span>
 
-<span data-ttu-id="6fa13-135">:::no-loc(Razor):::Wyrażenia jawne składają się z `@` symbolu z wyrównanym nawiasem.</span><span class="sxs-lookup"><span data-stu-id="6fa13-135">Explicit :::no-loc(Razor)::: expressions consist of an `@` symbol with balanced parenthesis.</span></span> <span data-ttu-id="6fa13-136">W celu renderowania czasu ostatniego tygodnia :::no-loc(Razor)::: używane są następujące znaczniki:</span><span class="sxs-lookup"><span data-stu-id="6fa13-136">To render last week's time, the following :::no-loc(Razor)::: markup is used:</span></span>
+<span data-ttu-id="6fa13-135">RazorWyrażenia jawne składają się z `@` symbolu z wyrównanym nawiasem.</span><span class="sxs-lookup"><span data-stu-id="6fa13-135">Explicit Razor expressions consist of an `@` symbol with balanced parenthesis.</span></span> <span data-ttu-id="6fa13-136">W celu renderowania czasu ostatniego tygodnia Razor używane są następujące znaczniki:</span><span class="sxs-lookup"><span data-stu-id="6fa13-136">To render last week's time, the following Razor markup is used:</span></span>
 
 ```cshtml
 <p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
@@ -157,9 +157,9 @@ ms.locfileid: "93059198"
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a><span data-ttu-id="6fa13-160">:::no-loc(Razor)::: bloki kodu</span><span class="sxs-lookup"><span data-stu-id="6fa13-160">:::no-loc(Razor)::: code blocks</span></span>
+## <a name="no-locrazor-code-blocks"></a><span data-ttu-id="6fa13-160">Razor bloki kodu</span><span class="sxs-lookup"><span data-stu-id="6fa13-160">Razor code blocks</span></span>
 
-<span data-ttu-id="6fa13-161">:::no-loc(Razor)::: bloki kodu zaczynają się od `@` i są ujęte w nawiasy `{}` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-161">:::no-loc(Razor)::: code blocks start with `@` and are enclosed by `{}`.</span></span> <span data-ttu-id="6fa13-162">W przeciwieństwie do wyrażeń, kod C# wewnątrz bloków kodu nie jest renderowany.</span><span class="sxs-lookup"><span data-stu-id="6fa13-162">Unlike expressions, C# code inside code blocks isn't rendered.</span></span> <span data-ttu-id="6fa13-163">Bloki kodu i wyrażenia w widoku mają ten sam zakres i są zdefiniowane w kolejności:</span><span class="sxs-lookup"><span data-stu-id="6fa13-163">Code blocks and expressions in a view share the same scope and are defined in order:</span></span>
+<span data-ttu-id="6fa13-161">Razor bloki kodu zaczynają się od `@` i są ujęte w nawiasy `{}` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-161">Razor code blocks start with `@` and are enclosed by `{}`.</span></span> <span data-ttu-id="6fa13-162">W przeciwieństwie do wyrażeń, kod C# wewnątrz bloków kodu nie jest renderowany.</span><span class="sxs-lookup"><span data-stu-id="6fa13-162">Unlike expressions, C# code inside code blocks isn't rendered.</span></span> <span data-ttu-id="6fa13-163">Bloki kodu i wyrażenia w widoku mają ten sam zakres i są zdefiniowane w kolejności:</span><span class="sxs-lookup"><span data-stu-id="6fa13-163">Code blocks and expressions in a view share the same scope and are defined in order:</span></span>
 
 ```cshtml
 @{
@@ -209,7 +209,7 @@ ms.locfileid: "93059198"
 
 ### <a name="implicit-transitions"></a><span data-ttu-id="6fa13-167">Przejścia niejawne</span><span class="sxs-lookup"><span data-stu-id="6fa13-167">Implicit transitions</span></span>
 
-<span data-ttu-id="6fa13-168">Językiem domyślnym w bloku kodu jest C#, ale :::no-loc(Razor)::: strona może przejść z powrotem do HTML:</span><span class="sxs-lookup"><span data-stu-id="6fa13-168">The default language in a code block is C#, but the :::no-loc(Razor)::: Page can transition back to HTML:</span></span>
+<span data-ttu-id="6fa13-168">Językiem domyślnym w bloku kodu jest C#, ale Razor strona może przejść z powrotem do HTML:</span><span class="sxs-lookup"><span data-stu-id="6fa13-168">The default language in a code block is C#, but the Razor Page can transition back to HTML:</span></span>
 
 ```cshtml
 @{
@@ -220,7 +220,7 @@ ms.locfileid: "93059198"
 
 ### <a name="explicit-delimited-transition"></a><span data-ttu-id="6fa13-169">Jawne ograniczone przechodzenie</span><span class="sxs-lookup"><span data-stu-id="6fa13-169">Explicit delimited transition</span></span>
 
-<span data-ttu-id="6fa13-170">Aby zdefiniować podsekcję bloku kodu, który powinien renderować HTML, należy ująć znaki do renderowania za pomocą :::no-loc(Razor)::: `<text>` tagu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-170">To define a subsection of a code block that should render HTML, surround the characters for rendering with the :::no-loc(Razor)::: `<text>` tag:</span></span>
+<span data-ttu-id="6fa13-170">Aby zdefiniować podsekcję bloku kodu, który powinien renderować HTML, należy ująć znaki do renderowania za pomocą Razor `<text>` tagu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-170">To define a subsection of a code block that should render HTML, surround the characters for rendering with the Razor `<text>` tag:</span></span>
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -230,7 +230,7 @@ ms.locfileid: "93059198"
 }
 ```
 
-<span data-ttu-id="6fa13-171">To podejście służy do renderowania kodu HTML, który nie jest ujęty w tag HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-171">Use this approach to render HTML that isn't surrounded by an HTML tag.</span></span> <span data-ttu-id="6fa13-172">Bez tagu HTML lub :::no-loc(Razor)::: tag wystąpi :::no-loc(Razor)::: błąd w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="6fa13-172">Without an HTML or :::no-loc(Razor)::: tag, a :::no-loc(Razor)::: runtime error occurs.</span></span>
+<span data-ttu-id="6fa13-171">To podejście służy do renderowania kodu HTML, który nie jest ujęty w tag HTML.</span><span class="sxs-lookup"><span data-stu-id="6fa13-171">Use this approach to render HTML that isn't surrounded by an HTML tag.</span></span> <span data-ttu-id="6fa13-172">Bez tagu HTML lub Razor tag wystąpi Razor błąd w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="6fa13-172">Without an HTML or Razor tag, a Razor runtime error occurs.</span></span>
 
 <span data-ttu-id="6fa13-173">`<text>`Tag jest przydatny do kontrolowania odstępów podczas renderowania zawartości:</span><span class="sxs-lookup"><span data-stu-id="6fa13-173">The `<text>` tag is useful to control whitespace when rendering content:</span></span>
 
@@ -249,9 +249,9 @@ ms.locfileid: "93059198"
 }
 ```
 
-<span data-ttu-id="6fa13-178">Bez `@:` kodu, :::no-loc(Razor)::: generowany jest błąd czasu wykonywania.</span><span class="sxs-lookup"><span data-stu-id="6fa13-178">Without the `@:` in the code, a :::no-loc(Razor)::: runtime error is generated.</span></span>
+<span data-ttu-id="6fa13-178">Bez `@:` kodu, Razor generowany jest błąd czasu wykonywania.</span><span class="sxs-lookup"><span data-stu-id="6fa13-178">Without the `@:` in the code, a Razor runtime error is generated.</span></span>
 
-<span data-ttu-id="6fa13-179">Dodatkowe `@` znaki w :::no-loc(Razor)::: pliku mogą spowodować błędy kompilatora w instrukcjach znajdujących się w dalszej części bloku.</span><span class="sxs-lookup"><span data-stu-id="6fa13-179">Extra `@` characters in a :::no-loc(Razor)::: file can cause compiler errors at statements later in the block.</span></span> <span data-ttu-id="6fa13-180">Te błędy kompilatora mogą być trudne do zrozumienia, ponieważ rzeczywisty błąd występuje przed zgłoszonym błędem.</span><span class="sxs-lookup"><span data-stu-id="6fa13-180">These compiler errors can be difficult to understand because the actual error occurs before the reported error.</span></span> <span data-ttu-id="6fa13-181">Ten błąd jest typowy po połączeniu wielu wyrażeń jawnych/jawnych w jeden blok kodu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-181">This error is common after combining multiple implicit/explicit expressions into a single code block.</span></span>
+<span data-ttu-id="6fa13-179">Dodatkowe `@` znaki w Razor pliku mogą spowodować błędy kompilatora w instrukcjach znajdujących się w dalszej części bloku.</span><span class="sxs-lookup"><span data-stu-id="6fa13-179">Extra `@` characters in a Razor file can cause compiler errors at statements later in the block.</span></span> <span data-ttu-id="6fa13-180">Te błędy kompilatora mogą być trudne do zrozumienia, ponieważ rzeczywisty błąd występuje przed zgłoszonym błędem.</span><span class="sxs-lookup"><span data-stu-id="6fa13-180">These compiler errors can be difficult to understand because the actual error occurs before the reported error.</span></span> <span data-ttu-id="6fa13-181">Ten błąd jest typowy po połączeniu wielu wyrażeń jawnych/jawnych w jeden blok kodu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-181">This error is common after combining multiple implicit/explicit expressions into a single code block.</span></span>
 
 ## <a name="control-structures"></a><span data-ttu-id="6fa13-182">Struktury formantów</span><span class="sxs-lookup"><span data-stu-id="6fa13-182">Control structures</span></span>
 
@@ -370,7 +370,7 @@ else
 
 ### <a name="compound-using"></a><span data-ttu-id="6fa13-193">Złożonego `@using`</span><span class="sxs-lookup"><span data-stu-id="6fa13-193">Compound `@using`</span></span>
 
-<span data-ttu-id="6fa13-194">W języku C# `using` instrukcja jest używana w celu upewnienia się, że obiekt został usunięty.</span><span class="sxs-lookup"><span data-stu-id="6fa13-194">In C#, a `using` statement is used to ensure an object is disposed.</span></span> <span data-ttu-id="6fa13-195">W programie :::no-loc(Razor)::: ten sam mechanizm jest używany do tworzenia pomocników HTML, które zawierają dodatkową zawartość.</span><span class="sxs-lookup"><span data-stu-id="6fa13-195">In :::no-loc(Razor):::, the same mechanism is used to create HTML Helpers that contain additional content.</span></span> <span data-ttu-id="6fa13-196">W poniższym kodzie, pomocników HTML renderuje `<form>` tag przy użyciu `@using` instrukcji:</span><span class="sxs-lookup"><span data-stu-id="6fa13-196">In the following code, HTML Helpers render a `<form>` tag with the `@using` statement:</span></span>
+<span data-ttu-id="6fa13-194">W języku C# `using` instrukcja jest używana w celu upewnienia się, że obiekt został usunięty.</span><span class="sxs-lookup"><span data-stu-id="6fa13-194">In C#, a `using` statement is used to ensure an object is disposed.</span></span> <span data-ttu-id="6fa13-195">W programie Razor ten sam mechanizm jest używany do tworzenia pomocników HTML, które zawierają dodatkową zawartość.</span><span class="sxs-lookup"><span data-stu-id="6fa13-195">In Razor, the same mechanism is used to create HTML Helpers that contain additional content.</span></span> <span data-ttu-id="6fa13-196">W poniższym kodzie, pomocników HTML renderuje `<form>` tag przy użyciu `@using` instrukcji:</span><span class="sxs-lookup"><span data-stu-id="6fa13-196">In the following code, HTML Helpers render a `<form>` tag with the `@using` statement:</span></span>
 
 ```cshtml
 @using (Html.BeginForm())
@@ -390,7 +390,7 @@ else
 
 ### `@lock`
 
-<span data-ttu-id="6fa13-198">:::no-loc(Razor)::: ma możliwość ochrony sekcji krytycznych przy użyciu instrukcji lock:</span><span class="sxs-lookup"><span data-stu-id="6fa13-198">:::no-loc(Razor)::: has the capability to protect critical sections with lock statements:</span></span>
+<span data-ttu-id="6fa13-198">Razor ma możliwość ochrony sekcji krytycznych przy użyciu instrukcji lock:</span><span class="sxs-lookup"><span data-stu-id="6fa13-198">Razor has the capability to protect critical sections with lock statements:</span></span>
 
 ```cshtml
 @lock (SomeLock)
@@ -401,7 +401,7 @@ else
 
 ### <a name="comments"></a><span data-ttu-id="6fa13-199">Komentarze</span><span class="sxs-lookup"><span data-stu-id="6fa13-199">Comments</span></span>
 
-<span data-ttu-id="6fa13-200">:::no-loc(Razor)::: obsługuje komentarze w językach C# i HTML:</span><span class="sxs-lookup"><span data-stu-id="6fa13-200">:::no-loc(Razor)::: supports C# and HTML comments:</span></span>
+<span data-ttu-id="6fa13-200">Razor obsługuje komentarze w językach C# i HTML:</span><span class="sxs-lookup"><span data-stu-id="6fa13-200">Razor supports C# and HTML comments:</span></span>
 
 ```cshtml
 @{
@@ -417,7 +417,7 @@ else
 <!-- HTML comment -->
 ```
 
-<span data-ttu-id="6fa13-202">:::no-loc(Razor)::: Komentarze są usuwane przez serwer przed renderowaniem strony sieci Web.</span><span class="sxs-lookup"><span data-stu-id="6fa13-202">:::no-loc(Razor)::: comments are removed by the server before the webpage is rendered.</span></span> <span data-ttu-id="6fa13-203">:::no-loc(Razor)::: używa `@*  *@` do ograniczania komentarzy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-203">:::no-loc(Razor)::: uses `@*  *@` to delimit comments.</span></span> <span data-ttu-id="6fa13-204">Poniższy kod jest oznaczony jako komentarz, więc serwer nie renderuje żadnego znacznika:</span><span class="sxs-lookup"><span data-stu-id="6fa13-204">The following code is commented out, so the server doesn't render any markup:</span></span>
+<span data-ttu-id="6fa13-202">Razor Komentarze są usuwane przez serwer przed renderowaniem strony sieci Web.</span><span class="sxs-lookup"><span data-stu-id="6fa13-202">Razor comments are removed by the server before the webpage is rendered.</span></span> <span data-ttu-id="6fa13-203">Razor używa `@*  *@` do ograniczania komentarzy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-203">Razor uses `@*  *@` to delimit comments.</span></span> <span data-ttu-id="6fa13-204">Poniższy kod jest oznaczony jako komentarz, więc serwer nie renderuje żadnego znacznika:</span><span class="sxs-lookup"><span data-stu-id="6fa13-204">The following code is commented out, so the server doesn't render any markup:</span></span>
 
 ```cshtml
 @*
@@ -431,16 +431,16 @@ else
 
 ## <a name="directives"></a><span data-ttu-id="6fa13-205">Dyrektyw</span><span class="sxs-lookup"><span data-stu-id="6fa13-205">Directives</span></span>
 
-<span data-ttu-id="6fa13-206">:::no-loc(Razor)::: dyrektywy są reprezentowane przez niejawne wyrażenia z zastrzeżonymi słowami kluczowymi po `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-206">:::no-loc(Razor)::: directives are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="6fa13-207">Dyrektywa zwykle zmienia sposób analizowania widoku lub umożliwia wykonywanie różnych funkcji.</span><span class="sxs-lookup"><span data-stu-id="6fa13-207">A directive typically changes the way a view is parsed or enables different functionality.</span></span>
+<span data-ttu-id="6fa13-206">Razor dyrektywy są reprezentowane przez niejawne wyrażenia z zastrzeżonymi słowami kluczowymi po `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-206">Razor directives are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="6fa13-207">Dyrektywa zwykle zmienia sposób analizowania widoku lub umożliwia wykonywanie różnych funkcji.</span><span class="sxs-lookup"><span data-stu-id="6fa13-207">A directive typically changes the way a view is parsed or enables different functionality.</span></span>
 
-<span data-ttu-id="6fa13-208">Zrozumienie, jak program :::no-loc(Razor)::: generuje kod dla widoku ułatwia zrozumienie, jak działają dyrektywy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-208">Understanding how :::no-loc(Razor)::: generates code for a view makes it easier to understand how directives work.</span></span>
+<span data-ttu-id="6fa13-208">Zrozumienie, jak program Razor generuje kod dla widoku ułatwia zrozumienie, jak działają dyrektywy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-208">Understanding how Razor generates code for a view makes it easier to understand how directives work.</span></span>
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
 <span data-ttu-id="6fa13-209">Kod generuje klasę podobną do następującej:</span><span class="sxs-lookup"><span data-stu-id="6fa13-209">The code generates a class similar to the following:</span></span>
 
 ```csharp
-public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
+public class _Views_Something_cshtml : RazorPage<dynamic>
 {
     public override async Task ExecuteAsync()
     {
@@ -453,7 +453,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 }
 ```
 
-<span data-ttu-id="6fa13-210">W dalszej części tego artykułu w sekcji [Badanie :::no-loc(Razor)::: klasy języka C# wygenerowanej dla widoku](#inspect-the-razor-c-class-generated-for-a-view) wyjaśniono sposób wyświetlania tej wygenerowanej klasy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-210">Later in this article, the section [Inspect the :::no-loc(Razor)::: C# class generated for a view](#inspect-the-razor-c-class-generated-for-a-view) explains how to view this generated class.</span></span>
+<span data-ttu-id="6fa13-210">W dalszej części tego artykułu w sekcji [Badanie Razor klasy języka C# wygenerowanej dla widoku](#inspect-the-razor-c-class-generated-for-a-view) wyjaśniono sposób wyświetlania tej wygenerowanej klasy.</span><span class="sxs-lookup"><span data-stu-id="6fa13-210">Later in this article, the section [Inspect the Razor C# class generated for a view](#inspect-the-razor-c-class-generated-for-a-view) explains how to view this generated class.</span></span>
 
 ### `@attribute`
 
@@ -467,9 +467,9 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ### `@code`
 
-<span data-ttu-id="6fa13-213">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-213">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-213">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-213">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="6fa13-214">`@code`Blok umożliwia [ :::no-loc(Razor)::: składnikowi](xref:blazor/components/index) Dodawanie elementów członkowskich języka C# (pól, właściwości i metod) do składnika:</span><span class="sxs-lookup"><span data-stu-id="6fa13-214">The `@code` block enables a [:::no-loc(Razor)::: component](xref:blazor/components/index) to add C# members (fields, properties, and methods) to a component:</span></span>
+<span data-ttu-id="6fa13-214">`@code`Blok umożliwia [ Razor składnikowi](xref:blazor/components/index) Dodawanie elementów członkowskich języka C# (pól, właściwości i metod) do składnika:</span><span class="sxs-lookup"><span data-stu-id="6fa13-214">The `@code` block enables a [Razor component](xref:blazor/components/index) to add C# members (fields, properties, and methods) to a component:</span></span>
 
 ```razor
 @code {
@@ -477,7 +477,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 }
 ```
 
-<span data-ttu-id="6fa13-215">W przypadku :::no-loc(Razor)::: składników `@code` jest to alias [`@functions`](#functions) i zalecane `@functions` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-215">For :::no-loc(Razor)::: components, `@code` is an alias of [`@functions`](#functions) and recommended over `@functions`.</span></span> <span data-ttu-id="6fa13-216">Dozwolony jest więcej niż jeden `@code` blok.</span><span class="sxs-lookup"><span data-stu-id="6fa13-216">More than one `@code` block is permissible.</span></span>
+<span data-ttu-id="6fa13-215">W przypadku Razor składników `@code` jest to alias [`@functions`](#functions) i zalecane `@functions` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-215">For Razor components, `@code` is an alias of [`@functions`](#functions) and recommended over `@functions`.</span></span> <span data-ttu-id="6fa13-216">Dozwolony jest więcej niż jeden `@code` blok.</span><span class="sxs-lookup"><span data-stu-id="6fa13-216">More than one `@code` block is permissible.</span></span>
 
 ::: moniker-end
 
@@ -493,7 +493,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="6fa13-218">W obszarze [ :::no-loc(Razor)::: składniki](xref:blazor/components/index)Użyj `@code` , `@functions` Aby dodać elementy członkowskie języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-218">In [:::no-loc(Razor)::: components](xref:blazor/components/index), use `@code` over `@functions` to add C# members.</span></span>
+<span data-ttu-id="6fa13-218">W obszarze [ Razor składniki](xref:blazor/components/index)Użyj `@code` , `@functions` Aby dodać elementy członkowskie języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-218">In [Razor components](xref:blazor/components/index), use `@code` over `@functions` to add C# members.</span></span>
 
 ::: moniker-end
 
@@ -507,7 +507,7 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 <div>From method: Hello</div>
 ```
 
-<span data-ttu-id="6fa13-221">Następujący kod jest wygenerowaną :::no-loc(Razor)::: klasą języka C#:</span><span class="sxs-lookup"><span data-stu-id="6fa13-221">The following code is the generated :::no-loc(Razor)::: C# class:</span></span>
+<span data-ttu-id="6fa13-221">Następujący kod jest wygenerowaną Razor klasą języka C#:</span><span class="sxs-lookup"><span data-stu-id="6fa13-221">The following code is the generated Razor C# class:</span></span>
 
 [!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
 
@@ -566,9 +566,9 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 @inherits TypeNameOfClassToInheritFrom
 ```
 
-<span data-ttu-id="6fa13-227">Następujący kod jest niestandardowym :::no-loc(Razor)::: typem strony:</span><span class="sxs-lookup"><span data-stu-id="6fa13-227">The following code is a custom :::no-loc(Razor)::: page type:</span></span>
+<span data-ttu-id="6fa13-227">Następujący kod jest niestandardowym Razor typem strony:</span><span class="sxs-lookup"><span data-stu-id="6fa13-227">The following code is a custom Razor page type:</span></span>
 
-[!code-csharp[](razor/sample/Classes/Custom:::no-loc(Razor):::Page.cs)]
+[!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
 <span data-ttu-id="6fa13-228">`CustomText`Zostanie wyświetlony w widoku:</span><span class="sxs-lookup"><span data-stu-id="6fa13-228">The `CustomText` is displayed in a view:</span></span>
 
@@ -603,21 +603,21 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 
 ### `@inject`
 
-<span data-ttu-id="6fa13-234">`@inject`Dyrektywa umożliwia :::no-loc(Razor)::: stronie dodanie usługi z [kontenera usługi](xref:fundamentals/dependency-injection) do widoku.</span><span class="sxs-lookup"><span data-stu-id="6fa13-234">The `@inject` directive enables the :::no-loc(Razor)::: Page to inject a service from the [service container](xref:fundamentals/dependency-injection) into a view.</span></span> <span data-ttu-id="6fa13-235">Aby uzyskać więcej informacji, zobacz [iniekcja zależności w widokach](xref:mvc/views/dependency-injection).</span><span class="sxs-lookup"><span data-stu-id="6fa13-235">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
+<span data-ttu-id="6fa13-234">`@inject`Dyrektywa umożliwia Razor stronie dodanie usługi z [kontenera usługi](xref:fundamentals/dependency-injection) do widoku.</span><span class="sxs-lookup"><span data-stu-id="6fa13-234">The `@inject` directive enables the Razor Page to inject a service from the [service container](xref:fundamentals/dependency-injection) into a view.</span></span> <span data-ttu-id="6fa13-235">Aby uzyskać więcej informacji, zobacz [iniekcja zależności w widokach](xref:mvc/views/dependency-injection).</span><span class="sxs-lookup"><span data-stu-id="6fa13-235">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ### `@layout`
 
-<span data-ttu-id="6fa13-236">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-236">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-236">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-236">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="6fa13-237">`@layout`Dyrektywa określa układ :::no-loc(Razor)::: składnika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-237">The `@layout` directive specifies a layout for a :::no-loc(Razor)::: component.</span></span> <span data-ttu-id="6fa13-238">Składniki układu są używane do uniknięcia duplikowania kodu i niespójności.</span><span class="sxs-lookup"><span data-stu-id="6fa13-238">Layout components are used to avoid code duplication and inconsistency.</span></span> <span data-ttu-id="6fa13-239">Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-239">For more information, see <xref:blazor/layouts>.</span></span>
+<span data-ttu-id="6fa13-237">`@layout`Dyrektywa określa układ Razor składnika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-237">The `@layout` directive specifies a layout for a Razor component.</span></span> <span data-ttu-id="6fa13-238">Składniki układu są używane do uniknięcia duplikowania kodu i niespójności.</span><span class="sxs-lookup"><span data-stu-id="6fa13-238">Layout components are used to avoid code duplication and inconsistency.</span></span> <span data-ttu-id="6fa13-239">Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-239">For more information, see <xref:blazor/layouts>.</span></span>
 
 ::: moniker-end
 
 ### `@model`
 
-<span data-ttu-id="6fa13-240">*Ten scenariusz ma zastosowanie tylko do widoków i :::no-loc(Razor)::: stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-240">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="6fa13-240">*Ten scenariusz ma zastosowanie tylko do widoków i Razor stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-240">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
 <span data-ttu-id="6fa13-241">`@model`Dyrektywa określa typ modelu przekazaną do widoku lub strony:</span><span class="sxs-lookup"><span data-stu-id="6fa13-241">The `@model` directive specifies the type of the model passed to a view or page:</span></span>
 
@@ -625,38 +625,38 @@ public class _Views_Something_cshtml : :::no-loc(Razor):::Page<dynamic>
 @model TypeNameOfModel
 ```
 
-<span data-ttu-id="6fa13-242">W aplikacji ASP.NET Core MVC lub :::no-loc(Razor)::: stronach utworzonych przy użyciu poszczególnych kont użytkowników, *widoki/konta/login. cshtml* zawierają następującą deklarację modelu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-242">In an ASP.NET Core MVC or :::no-loc(Razor)::: Pages app created with individual user accounts, *Views/Account/Login.cshtml* contains the following model declaration:</span></span>
+<span data-ttu-id="6fa13-242">W aplikacji ASP.NET Core MVC lub Razor stronach utworzonych przy użyciu poszczególnych kont użytkowników, *widoki/konta/login. cshtml* zawierają następującą deklarację modelu:</span><span class="sxs-lookup"><span data-stu-id="6fa13-242">In an ASP.NET Core MVC or Razor Pages app created with individual user accounts, *Views/Account/Login.cshtml* contains the following model declaration:</span></span>
 
 ```cshtml
 @model LoginViewModel
 ```
 
-<span data-ttu-id="6fa13-243">Wygenerowana Klasa dziedziczy po `:::no-loc(Razor):::Page<dynamic>` :</span><span class="sxs-lookup"><span data-stu-id="6fa13-243">The class generated inherits from `:::no-loc(Razor):::Page<dynamic>`:</span></span>
+<span data-ttu-id="6fa13-243">Wygenerowana Klasa dziedziczy po `RazorPage<dynamic>` :</span><span class="sxs-lookup"><span data-stu-id="6fa13-243">The class generated inherits from `RazorPage<dynamic>`:</span></span>
 
 ```csharp
-public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewModel>
+public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-<span data-ttu-id="6fa13-244">:::no-loc(Razor)::: uwidacznia `Model` Właściwość do uzyskiwania dostępu do modelu przekazaną do widoku:</span><span class="sxs-lookup"><span data-stu-id="6fa13-244">:::no-loc(Razor)::: exposes a `Model` property for accessing the model passed to the view:</span></span>
+<span data-ttu-id="6fa13-244">Razor uwidacznia `Model` Właściwość do uzyskiwania dostępu do modelu przekazaną do widoku:</span><span class="sxs-lookup"><span data-stu-id="6fa13-244">Razor exposes a `Model` property for accessing the model passed to the view:</span></span>
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
 ```
 
-<span data-ttu-id="6fa13-245">`@model`Dyrektywa określa typ `Model` właściwości.</span><span class="sxs-lookup"><span data-stu-id="6fa13-245">The `@model` directive specifies the type of the `Model` property.</span></span> <span data-ttu-id="6fa13-246">Dyrektywa określa, `T` w `:::no-loc(Razor):::Page<T>` którym wygenerowanej klasie, z której pochodzi widok.</span><span class="sxs-lookup"><span data-stu-id="6fa13-246">The directive specifies the `T` in `:::no-loc(Razor):::Page<T>` that the generated class that the view derives from.</span></span> <span data-ttu-id="6fa13-247">Jeśli `@model` dyrektywa nie jest określona, `Model` Właściwość jest typu `dynamic` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-247">If the `@model` directive isn't specified, the `Model` property is of type `dynamic`.</span></span> <span data-ttu-id="6fa13-248">Aby uzyskać więcej informacji, zobacz [silnie wpisane modele i @model słowo kluczowe](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span><span class="sxs-lookup"><span data-stu-id="6fa13-248">For more information, see [Strongly typed models and the @model keyword](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span></span>
+<span data-ttu-id="6fa13-245">`@model`Dyrektywa określa typ `Model` właściwości.</span><span class="sxs-lookup"><span data-stu-id="6fa13-245">The `@model` directive specifies the type of the `Model` property.</span></span> <span data-ttu-id="6fa13-246">Dyrektywa określa, `T` w `RazorPage<T>` którym wygenerowanej klasie, z której pochodzi widok.</span><span class="sxs-lookup"><span data-stu-id="6fa13-246">The directive specifies the `T` in `RazorPage<T>` that the generated class that the view derives from.</span></span> <span data-ttu-id="6fa13-247">Jeśli `@model` dyrektywa nie jest określona, `Model` Właściwość jest typu `dynamic` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-247">If the `@model` directive isn't specified, the `Model` property is of type `dynamic`.</span></span> <span data-ttu-id="6fa13-248">Aby uzyskać więcej informacji, zobacz [silnie wpisane modele i @model słowo kluczowe](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span><span class="sxs-lookup"><span data-stu-id="6fa13-248">For more information, see [Strongly typed models and the @model keyword](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).</span></span>
 
 ### `@namespace`
 
 <span data-ttu-id="6fa13-249">`@namespace`Dyrektywa:</span><span class="sxs-lookup"><span data-stu-id="6fa13-249">The `@namespace` directive:</span></span>
 
-* <span data-ttu-id="6fa13-250">Ustawia przestrzeń nazw klasy wygenerowanej :::no-loc(Razor)::: strony, widoku MVC lub :::no-loc(Razor)::: składnika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-250">Sets the namespace of the class of the generated :::no-loc(Razor)::: page, MVC view, or :::no-loc(Razor)::: component.</span></span>
-* <span data-ttu-id="6fa13-251">Ustawia główne pochodne przestrzenie nazw stron, widoków lub klas składników z najbliższego pliku importów w drzewie katalogów, *_ViewImports. cshtml* (widoki lub strony) lub *_Imports. Razor* ( :::no-loc(Razor)::: składniki).</span><span class="sxs-lookup"><span data-stu-id="6fa13-251">Sets the root derived namespaces of a pages, views, or components classes from the closest imports file in the directory tree, *_ViewImports.cshtml* (views or pages) or *_Imports.razor* (:::no-loc(Razor)::: components).</span></span>
+* <span data-ttu-id="6fa13-250">Ustawia przestrzeń nazw klasy wygenerowanej Razor strony, widoku MVC lub Razor składnika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-250">Sets the namespace of the class of the generated Razor page, MVC view, or Razor component.</span></span>
+* <span data-ttu-id="6fa13-251">Ustawia główne pochodne przestrzenie nazw stron, widoków lub klas składników z najbliższego pliku importów w drzewie katalogów, *_ViewImports. cshtml* (widoki lub strony) lub *_Imports. Razor* ( Razor składniki).</span><span class="sxs-lookup"><span data-stu-id="6fa13-251">Sets the root derived namespaces of a pages, views, or components classes from the closest imports file in the directory tree, *_ViewImports.cshtml* (views or pages) or *_Imports.razor* (Razor components).</span></span>
 
 ```cshtml
 @namespace Your.Namespace.Here
 ```
 
-<span data-ttu-id="6fa13-252">Dla :::no-loc(Razor)::: przykładu stron przedstawionych w poniższej tabeli:</span><span class="sxs-lookup"><span data-stu-id="6fa13-252">For the :::no-loc(Razor)::: Pages example shown in the following table:</span></span>
+<span data-ttu-id="6fa13-252">Dla Razor przykładu stron przedstawionych w poniższej tabeli:</span><span class="sxs-lookup"><span data-stu-id="6fa13-252">For the Razor Pages example shown in the following table:</span></span>
 
 * <span data-ttu-id="6fa13-253">Każda Strona importuje *strony/_ViewImports. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="6fa13-253">Each page imports *Pages/_ViewImports.cshtml* .</span></span>
 * <span data-ttu-id="6fa13-254">*Strona/_ViewImports. cshtml* zawiera `@namespace Hello.World` .</span><span class="sxs-lookup"><span data-stu-id="6fa13-254">*Pages/_ViewImports.cshtml* contains `@namespace Hello.World`.</span></span>
@@ -668,7 +668,7 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 | <span data-ttu-id="6fa13-259">*Pages/MorePages/Page. cshtml*</span><span class="sxs-lookup"><span data-stu-id="6fa13-259">*Pages/MorePages/Page.cshtml*</span></span>               | `Hello.World.MorePages`               |
 | <span data-ttu-id="6fa13-260">*Pages/MorePages/EvenMorePages/Page. cshtml*</span><span class="sxs-lookup"><span data-stu-id="6fa13-260">*Pages/MorePages/EvenMorePages/Page.cshtml*</span></span> | `Hello.World.MorePages.EvenMorePages` |
 
-<span data-ttu-id="6fa13-261">Powyższe relacje mają zastosowanie do plików importu używanych ze składnikami i widokami MVC :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="6fa13-261">The preceding relationships apply to import files used with MVC views and :::no-loc(Razor)::: components.</span></span>
+<span data-ttu-id="6fa13-261">Powyższe relacje mają zastosowanie do plików importu używanych ze składnikami i widokami MVC Razor .</span><span class="sxs-lookup"><span data-stu-id="6fa13-261">The preceding relationships apply to import files used with MVC views and Razor components.</span></span>
 
 <span data-ttu-id="6fa13-262">Gdy wiele plików importu ma `@namespace` dyrektywę, plik znajdujący się najbliżej strony, widoku lub składnika w drzewie katalogów jest używany do ustawiania głównej przestrzeni nazw.</span><span class="sxs-lookup"><span data-stu-id="6fa13-262">When multiple import files have a `@namespace` directive, the file closest to the page, view, or component in the directory tree is used to set the root namespace.</span></span>
 
@@ -686,22 +686,22 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 <span data-ttu-id="6fa13-269">`@page`Dyrektywa ma różne skutki w zależności od typu pliku, w którym występuje.</span><span class="sxs-lookup"><span data-stu-id="6fa13-269">The `@page` directive has different effects depending on the type of the file where it appears.</span></span> <span data-ttu-id="6fa13-270">Dyrektywa:</span><span class="sxs-lookup"><span data-stu-id="6fa13-270">The directive:</span></span>
 
-* <span data-ttu-id="6fa13-271">W pliku *. cshtml* wskazuje, że plik jest :::no-loc(Razor)::: stroną.</span><span class="sxs-lookup"><span data-stu-id="6fa13-271">In a *.cshtml* file indicates that the file is a :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="6fa13-272">Aby uzyskać więcej informacji, zobacz [trasy niestandardowe](xref:razor-pages/index#custom-routes) i <xref:razor-pages/index> .</span><span class="sxs-lookup"><span data-stu-id="6fa13-272">For more information, see [Custom routes](xref:razor-pages/index#custom-routes) and <xref:razor-pages/index>.</span></span>
-* <span data-ttu-id="6fa13-273">Określa, że :::no-loc(Razor)::: składnik powinien obsługiwać żądania bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="6fa13-273">Specifies that a :::no-loc(Razor)::: component should handle requests directly.</span></span> <span data-ttu-id="6fa13-274">Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/routing>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-274">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
+* <span data-ttu-id="6fa13-271">W pliku *. cshtml* wskazuje, że plik jest Razor stroną.</span><span class="sxs-lookup"><span data-stu-id="6fa13-271">In a *.cshtml* file indicates that the file is a Razor Page.</span></span> <span data-ttu-id="6fa13-272">Aby uzyskać więcej informacji, zobacz [trasy niestandardowe](xref:razor-pages/index#custom-routes) i <xref:razor-pages/index> .</span><span class="sxs-lookup"><span data-stu-id="6fa13-272">For more information, see [Custom routes](xref:razor-pages/index#custom-routes) and <xref:razor-pages/index>.</span></span>
+* <span data-ttu-id="6fa13-273">Określa, że Razor składnik powinien obsługiwać żądania bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="6fa13-273">Specifies that a Razor component should handle requests directly.</span></span> <span data-ttu-id="6fa13-274">Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/routing>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-274">For more information, see <xref:blazor/fundamentals/routing>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="6fa13-275">`@page`Dyrektywa w pierwszym wierszu pliku *. cshtml* wskazuje, że plik jest :::no-loc(Razor)::: stroną.</span><span class="sxs-lookup"><span data-stu-id="6fa13-275">The `@page` directive on the first line of a *.cshtml* file indicates that the file is a :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="6fa13-276">Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-276">For more information, see <xref:razor-pages/index>.</span></span>
+<span data-ttu-id="6fa13-275">`@page`Dyrektywa w pierwszym wierszu pliku *. cshtml* wskazuje, że plik jest Razor stroną.</span><span class="sxs-lookup"><span data-stu-id="6fa13-275">The `@page` directive on the first line of a *.cshtml* file indicates that the file is a Razor Page.</span></span> <span data-ttu-id="6fa13-276">Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-276">For more information, see <xref:razor-pages/index>.</span></span>
 
 ::: moniker-end
 
 ### `@section`
 
-<span data-ttu-id="6fa13-277">*Ten scenariusz ma zastosowanie tylko do widoków i :::no-loc(Razor)::: stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-277">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="6fa13-277">*Ten scenariusz ma zastosowanie tylko do widoków i Razor stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-277">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
-<span data-ttu-id="6fa13-278">`@section`Dyrektywa jest używana w połączeniu z [ :::no-loc(Razor)::: układami MVC i Pages](xref:mvc/views/layout) , aby umożliwić widokom i stronom renderowanie zawartości w różnych częściach strony html.</span><span class="sxs-lookup"><span data-stu-id="6fa13-278">The `@section` directive is used in conjunction with [MVC and :::no-loc(Razor)::: Pages layouts](xref:mvc/views/layout) to enable views or pages to render content in different parts of the HTML page.</span></span> <span data-ttu-id="6fa13-279">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-279">For more information, see <xref:mvc/views/layout>.</span></span>
+<span data-ttu-id="6fa13-278">`@section`Dyrektywa jest używana w połączeniu z [ Razor układami MVC i Pages](xref:mvc/views/layout) , aby umożliwić widokom i stronom renderowanie zawartości w różnych częściach strony html.</span><span class="sxs-lookup"><span data-stu-id="6fa13-278">The `@section` directive is used in conjunction with [MVC and Razor Pages layouts](xref:mvc/views/layout) to enable views or pages to render content in different parts of the HTML page.</span></span> <span data-ttu-id="6fa13-279">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-279">For more information, see <xref:mvc/views/layout>.</span></span>
 
 ### `@using`
 
@@ -711,7 +711,7 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="6fa13-281">W [ :::no-loc(Razor)::: składniku składniki](xref:blazor/components/index), `@using` również kontroluje, które składniki znajdują się w zakresie.</span><span class="sxs-lookup"><span data-stu-id="6fa13-281">In [:::no-loc(Razor)::: components](xref:blazor/components/index), `@using` also controls which components are in scope.</span></span>
+<span data-ttu-id="6fa13-281">W [ Razor składniku składniki](xref:blazor/components/index), `@using` również kontroluje, które składniki znajdują się w zakresie.</span><span class="sxs-lookup"><span data-stu-id="6fa13-281">In [Razor components](xref:blazor/components/index), `@using` also controls which components are in scope.</span></span>
 
 ::: moniker-end
 
@@ -719,25 +719,25 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ## <a name="directive-attributes"></a><span data-ttu-id="6fa13-282">Atrybuty dyrektywy</span><span class="sxs-lookup"><span data-stu-id="6fa13-282">Directive attributes</span></span>
 
-<span data-ttu-id="6fa13-283">:::no-loc(Razor)::: atrybuty dyrektywy są reprezentowane przez niejawne wyrażenia z zastrzeżonymi słowami kluczowymi po `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-283">:::no-loc(Razor)::: directive attributes are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="6fa13-284">Atrybut dyrektywy zazwyczaj zmienia sposób analizowania elementu lub umożliwia korzystanie z różnych funkcji.</span><span class="sxs-lookup"><span data-stu-id="6fa13-284">A directive attribute typically changes the way an element is parsed or enables different functionality.</span></span>
+<span data-ttu-id="6fa13-283">Razor atrybuty dyrektywy są reprezentowane przez niejawne wyrażenia z zastrzeżonymi słowami kluczowymi po `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-283">Razor directive attributes are represented by implicit expressions with reserved keywords following the `@` symbol.</span></span> <span data-ttu-id="6fa13-284">Atrybut dyrektywy zazwyczaj zmienia sposób analizowania elementu lub umożliwia korzystanie z różnych funkcji.</span><span class="sxs-lookup"><span data-stu-id="6fa13-284">A directive attribute typically changes the way an element is parsed or enables different functionality.</span></span>
 
 ### `@attributes`
 
-<span data-ttu-id="6fa13-285">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-285">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-285">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-285">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-286">`@attributes` zezwala składnikowi na renderowanie niezadeklarowanych atrybutów.</span><span class="sxs-lookup"><span data-stu-id="6fa13-286">`@attributes` allows a component to render non-declared attributes.</span></span> <span data-ttu-id="6fa13-287">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-287">For more information, see <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.</span></span>
 
 ### `@bind`
 
-<span data-ttu-id="6fa13-288">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-288">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-288">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-288">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-289">Powiązanie danych w składnikach jest realizowane przy użyciu `@bind` atrybutu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-289">Data binding in components is accomplished with the `@bind` attribute.</span></span> <span data-ttu-id="6fa13-290">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/data-binding>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-290">For more information, see <xref:blazor/components/data-binding>.</span></span>
 
 ### `@on{EVENT}`
 
-<span data-ttu-id="6fa13-291">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-291">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-291">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-291">*This scenario only applies to Razor components (.razor).*</span></span>
 
-<span data-ttu-id="6fa13-292">:::no-loc(Razor)::: udostępnia funkcje obsługi zdarzeń dla składników programu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-292">:::no-loc(Razor)::: provides event handling features for components.</span></span> <span data-ttu-id="6fa13-293">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-293">For more information, see <xref:blazor/components/event-handling>.</span></span>
+<span data-ttu-id="6fa13-292">Razor udostępnia funkcje obsługi zdarzeń dla składników programu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-292">Razor provides event handling features for components.</span></span> <span data-ttu-id="6fa13-293">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-293">For more information, see <xref:blazor/components/event-handling>.</span></span>
 
 ::: moniker-end
 
@@ -745,13 +745,13 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ### `@on{EVENT}:preventDefault`
 
-<span data-ttu-id="6fa13-294">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-294">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-294">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-294">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-295">Zapobiega domyślnej akcji dla zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="6fa13-295">Prevents the default action for the event.</span></span>
 
 ### `@on{EVENT}:stopPropagation`
 
-<span data-ttu-id="6fa13-296">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-296">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-296">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-296">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-297">Powoduje zatrzymanie propagacji zdarzenia dla zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="6fa13-297">Stops event propagation for the event.</span></span>
 
@@ -761,33 +761,33 @@ public class _Views_Account_Login_cshtml : :::no-loc(Razor):::Page<LoginViewMode
 
 ### `@key`
 
-<span data-ttu-id="6fa13-298">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-298">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-298">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-298">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-299">`@key`Atrybut dyrektywy powoduje, że algorytmy porównujące składniki, aby zagwarantować zachowywanie elementów lub składników na podstawie wartości klucza.</span><span class="sxs-lookup"><span data-stu-id="6fa13-299">The `@key` directive attribute causes the components diffing algorithm to guarantee preservation of elements or components based on the key's value.</span></span> <span data-ttu-id="6fa13-300">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-300">For more information, see <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.</span></span>
 
 ### `@ref`
 
-<span data-ttu-id="6fa13-301">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-301">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-301">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-301">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-302">Odwołania do składników ( `@ref` ) umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia.</span><span class="sxs-lookup"><span data-stu-id="6fa13-302">Component references (`@ref`) provide a way to reference a component instance so that you can issue commands to that instance.</span></span> <span data-ttu-id="6fa13-303">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#capture-references-to-components>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-303">For more information, see <xref:blazor/components/index#capture-references-to-components>.</span></span>
 
 ### `@typeparam`
 
-<span data-ttu-id="6fa13-304">*Ten scenariusz dotyczy tylko :::no-loc(Razor)::: składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-304">*This scenario only applies to :::no-loc(Razor)::: components (.razor).*</span></span>
+<span data-ttu-id="6fa13-304">*Ten scenariusz dotyczy tylko Razor składników (. Razor).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-304">*This scenario only applies to Razor components (.razor).*</span></span>
 
 <span data-ttu-id="6fa13-305">`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika.</span><span class="sxs-lookup"><span data-stu-id="6fa13-305">The `@typeparam` directive declares a generic type parameter for the generated component class.</span></span> <span data-ttu-id="6fa13-306">Aby uzyskać więcej informacji, zobacz <xref:blazor/components/templated-components#generic-typed-components>.</span><span class="sxs-lookup"><span data-stu-id="6fa13-306">For more information, see <xref:blazor/components/templated-components#generic-typed-components>.</span></span>
 
 ::: moniker-end
 
-## <a name="templated-no-locrazor-delegates"></a><span data-ttu-id="6fa13-307">Delegaty z szablonami :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="6fa13-307">Templated :::no-loc(Razor)::: delegates</span></span>
+## <a name="templated-no-locrazor-delegates"></a><span data-ttu-id="6fa13-307">Delegaty z szablonami Razor</span><span class="sxs-lookup"><span data-stu-id="6fa13-307">Templated Razor delegates</span></span>
 
-<span data-ttu-id="6fa13-308">:::no-loc(Razor)::: Szablony umożliwiają zdefiniowanie fragmentu interfejsu użytkownika w następującym formacie:</span><span class="sxs-lookup"><span data-stu-id="6fa13-308">:::no-loc(Razor)::: templates allow you to define a UI snippet with the following format:</span></span>
+<span data-ttu-id="6fa13-308">Razor Szablony umożliwiają zdefiniowanie fragmentu interfejsu użytkownika w następującym formacie:</span><span class="sxs-lookup"><span data-stu-id="6fa13-308">Razor templates allow you to define a UI snippet with the following format:</span></span>
 
 ```cshtml
 @<tag>...</tag>
 ```
 
-<span data-ttu-id="6fa13-309">Poniższy przykład ilustruje sposób określania delegata z szablonem :::no-loc(Razor)::: jako <xref:System.Func%602> .</span><span class="sxs-lookup"><span data-stu-id="6fa13-309">The following example illustrates how to specify a templated :::no-loc(Razor)::: delegate as a <xref:System.Func%602>.</span></span> <span data-ttu-id="6fa13-310">[Typ dynamiczny](/dotnet/csharp/programming-guide/types/using-type-dynamic) jest określony dla parametru metody, która jest hermetyzowana przez delegata.</span><span class="sxs-lookup"><span data-stu-id="6fa13-310">The [dynamic type](/dotnet/csharp/programming-guide/types/using-type-dynamic) is specified for the parameter of the method that the delegate encapsulates.</span></span> <span data-ttu-id="6fa13-311">[Typ obiektu](/dotnet/csharp/language-reference/keywords/object) jest określony jako wartość zwracana delegata.</span><span class="sxs-lookup"><span data-stu-id="6fa13-311">An [object type](/dotnet/csharp/language-reference/keywords/object) is specified as the return value of the delegate.</span></span> <span data-ttu-id="6fa13-312">Szablon jest używany z elementem <xref:System.Collections.Generic.List%601> `Pet` zawierającym `Name` Właściwość.</span><span class="sxs-lookup"><span data-stu-id="6fa13-312">The template is used with a <xref:System.Collections.Generic.List%601> of `Pet` that has a `Name` property.</span></span>
+<span data-ttu-id="6fa13-309">Poniższy przykład ilustruje sposób określania delegata z szablonem Razor jako <xref:System.Func%602> .</span><span class="sxs-lookup"><span data-stu-id="6fa13-309">The following example illustrates how to specify a templated Razor delegate as a <xref:System.Func%602>.</span></span> <span data-ttu-id="6fa13-310">[Typ dynamiczny](/dotnet/csharp/programming-guide/types/using-type-dynamic) jest określony dla parametru metody, która jest hermetyzowana przez delegata.</span><span class="sxs-lookup"><span data-stu-id="6fa13-310">The [dynamic type](/dotnet/csharp/programming-guide/types/using-type-dynamic) is specified for the parameter of the method that the delegate encapsulates.</span></span> <span data-ttu-id="6fa13-311">[Typ obiektu](/dotnet/csharp/language-reference/keywords/object) jest określony jako wartość zwracana delegata.</span><span class="sxs-lookup"><span data-stu-id="6fa13-311">An [object type](/dotnet/csharp/language-reference/keywords/object) is specified as the return value of the delegate.</span></span> <span data-ttu-id="6fa13-312">Szablon jest używany z elementem <xref:System.Collections.Generic.List%601> `Pet` zawierającym `Name` Właściwość.</span><span class="sxs-lookup"><span data-stu-id="6fa13-312">The template is used with a <xref:System.Collections.Generic.List%601> of `Pet` that has a `Name` property.</span></span>
 
 ```csharp
 public class Pet
@@ -826,7 +826,7 @@ public class Pet
 <p>You have a pet named <strong>K-9</strong>.</p>
 ```
 
-<span data-ttu-id="6fa13-315">Możesz również podać :::no-loc(Razor)::: szablon wbudowany jako argument metody.</span><span class="sxs-lookup"><span data-stu-id="6fa13-315">You can also supply an inline :::no-loc(Razor)::: template as an argument to a method.</span></span> <span data-ttu-id="6fa13-316">W poniższym przykładzie `Repeat` Metoda otrzymuje :::no-loc(Razor)::: szablon.</span><span class="sxs-lookup"><span data-stu-id="6fa13-316">In the following example, the `Repeat` method receives a :::no-loc(Razor)::: template.</span></span> <span data-ttu-id="6fa13-317">Metoda używa szablonu do tworzenia zawartości HTML z powtarzanymi elementami podanymi z listy:</span><span class="sxs-lookup"><span data-stu-id="6fa13-317">The method uses the template to produce HTML content with repeats of items supplied from a list:</span></span>
+<span data-ttu-id="6fa13-315">Możesz również podać Razor szablon wbudowany jako argument metody.</span><span class="sxs-lookup"><span data-stu-id="6fa13-315">You can also supply an inline Razor template as an argument to a method.</span></span> <span data-ttu-id="6fa13-316">W poniższym przykładzie `Repeat` Metoda otrzymuje Razor szablon.</span><span class="sxs-lookup"><span data-stu-id="6fa13-316">In the following example, the `Repeat` method receives a Razor template.</span></span> <span data-ttu-id="6fa13-317">Metoda używa szablonu do tworzenia zawartości HTML z powtarzanymi elementami podanymi z listy:</span><span class="sxs-lookup"><span data-stu-id="6fa13-317">The method uses the template to produce HTML content with repeats of items supplied from a list:</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Html
@@ -880,7 +880,7 @@ public class Pet
 
 ## <a name="tag-helpers"></a><span data-ttu-id="6fa13-323">Pomocnicy tagów</span><span class="sxs-lookup"><span data-stu-id="6fa13-323">Tag Helpers</span></span>
 
-<span data-ttu-id="6fa13-324">*Ten scenariusz ma zastosowanie tylko do widoków i :::no-loc(Razor)::: stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-324">*This scenario only applies to MVC views and :::no-loc(Razor)::: Pages (.cshtml).*</span></span>
+<span data-ttu-id="6fa13-324">*Ten scenariusz ma zastosowanie tylko do widoków i Razor stron MVC (. cshtml).*</span><span class="sxs-lookup"><span data-stu-id="6fa13-324">*This scenario only applies to MVC views and Razor Pages (.cshtml).*</span></span>
 
 <span data-ttu-id="6fa13-325">Istnieją trzy dyrektywy, które odnoszą się do [pomocników tagów](xref:mvc/views/tag-helpers/intro).</span><span class="sxs-lookup"><span data-stu-id="6fa13-325">There are three directives that pertain to [Tag Helpers](xref:mvc/views/tag-helpers/intro).</span></span>
 
@@ -890,9 +890,9 @@ public class Pet
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | <span data-ttu-id="6fa13-329">Usuwa pomocników tagów, które zostały wcześniej dodane z widoku.</span><span class="sxs-lookup"><span data-stu-id="6fa13-329">Removes Tag Helpers previously added from a view.</span></span> |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | <span data-ttu-id="6fa13-330">Określa prefiks tagu w celu włączenia obsługi pomocnika tagów i zapewnienia jawnego użycia pomocnika tagów.</span><span class="sxs-lookup"><span data-stu-id="6fa13-330">Specifies a tag prefix to enable Tag Helper support and to make Tag Helper usage explicit.</span></span> |
 
-## <a name="no-locrazor-reserved-keywords"></a><span data-ttu-id="6fa13-331">:::no-loc(Razor)::: zastrzeżone słowa kluczowe</span><span class="sxs-lookup"><span data-stu-id="6fa13-331">:::no-loc(Razor)::: reserved keywords</span></span>
+## <a name="no-locrazor-reserved-keywords"></a><span data-ttu-id="6fa13-331">Razor zastrzeżone słowa kluczowe</span><span class="sxs-lookup"><span data-stu-id="6fa13-331">Razor reserved keywords</span></span>
 
-### <a name="no-locrazor-keywords"></a><span data-ttu-id="6fa13-332">:::no-loc(Razor)::: służąc</span><span class="sxs-lookup"><span data-stu-id="6fa13-332">:::no-loc(Razor)::: keywords</span></span>
+### <a name="no-locrazor-keywords"></a><span data-ttu-id="6fa13-332">Razor służąc</span><span class="sxs-lookup"><span data-stu-id="6fa13-332">Razor keywords</span></span>
 
 * <span data-ttu-id="6fa13-333">`page` (Wymaga ASP.NET Core 2,1 lub nowszego)</span><span class="sxs-lookup"><span data-stu-id="6fa13-333">`page` (Requires ASP.NET Core 2.1 or later)</span></span>
 * `namespace`
@@ -902,9 +902,9 @@ public class Pet
 * `section`
 * <span data-ttu-id="6fa13-334">`helper` (Obecnie nie jest obsługiwane przez ASP.NET Core)</span><span class="sxs-lookup"><span data-stu-id="6fa13-334">`helper` (Not currently supported by ASP.NET Core)</span></span>
 
-<span data-ttu-id="6fa13-335">:::no-loc(Razor)::: Słowa kluczowe są wyprowadzane z `@(:::no-loc(Razor)::: Keyword)` (na przykład `@(functions)` ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-335">:::no-loc(Razor)::: keywords are escaped with `@(:::no-loc(Razor)::: Keyword)` (for example, `@(functions)`).</span></span>
+<span data-ttu-id="6fa13-335">Razor Słowa kluczowe są wyprowadzane z `@(Razor Keyword)` (na przykład `@(functions)` ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-335">Razor keywords are escaped with `@(Razor Keyword)` (for example, `@(functions)`).</span></span>
 
-### <a name="c-no-locrazor-keywords"></a><span data-ttu-id="6fa13-336">:::no-loc(Razor):::Słowa kluczowe języka C#</span><span class="sxs-lookup"><span data-stu-id="6fa13-336">C# :::no-loc(Razor)::: keywords</span></span>
+### <a name="c-no-locrazor-keywords"></a><span data-ttu-id="6fa13-336">RazorSłowa kluczowe języka C#</span><span class="sxs-lookup"><span data-stu-id="6fa13-336">C# Razor keywords</span></span>
 
 * `case`
 * `do`
@@ -921,19 +921,19 @@ public class Pet
 * `using`
 * `while`
 
-<span data-ttu-id="6fa13-337">:::no-loc(Razor):::Słowa kluczowe języka C# muszą mieć podwójne ucieczki z `@(@C# :::no-loc(Razor)::: Keyword)` (na przykład `@(@case)` ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-337">C# :::no-loc(Razor)::: keywords must be double-escaped with `@(@C# :::no-loc(Razor)::: Keyword)` (for example, `@(@case)`).</span></span> <span data-ttu-id="6fa13-338">Pierwszy `@` wyprowadza :::no-loc(Razor)::: Analizator.</span><span class="sxs-lookup"><span data-stu-id="6fa13-338">The first `@` escapes the :::no-loc(Razor)::: parser.</span></span> <span data-ttu-id="6fa13-339">Drugi `@` wyprowadza analizator składni języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-339">The second `@` escapes the C# parser.</span></span>
+<span data-ttu-id="6fa13-337">RazorSłowa kluczowe języka C# muszą mieć podwójne ucieczki z `@(@C# Razor Keyword)` (na przykład `@(@case)` ).</span><span class="sxs-lookup"><span data-stu-id="6fa13-337">C# Razor keywords must be double-escaped with `@(@C# Razor Keyword)` (for example, `@(@case)`).</span></span> <span data-ttu-id="6fa13-338">Pierwszy `@` wyprowadza Razor Analizator.</span><span class="sxs-lookup"><span data-stu-id="6fa13-338">The first `@` escapes the Razor parser.</span></span> <span data-ttu-id="6fa13-339">Drugi `@` wyprowadza analizator składni języka C#.</span><span class="sxs-lookup"><span data-stu-id="6fa13-339">The second `@` escapes the C# parser.</span></span>
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a><span data-ttu-id="6fa13-340">Zastrzeżone słowa kluczowe, które nie są używane przez :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="6fa13-340">Reserved keywords not used by :::no-loc(Razor):::</span></span>
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a><span data-ttu-id="6fa13-340">Zastrzeżone słowa kluczowe, które nie są używane przez Razor</span><span class="sxs-lookup"><span data-stu-id="6fa13-340">Reserved keywords not used by Razor</span></span>
 
 * `class`
 
-## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a><span data-ttu-id="6fa13-341">Sprawdzanie :::no-loc(Razor)::: klasy języka C# wygenerowanej dla widoku</span><span class="sxs-lookup"><span data-stu-id="6fa13-341">Inspect the :::no-loc(Razor)::: C# class generated for a view</span></span>
+## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a><span data-ttu-id="6fa13-341">Sprawdzanie Razor klasy języka C# wygenerowanej dla widoku</span><span class="sxs-lookup"><span data-stu-id="6fa13-341">Inspect the Razor C# class generated for a view</span></span>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-<span data-ttu-id="6fa13-342">W zestaw .NET Core SDK 2,1 lub nowszej, [ :::no-loc(Razor)::: zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację :::no-loc(Razor)::: plików.</span><span class="sxs-lookup"><span data-stu-id="6fa13-342">With .NET Core SDK 2.1 or later, the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk) handles compilation of :::no-loc(Razor)::: files.</span></span> <span data-ttu-id="6fa13-343">Podczas kompilowania projektu :::no-loc(Razor)::: zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/ :::no-loc(Razor):::* katalogu w katalogu głównym projektu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-343">When building a project, the :::no-loc(Razor)::: SDK generates an *obj/<build_configuration>/<target_framework_moniker>/:::no-loc(Razor):::* directory in the project root.</span></span> <span data-ttu-id="6fa13-344">Struktura katalogów w *:::no-loc(Razor):::* katalogu odzwierciedla strukturę katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-344">The directory structure within the *:::no-loc(Razor):::* directory mirrors the project's directory structure.</span></span>
+<span data-ttu-id="6fa13-342">W zestaw .NET Core SDK 2,1 lub nowszej, [ Razor zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację Razor plików.</span><span class="sxs-lookup"><span data-stu-id="6fa13-342">With .NET Core SDK 2.1 or later, the [Razor SDK](xref:razor-pages/sdk) handles compilation of Razor files.</span></span> <span data-ttu-id="6fa13-343">Podczas kompilowania projektu Razor zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/ Razor* katalogu w katalogu głównym projektu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-343">When building a project, the Razor SDK generates an *obj/<build_configuration>/<target_framework_moniker>/Razor* directory in the project root.</span></span> <span data-ttu-id="6fa13-344">Struktura katalogów w *Razor* katalogu odzwierciedla strukturę katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="6fa13-344">The directory structure within the *Razor* directory mirrors the project's directory structure.</span></span>
 
-<span data-ttu-id="6fa13-345">Rozważmy następującą strukturę katalogów w projekcie ASP.NET Core stron 2,1 na :::no-loc(Razor)::: platformie .NET Core 2,1:</span><span class="sxs-lookup"><span data-stu-id="6fa13-345">Consider the following directory structure in an ASP.NET Core 2.1 :::no-loc(Razor)::: Pages project targeting .NET Core 2.1:</span></span>
+<span data-ttu-id="6fa13-345">Rozważmy następującą strukturę katalogów w projekcie ASP.NET Core stron 2,1 na Razor platformie .NET Core 2,1:</span><span class="sxs-lookup"><span data-stu-id="6fa13-345">Consider the following directory structure in an ASP.NET Core 2.1 Razor Pages project targeting .NET Core 2.1:</span></span>
 
 ```
  Areas/
@@ -956,7 +956,7 @@ public class Pet
  obj/
    Debug/
      netcoreapp2.1/
-       :::no-loc(Razor):::/
+       Razor/
          Areas/
            Admin/
              Pages/
@@ -969,7 +969,7 @@ public class Pet
            Index.g.cshtml.cs
 ```
 
-<span data-ttu-id="6fa13-347">Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml* , Otwórz *obj/Debug/netcoreapp 2.1/ :::no-loc(Razor)::: /Pages/index.g.cshtml.cs* .</span><span class="sxs-lookup"><span data-stu-id="6fa13-347">To view the generated class for *Pages/Index.cshtml* , open *obj/Debug/netcoreapp2.1/:::no-loc(Razor):::/Pages/Index.g.cshtml.cs* .</span></span>
+<span data-ttu-id="6fa13-347">Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml* , Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs* .</span><span class="sxs-lookup"><span data-stu-id="6fa13-347">To view the generated class for *Pages/Index.cshtml* , open *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs* .</span></span>
 
 ::: moniker-end
 
@@ -979,7 +979,7 @@ public class Pet
 
 [!code-csharp[](razor/sample/Utilities/CustomTemplateEngine.cs)]
 
-<span data-ttu-id="6fa13-349">W programie `Startup.ConfigureServices` Zastąp wartość `:::no-loc(Razor):::TemplateEngine` dodany przez MVC `CustomTemplateEngine` klasą:</span><span class="sxs-lookup"><span data-stu-id="6fa13-349">In `Startup.ConfigureServices`, override the `:::no-loc(Razor):::TemplateEngine` added by MVC with the `CustomTemplateEngine` class:</span></span>
+<span data-ttu-id="6fa13-349">W programie `Startup.ConfigureServices` Zastąp wartość `RazorTemplateEngine` dodany przez MVC `CustomTemplateEngine` klasą:</span><span class="sxs-lookup"><span data-stu-id="6fa13-349">In `Startup.ConfigureServices`, override the `RazorTemplateEngine` added by MVC with the `CustomTemplateEngine` class:</span></span>
 
 [!code-csharp[](razor/sample/Startup.cs?highlight=4&range=10-14)]
 
@@ -991,7 +991,7 @@ public class Pet
 
 ## <a name="view-lookups-and-case-sensitivity"></a><span data-ttu-id="6fa13-353">Wyświetl wyszukiwania i rozróżnianie wielkości liter</span><span class="sxs-lookup"><span data-stu-id="6fa13-353">View lookups and case sensitivity</span></span>
 
-<span data-ttu-id="6fa13-354">:::no-loc(Razor):::Aparat widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach.</span><span class="sxs-lookup"><span data-stu-id="6fa13-354">The :::no-loc(Razor)::: view engine performs case-sensitive lookups for views.</span></span> <span data-ttu-id="6fa13-355">Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:</span><span class="sxs-lookup"><span data-stu-id="6fa13-355">However, the actual lookup is determined by the underlying file system:</span></span>
+<span data-ttu-id="6fa13-354">RazorAparat widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach.</span><span class="sxs-lookup"><span data-stu-id="6fa13-354">The Razor view engine performs case-sensitive lookups for views.</span></span> <span data-ttu-id="6fa13-355">Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:</span><span class="sxs-lookup"><span data-stu-id="6fa13-355">However, the actual lookup is determined by the underlying file system:</span></span>
 
 * <span data-ttu-id="6fa13-356">Źródło na podstawie pliku:</span><span class="sxs-lookup"><span data-stu-id="6fa13-356">File based source:</span></span>
   * <span data-ttu-id="6fa13-357">W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter.</span><span class="sxs-lookup"><span data-stu-id="6fa13-357">On operating systems with case insensitive file systems (for example, Windows), physical file provider lookups are case insensitive.</span></span> <span data-ttu-id="6fa13-358">Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml* , */views/Home/test.cshtml* i innymi wariantami wielkości liter.</span><span class="sxs-lookup"><span data-stu-id="6fa13-358">For example, `return View("Test")` results in matches for */Views/Home/Test.cshtml* , */Views/home/test.cshtml* , and any other casing variant.</span></span>
@@ -1001,10 +1001,10 @@ public class Pet
 <span data-ttu-id="6fa13-364">Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i katalogów do wielkości liter:</span><span class="sxs-lookup"><span data-stu-id="6fa13-364">Developers are encouraged to match the casing of file and directory names to the casing of:</span></span>
 
 * <span data-ttu-id="6fa13-365">Nazwy obszaru, kontrolera i akcji.</span><span class="sxs-lookup"><span data-stu-id="6fa13-365">Area, controller, and action names.</span></span>
-* <span data-ttu-id="6fa13-366">:::no-loc(Razor)::: Page.</span><span class="sxs-lookup"><span data-stu-id="6fa13-366">:::no-loc(Razor)::: Pages.</span></span>
+* <span data-ttu-id="6fa13-366">Razor Page.</span><span class="sxs-lookup"><span data-stu-id="6fa13-366">Razor Pages.</span></span>
 
 <span data-ttu-id="6fa13-367">Przypadek dopasowania gwarantuje, że wdrożenia znajdą swoje widoki niezależnie od systemu plików.</span><span class="sxs-lookup"><span data-stu-id="6fa13-367">Matching case ensures the deployments find their views regardless of the underlying file system.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="6fa13-368">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="6fa13-368">Additional resources</span></span>
 
-<span data-ttu-id="6fa13-369">[Wprowadzenie do programowania w sieci Web ASP.NET za pomocą :::no-loc(Razor)::: Składnia](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania z :::no-loc(Razor)::: składnią.</span><span class="sxs-lookup"><span data-stu-id="6fa13-369">[Introduction to ASP.NET Web Programming Using the :::no-loc(Razor)::: Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with :::no-loc(Razor)::: syntax.</span></span>
+<span data-ttu-id="6fa13-369">[Wprowadzenie do programowania w sieci Web ASP.NET za pomocą Razor Składnia](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania z Razor składnią.</span><span class="sxs-lookup"><span data-stu-id="6fa13-369">[Introduction to ASP.NET Web Programming Using the Razor Syntax](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) provides many samples of programming with Razor syntax.</span></span>

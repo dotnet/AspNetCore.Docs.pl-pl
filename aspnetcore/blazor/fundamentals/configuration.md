@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(Blazor):::Konfiguracja ASP.NET Core
+title: BlazorKonfiguracja ASP.NET Core
 author: guardrex
-description: 'Dowiedz się więcej na temat konfiguracji :::no-loc(Blazor)::: aplikacji, w tym ustawień aplikacji, uwierzytelniania i konfiguracji rejestrowania.'
+description: 'Dowiedz się więcej na temat konfiguracji Blazor aplikacji, w tym ustawień aplikacji, uwierzytelniania i konfiguracji rejestrowania.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/configuration
 ms.openlocfilehash: f8b1c49ab29bb8a88ca6d9785cd7ee151315e065
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,31 +26,31 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234377"
 ---
-# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="3e656-103">:::no-loc(Blazor):::Konfiguracja ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="3e656-103">ASP.NET Core :::no-loc(Blazor)::: configuration</span></span>
+# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="3e656-103">BlazorKonfiguracja ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="3e656-103">ASP.NET Core Blazor configuration</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="3e656-104">Ten temat ma zastosowanie do programu :::no-loc(Blazor WebAssembly)::: .</span><span class="sxs-lookup"><span data-stu-id="3e656-104">This topic applies to :::no-loc(Blazor WebAssembly):::.</span></span> <span data-ttu-id="3e656-105">Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="3e656-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
+> <span data-ttu-id="3e656-104">Ten temat ma zastosowanie do programu Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="3e656-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="3e656-105">Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="3e656-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
 
-<span data-ttu-id="3e656-106">:::no-loc(Blazor WebAssembly)::: ładuje domyślnie konfigurację z plików ustawień aplikacji:</span><span class="sxs-lookup"><span data-stu-id="3e656-106">:::no-loc(Blazor WebAssembly)::: loads configuration from app settings files by default:</span></span>
+<span data-ttu-id="3e656-106">Blazor WebAssembly ładuje domyślnie konfigurację z plików ustawień aplikacji:</span><span class="sxs-lookup"><span data-stu-id="3e656-106">Blazor WebAssembly loads configuration from app settings files by default:</span></span>
 
-* `wwwroot/:::no-loc(appsettings.json):::`
+* `wwwroot/appsettings.json`
 * `wwwroot/appsettings.{ENVIRONMENT}.json`
 
 <span data-ttu-id="3e656-107">Inni dostawcy konfiguracji zarejestrowani przez aplikację mogą także zapewnić konfigurację.</span><span class="sxs-lookup"><span data-stu-id="3e656-107">Other configuration providers registered by the app can also provide configuration.</span></span>
 
-<span data-ttu-id="3e656-108">Nie wszyscy dostawcy lub funkcje dostawcy są odpowiednie dla :::no-loc(Blazor WebAssembly)::: aplikacji:</span><span class="sxs-lookup"><span data-stu-id="3e656-108">Not all providers or provider features are appropriate for :::no-loc(Blazor WebAssembly)::: apps:</span></span>
+<span data-ttu-id="3e656-108">Nie wszyscy dostawcy lub funkcje dostawcy są odpowiednie dla Blazor WebAssembly aplikacji:</span><span class="sxs-lookup"><span data-stu-id="3e656-108">Not all providers or provider features are appropriate for Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="3e656-109">[Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration): Dostawca nie jest obsługiwany dla tożsamości zarządzanej i identyfikatora aplikacji (identyfikator klienta) w scenariuszach tajnych klienta.</span><span class="sxs-lookup"><span data-stu-id="3e656-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="3e656-110">Identyfikator aplikacji ze tajemnicą klienta nie jest zalecany dla żadnej aplikacji ASP.NET Core, w szczególności :::no-loc(Blazor WebAssembly)::: aplikacji, ponieważ klucz tajny klienta nie może być zabezpieczony po stronie klienta w celu uzyskania dostępu do usługi.</span><span class="sxs-lookup"><span data-stu-id="3e656-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially :::no-loc(Blazor WebAssembly)::: apps because the client secret can't be secured client-side to access to the service.</span></span>
-* <span data-ttu-id="3e656-111">[Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app): Dostawca nie jest odpowiedni dla :::no-loc(Blazor WebAssembly)::: aplikacji, ponieważ :::no-loc(Blazor WebAssembly)::: aplikacje nie są uruchamiane na serwerze na platformie Azure.</span><span class="sxs-lookup"><span data-stu-id="3e656-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for :::no-loc(Blazor WebAssembly)::: apps because :::no-loc(Blazor WebAssembly)::: apps don't run on a server in Azure.</span></span>
+* <span data-ttu-id="3e656-109">[Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration): Dostawca nie jest obsługiwany dla tożsamości zarządzanej i identyfikatora aplikacji (identyfikator klienta) w scenariuszach tajnych klienta.</span><span class="sxs-lookup"><span data-stu-id="3e656-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="3e656-110">Identyfikator aplikacji ze tajemnicą klienta nie jest zalecany dla żadnej aplikacji ASP.NET Core, w szczególności Blazor WebAssembly aplikacji, ponieważ klucz tajny klienta nie może być zabezpieczony po stronie klienta w celu uzyskania dostępu do usługi.</span><span class="sxs-lookup"><span data-stu-id="3e656-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially Blazor WebAssembly apps because the client secret can't be secured client-side to access to the service.</span></span>
+* <span data-ttu-id="3e656-111">[Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app): Dostawca nie jest odpowiedni dla Blazor WebAssembly aplikacji, ponieważ Blazor WebAssembly aplikacje nie są uruchamiane na serwerze na platformie Azure.</span><span class="sxs-lookup"><span data-stu-id="3e656-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for Blazor WebAssembly apps because Blazor WebAssembly apps don't run on a server in Azure.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="3e656-112">Konfiguracja w :::no-loc(Blazor WebAssembly)::: aplikacji jest widoczna dla użytkowników.</span><span class="sxs-lookup"><span data-stu-id="3e656-112">Configuration in a :::no-loc(Blazor WebAssembly)::: app is visible to users.</span></span> <span data-ttu-id="3e656-113">**Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**</span><span class="sxs-lookup"><span data-stu-id="3e656-113">**Don't store app secrets or credentials in configuration.**</span></span>
+> <span data-ttu-id="3e656-112">Konfiguracja w Blazor WebAssembly aplikacji jest widoczna dla użytkowników.</span><span class="sxs-lookup"><span data-stu-id="3e656-112">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="3e656-113">**Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**</span><span class="sxs-lookup"><span data-stu-id="3e656-113">**Don't store app secrets or credentials in configuration.**</span></span>
 
 <span data-ttu-id="3e656-114">Aby uzyskać więcej informacji na temat dostawców konfiguracji, zobacz <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="3e656-114">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
 
 ## <a name="app-settings-configuration"></a><span data-ttu-id="3e656-115">Konfiguracja ustawień aplikacji</span><span class="sxs-lookup"><span data-stu-id="3e656-115">App settings configuration</span></span>
 
-<span data-ttu-id="3e656-116">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="3e656-116">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="3e656-116">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="3e656-116">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -72,7 +72,7 @@ ms.locfileid: "93234377"
 
 ## <a name="custom-configuration-provider-with-ef-core"></a><span data-ttu-id="3e656-118">Niestandardowy dostawca konfiguracji z EF Core</span><span class="sxs-lookup"><span data-stu-id="3e656-118">Custom configuration provider with EF Core</span></span>
 
-<span data-ttu-id="3e656-119">Niestandardowy dostawca konfiguracji z EF Core, który został pokazany w programie <xref:fundamentals/configuration/index#custom-configuration-provider> Works z :::no-loc(Blazor WebAssembly)::: aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="3e656-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with :::no-loc(Blazor WebAssembly)::: apps.</span></span>
+<span data-ttu-id="3e656-119">Niestandardowy dostawca konfiguracji z EF Core, który został pokazany w programie <xref:fundamentals/configuration/index#custom-configuration-provider> Works z Blazor WebAssembly aplikacjami.</span><span class="sxs-lookup"><span data-stu-id="3e656-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with Blazor WebAssembly apps.</span></span>
 
 <span data-ttu-id="3e656-120">Dodaj dostawcę konfiguracji przykładu do następującego kodu w `Program.Main` ( `Program.cs` ):</span><span class="sxs-lookup"><span data-stu-id="3e656-120">Add the example's configuration provider with the following code in `Program.Main` (`Program.cs`):</span></span>
 
@@ -182,7 +182,7 @@ builder.Configuration.AddJsonStream(stream);
 
 ## <a name="authentication-configuration"></a><span data-ttu-id="3e656-130">Konfiguracja uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="3e656-130">Authentication configuration</span></span>
 
-<span data-ttu-id="3e656-131">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="3e656-131">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="3e656-131">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="3e656-131">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -210,7 +210,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 <span data-ttu-id="3e656-135">Dla symbolu zastępczego `{VERSION}` Najnowsza stabilna wersja pakietu, która pasuje do udostępnionej struktury aplikacji, znajduje się w **historii wersji** pakietu pod adresem [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span><span class="sxs-lookup"><span data-stu-id="3e656-135">For the placeholder `{VERSION}`, the latest stable version of the package that matches the app's shared framework version can be found in the package's **Version History** at [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span></span>
 
-<span data-ttu-id="3e656-136">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="3e656-136">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="3e656-136">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="3e656-136">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {

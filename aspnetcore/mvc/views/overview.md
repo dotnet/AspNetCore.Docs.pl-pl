@@ -5,17 +5,17 @@ description: Dowiedz się, w jaki sposób widoki obsługują prezentację danych
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/overview
 ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,11 +28,11 @@ ms.locfileid: "93060628"
 
 <span data-ttu-id="1f1e0-104">Przez [Steve Smith](https://ardalis.com/)</span><span class="sxs-lookup"><span data-stu-id="1f1e0-104">By [Steve Smith](https://ardalis.com/)</span></span>
 
-<span data-ttu-id="1f1e0-105">W tym dokumencie objaśniono widoki używane w aplikacjach ASP.NET Core MVC.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="1f1e0-106">Aby uzyskać informacje na temat :::no-loc(Razor)::: stron, zobacz [wprowadzenie do :::no-loc(Razor)::: stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-106">For information on :::no-loc(Razor)::: Pages, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="1f1e0-105">W tym dokumencie objaśniono widoki używane w aplikacjach ASP.NET Core MVC.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="1f1e0-106">Aby uzyskać informacje na temat Razor stron, zobacz [wprowadzenie do Razor stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-106">For information on Razor Pages, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
-<span data-ttu-id="1f1e0-107">W wzorcu Model-View-Controller (MVC) *Widok* obsługuje prezentację danych aplikacji i interakcję użytkownika.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="1f1e0-108">Widok to szablon HTML z osadzonym [ :::no-loc(Razor)::: znacznikiem](xref:mvc/views/razor).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-108">A view is an HTML template with embedded [:::no-loc(Razor)::: markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="1f1e0-109">:::no-loc(Razor)::: Znaczniki to kod, który współdziała ze znacznikiem HTML, aby utworzyć stronę sieci Web, która jest wysyłana do klienta.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-109">:::no-loc(Razor)::: markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
+<span data-ttu-id="1f1e0-107">W wzorcu Model-View-Controller (MVC) *Widok* obsługuje prezentację danych aplikacji i interakcję użytkownika.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="1f1e0-108">Widok to szablon HTML z osadzonym [ Razor znacznikiem](xref:mvc/views/razor).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-108">A view is an HTML template with embedded [Razor markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="1f1e0-109">Razor Znaczniki to kod, który współdziała ze znacznikiem HTML, aby utworzyć stronę sieci Web, która jest wysyłana do klienta.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-109">Razor markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
 
-<span data-ttu-id="1f1e0-110">W ASP.NET Core MVC, widoki są plikami *. cshtml* , które używają [języka programowania C#](/dotnet/csharp/) w :::no-loc(Razor)::: znacznikach.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in :::no-loc(Razor)::: markup.</span></span> <span data-ttu-id="1f1e0-111">Zazwyczaj pliki widoku są pogrupowane w foldery o nazwie dla każdej z [kontrolerów](xref:mvc/controllers/actions)aplikacji.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="1f1e0-112">Foldery są przechowywane w folderze *widoki* w katalogu głównym aplikacji:</span><span class="sxs-lookup"><span data-stu-id="1f1e0-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
+<span data-ttu-id="1f1e0-110">W ASP.NET Core MVC, widoki są plikami *. cshtml* , które używają [języka programowania C#](/dotnet/csharp/) w Razor znacznikach.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in Razor markup.</span></span> <span data-ttu-id="1f1e0-111">Zazwyczaj pliki widoku są pogrupowane w foldery o nazwie dla każdej z [kontrolerów](xref:mvc/controllers/actions)aplikacji.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="1f1e0-112">Foldery są przechowywane w folderze *widoki* w katalogu głównym aplikacji:</span><span class="sxs-lookup"><span data-stu-id="1f1e0-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
 
 ![Folder widoki w Eksplorator rozwiązań programu Visual Studio jest otwarty z folderem macierzystym otwartym, aby pokazać informacje o plikach. cshtml, Contact. cshtml i index. cshtml](overview/_static/views_solution_explorer.png)
 
@@ -59,7 +59,7 @@ ms.locfileid: "93060628"
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-<span data-ttu-id="1f1e0-144">*:::no-loc(Razor):::* znaczniki zaczynają się od `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-144">*:::no-loc(Razor):::* markup starts with the `@` symbol.</span></span> <span data-ttu-id="1f1e0-145">Uruchom instrukcje języka C#, umieszczając kod w języku C# w [ :::no-loc(Razor)::: blokach kodu](xref:mvc/views/razor#razor-code-blocks) ustawionych przez nawiasy klamrowe ( `{ ... }` ).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-145">Run C# statements by placing C# code within [:::no-loc(Razor)::: code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="1f1e0-146">Na przykład zapoznaj się z tematem przypisywanie elementu "informacje" `ViewData["Title"]` .</span><span class="sxs-lookup"><span data-stu-id="1f1e0-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="1f1e0-147">Możesz wyświetlić wartości w kodzie HTML, po prostu przywołując wartość `@` symbolem.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="1f1e0-148">Zapoznaj się z zawartością `<h2>` `<h3>` elementów i powyżej.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
+<span data-ttu-id="1f1e0-144">*Razor* znaczniki zaczynają się od `@` symbolu.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-144">*Razor* markup starts with the `@` symbol.</span></span> <span data-ttu-id="1f1e0-145">Uruchom instrukcje języka C#, umieszczając kod w języku C# w [ Razor blokach kodu](xref:mvc/views/razor#razor-code-blocks) ustawionych przez nawiasy klamrowe ( `{ ... }` ).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-145">Run C# statements by placing C# code within [Razor code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="1f1e0-146">Na przykład zapoznaj się z tematem przypisywanie elementu "informacje" `ViewData["Title"]` .</span><span class="sxs-lookup"><span data-stu-id="1f1e0-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="1f1e0-147">Możesz wyświetlić wartości w kodzie HTML, po prostu przywołując wartość `@` symbolem.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="1f1e0-148">Zapoznaj się z zawartością `<h2>` `<h3>` elementów i powyżej.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
 
 <span data-ttu-id="1f1e0-149">Zawartość widoku pokazana powyżej jest tylko częścią całej strony sieci Web, która jest renderowana dla użytkownika.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-149">The view content shown above is only part of the entire webpage that's rendered to the user.</span></span> <span data-ttu-id="1f1e0-150">Pozostała część układu strony i inne typowe aspekty widoku są określone w innych plikach widoku.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-150">The rest of the page's layout and other common aspects of the view are specified in other view files.</span></span> <span data-ttu-id="1f1e0-151">Aby dowiedzieć się więcej, zobacz [temat układ](xref:mvc/views/layout).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-151">To learn more, see the [Layout topic](xref:mvc/views/layout).</span></span>
 
@@ -204,7 +204,7 @@ namespace WebApplication1.ViewModels
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a><span data-ttu-id="1f1e0-212">Dane słabo wpisane (ViewData, ViewData Attribute i ViewBag)</span><span class="sxs-lookup"><span data-stu-id="1f1e0-212">Weakly typed data (ViewData, ViewData attribute, and ViewBag)</span></span>
 
-<span data-ttu-id="1f1e0-213">`ViewBag`*nie jest dostępny w :::no-loc(Razor)::: Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-213">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1f1e0-213">`ViewBag`*nie jest dostępny w Razor Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-213">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1f1e0-214">W przypadku widoków o jednoznacznie określonym typie widoki mają dostęp do jednoznacznie *wpisanej* kolekcji (nazywanej również *luźno wpisaną* ) kolekcją danych.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-214">In addition to strongly typed views, views have access to a *weakly typed* (also called *loosely typed* ) collection of data.</span></span> <span data-ttu-id="1f1e0-215">W przeciwieństwie do mocnych typów, *słabych typów* (lub *luźnych typów* ) oznacza, że nie deklaruje jawnie typu danych, z których korzystasz.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-215">Unlike strong types, *weak types* (or *loose types* ) means that you don't explicitly declare the type of data you're using.</span></span> <span data-ttu-id="1f1e0-216">Możesz użyć kolekcji nieokreślonych danych do przekazywania małych ilości danych do i z kontrolerów i widoków.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-216">You can use the collection of weakly typed data for passing small amounts of data in and out of controllers and views.</span></span>
 
@@ -264,7 +264,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1f1e0-238">**ViewData — atrybut**</span><span class="sxs-lookup"><span data-stu-id="1f1e0-238">**ViewData attribute**</span></span>
 
-<span data-ttu-id="1f1e0-239">Innym podejściem korzystającym z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) jest [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="1f1e0-240">Właściwości na kontrolerach lub :::no-loc(Razor)::: modelach stron oznaczonych `[ViewData]` atrybutem są przechowywane i ładowane ze słownika.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-240">Properties on controllers or :::no-loc(Razor)::: Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
+<span data-ttu-id="1f1e0-239">Innym podejściem korzystającym z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) jest [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span><span class="sxs-lookup"><span data-stu-id="1f1e0-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="1f1e0-240">Właściwości na kontrolerach lub Razor modelach stron oznaczonych `[ViewData]` atrybutem są przechowywane i ładowane ze słownika.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-240">Properties on controllers or Razor Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
 
 <span data-ttu-id="1f1e0-241">W poniższym przykładzie kontroler Home zawiera `Title` Właściwość oznaczoną przy użyciu `[ViewData]` .</span><span class="sxs-lookup"><span data-stu-id="1f1e0-241">In the following example, the Home controller contains a `Title` property marked with `[ViewData]`.</span></span> <span data-ttu-id="1f1e0-242">`About`Metoda ustawia tytuł dla widoku informacje:</span><span class="sxs-lookup"><span data-stu-id="1f1e0-242">The `About` method sets the title for the About view:</span></span>
 
@@ -298,7 +298,7 @@ public class HomeController : Controller
 
 <span data-ttu-id="1f1e0-244">**ViewBag**</span><span class="sxs-lookup"><span data-stu-id="1f1e0-244">**ViewBag**</span></span>
 
-<span data-ttu-id="1f1e0-245">`ViewBag`*nie jest dostępny w :::no-loc(Razor)::: Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-245">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1f1e0-245">`ViewBag`*nie jest dostępny w Razor Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-245">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1f1e0-246">`ViewBag` jest obiektem [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) , który zapewnia dynamiczny dostęp do obiektów przechowywanych w `ViewData` .</span><span class="sxs-lookup"><span data-stu-id="1f1e0-246">`ViewBag` is a [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) object that provides dynamic access to the objects stored in `ViewData`.</span></span> <span data-ttu-id="1f1e0-247">`ViewBag` może być wygodniejszy do pracy z, ponieważ nie wymaga rzutowania.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-247">`ViewBag` can be more convenient to work with, since it doesn't require casting.</span></span> <span data-ttu-id="1f1e0-248">Poniższy przykład pokazuje, jak używać tego `ViewBag` samego wyniku, jak w przypadku użycia `ViewData` powyżej:</span><span class="sxs-lookup"><span data-stu-id="1f1e0-248">The following example shows how to use `ViewBag` with the same result as using `ViewData` above:</span></span>
 
@@ -331,7 +331,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1f1e0-249">**Jednoczesne korzystanie z ViewData i ViewBag**</span><span class="sxs-lookup"><span data-stu-id="1f1e0-249">**Using ViewData and ViewBag simultaneously**</span></span>
 
-<span data-ttu-id="1f1e0-250">`ViewBag`*nie jest dostępny w :::no-loc(Razor)::: Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-250">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="1f1e0-250">`ViewBag`*nie jest dostępny w Razor Strony.*</span><span class="sxs-lookup"><span data-stu-id="1f1e0-250">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="1f1e0-251">Ponieważ `ViewData` i `ViewBag` zapoznaj się z tą samą `ViewData` kolekcją podstawową, można użyć obu `ViewData` i `ViewBag` i kombinacji między nimi podczas odczytywania i zapisywania wartości.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-251">Since `ViewData` and `ViewBag` refer to the same underlying `ViewData` collection, you can use both `ViewData` and `ViewBag` and mix and match between them when reading and writing values.</span></span>
 
@@ -371,7 +371,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="1f1e0-259">**Podsumowanie różnic między ViewData i ViewBag**</span><span class="sxs-lookup"><span data-stu-id="1f1e0-259">**Summary of the differences between ViewData and ViewBag**</span></span>
 
- <span data-ttu-id="1f1e0-260">`ViewBag` nie jest dostępny na :::no-loc(Razor)::: stronach.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-260">`ViewBag` isn't available in the :::no-loc(Razor)::: Pages.</span></span>
+ <span data-ttu-id="1f1e0-260">`ViewBag` nie jest dostępny na Razor stronach.</span><span class="sxs-lookup"><span data-stu-id="1f1e0-260">`ViewBag` isn't available in the Razor Pages.</span></span>
 
 * `ViewData`
   * <span data-ttu-id="1f1e0-261">Pochodzi z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), więc ma właściwości słownika, które mogą być przydatne, takie jak `ContainsKey` , `Add` , `Remove` , i `Clear` .</span><span class="sxs-lookup"><span data-stu-id="1f1e0-261">Derives from [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), so it has dictionary properties that can be useful, such as `ContainsKey`, `Add`, `Remove`, and `Clear`.</span></span>

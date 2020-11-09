@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/cors
 ms.openlocfilehash: 03008f40fc1c4b323535d08a1bb4c4007bc145f7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -131,7 +131,7 @@ ms.locfileid: "93060823"
 
 * <span data-ttu-id="01e47-166">`app.UseCors` włącza oprogramowanie pośredniczące CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-166">`app.UseCors` enables the CORS middleware.</span></span> <span data-ttu-id="01e47-167">Ponieważ zasady domyślne nie zostały skonfigurowane, `app.UseCors()` sama nie włącza mechanizmu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-167">Because a default policy hasn't been configured, `app.UseCors()` alone doesn't enable CORS.</span></span>
 * <span data-ttu-id="01e47-168">`/echo`Punkty końcowe i umożliwiają Zezwalanie na żądania między źródłami przy użyciu określonych zasad.</span><span class="sxs-lookup"><span data-stu-id="01e47-168">The `/echo` and controller endpoints allow cross-origin requests using the specified policy.</span></span>
-* <span data-ttu-id="01e47-169">`/echo2` :::no-loc(Razor)::: Punkty końcowe stron i **nie** zezwalają na żądania między źródłami, ponieważ nie określono żadnych zasad domyślnych.</span><span class="sxs-lookup"><span data-stu-id="01e47-169">The `/echo2` and :::no-loc(Razor)::: Pages endpoints do **not** allow cross-origin requests because no default policy was specified.</span></span>
+* <span data-ttu-id="01e47-169">`/echo2` Razor Punkty końcowe stron i **nie** zezwalają na żądania między źródłami, ponieważ nie określono żadnych zasad domyślnych.</span><span class="sxs-lookup"><span data-stu-id="01e47-169">The `/echo2` and Razor Pages endpoints do **not** allow cross-origin requests because no default policy was specified.</span></span>
 
 <span data-ttu-id="01e47-170">Atrybut [[DisableCors]](#dc) **nie wyłącza mechanizmu**  CORS, który został włączony przez Routing punktów końcowych za pomocą `RequireCors` .</span><span class="sxs-lookup"><span data-stu-id="01e47-170">The [[DisableCors]](#dc) attribute does **not**  disable CORS that has been enabled by endpoint routing with `RequireCors`.</span></span>
 
@@ -150,7 +150,7 @@ ms.locfileid: "93060823"
 
 <span data-ttu-id="01e47-178">Ten `[EnableCors]` atrybut może być stosowany do:</span><span class="sxs-lookup"><span data-stu-id="01e47-178">The `[EnableCors]` attribute can be applied to:</span></span>
 
-* <span data-ttu-id="01e47-179">:::no-loc(Razor)::: Stronic `PageModel`</span><span class="sxs-lookup"><span data-stu-id="01e47-179">:::no-loc(Razor)::: Page `PageModel`</span></span>
+* <span data-ttu-id="01e47-179">Razor Stronic `PageModel`</span><span class="sxs-lookup"><span data-stu-id="01e47-179">Razor Page `PageModel`</span></span>
 * <span data-ttu-id="01e47-180">Kontroler</span><span class="sxs-lookup"><span data-stu-id="01e47-180">Controller</span></span>
 * <span data-ttu-id="01e47-181">Metoda akcji kontrolera</span><span class="sxs-lookup"><span data-stu-id="01e47-181">Controller action method</span></span>
 
@@ -276,7 +276,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="01e47-242">Poświadczenia w żądaniach między źródłami</span><span class="sxs-lookup"><span data-stu-id="01e47-242">Credentials in cross-origin requests</span></span>
 
-<span data-ttu-id="01e47-243">Poświadczenia wymagają specjalnej obsługi w żądaniu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-243">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="01e47-244">Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami.</span><span class="sxs-lookup"><span data-stu-id="01e47-244">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="01e47-245">Poświadczenia obejmują :::no-loc(cookie)::: schematy uwierzytelniania s i http.</span><span class="sxs-lookup"><span data-stu-id="01e47-245">Credentials include :::no-loc(cookie):::s and HTTP authentication schemes.</span></span> <span data-ttu-id="01e47-246">Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .</span><span class="sxs-lookup"><span data-stu-id="01e47-246">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
+<span data-ttu-id="01e47-243">Poświadczenia wymagają specjalnej obsługi w żądaniu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-243">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="01e47-244">Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami.</span><span class="sxs-lookup"><span data-stu-id="01e47-244">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="01e47-245">Poświadczenia obejmują cookie schematy uwierzytelniania s i http.</span><span class="sxs-lookup"><span data-stu-id="01e47-245">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="01e47-246">Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .</span><span class="sxs-lookup"><span data-stu-id="01e47-246">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
 
 <span data-ttu-id="01e47-247">`XMLHttpRequest`Bezpośrednie używanie:</span><span class="sxs-lookup"><span data-stu-id="01e47-247">Using `XMLHttpRequest` directly:</span></span>
 
@@ -346,7 +346,7 @@ Response Headers:
 Access-Control-Allow-Methods: PUT,DELETE,GET
 Access-Control-Allow-Origin: https://cors1.azurewebsites.net
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f8...8;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
+Set-Cookie: ARRAffinity=8f8...8;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
 Vary: Origin
 
 Request Headers:
@@ -462,7 +462,7 @@ Status Code: 200 OK
 Content-Encoding: gzip
 Content-Type: text/plain; charset=utf-8
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
+Set-Cookie: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
 Transfer-Encoding: chunked
 Vary: Accept-Encoding
 X-Powered-By: ASP.NET
@@ -501,7 +501,7 @@ Access-Control-Allow-Headers: Content-Type,x-custom-header
 Access-Control-Allow-Methods: PUT,DELETE,GET,OPTIONS
 Access-Control-Allow-Origin: https://cors1.azurewebsites.net
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors3.azurewebsites.net
+Set-Cookie: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors3.azurewebsites.net
 Vary: Origin
 X-Powered-By: ASP.NET
 ```
@@ -550,7 +550,7 @@ User-Agent: Mozilla/5.0
 
 ## <a name="test-cors"></a><span data-ttu-id="01e47-356">Testowanie CORS</span><span class="sxs-lookup"><span data-stu-id="01e47-356">Test CORS</span></span>
 
-<span data-ttu-id="01e47-357">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ma kod do testowania mechanizmu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-357">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) has code to test CORS.</span></span> <span data-ttu-id="01e47-358">Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="01e47-358">See [how to download](xref:index#how-to-download-a-sample).</span></span> <span data-ttu-id="01e47-359">Przykładem jest projekt interfejsu API ze :::no-loc(Razor)::: stronami dodanymi:</span><span class="sxs-lookup"><span data-stu-id="01e47-359">The sample is an API project with :::no-loc(Razor)::: Pages added:</span></span>
+<span data-ttu-id="01e47-357">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ma kod do testowania mechanizmu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-357">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) has code to test CORS.</span></span> <span data-ttu-id="01e47-358">Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="01e47-358">See [how to download](xref:index#how-to-download-a-sample).</span></span> <span data-ttu-id="01e47-359">Przykładem jest projekt interfejsu API ze Razor stronami dodanymi:</span><span class="sxs-lookup"><span data-stu-id="01e47-359">The sample is an API project with Razor Pages added:</span></span>
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupTest2.cs?name=snippet2)]
 
@@ -708,7 +708,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 <span data-ttu-id="01e47-440">Uwaga: `UseCors` należy wywołać przed `UseMvc` .</span><span class="sxs-lookup"><span data-stu-id="01e47-440">Note: `UseCors` must be called before `UseMvc`.</span></span>
 
-<span data-ttu-id="01e47-441">Zobacz [Włączanie mechanizmu CORS na :::no-loc(Razor)::: stronach, kontrolerach i metodach akcji](#ecors) , aby zastosować zasady CORS na poziomie strony/kontrolera/akcji.</span><span class="sxs-lookup"><span data-stu-id="01e47-441">See [Enable CORS in :::no-loc(Razor)::: Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
+<span data-ttu-id="01e47-441">Zobacz [Włączanie mechanizmu CORS na Razor stronach, kontrolerach i metodach akcji](#ecors) , aby zastosować zasady CORS na poziomie strony/kontrolera/akcji.</span><span class="sxs-lookup"><span data-stu-id="01e47-441">See [Enable CORS in Razor Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
 
 <span data-ttu-id="01e47-442">Zobacz temat [CORS testów](#test) , aby uzyskać instrukcje dotyczące testowania kodu podobnego do poprzedniego kodu.</span><span class="sxs-lookup"><span data-stu-id="01e47-442">See [Test CORS](#test) for instructions on testing code similar to the preceding code.</span></span>
 
@@ -720,7 +720,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 <span data-ttu-id="01e47-447">Ten `[EnableCors]` atrybut może być stosowany do:</span><span class="sxs-lookup"><span data-stu-id="01e47-447">The `[EnableCors]` attribute can be applied to:</span></span>
 
-* <span data-ttu-id="01e47-448">:::no-loc(Razor)::: Stronic `PageModel`</span><span class="sxs-lookup"><span data-stu-id="01e47-448">:::no-loc(Razor)::: Page `PageModel`</span></span>
+* <span data-ttu-id="01e47-448">Razor Stronic `PageModel`</span><span class="sxs-lookup"><span data-stu-id="01e47-448">Razor Page `PageModel`</span></span>
 * <span data-ttu-id="01e47-449">Kontroler</span><span class="sxs-lookup"><span data-stu-id="01e47-449">Controller</span></span>
 * <span data-ttu-id="01e47-450">Metoda akcji kontrolera</span><span class="sxs-lookup"><span data-stu-id="01e47-450">Controller action method</span></span>
 
@@ -823,7 +823,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 
 ### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="01e47-498">Poświadczenia w żądaniach między źródłami</span><span class="sxs-lookup"><span data-stu-id="01e47-498">Credentials in cross-origin requests</span></span>
 
-<span data-ttu-id="01e47-499">Poświadczenia wymagają specjalnej obsługi w żądaniu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-499">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="01e47-500">Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami.</span><span class="sxs-lookup"><span data-stu-id="01e47-500">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="01e47-501">Poświadczenia obejmują :::no-loc(cookie)::: schematy uwierzytelniania s i http.</span><span class="sxs-lookup"><span data-stu-id="01e47-501">Credentials include :::no-loc(cookie):::s and HTTP authentication schemes.</span></span> <span data-ttu-id="01e47-502">Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .</span><span class="sxs-lookup"><span data-stu-id="01e47-502">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
+<span data-ttu-id="01e47-499">Poświadczenia wymagają specjalnej obsługi w żądaniu CORS.</span><span class="sxs-lookup"><span data-stu-id="01e47-499">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="01e47-500">Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami.</span><span class="sxs-lookup"><span data-stu-id="01e47-500">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="01e47-501">Poświadczenia obejmują cookie schematy uwierzytelniania s i http.</span><span class="sxs-lookup"><span data-stu-id="01e47-501">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="01e47-502">Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .</span><span class="sxs-lookup"><span data-stu-id="01e47-502">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
 
 <span data-ttu-id="01e47-503">`XMLHttpRequest`Bezpośrednie używanie:</span><span class="sxs-lookup"><span data-stu-id="01e47-503">Using `XMLHttpRequest` directly:</span></span>
 
@@ -999,14 +999,14 @@ Test message
   > [!WARNING]
   > <span data-ttu-id="01e47-579">`WithOrigins("https://localhost:<port>");` powinien być używany tylko do testowania przykładowej aplikacji podobnej do [przykładowego kodu pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors).</span><span class="sxs-lookup"><span data-stu-id="01e47-579">`WithOrigins("https://localhost:<port>");` should only be used for testing a sample app similar to the [download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors).</span></span>
 
-1. <span data-ttu-id="01e47-580">Utwórz projekt aplikacji sieci Web ( :::no-loc(Razor)::: strony lub MVC).</span><span class="sxs-lookup"><span data-stu-id="01e47-580">Create a web app project (:::no-loc(Razor)::: Pages or MVC).</span></span> <span data-ttu-id="01e47-581">Przykład używa :::no-loc(Razor)::: stron.</span><span class="sxs-lookup"><span data-stu-id="01e47-581">The sample uses :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="01e47-582">Aplikację sieci Web można utworzyć w tym samym rozwiązaniu co projekt interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="01e47-582">You can create the web app in the same solution as the API project.</span></span>
+1. <span data-ttu-id="01e47-580">Utwórz projekt aplikacji sieci Web ( Razor strony lub MVC).</span><span class="sxs-lookup"><span data-stu-id="01e47-580">Create a web app project (Razor Pages or MVC).</span></span> <span data-ttu-id="01e47-581">Przykład używa Razor stron.</span><span class="sxs-lookup"><span data-stu-id="01e47-581">The sample uses Razor Pages.</span></span> <span data-ttu-id="01e47-582">Aplikację sieci Web można utworzyć w tym samym rozwiązaniu co projekt interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="01e47-582">You can create the web app in the same solution as the API project.</span></span>
 1. <span data-ttu-id="01e47-583">Dodaj następujący wyróżniony kod do pliku *index. cshtml* :</span><span class="sxs-lookup"><span data-stu-id="01e47-583">Add the following highlighted code to the *Index.cshtml* file:</span></span>
 
   [!code-cshtml[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
 1. <span data-ttu-id="01e47-584">W poprzednim kodzie Zastąp ciąg `url: 'https://<web app>.azurewebsites.net/api/values/1',` adresem URL wdrożonej aplikacji.</span><span class="sxs-lookup"><span data-stu-id="01e47-584">In the preceding code, replace `url: 'https://<web app>.azurewebsites.net/api/values/1',` with the URL to the deployed app.</span></span>
 1. <span data-ttu-id="01e47-585">Wdróż projekt interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="01e47-585">Deploy the API project.</span></span> <span data-ttu-id="01e47-586">Na przykład [Wdróż na platformie Azure](xref:host-and-deploy/azure-apps/index).</span><span class="sxs-lookup"><span data-stu-id="01e47-586">For example, [deploy to Azure](xref:host-and-deploy/azure-apps/index).</span></span>
-1. <span data-ttu-id="01e47-587">Uruchom :::no-loc(Razor)::: strony lub aplikację MVC na pulpicie, a następnie kliknij przycisk **Testuj** .</span><span class="sxs-lookup"><span data-stu-id="01e47-587">Run the :::no-loc(Razor)::: Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="01e47-588">Użyj narzędzi F12, aby przejrzeć komunikaty o błędach.</span><span class="sxs-lookup"><span data-stu-id="01e47-588">Use the F12 tools to review error messages.</span></span>
+1. <span data-ttu-id="01e47-587">Uruchom Razor strony lub aplikację MVC na pulpicie, a następnie kliknij przycisk **Testuj** .</span><span class="sxs-lookup"><span data-stu-id="01e47-587">Run the Razor Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="01e47-588">Użyj narzędzi F12, aby przejrzeć komunikaty o błędach.</span><span class="sxs-lookup"><span data-stu-id="01e47-588">Use the F12 tools to review error messages.</span></span>
 1. <span data-ttu-id="01e47-589">Usuń pochodzenie hosta lokalnego z `WithOrigins` i Wdróż aplikację.</span><span class="sxs-lookup"><span data-stu-id="01e47-589">Remove the localhost origin from `WithOrigins` and deploy the app.</span></span> <span data-ttu-id="01e47-590">Alternatywnie Uruchom aplikację kliencką z innym portem.</span><span class="sxs-lookup"><span data-stu-id="01e47-590">Alternatively, run the client app with a different port.</span></span> <span data-ttu-id="01e47-591">Na przykład uruchom polecenie z programu Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="01e47-591">For example, run from Visual Studio.</span></span>
 1. <span data-ttu-id="01e47-592">Przetestuj za pomocą aplikacji klienckiej.</span><span class="sxs-lookup"><span data-stu-id="01e47-592">Test with the client app.</span></span> <span data-ttu-id="01e47-593">Błędy funkcji CORS zwracają błąd, ale komunikat o błędzie nie jest dostępny dla języka JavaScript.</span><span class="sxs-lookup"><span data-stu-id="01e47-593">CORS failures return an error, but the error message isn't available to JavaScript.</span></span> <span data-ttu-id="01e47-594">Aby wyświetlić błąd, Użyj karty konsola w narzędziach F12.</span><span class="sxs-lookup"><span data-stu-id="01e47-594">Use the console tab in the F12 tools to see the error.</span></span> <span data-ttu-id="01e47-595">W zależności od przeglądarki pojawia się błąd (w konsoli narzędzia F12) podobny do poniższego:</span><span class="sxs-lookup"><span data-stu-id="01e47-595">Depending on the browser, you get an error (in the F12 tools console) similar to the following:</span></span>
 

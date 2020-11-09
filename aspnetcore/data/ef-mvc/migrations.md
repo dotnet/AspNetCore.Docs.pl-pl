@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/migrations
 ms.openlocfilehash: 070c18db55956d79560904f53395b5001c7bce6d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -54,7 +54,7 @@ ms.locfileid: "93054037"
 
 ## <a name="change-the-connection-string"></a><span data-ttu-id="376be-125">Zmień parametry połączenia</span><span class="sxs-lookup"><span data-stu-id="376be-125">Change the connection string</span></span>
 
-<span data-ttu-id="376be-126">W *:::no-loc(appsettings.json):::* pliku Zmień nazwę bazy danych w parametrach połączenia na ContosoUniversity2 lub inną nazwę, która nie została użyta na komputerze, którego używasz.</span><span class="sxs-lookup"><span data-stu-id="376be-126">In the *:::no-loc(appsettings.json):::* file, change the name of the database in the connection string to ContosoUniversity2 or some other name that you haven't used on the computer you're using.</span></span>
+<span data-ttu-id="376be-126">W *appsettings.json* pliku Zmień nazwę bazy danych w parametrach połączenia na ContosoUniversity2 lub inną nazwę, która nie została użyta na komputerze, którego używasz.</span><span class="sxs-lookup"><span data-stu-id="376be-126">In the *appsettings.json* file, change the name of the database in the connection string to ContosoUniversity2 or some other name that you haven't used on the computer you're using.</span></span>
 
 [!code-json[](intro/samples/cu/appsettings2.json?range=1-4)]
 

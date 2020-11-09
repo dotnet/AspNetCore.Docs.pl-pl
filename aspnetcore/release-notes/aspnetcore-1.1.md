@@ -5,17 +5,17 @@ description: Dowiedz się więcej o nowych funkcjach w ASP.NET Core 1,1.
 ms.author: riande
 ms.date: 12/18/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-1.1
 ms.openlocfilehash: cc891280a6314dbc4c0838d5b4a8d2a20698eab6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -32,7 +32,7 @@ ms.locfileid: "93059744"
 - [<span data-ttu-id="03297-106">Oprogramowanie pośredniczące buforowania odpowiedzi</span><span class="sxs-lookup"><span data-stu-id="03297-106">Response Caching Middleware</span></span>](xref:performance/caching/middleware)
 - [<span data-ttu-id="03297-107">Wyświetlanie składników jako pomocników tagów</span><span class="sxs-lookup"><span data-stu-id="03297-107">View Components as Tag Helpers</span></span>](xref:mvc/views/view-components#invoking-a-view-component-as-a-tag-helper)
 - [<span data-ttu-id="03297-108">Oprogramowanie pośredniczące jako filtry MVC</span><span class="sxs-lookup"><span data-stu-id="03297-108">Middleware as MVC filters</span></span>](xref:mvc/controllers/filters#using-middleware-in-the-filter-pipeline)
-- [<span data-ttu-id="03297-109">:::no-loc(Cookie):::Dostawca TempData oparty na programie</span><span class="sxs-lookup"><span data-stu-id="03297-109">:::no-loc(Cookie):::-based TempData provider</span></span>](xref:fundamentals/app-state#tempdata)
+- [<span data-ttu-id="03297-109">CookieDostawca TempData oparty na programie</span><span class="sxs-lookup"><span data-stu-id="03297-109">Cookie-based TempData provider</span></span>](xref:fundamentals/app-state#tempdata)
 - [<span data-ttu-id="03297-110">Dostawca rejestrowania Azure App Service</span><span class="sxs-lookup"><span data-stu-id="03297-110">Azure App Service logging provider</span></span>](xref:fundamentals/logging/index#azure-app-service-provider)
 - [<span data-ttu-id="03297-111">Dostawca konfiguracji Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="03297-111">Azure Key Vault configuration provider</span></span>](xref:security/key-vault-configuration)
 - [<span data-ttu-id="03297-112">Repozytoria kluczy ochrony danych magazynu platformy Azure i usługi Redis</span><span class="sxs-lookup"><span data-stu-id="03297-112">Azure and Redis Storage Data Protection Key Repositories</span></span>](xref:security/data-protection/implementation/key-storage-providers)

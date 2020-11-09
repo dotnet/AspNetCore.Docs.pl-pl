@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/24/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
 ms.openlocfilehash: 04ab5be4d9cec066a4b7cd422a1566bcbb5a291a
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -48,7 +48,7 @@ ms.locfileid: "93061161"
 * `vary-by-header`
 * `vary-by-query`
 * `vary-by-route`
-* `vary-by-:::no-loc(cookie):::`
+* `vary-by-cookie`
 * `vary-by-user`
 * `vary-by priority`
 
@@ -60,7 +60,7 @@ ms.locfileid: "93061161"
 | -------------- | ------------------------------------- |
 | <span data-ttu-id="3ac67-119">String</span><span class="sxs-lookup"><span data-stu-id="3ac67-119">String</span></span>         | `my-distributed-cache-unique-key-101` |
 
-<span data-ttu-id="3ac67-120">Ciąg `name` jest wymagany.</span><span class="sxs-lookup"><span data-stu-id="3ac67-120">`name` is required.</span></span> <span data-ttu-id="3ac67-121">Ten `name` atrybut jest używany jako klucz dla każdego przechowywanego wystąpienia pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="3ac67-121">The `name` attribute is used as a key for each stored cache instance.</span></span> <span data-ttu-id="3ac67-122">W przeciwieństwie do pomocnika tagu pamięci podręcznej, który przypisuje klucz pamięci podręcznej do każdego wystąpienia na podstawie :::no-loc(Razor)::: nazwy strony i lokalizacji na :::no-loc(Razor)::: stronie, pomocnik tagów rozproszonej pamięci podręcznej tylko opiera swój klucz w atrybucie `name` .</span><span class="sxs-lookup"><span data-stu-id="3ac67-122">Unlike the Cache Tag Helper that assigns a cache key to each instance based on the :::no-loc(Razor)::: page name and location in the :::no-loc(Razor)::: page, the Distributed Cache Tag Helper only bases its key on the attribute `name`.</span></span>
+<span data-ttu-id="3ac67-120">Ciąg `name` jest wymagany.</span><span class="sxs-lookup"><span data-stu-id="3ac67-120">`name` is required.</span></span> <span data-ttu-id="3ac67-121">Ten `name` atrybut jest używany jako klucz dla każdego przechowywanego wystąpienia pamięci podręcznej.</span><span class="sxs-lookup"><span data-stu-id="3ac67-121">The `name` attribute is used as a key for each stored cache instance.</span></span> <span data-ttu-id="3ac67-122">W przeciwieństwie do pomocnika tagu pamięci podręcznej, który przypisuje klucz pamięci podręcznej do każdego wystąpienia na podstawie Razor nazwy strony i lokalizacji na Razor stronie, pomocnik tagów rozproszonej pamięci podręcznej tylko opiera swój klucz w atrybucie `name` .</span><span class="sxs-lookup"><span data-stu-id="3ac67-122">Unlike the Cache Tag Helper that assigns a cache key to each instance based on the Razor page name and location in the Razor page, the Distributed Cache Tag Helper only bases its key on the attribute `name`.</span></span>
 
 <span data-ttu-id="3ac67-123">Przykład:</span><span class="sxs-lookup"><span data-stu-id="3ac67-123">Example:</span></span>
 

@@ -1,21 +1,21 @@
 ---
-title: 'Migrowanie uwierzytelniania i :::no-loc(Identity)::: do ASP.NET Core 2,0'
+title: 'Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0'
 author: scottaddie
-description: 'W tym artykule opisano najczęstsze kroki migracji ASP.NET Core 1. x oraz :::no-loc(Identity)::: do ASP.NET Core 2,0.'
+description: 'W tym artykule opisano najczęstsze kroki migracji ASP.NET Core 1. x oraz Identity do ASP.NET Core 2,0.'
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/1x-to-2x/identity-2x
 ms.openlocfilehash: cad7582670013661f5fcbfbebad923f0f092462e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,17 +24,17 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93057183"
 ---
-# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a><span data-ttu-id="ff729-103">Migrowanie uwierzytelniania i :::no-loc(Identity)::: do ASP.NET Core 2,0</span><span class="sxs-lookup"><span data-stu-id="ff729-103">Migrate authentication and :::no-loc(Identity)::: to ASP.NET Core 2.0</span></span>
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a><span data-ttu-id="ff729-103">Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0</span><span class="sxs-lookup"><span data-stu-id="ff729-103">Migrate authentication and Identity to ASP.NET Core 2.0</span></span>
 
 <span data-ttu-id="ff729-104">Przez [Scott Addie](https://github.com/scottaddie) i [Hao Kung](https://github.com/HaoK)</span><span class="sxs-lookup"><span data-stu-id="ff729-104">By [Scott Addie](https://github.com/scottaddie) and [Hao Kung](https://github.com/HaoK)</span></span>
 
-<span data-ttu-id="ff729-105">ASP.NET Core 2,0 ma nowy model uwierzytelniania i [:::no-loc(Identity):::](xref:security/authentication/identity) upraszcza konfigurację przy użyciu usług.</span><span class="sxs-lookup"><span data-stu-id="ff729-105">ASP.NET Core 2.0 has a new model for authentication and [:::no-loc(Identity):::](xref:security/authentication/identity) that simplifies configuration by using services.</span></span> <span data-ttu-id="ff729-106">ASP.NET Core 1. x aplikacji korzystających z uwierzytelniania lub :::no-loc(Identity)::: można je zaktualizować, aby użyć nowego modelu, jak opisano poniżej.</span><span class="sxs-lookup"><span data-stu-id="ff729-106">ASP.NET Core 1.x applications that use authentication or :::no-loc(Identity)::: can be updated to use the new model as outlined below.</span></span>
+<span data-ttu-id="ff729-105">ASP.NET Core 2,0 ma nowy model uwierzytelniania i [Identity](xref:security/authentication/identity) upraszcza konfigurację przy użyciu usług.</span><span class="sxs-lookup"><span data-stu-id="ff729-105">ASP.NET Core 2.0 has a new model for authentication and [Identity](xref:security/authentication/identity) that simplifies configuration by using services.</span></span> <span data-ttu-id="ff729-106">ASP.NET Core 1. x aplikacji korzystających z uwierzytelniania lub Identity można je zaktualizować, aby użyć nowego modelu, jak opisano poniżej.</span><span class="sxs-lookup"><span data-stu-id="ff729-106">ASP.NET Core 1.x applications that use authentication or Identity can be updated to use the new model as outlined below.</span></span>
 
 ## <a name="update-namespaces"></a><span data-ttu-id="ff729-107">Aktualizowanie przestrzeni nazw</span><span class="sxs-lookup"><span data-stu-id="ff729-107">Update namespaces</span></span>
 
-<span data-ttu-id="ff729-108">W 1. x klasy takie jak `:::no-loc(Identity):::Role` i `:::no-loc(Identity):::User` zostały znalezione w `Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore` przestrzeni nazw.</span><span class="sxs-lookup"><span data-stu-id="ff729-108">In 1.x, classes such `:::no-loc(Identity):::Role` and `:::no-loc(Identity):::User` were found in the `Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore` namespace.</span></span>
+<span data-ttu-id="ff729-108">W 1. x klasy takie jak `IdentityRole` i `IdentityUser` zostały znalezione w `Microsoft.AspNetCore.Identity.EntityFrameworkCore` przestrzeni nazw.</span><span class="sxs-lookup"><span data-stu-id="ff729-108">In 1.x, classes such `IdentityRole` and `IdentityUser` were found in the `Microsoft.AspNetCore.Identity.EntityFrameworkCore` namespace.</span></span>
 
-<span data-ttu-id="ff729-109">W 2,0, <xref:Microsoft.AspNetCore.:::no-loc(Identity):::> przestrzeń nazw stało się nowym domem dla kilku takich klas.</span><span class="sxs-lookup"><span data-stu-id="ff729-109">In 2.0, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::> namespace became the new home for several of such classes.</span></span> <span data-ttu-id="ff729-110">W przypadku domyślnego :::no-loc(Identity)::: kodu klasy, których to dotyczy, obejmują `ApplicationUser` i `Startup` .</span><span class="sxs-lookup"><span data-stu-id="ff729-110">With the default :::no-loc(Identity)::: code, affected classes include `ApplicationUser` and `Startup`.</span></span> <span data-ttu-id="ff729-111">Dostosuj swoje `using` instrukcje, aby rozwiązać odnośne odwołania.</span><span class="sxs-lookup"><span data-stu-id="ff729-111">Adjust your `using` statements to resolve the affected references.</span></span>
+<span data-ttu-id="ff729-109">W 2,0, <xref:Microsoft.AspNetCore.Identity> przestrzeń nazw stało się nowym domem dla kilku takich klas.</span><span class="sxs-lookup"><span data-stu-id="ff729-109">In 2.0, the <xref:Microsoft.AspNetCore.Identity> namespace became the new home for several of such classes.</span></span> <span data-ttu-id="ff729-110">W przypadku domyślnego Identity kodu klasy, których to dotyczy, obejmują `ApplicationUser` i `Startup` .</span><span class="sxs-lookup"><span data-stu-id="ff729-110">With the default Identity code, affected classes include `ApplicationUser` and `Startup`.</span></span> <span data-ttu-id="ff729-111">Dostosuj swoje `using` instrukcje, aby rozwiązać odnośne odwołania.</span><span class="sxs-lookup"><span data-stu-id="ff729-111">Adjust your `using` statements to resolve the affected references.</span></span>
 
 <a name="auth-middleware"></a>
 
@@ -42,18 +42,18 @@ ms.locfileid: "93057183"
 
 <span data-ttu-id="ff729-113">W projektach 1. x uwierzytelnianie jest konfigurowane za pośrednictwem oprogramowania pośredniczącego.</span><span class="sxs-lookup"><span data-stu-id="ff729-113">In 1.x projects, authentication is configured via middleware.</span></span> <span data-ttu-id="ff729-114">Metoda pośrednicząca jest wywoływana dla każdego schematu uwierzytelniania, który ma być obsługiwany.</span><span class="sxs-lookup"><span data-stu-id="ff729-114">A middleware method is invoked for each authentication scheme you want to support.</span></span>
 
-<span data-ttu-id="ff729-115">Poniższy przykład 1. x konfiguruje uwierzytelnianie w serwisie Facebook :::no-loc(Identity)::: w programie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-115">The following 1.x example configures Facebook authentication with :::no-loc(Identity)::: in *Startup.cs* :</span></span>
+<span data-ttu-id="ff729-115">Poniższy przykład 1. x konfiguruje uwierzytelnianie w serwisie Facebook Identity w programie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-115">The following 1.x example configures Facebook authentication with Identity in *Startup.cs* :</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 }
 
 public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 {
-    app.Use:::no-loc(Identity):::();
+    app.UseIdentity();
     app.UseFacebookAuthentication(new FacebookOptions {
         AppId = Configuration["auth:facebook:appid"],
         AppSecret = Configuration["auth:facebook:appsecret"]
@@ -61,18 +61,18 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 }
 ```
 
-<span data-ttu-id="ff729-116">W przypadku projektów 2,0 uwierzytelnianie jest konfigurowane za pośrednictwem usług.</span><span class="sxs-lookup"><span data-stu-id="ff729-116">In 2.0 projects, authentication is configured via services.</span></span> <span data-ttu-id="ff729-117">Każdy schemat uwierzytelniania jest rejestrowany w `ConfigureServices` metodzie *Startup.cs* .</span><span class="sxs-lookup"><span data-stu-id="ff729-117">Each authentication scheme is registered in the `ConfigureServices` method of *Startup.cs* .</span></span> <span data-ttu-id="ff729-118">`Use:::no-loc(Identity):::`Metoda jest zastępowana przez `UseAuthentication` .</span><span class="sxs-lookup"><span data-stu-id="ff729-118">The `Use:::no-loc(Identity):::` method is replaced with `UseAuthentication`.</span></span>
+<span data-ttu-id="ff729-116">W przypadku projektów 2,0 uwierzytelnianie jest konfigurowane za pośrednictwem usług.</span><span class="sxs-lookup"><span data-stu-id="ff729-116">In 2.0 projects, authentication is configured via services.</span></span> <span data-ttu-id="ff729-117">Każdy schemat uwierzytelniania jest rejestrowany w `ConfigureServices` metodzie *Startup.cs* .</span><span class="sxs-lookup"><span data-stu-id="ff729-117">Each authentication scheme is registered in the `ConfigureServices` method of *Startup.cs* .</span></span> <span data-ttu-id="ff729-118">`UseIdentity`Metoda jest zastępowana przez `UseAuthentication` .</span><span class="sxs-lookup"><span data-stu-id="ff729-118">The `UseIdentity` method is replaced with `UseAuthentication`.</span></span>
 
-<span data-ttu-id="ff729-119">Poniższy przykład 2,0 służy do konfigurowania uwierzytelniania w serwisie Facebook :::no-loc(Identity)::: w programie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-119">The following 2.0 example configures Facebook authentication with :::no-loc(Identity)::: in *Startup.cs* :</span></span>
+<span data-ttu-id="ff729-119">Poniższy przykład 2,0 służy do konfigurowania uwierzytelniania w serwisie Facebook Identity w programie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-119">The following 2.0 example configures Facebook authentication with Identity in *Startup.cs* :</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-    // If you want to tweak :::no-loc(Identity)::: :::no-loc(cookie):::s, they're no longer part of :::no-loc(Identity):::Options.
-    services.ConfigureApplication:::no-loc(Cookie):::(options => options.LoginPath = "/Account/LogIn");
+    // If you want to tweak Identity cookies, they're no longer part of IdentityOptions.
+    services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
     services.AddAuthentication()
             .AddFacebook(options =>
             {
@@ -90,42 +90,42 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 <span data-ttu-id="ff729-122">Poniżej przedstawiono 2,0 instrukcje dotyczące migracji dla każdego głównego schematu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="ff729-122">Below are 2.0 migration instructions for each major authentication scheme.</span></span>
 
-### <a name="no-loccookie-based-authentication"></a><span data-ttu-id="ff729-123">:::no-loc(Cookie):::uwierzytelnianie oparte na usłudze</span><span class="sxs-lookup"><span data-stu-id="ff729-123">:::no-loc(Cookie):::-based authentication</span></span>
+### <a name="no-loccookie-based-authentication"></a><span data-ttu-id="ff729-123">Cookieuwierzytelnianie oparte na usłudze</span><span class="sxs-lookup"><span data-stu-id="ff729-123">Cookie-based authentication</span></span>
 
 <span data-ttu-id="ff729-124">Wybierz jedną z dwóch opcji poniżej i wprowadź niezbędne zmiany w programie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-124">Select one of the two options below, and make the necessary changes in *Startup.cs* :</span></span>
 
-1. <span data-ttu-id="ff729-125">Użyj :::no-loc(cookie)::: s z :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="ff729-125">Use :::no-loc(cookie):::s with :::no-loc(Identity):::</span></span>
-    - <span data-ttu-id="ff729-126">Zamień `Use:::no-loc(Identity):::` na `UseAuthentication` w `Configure` metodzie:</span><span class="sxs-lookup"><span data-stu-id="ff729-126">Replace `Use:::no-loc(Identity):::` with `UseAuthentication` in the `Configure` method:</span></span>
+1. <span data-ttu-id="ff729-125">Użyj cookie s z Identity</span><span class="sxs-lookup"><span data-stu-id="ff729-125">Use cookies with Identity</span></span>
+    - <span data-ttu-id="ff729-126">Zamień `UseIdentity` na `UseAuthentication` w `Configure` metodzie:</span><span class="sxs-lookup"><span data-stu-id="ff729-126">Replace `UseIdentity` with `UseAuthentication` in the `Configure` method:</span></span>
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - <span data-ttu-id="ff729-127">Wywołaj `Add:::no-loc(Identity):::` metodę w `ConfigureServices` metodzie, aby dodać :::no-loc(cookie)::: usługi uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="ff729-127">Invoke the `Add:::no-loc(Identity):::` method in the `ConfigureServices` method to add the :::no-loc(cookie)::: authentication services.</span></span>
-    - <span data-ttu-id="ff729-128">Opcjonalnie Wywołaj `ConfigureApplication:::no-loc(Cookie):::` metodę lub `ConfigureExternal:::no-loc(Cookie):::` w `ConfigureServices` metodzie, aby dostosować :::no-loc(Identity)::: :::no-loc(cookie)::: Ustawienia.</span><span class="sxs-lookup"><span data-stu-id="ff729-128">Optionally, invoke the `ConfigureApplication:::no-loc(Cookie):::` or `ConfigureExternal:::no-loc(Cookie):::` method in the `ConfigureServices` method to tweak the :::no-loc(Identity)::: :::no-loc(cookie)::: settings.</span></span>
+    - <span data-ttu-id="ff729-127">Wywołaj `AddIdentity` metodę w `ConfigureServices` metodzie, aby dodać cookie usługi uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="ff729-127">Invoke the `AddIdentity` method in the `ConfigureServices` method to add the cookie authentication services.</span></span>
+    - <span data-ttu-id="ff729-128">Opcjonalnie Wywołaj `ConfigureApplicationCookie` metodę lub `ConfigureExternalCookie` w `ConfigureServices` metodzie, aby dostosować Identity cookie Ustawienia.</span><span class="sxs-lookup"><span data-stu-id="ff729-128">Optionally, invoke the `ConfigureApplicationCookie` or `ConfigureExternalCookie` method in the `ConfigureServices` method to tweak the Identity cookie settings.</span></span>
 
         ```csharp
-        services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+        services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-        services.ConfigureApplication:::no-loc(Cookie):::(options => options.LoginPath = "/Account/LogIn");
+        services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. <span data-ttu-id="ff729-129">Użyj :::no-loc(cookie)::: bez :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="ff729-129">Use :::no-loc(cookie):::s without :::no-loc(Identity):::</span></span>
-    - <span data-ttu-id="ff729-130">Zastąp `Use:::no-loc(Cookie):::Authentication` wywołanie metody w `Configure` metodzie `UseAuthentication` :</span><span class="sxs-lookup"><span data-stu-id="ff729-130">Replace the `Use:::no-loc(Cookie):::Authentication` method call in the `Configure` method with `UseAuthentication`:</span></span>
+2. <span data-ttu-id="ff729-129">Użyj cookie bez Identity</span><span class="sxs-lookup"><span data-stu-id="ff729-129">Use cookies without Identity</span></span>
+    - <span data-ttu-id="ff729-130">Zastąp `UseCookieAuthentication` wywołanie metody w `Configure` metodzie `UseAuthentication` :</span><span class="sxs-lookup"><span data-stu-id="ff729-130">Replace the `UseCookieAuthentication` method call in the `Configure` method with `UseAuthentication`:</span></span>
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - <span data-ttu-id="ff729-131">Wywołaj `AddAuthentication` `Add:::no-loc(Cookie):::` metody i w `ConfigureServices` metodzie:</span><span class="sxs-lookup"><span data-stu-id="ff729-131">Invoke the `AddAuthentication` and `Add:::no-loc(Cookie):::` methods in the `ConfigureServices` method:</span></span>
+    - <span data-ttu-id="ff729-131">Wywołaj `AddAuthentication` `AddCookie` metody i w `ConfigureServices` metodzie:</span><span class="sxs-lookup"><span data-stu-id="ff729-131">Invoke the `AddAuthentication` and `AddCookie` methods in the `ConfigureServices` method:</span></span>
 
         ```csharp
-        // If you don't want the :::no-loc(cookie)::: to be automatically authenticated and assigned to HttpContext.User,
-        // remove the :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme parameter passed to AddAuthentication.
-        services.AddAuthentication(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme)
-                .Add:::no-loc(Cookie):::(options =>
+        // If you don't want the cookie to be automatically authenticated and assigned to HttpContext.User,
+        // remove the CookieAuthenticationDefaults.AuthenticationScheme parameter passed to AddAuthentication.
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
                 {
                     options.LoginPath = "/Account/LogIn";
                     options.LogoutPath = "/Account/LogOff";
@@ -152,7 +152,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
             });
     ```
 
-    <span data-ttu-id="ff729-136">Ten fragment kodu nie używa :::no-loc(Identity)::: , dlatego należy ustawić domyślny schemat, przekazując `JwtBearerDefaults.AuthenticationScheme` do `AddAuthentication` metody.</span><span class="sxs-lookup"><span data-stu-id="ff729-136">This code snippet doesn't use :::no-loc(Identity):::, so the default scheme should be set by passing `JwtBearerDefaults.AuthenticationScheme` to the `AddAuthentication` method.</span></span>
+    <span data-ttu-id="ff729-136">Ten fragment kodu nie używa Identity , dlatego należy ustawić domyślny schemat, przekazując `JwtBearerDefaults.AuthenticationScheme` do `AddAuthentication` metody.</span><span class="sxs-lookup"><span data-stu-id="ff729-136">This code snippet doesn't use Identity, so the default scheme should be set by passing `JwtBearerDefaults.AuthenticationScheme` to the `AddAuthentication` method.</span></span>
 
 ### <a name="openid-connect-oidc-authentication"></a><span data-ttu-id="ff729-137">Uwierzytelnianie OpenID Connect (OIDC)</span><span class="sxs-lookup"><span data-stu-id="ff729-137">OpenID Connect (OIDC) authentication</span></span>
 
@@ -169,10 +169,10 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
     ```csharp
     services.AddAuthentication(options =>
     {
-        options.DefaultScheme = :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
     })
-    .Add:::no-loc(Cookie):::()
+    .AddCookie()
     .AddOpenIdConnect(options =>
     {
         options.Authority = Configuration["auth:oidc:authority"];
@@ -278,17 +278,17 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 <span data-ttu-id="ff729-162">W 2,0 te dwie właściwości zostały usunięte jako właściwości w poszczególnych `AuthenticationOptions` wystąpieniach.</span><span class="sxs-lookup"><span data-stu-id="ff729-162">In 2.0, these two properties have been removed as properties on the individual `AuthenticationOptions` instance.</span></span> <span data-ttu-id="ff729-163">Można je skonfigurować w `AddAuthentication` wywołaniu metody w `ConfigureServices` metodzie *Startup.cs* :</span><span class="sxs-lookup"><span data-stu-id="ff729-163">They can be configured in the `AddAuthentication` method call within the `ConfigureServices` method of *Startup.cs* :</span></span>
 
 ```csharp
-services.AddAuthentication(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme);
+services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-<span data-ttu-id="ff729-164">W poprzednim fragmencie kodu domyślny schemat jest ustawiany na `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` (" :::no-loc(Cookie)::: s").</span><span class="sxs-lookup"><span data-stu-id="ff729-164">In the preceding code snippet, the default scheme is set to `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` (":::no-loc(Cookie):::s").</span></span>
+<span data-ttu-id="ff729-164">W poprzednim fragmencie kodu domyślny schemat jest ustawiany na `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s").</span><span class="sxs-lookup"><span data-stu-id="ff729-164">In the preceding code snippet, the default scheme is set to `CookieAuthenticationDefaults.AuthenticationScheme` ("Cookies").</span></span>
 
-<span data-ttu-id="ff729-165">Alternatywnie można użyć przeciążonej wersji `AddAuthentication` metody do ustawienia więcej niż jednej właściwości.</span><span class="sxs-lookup"><span data-stu-id="ff729-165">Alternatively, use an overloaded version of the `AddAuthentication` method to set more than one property.</span></span> <span data-ttu-id="ff729-166">W poniższym przykładzie przeciążonej metody domyślny schemat jest ustawiany na `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-166">In the following overloaded method example, the default scheme is set to `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme`.</span></span> <span data-ttu-id="ff729-167">Schemat uwierzytelniania można także określić w ramach poszczególnych `[Authorize]` atrybutów lub zasad autoryzacji.</span><span class="sxs-lookup"><span data-stu-id="ff729-167">The authentication scheme may alternatively be specified within your individual `[Authorize]` attributes or authorization policies.</span></span>
+<span data-ttu-id="ff729-165">Alternatywnie można użyć przeciążonej wersji `AddAuthentication` metody do ustawienia więcej niż jednej właściwości.</span><span class="sxs-lookup"><span data-stu-id="ff729-165">Alternatively, use an overloaded version of the `AddAuthentication` method to set more than one property.</span></span> <span data-ttu-id="ff729-166">W poniższym przykładzie przeciążonej metody domyślny schemat jest ustawiany na `CookieAuthenticationDefaults.AuthenticationScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-166">In the following overloaded method example, the default scheme is set to `CookieAuthenticationDefaults.AuthenticationScheme`.</span></span> <span data-ttu-id="ff729-167">Schemat uwierzytelniania można także określić w ramach poszczególnych `[Authorize]` atrybutów lub zasad autoryzacji.</span><span class="sxs-lookup"><span data-stu-id="ff729-167">The authentication scheme may alternatively be specified within your individual `[Authorize]` attributes or authorization policies.</span></span>
 
 ```csharp
 services.AddAuthentication(options =>
 {
-    options.DefaultScheme = :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 });
 ```
@@ -297,7 +297,7 @@ services.AddAuthentication(options =>
 - <span data-ttu-id="ff729-169">Chcesz, aby użytkownik był zalogowany automatycznie</span><span class="sxs-lookup"><span data-stu-id="ff729-169">You want the user to be automatically signed in</span></span>
 - <span data-ttu-id="ff729-170">Używasz `[Authorize]` zasad atrybutu lub autoryzacji bez określania schematów</span><span class="sxs-lookup"><span data-stu-id="ff729-170">You use the `[Authorize]` attribute or authorization policies without specifying schemes</span></span>
 
-<span data-ttu-id="ff729-171">Wyjątkiem od tej reguły jest `Add:::no-loc(Identity):::` Metoda.</span><span class="sxs-lookup"><span data-stu-id="ff729-171">An exception to this rule is the `Add:::no-loc(Identity):::` method.</span></span> <span data-ttu-id="ff729-172">Ta metoda dodaje :::no-loc(cookie)::: do użytkownika i ustawia domyślne schematy uwierzytelniania i wyzwania dla aplikacji :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ApplicationScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-172">This method adds :::no-loc(cookie):::s for you and sets the default authenticate and challenge schemes to the application :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ApplicationScheme`.</span></span> <span data-ttu-id="ff729-173">Ponadto ustawia domyślny schemat logowania na zewnętrzny :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ExternalScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-173">Additionally, it sets the default sign-in scheme to the external :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ExternalScheme`.</span></span>
+<span data-ttu-id="ff729-171">Wyjątkiem od tej reguły jest `AddIdentity` Metoda.</span><span class="sxs-lookup"><span data-stu-id="ff729-171">An exception to this rule is the `AddIdentity` method.</span></span> <span data-ttu-id="ff729-172">Ta metoda dodaje cookie do użytkownika i ustawia domyślne schematy uwierzytelniania i wyzwania dla aplikacji cookie `IdentityConstants.ApplicationScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-172">This method adds cookies for you and sets the default authenticate and challenge schemes to the application cookie `IdentityConstants.ApplicationScheme`.</span></span> <span data-ttu-id="ff729-173">Ponadto ustawia domyślny schemat logowania na zewnętrzny cookie `IdentityConstants.ExternalScheme` .</span><span class="sxs-lookup"><span data-stu-id="ff729-173">Additionally, it sets the default sign-in scheme to the external cookie `IdentityConstants.ExternalScheme`.</span></span>
 
 <a name="obsolete-interface"></a>
 
@@ -344,25 +344,25 @@ services.AddAuthentication(options =>
 
 <span data-ttu-id="ff729-191">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/windowsauth>.</span><span class="sxs-lookup"><span data-stu-id="ff729-191">For more information, see <xref:security/authentication/windowsauth>.</span></span>
 
-<a name="identity-:::no-loc(cookie):::-options"></a>
+<a name="identity-cookie-options"></a>
 
-## <a name="no-locidentityno-loccookieoptions-instances"></a><span data-ttu-id="ff729-192">:::no-loc(Identity)::::::no-loc(Cookie):::Wystąpienia opcji</span><span class="sxs-lookup"><span data-stu-id="ff729-192">:::no-loc(Identity)::::::no-loc(Cookie):::Options instances</span></span>
+## <a name="no-locidentityno-loccookieoptions-instances"></a><span data-ttu-id="ff729-192">IdentityCookieWystąpienia opcji</span><span class="sxs-lookup"><span data-stu-id="ff729-192">IdentityCookieOptions instances</span></span>
 
-<span data-ttu-id="ff729-193">Efektem ubocznym zmian 2,0 jest przełączenie do użycia nazwanych opcji zamiast :::no-loc(cookie)::: wystąpień opcji.</span><span class="sxs-lookup"><span data-stu-id="ff729-193">A side effect of the 2.0 changes is the switch to using named options instead of :::no-loc(cookie)::: options instances.</span></span> <span data-ttu-id="ff729-194">Możliwość dostosowywania :::no-loc(Identity)::: :::no-loc(cookie)::: nazw schematów jest usuwana.</span><span class="sxs-lookup"><span data-stu-id="ff729-194">The ability to customize the :::no-loc(Identity)::: :::no-loc(cookie)::: scheme names is removed.</span></span>
+<span data-ttu-id="ff729-193">Efektem ubocznym zmian 2,0 jest przełączenie do użycia nazwanych opcji zamiast cookie wystąpień opcji.</span><span class="sxs-lookup"><span data-stu-id="ff729-193">A side effect of the 2.0 changes is the switch to using named options instead of cookie options instances.</span></span> <span data-ttu-id="ff729-194">Możliwość dostosowywania Identity cookie nazw schematów jest usuwana.</span><span class="sxs-lookup"><span data-stu-id="ff729-194">The ability to customize the Identity cookie scheme names is removed.</span></span>
 
-<span data-ttu-id="ff729-195">Na przykład projekty 1. x wykorzystują [iniekcję konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) do przekazania `:::no-loc(Identity)::::::no-loc(Cookie):::Options` parametru do *AccountController.cs* i *ManageController.cs* .</span><span class="sxs-lookup"><span data-stu-id="ff729-195">For example, 1.x projects use [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) to pass an `:::no-loc(Identity)::::::no-loc(Cookie):::Options` parameter into *AccountController.cs* and *ManageController.cs* .</span></span> <span data-ttu-id="ff729-196">Zewnętrzny :::no-loc(cookie)::: schemat uwierzytelniania jest dostępny z podanego wystąpienia:</span><span class="sxs-lookup"><span data-stu-id="ff729-196">The external :::no-loc(cookie)::: authentication scheme is accessed from the provided instance:</span></span>
+<span data-ttu-id="ff729-195">Na przykład projekty 1. x wykorzystują [iniekcję konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) do przekazania `IdentityCookieOptions` parametru do *AccountController.cs* i *ManageController.cs* .</span><span class="sxs-lookup"><span data-stu-id="ff729-195">For example, 1.x projects use [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) to pass an `IdentityCookieOptions` parameter into *AccountController.cs* and *ManageController.cs* .</span></span> <span data-ttu-id="ff729-196">Zewnętrzny cookie schemat uwierzytelniania jest dostępny z podanego wystąpienia:</span><span class="sxs-lookup"><span data-stu-id="ff729-196">The external cookie authentication scheme is accessed from the provided instance:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
-<span data-ttu-id="ff729-197">Wspomniane wyżej iniekcja konstruktora nie jest konieczna w projektach 2,0 i `_external:::no-loc(Cookie):::Scheme` można usunąć pole:</span><span class="sxs-lookup"><span data-stu-id="ff729-197">The aforementioned constructor injection becomes unnecessary in 2.0 projects, and the `_external:::no-loc(Cookie):::Scheme` field can be deleted:</span></span>
+<span data-ttu-id="ff729-197">Wspomniane wyżej iniekcja konstruktora nie jest konieczna w projektach 2,0 i `_externalCookieScheme` można usunąć pole:</span><span class="sxs-lookup"><span data-stu-id="ff729-197">The aforementioned constructor injection becomes unnecessary in 2.0 projects, and the `_externalCookieScheme` field can be deleted:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor)]
 
-<span data-ttu-id="ff729-198">1. x projekty używały `_external:::no-loc(Cookie):::Scheme` pola w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="ff729-198">1.x projects used the `_external:::no-loc(Cookie):::Scheme` field as follows:</span></span>
+<span data-ttu-id="ff729-198">1. x projekty używały `_externalCookieScheme` pola w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="ff729-198">1.x projects used the `_externalCookieScheme` field as follows:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
-<span data-ttu-id="ff729-199">W projektach 2,0 Zastąp poprzedni kod poniższym kodem.</span><span class="sxs-lookup"><span data-stu-id="ff729-199">In 2.0 projects, replace the preceding code with the following.</span></span> <span data-ttu-id="ff729-200">`:::no-loc(Identity):::Constants.ExternalScheme`Stała może być używana bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="ff729-200">The `:::no-loc(Identity):::Constants.ExternalScheme` constant can be used directly.</span></span>
+<span data-ttu-id="ff729-199">W projektach 2,0 Zastąp poprzedni kod poniższym kodem.</span><span class="sxs-lookup"><span data-stu-id="ff729-199">In 2.0 projects, replace the preceding code with the following.</span></span> <span data-ttu-id="ff729-200">`IdentityConstants.ExternalScheme`Stała może być używana bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="ff729-200">The `IdentityConstants.ExternalScheme` constant can be used directly.</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
@@ -372,35 +372,35 @@ services.AddAuthentication(options =>
 
 <a name="navigation-properties"></a>
 
-## <a name="add-no-locidentityuser-poco-navigation-properties"></a><span data-ttu-id="ff729-202">Dodawanie :::no-loc(Identity)::: właściwości nawigacji poco użytkownika</span><span class="sxs-lookup"><span data-stu-id="ff729-202">Add :::no-loc(Identity):::User POCO navigation properties</span></span>
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a><span data-ttu-id="ff729-202">Dodawanie Identity właściwości nawigacji poco użytkownika</span><span class="sxs-lookup"><span data-stu-id="ff729-202">Add IdentityUser POCO navigation properties</span></span>
 
-<span data-ttu-id="ff729-203">Wszystkie podstawowe właściwości nawigacji Entity Framework (EF) podstawowego `:::no-loc(Identity):::User` poco (stary obiekt CLR) zostały usunięte.</span><span class="sxs-lookup"><span data-stu-id="ff729-203">The Entity Framework (EF) Core navigation properties of the base `:::no-loc(Identity):::User` POCO (Plain Old CLR Object) have been removed.</span></span> <span data-ttu-id="ff729-204">Jeśli projekt 1. x użył tych właściwości, ręcznie dodaj je z powrotem do projektu 2,0:</span><span class="sxs-lookup"><span data-stu-id="ff729-204">If your 1.x project used these properties, manually add them back to the 2.0 project:</span></span>
+<span data-ttu-id="ff729-203">Wszystkie podstawowe właściwości nawigacji Entity Framework (EF) podstawowego `IdentityUser` poco (stary obiekt CLR) zostały usunięte.</span><span class="sxs-lookup"><span data-stu-id="ff729-203">The Entity Framework (EF) Core navigation properties of the base `IdentityUser` POCO (Plain Old CLR Object) have been removed.</span></span> <span data-ttu-id="ff729-204">Jeśli projekt 1. x użył tych właściwości, ręcznie dodaj je z powrotem do projektu 2,0:</span><span class="sxs-lookup"><span data-stu-id="ff729-204">If your 1.x project used these properties, manually add them back to the 2.0 project:</span></span>
 
 ```csharp
 /// <summary>
 /// Navigation property for the roles this user belongs to.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserRole<int>> Roles { get; } = new List<:::no-loc(Identity):::UserRole<int>>();
+public virtual ICollection<IdentityUserRole<int>> Roles { get; } = new List<IdentityUserRole<int>>();
 
 /// <summary>
 /// Navigation property for the claims this user possesses.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserClaim<int>> Claims { get; } = new List<:::no-loc(Identity):::UserClaim<int>>();
+public virtual ICollection<IdentityUserClaim<int>> Claims { get; } = new List<IdentityUserClaim<int>>();
 
 /// <summary>
 /// Navigation property for this users login accounts.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserLogin<int>> Logins { get; } = new List<:::no-loc(Identity):::UserLogin<int>>();
+public virtual ICollection<IdentityUserLogin<int>> Logins { get; } = new List<IdentityUserLogin<int>>();
 ```
 
-<span data-ttu-id="ff729-205">Aby zapobiec duplikowaniu kluczy obcych podczas uruchamiania EF Core migracji, Dodaj następujące elementy do `:::no-loc(Identity):::DbContext` `OnModelCreating` metody klasy (po `base.OnModelCreating();` wywołaniu):</span><span class="sxs-lookup"><span data-stu-id="ff729-205">To prevent duplicate foreign keys when running EF Core Migrations, add the following to your `:::no-loc(Identity):::DbContext` class' `OnModelCreating` method (after the `base.OnModelCreating();` call):</span></span>
+<span data-ttu-id="ff729-205">Aby zapobiec duplikowaniu kluczy obcych podczas uruchamiania EF Core migracji, Dodaj następujące elementy do `IdentityDbContext` `OnModelCreating` metody klasy (po `base.OnModelCreating();` wywołaniu):</span><span class="sxs-lookup"><span data-stu-id="ff729-205">To prevent duplicate foreign keys when running EF Core Migrations, add the following to your `IdentityDbContext` class' `OnModelCreating` method (after the `base.OnModelCreating();` call):</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder)
 {
     base.OnModelCreating(builder);
-    // Customize the :::no-loc(ASP.NET Core Identity)::: model and override the defaults if needed.
-    // For example, you can rename the :::no-loc(ASP.NET Core Identity)::: table names and more.
+    // Customize the ASP.NET Core Identity model and override the defaults if needed.
+    // For example, you can rename the ASP.NET Core Identity table names and more.
     // Add your customizations after calling base.OnModelCreating(builder);
 
     builder.Entity<ApplicationUser>()
@@ -438,7 +438,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
-<span data-ttu-id="ff729-210">W projektach 2,0 użyj <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager`1.GetExternalAuthenticationSchemesAsync*> metody.</span><span class="sxs-lookup"><span data-stu-id="ff729-210">In 2.0 projects, use the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager`1.GetExternalAuthenticationSchemesAsync*> method.</span></span> <span data-ttu-id="ff729-211">Zmiana w *ManageController.cs* przypomina następujący kod:</span><span class="sxs-lookup"><span data-stu-id="ff729-211">The change in *ManageController.cs* resembles the following code:</span></span>
+<span data-ttu-id="ff729-210">W projektach 2,0 użyj <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> metody.</span><span class="sxs-lookup"><span data-stu-id="ff729-210">In 2.0 projects, use the <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> method.</span></span> <span data-ttu-id="ff729-211">Zmiana w *ManageController.cs* przypomina następujący kod:</span><span class="sxs-lookup"><span data-stu-id="ff729-211">The change in *ManageController.cs* resembles the following code:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemesAsync)]
 

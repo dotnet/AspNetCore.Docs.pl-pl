@@ -1,22 +1,22 @@
 ---
-title: 'Część 5, :::no-loc(Razor)::: strony z EF Core w modelu ASP.NET Core — dane'
+title: 'Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane'
 author: rick-anderson
-description: 'Część 5 :::no-loc(Razor)::: stron i Entity Framework serii samouczków.'
+description: 'Część 5 Razor stron i Entity Framework serii samouczków.'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/complex-data-model
 ms.openlocfilehash: 1ac9d6303daac82f3973c5d027fe1f453dc32e02
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054102"
 ---
-# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a><span data-ttu-id="b8c9c-103">Część 5, :::no-loc(Razor)::: strony z EF Core w modelu ASP.NET Core — dane</span><span class="sxs-lookup"><span data-stu-id="b8c9c-103">Part 5, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Data Model</span></span>
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a><span data-ttu-id="b8c9c-103">Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane</span><span class="sxs-lookup"><span data-stu-id="b8c9c-103">Part 5, Razor Pages with EF Core in ASP.NET Core - Data Model</span></span>
 
 <span data-ttu-id="b8c9c-104">Autorzy [Dykstra](https://github.com/tdykstra) i [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="b8c9c-104">By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 

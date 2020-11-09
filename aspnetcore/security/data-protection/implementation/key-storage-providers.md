@@ -5,17 +5,17 @@ description: Informacje o dostawcach magazynu kluczy w ASP.NET Core i sposobach 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/implementation/key-storage-providers
 ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a><span data-ttu-id="b9d50-114">Azure Storage</span><span class="sxs-lookup"><span data-stu-id="b9d50-114">Azure Storage</span></span>
 
-<span data-ttu-id="b9d50-115">Pakiet [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) umożliwia przechowywanie kluczy ochrony danych w usłudze Azure Blob Storage.</span><span class="sxs-lookup"><span data-stu-id="b9d50-115">The [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="b9d50-116">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-117">Aplikacje mogą udostępniać uwierzytelnianie :::no-loc(cookie)::: s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-117">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="b9d50-115">Pakiet [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) umożliwia przechowywanie kluczy ochrony danych w usłudze Azure Blob Storage.</span><span class="sxs-lookup"><span data-stu-id="b9d50-115">The [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) package allows storing data protection keys in Azure Blob Storage.</span></span> <span data-ttu-id="b9d50-116">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-116">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-117">Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-117">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 <span data-ttu-id="b9d50-118">Aby skonfigurować dostawcę usługi Azure Blob Storage, wywołaj jedno z przeciążeń [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) .</span><span class="sxs-lookup"><span data-stu-id="b9d50-118">To configure the Azure Blob Storage provider, call one of the [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) overloads.</span></span>
 
@@ -82,13 +82,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="b9d50-122">Pakiet [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis.</span><span class="sxs-lookup"><span data-stu-id="b9d50-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="b9d50-123">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-124">Aplikacje mogą udostępniać uwierzytelnianie :::no-loc(cookie)::: s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-124">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="b9d50-122">Pakiet [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis.</span><span class="sxs-lookup"><span data-stu-id="b9d50-122">The [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="b9d50-123">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-123">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-124">Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-124">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-<span data-ttu-id="b9d50-125">Pakiet [Microsoft. AspNetCore. dataprotection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis.</span><span class="sxs-lookup"><span data-stu-id="b9d50-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="b9d50-126">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-127">Aplikacje mogą udostępniać uwierzytelnianie :::no-loc(cookie)::: s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-127">Apps can share authentication :::no-loc(cookie):::s or CSRF protection across multiple servers.</span></span>
+<span data-ttu-id="b9d50-125">Pakiet [Microsoft. AspNetCore. dataprotection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis.</span><span class="sxs-lookup"><span data-stu-id="b9d50-125">The [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) package allows storing data protection keys in a Redis cache.</span></span> <span data-ttu-id="b9d50-126">Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web.</span><span class="sxs-lookup"><span data-stu-id="b9d50-126">Keys can be shared across several instances of a web app.</span></span> <span data-ttu-id="b9d50-127">Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.</span><span class="sxs-lookup"><span data-stu-id="b9d50-127">Apps can share authentication cookies or CSRF protection across multiple servers.</span></span>
 
 ::: moniker-end
 

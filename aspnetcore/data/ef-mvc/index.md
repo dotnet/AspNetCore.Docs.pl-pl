@@ -5,17 +5,17 @@ description: ''
 ms.author: riande
 ms.date: 03/27/2017
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/index
 ms.openlocfilehash: 791787612c471e17a886ee05b38dddcabdcceff2
 ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
@@ -28,7 +28,7 @@ ms.locfileid: "93365345"
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="7d659-103">Ten samouczek **nie** został zaktualizowany do ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="7d659-103">This tutorial has **not** been updated to ASP.NET Core 3.0.</span></span> <span data-ttu-id="7d659-104">Zaktualizowano [ :::no-loc(Razor)::: wersję stron](xref:data/ef-rp/intro) .</span><span class="sxs-lookup"><span data-stu-id="7d659-104">The [:::no-loc(Razor)::: Pages version](xref:data/ef-rp/intro) has been updated.</span></span>
+<span data-ttu-id="7d659-103">Ten samouczek **nie** został zaktualizowany do ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="7d659-103">This tutorial has **not** been updated to ASP.NET Core 3.0.</span></span> <span data-ttu-id="7d659-104">Zaktualizowano [ Razor wersję stron](xref:data/ef-rp/intro) .</span><span class="sxs-lookup"><span data-stu-id="7d659-104">The [Razor Pages version](xref:data/ef-rp/intro) has been updated.</span></span>
 
 ::: moniker-end
 

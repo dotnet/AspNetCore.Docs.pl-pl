@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -127,7 +127,7 @@ ms.locfileid: "93059952"
 <span data-ttu-id="aa45f-212">Inne struktury są zalecane w porównaniu z gRPC w następujących scenariuszach:</span><span class="sxs-lookup"><span data-stu-id="aa45f-212">Other frameworks are recommended over gRPC in the following scenarios:</span></span>
 
 * <span data-ttu-id="aa45f-213">**Interfejsy API dostępne dla przeglądarki** : gRPC nie jest w pełni obsługiwane w przeglądarce.</span><span class="sxs-lookup"><span data-stu-id="aa45f-213">**Browser accessible APIs** : gRPC isn't fully supported in the browser.</span></span> <span data-ttu-id="aa45f-214">gRPC — sieć Web może oferować pomoc techniczną przeglądarki, ale ma ograniczenia i wprowadza serwer proxy serwera.</span><span class="sxs-lookup"><span data-stu-id="aa45f-214">gRPC-Web can offer browser support, but it has limitations and introduces a server proxy.</span></span>
-* <span data-ttu-id="aa45f-215">**Rozgłaszanie komunikacji** w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje.</span><span class="sxs-lookup"><span data-stu-id="aa45f-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="aa45f-216">Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta.</span><span class="sxs-lookup"><span data-stu-id="aa45f-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="aa45f-217">[:::no-loc(SignalR):::](xref:signalr/introduction) jest przydatną strukturą dla tego scenariusza.</span><span class="sxs-lookup"><span data-stu-id="aa45f-217">[:::no-loc(SignalR):::](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="aa45f-218">:::no-loc(SignalR)::: ma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.</span><span class="sxs-lookup"><span data-stu-id="aa45f-218">:::no-loc(SignalR)::: has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
+* <span data-ttu-id="aa45f-215">**Rozgłaszanie komunikacji** w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje.</span><span class="sxs-lookup"><span data-stu-id="aa45f-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="aa45f-216">Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta.</span><span class="sxs-lookup"><span data-stu-id="aa45f-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="aa45f-217">[SignalR](xref:signalr/introduction) jest przydatną strukturą dla tego scenariusza.</span><span class="sxs-lookup"><span data-stu-id="aa45f-217">[SignalR](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="aa45f-218">SignalR ma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.</span><span class="sxs-lookup"><span data-stu-id="aa45f-218">SignalR has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="aa45f-219">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="aa45f-219">Additional resources</span></span>
 

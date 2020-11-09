@@ -1,24 +1,24 @@
 ---
-title: 'Samouczek: wprowadzenie do :::no-loc(Razor)::: stron w ASP.NET Core'
+title: 'Samouczek: wprowadzenie do Razor stron w ASP.NET Core'
 author: rick-anderson
-description: 'Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia :::no-loc(Razor)::: aplikacji sieci web ASP.NET Core Pages.'
+description: 'Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia Razor aplikacji sieci web ASP.NET Core Pages.'
 ms.author: riande
 ms.date: 09/15/2020
 no-loc:
-- ':::no-loc(Index):::'
-- ':::no-loc(Create):::'
-- ':::no-loc(Delete):::'
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'Index'
+- 'Create'
+- 'Delete'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: b4dcbe9536107cdc5b0342782abc4bad0b89a8dc
 ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
@@ -27,27 +27,27 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 11/07/2020
 ms.locfileid: "94360969"
 ---
-# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="cfa7a-103">Samouczek: wprowadzenie do :::no-loc(Razor)::: stron w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="cfa7a-103">Tutorial: Get started with :::no-loc(Razor)::: Pages in ASP.NET Core</span></span>
+# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="cfa7a-103">Samouczek: wprowadzenie do Razor stron w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="cfa7a-103">Tutorial: Get started with Razor Pages in ASP.NET Core</span></span>
 
 <span data-ttu-id="cfa7a-104">Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="cfa7a-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
-<span data-ttu-id="cfa7a-105">Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia :::no-loc(Razor)::: aplikacji sieci web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-105">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="cfa7a-105">Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia Razor aplikacji sieci web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-105">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="cfa7a-106">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do :::no-loc(Razor)::: stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-106">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="cfa7a-106">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do Razor stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-106">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="cfa7a-107">Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-107">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
-<span data-ttu-id="cfa7a-108">[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="cfa7a-108">[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="cfa7a-109">W tym samouczku zostały wykonane następujące czynności:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-109">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="cfa7a-110">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-110">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="cfa7a-110">CreateRazoraplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-110">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="cfa7a-111">Uruchom aplikację.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-111">Run the app.</span></span>
 > * <span data-ttu-id="cfa7a-112">Przejrzyj pliki projektu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-112">Examine the project files.</span></span>
 
-<span data-ttu-id="cfa7a-113">Na końcu tego samouczka będziesz mieć :::no-loc(Razor)::: aplikację sieci Web strony roboczej, którą można ulepszyć w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-113">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll enhance in later tutorials.</span></span>
+<span data-ttu-id="cfa7a-113">Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboczej, którą można ulepszyć w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-113">At the end of this tutorial, you'll have a working Razor Pages web app that you'll enhance in later tutorials.</span></span>
 
 ![Strona główna lub:: No-Loc (index)::: Page](razor-pages-start/_static/5/home5.png)
 
@@ -67,28 +67,28 @@ ms.locfileid: "94360969"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-119">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-119">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-119">CreateRazoraplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-119">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="cfa7a-120">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cfa7a-120">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="cfa7a-121">Uruchom program Visual Studio i wybierz **:::no-loc(Create)::: Nowy projekt**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-121">Start Visual Studio and select **:::no-loc(Create)::: a new project**.</span></span> <span data-ttu-id="cfa7a-122">Aby uzyskać więcej informacji, zobacz [ :::no-loc(Create)::: Nowy projekt w programie Visual Studio](/visualstudio/ide/create-new-project).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-122">For more information, see [:::no-loc(Create)::: a new project in Visual Studio](/visualstudio/ide/create-new-project).</span></span>
+1. <span data-ttu-id="cfa7a-121">Uruchom program Visual Studio i wybierz **Create Nowy projekt**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-121">Start Visual Studio and select **Create a new project**.</span></span> <span data-ttu-id="cfa7a-122">Aby uzyskać więcej informacji, zobacz [ Create Nowy projekt w programie Visual Studio](/visualstudio/ide/create-new-project).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-122">For more information, see [Create a new project in Visual Studio](/visualstudio/ide/create-new-project).</span></span>
 
    ![::: No-Loc (Create)::: nowy projekt z okna uruchamiania](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. <span data-ttu-id="cfa7a-124">W oknie dialogowym **:::no-loc(Create)::: Nowy projekt** wybierz pozycję **ASP.NET Core aplikacja sieci Web** , a następnie wybierz przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-124">In the **:::no-loc(Create)::: a new project** dialog, select **ASP.NET Core Web Application** , and then select **Next**.</span></span>
+1. <span data-ttu-id="cfa7a-124">W oknie dialogowym **Create Nowy projekt** wybierz pozycję **ASP.NET Core aplikacja sieci Web** , a następnie wybierz przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-124">In the **Create a new project** dialog, select **ASP.NET Core Web Application** , and then select **Next**.</span></span>
 
     ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/5/np.png)
     
-1. <span data-ttu-id="cfa7a-126">W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `:::no-loc(Razor):::PagesMovie` w polu **Nazwa projektu**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-126">In the **Configure your new project** dialog, enter `:::no-loc(Razor):::PagesMovie` for **Project name**.</span></span> <span data-ttu-id="cfa7a-127">Ważne jest, aby nazwa *:::no-loc(Razor)::: PagesMovie* projektu, w tym pasujące do wielkości liter, więc przestrzenie nazw są zgodne podczas kopiowania i wklejania przykładowego kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-127">It's important to name the project *:::no-loc(Razor):::PagesMovie* , including matching the capitalization, so the namespaces will match when you copy and paste example code.</span></span>
+1. <span data-ttu-id="cfa7a-126">W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `RazorPagesMovie` w polu **Nazwa projektu**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-126">In the **Configure your new project** dialog, enter `RazorPagesMovie` for **Project name**.</span></span> <span data-ttu-id="cfa7a-127">Ważne jest, aby nazwa *Razor PagesMovie* projektu, w tym pasujące do wielkości liter, więc przestrzenie nazw są zgodne podczas kopiowania i wklejania przykładowego kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-127">It's important to name the project *RazorPagesMovie* , including matching the capitalization, so the namespaces will match when you copy and paste example code.</span></span>
 
-1. <span data-ttu-id="cfa7a-128">Wybierz pozycję **:::no-loc(Create):::**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-128">Select **:::no-loc(Create):::**.</span></span>
+1. <span data-ttu-id="cfa7a-128">Wybierz pozycję **Create**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-128">Select **Create**.</span></span>
 
     ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-1. <span data-ttu-id="cfa7a-130">W oknie dialogowym **:::no-loc(Create)::: Nowa aplikacja sieci Web ASP.NET Core** wybierz pozycję:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-130">In the **:::no-loc(Create)::: a new ASP.NET Core web application** dialog, select:</span></span>
+1. <span data-ttu-id="cfa7a-130">W oknie dialogowym **Create Nowa aplikacja sieci Web ASP.NET Core** wybierz pozycję:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-130">In the **Create a new ASP.NET Core web application** dialog, select:</span></span>
     1. <span data-ttu-id="cfa7a-131">**Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-131">**.NET Core** and **ASP.NET Core 5.0** in the dropdowns.</span></span>
     1. <span data-ttu-id="cfa7a-132">**Aplikacja sieci Web**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-132">**Web Application**.</span></span>
-    1. <span data-ttu-id="cfa7a-133">**:::no-loc(Create):::**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-133">**:::no-loc(Create):::**.</span></span>
+    1. <span data-ttu-id="cfa7a-133">**Create**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-133">**Create**.</span></span>
 
      ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/5/npx.png)
 
@@ -105,12 +105,12 @@ ms.locfileid: "94360969"
 1. <span data-ttu-id="cfa7a-140">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-140">Run the following commands:</span></span>
 
    ```dotnetcli
-   dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-   code -r :::no-loc(Razor):::PagesMovie
+   dotnet new webapp -o RazorPagesMovie
+   code -r RazorPagesMovie
    ```
 
-   * <span data-ttu-id="cfa7a-141">`dotnet new`Polecenie tworzy nowy :::no-loc(Razor)::: Projekt strony w folderze *:::no-loc(Razor)::: PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-141">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-   * <span data-ttu-id="cfa7a-142">`code`Polecenie otwiera folder *:::no-loc(Razor)::: PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-142">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+   * <span data-ttu-id="cfa7a-141">`dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *Razor PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-141">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+   * <span data-ttu-id="cfa7a-142">`code`Polecenie otwiera folder *Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-142">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="cfa7a-143">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="cfa7a-143">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
@@ -128,9 +128,9 @@ ms.locfileid: "94360969"
     1. <span data-ttu-id="cfa7a-151">Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję programu .NET 5. x.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-151">If presented an option to select a **Target Framework** , select the latest .NET 5.x version.</span></span>
     1. <span data-ttu-id="cfa7a-152">Wybierz pozycję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-152">Select **Next**.</span></span>
 
-1. <span data-ttu-id="cfa7a-153">Nadaj projektowi nazwę *:::no-loc(Razor)::: PagesMovie* i wybierz opcję **:::no-loc(Create):::** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-153">Name the project *:::no-loc(Razor):::PagesMovie* and select **:::no-loc(Create):::**.</span></span>
+1. <span data-ttu-id="cfa7a-153">Nadaj projektowi nazwę *Razor PagesMovie* i wybierz opcję **Create** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-153">Name the project *RazorPagesMovie* and select **Create**.</span></span>
 
-    ![macOS Nazwij projekt](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+    ![macOS Nazwij projekt](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -146,9 +146,9 @@ ms.locfileid: "94360969"
 
 ### <a name="pages-folder"></a><span data-ttu-id="cfa7a-158">Folder stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-158">Pages folder</span></span>
 
-<span data-ttu-id="cfa7a-159">Zawiera :::no-loc(Razor)::: strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-159">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="cfa7a-160">Każda :::no-loc(Razor)::: strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-160">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="cfa7a-159">Zawiera Razor strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-159">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="cfa7a-160">Każda Razor strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-160">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="cfa7a-161">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając :::no-loc(Razor)::: składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-161">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="cfa7a-161">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając Razor składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-161">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="cfa7a-162">Plik *. cshtml.cs* , który ma kod C#, który obsługuje zdarzenia strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-162">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="cfa7a-163">Pliki pomocnicze mają nazwy zaczynające się od znaku podkreślenia.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-163">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="cfa7a-164">Na przykład plik *_Layout. cshtml* służy do konfigurowania elementów interfejsu użytkownika wspólnych dla wszystkich stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-164">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="cfa7a-165">Ten plik konfiguruje menu nawigacji w górnej części strony i informacje o prawach autorskich w dolnej części strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-165">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="cfa7a-166">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-166">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -157,7 +157,7 @@ ms.locfileid: "94360969"
 
 <span data-ttu-id="cfa7a-168">Zawiera statyczne zasoby, takie jak pliki HTML, pliki JavaScript i pliki CSS.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-168">Contains static assets, like HTML files, JavaScript files, and CSS files.</span></span> <span data-ttu-id="cfa7a-169">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/static-files>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-169">For more information, see <xref:fundamentals/static-files>.</span></span>
 
-### :::no-loc(appsettings.json):::
+### appsettings.json
 
 <span data-ttu-id="cfa7a-170">Zawiera dane konfiguracji, takie jak parametry połączenia.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-170">Contains configuration data, like connection strings.</span></span> <span data-ttu-id="cfa7a-171">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/index>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-171">For more information, see <xref:fundamentals/configuration/index>.</span></span>
 
@@ -180,22 +180,22 @@ ms.locfileid: "94360969"
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="cfa7a-180">Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia :::no-loc(Razor)::: aplikacji sieci web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-180">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="cfa7a-180">Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia Razor aplikacji sieci web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-180">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="cfa7a-181">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do :::no-loc(Razor)::: stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-181">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="cfa7a-181">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do Razor stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-181">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="cfa7a-182">Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-182">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
-<span data-ttu-id="cfa7a-183">[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-183">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="cfa7a-183">[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-183">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 <span data-ttu-id="cfa7a-184">W tym samouczku zostały wykonane następujące czynności:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-184">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="cfa7a-185">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-185">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="cfa7a-185">CreateRazoraplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-185">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="cfa7a-186">Uruchom aplikację.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-186">Run the app.</span></span>
 > * <span data-ttu-id="cfa7a-187">Przejrzyj pliki projektu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-187">Examine the project files.</span></span>
 
-<span data-ttu-id="cfa7a-188">Na końcu tego samouczka będziesz mieć :::no-loc(Razor)::: aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-188">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="cfa7a-188">Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-188">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![Strona główna lub:: No-Loc (index)::: Page](razor-pages-start/_static/home2.2.png)
 
@@ -215,17 +215,17 @@ ms.locfileid: "94360969"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-194">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-194">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-194">CreateRazoraplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-194">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="cfa7a-195">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cfa7a-195">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="cfa7a-196">Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-196">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="cfa7a-197">:::no-loc(Create)::: Nowa aplikacja sieci Web ASP.NET Core i kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-197">:::no-loc(Create)::: a new ASP.NET Core Web Application and select **Next**.</span></span>
+* <span data-ttu-id="cfa7a-197">Create Nowa aplikacja sieci Web ASP.NET Core i kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-197">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
   <span data-ttu-id="cfa7a-198">![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2.1.png)</span><span class="sxs-lookup"><span data-stu-id="cfa7a-198">![new ASP.NET Core Web Application](razor-pages-start/_static/np_2.1.png)</span></span>
-* <span data-ttu-id="cfa7a-199">Nazwij projekt **:::no-loc(Razor)::: PagesMovie**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-199">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="cfa7a-200">Ważne jest, aby nazwa projektu *:::no-loc(Razor)::: PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-200">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="cfa7a-199">Nazwij projekt **Razor PagesMovie**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-199">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="cfa7a-200">Ważne jest, aby nazwa projektu *Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-200">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
   <span data-ttu-id="cfa7a-201">![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)</span><span class="sxs-lookup"><span data-stu-id="cfa7a-201">![new ASP.NET Core Web Application](razor-pages-start/_static/config.png)</span></span>
 
-* <span data-ttu-id="cfa7a-202">Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **:::no-loc(Create):::** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-202">Select **ASP.NET Core 3.1** in the dropdown, **Web Application** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="cfa7a-202">Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Create** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-202">Select **ASP.NET Core 3.1** in the dropdown, **Web Application** , and then select **Create**.</span></span>
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/3/npx.png)
 
@@ -242,14 +242,14 @@ ms.locfileid: "94360969"
 * <span data-ttu-id="cfa7a-209">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-209">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="cfa7a-210">`dotnet new`Polecenie tworzy nowy :::no-loc(Razor)::: Projekt strony w folderze *:::no-loc(Razor)::: PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-210">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="cfa7a-211">`code`Polecenie otwiera folder *:::no-loc(Razor)::: PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-211">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="cfa7a-210">`dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *Razor PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-210">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="cfa7a-211">`code`Polecenie otwiera folder *Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-211">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="cfa7a-212">Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " :::no-loc(Razor)::: PagesMovie". Dodać je?**</span><span class="sxs-lookup"><span data-stu-id="cfa7a-212">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="cfa7a-213">Wybierz pozycję **Tak**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-213">Select **Yes**.</span></span>
+* <span data-ttu-id="cfa7a-212">Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?**</span><span class="sxs-lookup"><span data-stu-id="cfa7a-212">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="cfa7a-213">Wybierz pozycję **Tak**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-213">Select **Yes**.</span></span>
 
   <span data-ttu-id="cfa7a-214">Katalog *. programu vscode* , zawierający *launch.json* i *tasks.jsdla* plików, jest dodawany do katalogu głównego projektu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-214">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -270,9 +270,9 @@ ms.locfileid: "94360969"
 
   <span data-ttu-id="cfa7a-224">Wybierz pozycję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-224">Select **Next**.</span></span>
 
-* <span data-ttu-id="cfa7a-225">Nazwij projekt **:::no-loc(Razor)::: PagesMovie** , a następnie wybierz pozycję **:::no-loc(Create):::** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-225">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="cfa7a-225">Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Create** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-225">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![macOS Nazwij projekt](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![macOS Nazwij projekt](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -288,9 +288,9 @@ ms.locfileid: "94360969"
 
 ### <a name="pages-folder"></a><span data-ttu-id="cfa7a-230">Folder stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-230">Pages folder</span></span>
 
-<span data-ttu-id="cfa7a-231">Zawiera :::no-loc(Razor)::: strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-231">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="cfa7a-232">Każda :::no-loc(Razor)::: strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-232">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="cfa7a-231">Zawiera Razor strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-231">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="cfa7a-232">Każda Razor strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-232">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="cfa7a-233">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając :::no-loc(Razor)::: składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-233">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="cfa7a-233">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając Razor składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-233">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="cfa7a-234">Plik *. cshtml.cs* , który ma kod C#, który obsługuje zdarzenia strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-234">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="cfa7a-235">Pliki pomocnicze mają nazwy zaczynające się od znaku podkreślenia.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-235">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="cfa7a-236">Na przykład plik *_Layout. cshtml* służy do konfigurowania elementów interfejsu użytkownika wspólnych dla wszystkich stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-236">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="cfa7a-237">Ten plik konfiguruje menu nawigacji w górnej części strony i informacje o prawach autorskich w dolnej części strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-237">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="cfa7a-238">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-238">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -322,9 +322,9 @@ ms.locfileid: "94360969"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="cfa7a-253">Jest to pierwszy samouczek dotyczący serii.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-253">This is the first tutorial of a series.</span></span> <span data-ttu-id="cfa7a-254">[Seria](xref:tutorials/razor-pages/index) uczy się podstaw tworzenia :::no-loc(Razor)::: aplikacji sieci Web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-254">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="cfa7a-253">Jest to pierwszy samouczek dotyczący serii.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-253">This is the first tutorial of a series.</span></span> <span data-ttu-id="cfa7a-254">[Seria](xref:tutorials/razor-pages/index) uczy się podstaw tworzenia Razor aplikacji sieci Web ASP.NET Core Pages.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-254">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
-<span data-ttu-id="cfa7a-255">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do :::no-loc(Razor)::: stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-255">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="cfa7a-255">Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają kontrolery i widoki, zobacz [wprowadzenie do Razor stron](xref:razor-pages/index).</span><span class="sxs-lookup"><span data-stu-id="cfa7a-255">For a more advanced introduction aimed at developers who are familiar with controllers and views, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
 <span data-ttu-id="cfa7a-256">Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-256">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
@@ -333,11 +333,11 @@ ms.locfileid: "94360969"
 <span data-ttu-id="cfa7a-258">W tym samouczku zostały wykonane następujące czynności:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-258">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="cfa7a-259">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-259">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="cfa7a-259">CreateRazoraplikacja internetowa stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-259">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="cfa7a-260">Uruchom aplikację.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-260">Run the app.</span></span>
 > * <span data-ttu-id="cfa7a-261">Przejrzyj pliki projektu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-261">Examine the project files.</span></span>
 
-<span data-ttu-id="cfa7a-262">Na końcu tego samouczka będziesz mieć :::no-loc(Razor)::: aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-262">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="cfa7a-262">Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-262">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![Strona główna lub:: No-Loc (index)::: Page](razor-pages-start/_static/home2.2.png)
 
@@ -357,21 +357,21 @@ ms.locfileid: "94360969"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-268">:::no-loc(Create)::::::no-loc(Razor):::aplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-268">:::no-loc(Create)::: a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a><span data-ttu-id="cfa7a-268">CreateRazoraplikacja internetowa stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-268">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="cfa7a-269">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cfa7a-269">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="cfa7a-270">Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-270">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
 
-* <span data-ttu-id="cfa7a-271">:::no-loc(Create)::: Nowa aplikacja sieci Web ASP.NET Core i kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-271">:::no-loc(Create)::: a new ASP.NET Core Web Application and select **Next**.</span></span>
+* <span data-ttu-id="cfa7a-271">Create Nowa aplikacja sieci Web ASP.NET Core i kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-271">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
 
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2.1.png)
 
-* <span data-ttu-id="cfa7a-273">Nazwij projekt **:::no-loc(Razor)::: PagesMovie**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-273">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="cfa7a-274">Ważne jest, aby nazwa projektu *:::no-loc(Razor)::: PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-274">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="cfa7a-273">Nazwij projekt **Razor PagesMovie**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-273">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="cfa7a-274">Ważne jest, aby nazwa projektu *Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-274">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
 
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-* <span data-ttu-id="cfa7a-276">Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **:::no-loc(Create):::** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-276">Select **ASP.NET Core 2.2** in the dropdown, **Web Application** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="cfa7a-276">Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Create** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-276">Select **ASP.NET Core 2.2** in the dropdown, **Web Application** , and then select **Create**.</span></span>
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2_2.2.png)
 
@@ -388,14 +388,14 @@ ms.locfileid: "94360969"
 * <span data-ttu-id="cfa7a-283">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-283">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="cfa7a-284">`dotnet new`Polecenie tworzy nowy :::no-loc(Razor)::: Projekt strony w folderze *:::no-loc(Razor)::: PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-284">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="cfa7a-285">`code`Polecenie otwiera folder *:::no-loc(Razor)::: PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-285">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="cfa7a-284">`dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *Razor PagesMovie* .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-284">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="cfa7a-285">`code`Polecenie otwiera folder *Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-285">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="cfa7a-286">Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " :::no-loc(Razor)::: PagesMovie". Dodać je?**</span><span class="sxs-lookup"><span data-stu-id="cfa7a-286">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="cfa7a-287">Wybierz pozycję **Tak**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-287">Select **Yes**.</span></span>
+* <span data-ttu-id="cfa7a-286">Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?**</span><span class="sxs-lookup"><span data-stu-id="cfa7a-286">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="cfa7a-287">Wybierz pozycję **Tak**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-287">Select **Yes**.</span></span>
 
   <span data-ttu-id="cfa7a-288">Katalog *. programu vscode* , zawierający *launch.json* i *tasks.jsdla* plików, jest dodawany do katalogu głównego projektu.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-288">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -414,9 +414,9 @@ ms.locfileid: "94360969"
 
   <span data-ttu-id="cfa7a-297">Wybierz pozycję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-297">Select **Next**.</span></span>
 
-* <span data-ttu-id="cfa7a-298">Nazwij projekt **:::no-loc(Razor)::: PagesMovie** , a następnie wybierz pozycję **:::no-loc(Create):::** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-298">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **:::no-loc(Create):::**.</span></span>
+* <span data-ttu-id="cfa7a-298">Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Create** .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-298">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![nameproj](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -495,14 +495,14 @@ ms.locfileid: "94360969"
 
 ### <a name="pages-folder"></a><span data-ttu-id="cfa7a-340">Folder stron</span><span class="sxs-lookup"><span data-stu-id="cfa7a-340">Pages folder</span></span>
 
-<span data-ttu-id="cfa7a-341">Zawiera :::no-loc(Razor)::: strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-341">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="cfa7a-342">Każda :::no-loc(Razor)::: strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-342">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="cfa7a-341">Zawiera Razor strony i pliki pomocnicze.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-341">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="cfa7a-342">Każda Razor strona to para plików:</span><span class="sxs-lookup"><span data-stu-id="cfa7a-342">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="cfa7a-343">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając :::no-loc(Razor)::: składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-343">A *.cshtml* file that has HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="cfa7a-343">Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# używając Razor składni.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-343">A *.cshtml* file that has HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="cfa7a-344">Plik *. cshtml.cs* , który ma kod C#, który obsługuje zdarzenia strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-344">A *.cshtml.cs* file that has C# code that handles page events.</span></span>
 
 <span data-ttu-id="cfa7a-345">Pliki pomocnicze mają nazwy zaczynające się od znaku podkreślenia.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-345">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="cfa7a-346">Na przykład plik *_Layout. cshtml* służy do konfigurowania elementów interfejsu użytkownika wspólnych dla wszystkich stron.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-346">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="cfa7a-347">Ten plik konfiguruje menu nawigacji w górnej części strony i informacje o prawach autorskich w dolnej części strony.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-347">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="cfa7a-348">Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-348">For more information, see <xref:mvc/views/layout>.</span></span>
 
-<span data-ttu-id="cfa7a-349">:::no-loc(Razor)::: Strony pochodzą od `PageModel` .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-349">:::no-loc(Razor)::: Pages are derived from `PageModel`.</span></span> <span data-ttu-id="cfa7a-350">Zgodnie z Konwencją `PageModel` Klasa pochodna ma nazwę `<PageName>Model` .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-350">By convention, the `PageModel`-derived class is named `<PageName>Model`.</span></span>
+<span data-ttu-id="cfa7a-349">Razor Strony pochodzą od `PageModel` .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-349">Razor Pages are derived from `PageModel`.</span></span> <span data-ttu-id="cfa7a-350">Zgodnie z Konwencją `PageModel` Klasa pochodna ma nazwę `<PageName>Model` .</span><span class="sxs-lookup"><span data-stu-id="cfa7a-350">By convention, the `PageModel`-derived class is named `<PageName>Model`.</span></span>
 
 ### <a name="wwwroot-folder"></a><span data-ttu-id="cfa7a-351">folder wwwroot</span><span class="sxs-lookup"><span data-stu-id="cfa7a-351">wwwroot folder</span></span>
 
@@ -518,7 +518,7 @@ ms.locfileid: "94360969"
 
 ### <a name="startupcs"></a><span data-ttu-id="cfa7a-360">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="cfa7a-360">Startup.cs</span></span>
 
-<span data-ttu-id="cfa7a-361">Zawiera kod, który konfiguruje zachowanie aplikacji, na przykład czy wymaga zgody na polecenie :::no-loc(cookie)::: s.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-361">Contains code that configures app behavior, such as whether it requires consent for :::no-loc(cookie):::s.</span></span> <span data-ttu-id="cfa7a-362">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-362">For more information, see <xref:fundamentals/startup>.</span></span>
+<span data-ttu-id="cfa7a-361">Zawiera kod, który konfiguruje zachowanie aplikacji, na przykład czy wymaga zgody na polecenie cookie s.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-361">Contains code that configures app behavior, such as whether it requires consent for cookies.</span></span> <span data-ttu-id="cfa7a-362">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.</span><span class="sxs-lookup"><span data-stu-id="cfa7a-362">For more information, see <xref:fundamentals/startup>.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="cfa7a-363">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="cfa7a-363">Additional resources</span></span>
 

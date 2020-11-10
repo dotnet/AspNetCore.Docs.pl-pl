@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 5898059d83576cd0d2af15ad61bc399cbfbe0e99
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055857"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430994"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -223,7 +223,7 @@ Ukośniki i segmenty ścieżki przechwyconej są zdekodowane. Dla szablonu trasy
 
 ::: moniker range="< aspnetcore-5.0"
 
-Wszystkie parametry tras są obsługiwane w ASP.NET Core w programie .NET 5 Release Candidate 1 (RC1) lub nowszym. *
+Wszystkie parametry tras są obsługiwane w ASP.NET Core 5,0 lub nowszych.
 
 ::: moniker-end
 

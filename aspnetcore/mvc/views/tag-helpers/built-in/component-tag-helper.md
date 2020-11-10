@@ -4,7 +4,7 @@ author: guardrex
 ms.author: riande
 description: Dowiedz się, jak używać pomocnika tagów składnika ASP.NET Core, aby renderować Razor składniki na stronach i widokach.
 ms.custom: mvc
-ms.date: 04/15/2020
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,26 +18,75 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: cddbca7f95e4d2143d4632aaa83133bc6210e251
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8e780de2367f66ad1f5197077d5243e0b85a41dd
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059159"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431046"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Pomocnik tagu składnika w ASP.NET Core
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
-Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składnika](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper).
-
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-Postępuj zgodnie ze wskazówkami zawartymi w sekcji *przygotowanie aplikacji do używania składników w stronach i widokach* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> artykułu.
+Postępuj zgodnie ze wskazówkami w sekcji *konfiguracji* dla następujących elementów:
+
+* [Blazor WebAssembly](xref:blazor/components/prerendering-and-integration?pivots=webassembly)
+* [Blazor Server](xref:blazor/components/prerendering-and-integration?pivots=server)
 
 ## <a name="component-tag-helper"></a>Pomocnik tagów składnika
 
-Poniższy pomocnik tagów składnika renderuje `Counter` składnik na stronie lub widoku:
+Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składnika](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper) ( `<component>` tag).
+
+> [!NOTE]
+> Integrowanie Razor składników na Razor stronach i aplikacjach MVC w *hostowanej Blazor WebAssembly aplikacji* jest obsługiwane w ASP.NET Core na platformie .NET 5,0 lub nowszej.
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Określa, czy składnik:
+
+* Jest wstępnie renderowany na stronie.
+* Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
+
+::: moniker range=">= aspnetcore-5.0"
+
+Blazor WebAssembly w poniższej tabeli przedstawiono tryby renderowania aplikacji.
+
+| Tryb renderowania | Opis |
+| ----------- | ----------- |
+| `WebAssembly` | Renderuje znacznik dla Blazor WebAssembly aplikacji w celu uwzględnienia składnika interaktywnego, gdy jest ładowany w przeglądarce. Składnik nie jest wstępnie renderowany. Ta opcja ułatwia renderowanie różnych Blazor WebAssembly składników na różnych stronach. |
+| `WebAssemblyPrerendered` | Wstępnie renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor WebAssembly aplikacji w celu późniejszego użycia w celu zapewnienia, że składnik będzie interaktywny po załadowaniu w przeglądarce. |
+
+Blazor Server w poniższej tabeli przedstawiono tryby renderowania aplikacji.
+
+| Tryb renderowania | Opis |
+| ----------- | ----------- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor Server aplikacji. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla Blazor Server aplikacji. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Blazor Server w poniższej tabeli przedstawiono tryby renderowania aplikacji.
+
+| Tryb renderowania | Opis |
+| ----------- | ----------- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor Server aplikacji. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla Blazor Server aplikacji. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
+
+::: moniker-end
+
+Dodatkowe cechy obejmują:
+
+* Wiele pomocników tagów składnika renderuje wiele Razor składników jest dozwolonych.
+* Nie można dynamicznie renderować składników po rozpoczęciu aplikacji.
+* Podczas gdy strony i widoki mogą korzystać ze składników, wartość nie jest równa "true". Składniki nie mogą korzystać z funkcji specjalnych, takich jak widoki częściowe i sekcje. Aby użyć logiki z widoku częściowego w składniku, należy rozłożyć logikę widoku częściowego na składnik.
+* Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
+
+Poniższy pomocnik tagów składnika renderuje `Counter` składnik na stronie lub widoku w Blazor Server aplikacji za pomocą `ServerPrerendered` :
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -48,7 +97,7 @@ Poniższy pomocnik tagów składnika renderuje `Counter` składnik na stronie lu
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-W poprzednim przykładzie przyjęto założenie, że `Counter` składnik znajduje się w folderze *strony* aplikacji. Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `@using BlazorSample.Pages` ).
+W poprzednim przykładzie przyjęto założenie, że `Counter` składnik znajduje się w folderze *strony* aplikacji. Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji (na przykład `@using BlazorSample.Pages` lub `@using BlazorSample.Client.Pages` w rozwiązaniu hostowanym Blazor ).
 
 Pomocnik tagów składnika może również przekazywać parametry do składników. Rozważmy poniższy `ColorfulCheckbox` składnik, który ustawia kolor i rozmiar etykiety pola wyboru:
 
@@ -102,6 +151,13 @@ Następujący kod HTML jest renderowany na stronie lub w widoku:
 ```
 
 Przekazywanie ciągu w cudzysłowie wymaga [ Razor wyrażenia jawnego](xref:mvc/views/razor#explicit-razor-expressions), jak pokazano `param-Color` w powyższym przykładzie. RazorZachowanie analizy dla `string` wartości typu nie ma zastosowania do atrybutu, `param-*` ponieważ atrybut jest `object` typem.
+
+Wszystkie typy parametrów są obsługiwane, z wyjątkiem:
+
+* Parametry ogólne.
+* Parametry, których nie można serializować.
+* Dziedziczenie w parametrach kolekcji.
+* Parametry, których typ jest zdefiniowany poza Blazor WebAssembly aplikacją lub w ramach zestawu załadowanego przez opóźnieniem.
 
 Typ parametru musi być możliwy do serializacji JSON, co oznacza, że typ musi mieć domyślny Konstruktor i właściwości settable. Na przykład można określić wartość dla `Size` i `Color` w poprzednim przykładzie, ponieważ typy `Size` i `Color` są typami pierwotnymi ( `int` i `string` ), które są obsługiwane przez serializator JSON.
 
@@ -158,21 +214,6 @@ public class MyClass
 ```
 
 W poprzednim przykładzie przyjęto założenie, że `MyComponent` składnik znajduje się w folderze *udostępnionym* aplikacji. Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `@using BlazorSample` i `@using BlazorSample.Shared` ). `MyClass` znajduje się w przestrzeni nazw aplikacji.
-
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Określa, czy składnik:
-
-* Jest wstępnie renderowany na stronie.
-* Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
-
-| Tryb renderowania | Opis |
-| ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor Server aplikacji. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla Blazor Server aplikacji. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
-
-Podczas gdy strony i widoki mogą korzystać ze składników, wartość nie jest równa "true". Składniki nie mogą korzystać z funkcji specjalnych, takich jak widoki częściowe i sekcje. Aby użyć logiki z widoku częściowego w składniku, należy rozłożyć logikę widoku częściowego na składnik.
-
-Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

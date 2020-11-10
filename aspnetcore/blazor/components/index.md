@@ -5,7 +5,7 @@ description: Dowiedz się, jak tworzyć i używać Razor składników, w tym jak
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f02bc3a92b9f62eb0e3efea0cd780ad6d09bef5
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056273"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431007"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -36,7 +36,7 @@ Blazor aplikacje są kompilowane przy użyciu *składników* programu. Składnik
 
 ## <a name="component-classes"></a>Klasy składników
 
-Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany *Razor składnikiem* .
+Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany *Razor składnikiem*.
 
 ### <a name="no-locrazor-syntax"></a>Razor obowiązuje
 
@@ -628,12 +628,26 @@ Upewnij się, że wartości używane do [`@key`][5] nie kolidują. Jeśli w tym 
 
 ## <a name="overwritten-parameters"></a>Zastępowanie parametrów
 
-Podawane są nowe wartości parametrów, zwykle zastępując istniejące, gdy składnik nadrzędny zostanie przerenderowany.
+BlazorStruktura zazwyczaj nakłada bezpieczne przypisanie parametrów nadrzędny-do-podrzędnego:
 
-Rozważmy następujący `Expander` składnik:
+* Parametry nie są nieoczekiwanie zapisywane.
+* Efekty uboczne są zminimalizowane. Na przykład można uniknąć dodatkowych renderowanych, ponieważ mogą one tworzyć nieskończone pętle renderowania.
+
+Składnik podrzędny otrzymuje nowe wartości parametrów, które prawdopodobnie zastąpią istniejące wartości, gdy składnik nadrzędny zostanie przerenderowany. Accidentially zastępowanie wartości parametrów w składniku podrzędnym często występuje podczas tworzenia składnika z co najmniej jednym parametrem związanym z danymi i zapisem dewelopera bezpośrednio do parametru w elemencie podrzędnym:
+
+* Składnik podrzędny jest renderowany z co najmniej jedną wartością parametru ze składnika nadrzędnego.
+* Element podrzędny zapisuje bezpośrednio do wartości parametru.
+* Składnik nadrzędny ponownie renderuje i zastępuje wartość parametru elementu podrzędnego.
+
+Możliwość zastępowania wartości parametr rozciąga się również na metody ustawiające właściwości składnika podrzędnego.
+
+**Nasze ogólne wskazówki nie umożliwiają tworzenia składników, które bezpośrednio zapisują do własnych parametrów.**
+
+Rozważmy następujący wadliwy `Expander` składnik, który:
 
 * Renderuje zawartość podrzędną.
-* Włącza lub wyłącza wyświetlanie zawartości podrzędnej za pomocą parametru składnika.
+* Włącza lub wyłącza wyświetlanie zawartości podrzędnej za pomocą parametru składnika ( `Expanded` ).
+* Składnik zapisuje bezpośrednio do `Expanded` parametru, który pokazuje problem z nadpisaniem parametrów i należy go unikać.
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -685,7 +699,7 @@ Następujący zmieniony `Expander` składnik:
 
 * Akceptuje `Expanded` wartość parametru składnika z elementu nadrzędnego.
 * Przypisuje wartość parametru składnika do *pola prywatnego* ( `expanded` ) w [zdarzeniu OnInitialized](xref:blazor/components/lifecycle#component-initialization-methods).
-* Używa prywatnego pola do utrzymania stanu wewnętrznego przełączania.
+* Używa pola private do obsługi wewnętrznego stanu przełączania, który pokazuje, jak uniknąć pisania bezpośrednio do parametru.
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -719,6 +733,8 @@ Następujący zmieniony `Expander` składnik:
     }
 }
 ```
+
+Aby uzyskać dodatkowe informacje, zobacz [ Blazor dwukierunkowy błąd powiązania (dotnet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599). 
 
 ## <a name="apply-an-attribute"></a>Zastosuj atrybut
 

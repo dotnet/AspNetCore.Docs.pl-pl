@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 078329d1e5dfe41a7713b1e53894a9b09886752d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052672"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422720"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -42,11 +42,11 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element** .
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element**.
 
 * W oknie dialogowym **Dodaj nowy element — MvcMovie**
 
@@ -54,9 +54,9 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
   * Wybierz **Razor Widok**
 
-  * Zachowaj wartość pola **Nazwa** , *index. cshtml* .
+  * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
 
-  * Wybierz pozycję **Dodaj** .
+  * Wybierz pozycję **Dodaj**.
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view.png)
 
@@ -64,19 +64,19 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 Dodaj `Index` widok dla `HelloWorldController` .
 
-* Dodaj nowy folder o nazwie *viewss/HelloWorld* .
-* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml* .
+* Dodaj nowy folder o nazwie *viewss/HelloWorld*.
+* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik** .
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik**.
 * W oknie dialogowym **nowy plik** :
 
   * W lewym okienku wybierz pozycję **ASP .NET Core** .
   * Wybierz **stronę widok MVC** w środkowym okienku.
   * Wpisz *indeks* w polu **Nazwa** .
-  * Wybierz pozycję **Nowy** .
+  * Wybierz pozycję **Nowy**.
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_mac.png)
 
@@ -99,8 +99,20 @@ Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu ko
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Zmień tytuł, stopkę i łącze menu w pliku układu
 
 Zastąp zawartość pliku *viewss/Shared/_Layout. cshtml* następującym znacznikiem. Zmiany są wyróżnione:
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie5/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 Poprzednia Adiustacja wprowadziła następujące zmiany:
 
@@ -115,7 +127,7 @@ Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie** . Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
+Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie**. Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
 
 Przejrzyj plik *views/_ViewStart. cshtml* :
 
@@ -161,7 +173,7 @@ W *HelloWorldController.cs* Zmień metodę, `Welcome` Aby dodać `Message` `NumT
 
 `ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
-Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml* .
+Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
@@ -199,11 +211,11 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element** .
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element**.
 
 * W oknie dialogowym **Dodaj nowy element — MvcMovie**
 
@@ -211,9 +223,9 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
   * Wybierz **Razor Widok**
 
-  * Zachowaj wartość pola **Nazwa** , *index. cshtml* .
+  * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
 
-  * Wybierz pozycję **Dodaj** .
+  * Wybierz pozycję **Dodaj**.
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view.png)
 
@@ -221,19 +233,19 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 Dodaj `Index` widok dla `HelloWorldController` .
 
-* Dodaj nowy folder o nazwie *viewss/HelloWorld* .
-* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml* .
+* Dodaj nowy folder o nazwie *viewss/HelloWorld*.
+* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik** .
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik**.
 * W oknie dialogowym **nowy plik** :
 
   * W lewym okienku wybierz pozycję **Sieć Web** .
   * W środkowym okienku wybierz pozycję **pusty plik HTML** .
   * Wpisz *index. cshtml* w polu **Nazwa** .
-  * Wybierz pozycję **Nowy** .
+  * Wybierz pozycję **Nowy**.
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_mac.png)
 
@@ -275,7 +287,7 @@ Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie** . Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
+Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie**. Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
 
 Przejrzyj plik *views/_ViewStart. cshtml* :
 
@@ -321,7 +333,7 @@ W *HelloWorldController.cs* Zmień metodę, `Welcome` Aby dodać `Message` `NumT
 
 `ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
-Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml* .
+Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 

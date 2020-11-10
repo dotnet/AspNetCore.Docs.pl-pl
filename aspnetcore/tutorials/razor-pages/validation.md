@@ -21,12 +21,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 960e248d6f83b031004e354c98d8637674a403e1
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: efae7d79ff7a0b351afc68264463546bb26b4424
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360697"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422707"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
 
@@ -250,7 +250,7 @@ Migracja nie jest wymagana w przypadku oprogramowania SQLite.
 
 ### <a name="publish-to-azure"></a>Publikowanie na platformie Azure
 
-Aby uzyskać informacje na temat wdrażania na platformie Azure, zobacz [Samouczek: Tworzenie aplikacji ASP.NET Core na platformie Azure przy użyciu SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
+Aby uzyskać informacje na temat wdrażania na platformie Azure, zobacz [Samouczek: Tworzenie aplikacji ASP.NET Core na platformie Azure przy użyciu SQL Database](/azure/app-service/tutorial-dotnetcore-sqldb-app).
 
 Dziękujemy za zakończenie tego wprowadzenia do Razor stron. [Wprowadzenie do Razor Strony i EF Core](xref:data/ef-rp/intro) są doskonałym zaobserwują się z tym samouczkiem.
 

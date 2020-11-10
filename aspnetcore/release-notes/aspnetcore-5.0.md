@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: e9c74f7b45ebcdffc19a0483b4e98ad2f44d5747
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1f377f3be54ed8837d2857aed64c2d055ed9f582
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061778"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422590"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
@@ -93,7 +93,7 @@ W ASP.NET Core 5,0 szablony internetowego interfejsu API domyślnie włączają 
     ```dotnetcli
     dotnet new webapi --no-openapi true
     ```
-* W programie Visual Studio: Usuń zaznaczenie opcji **Włącz obsługę openapi** .
+* W programie Visual Studio: Usuń zaznaczenie opcji **Włącz obsługę openapi**.
 
 Wszystkie pliki *csproj* utworzone dla projektów internetowego interfejsu API zawierają odwołanie do pakietu NuGet [Swashbuckle. AspNetCore](https://www.nuget.org/packages/Swashbuckle.AspNetCore/) .
 
@@ -223,6 +223,8 @@ W programie [gRPC](https://grpc.io/)wprowadzono wiele ulepszeń preformowania. A
 Więcej informacji gRPC można znaleźć w temacie <xref:grpc/index> .
 
 ## SignalR
+
+### <a name="no-locsignalr-hub-filters"></a>SignalR Filtry centrum
 
 SignalR Filtry centrów o nazwie potoki centrów w ASP.NET SignalR , to funkcja, która umożliwia uruchamianie kodu przed wywołaniem i po wywołaniu metod centrów. Uruchamianie kodu przed i po wywołaniu metody Hub jest podobne do sposobu, w jaki oprogramowanie pośredniczące ma możliwość uruchomienia kodu przed i po żądaniu HTTP. Typowe zastosowania obejmują rejestrowanie, obsługę błędów i walidację argumentów.
 

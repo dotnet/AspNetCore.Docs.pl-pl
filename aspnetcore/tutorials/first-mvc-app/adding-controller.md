@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 11832efa6715f96856665f174d65b094806d2810
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1851a61441ed351442f86939022319ad59d10006
+ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061291"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94422622"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -40,35 +40,35 @@ Wzorzec architektoniczny Model-View-Controller (MVC) oddziela aplikację do trze
 
 Wzorzec MVC ułatwia tworzenie aplikacji, które oddzielają różne aspekty aplikacji (logiki wejściowej, logiki biznesowej i logiki interfejsu użytkownika), jednocześnie zapewniając swobodny sprzężenie między tymi elementami. Wzorzec określa, gdzie poszczególne rodzaje logiki powinny znajdować się w aplikacji. Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę nad jednym aspektem implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
 
-Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do kompilowania aplikacji filmowej. Projekt MVC zawiera foldery dla *kontrolerów* i *widoków* .
+Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do kompilowania aplikacji filmowej. Projekt MVC zawiera foldery dla *kontrolerów* i *widoków*.
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj** 
-   ![ menu kontekstowe kontrolera >](adding-controller/_static/add_controller.png)
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj kontroler >** 
+   ![ Eksplorator rozwiązań, kliknij prawym przyciskiem myszy kontrolery > Dodaj kontroler >](~/tutorials/first-mvc-app/adding-controller/_static/add_controllerCopy.png)
 
-* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Klasa kontrolera — puste**
+* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC — pusty**
 
-  ![Dodaj kontroler MVC i nadaj mu nazwę](adding-controller/_static/ac.png)
+  ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app/adding-controller/_static/acCopy.png)
 
-* W **oknie dialogowym Dodaj pusty kontroler MVC** wpisz **HelloWorldController** i wybierz pozycję **Dodaj** .
+* W **oknie dialogowym Dodaj pusty kontroler MVC** wpisz **HelloWorldController** i wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij prawym przyciskiem myszy) **Kontrolery > nowy plik** i Nadaj nowemu plikowi nazwę *HelloWorldController.cs* .
+Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij prawym przyciskiem myszy) **Kontrolery > nowy plik** i Nadaj nowemu plikowi nazwę *HelloWorldController.cs*.
 
   ![Menu kontekstowe](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **kontrolery > Dodaj > nowy plik** .
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **kontrolery > Dodaj > nowy plik**.
 ![Menu kontekstowe](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-Wybierz **ASP.NET Core** i **klasy kontrolera** .
+Wybierz **ASP.NET Core** i **klasy kontrolera**.
 
-Nadaj nazwę kontrolerowi **HelloWorldController** .
+Nadaj nazwę kontrolerowi **HelloWorldController**.
 
 ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 
@@ -98,7 +98,7 @@ Format routingu jest ustawiany w `Configure` metodzie w pliku *Startup.cs* .
 
 Gdy przejdziesz do aplikacji i nie podasz żadnych segmentów adresu URL, domyślnym kontrolerem "Home" i metodą "index" określoną w wierszu szablonu wyróżnionym powyżej.
 
-Pierwszy segment adresu URL określa klasę kontrolera do uruchomienia. Dlatego `localhost:{PORT}/HelloWorld` mapuje do klasy kontrolera **HelloWorld** . Druga część segmentu adresu URL określa metodę akcji klasy. `localhost:{PORT}/HelloWorld/Index`Mogłoby to spowodować `Index` uruchomienie metody `HelloWorldController` klasy. Zwróć uwagę, że trzeba tylko przeglądać do `localhost:{PORT}/HelloWorld` i `Index` Metoda została wywołana domyślnie. Dzieje się tak dlatego, że `Index` jest to metoda domyślna, która będzie wywoływana na kontrolerze, jeśli nazwa metody nie jest jawnie określona. Trzecia część segmentu URL ( `id` ) jest dla danych trasy. Dane trasy są wyjaśnione w dalszej części samouczka.
+Pierwszy segment adresu URL określa klasę kontrolera do uruchomienia. Dlatego `localhost:{PORT}/HelloWorld` mapuje do klasy kontrolera **HelloWorld**. Druga część segmentu adresu URL określa metodę akcji klasy. `localhost:{PORT}/HelloWorld/Index`Mogłoby to spowodować `Index` uruchomienie metody `HelloWorldController` klasy. Zwróć uwagę, że trzeba tylko przeglądać do `localhost:{PORT}/HelloWorld` i `Index` Metoda została wywołana domyślnie. Dzieje się tak dlatego, że `Index` jest to metoda domyślna, która będzie wywoływana na kontrolerze, jeśli nazwa metody nie jest jawnie określona. Trzecia część segmentu URL ( `id` ) jest dla danych trasy. Dane trasy są wyjaśnione w dalszej części samouczka.
 
 Przejdź na stronę `https://localhost:{PORT}/HelloWorld/Welcome`. `Welcome`Metoda jest uruchamiana i zwraca ciąg `This is the Welcome action method...` . Dla tego adresu URL kontroler jest `HelloWorld` i `Welcome` jest metodą akcji. Nie użyto `[Parameters]` jeszcze części adresu URL.
 
@@ -154,35 +154,35 @@ Wzorzec architektoniczny Model-View-Controller (MVC) oddziela aplikację do trze
 
 Wzorzec MVC ułatwia tworzenie aplikacji, które oddzielają różne aspekty aplikacji (logiki wejściowej, logiki biznesowej i logiki interfejsu użytkownika), jednocześnie zapewniając swobodny sprzężenie między tymi elementami. Wzorzec określa, gdzie poszczególne rodzaje logiki powinny znajdować się w aplikacji. Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę nad jednym aspektem implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
 
-Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do kompilowania aplikacji filmowej. Projekt MVC zawiera foldery dla *kontrolerów* i *widoków* .
+Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do kompilowania aplikacji filmowej. Projekt MVC zawiera foldery dla *kontrolerów* i *widoków*.
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj** 
-   ![ menu kontekstowe kontrolera >](adding-controller/_static/add_controller.png)
+   ![ menu kontekstowe kontrolera >](~/tutorials/first-mvc-app/adding-controller/_static/add_controller.png)
 
 * W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC — pusty**
 
-  ![Dodaj kontroler MVC i nadaj mu nazwę](adding-controller/_static/ac.png)
+  ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app/adding-controller/_static/ac.png)
 
-* W **oknie dialogowym Dodaj pusty kontroler MVC** wpisz **HelloWorldController** i wybierz pozycję **Dodaj** .
+* W **oknie dialogowym Dodaj pusty kontroler MVC** wpisz **HelloWorldController** i wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij prawym przyciskiem myszy) **Kontrolery > nowy plik** i Nadaj nowemu plikowi nazwę *HelloWorldController.cs* .
+Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij prawym przyciskiem myszy) **Kontrolery > nowy plik** i Nadaj nowemu plikowi nazwę *HelloWorldController.cs*.
 
   ![Menu kontekstowe](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **kontrolery > Dodaj > nowy plik** .
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **kontrolery > Dodaj > nowy plik**.
 ![Menu kontekstowe](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-Wybierz klasę **ASP.NET Core** i **kontrolera MVC** .
+Wybierz klasę **ASP.NET Core** i **kontrolera MVC**.
 
-Nadaj nazwę kontrolerowi **HelloWorldController** .
+Nadaj nazwę kontrolerowi **HelloWorldController**.
 
 ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 

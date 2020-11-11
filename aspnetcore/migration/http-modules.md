@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4abba1d4304bf537bd96623527c851d9d15774a4
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060706"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508165"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -58,7 +58,7 @@ Przed przystąpieniem do ASP.NET Core oprogramowania pośredniczącego najpierw 
 
 1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>, Czyli zdarzenia serii wywoływane przez ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)itd. Każdy moduł może utworzyć procedurę obsługi dla jednego lub wielu zdarzeń.
 
-2. Dla tego samego zdarzenia kolejność, w jakiej są skonfigurowane w *Web.config* .
+2. Dla tego samego zdarzenia kolejność, w jakiej są skonfigurowane w *Web.config*.
 
 Oprócz modułów można dodać programy obsługi dla zdarzeń cyklu życia do pliku *Global.asax.cs* . Te programy obsługi są uruchamiane po programach obsługi w skonfigurowanych modułach.
 
@@ -141,7 +141,7 @@ Przekształć to, [dodając nowe oprogramowanie pośredniczące](xref:fundamenta
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł ( `BeginRequest` , `EndRequest` itp.) i jego kolejność na liście modułów w *Web.config* .
+Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł ( `BeginRequest` , `EndRequest` itp.) i jego kolejność na liście modułów w *Web.config*.
 
 Jak wspomniano wcześniej, nie ma cyklu życia aplikacji w ASP.NET Core i kolejności, w której odpowiedzi są przetwarzane przez oprogramowanie pośredniczące, różnią się od kolejności używanej przez moduły. Może to spowodować, że decyzje dotyczące porządkowania są bardziej trudne.
 
@@ -181,7 +181,7 @@ Oprogramowanie pośredniczące dodane do potoku, zanim gałąź zostanie wywoła
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>Ładowanie opcji oprogramowania pośredniczącego przy użyciu wzorca opcji
 
-Niektóre moduły i programy obsługi mają opcje konfiguracji, które są przechowywane w *Web.config* . Jednak w ASP.NET Core jest używany nowy model konfiguracji zamiast *Web.config* .
+Niektóre moduły i programy obsługi mają opcje konfiguracji, które są przechowywane w *Web.config*. Jednak w ASP.NET Core jest używany nowy model konfiguracji zamiast *Web.config*.
 
 Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia następujące opcje:
 
@@ -324,7 +324,7 @@ Element **HttpContext. Request. form** tłumaczy na:
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> Odczytaj wartości formularza tylko wtedy, gdy podtyp zawartości to *x-www-form-urlencoded* lub *form-Data* .
+> Odczytaj wartości formularza tylko wtedy, gdy podtyp zawartości to *x-www-form-urlencoded* lub *form-Data*.
 
 Element **HttpContext. Request. InputStream** Wykonuje translację na:
 
@@ -357,7 +357,7 @@ Element **HttpContext. Response. Output** tłumaczy na:
 
 **HttpContext. Response. TransmitFile**
 
-Obsługa pliku jest omówiona w temacie [oprogramowanie pośredniczące i funkcje żądania](xref:fundamentals/request-features#middleware-and-request-features).
+Obsługa pliku jest omówiona w temacie <xref:fundamentals/request-features> .
 
 **HttpContext. Response. Headers**
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: ee38040a1edc8db43b8d5bf0202fd519b153ea04
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f818a0b7f1ba6d4dd6affeeba785c5e288568dd8
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056247"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507957"
 ---
 # <a name="aspnet-core-no-locblazor-templated-components"></a>BlazorSkładniki szablonu ASP.NET Core
 
@@ -43,7 +43,7 @@ Składnik szablonu jest definiowany przez określenie co najmniej jednego parame
 
 `TableTemplate` składnik ( `TableTemplate.razor` ):
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
 W przypadku korzystania z składnika z szablonem parametry szablonu można określić za pomocą elementów podrzędnych, które pasują do nazw parametrów ( `TableHeader` i `RowTemplate` w poniższym przykładzie):
 
@@ -122,7 +122,7 @@ Alternatywnie można określić `Context` atrybut dla elementu składnika. Okre�
 
 Składniki z szablonami są często wpisywane ogólnie. Na przykład, składnik generyczny `ListViewTemplate` ( `ListViewTemplate.razor` ) może służyć do renderowania `IEnumerable<T>` wartości. Aby zdefiniować składnik ogólny, użyj [`@typeparam`](xref:mvc/views/razor#typeparam) dyrektywy do określenia parametrów typu:
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
 W przypadku używania składników o typie ogólnym parametr typu jest wnioskowany, jeśli jest to możliwe:
 

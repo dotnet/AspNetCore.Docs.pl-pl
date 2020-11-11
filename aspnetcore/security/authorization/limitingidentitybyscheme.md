@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 4dc86480d40d8ee40b3c03aa7fd2994e6c15b105
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a5f2dff7b0e0d4f209ba445b2efb6fb261cbaab1
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053127"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94464019"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autoryzuj z określonym schematem w ASP.NET Core
 
 W niektórych scenariuszach, takich jak aplikacje jednostronicowe (aplikacji jednostronicowych), często używane są wiele metod uwierzytelniania. Na przykład aplikacja może używać cookie uwierzytelniania opartego na usłudze do logowania i uwierzytelniania JWT dla żądań języka JavaScript. W niektórych przypadkach aplikacja może mieć wiele wystąpień programu obsługi uwierzytelniania. Na przykład dwa cookie programy obsługi, w których jeden zawiera podstawową tożsamość, a jedna jest tworzona podczas wyzwalania uwierzytelniania wieloskładnikowego (MFA). Uwierzytelnianie wieloskładnikowe może być wyzwalane, ponieważ użytkownik zażądał operacji wymagającej dodatkowych zabezpieczeń. Aby uzyskać więcej informacji na temat wymuszania usługi MFA, gdy użytkownik zażąda zasobu wymagającego uwierzytelniania wieloskładnikowego, zobacz [sekcję dotyczącą ochrony za pomocą](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)usługi GitHub i usługi MFA
 
-Schemat uwierzytelniania ma nazwę, gdy usługa uwierzytelniania jest konfigurowana podczas uwierzytelniania. Przykład:
+Schemat uwierzytelniania ma nazwę, gdy usługa uwierzytelniania jest konfigurowana podczas uwierzytelniania. Na przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -54,7 +54,7 @@ W poprzednim kodzie dodano dwa programy obsługi uwierzytelniania: jeden dla coo
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Wybieranie schematu z atrybutem Autoryzuj
 
-W punkcie autoryzacji Aplikacja wskazuje program obsługi, który ma być używany. Wybierz program obsługi, za pomocą którego aplikacja będzie autoryzować, przekazując rozdzieloną przecinkami listę schematów uwierzytelniania do `[Authorize]` . Ten `[Authorize]` atrybut określa schemat lub schematy uwierzytelniania, które mają być używane niezależnie od tego, czy skonfigurowano wartość domyślną. Przykład:
+W punkcie autoryzacji Aplikacja wskazuje program obsługi, który ma być używany. Wybierz program obsługi, za pomocą którego aplikacja będzie autoryzować, przekazując rozdzieloną przecinkami listę schematów uwierzytelniania do `[Authorize]` . Ten `[Authorize]` atrybut określa schemat lub schematy uwierzytelniania, które mają być używane niezależnie od tego, czy skonfigurowano wartość domyślną. Na przykład:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -130,7 +130,7 @@ public void ConfigureServices(IServiceCollection services)
 > [!NOTE]
 > Zarejestrowano tylko jedno uwierzytelnianie okaziciela JWT z domyślnym schematem uwierzytelniania `JwtBearerDefaults.AuthenticationScheme` . Dodatkowe uwierzytelnianie musi być zarejestrowane przy użyciu unikatowego schematu uwierzytelniania.
 
-Następnym krokiem jest zaktualizowanie domyślnych zasad autoryzacji w celu zaakceptowania obu schematów uwierzytelniania. Przykład:
+Następnym krokiem jest zaktualizowanie domyślnych zasad autoryzacji w celu zaakceptowania obu schematów uwierzytelniania. Na przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -152,3 +152,5 @@ public void ConfigureServices(IServiceCollection services)
 Ponieważ domyślne zasady autoryzacji są zastępowane, można użyć `[Authorize]` atrybutu w kontrolerach. Kontroler akceptuje żądania z tokenem JWT wystawionym przez pierwszego lub drugiego wystawcy.
 
 ::: moniker-end
+
+[Ten problem](https://github.com/dotnet/aspnetcore/issues/26002) z usługą GitHub można znaleźć w artykule dotyczącym wielu schematów uwierzytelniania.

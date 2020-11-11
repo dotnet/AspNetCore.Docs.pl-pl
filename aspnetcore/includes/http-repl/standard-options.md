@@ -9,10 +9,6 @@
   * `{header}={value}`
   * `{header}:{value}`
 
-* `--response`
-
-  Określa plik, do którego należy zapisać całą odpowiedź HTTP (łącznie z nagłówkami i treścią). Na przykład `--response "C:\response.txt"`. Plik zostanie utworzony, jeśli nie istnieje.
-
 * `--response:body`
 
   Określa plik, do którego powinna zostać zapisywana treść odpowiedzi HTTP. Na przykład `--response:body "C:\response.json"`. Plik zostanie utworzony, jeśli nie istnieje.

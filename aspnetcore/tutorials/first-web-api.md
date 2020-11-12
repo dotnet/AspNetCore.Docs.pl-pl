@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: fc41dd13e7d027d9630cd596162f9b5fd2ef9e2b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab06f2d347d7f05e9c72a85e0c6e0fbc67fe48a7
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058496"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550715"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -63,7 +63,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -79,12 +79,12 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
-* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
-* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz** .
-* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 5,0** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz** .
+* Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 5,0** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.
 
 ![Okno dialogowe programu VS New Project](first-web-api/_static/5/vs.png)
 
@@ -102,7 +102,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
    code -r ../TodoApi
    ```
 
-* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak** .
+* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.
 
   Poprzednie polecenia:
 
@@ -111,17 +111,17 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie** .
+* Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
   ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz opcję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 5. x. Wybierz pozycję **Dalej**.
 
-* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
+* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
@@ -140,7 +140,7 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API z obsługą [struktury Swagger](xref:tutorials/web-api-help-pages-using-swagger).
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
@@ -227,11 +227,11 @@ Ze względu na to, że program Swagger został usunięty, poprzedzający znaczni
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym:
 
@@ -243,11 +243,11 @@ Ze względu na to, że program Swagger został usunięty, poprzedzający znaczni
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa** .
+* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
 * Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
 
@@ -265,17 +265,17 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> klasy.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-* W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania** .
+* W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
 * Wybierz kartę **Przeglądaj** , a następnie wpisz * * Microsoft.
 **EntityFrameworkCore. SqlServer** w polu wyszukiwania.
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
 * Zaznacz pole wyboru **Uwzględnij wersję wstępną** , aby uzyskać dostęp do wersji 5,0 RC. 
 * W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .
-* Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj** .
+* Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
 * Użyj powyższych instrukcji, aby dodać pakiet NuGet **Microsoft. EntityFrameworkCore. inMemory** .
 
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
@@ -283,7 +283,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 ## <a name="add-the-todocontext-database-context"></a>Dodawanie kontekstu bazy danych TodoContext
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -312,16 +312,16 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
-* Wybierz pozycję **Dodaj** > **nowy element szkieletowy** .
-* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj** .
+* Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.
+* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj**.
 * Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
-  * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model** .
-  * Wybierz pozycję **TodoContext (TodoApi. Models )** w **klasie kontekstu danych** .
-  * Wybierz pozycję **Dodaj** .
+  * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model**.
+  * Wybierz pozycję **TodoContext (TodoApi. Models )** w **klasie kontekstu danych**.
+  * Wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -379,7 +379,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Uruchom aplikację internetową.
 * Uruchom wpis.
 * Wyłącz **weryfikację certyfikatu SSL**
-  * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL** .
+  * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
     > [!WARNING]
     > Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.
 
@@ -390,9 +390,9 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Utwórz nowe żądanie.
 * Ustaw metodę HTTP na `POST` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
-* Wybierz kartę **Treść** .
+* Wybierz kartę **Treść**.
 * Wybierz przycisk radiowy **RAW** .
-* Ustaw typ na **JSON (Application/JSON)** .
+* Ustaw typ na **JSON (Application/JSON)**.
 * W treści żądania wprowadź kod JSON dla elementu do wykonania:
 
     ```json
@@ -402,7 +402,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
     }
     ```
 
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/3/create.png)
 
@@ -419,7 +419,7 @@ Aby przetestować w programie Poster:
 
 * Ustaw metodę HTTP na `GET` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems/1` . Na przykład `https://localhost:5001/api/TodoItems/1`.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 ## <a name="examine-the-get-methods"></a>Badanie metod GET
 
@@ -448,10 +448,10 @@ Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems
 ### <a name="test-get-with-postman"></a>Test get przy użyciu programu Poster
 
 * Utwórz nowe żądanie.
-* Ustaw metodę HTTP, aby **uzyskać** .
+* Ustaw metodę HTTP, aby **uzyskać**.
 * Ustaw identyfikator URI żądania na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
 * Ustaw **dwa widoki okienka** w programie Poster.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 Ta aplikacja używa bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych. Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.
 
@@ -519,7 +519,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 * Ustaw metodę na `DELETE` .
 * Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1` ).
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 <a name="over-post-v5"></a>
 
@@ -589,7 +589,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -605,12 +605,12 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
-* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
-* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz** .
-* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz** .
+* Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.
 
 ![Okno dialogowe programu VS New Project](first-web-api/_static/vs3.png)
 
@@ -628,7 +628,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
    code -r ../TodoApi
    ```
 
-* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak** .
+* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.
 
   Poprzednie polecenia:
 
@@ -637,17 +637,17 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie** .
+* Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
   ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz opcję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz pozycję **Dalej**.
 
-* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
+* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
@@ -666,11 +666,11 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
-Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak** . W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak** .
+Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**. W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -723,11 +723,11 @@ Zwracany jest kod JSON podobny do następującego:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -739,11 +739,11 @@ Zwracany jest kod JSON podobny do następującego:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa** .
+* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
 * Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
 
@@ -761,21 +761,21 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-* W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania** .
+* W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
 * Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .
 * W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .
-* Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj** .
+* Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
 * Użyj powyższych instrukcji, aby dodać pakiet NuGet **Microsoft. EntityFrameworkCore. inMemory** .
 
 ![Menedżer pakietów NuGet](first-web-api/_static/vs3NuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>Dodawanie kontekstu bazy danych TodoContext
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -803,16 +803,16 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
-* Wybierz pozycję **Dodaj** > **nowy element szkieletowy** .
-* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj** .
+* Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.
+* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj**.
 * Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
-  * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model** .
-  * Wybierz pozycję **TodoContext (TodoApi. Models )** w **klasie kontekstu danych** .
-  * Wybierz pozycję **Dodaj** .
+  * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model**.
+  * Wybierz pozycję **TodoContext (TodoApi. Models )** w **klasie kontekstu danych**.
+  * Wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -870,7 +870,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Uruchom aplikację internetową.
 * Uruchom wpis.
 * Wyłącz **weryfikację certyfikatu SSL**
-  * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL** .
+  * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
     > [!WARNING]
     > Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.
 
@@ -881,9 +881,9 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Utwórz nowe żądanie.
 * Ustaw metodę HTTP na `POST` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
-* Wybierz kartę **Treść** .
+* Wybierz kartę **Treść**.
 * Wybierz przycisk radiowy **RAW** .
-* Ustaw typ na **JSON (Application/JSON)** .
+* Ustaw typ na **JSON (Application/JSON)**.
 * W treści żądania wprowadź kod JSON dla elementu do wykonania:
 
     ```json
@@ -893,7 +893,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
     }
     ```
 
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/3/create.png)
 
@@ -906,7 +906,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
 * Ustaw metodę HTTP na `GET` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems/1` . Na przykład `https://localhost:5001/api/TodoItems/1`.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 ## <a name="examine-the-get-methods"></a>Badanie metod GET
 
@@ -935,10 +935,10 @@ Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems
 ### <a name="test-get-with-postman"></a>Test get przy użyciu programu Poster
 
 * Utwórz nowe żądanie.
-* Ustaw metodę HTTP, aby **uzyskać** .
+* Ustaw metodę HTTP, aby **uzyskać**.
 * Ustaw identyfikator URI żądania na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
 * Ustaw **dwa widoki okienka** w programie Poster.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 Ta aplikacja używa bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych. Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.
 
@@ -1006,7 +1006,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 * Ustaw metodę na `DELETE` .
 * Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1` ).
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 <a name="over-post"></a>
 <a name="over-post-v3"></a>
@@ -1080,7 +1080,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites-21"></a>Wymagania wstępne 2,1
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -1096,12 +1096,12 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project-21"></a>Tworzenie projektu sieci Web 2,1
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
-* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
-* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz** .
-* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 2,2** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz** . **Nie** zaznaczaj opcji **Włącz obsługę platformy Docker** .
+* Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 2,2** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**. **Nie** zaznaczaj opcji **Włącz obsługę platformy Docker**.
 
 ![Okno dialogowe programu VS New Project](first-web-api/_static/vs.png)
 
@@ -1118,19 +1118,19 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   Te polecenia tworzą nowy projekt internetowego interfejsu API i otwierają nowe wystąpienie Visual Studio Code w nowym folderze projektu.
 
-* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak** .
+* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie** .
+* Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
   ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** programu .NET Core 2. x. Wybierz opcję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** programu .NET Core 2. x. Wybierz pozycję **Dalej**.
 
-* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
+* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
@@ -1140,11 +1140,11 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 Szablon projektu tworzy `values` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
-Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak** . W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak** .
+Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**. W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -1166,11 +1166,11 @@ Zostanie zwrócony następujący kod JSON:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -1182,11 +1182,11 @@ Zostanie zwrócony następujący kod JSON:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa** .
+* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
 * Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
 
@@ -1204,9 +1204,9 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj** .
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1234,12 +1234,12 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="add-a-controller-21"></a>Dodawanie kontrolera 2,1
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
-* Wybierz pozycję **Dodaj** > **nowy element** .
+* Wybierz pozycję **Dodaj** > **nowy element**.
 * W oknie dialogowym **Dodaj nowy element** wybierz szablon **Klasa kontrolera interfejsu API** .
-* Nadaj klasie nazwę *TodoController* i wybierz pozycję **Dodaj** .
+* Nadaj klasie nazwę *TodoController* i wybierz pozycję **Dodaj**.
 
   ![Okno dialogowe Dodawanie nowego elementu z kontrolerem w polu wyszukiwania i wybranym kontrolerem interfejsu API sieci Web](first-web-api/_static/new_controller.png)
 
@@ -1321,15 +1321,15 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Zainstaluj program [Poster](https://www.getpostman.com/downloads/).
 * Uruchom aplikację internetową.
 * Uruchom wpis.
-* Wyłącz **weryfikację certyfikatu SSL** .
+* Wyłącz **weryfikację certyfikatu SSL**.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL** .
+* W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Z poziomu preferencji programu **Poster**  >  **Preferences** (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL** . Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia** , a następnie wyłącz weryfikację certyfikatu SSL.
+* Z poziomu preferencji programu **Poster**  >  **Preferences** (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**. Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia** , a następnie wyłącz weryfikację certyfikatu SSL.
 
 ---
   
@@ -1337,10 +1337,10 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 > Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.
 
 * Utwórz nowe żądanie.
-  * Ustaw metodę HTTP, aby **uzyskać** .
+  * Ustaw metodę HTTP, aby **uzyskać**.
   * Ustaw identyfikator URI żądania na `https://localhost:<port>/api/todo` . Na przykład `https://localhost:5001/api/todo`.
 * Ustaw **dwa widoki okienka** w programie Poster.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 ![Ogłoś przy użyciu żądania GET](first-web-api/_static/2pv.png)
 
@@ -1365,9 +1365,9 @@ Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](x
 * Skompiluj projekt.
 * W programie Poster ustaw metodę HTTP na `POST` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItem` . Na przykład `https://localhost:5001/api/TodoItem`.
-* Wybierz kartę **Treść** .
+* Wybierz kartę **Treść**.
 * Wybierz przycisk radiowy **RAW** .
-* Ustaw typ na **JSON (Application/JSON)** .
+* Ustaw typ na **JSON (Application/JSON)**.
 * W treści żądania wprowadź kod JSON dla elementu do wykonania:
 
     ```json
@@ -1377,7 +1377,7 @@ Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](x
     }
     ```
 
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/create.png)
 
@@ -1392,7 +1392,7 @@ Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](x
 
 * Ustaw metodę, aby uzyskać.
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems/2` . Na przykład `https://localhost:5001/api/TodoItems/2`.
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 ## <a name="add-a-puttodoitem-method-21"></a>Dodawanie metody PutTodoItem 2,1
 
@@ -1436,7 +1436,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 * Ustaw metodę na `DELETE` .
 * Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/todo/1` ).
-* Wybierz pozycję **Wyślij** .
+* Wybierz pozycję **Wyślij**.
 
 Przykładowa aplikacja umożliwia usunięcie wszystkich elementów. Jednak po usunięciu ostatniego elementu jest on tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.
 
@@ -1460,7 +1460,7 @@ Dodaj plik języka JavaScript o nazwie *site.js* do katalogu *wwwroot* . Zastąp
 
 Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:
 
-* Otwórz *Properties\launchSettings.jsna* .
+* Otwórz *Properties\launchSettings.jsna*.
 * Usuń `launchUrl` Właściwość, aby wymusić otwieranie przez aplikację w *index.html* &mdash; domyślnego pliku projektu.
 
 Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API. Poniżej znajdują się wyjaśnienia wywołań interfejsu API.

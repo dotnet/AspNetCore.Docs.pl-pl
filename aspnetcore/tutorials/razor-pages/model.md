@@ -3,7 +3,7 @@ title: Część 2, Dodawanie modelu
 author: rick-anderson
 description: Część 2 serii samouczków na Razor stronach. W tej sekcji dodawane są klasy modelu.
 ms.author: riande
-ms.date: 09/30/2020
+ms.date: 11/11/2020
 no-loc:
 - Index
 - Create
@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: ee1b7d77d8d209a11669ba29c8a951c59368180e
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 6244ac8798fb470a88802389961968fb52bd3c0a
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94361077"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550697"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
@@ -97,7 +97,7 @@ Dodaj następujące właściwości do `Movie` klasy:
 
 Dodaj parametry połączenia do *appsettings.json* pliku, jak pokazano w następującym wyróżnionym kodzie:
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/appsettings_SQLite.json?highlight=10-12)]
 
 <a name="reg"></a>
 
@@ -112,7 +112,7 @@ Dodaj parametry połączenia do *appsettings.json* pliku, jak pokazano w następ
 
 1. Zarejestruj kontekst bazy danych z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `Startup.ConfigureServices` :
 
-   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+   [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
@@ -477,7 +477,7 @@ using Microsoft.EntityFrameworkCore;
 
 Zarejestruj kontekst bazy danych z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `Startup.ConfigureServices` .
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
@@ -834,7 +834,7 @@ Poprzedni kod tworzy `DbSet` Właściwość zestawu jednostek. W Entity Framewor
 
 Dodaj parametry połączenia do *appsettings.json* pliku, jak pokazano w następującym wyróżnionym kodzie:
 
-[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-9)]
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/appsettings_SQLite.json?highlight=8-10)]
 
 ### <a name="add-required-nuget-packages"></a>Dodaj wymagane pakiety NuGet
 

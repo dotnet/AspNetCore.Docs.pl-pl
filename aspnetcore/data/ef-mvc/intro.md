@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a815502bb8aa97c137ea8940c7e5f1dde79e9999
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430890"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550650"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Samouczek: wprowadzenie do EF Core w aplikacji sieci Web ASP.NET MVC
 
@@ -34,7 +34,7 @@ Autorzy [Dykstra](https://github.com/tdykstra) i [Rick Anderson](https://twitter
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
-Przykładowy punkt dostępu sieci Web firmy Contoso University demonstruje sposób tworzenia aplikacji sieci Web ASP.NET Core MVC przy użyciu narzędzia Entity Framework (EF) Core i programu Visual Studio.
+Przykładowa aplikacja internetowa Contoso University pokazuje, jak utworzyć aplikację sieci Web ASP.NET Core MVC przy użyciu narzędzia Entity Framework (EF) Core i programu Visual Studio.
 
 Przykładowa aplikacja jest witryną internetową fikcyjnej firmy Contoso University. Obejmuje to funkcje, takie jak przyjmowanie studentów, tworzenie kursu i przydziały instruktora. Jest to pierwsza z szeregu samouczków, które opisują sposób tworzenia przykładowej aplikacji firmy Contoso University.
 

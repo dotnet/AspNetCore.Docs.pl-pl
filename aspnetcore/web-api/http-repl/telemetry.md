@@ -1,10 +1,10 @@
 ---
-title: Telemetrię HTTP REPL
+title: Telemetrię HttpRepl
 author: scottaddie
-description: Dowiedz się więcej na temat danych telemetrycznych zebranych przez REPL HTTP.
+description: Dowiedz się więcej o telemetrii zebranej przez HttpRepl.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,30 +18,32 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl/telemetry
-ms.openlocfilehash: 8590959e43c2dda69090acb358e740b271426a44
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: 5ff22753f566c494e51dae67c8c4f6371211be78
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502030"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550611"
 ---
-# <a name="http-repl-telemetry"></a>Telemetrię HTTP REPL
+# <a name="httprepl-telemetry"></a>Telemetrię HttpRepl
 
-[Pętla http Read-eval-Print (REPL)](xref:web-api/http-repl) zawiera funkcję telemetrii, która zbiera dane użycia. Należy pamiętać, że zespół protokołu HTTP REPL rozumie, w jaki sposób narzędzie jest używane, aby można je było ulepszyć.
+[HttpRepl](xref:web-api/http-repl) zawiera funkcję telemetrii, która zbiera dane dotyczące użycia. Należy pamiętać, że zespół HttpRepl rozumie, w jaki sposób narzędzie jest używane, aby można je było ulepszyć.
 
 ## <a name="how-to-opt-out"></a>Jak zrezygnować
 
-Funkcja telemetrii HTTP REPL jest domyślnie włączona. Aby zrezygnować z funkcji telemetrii, należy ustawić `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` zmienną środowiskową na `1` lub `true` .
+Funkcja telemetrii HttpRepl jest domyślnie włączona. Aby zrezygnować z funkcji telemetrii, należy ustawić `DOTNET_HTTPREPL_TELEMETRY_OPTOUT` zmienną środowiskową na `1` lub `true` .
 
 ## <a name="disclosure"></a>Mogąc
 
-HttpRepl wyświetla tekst podobny do poniższego podczas pierwszego uruchomienia narzędzia. Tekst może się nieco różnić w zależności od wersji uruchomionego narzędzia. To "pierwsze uruchomienie" polega na tym, jak firma Microsoft powiadamia użytkownika o zbieraniu danych.
+Podczas pierwszego uruchomienia narzędzia HttpRepl wyświetla tekst podobny do poniższego. Tekst może się nieco różnić w zależności od wersji uruchomionego narzędzia. To "pierwsze uruchomienie" polega na tym, jak firma Microsoft powiadamia użytkownika o zbieraniu danych.
 
 ```console
 Telemetry
 ---------
-The .NET Core tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 ```
+
+Aby pominąć tekst środowiska "pierwsze uruchomienie", należy ustawić `DOTNET_HTTPREPL_SKIP_FIRST_TIME_EXPERIENCE` zmienną środowiskową na `1` lub `true` .
 
 ## <a name="data-points"></a>Punkty danych
 
@@ -68,7 +70,7 @@ Funkcja telemetrii zbiera następujące dane.
 | >= 5,0        | Czy narzędzie jest uruchomione w kontenerze. |
 | >= 5,0        | Adres MAC w postaci skrótu Access Control: kryptograficzny (SHA256) i unikatowy identyfikator dla maszyny. |
 | >= 5,0        | Wersja jądra. |
-| >= 5,0        | Wersja HTTP REPL. |
+| >= 5,0        | Wersja HttpRepl. |
 | >= 5,0        | Czy narzędzie zostało uruchomione z `help` `run` argumentami,, czy `connect` . Rzeczywiste wartości argumentów nie są zbierane. |
 | >= 5,0        | Wywołano polecenie (na przykład `get` ) i czy zakończyło się ono pomyślnie. |
 | >= 5,0        | Dla `connect` polecenia, czy `root` `base` argumenty, lub `openapi` zostały dostarczone. Rzeczywiste wartości argumentów nie są zbierane. |

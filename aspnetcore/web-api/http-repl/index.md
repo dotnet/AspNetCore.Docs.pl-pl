@@ -1,11 +1,11 @@
 ---
-title: Testowanie interfejsów API sieci Web przy użyciu protokołu HTTP REPL
+title: Testowanie interfejsów API sieci Web za pomocą HttpRepl
 author: scottaddie
-description: Dowiedz się, jak przeglądać i testować ASP.NET Core internetowy interfejs API przy użyciu globalnego narzędzia REPL .NET Core.
+description: Dowiedz się, jak przeglądać i testować ASP.NET Core internetowy interfejs API za pomocą narzędzia globalnego HttpRepl .NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 81174b551c5b6d81e6ac80975f7f77ee6664059d
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: df2d4e63a18471b4c5f4f1c9434921303bb1da8a
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502035"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550624"
 ---
-# <a name="test-web-apis-with-the-http-repl"></a>Testowanie interfejsów API sieci Web przy użyciu protokołu HTTP REPL
+# <a name="test-web-apis-with-the-httprepl"></a>Testowanie interfejsów API sieci Web za pomocą HttpRepl
 
 Przez [Scott Addie](https://twitter.com/Scott_Addie)
 
@@ -54,7 +54,7 @@ Aby wykonać te czynności, [Wyświetl lub Pobierz przykładowy ASP.NET Core int
 
 ## <a name="installation"></a>Instalacja
 
-Aby zainstalować REPL HTTP, uruchom następujące polecenie:
+Aby zainstalować HttpRepl, uruchom następujące polecenie:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-httprepl
@@ -64,13 +64,13 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 ## <a name="usage"></a>Użycie
 
-Po pomyślnej instalacji narzędzia Uruchom następujące polecenie, aby uruchomić REPL HTTP:
+Po pomyślnej instalacji narzędzia Uruchom następujące polecenie, aby uruchomić HttpRepl:
 
 ```console
 httprepl
 ```
 
-Aby wyświetlić dostępne polecenia HTTP REPL, Uruchom jedno z następujących poleceń:
+Aby wyświetlić dostępne polecenia HttpRepl, Uruchom jedno z następujących poleceń:
 
 ```console
 httprepl -h
@@ -135,7 +135,7 @@ Use `help <COMMAND>` for more detail on an individual command. e.g. `help get`.
 For detailed tool info, see https://aka.ms/http-repl-doc.
 ```
 
-REPL HTTP oferuje polecenie uzupełniania. Naciśnięcie klawisza <kbd>Tab</kbd> wykonuje iterację na liście poleceń, które uzupełniają wpisane znaki lub punkt końcowy interfejsu API. W poniższych sekcjach znajduje się opis dostępnych poleceń interfejsu wiersza polecenia.
+HttpRepl oferuje polecenie uzupełniania. Naciśnięcie klawisza <kbd>Tab</kbd> wykonuje iterację na liście poleceń, które uzupełniają wpisane znaki lub punkt końcowy interfejsu API. W poniższych sekcjach znajduje się opis dostępnych poleceń interfejsu wiersza polecenia.
 
 ## <a name="connect-to-the-web-api"></a>Nawiązywanie połączenia z interfejsem API sieci Web
 
@@ -145,19 +145,19 @@ Połącz się z interfejsem API sieci Web, uruchamiając następujące polecenie
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Na przykład:
+`<ROOT URI>` jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Przykład:
 
 ```console
 httprepl https://localhost:5001
 ```
 
-Alternatywnie Uruchom następujące polecenie w dowolnym momencie podczas działania REPL HTTP:
+Alternatywnie Uruchom następujące polecenie w dowolnym momencie, gdy HttpRepl jest uruchomiona:
 
 ```console
 connect <ROOT URI>
 ```
 
-Na przykład:
+Przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001
@@ -171,7 +171,7 @@ Powyższe polecenie Connect podejmie próbę automatycznego znalezienia opisu Op
 connect <ROOT URI> --openapi <OPENAPI DESCRIPTION ADDRESS>
 ```
 
-Na przykład:
+Przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --openapi /swagger/v1/swagger.json
@@ -185,7 +185,7 @@ Określenie `--verbose` opcji za pomocą `connect` polecenia spowoduje wygenerow
 connect <ROOT URI> --verbose
 ```
 
-Na przykład:
+Przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --verbose
@@ -230,7 +230,7 @@ https://localhost:5001/fruits> ls
 https://localhost:5001/fruits>
 ```
 
-Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Na przykład:
+Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Przykład:
 
 ```console
 https://localhost:5001/> ui
@@ -252,9 +252,9 @@ W ścieżce następującego `cd` polecenia jest rozróżniana wielkość liter. 
 https://localhost:5001/people>
 ```
 
-## <a name="customize-the-http-repl"></a>Dostosowywanie REPL HTTP
+## <a name="customize-the-httprepl"></a>Dostosuj HttpRepl
 
-Domyślne [kolory](#set-color-preferences) REPL http można dostosować. Ponadto można zdefiniować [domyślny edytor tekstu](#set-the-default-text-editor) . Preferencje HTTP REPL są utrwalane w bieżącej sesji i są honorowane w przyszłych sesjach. Po zmodyfikowaniu preferencje są przechowywane w następującym pliku:
+Domyślne [kolory](#set-color-preferences) HttpRepl można dostosować. Ponadto można zdefiniować [domyślny edytor tekstu](#set-the-default-text-editor) . Preferencje HttpRepl są utrwalane w bieżącej sesji i są honorowane w przyszłych sesjach. Po zmodyfikowaniu preferencje są przechowywane w następującym pliku:
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
@@ -274,7 +274,7 @@ Plik *. httpreplprefs* jest ładowany podczas uruchamiania i nie jest monitorowa
 
 ### <a name="view-the-settings"></a>Wyświetl ustawienia
 
-Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Na przykład:
+Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Przykład:
 
 ```console
 https://localhost:5001/> pref get
@@ -295,7 +295,7 @@ colors.status=BoldYellow
 
 ### <a name="set-color-preferences"></a>Ustawianie preferencji koloru
 
-Kolorowanie odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Aby dostosować domyślne kolorowanie narzędzi HTTP REPL, Znajdź klucz odpowiadający kolorowi do zmiany. Aby uzyskać instrukcje dotyczące znajdowania kluczy, zobacz sekcję [Wyświetlanie ustawień](#view-the-settings) . Na przykład zmień `colors.json` wartość klucza z na w `Green` `White` następujący sposób:
+Kolorowanie odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Aby dostosować domyślne kolorowanie narzędzi HttpRepl, Znajdź klucz odpowiadający kolorowi do zmiany. Aby uzyskać instrukcje dotyczące znajdowania kluczy, zobacz sekcję [Wyświetlanie ustawień](#view-the-settings) . Na przykład zmień `colors.json` wartość klucza z na w `Green` `White` następujący sposób:
 
 ```console
 https://localhost:5001/people> pref set colors.json White
@@ -312,7 +312,7 @@ Jeśli określone klucze kolorów nie są ustawione, brane są więcej kluczy og
 
 ### <a name="set-indentation-size"></a>Ustaw rozmiar wcięcia
 
-Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Na przykład:
+Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Przykład:
 
 ```json
 [
@@ -358,7 +358,7 @@ Kolejne odpowiedzi przestrzegają ustawień czterech spacji:
 
 ### <a name="set-the-default-text-editor"></a>Ustawianie domyślnego edytora tekstu
 
-Domyślnie REPL HTTP nie ma edytora tekstu skonfigurowanego do użycia. Aby przetestować metody interfejsu API sieci Web wymagające treści żądania HTTP, należy ustawić domyślny edytor tekstu. Narzędzie HTTP REPL uruchamia skonfigurowany Edytor tekstów wyłącznie na potrzeby redagowania treści żądania. Uruchom następujące polecenie, aby ustawić preferowany Edytor tekstu jako domyślny:
+Domyślnie HttpRepl nie ma edytora tekstu skonfigurowanego do użycia. Aby przetestować metody interfejsu API sieci Web wymagające treści żądania HTTP, należy ustawić domyślny edytor tekstu. Narzędzie HttpRepl uruchamia skonfigurowany Edytor tekstów wyłącznie na potrzeby redagowania treści żądania. Uruchom następujące polecenie, aby ustawić preferowany Edytor tekstu jako domyślny:
 
 ```console
 pref set editor.command.default "<EXECUTABLE>"
@@ -386,7 +386,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-Aby uruchomić domyślny edytor tekstu z określonymi argumentami interfejsu wiersza polecenia, należy ustawić `editor.command.default.arguments` klucz. Załóżmy na przykład, że Visual Studio Code jest domyślnym edytorem tekstu i zawsze chcesz, aby REPL HTTP mógł otworzyć Visual Studio Code w nowej sesji z wyłączonymi rozszerzeniami. Uruchom następujące polecenie:
+Aby uruchomić domyślny edytor tekstu z określonymi argumentami interfejsu wiersza polecenia, należy ustawić `editor.command.default.arguments` klucz. Załóżmy na przykład, że Visual Studio Code jest domyślnym edytorem tekstu i zawsze chcesz, aby HttpRepl się otwierać Visual Studio Code w nowej sesji z wyłączonymi rozszerzeniami. Uruchom następujące polecenie:
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -397,7 +397,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 ### <a name="set-the-openapi-description-search-paths"></a>Ustaw ścieżki wyszukiwania opisu OpenAPI
 
-Domyślnie REPL HTTP ma zestaw ścieżek względnych, których używa do znajdowania opisu OpenAPI podczas wykonywania `connect` polecenia bez `--openapi` opcji. Ścieżki względne są łączone z ścieżkami głównymi i podstawowymi określonymi w `connect` poleceniu. Domyślne ścieżki względne to:
+Domyślnie HttpRepl ma zestaw ścieżek względnych, których używa, aby znaleźć opis OpenAPI podczas wykonywania `connect` polecenia bez `--openapi` opcji. Ścieżki względne są łączone z ścieżkami głównymi i podstawowymi określonymi w `connect` poleceniu. Domyślne ścieżki względne to:
 
 - *swagger.jsna*
 - *Struktura Swagger/V1/swagger.jswłączona*
@@ -406,7 +406,7 @@ Domyślnie REPL HTTP ma zestaw ścieżek względnych, których używa do znajdow
 - *openapi.jsna*
 - */openapi.jsna*
 
-Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
+Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -414,13 +414,13 @@ pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 
 Zamiast całkowicie zastąpić listę domyślną, można również zmodyfikować listę, dodając lub usuwając ścieżki.
 
-Aby dodać jedną lub więcej ścieżek wyszukiwania do listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
+Aby dodać jedną lub więcej ścieżek wyszukiwania do listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
 
 ```console
 pref set swagger.addToSearchPaths "openapi/v2/openapi.json|openapi/v3/openapi.json"
 ```
 
-Aby usunąć jedną lub więcej ścieżek wyszukiwania z listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
+Aby usunąć jedną lub więcej ścieżek wyszukiwania z listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
 
 ```console
 pref set swagger.removeFromSearchPaths "swagger.json|/swagger.json"
@@ -540,7 +540,7 @@ Aby wydać żądanie HTTP POST:
     https://localhost:5001/people> post -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
 
     ```json
     {
@@ -636,7 +636,7 @@ Aby wydać żądanie HTTP PUT:
     https://localhost:5001/fruits> put 2 -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
 
     ```json
     {
@@ -842,7 +842,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących metod:
 
-* Ustaw wartość inline z żądaniem HTTP. Na przykład:
+* Ustaw wartość inline z żądaniem HTTP. Przykład:
 
     ```console
     https://localhost:5001/people> post -h Content-Type=application/json
@@ -850,13 +850,13 @@ Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących 
     
     W przypadku wcześniejszego podejścia każdy unikatowy nagłówek żądania HTTP wymaga własnej `-h` opcji.
 
-* Ustaw przed wysłaniem żądania HTTP. Na przykład:
+* Ustaw przed wysłaniem żądania HTTP. Przykład:
 
     ```console
     https://localhost:5001/people> set header Content-Type application/json
     ```
     
-    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Na przykład:
+    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Przykład:
     
     ```console
     https://localhost:5001/people> set header Content-Type
@@ -864,7 +864,7 @@ Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących 
 
 ## <a name="test-secured-endpoints"></a>Testuj zabezpieczone punkty końcowe
 
-REPL HTTP obsługuje testowanie zabezpieczonych punktów końcowych w następujący sposób:
+HttpRepl obsługuje testowanie zabezpieczonych punktów końcowych w następujący sposób:
 
 * Za pośrednictwem domyślnych poświadczeń zalogowanego użytkownika.
 * Za pomocą nagłówków żądań HTTP.
@@ -907,7 +907,7 @@ Na przykład można wysłać token okaziciela do punktu końcowego za pomocą na
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-Aby uzyskać dostęp do punktu końcowego hostowanego na platformie Azure lub użyć [interfejsu API REST platformy Azure](/rest/api/azure/), potrzebujesz tokenu okaziciela. Wykonaj następujące kroki, aby uzyskać token okaziciela dla subskrypcji platformy Azure za pośrednictwem [interfejsu wiersza polecenia platformy Azure](/cli/azure/). REPL HTTP ustawia token okaziciela w nagłówku żądania HTTP. Zostanie pobrana lista Web Apps Azure App Service.
+Aby uzyskać dostęp do punktu końcowego hostowanego na platformie Azure lub użyć [interfejsu API REST platformy Azure](/rest/api/azure/), potrzebujesz tokenu okaziciela. Wykonaj następujące kroki, aby uzyskać token okaziciela dla subskrypcji platformy Azure za pośrednictwem [interfejsu wiersza polecenia platformy Azure](/cli/azure/). HttpRepl ustawia token okaziciela w nagłówku żądania HTTP. Zostanie pobrana lista Web Apps Azure App Service.
 
 1. Zaloguj się do platformy Azure:
 
@@ -933,7 +933,7 @@ Aby uzyskać dostęp do punktu końcowego hostowanego na platformie Azure lub u�
     az account get-access-token --query accessToken
     ```
 
-1. Połącz się z interfejsem API REST platformy Azure za pośrednictwem REPL HTTP:
+1. Nawiązywanie połączenia z interfejsem API REST platformy Azure za pośrednictwem HttpRepl:
 
     ```console
     httprepl https://management.azure.com
@@ -987,14 +987,14 @@ Domyślnie wyświetlanie wysyłanego żądania HTTP jest pomijane. Istnieje moż
 
 ### <a name="enable-request-display"></a>Włącz wyświetlanie żądań
 
-Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Na przykład:
+Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Przykład:
 
 ```console
 https://localhost:5001/people> echo on
 Request echoing is on
 ```
 
-Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Na przykład:
+Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Przykład:
 
 ```console
 https://localhost:5001/people> post
@@ -1032,7 +1032,7 @@ https://localhost:5001/people>
 
 ### <a name="disable-request-display"></a>Wyłącz wyświetlanie żądań
 
-Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Na przykład:
+Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Przykład:
 
 ```console
 https://localhost:5001/people> echo off
@@ -1041,7 +1041,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Uruchamianie skryptu
 
-Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku przyjmują ten sam formularz, co polecenia wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Na przykład:
+Jeśli często wykonujesz ten sam zestaw poleceń HttpRepl, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku przyjmują ten sam formularz, co polecenia wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Przykład:
 
 1. Utwórz plik tekstowy zawierający zestaw poleceń rozdzielanych znakami nowego wiersza. Aby to zilustrować, rozważ plik *people-script.txt* zawierający następujące polecenia:
 
@@ -1053,7 +1053,7 @@ Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywa
     get 1
     ```
 
-1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Na przykład:
+1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Przykład:
 
     ```console
     https://localhost:5001/> run C:\http-repl-scripts\people-script.txt
@@ -1096,7 +1096,7 @@ Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywa
 
 ## <a name="clear-the-output"></a>Wyczyść dane wyjściowe
 
-Aby usunąć wszystkie dane wyjściowe zapisywane do powłoki poleceń za pomocą narzędzia HTTP REPL, uruchom `clear` polecenie lub `cls` . Do zilustrowania, Załóżmy, że powłoka poleceń zawiera następujące dane wyjściowe:
+Aby usunąć wszystkie dane wyjściowe zapisywane do powłoki poleceń za pomocą narzędzia HttpRepl, uruchom `clear` polecenie lub `cls` . Do zilustrowania, Załóżmy, że powłoka poleceń zawiera następujące dane wyjściowe:
 
 ```console
 httprepl https://localhost:5001
@@ -1126,4 +1126,4 @@ https://localhost:5001/>
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Żądania interfejsu API REST](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
-* [Repozytorium usługi GitHub HTTP REPL](https://github.com/dotnet/HttpRepl)
+* [Repozytorium GitHub HttpRepl](https://github.com/dotnet/HttpRepl)

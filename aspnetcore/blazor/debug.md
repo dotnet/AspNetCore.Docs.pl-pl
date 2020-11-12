@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b7e246c20bf12f8ddf07cff54864836cb535aa60
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 990882c03ddc14c664aa8da0518fb36087199aca
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94340000"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550520"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -49,6 +49,7 @@ Obecnie *nie* można:
 
 * Przerwij w przypadku nieobsłużonych wyjątków.
 * Punkty przerwania trafień podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
+* Debuguj w scenariuszach nielokalnych (na przykład [podsystem Windows dla systemu Linux (WSL)](/windows/wsl/) lub [Visual Studio Codespaces](/visualstudio/codespaces/overview/what-is-vsonline)).
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 

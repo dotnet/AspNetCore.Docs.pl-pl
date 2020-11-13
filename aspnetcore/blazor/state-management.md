@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054999"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570149"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -55,25 +55,25 @@ Trwałość danych jest zazwyczaj wymagana tylko w przypadku stanu wysokiej wart
 * Wieloetapowe formularze sieci Web: czasochłonne, aby użytkownik mógł ponownie wprowadzić dane dla kilku ukończonych kroków wieloetapowego formularza sieci Web, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli opuszcza formularz i wróci później.
 * Koszyki: każdy handlowy istotny składnik aplikacji, który reprezentuje potencjalne dochody, może być utrzymywany. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
-Aplikacja może utrzymywać tylko *stan aplikacji* . Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
+Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
 Istnieją wspólne lokalizacje dla stanu utrwalania:
 
-* [Magazyn po stronie serwera](#server-side-storage)
-* [Adres URL](#url)
-* [Magazyn przeglądarki](#browser-storage)
-* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service)
+* [Magazyn po stronie serwera](#server-side-storage-wasm)
+* [Adres URL](#url-wasm)
+* [Magazyn przeglądarki](#browser-storage-wasm)
+* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service-wasm)
 
-### <a name="server-side-storage"></a>Magazyn po stronie serwera
+<h2 id="server-side-storage-wasm">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne są następujące opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w każdej nowej sesji przeglądarki.
 
@@ -90,7 +90,7 @@ Aby uzyskać więcej informacji na temat opcji usługi Azure Data Storage, zobac
 * [Bazy danych platformy Azure](https://azure.microsoft.com/product-categories/databases/)
 * [Dokumentacja usługi Azure Storage](/azure/storage/)
 
-### <a name="url"></a>Adres URL
+<h2 id="url-wasm">Adres URL</h2>
 
 W przypadku danych przejściowych reprezentujących stan nawigacji należy modelować dane w ramach adresu URL. Przykłady stanu użytkownika z modelem w adresie URL obejmują:
 
@@ -101,7 +101,7 @@ Zawartość paska adresu przeglądarki jest zachowywana, jeśli użytkownik ręc
 
 Aby uzyskać informacje na temat definiowania wzorców adresów URL za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy, zobacz <xref:blazor/fundamentals/routing> .
 
-### <a name="browser-storage"></a>Magazyn przeglądarki
+<h2 id="browser-storage-wasm">Magazyn przeglądarki</h2>
 
 W przypadku danych przejściowych, które użytkownik aktywnie tworzy, często używaną lokalizacją magazynu jest przeglądarka [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) i [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) Kolekcje:
 
@@ -121,7 +121,7 @@ Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStor
 > [!WARNING]
 > Użytkownicy mogą wyświetlać lub naruszać dane przechowywane w `localStorage` i `sessionStorage` .
 
-## <a name="in-memory-state-container-service"></a>Usługa kontenera stanu w pamięci
+<h2 id="in-memory-state-container-service-wasm">Usługa kontenera stanu w pamięci</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
@@ -135,7 +135,7 @@ Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStor
 
 ::: zone pivot="server"
 
-Blazor Server jest platformą aplikacji stanowych. W większości przypadków aplikacja utrzymuje połączenie z serwerem. Stan użytkownika jest przechowywany w pamięci serwera w ramach *obwodu* . 
+Blazor Server jest platformą aplikacji stanowych. W większości przypadków aplikacja utrzymuje połączenie z serwerem. Stan użytkownika jest przechowywany w pamięci serwera w ramach *obwodu*. 
 
 Przykłady stanu użytkownika przechowywanego w obwodzie:
 
@@ -164,25 +164,25 @@ Trwałość danych jest zazwyczaj wymagana tylko w przypadku stanu wysokiej wart
 * Wieloetapowe formularze sieci Web: czasochłonne, aby użytkownik mógł ponownie wprowadzić dane dla kilku ukończonych kroków wieloetapowego formularza sieci Web, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli opuszcza formularz i wróci później.
 * Koszyki: każdy handlowy istotny składnik aplikacji, który reprezentuje potencjalne dochody, może być utrzymywany. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
-Aplikacja może utrzymywać tylko *stan aplikacji* . Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
+Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
 Istnieją wspólne lokalizacje dla stanu utrwalania:
 
-* [Magazyn po stronie serwera](#server-side-storage)
-* [Adres URL](#url)
-* [Magazyn przeglądarki](#browser-storage)
-* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service)
+* [Magazyn po stronie serwera](#server-side-storage-server)
+* [Adres URL](#url-server)
+* [Magazyn przeglądarki](#browser-storage-server)
+* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service-server)
 
-### <a name="server-side-storage"></a>Magazyn po stronie serwera
+<h2 id="server-side-storage-server">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne są następujące opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w dowolnym nowym obwodie.
 
@@ -191,7 +191,7 @@ Aby uzyskać więcej informacji na temat opcji usługi Azure Data Storage, zobac
 * [Bazy danych platformy Azure](https://azure.microsoft.com/product-categories/databases/)
 * [Dokumentacja usługi Azure Storage](/azure/storage/)
 
-### <a name="url"></a>Adres URL
+<h2 id="url-server">Adres URL</h2>
 
 W przypadku danych przejściowych reprezentujących stan nawigacji należy modelować dane w ramach adresu URL. Przykłady stanu użytkownika z modelem w adresie URL obejmują:
 
@@ -205,7 +205,7 @@ Zawartość paska adresu przeglądarki jest zachowywana:
 
 Aby uzyskać informacje na temat definiowania wzorców adresów URL za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy, zobacz <xref:blazor/fundamentals/routing> .
 
-### <a name="browser-storage"></a>Magazyn przeglądarki
+<h2 id="browser-storage-server">Magazyn przeglądarki</h2>
 
 W przypadku danych przejściowych, które użytkownik aktywnie tworzy, często używaną lokalizacją magazynu jest przeglądarka [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) i [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) Kolekcje:
 
@@ -226,7 +226,7 @@ Ostrzeżenia dotyczące korzystania z magazynu przeglądarki:
 * Przechowywanie kilku kilobajtów danych jest rozsądne dla Blazor Server aplikacji. Po kilku kilobajtach należy wziąć pod uwagę wpływ na wydajność, ponieważ dane są ładowane i zapisywane w sieci.
 * Użytkownicy mogą wyświetlać i modyfikować dane. [Ochrona danych ASP.NET Core](xref:security/data-protection/introduction) może ograniczyć ryzyko. Na przykład [ASP.NET Core chronionej przeglądarki](#aspnet-core-protected-browser-storage) używa ASP.NET Core ochrony danych.
 
-Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage` . Warto rozważać wybór pakietu, który w sposób przezroczysty używa [ASP.NET Core ochrony danych](xref:security/data-protection/introduction). Ochrona danych szyfruje przechowywane dane i zmniejsza potencjalne ryzyko naruszenia przechowywanych danych. Jeśli dane serializowane w formacie JSON są przechowywane w postaci zwykłego tekstu, użytkownicy mogą zobaczyć dane przy użyciu narzędzi deweloperskich przeglądarki, a także zmodyfikować przechowywane dane. Zabezpieczanie danych nie zawsze jest problemem, ponieważ dane mogą być proste. Na przykład odczytywanie lub modyfikowanie zapisanego koloru elementu interfejsu użytkownika nie jest istotnym zagrożeniem bezpieczeństwa użytkownika lub organizacji. Unikaj zezwalania użytkownikom na inspekcję i manipulowanie *danymi poufnymi* .
+Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage` . Warto rozważać wybór pakietu, który w sposób przezroczysty używa [ASP.NET Core ochrony danych](xref:security/data-protection/introduction). Ochrona danych szyfruje przechowywane dane i zmniejsza potencjalne ryzyko naruszenia przechowywanych danych. Jeśli dane serializowane w formacie JSON są przechowywane w postaci zwykłego tekstu, użytkownicy mogą zobaczyć dane przy użyciu narzędzi deweloperskich przeglądarki, a także zmodyfikować przechowywane dane. Zabezpieczanie danych nie zawsze jest problemem, ponieważ dane mogą być proste. Na przykład odczytywanie lub modyfikowanie zapisanego koloru elementu interfejsu użytkownika nie jest istotnym zagrożeniem bezpieczeństwa użytkownika lub organizacji. Unikaj zezwalania użytkownikom na inspekcję i manipulowanie *danymi poufnymi*.
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -700,7 +700,7 @@ Aby zachować wiele różnych obiektów stanu i korzystać z różnych podzbior�
 
 ::: moniker-end
 
-## <a name="in-memory-state-container-service"></a>Usługa kontenera stanu w pamięci
+<h2 id="in-memory-state-container-service-server">Usługa kontenera stanu w pamięci</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 

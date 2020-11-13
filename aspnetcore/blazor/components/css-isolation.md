@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 628e7dc897912beaae0df792b82958517ac70ca4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4fec0fa750b9209849030d0d6b7de8f4e163d62f
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056325"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570136"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorIzolacja ASP.NET Core CSS
 
@@ -34,9 +34,9 @@ Izolacja CSS upraszcza rozmiary CSS aplikacji, uniemożliwiając zależności od
 
 ## <a name="enable-css-isolation"></a>Włącz izolację CSS 
 
-Aby zdefiniować Style specyficzne dla składnika, należy utworzyć `razor.css` plik pasujący do nazwy `.razor` pliku składnika. Ten `razor.css` plik jest *plikiem CSS z zakresem* . 
+Aby zdefiniować Style specyficzne dla składnika, należy utworzyć `.razor.css` plik pasujący do nazwy `.razor` pliku składnika. Ten `.razor.css` plik jest *plikiem CSS z zakresem*. 
 
-Dla `MyComponent` składnika, który ma `MyComponent.razor` plik, Utwórz plik obok składnika o nazwie `MyComponent.razor.css` . `MyComponent`W `razor.css` nazwie pliku **nie** jest rozróżniana wielkość liter.
+Dla `MyComponent` składnika, który ma `MyComponent.razor` plik, Utwórz plik obok składnika o nazwie `MyComponent.razor.css` . `MyComponent`W `.razor.css` nazwie pliku **nie** jest rozróżniana wielkość liter.
 
 Aby na przykład dodać izolację CSS do `Counter` składnika w domyślnym Blazor szablonie projektu, Dodaj nowy plik o nazwie `Counter.razor.css` obok `Counter.razor` pliku, a następnie Dodaj następujący kod CSS:
 
@@ -86,7 +86,7 @@ Jeśli są wykorzystywane inne projekty, takie jak pakiety NuGet lub [ Razor bib
 
 ## <a name="child-component-support"></a>Obsługa składników podrzędnych
 
-Domyślnie izolacja CSS dotyczy tylko składnika, który został skojarzony z formatem `{COMPONENT NAME}.razor.css` , gdzie symbol zastępczy `{COMPONENT NAME}` jest zwykle nazwą składnika. Aby zastosować zmiany do składnika podrzędnego, użyj `::deep` Combinator do dowolnego elementu podrzędnego w pliku składnika nadrzędnego `razor.css` . `::deep`Combinator wybiera elementy, które są *elementami podrzędnymi* wygenerowanego identyfikatora zakresu elementu. 
+Domyślnie izolacja CSS dotyczy tylko składnika, który został skojarzony z formatem `{COMPONENT NAME}.razor.css` , gdzie symbol zastępczy `{COMPONENT NAME}` jest zwykle nazwą składnika. Aby zastosować zmiany do składnika podrzędnego, użyj `::deep` Combinator do dowolnego elementu podrzędnego w pliku składnika nadrzędnego `.razor.css` . `::deep`Combinator wybiera elementy, które są *elementami podrzędnymi* wygenerowanego identyfikatora zakresu elementu. 
 
 Poniższy przykład pokazuje składnik nadrzędny o nazwie `Parent` ze składnikiem podrzędnym o nazwie `Child` .
 
@@ -180,3 +180,24 @@ Aby zrezygnować z Blazor publikowania i ładowania plików objętych zakresem w
   <DisableScopedCssBundling>true</DisableScopedCssBundling>
 </PropertyGroup>
 ```
+
+## <a name="no-locrazor-class-library-rcl-support"></a>Razor Obsługa biblioteki klas (RCL)
+
+Gdy [ Razor Biblioteka klas (RCL)](xref:razor-pages/ui-class) zapewnia odizolowane style, `<link>` atrybut znacznika `href` wskazuje `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` , gdzie symbole zastępcze są:
+
+* `{STATIC WEB ASSET BASE PATH}`: Ścieżka podstawowa statycznego elementu zawartości sieci Web.
+* `{ASSEMBLY NAME}`: Nazwa zestawu biblioteki klas.
+
+W poniższym przykładzie:
+
+* Ścieżka podstawowa statycznego elementu zawartości sieci Web to `_content/ClassLib` .
+* Nazwa zestawu biblioteki klas to `ClassLib` .
+
+```html
+<link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">
+```
+
+Aby uzyskać więcej informacji na temat RCLs i bibliotek składników, zobacz:
+
+* <xref:razor-pages/ui-class>
+* <xref:blazor/components/class-libraries>.

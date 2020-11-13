@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055597"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570123"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET Core Blazor
 
@@ -57,12 +57,9 @@ Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplik
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla skryptów Bootstrap.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
   * W Blazor WebAssembly aplikacji:
-    * Określ następujące skróty, aby zezwolić na ładowanie wymaganych Blazor WebAssembly skryptów wbudowanych:
-      * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
-      * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
-      * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
+    * Określ wartości skrótów, aby zezwolić na ładowanie wymaganych skryptów.
     * Określ `unsafe-eval` użycie `eval()` i metody tworzenia kodu z ciągów.
-  * W Blazor Server aplikacji Określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót do skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
+  * W Blazor Server aplikacji Określ wartości skrótów, aby zezwolić na ładowanie wymaganych skryptów.
 * [styl-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): wskazuje prawidłowe źródła dla arkuszy stylów.
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla arkuszy stylów ładowania początkowego.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
@@ -93,6 +90,29 @@ W poniższych sekcjach przedstawiono przykładowe zasady dla Blazor WebAssembly 
 
 W obszarze `<head>` zawartość `wwwroot/index.html` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 
+::: moniker range=">= aspnetcore-5.0"
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self' 
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 
+                          'unsafe-eval';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self'
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```html
 <meta http-equiv="Content-Security-Policy" 
       content="base-uri 'self';
@@ -112,9 +132,38 @@ W obszarze `<head>` zawartość `wwwroot/index.html` strony hosta Zastosuj dyrek
                upgrade-insecure-requests;">
 ```
 
+::: moniker-end
+
+Dodawanie dodatkowych `script-src` i `style-src` skrótów zgodnie z wymaganiami aplikacji. Podczas programowania Użyj narzędzia online lub narzędzi programistycznych przeglądarki, aby wyliczyć skróty. Na przykład następujący komunikat o błędzie konsoli narzędzia przeglądarki zgłasza skrót dla wymaganego skryptu nieobjętego zasadami:
+
+> Odmówiono wykonania skryptu wbudowanego, ponieważ narusza on następującą dyrektywę zasad zabezpieczeń zawartości: "... ". Słowo kluczowe "UNSAFE-inline", skrót ("SHA256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA =") lub identyfikator jednorazowy ("nonce-...") jest wymagany do włączenia wykonywania wbudowanego.
+
+Konkretny skrypt skojarzony z tym błędem jest wyświetlany w konsoli obok błędu.
+
 ### Blazor Server
 
 W obszarze `<head>` zawartość `Pages/_Host.cshtml` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
+
+::: moniker range=">= aspnetcore-5.0"
+
+```cshtml
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self' 
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -131,6 +180,14 @@ W obszarze `<head>` zawartość `Pages/_Host.cshtml` strony hosta Zastosuj dyrek
                          'unsafe-inline';
                upgrade-insecure-requests;">
 ```
+
+::: moniker-end
+
+Dodawanie dodatkowych `script-src` i `style-src` skrótów zgodnie z wymaganiami aplikacji. Podczas programowania Użyj narzędzia online lub narzędzi programistycznych przeglądarki, aby wyliczyć skróty. Na przykład następujący komunikat o błędzie konsoli narzędzia przeglądarki zgłasza skrót dla wymaganego skryptu nieobjętego zasadami:
+
+> Odmówiono wykonania skryptu wbudowanego, ponieważ narusza on następującą dyrektywę zasad zabezpieczeń zawartości: "... ". Słowo kluczowe "UNSAFE-inline", skrót ("SHA256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA =") lub identyfikator jednorazowy ("nonce-...") jest wymagany do włączenia wykonywania wbudowanego.
+
+Konkretny skrypt skojarzony z tym błędem jest wyświetlany w konsoli obok błędu.
 
 ## <a name="meta-tag-limitations"></a>Ograniczenia tagów Meta
 

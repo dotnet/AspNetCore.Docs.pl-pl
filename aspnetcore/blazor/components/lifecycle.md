@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: cykl życia'
+title: 'ASP.NET Core Blazor cykl życia'
 author: guardrex
-description: 'Dowiedz się, jak korzystać z :::no-loc(Razor)::: metod cyklu życia składników w :::no-loc(Blazor)::: aplikacjach ASP.NET Core.'
+description: 'Dowiedz się, jak korzystać z Razor metod cyklu życia składników w Blazor aplikacjach ASP.NET Core.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/lifecycle
 ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -26,13 +26,13 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 11/11/2020
 ms.locfileid: "94508030"
 ---
-# <a name="aspnet-core-no-locblazor-lifecycle"></a><span data-ttu-id="282e3-103">ASP.NET Core :::no-loc(Blazor)::: cykl życia</span><span class="sxs-lookup"><span data-stu-id="282e3-103">ASP.NET Core :::no-loc(Blazor)::: lifecycle</span></span>
+# <a name="aspnet-core-no-locblazor-lifecycle"></a><span data-ttu-id="282e3-103">ASP.NET Core Blazor cykl życia</span><span class="sxs-lookup"><span data-stu-id="282e3-103">ASP.NET Core Blazor lifecycle</span></span>
 
 <span data-ttu-id="282e3-104">Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="282e3-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-<span data-ttu-id="282e3-105">:::no-loc(Blazor):::Platforma obejmuje metody cyklu życia synchronicznego i asynchronicznego.</span><span class="sxs-lookup"><span data-stu-id="282e3-105">The :::no-loc(Blazor)::: framework includes synchronous and asynchronous lifecycle methods.</span></span> <span data-ttu-id="282e3-106">Zastąp metody cyklu życia, aby wykonać dodatkowe operacje na składnikach podczas inicjowania i renderowania składnika.</span><span class="sxs-lookup"><span data-stu-id="282e3-106">Override lifecycle methods to perform additional operations on components during component initialization and rendering.</span></span>
+<span data-ttu-id="282e3-105">BlazorPlatforma obejmuje metody cyklu życia synchronicznego i asynchronicznego.</span><span class="sxs-lookup"><span data-stu-id="282e3-105">The Blazor framework includes synchronous and asynchronous lifecycle methods.</span></span> <span data-ttu-id="282e3-106">Zastąp metody cyklu życia, aby wykonać dodatkowe operacje na składnikach podczas inicjowania i renderowania składnika.</span><span class="sxs-lookup"><span data-stu-id="282e3-106">Override lifecycle methods to perform additional operations on components during component initialization and rendering.</span></span>
 
-<span data-ttu-id="282e3-107">Poniższe diagramy ilustrują :::no-loc(Blazor)::: cykl życia.</span><span class="sxs-lookup"><span data-stu-id="282e3-107">The following diagrams illustrate the :::no-loc(Blazor)::: lifecycle.</span></span> <span data-ttu-id="282e3-108">Metody cyklu życia są definiowane przy użyciu przykładów w poniższych sekcjach tego artykułu.</span><span class="sxs-lookup"><span data-stu-id="282e3-108">Lifecycle methods are defined with examples in the following sections of this article.</span></span>
+<span data-ttu-id="282e3-107">Poniższe diagramy ilustrują Blazor cykl życia.</span><span class="sxs-lookup"><span data-stu-id="282e3-107">The following diagrams illustrate the Blazor lifecycle.</span></span> <span data-ttu-id="282e3-108">Metody cyklu życia są definiowane przy użyciu przykładów w poniższych sekcjach tego artykułu.</span><span class="sxs-lookup"><span data-stu-id="282e3-108">Lifecycle methods are defined with examples in the following sections of this article.</span></span>
 
 <span data-ttu-id="282e3-109">Zdarzenia cyklu życia składnika:</span><span class="sxs-lookup"><span data-stu-id="282e3-109">Component lifecycle events:</span></span>
 
@@ -109,14 +109,14 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-<span data-ttu-id="282e3-147">:::no-loc(Blazor Server):::aplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_twice_** :</span><span class="sxs-lookup"><span data-stu-id="282e3-147">:::no-loc(Blazor Server)::: apps that [prerender their content](xref:blazor/fundamentals/additional-scenarios#render-mode) call <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_twice_** :</span></span>
+<span data-ttu-id="282e3-147">Blazor Serveraplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_twice_** :</span><span class="sxs-lookup"><span data-stu-id="282e3-147">Blazor Server apps that [prerender their content](xref:blazor/fundamentals/additional-scenarios#render-mode) call <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_twice_** :</span></span>
 
 * <span data-ttu-id="282e3-148">Gdy składnik jest początkowo renderowany statycznie jako część strony.</span><span class="sxs-lookup"><span data-stu-id="282e3-148">Once when the component is initially rendered statically as part of the page.</span></span>
 * <span data-ttu-id="282e3-149">Drugi raz, gdy przeglądarka nawiąże połączenie z serwerem.</span><span class="sxs-lookup"><span data-stu-id="282e3-149">A second time when the browser establishes a connection back to the server.</span></span>
 
 <span data-ttu-id="282e3-150">Aby zapobiec <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> dwukrotnemu uruchomieniu kodu dewelopera, zapoznaj się z sekcją [ponowne łączenie po prerenderowania](#stateful-reconnection-after-prerendering) .</span><span class="sxs-lookup"><span data-stu-id="282e3-150">To prevent developer code in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> from running twice, see the [Stateful reconnection after prerendering](#stateful-reconnection-after-prerendering) section.</span></span>
 
-<span data-ttu-id="282e3-151">Podczas gdy :::no-loc(Blazor Server)::: aplikacja jest wstępnie renderowana, niektóre akcje, takie jak wywoływanie kodu JavaScript, nie są możliwe, ponieważ połączenie z przeglądarką nie zostało nawiązane.</span><span class="sxs-lookup"><span data-stu-id="282e3-151">While a :::no-loc(Blazor Server)::: app is prerendering, certain actions, such as calling into JavaScript, aren't possible because a connection with the browser hasn't been established.</span></span> <span data-ttu-id="282e3-152">Składniki mogą być konieczne w różny sposób, gdy są wstępnie renderowane.</span><span class="sxs-lookup"><span data-stu-id="282e3-152">Components may need to render differently when prerendered.</span></span> <span data-ttu-id="282e3-153">Aby uzyskać więcej informacji, zobacz sekcję [wykrywanie, gdy aplikacja jest prerenderowana](#detect-when-the-app-is-prerendering) .</span><span class="sxs-lookup"><span data-stu-id="282e3-153">For more information, see the [Detect when the app is prerendering](#detect-when-the-app-is-prerendering) section.</span></span>
+<span data-ttu-id="282e3-151">Podczas gdy Blazor Server aplikacja jest wstępnie renderowana, niektóre akcje, takie jak wywoływanie kodu JavaScript, nie są możliwe, ponieważ połączenie z przeglądarką nie zostało nawiązane.</span><span class="sxs-lookup"><span data-stu-id="282e3-151">While a Blazor Server app is prerendering, certain actions, such as calling into JavaScript, aren't possible because a connection with the browser hasn't been established.</span></span> <span data-ttu-id="282e3-152">Składniki mogą być konieczne w różny sposób, gdy są wstępnie renderowane.</span><span class="sxs-lookup"><span data-stu-id="282e3-152">Components may need to render differently when prerendered.</span></span> <span data-ttu-id="282e3-153">Aby uzyskać więcej informacji, zobacz sekcję [wykrywanie, gdy aplikacja jest prerenderowana](#detect-when-the-app-is-prerendering) .</span><span class="sxs-lookup"><span data-stu-id="282e3-153">For more information, see the [Detect when the app is prerendering](#detect-when-the-app-is-prerendering) section.</span></span>
 
 <span data-ttu-id="282e3-154">W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie ich do usunięcia.</span><span class="sxs-lookup"><span data-stu-id="282e3-154">If any event handlers are set up, unhook them on disposal.</span></span> <span data-ttu-id="282e3-155">Aby uzyskać więcej informacji, zobacz sekcję [Usuwanie składnika `IDisposable` z](#component-disposal-with-idisposable) .</span><span class="sxs-lookup"><span data-stu-id="282e3-155">For more information, see the [Component disposal with `IDisposable`](#component-disposal-with-idisposable) section.</span></span>
 
@@ -218,9 +218,9 @@ protected override bool ShouldRender()
 
 <span data-ttu-id="282e3-198">Akcje asynchroniczne wykonane w zdarzeniach cyklu życia mogły nie zostać ukończone przed renderowaniem składnika.</span><span class="sxs-lookup"><span data-stu-id="282e3-198">Asynchronous actions performed in lifecycle events might not have completed before the component is rendered.</span></span> <span data-ttu-id="282e3-199">Obiekty mogą być `null` lub uzupełniane wypełniane danymi podczas wykonywania metody cyklu życia.</span><span class="sxs-lookup"><span data-stu-id="282e3-199">Objects might be `null` or incompletely populated with data while the lifecycle method is executing.</span></span> <span data-ttu-id="282e3-200">Zapewnianie logiki renderowania w celu potwierdzenia, że obiekty są inicjowane.</span><span class="sxs-lookup"><span data-stu-id="282e3-200">Provide rendering logic to confirm that objects are initialized.</span></span> <span data-ttu-id="282e3-201">Renderuj zastępcze elementy interfejsu użytkownika (na przykład komunikat ładowania), gdy obiekty są `null` .</span><span class="sxs-lookup"><span data-stu-id="282e3-201">Render placeholder UI elements (for example, a loading message) while objects are `null`.</span></span>
 
-<span data-ttu-id="282e3-202">W `FetchData` składniku :::no-loc(Blazor)::: szablonów program <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> został zastąpiony asynchronicznie odbierania danych prognozy ( `forecasts` ).</span><span class="sxs-lookup"><span data-stu-id="282e3-202">In the `FetchData` component of the :::no-loc(Blazor)::: templates, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> is overridden to asychronously receive forecast data (`forecasts`).</span></span> <span data-ttu-id="282e3-203">Gdy `forecasts` tak jest `null` , zostanie wyświetlony komunikat ładowania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="282e3-203">When `forecasts` is `null`, a loading message is displayed to the user.</span></span> <span data-ttu-id="282e3-204">Po `Task` zakończeniu zwracany przez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> program składnik zostanie przerenderowany ze zaktualizowanym stanem.</span><span class="sxs-lookup"><span data-stu-id="282e3-204">After the `Task` returned by <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> completes, the component is rerendered with the updated state.</span></span>
+<span data-ttu-id="282e3-202">W `FetchData` składniku Blazor szablonów program <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> został zastąpiony asynchronicznie odbierania danych prognozy ( `forecasts` ).</span><span class="sxs-lookup"><span data-stu-id="282e3-202">In the `FetchData` component of the Blazor templates, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> is overridden to asychronously receive forecast data (`forecasts`).</span></span> <span data-ttu-id="282e3-203">Gdy `forecasts` tak jest `null` , zostanie wyświetlony komunikat ładowania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="282e3-203">When `forecasts` is `null`, a loading message is displayed to the user.</span></span> <span data-ttu-id="282e3-204">Po `Task` zakończeniu zwracany przez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> program składnik zostanie przerenderowany ze zaktualizowanym stanem.</span><span class="sxs-lookup"><span data-stu-id="282e3-204">After the `Task` returned by <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> completes, the component is rerendered with the updated state.</span></span>
 
-<span data-ttu-id="282e3-205">`Pages/FetchData.razor` w :::no-loc(Blazor Server)::: szablonie:</span><span class="sxs-lookup"><span data-stu-id="282e3-205">`Pages/FetchData.razor` in the :::no-loc(Blazor Server)::: template:</span></span>
+<span data-ttu-id="282e3-205">`Pages/FetchData.razor` w Blazor Server szablonie:</span><span class="sxs-lookup"><span data-stu-id="282e3-205">`Pages/FetchData.razor` in the Blazor Server template:</span></span>
 
 [!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
 
@@ -230,20 +230,20 @@ protected override bool ShouldRender()
 
 ## <a name="stateful-reconnection-after-prerendering"></a><span data-ttu-id="282e3-208">Stanowe Ponowne nawiązywanie połączenia po przeprowadzeniu prerenderowania</span><span class="sxs-lookup"><span data-stu-id="282e3-208">Stateful reconnection after prerendering</span></span>
 
-<span data-ttu-id="282e3-209">W :::no-loc(Blazor Server)::: aplikacji, gdy <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> jest <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , składnik jest początkowo renderowany statycznie jako część strony.</span><span class="sxs-lookup"><span data-stu-id="282e3-209">In a :::no-loc(Blazor Server)::: app when <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> is <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered>, the component is initially rendered statically as part of the page.</span></span> <span data-ttu-id="282e3-210">Gdy przeglądarka nawiąże połączenie z serwerem, składnik jest renderowany *ponownie* , a składnik jest teraz interaktywny.</span><span class="sxs-lookup"><span data-stu-id="282e3-210">Once the browser establishes a connection back to the server, the component is rendered *again* , and the component is now interactive.</span></span> <span data-ttu-id="282e3-211">Jeśli [`OnInitialized{Async}`](#component-initialization-methods) istnieje metoda cyklu życia do inicjowania składnika, metoda jest wykonywana *dwukrotnie* :</span><span class="sxs-lookup"><span data-stu-id="282e3-211">If the [`OnInitialized{Async}`](#component-initialization-methods) lifecycle method for initializing the component is present, the method is executed *twice* :</span></span>
+<span data-ttu-id="282e3-209">W Blazor Server aplikacji, gdy <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> jest <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , składnik jest początkowo renderowany statycznie jako część strony.</span><span class="sxs-lookup"><span data-stu-id="282e3-209">In a Blazor Server app when <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> is <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered>, the component is initially rendered statically as part of the page.</span></span> <span data-ttu-id="282e3-210">Gdy przeglądarka nawiąże połączenie z serwerem, składnik jest renderowany *ponownie* , a składnik jest teraz interaktywny.</span><span class="sxs-lookup"><span data-stu-id="282e3-210">Once the browser establishes a connection back to the server, the component is rendered *again* , and the component is now interactive.</span></span> <span data-ttu-id="282e3-211">Jeśli [`OnInitialized{Async}`](#component-initialization-methods) istnieje metoda cyklu życia do inicjowania składnika, metoda jest wykonywana *dwukrotnie* :</span><span class="sxs-lookup"><span data-stu-id="282e3-211">If the [`OnInitialized{Async}`](#component-initialization-methods) lifecycle method for initializing the component is present, the method is executed *twice* :</span></span>
 
 * <span data-ttu-id="282e3-212">Gdy składnik jest wstępnie renderowany statycznie.</span><span class="sxs-lookup"><span data-stu-id="282e3-212">When the component is prerendered statically.</span></span>
 * <span data-ttu-id="282e3-213">Po nawiązaniu połączenia z serwerem.</span><span class="sxs-lookup"><span data-stu-id="282e3-213">After the server connection has been established.</span></span>
 
 <span data-ttu-id="282e3-214">Może to spowodować zauważalną zmianę danych wyświetlanych w interfejsie użytkownika, gdy składnik jest renderowany.</span><span class="sxs-lookup"><span data-stu-id="282e3-214">This can result in a noticeable change in the data displayed in the UI when the component is finally rendered.</span></span>
 
-<span data-ttu-id="282e3-215">Aby uniknąć podwójnego renderowania w :::no-loc(Blazor Server)::: aplikacji:</span><span class="sxs-lookup"><span data-stu-id="282e3-215">To avoid the double-rendering scenario in a :::no-loc(Blazor Server)::: app:</span></span>
+<span data-ttu-id="282e3-215">Aby uniknąć podwójnego renderowania w Blazor Server aplikacji:</span><span class="sxs-lookup"><span data-stu-id="282e3-215">To avoid the double-rendering scenario in a Blazor Server app:</span></span>
 
 * <span data-ttu-id="282e3-216">Przekaż identyfikator, który może służyć do buforowania stanu podczas wykonywania prerenderowania i pobierania stanu po ponownym uruchomieniu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="282e3-216">Pass in an identifier that can be used to cache the state during prerendering and to retrieve the state after the app restarts.</span></span>
 * <span data-ttu-id="282e3-217">Użyj identyfikatora podczas renderowania, aby zapisać stan składnika.</span><span class="sxs-lookup"><span data-stu-id="282e3-217">Use the identifier during prerendering to save component state.</span></span>
 * <span data-ttu-id="282e3-218">Użyj identyfikatora po włączeniu, aby pobrać buforowany stan.</span><span class="sxs-lookup"><span data-stu-id="282e3-218">Use the identifier after prerendering to retrieve the cached state.</span></span>
 
-<span data-ttu-id="282e3-219">Poniższy kod ilustruje aktualizację `WeatherForecastService` w aplikacji opartej na szablonie :::no-loc(Blazor Server)::: , która pozwala uniknąć podwójnego renderowania:</span><span class="sxs-lookup"><span data-stu-id="282e3-219">The following code demonstrates an updated `WeatherForecastService` in a template-based :::no-loc(Blazor Server)::: app that avoids the double rendering:</span></span>
+<span data-ttu-id="282e3-219">Poniższy kod ilustruje aktualizację `WeatherForecastService` w aplikacji opartej na szablonie Blazor Server , która pozwala uniknąć podwójnego renderowania:</span><span class="sxs-lookup"><span data-stu-id="282e3-219">The following code demonstrates an updated `WeatherForecastService` in a template-based Blazor Server app that avoids the double rendering:</span></span>
 
 ```csharp
 public class WeatherForecastService
@@ -313,7 +313,7 @@ public class WeatherForecastService
 > [!NOTE]
 > <span data-ttu-id="282e3-226">Wywoływanie metody <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> `Dispose` nie jest obsługiwane.</span><span class="sxs-lookup"><span data-stu-id="282e3-226">Calling <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> in `Dispose` isn't supported.</span></span> <span data-ttu-id="282e3-227"><xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> może być wywoływana w ramach rozrywania modułu renderowania, dlatego żądanie aktualizacji interfejsu użytkownika nie jest obsługiwane.</span><span class="sxs-lookup"><span data-stu-id="282e3-227"><xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> might be invoked as part of tearing down the renderer, so requesting UI updates at that point isn't supported.</span></span>
 
-<span data-ttu-id="282e3-228">Procedury obsługi zdarzeń anulowania subskrypcji z zdarzeń platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="282e3-228">Unsubscribe event handlers from .NET events.</span></span> <span data-ttu-id="282e3-229">Poniższe przykłady [ :::no-loc(Blazor)::: formularzy](xref:blazor/forms-validation) pokazują, jak odpiąć procedurę obsługi zdarzeń w `Dispose` metodzie:</span><span class="sxs-lookup"><span data-stu-id="282e3-229">The following [:::no-loc(Blazor)::: form](xref:blazor/forms-validation) examples show how to unhook an event handler in the `Dispose` method:</span></span>
+<span data-ttu-id="282e3-228">Procedury obsługi zdarzeń anulowania subskrypcji z zdarzeń platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="282e3-228">Unsubscribe event handlers from .NET events.</span></span> <span data-ttu-id="282e3-229">Poniższe przykłady [ Blazor formularzy](xref:blazor/forms-validation) pokazują, jak odpiąć procedurę obsługi zdarzeń w `Dispose` metodzie:</span><span class="sxs-lookup"><span data-stu-id="282e3-229">The following [Blazor form](xref:blazor/forms-validation) examples show how to unhook an event handler in the `Dispose` method:</span></span>
 
 * <span data-ttu-id="282e3-230">Pole prywatne i podejście lambda</span><span class="sxs-lookup"><span data-stu-id="282e3-230">Private field and lambda approach</span></span>
 

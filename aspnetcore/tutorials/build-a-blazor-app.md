@@ -1,23 +1,23 @@
 ---
-title: 'Tworzenie aplikacji z listą zadań do wykonania :::no-loc(Blazor):::'
+title: 'Tworzenie aplikacji z listą zadań do wykonania Blazor'
 author: guardrex
-description: 'Kompiluj :::no-loc(Blazor)::: aplikację krok po kroku.'
+description: 'Kompiluj Blazor aplikację krok po kroku.'
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/build-a-blazor-app
 ms.openlocfilehash: 1efcd167d9a45b2def271b239c9b360749d72791
 ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
@@ -26,17 +26,17 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 11/12/2020
 ms.locfileid: "94570188"
 ---
-# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="e3c52-103">Tworzenie aplikacji z listą zadań do wykonania :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="e3c52-103">Build a :::no-loc(Blazor)::: todo list app</span></span>
+# <a name="build-a-no-locblazor-todo-list-app"></a><span data-ttu-id="e3c52-103">Tworzenie aplikacji z listą zadań do wykonania Blazor</span><span class="sxs-lookup"><span data-stu-id="e3c52-103">Build a Blazor todo list app</span></span>
 
 <span data-ttu-id="e3c52-104">Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="e3c52-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="e3c52-105">W tym samouczku pokazano, jak utworzyć i zmodyfikować :::no-loc(Blazor)::: aplikację.</span><span class="sxs-lookup"><span data-stu-id="e3c52-105">This tutorial shows you how to build and modify a :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="e3c52-106">Omawiane kwestie:</span><span class="sxs-lookup"><span data-stu-id="e3c52-106">You learn how to:</span></span>
+<span data-ttu-id="e3c52-105">W tym samouczku pokazano, jak utworzyć i zmodyfikować Blazor aplikację.</span><span class="sxs-lookup"><span data-stu-id="e3c52-105">This tutorial shows you how to build and modify a Blazor app.</span></span> <span data-ttu-id="e3c52-106">Omawiane kwestie:</span><span class="sxs-lookup"><span data-stu-id="e3c52-106">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="e3c52-107">Tworzenie projektu aplikacji z listą zadań do zrobienia :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="e3c52-107">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="e3c52-108">Modyfikuj :::no-loc(Razor)::: składniki</span><span class="sxs-lookup"><span data-stu-id="e3c52-108">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="e3c52-107">Tworzenie projektu aplikacji z listą zadań do zrobienia Blazor</span><span class="sxs-lookup"><span data-stu-id="e3c52-107">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="e3c52-108">Modyfikuj Razor składniki</span><span class="sxs-lookup"><span data-stu-id="e3c52-108">Modify Razor components</span></span>
 > * <span data-ttu-id="e3c52-109">Używanie obsługi zdarzeń i powiązania danych w składnikach</span><span class="sxs-lookup"><span data-stu-id="e3c52-109">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="e3c52-110">Używanie routingu w :::no-loc(Blazor)::: aplikacji</span><span class="sxs-lookup"><span data-stu-id="e3c52-110">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="e3c52-110">Używanie routingu w Blazor aplikacji</span><span class="sxs-lookup"><span data-stu-id="e3c52-110">Use routing in a Blazor app</span></span>
 
 <span data-ttu-id="e3c52-111">Na końcu tego samouczka będziesz mieć działającą aplikację z listą zadań do wykonania.</span><span class="sxs-lookup"><span data-stu-id="e3c52-111">At the end of this tutorial, you'll have a working todo list app.</span></span>
 
@@ -54,9 +54,9 @@ ms.locfileid: "94570188"
 
 ::: moniker-end
 
-## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="e3c52-113">Tworzenie aplikacji z listą zadań do zrobienia :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="e3c52-113">Create a todo list :::no-loc(Blazor)::: app</span></span>
+## <a name="create-a-todo-list-no-locblazor-app"></a><span data-ttu-id="e3c52-113">Tworzenie aplikacji z listą zadań do zrobienia Blazor</span><span class="sxs-lookup"><span data-stu-id="e3c52-113">Create a todo list Blazor app</span></span>
 
-1. <span data-ttu-id="e3c52-114">Utwórz nową :::no-loc(Blazor)::: aplikację o nazwie `TodoList` w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="e3c52-114">Create a new :::no-loc(Blazor)::: app named `TodoList` in a command shell:</span></span>
+1. <span data-ttu-id="e3c52-114">Utwórz nową Blazor aplikację o nazwie `TodoList` w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="e3c52-114">Create a new Blazor app named `TodoList` in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o TodoList
@@ -68,14 +68,14 @@ ms.locfileid: "94570188"
    cd TodoList
    ```
 
-1. <span data-ttu-id="e3c52-118">Dodaj nowy `Todo` :::no-loc(Razor)::: składnik do aplikacji w `Pages` folderze przy użyciu następującego polecenia:</span><span class="sxs-lookup"><span data-stu-id="e3c52-118">Add a new `Todo` :::no-loc(Razor)::: component to the app in the `Pages` folder using the following command:</span></span>
+1. <span data-ttu-id="e3c52-118">Dodaj nowy `Todo` Razor składnik do aplikacji w `Pages` folderze przy użyciu następującego polecenia:</span><span class="sxs-lookup"><span data-stu-id="e3c52-118">Add a new `Todo` Razor component to the app in the `Pages` folder using the following command:</span></span>
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
    > [!IMPORTANT]
-   > <span data-ttu-id="e3c52-119">:::no-loc(Razor)::: nazwy plików składników wymagają wielkich liter.</span><span class="sxs-lookup"><span data-stu-id="e3c52-119">:::no-loc(Razor)::: component file names require a capitalized first letter.</span></span> <span data-ttu-id="e3c52-120">Otwórz `Pages` folder i upewnij się, że `Todo` Nazwa pliku składnika zaczyna się od wielkiej litery `T` .</span><span class="sxs-lookup"><span data-stu-id="e3c52-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="e3c52-121">Nazwa pliku powinna być `Todo.razor` .</span><span class="sxs-lookup"><span data-stu-id="e3c52-121">The file name should be `Todo.razor`.</span></span>
+   > <span data-ttu-id="e3c52-119">Razor nazwy plików składników wymagają wielkich liter.</span><span class="sxs-lookup"><span data-stu-id="e3c52-119">Razor component file names require a capitalized first letter.</span></span> <span data-ttu-id="e3c52-120">Otwórz `Pages` folder i upewnij się, że `Todo` Nazwa pliku składnika zaczyna się od wielkiej litery `T` .</span><span class="sxs-lookup"><span data-stu-id="e3c52-120">Open the `Pages` folder and confirm that the `Todo` component file name starts with a capital letter `T`.</span></span> <span data-ttu-id="e3c52-121">Nazwa pliku powinna być `Todo.razor` .</span><span class="sxs-lookup"><span data-stu-id="e3c52-121">The file name should be `Todo.razor`.</span></span>
 
 1. <span data-ttu-id="e3c52-122">W polu `Pages/Todo.razor` Podaj początkowe znaczniki dla składnika:</span><span class="sxs-lookup"><span data-stu-id="e3c52-122">In `Pages/Todo.razor` provide the initial markup for the component:</span></span>
 
@@ -157,12 +157,12 @@ ms.locfileid: "94570188"
 <span data-ttu-id="e3c52-158">W niniejszym samouczku zawarto informacje na temat wykonywania następujących czynności:</span><span class="sxs-lookup"><span data-stu-id="e3c52-158">In this tutorial, you learned how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="e3c52-159">Tworzenie projektu aplikacji z listą zadań do zrobienia :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="e3c52-159">Create a todo list :::no-loc(Blazor)::: app project</span></span>
-> * <span data-ttu-id="e3c52-160">Modyfikuj :::no-loc(Razor)::: składniki</span><span class="sxs-lookup"><span data-stu-id="e3c52-160">Modify :::no-loc(Razor)::: components</span></span>
+> * <span data-ttu-id="e3c52-159">Tworzenie projektu aplikacji z listą zadań do zrobienia Blazor</span><span class="sxs-lookup"><span data-stu-id="e3c52-159">Create a todo list Blazor app project</span></span>
+> * <span data-ttu-id="e3c52-160">Modyfikuj Razor składniki</span><span class="sxs-lookup"><span data-stu-id="e3c52-160">Modify Razor components</span></span>
 > * <span data-ttu-id="e3c52-161">Używanie obsługi zdarzeń i powiązania danych w składnikach</span><span class="sxs-lookup"><span data-stu-id="e3c52-161">Use event handling and data binding in components</span></span>
-> * <span data-ttu-id="e3c52-162">Używanie routingu w :::no-loc(Blazor)::: aplikacji</span><span class="sxs-lookup"><span data-stu-id="e3c52-162">Use routing in a :::no-loc(Blazor)::: app</span></span>
+> * <span data-ttu-id="e3c52-162">Używanie routingu w Blazor aplikacji</span><span class="sxs-lookup"><span data-stu-id="e3c52-162">Use routing in a Blazor app</span></span>
 
-<span data-ttu-id="e3c52-163">Informacje o narzędziach dla ASP.NET Core :::no-loc(Blazor)::: :</span><span class="sxs-lookup"><span data-stu-id="e3c52-163">Learn about tooling for ASP.NET Core :::no-loc(Blazor)::::</span></span>
+<span data-ttu-id="e3c52-163">Informacje o narzędziach dla ASP.NET Core Blazor :</span><span class="sxs-lookup"><span data-stu-id="e3c52-163">Learn about tooling for ASP.NET Core Blazor:</span></span>
 
 > [!div class="nextstepaction"]
 > <xref:blazor/tooling>

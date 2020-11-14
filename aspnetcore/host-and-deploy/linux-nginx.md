@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/30/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/linux-nginx
 ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
 ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
@@ -165,7 +165,7 @@ server {
 }
 ```
 
-<span data-ttu-id="da00f-170">Jeśli aplikacja jest :::no-loc(SignalR)::: aplikacją lub jest :::no-loc(Blazor Server)::: odpowiednio wyświetlana <xref:signalr/scale#linux-with-nginx> , <xref:blazor/host-and-deploy/server#linux-with-nginx> Aby uzyskać więcej informacji.</span><span class="sxs-lookup"><span data-stu-id="da00f-170">If the app is a :::no-loc(SignalR)::: or :::no-loc(Blazor Server)::: app see <xref:signalr/scale#linux-with-nginx> and <xref:blazor/host-and-deploy/server#linux-with-nginx> respectively for more information.</span></span>
+<span data-ttu-id="da00f-170">Jeśli aplikacja jest SignalR aplikacją lub jest Blazor Server odpowiednio wyświetlana <xref:signalr/scale#linux-with-nginx> , <xref:blazor/host-and-deploy/server#linux-with-nginx> Aby uzyskać więcej informacji.</span><span class="sxs-lookup"><span data-stu-id="da00f-170">If the app is a SignalR or Blazor Server app see <xref:signalr/scale#linux-with-nginx> and <xref:blazor/host-and-deploy/server#linux-with-nginx> respectively for more information.</span></span>
 
 <span data-ttu-id="da00f-171">Gdy nie są `server_name` zgodne, Nginx używa serwera domyślnego.</span><span class="sxs-lookup"><span data-stu-id="da00f-171">When no `server_name` matches, Nginx uses the default server.</span></span> <span data-ttu-id="da00f-172">W przypadku braku zdefiniowanego serwera domyślnego pierwszy serwer w pliku konfiguracji jest domyślnym serwerem.</span><span class="sxs-lookup"><span data-stu-id="da00f-172">If no default server is defined, the first server in the configuration file is the default server.</span></span> <span data-ttu-id="da00f-173">Najlepszym rozwiązaniem jest dodanie określonego serwera domyślnego, który zwraca kod stanu 444 w pliku konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="da00f-173">As a best practice, add a specific default server which returns a status code of 444 in your configuration file.</span></span> <span data-ttu-id="da00f-174">Domyślnym przykładem konfiguracji serwera jest:</span><span class="sxs-lookup"><span data-stu-id="da00f-174">A default server configuration example is:</span></span>
 
@@ -306,13 +306,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a><span data-ttu-id="da00f-229">Ochrona danych</span><span class="sxs-lookup"><span data-stu-id="da00f-229">Data protection</span></span>
 
-<span data-ttu-id="da00f-230">[ASP.NET Core stosu ochrony danych](xref:security/data-protection/introduction) jest używany przez kilka ASP.NET Core [middlewares](xref:fundamentals/middleware/index), w tym uwierzytelniania oprogramowania pośredniczącego (na przykład :::no-loc(cookie)::: oprogramowania pośredniczącego) i ochrony przez wiele lokacji (CSRF).</span><span class="sxs-lookup"><span data-stu-id="da00f-230">The [ASP.NET Core Data Protection stack](xref:security/data-protection/introduction) is used by several ASP.NET Core [middlewares](xref:fundamentals/middleware/index), including authentication middleware (for example, :::no-loc(cookie)::: middleware) and cross-site request forgery (CSRF) protections.</span></span> <span data-ttu-id="da00f-231">Nawet jeśli interfejsy API ochrony danych nie są wywoływane przez kod użytkownika, należy skonfigurować ochronę danych w celu utworzenia trwałego [magazynu kluczy](xref:security/data-protection/implementation/key-management)kryptograficznych.</span><span class="sxs-lookup"><span data-stu-id="da00f-231">Even if Data Protection APIs aren't called by user code, data protection should be configured to create a persistent cryptographic [key store](xref:security/data-protection/implementation/key-management).</span></span> <span data-ttu-id="da00f-232">Jeśli ochrona danych nie jest skonfigurowana, klucze są przechowywane w pamięci i usuwane po ponownym uruchomieniu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="da00f-232">If data protection isn't configured, the keys are held in memory and discarded when the app restarts.</span></span>
+<span data-ttu-id="da00f-230">[ASP.NET Core stosu ochrony danych](xref:security/data-protection/introduction) jest używany przez kilka ASP.NET Core [middlewares](xref:fundamentals/middleware/index), w tym uwierzytelniania oprogramowania pośredniczącego (na przykład cookie oprogramowania pośredniczącego) i ochrony przez wiele lokacji (CSRF).</span><span class="sxs-lookup"><span data-stu-id="da00f-230">The [ASP.NET Core Data Protection stack](xref:security/data-protection/introduction) is used by several ASP.NET Core [middlewares](xref:fundamentals/middleware/index), including authentication middleware (for example, cookie middleware) and cross-site request forgery (CSRF) protections.</span></span> <span data-ttu-id="da00f-231">Nawet jeśli interfejsy API ochrony danych nie są wywoływane przez kod użytkownika, należy skonfigurować ochronę danych w celu utworzenia trwałego [magazynu kluczy](xref:security/data-protection/implementation/key-management)kryptograficznych.</span><span class="sxs-lookup"><span data-stu-id="da00f-231">Even if Data Protection APIs aren't called by user code, data protection should be configured to create a persistent cryptographic [key store](xref:security/data-protection/implementation/key-management).</span></span> <span data-ttu-id="da00f-232">Jeśli ochrona danych nie jest skonfigurowana, klucze są przechowywane w pamięci i usuwane po ponownym uruchomieniu aplikacji.</span><span class="sxs-lookup"><span data-stu-id="da00f-232">If data protection isn't configured, the keys are held in memory and discarded when the app restarts.</span></span>
 
 <span data-ttu-id="da00f-233">Jeśli pierścień kluczy jest przechowywany w pamięci po ponownym uruchomieniu aplikacji:</span><span class="sxs-lookup"><span data-stu-id="da00f-233">If the key ring is stored in memory when the app restarts:</span></span>
 
-* <span data-ttu-id="da00f-234">:::no-loc(cookie):::Tokeny uwierzytelniania na podstawie wszystkich są unieważnione.</span><span class="sxs-lookup"><span data-stu-id="da00f-234">All :::no-loc(cookie):::-based authentication tokens are invalidated.</span></span>
+* <span data-ttu-id="da00f-234">cookieTokeny uwierzytelniania na podstawie wszystkich są unieważnione.</span><span class="sxs-lookup"><span data-stu-id="da00f-234">All cookie-based authentication tokens are invalidated.</span></span>
 * <span data-ttu-id="da00f-235">Użytkownicy muszą ponownie zalogować się przy następnym żądaniu.</span><span class="sxs-lookup"><span data-stu-id="da00f-235">Users are required to sign in again on their next request.</span></span>
-* <span data-ttu-id="da00f-236">Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza.</span><span class="sxs-lookup"><span data-stu-id="da00f-236">Any data protected with the key ring can no longer be decrypted.</span></span> <span data-ttu-id="da00f-237">Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData :::no-loc(cookie)::: s](xref:fundamentals/app-state#tempdata).</span><span class="sxs-lookup"><span data-stu-id="da00f-237">This may include [CSRF tokens](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) and [ASP.NET Core MVC TempData :::no-loc(cookie):::s](xref:fundamentals/app-state#tempdata).</span></span>
+* <span data-ttu-id="da00f-236">Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza.</span><span class="sxs-lookup"><span data-stu-id="da00f-236">Any data protected with the key ring can no longer be decrypted.</span></span> <span data-ttu-id="da00f-237">Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata).</span><span class="sxs-lookup"><span data-stu-id="da00f-237">This may include [CSRF tokens](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) and [ASP.NET Core MVC TempData cookies](xref:fundamentals/app-state#tempdata).</span></span>
 
 <span data-ttu-id="da00f-238">Aby skonfigurować ochronę danych w celu utrwalenia i szyfrowania pierścienia kluczy, zobacz:</span><span class="sxs-lookup"><span data-stu-id="da00f-238">To configure data protection to persist and encrypt the key ring, see:</span></span>
 
@@ -409,7 +409,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
 > [!NOTE]
-> <span data-ttu-id="da00f-291">:::no-loc(Blazor WebAssembly)::: aplikacje wymagają większej `burst` wartości parametru, aby pomieścić większą liczbę żądań wykonywanych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="da00f-291">:::no-loc(Blazor WebAssembly)::: apps require a larger `burst` parameter value to accommodate the larger number of requests made by an app.</span></span> <span data-ttu-id="da00f-292">Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/webassembly#nginx>.</span><span class="sxs-lookup"><span data-stu-id="da00f-292">For more information, see <xref:blazor/host-and-deploy/webassembly#nginx>.</span></span>
+> <span data-ttu-id="da00f-291">Blazor WebAssembly aplikacje wymagają większej `burst` wartości parametru, aby pomieścić większą liczbę żądań wykonywanych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="da00f-291">Blazor WebAssembly apps require a larger `burst` parameter value to accommodate the larger number of requests made by an app.</span></span> <span data-ttu-id="da00f-292">Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/webassembly#nginx>.</span><span class="sxs-lookup"><span data-stu-id="da00f-292">For more information, see <xref:blazor/host-and-deploy/webassembly#nginx>.</span></span>
 
 #### <a name="secure-nginx-from-clickjacking"></a><span data-ttu-id="da00f-293">Zabezpiecz Nginx z clickjacking</span><span class="sxs-lookup"><span data-stu-id="da00f-293">Secure Nginx from clickjacking</span></span>
 

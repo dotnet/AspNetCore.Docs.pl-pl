@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-3.1
 ms.openlocfilehash: dd012a2104f574865ed577ab3c0e81dc9cc9596d
 ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
@@ -29,13 +29,13 @@ ms.locfileid: "94431020"
 
 <span data-ttu-id="ab2ee-104">W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 3,1 z linkami do odpowiedniej dokumentacji.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-104">This article highlights the most significant changes in ASP.NET Core 3.1 with links to relevant documentation.</span></span>
 
-## <a name="partial-class-support-for-no-locrazor-components"></a><span data-ttu-id="ab2ee-105">Obsługa częściowej klasy dla :::no-loc(Razor)::: składników</span><span class="sxs-lookup"><span data-stu-id="ab2ee-105">Partial class support for :::no-loc(Razor)::: components</span></span>
+## <a name="partial-class-support-for-no-locrazor-components"></a><span data-ttu-id="ab2ee-105">Obsługa częściowej klasy dla Razor składników</span><span class="sxs-lookup"><span data-stu-id="ab2ee-105">Partial class support for Razor components</span></span>
 
-<span data-ttu-id="ab2ee-106">:::no-loc(Razor)::: składniki są teraz generowane jako klasy częściowe.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-106">:::no-loc(Razor)::: components are now generated as partial classes.</span></span> <span data-ttu-id="ab2ee-107">Kod :::no-loc(Razor)::: składnika można napisać przy użyciu pliku powiązanego z kodem zdefiniowanego jako Klasa częściowa zamiast definiować cały kod dla składnika w pojedynczym pliku.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-107">Code for a :::no-loc(Razor)::: component can be written using a code-behind file defined as a partial class rather than defining all the code for the component in a single file.</span></span> <span data-ttu-id="ab2ee-108">Aby uzyskać więcej informacji, zobacz temat [Obsługa klasy częściowej](xref:blazor/components/index#partial-class-support).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-108">For more information, see [Partial class support](xref:blazor/components/index#partial-class-support).</span></span>
+<span data-ttu-id="ab2ee-106">Razor składniki są teraz generowane jako klasy częściowe.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-106">Razor components are now generated as partial classes.</span></span> <span data-ttu-id="ab2ee-107">Kod Razor składnika można napisać przy użyciu pliku powiązanego z kodem zdefiniowanego jako Klasa częściowa zamiast definiować cały kod dla składnika w pojedynczym pliku.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-107">Code for a Razor component can be written using a code-behind file defined as a partial class rather than defining all the code for the component in a single file.</span></span> <span data-ttu-id="ab2ee-108">Aby uzyskać więcej informacji, zobacz temat [Obsługa klasy częściowej](xref:blazor/components/index#partial-class-support).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-108">For more information, see [Partial class support](xref:blazor/components/index#partial-class-support).</span></span>
 
-## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a><span data-ttu-id="ab2ee-109">:::no-loc(Blazor)::: Pomocnik tagu składnika i przekazywanie parametrów do składników najwyższego poziomu</span><span class="sxs-lookup"><span data-stu-id="ab2ee-109">:::no-loc(Blazor)::: Component Tag Helper and pass parameters to top-level components</span></span>
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a><span data-ttu-id="ab2ee-109">Blazor Pomocnik tagu składnika i przekazywanie parametrów do składników najwyższego poziomu</span><span class="sxs-lookup"><span data-stu-id="ab2ee-109">Blazor Component Tag Helper and pass parameters to top-level components</span></span>
 
-<span data-ttu-id="ab2ee-110">W programie :::no-loc(Blazor)::: z ASP.NET Core 3,0 składniki były renderowane na stronach i w widokach za pomocą pomocnika HTML ( `Html.RenderComponentAsync` ).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-110">In :::no-loc(Blazor)::: with ASP.NET Core 3.0, components were rendered into pages and views using an HTML Helper (`Html.RenderComponentAsync`).</span></span> <span data-ttu-id="ab2ee-111">W ASP.NET Core 3,1 Renderuj składnik ze strony lub widoku przy użyciu nowego pomocnika tagów składnika:</span><span class="sxs-lookup"><span data-stu-id="ab2ee-111">In ASP.NET Core 3.1, render a component from a page or view with the new Component Tag Helper:</span></span>
+<span data-ttu-id="ab2ee-110">W programie Blazor z ASP.NET Core 3,0 składniki były renderowane na stronach i w widokach za pomocą pomocnika HTML ( `Html.RenderComponentAsync` ).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-110">In Blazor with ASP.NET Core 3.0, components were rendered into pages and views using an HTML Helper (`Html.RenderComponentAsync`).</span></span> <span data-ttu-id="ab2ee-111">W ASP.NET Core 3,1 Renderuj składnik ze strony lub widoku przy użyciu nowego pomocnika tagów składnika:</span><span class="sxs-lookup"><span data-stu-id="ab2ee-111">In ASP.NET Core 3.1, render a component from a page or view with the new Component Tag Helper:</span></span>
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
@@ -43,7 +43,7 @@ ms.locfileid: "94431020"
 
 <span data-ttu-id="ab2ee-112">Pomocnik HTML pozostaje obsługiwany w ASP.NET Core 3,1, ale zaleca się pomocnika tagów składnika.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-112">The HTML Helper remains supported in ASP.NET Core 3.1, but the Component Tag Helper is recommended.</span></span>
 
-<span data-ttu-id="ab2ee-113">:::no-loc(Blazor Server)::: aplikacje mogą teraz przekazywać parametry do składników najwyższego poziomu podczas początkowego renderowania.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-113">:::no-loc(Blazor Server)::: apps can now pass parameters to top-level components during the initial render.</span></span> <span data-ttu-id="ab2ee-114">Wcześniej można było przekazać parametry do składnika najwyższego poziomu za pomocą elementu [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-114">Previously you could only pass parameters to a top-level component with [RenderMode.Static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static).</span></span> <span data-ttu-id="ab2ee-115">W tej wersji obsługiwane są zarówno metody [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) , jak i [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) .</span><span class="sxs-lookup"><span data-stu-id="ab2ee-115">With this release, both [RenderMode.Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) and [RenderMode.ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) are supported.</span></span> <span data-ttu-id="ab2ee-116">Wszystkie określone wartości parametrów są serializowane jako kod JSON i zawarte w początkowej odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-116">Any specified parameter values are serialized as JSON and included in the initial response.</span></span>
+<span data-ttu-id="ab2ee-113">Blazor Server aplikacje mogą teraz przekazywać parametry do składników najwyższego poziomu podczas początkowego renderowania.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-113">Blazor Server apps can now pass parameters to top-level components during the initial render.</span></span> <span data-ttu-id="ab2ee-114">Wcześniej można było przekazać parametry do składnika najwyższego poziomu za pomocą elementu [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-114">Previously you could only pass parameters to a top-level component with [RenderMode.Static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static).</span></span> <span data-ttu-id="ab2ee-115">W tej wersji obsługiwane są zarówno metody [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) , jak i [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) .</span><span class="sxs-lookup"><span data-stu-id="ab2ee-115">With this release, both [RenderMode.Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) and [RenderMode.ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) are supported.</span></span> <span data-ttu-id="ab2ee-116">Wszystkie określone wartości parametrów są serializowane jako kod JSON i zawarte w początkowej odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-116">Any specified parameter values are serialized as JSON and included in the initial response.</span></span>
 
 <span data-ttu-id="ab2ee-117">Na przykład wyprerender `Counter` składnik o wartości przyrostowej ( `IncrementAmount` ):</span><span class="sxs-lookup"><span data-stu-id="ab2ee-117">For example, prerender a `Counter` component with an increment amount (`IncrementAmount`):</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "94431020"
     param-IncrementAmount="10" />
 ```
 
-<span data-ttu-id="ab2ee-118">Aby uzyskać więcej informacji, zobacz [integrowanie składników na :::no-loc(Razor)::: stronach i aplikacjach MVC](xref:blazor/components/prerendering-and-integration).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-118">For more information, see [Integrate components into :::no-loc(Razor)::: Pages and MVC apps](xref:blazor/components/prerendering-and-integration).</span></span>
+<span data-ttu-id="ab2ee-118">Aby uzyskać więcej informacji, zobacz [integrowanie składników na Razor stronach i aplikacjach MVC](xref:blazor/components/prerendering-and-integration).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-118">For more information, see [Integrate components into Razor Pages and MVC apps](xref:blazor/components/prerendering-and-integration).</span></span>
 
 ## <a name="support-for-shared-queues-in-httpsys"></a><span data-ttu-id="ab2ee-119">Obsługa kolejek udostępnionych w HTTP.sys</span><span class="sxs-lookup"><span data-stu-id="ab2ee-119">Support for shared queues in HTTP.sys</span></span>
 
@@ -60,11 +60,11 @@ ms.locfileid: "94431020"
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
-## <a name="breaking-changes-for-samesite-no-loccookies"></a><span data-ttu-id="ab2ee-124">Istotne zmiany dotyczące SameSite :::no-loc(cookie)::: s</span><span class="sxs-lookup"><span data-stu-id="ab2ee-124">Breaking changes for SameSite :::no-loc(cookie):::s</span></span>
+## <a name="breaking-changes-for-samesite-no-loccookies"></a><span data-ttu-id="ab2ee-124">Istotne zmiany dotyczące SameSite cookie s</span><span class="sxs-lookup"><span data-stu-id="ab2ee-124">Breaking changes for SameSite cookies</span></span>
 
-<span data-ttu-id="ab2ee-125">Zachowanie SameSite :::no-loc(cookie)::: s zostało zmienione w celu odzwierciedlenia przyszłych zmian przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-125">The behavior of SameSite :::no-loc(cookie):::s has changed to reflect upcoming browser changes.</span></span> <span data-ttu-id="ab2ee-126">Może to mieć wpływ na scenariusze uwierzytelniania, takie jak AzureAd, OpenIdConnect lub WsFederation.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-126">This may affect authentication scenarios like AzureAd, OpenIdConnect, or WsFederation.</span></span> <span data-ttu-id="ab2ee-127">Aby uzyskać więcej informacji, zobacz <xref:security/samesite>.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-127">For more information, see <xref:security/samesite>.</span></span>
+<span data-ttu-id="ab2ee-125">Zachowanie SameSite cookie s zostało zmienione w celu odzwierciedlenia przyszłych zmian przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-125">The behavior of SameSite cookies has changed to reflect upcoming browser changes.</span></span> <span data-ttu-id="ab2ee-126">Może to mieć wpływ na scenariusze uwierzytelniania, takie jak AzureAd, OpenIdConnect lub WsFederation.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-126">This may affect authentication scenarios like AzureAd, OpenIdConnect, or WsFederation.</span></span> <span data-ttu-id="ab2ee-127">Aby uzyskać więcej informacji, zobacz <xref:security/samesite>.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-127">For more information, see <xref:security/samesite>.</span></span>
 
-## <a name="prevent-default-actions-for-events-in-no-locblazor-apps"></a><span data-ttu-id="ab2ee-128">Zapobiegaj domyślnym akcjom dla zdarzeń w :::no-loc(Blazor)::: aplikacjach</span><span class="sxs-lookup"><span data-stu-id="ab2ee-128">Prevent default actions for events in :::no-loc(Blazor)::: apps</span></span>
+## <a name="prevent-default-actions-for-events-in-no-locblazor-apps"></a><span data-ttu-id="ab2ee-128">Zapobiegaj domyślnym akcjom dla zdarzeń w Blazor aplikacjach</span><span class="sxs-lookup"><span data-stu-id="ab2ee-128">Prevent default actions for events in Blazor apps</span></span>
 
 <span data-ttu-id="ab2ee-129">Użyj `@on{EVENT}:preventDefault` atrybutu dyrektywy, aby zapobiec domyślnej akcji dla zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-129">Use the `@on{EVENT}:preventDefault` directive attribute to prevent the default action for an event.</span></span> <span data-ttu-id="ab2ee-130">W poniższym przykładzie jest blokowane domyślne działanie wyświetlania znaku klucza w polu tekstowym:</span><span class="sxs-lookup"><span data-stu-id="ab2ee-130">In the following example, the default action of displaying the key's character in the text box is prevented:</span></span>
 
@@ -74,7 +74,7 @@ ms.locfileid: "94431020"
 
 <span data-ttu-id="ab2ee-131">Aby uzyskać więcej informacji, zobacz [zapobieganie domyślnym akcjom](xref:blazor/components/event-handling#prevent-default-actions).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-131">For more information, see [Prevent default actions](xref:blazor/components/event-handling#prevent-default-actions).</span></span>
 
-## <a name="stop-event-propagation-in-no-locblazor-apps"></a><span data-ttu-id="ab2ee-132">Zatrzymaj propagację zdarzeń w :::no-loc(Blazor)::: aplikacjach</span><span class="sxs-lookup"><span data-stu-id="ab2ee-132">Stop event propagation in :::no-loc(Blazor)::: apps</span></span>
+## <a name="stop-event-propagation-in-no-locblazor-apps"></a><span data-ttu-id="ab2ee-132">Zatrzymaj propagację zdarzeń w Blazor aplikacjach</span><span class="sxs-lookup"><span data-stu-id="ab2ee-132">Stop event propagation in Blazor apps</span></span>
 
 <span data-ttu-id="ab2ee-133">Użyj `@on{EVENT}:stopPropagation` atrybutu dyrektywy, aby zatrzymać propagację zdarzeń.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-133">Use the `@on{EVENT}:stopPropagation` directive attribute to stop event propagation.</span></span> <span data-ttu-id="ab2ee-134">W poniższym przykładzie, zaznaczając pole wyboru, Zapobiegaj kliknięciu zdarzeń z elementu podrzędnego `<div>` od propagowania do elementu nadrzędnego `<div>` :</span><span class="sxs-lookup"><span data-stu-id="ab2ee-134">In the following example, selecting the check box prevents click events from the child `<div>` from propagating to the parent `<div>`:</span></span>
 
@@ -94,9 +94,9 @@ ms.locfileid: "94431020"
 
 <span data-ttu-id="ab2ee-135">Aby uzyskać więcej informacji, zobacz sekcję [Zatrzymaj propagację zdarzeń](xref:blazor/components/event-handling#stop-event-propagation).</span><span class="sxs-lookup"><span data-stu-id="ab2ee-135">For more information, see [Stop event propagation](xref:blazor/components/event-handling#stop-event-propagation).</span></span>
 
-## <a name="detailed-errors-during-no-locblazor-app-development"></a><span data-ttu-id="ab2ee-136">Szczegóły błędów podczas :::no-loc(Blazor)::: opracowywania aplikacji</span><span class="sxs-lookup"><span data-stu-id="ab2ee-136">Detailed errors during :::no-loc(Blazor)::: app development</span></span>
+## <a name="detailed-errors-during-no-locblazor-app-development"></a><span data-ttu-id="ab2ee-136">Szczegóły błędów podczas Blazor opracowywania aplikacji</span><span class="sxs-lookup"><span data-stu-id="ab2ee-136">Detailed errors during Blazor app development</span></span>
 
-<span data-ttu-id="ab2ee-137">Gdy :::no-loc(Blazor)::: aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje szczegółowe informacje o błędzie z aplikacji, które pomagają w rozwiązywaniu problemów i rozwiązaniu problemu.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-137">When a :::no-loc(Blazor)::: app isn't functioning properly during development, receiving detailed error information from the app assists in troubleshooting and fixing the issue.</span></span> <span data-ttu-id="ab2ee-138">Gdy wystąpi błąd, :::no-loc(Blazor)::: aplikacje wyświetlają złoty pasek u dołu ekranu:</span><span class="sxs-lookup"><span data-stu-id="ab2ee-138">When an error occurs, :::no-loc(Blazor)::: apps display a gold bar at the bottom of the screen:</span></span>
+<span data-ttu-id="ab2ee-137">Gdy Blazor aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje szczegółowe informacje o błędzie z aplikacji, które pomagają w rozwiązywaniu problemów i rozwiązaniu problemu.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-137">When a Blazor app isn't functioning properly during development, receiving detailed error information from the app assists in troubleshooting and fixing the issue.</span></span> <span data-ttu-id="ab2ee-138">Gdy wystąpi błąd, Blazor aplikacje wyświetlają złoty pasek u dołu ekranu:</span><span class="sxs-lookup"><span data-stu-id="ab2ee-138">When an error occurs, Blazor apps display a gold bar at the bottom of the screen:</span></span>
 
 * <span data-ttu-id="ab2ee-139">W trakcie programowania złoty pasek kieruje użytkownika do konsoli przeglądarki, gdzie można zobaczyć wyjątek.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-139">During development, the gold bar directs you to the browser console, where you can see the exception.</span></span>
 * <span data-ttu-id="ab2ee-140">W środowisku produkcyjnym złoty pasek powiadamia użytkownika o wystąpieniu błędu i zaleca odświeżenie przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="ab2ee-140">In production, the gold bar notifies the user that an error has occurred and recommends refreshing the browser.</span></span>

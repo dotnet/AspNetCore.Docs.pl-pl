@@ -5,17 +5,17 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/http-modules
 ms.openlocfilehash: 4abba1d4304bf537bd96623527c851d9d15774a4
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -195,9 +195,9 @@ ms.locfileid: "94508165"
 
 2. <span data-ttu-id="dddf8-185">Przechowywanie wartości opcji</span><span class="sxs-lookup"><span data-stu-id="dddf8-185">Store the option values</span></span>
 
-   <span data-ttu-id="dddf8-186">System konfiguracji umożliwia przechowywanie wartości opcji w dowolnym miejscu.</span><span class="sxs-lookup"><span data-stu-id="dddf8-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="dddf8-187">Jednak większość witryn korzysta z *:::no-loc(appsettings.json):::* tej metody:</span><span class="sxs-lookup"><span data-stu-id="dddf8-187">However, most sites use *:::no-loc(appsettings.json):::* , so we'll take that approach:</span></span>
+   <span data-ttu-id="dddf8-186">System konfiguracji umożliwia przechowywanie wartości opcji w dowolnym miejscu.</span><span class="sxs-lookup"><span data-stu-id="dddf8-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="dddf8-187">Jednak większość witryn korzysta z *appsettings.json* tej metody:</span><span class="sxs-lookup"><span data-stu-id="dddf8-187">However, most sites use *appsettings.json* , so we'll take that approach:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,14-18)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
    <span data-ttu-id="dddf8-188">*MyMiddlewareOptionsSection* tutaj to nazwa sekcji.</span><span class="sxs-lookup"><span data-stu-id="dddf8-188">*MyMiddlewareOptionsSection* here is a section name.</span></span> <span data-ttu-id="dddf8-189">Nie musi być taka sama jak nazwa klasy Options.</span><span class="sxs-lookup"><span data-stu-id="dddf8-189">It doesn't have to be the same as the name of your options class.</span></span>
 
@@ -207,7 +207,7 @@ ms.locfileid: "94508165"
 
     <span data-ttu-id="dddf8-192">Aktualizowanie `Startup` klasy:</span><span class="sxs-lookup"><span data-stu-id="dddf8-192">Update your `Startup` class:</span></span>
 
-   1. <span data-ttu-id="dddf8-193">Jeśli używasz programu *:::no-loc(appsettings.json):::* , Dodaj go do konstruktora konfiguracji w `Startup` konstruktorze:</span><span class="sxs-lookup"><span data-stu-id="dddf8-193">If you're using *:::no-loc(appsettings.json):::* , add it to the configuration builder in the `Startup` constructor:</span></span>
+   1. <span data-ttu-id="dddf8-193">Jeśli używasz programu *appsettings.json* , Dodaj go do konstruktora konfiguracji w `Startup` konstruktorze:</span><span class="sxs-lookup"><span data-stu-id="dddf8-193">If you're using *appsettings.json* , add it to the configuration builder in the `Startup` constructor:</span></span>
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -235,11 +235,11 @@ ms.locfileid: "94508165"
 
 <span data-ttu-id="dddf8-208">Rozwiązaniem jest uzyskanie obiektów Options z rzeczywistymi wartościami opcji w `Startup` klasie i przekazywanie ich bezpośrednio do każdego wystąpienia oprogramowania pośredniczącego.</span><span class="sxs-lookup"><span data-stu-id="dddf8-208">The solution is to get the options objects with the actual options values in your `Startup` class and pass those directly to each instance of your middleware.</span></span>
 
-1. <span data-ttu-id="dddf8-209">Dodaj drugi klucz do *:::no-loc(appsettings.json):::*</span><span class="sxs-lookup"><span data-stu-id="dddf8-209">Add a second key to *:::no-loc(appsettings.json):::*</span></span>
+1. <span data-ttu-id="dddf8-209">Dodaj drugi klucz do *appsettings.json*</span><span class="sxs-lookup"><span data-stu-id="dddf8-209">Add a second key to *appsettings.json*</span></span>
 
-   <span data-ttu-id="dddf8-210">Aby dodać drugi zestaw opcji do *:::no-loc(appsettings.json):::* pliku, Użyj nowego klucza w celu jego jednoznacznej identyfikacji:</span><span class="sxs-lookup"><span data-stu-id="dddf8-210">To add a second set of options to the *:::no-loc(appsettings.json):::* file, use a new key to uniquely identify it:</span></span>
+   <span data-ttu-id="dddf8-210">Aby dodać drugi zestaw opcji do *appsettings.json* pliku, Użyj nowego klucza w celu jego jednoznacznej identyfikacji:</span><span class="sxs-lookup"><span data-stu-id="dddf8-210">To add a second set of options to the *appsettings.json* file, use a new key to uniquely identify it:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,10-18&highlight=2-5)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
 2. <span data-ttu-id="dddf8-211">Pobierz wartości opcji i przekaż je do oprogramowania pośredniczącego.</span><span class="sxs-lookup"><span data-stu-id="dddf8-211">Retrieve options values and pass them to middleware.</span></span> <span data-ttu-id="dddf8-212">`Use...`Metoda rozszerzająca (która dodaje oprogramowanie pośredniczące do potoku) jest miejscem logicznym do przekazania w wartościach opcji:</span><span class="sxs-lookup"><span data-stu-id="dddf8-212">The `Use...` extension method (which adds your middleware to the pipeline) is a logical place to pass in the option values:</span></span> 
 
@@ -295,9 +295,9 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-<span data-ttu-id="dddf8-233">Element **HttpContext. Request. :::no-loc(Cookie)::: s** tłumaczy na:</span><span class="sxs-lookup"><span data-stu-id="dddf8-233">**HttpContext.Request.:::no-loc(Cookie):::s** translates to:</span></span>
+<span data-ttu-id="dddf8-233">Element **HttpContext. Request. Cookie s** tłumaczy na:</span><span class="sxs-lookup"><span data-stu-id="dddf8-233">**HttpContext.Request.Cookies** translates to:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
 <span data-ttu-id="dddf8-234">Element **HttpContext. Request. RequestContext. RouteData** tłumaczy na:</span><span class="sxs-lookup"><span data-stu-id="dddf8-234">**HttpContext.Request.RequestContext.RouteData** translates to:</span></span>
 
@@ -378,21 +378,21 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-<span data-ttu-id="dddf8-260">**HttpContext. Response. :::no-loc(Cookie)::: wolumin**</span><span class="sxs-lookup"><span data-stu-id="dddf8-260">**HttpContext.Response.:::no-loc(Cookie):::s**</span></span>
+<span data-ttu-id="dddf8-260">**HttpContext. Response. Cookie wolumin**</span><span class="sxs-lookup"><span data-stu-id="dddf8-260">**HttpContext.Response.Cookies**</span></span>
 
-<span data-ttu-id="dddf8-261">:::no-loc(Cookie):::s przenoszone do przeglądarki w nagłówku *zestawu :::no-loc(Cookie):::* odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="dddf8-261">:::no-loc(Cookie):::s travel to the browser in a *Set-:::no-loc(Cookie):::* response header.</span></span> <span data-ttu-id="dddf8-262">W związku z tym wysyłanie :::no-loc(cookie)::: s wymaga tego samego wywołania zwrotnego, które jest używane do wysyłania nagłówków odpowiedzi:</span><span class="sxs-lookup"><span data-stu-id="dddf8-262">As a result, sending :::no-loc(cookie):::s requires the same callback as used for sending response headers:</span></span>
+<span data-ttu-id="dddf8-261">Cookies przenoszone do przeglądarki w nagłówku *zestawu Cookie* odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="dddf8-261">Cookies travel to the browser in a *Set-Cookie* response header.</span></span> <span data-ttu-id="dddf8-262">W związku z tym wysyłanie cookie s wymaga tego samego wywołania zwrotnego, które jest używane do wysyłania nagłówków odpowiedzi:</span><span class="sxs-lookup"><span data-stu-id="dddf8-262">As a result, sending cookies requires the same callback as used for sending response headers:</span></span>
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
 {
     // ...
-    httpContext.Response.OnStarting(Set:::no-loc(Cookie):::s, state: httpContext);
+    httpContext.Response.OnStarting(SetCookies, state: httpContext);
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-<span data-ttu-id="dddf8-263">`Set:::no-loc(Cookie):::s`Metoda wywołania zwrotnego będzie wyglądać następująco:</span><span class="sxs-lookup"><span data-stu-id="dddf8-263">The `Set:::no-loc(Cookie):::s` callback method would look like the following:</span></span>
+<span data-ttu-id="dddf8-263">`SetCookies`Metoda wywołania zwrotnego będzie wyglądać następująco:</span><span class="sxs-lookup"><span data-stu-id="dddf8-263">The `SetCookies` callback method would look like the following:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Set:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
 ## <a name="additional-resources"></a><span data-ttu-id="dddf8-264">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="dddf8-264">Additional resources</span></span>
 

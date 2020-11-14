@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: a333c189e81a9f44e94deb6b37097f1a8b19a0f9
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 6435a7c9ce2a30873f0d3475a38270d3dea1b300
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430929"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595470"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -44,7 +44,7 @@ Blazor WebAssembly aplikacje są uruchamiane na kliencie. Autoryzacja jest używ
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Identity.SignInManager%601> i <xref:Microsoft.AspNetCore.Identity.UserManager%601> nie są obsługiwane w Razor składnikach.
 
-## <a name="authentication"></a>Uwierzytelnianie
+## <a name="authentication"></a>Authentication
 
 Blazor program używa istniejących mechanizmów uwierzytelniania ASP.NET Core do ustanowienia tożsamości użytkownika. Dokładny mechanizm zależy od tego, w jaki sposób Blazor aplikacja jest hostowana Blazor WebAssembly Blazor Server .
 
@@ -255,7 +255,7 @@ Każda z tych koncepcji jest taka sama jak w aplikacji ASP.NET Core MVC lub Razo
 
 ## <a name="authorizeview-component"></a>Składnik AuthorizeView
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Składnik selektywnie wyświetla interfejs użytkownika w zależności od tego, czy użytkownik jest uprawniony do jego wyświetlania. Takie podejście jest przydatne, gdy wystarczy *wyświetlić* dane dla użytkownika i nie trzeba używać tożsamości użytkownika w logice proceduralnej.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Składnik selektywnie wyświetla zawartość interfejsu użytkownika w zależności od tego, czy użytkownik jest autoryzowany. Takie podejście jest przydatne, gdy wystarczy *wyświetlić* dane dla użytkownika i nie trzeba używać tożsamości użytkownika w logice proceduralnej.
 
 Składnik uwidacznia `context` zmienną typu <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> , za pomocą której można uzyskać dostęp do informacji o zalogowanym użytkowniku:
 
@@ -266,24 +266,29 @@ Składnik uwidacznia `context` zmienną typu <xref:Microsoft.AspNetCore.Componen
 </AuthorizeView>
 ```
 
-Jeśli użytkownik nie jest uwierzytelniony, można również podać inną zawartość do wyświetlenia:
+Możesz również podać inną zawartość do wyświetlenia, jeśli użytkownik nie ma uprawnień:
 
 ```razor
 <AuthorizeView>
     <Authorized>
         <h1>Hello, @context.User.Identity.Name!</h1>
-        <p>You can only see this content if you're authenticated.</p>
+        <p>You can only see this content if you're authorized.</p>
+        <button @onclick="SecureMethod">Authorized Only Button</button>
     </Authorized>
     <NotAuthorized>
         <h1>Authentication Failure!</h1>
         <p>You're not signed in.</p>
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+    private void SecureMethod() { ... }
+}
 ```
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Składnik może być używany w `NavMenu` składniku ( `Shared/NavMenu.razor` ) do wyświetlania elementu listy ( `<li>...</li>` ) dla [ `NavLink` składnika](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), ale należy zauważyć, że to podejście powoduje jedynie usunięcie elementu listy z renderowanych danych wyjściowych. Nie uniemożliwia użytkownikowi przechodzenia do składnika.
-
 Zawartość `<Authorized>` i `<NotAuthorized>` tagi mogą zawierać dowolne elementy, takie jak inne składniki interaktywne.
+
+Domyślna procedura obsługi zdarzeń dla autoryzowanego elementu, taka jak `SecureMethod` Metoda dla `<button>` elementu w poprzednim przykładzie, może być wywoływana tylko przez autoryzowanego użytkownika.
 
 Warunki autoryzacji, takie jak role lub zasady kontrolujące opcje interfejsu użytkownika lub dostęp, są omówione w sekcji [autoryzacja](#authorization) .
 
@@ -291,6 +296,8 @@ Jeśli warunki autoryzacji nie są określone, program <xref:Microsoft.AspNetCor
 
 * Uwierzytelniony (zalogowany) Użytkownicy jako autoryzowany.
 * Nieuwierzytelnionych (wylogowanych) użytkowników jako nieautoryzowanych.
+
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Składnik może być używany w `NavMenu` składniku ( `Shared/NavMenu.razor` ) do wyświetlania elementu listy ( `<li>...</li>` ) dla [ `NavLink` składnika](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), ale należy zauważyć, że to podejście powoduje jedynie usunięcie elementu listy z renderowanych danych wyjściowych. Nie uniemożliwia użytkownikowi przechodzenia do składnika.
 
 ### <a name="role-based-and-policy-based-authorization"></a>Autoryzacja oparta na rolach i zasadach
 
@@ -495,7 +502,7 @@ Prawdopodobnie projekt nie został utworzony przy użyciu Blazor Server szablonu
 
 <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>Dostarcza `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` parametr kaskadowy, który z kolei otrzymuje od podstawowej <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> usługi di.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>

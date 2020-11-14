@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: f8b6e65424948aaa7b28023497bbbf2a1ceb47dd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9ec3900b67897255e321462b83117f5c2e32ab45
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056052"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595418"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -102,32 +102,21 @@ W poniższej tabeli opisano klasy CSS stosowane do `components-reconnect-modal` 
 
 ## <a name="render-mode"></a>Tryb renderowania
 
+::: moniker range=">= aspnetcore-5.0"
+
+*Ta sekcja ma zastosowanie do hostowanych Blazor WebAssembly i Blazor Server .*
+
+Blazor aplikacje są domyślnie skonfigurowane w taki sposób, aby wyprerender interfejs użytkownika na serwerze. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 *Ta sekcja ma zastosowanie do Blazor Server .*
 
-Blazor Server aplikacje są domyślnie skonfigurowane, aby skonfigurować interfejs użytkownika na serwerze przed nawiązaniem połączenia z serwerem. Ta strona jest skonfigurowana na `_Host.cshtml` Razor stronie:
+Blazor Server aplikacje są domyślnie skonfigurowane, aby skonfigurować interfejs użytkownika na serwerze przed nawiązaniem połączenia z serwerem. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
-```cshtml
-<body>
-    <app>
-      <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
-
-    <script src="_framework/blazor.server.js"></script>
-</body>
-```
-
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> Określa, czy składnik:
-
-* Jest wstępnie renderowany na stronie.
-* Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
-
-| Tryb renderowania | Opis |
-| --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor Server aplikacji. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla Blazor Server aplikacji. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
-
-Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
+::: moniker-end
 
 ## <a name="initialize-the-no-locblazor-circuit"></a>Inicjowanie Blazor obwodu
 

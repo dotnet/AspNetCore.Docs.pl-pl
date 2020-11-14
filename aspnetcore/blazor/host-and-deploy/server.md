@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055766"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595444"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Hostowanie i wdrażanie Blazor Server
 
@@ -56,7 +56,7 @@ Gdy rozważasz skalowalność pojedynczego serwera (skalowanie w górę), pamię
 
 Aby uzyskać wskazówki dotyczące tworzenia bezpiecznych i skalowalnych Blazor aplikacji serwerowych, zobacz <xref:blazor/security/server/threat-mitigation> .
 
-Każdy obwód wykorzystuje około 250 KB pamięci w przypadku aplikacji o minimalnej *Hello World* . Rozmiar obwodu zależy od kodu aplikacji i wymagań dotyczących konserwacji stanu związanych z poszczególnymi składnikami. Zalecamy mierzenie wymagań dotyczących zasobów podczas opracowywania aplikacji i infrastruktury, ale następujący punkt odniesienia może być punktem początkowym w planowaniu celu wdrożenia: jeśli oczekujesz, że aplikacja będzie obsługiwać 5 000 współbieżnych użytkowników, należy rozważyć budżetowanie co najmniej 1,3 GB pamięci serwera do aplikacji (lub ~ 273 KB na użytkownika).
+Każdy obwód wykorzystuje około 250 KB pamięci w przypadku aplikacji o minimalnej *Hello World*. Rozmiar obwodu zależy od kodu aplikacji i wymagań dotyczących konserwacji stanu związanych z poszczególnymi składnikami. Zalecamy mierzenie wymagań dotyczących zasobów podczas opracowywania aplikacji i infrastruktury, ale następujący punkt odniesienia może być punktem początkowym w planowaniu celu wdrożenia: jeśli oczekujesz, że aplikacja będzie obsługiwać 5 000 współbieżnych użytkowników, należy rozważyć budżetowanie co najmniej 1,3 GB pamięci serwera do aplikacji (lub ~ 273 KB na użytkownika).
 
 ### <a name="no-locsignalr-configuration"></a>SignalR skonfigurować
 
@@ -69,7 +69,7 @@ Blazor najlepiej sprawdza się w przypadku korzystania z usługi WebSockets jako
 Zalecamy korzystanie z [ SignalR usługi platformy Azure](xref:signalr/scale#azure-signalr-service) dla Blazor Server aplikacji. Usługa umożliwia skalowanie Blazor Server aplikacji w górę do dużej liczby jednoczesnych SignalR połączeń. Ponadto SignalR globalne zasięgi i wysokiej wydajności centra danych usługi znacznie ułatwiają zredukowanie opóźnień ze względu na lokalizację geograficzną.
 
 > [!IMPORTANT]
-> Gdy usługi [WebSockets](https://wikipedia.org/wiki/WebSocket) są wyłączone, Azure App Service symuluje połączenie w czasie rzeczywistym za pomocą protokołu HTTP. Długotrwałe sondowanie protokołu HTTP jest znacznie wolniejsze niż uruchamianie z włączonymi składnikami WebSockets, które nie używają sondowania do symulowania połączenia klienta z serwerem.
+> Gdy usługi [WebSockets](https://wikipedia.org/wiki/WebSocket) są wyłączone, Azure App Service symuluje połączenie w czasie rzeczywistym przy użyciu długich sondowania protokołu HTTP. Długotrwałe sondowanie HTTP jest znacznie wolniejsze niż uruchamianie z włączonymi składnikami WebSockets, które nie używają sondowania w celu symulowania połączenia klienta z serwerem.
 >
 > Zalecamy używanie funkcji WebSockets dla Blazor Server aplikacji wdrożonych w programie Azure App Service. [ SignalR Usługa platformy Azure](xref:signalr/scale#azure-signalr-service) domyślnie używa obiektów WebSockets. Jeśli aplikacja nie korzysta z usługi platformy Azure SignalR , zobacz <xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service> .
 >
@@ -78,9 +78,9 @@ Zalecamy korzystanie z [ SignalR usługi platformy Azure](xref:signalr/scale#azu
 > * [Co to jest SignalR usługa Azure?](/azure/azure-signalr/signalr-overview)
 > * [Przewodnik dotyczący wydajności SignalR usługi platformy Azure](/azure-signalr/signalr-concept-performance#performance-factors)
 
-Aby skonfigurować aplikację (i opcjonalnie zainicjować obsługę administracyjną) SignalR usługi platformy Azure:
+### <a name="configuration"></a>Konfigurowanie
 
-1. Włącz obsługę *sesji usługi Sticky Notes* , w przypadku których klienci są [przekierowywani z powrotem do tego samego serwera podczas renderowania](xref:blazor/hosting-models#connection-to-the-server). Ustaw `ServerStickyMode` opcję lub wartość konfiguracji na `Required` . Zazwyczaj aplikacja tworzy konfigurację przy użyciu **jednej** z następujących metod:
+Aby skonfigurować aplikację dla usługi platformy Azure SignalR , aplikacja musi obsługiwać sesje programu *Sticky Notes* , w przypadku których klienci są [przekierowywani z powrotem do tego samego serwera podczas renderowania](xref:blazor/hosting-models#connection-to-the-server). `ServerStickyMode`Wartość opcji lub konfiguracji jest ustawiona na `Required` . Zazwyczaj aplikacja tworzy konfigurację przy użyciu **_jednej_** z następujących metod:
 
    * `Startup.ConfigureServices`:
   
@@ -92,19 +92,25 @@ Aby skonfigurować aplikację (i opcjonalnie zainicjować obsługę administracy
      });
      ```
 
-   * Konfiguracja (Użyj **jednej** z następujących metod):
+   * Konfiguracja (Użyj **_jednej_** z następujących metod):
   
-     * `appsettings.json`:
+     * W pliku `appsettings.json`:
 
        ```json
-       "Azure:SignalR:ServerStickyMode": "Required"
+       "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * **Configuration**  >  **Ustawienia aplikacji** konfiguracji usługi App Service w Azure Portal ( **Nazwa** : `Azure:SignalR:ServerStickyMode` , **wartość** : `Required` ).
+     * **Configuration**  >  **Ustawienia aplikacji** konfiguracji usługi App Service w Azure Portal ( **Nazwa** : `Azure__SignalR__StickyServerMode` , **wartość** : `Required` ). Takie podejście jest stosowane automatycznie w przypadku aprowizacji [ SignalR usługi platformy Azure](#provision-the-azure-signalr-service).
+
+### <a name="provision-the-azure-no-locsignalr-service"></a>Inicjowanie obsługi administracyjnej SignalR usługi platformy Azure
+
+Aby zainicjować obsługę administracyjną usługi platformy Azure SignalR dla aplikacji w programie Visual Studio:
 
 1. Utwórz profil publikowania aplikacji platformy Azure w programie Visual Studio dla Blazor Server aplikacji.
 1. Dodaj zależność **SignalR usługi platformy Azure** do profilu. Jeśli subskrypcja platformy Azure nie ma istniejącego wystąpienia usługi platformy Azure SignalR , które ma zostać przypisane do aplikacji, wybierz opcję **Utwórz nowe SignalR wystąpienie usługi platformy Azure** , aby udostępnić nowe wystąpienie usługi.
 1. Publikowanie aplikacji na platformie Azure
+
+Inicjowanie obsługi administracyjnej usługi platformy Azure SignalR w programie Visual Studio powoduje automatyczne [włączenie *sesji programu Sticky Notes*](#configuration) i dodanie SignalR parametrów połączenia do konfiguracji usługi App Service.
 
 #### <a name="iis"></a>IIS
 

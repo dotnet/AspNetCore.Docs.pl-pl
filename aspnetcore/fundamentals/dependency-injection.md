@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 9f9f41f4d25867c43cd49640bc76ef63f9415eb2
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 3f7cce475b5c7b0fcbb93644b2c39acd637a6f9d
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570201"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595483"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Wstrzykiwanie zależności w ASP.NET Core
 
@@ -402,7 +402,7 @@ W poniższej tabeli przedstawiono niewielki przykład następujących usług zar
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName>                             | Pojedynczego |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName>                           | Pojedynczego |
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
@@ -500,7 +500,10 @@ W przykładowej aplikacji `IMyDependency` Usługa jest zarejestrowana w konkretn
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> Każda `services.Add{SERVICE_NAME}` Metoda rozszerzenia dodaje usługi (i potencjalnie konfiguruje). Na przykład `services.AddMvc()` dodaje Razor strony usług i wymagane przez MVC. Zalecamy, aby aplikacje były zgodne z tą konwencją. Umieść metody rozszerzające w przestrzeni nazw [Microsoft. Extensions. DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) , aby hermetyzować grupy rejestracji usług.
+> Każda `services.Add{SERVICE_NAME}` Metoda rozszerzania dodaje i potencjalnie konfiguruje usługi. Na przykład, `services.AddControllersWithViews` , `services.AddRazorPages` i `services.AddControllers` dodaje usługi ASP.NET Core aplikacje wymagają. Zalecamy, aby aplikacje były zgodne z tą konwencją. Umieść metody rozszerzające w <xref:Microsoft.Extensions.DependencyInjection?displayProperty=fullName> przestrzeni nazw, aby hermetyzować grupy rejestracji usług. Łącznie z częścią przestrzeni nazw `Microsoft.Extensions.DependencyInjection` dla metod rozszerzenia di:
+>
+> * Umożliwia wyświetlanie ich w [technologii IntelliSense](/visualstudio/ide/using-intellisense) bez dodawania dodatkowych `using` bloków.
+> * Zapobiega nadmiernym `using` instrukcjom w klasie, w `Startup` której te metody rozszerzające są zwykle wywoływane z.
 
 Jeśli Konstruktor usługi wymaga [wbudowanego typu](/dotnet/csharp/language-reference/keywords/built-in-types-table), takiego jak `string` ,, typ można wstrzyknąć przy użyciu [konfiguracji](xref:fundamentals/configuration/index) lub [wzorca opcji](xref:fundamentals/configuration/options):
 
@@ -1010,7 +1013,7 @@ Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacj
 
 DI jest *alternatywą* dla wzorców dostępu do obiektów static/Global. Możesz nie być w stanie korzystać z zalet programu DI w przypadku jego mieszania z dostępem do obiektów statycznych.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>

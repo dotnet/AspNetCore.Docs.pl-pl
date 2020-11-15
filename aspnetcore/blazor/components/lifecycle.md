@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508030"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637720"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -81,7 +81,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 Domyślna implementacja programu <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> ustawia wartość każdej właściwości z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) atrybutem lub, który ma odpowiednią wartość w <xref:Microsoft.AspNetCore.Components.ParameterView> . Parametry, które nie mają odpowiedniej wartości w, <xref:Microsoft.AspNetCore.Components.ParameterView> pozostają bez zmian.
 
-Jeśli [`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) nie zostanie wywołana, kod niestandardowy może interpretować wartość parametrów przychodzących w dowolny sposób. Na przykład nie jest wymagane przypisanie parametrów przychodzących do właściwości w klasie.
+Jeśli [`base.SetParametersAsync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) nie zostanie wywołana, kod niestandardowy może interpretować wartość parametrów przychodzących w dowolny sposób. Na przykład nie jest wymagane przypisanie parametrów przychodzących do właściwości w klasie.
 
 W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie ich do usunięcia. Aby uzyskać więcej informacji, zobacz sekcję [Usuwanie składnika `IDisposable` z](#component-disposal-with-idisposable) .
 
@@ -109,7 +109,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor Serveraplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_twice_** :
+Blazor Serveraplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *twice* :
 
 * Gdy składnik jest początkowo renderowany statycznie jako część strony.
 * Drugi raz, gdy przeglądarka nawiąże połączenie z serwerem.
@@ -218,7 +218,7 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/webassembly-performance-bes
 
 Akcje asynchroniczne wykonane w zdarzeniach cyklu życia mogły nie zostać ukończone przed renderowaniem składnika. Obiekty mogą być `null` lub uzupełniane wypełniane danymi podczas wykonywania metody cyklu życia. Zapewnianie logiki renderowania w celu potwierdzenia, że obiekty są inicjowane. Renderuj zastępcze elementy interfejsu użytkownika (na przykład komunikat ładowania), gdy obiekty są `null` .
 
-W `FetchData` składniku Blazor szablonów program <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> został zastąpiony asynchronicznie odbierania danych prognozy ( `forecasts` ). Gdy `forecasts` tak jest `null` , zostanie wyświetlony komunikat ładowania użytkownika. Po `Task` zakończeniu zwracany przez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> program składnik zostanie przerenderowany ze zaktualizowanym stanem.
+W `FetchData` składniku Blazor szablonów program <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> jest zastępowany asynchronicznie odbieranych danych prognozy ( `forecasts` ). Gdy `forecasts` tak jest `null` , zostanie wyświetlony komunikat ładowania użytkownika. Po `Task` zakończeniu zwracany przez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> program składnik zostanie przerenderowany ze zaktualizowanym stanem.
 
 `Pages/FetchData.razor` w Blazor Server szablonie:
 
@@ -392,3 +392,7 @@ W poniższym przykładzie:
     }
 }
 ```
+
+## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server zdarzenia ponownego połączenia
+
+Zdarzenia cyklu życia składnika omówione w tym artykule działają niezależnie od [ Blazor Server programów obsługi zdarzeń ponownego połączenia](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui). Gdy Blazor Server aplikacja utraci SignalR połączenie z klientem, wszystkie aktualizacje interfejsu użytkownika są przerywane. Aktualizacje interfejsu użytkownika są wznawiane po ponownym nawiązaniu połączenia. Aby uzyskać więcej informacji na temat zdarzeń i konfiguracji obsługi obwodów, zobacz <xref:blazor/fundamentals/additional-scenarios> .

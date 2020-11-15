@@ -1,5 +1,5 @@
 ---
-title: Użyj ASP.NET Core SignalR z Blazor WebAssembly
+title: Używanie ASP.NET Core SignalR z hostowaną Blazor WebAssembly aplikacją
 author: guardrex
 description: Utwórz aplikację czatu korzystającą z ASP.NET Core SignalR z Blazor WebAssembly .
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: afbfc44db8cb833df7a79061f9bd73052859fec2
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 2975ee699a2535cdf63ef2f5af5790f178a09f93
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508178"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637733"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
+# <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>Używanie ASP.NET Core SignalR z hostowaną Blazor WebAssembly aplikacją
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -61,7 +61,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,8 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/5.0-SDK.md)]
 
@@ -85,7 +85,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,6 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -117,13 +117,13 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Wybierz pozycję **Blazor aplikacja** i wybierz pozycję **dalej**.
 
-1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
+1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
 1. Wybierz szablon **Blazor WebAssembly aplikacji** .
 
 1. W obszarze **Zaawansowane** zaznacz pole wyboru **hostowane ASP.NET Core** .
 
-1. Wybierz przycisk **Utwórz**.
+1. Wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -145,17 +145,17 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-1. Wybierz szablon **Blazor WebAssembly aplikacji** . Wybierz pozycję **Dalej**.
+1. Wybierz szablon **Blazor WebAssembly aplikacji** . Wybierz opcję **Dalej**.
 
-1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz pozycję **Dalej**.
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz opcję **Dalej**.
 
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz przycisk **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz pozycję **Utwórz**.
 
    Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.
 
 1. Otwórz projekt, przechodząc do folderu projektu i otwierając plik rozwiązania projektu ( `.sln` ).
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenie:
 
@@ -201,7 +201,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuj** , jeśli akceptujesz postanowienia licencyjne.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenia:
 
@@ -345,7 +345,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W powłoce poleceń wykonaj następujące polecenia:
 
@@ -381,7 +381,7 @@ Aby dowiedzieć się więcej na temat tworzenia Blazor aplikacji, zapoznaj się 
 > <xref:blazor/index>
 > [Uwierzytelnianie tokenu okaziciela z użyciem Identity serwera, obiektów WebSockets i zdarzeń Server-Sent](xref:signalr/authn-and-authz#bearer-token-authentication)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:signalr/introduction>
 * [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

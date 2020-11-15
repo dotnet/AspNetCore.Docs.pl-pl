@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507944"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637707"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -85,7 +85,7 @@ Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowan
 
 Składniki to zwykłe klasy języka C# i można je umieścić w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w `Pages` folderze. Składniki niestronicowe są często umieszczane w `Shared` folderze lub do folderu niestandardowego dodanego do projektu.
 
-### <a name="namespaces"></a>Przestrzenie nazw
+### <a name="namespaces"></a>Namespaces
 
 Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorSample` i znajduje się `Counter` w `Pages` folderze:
 
@@ -244,11 +244,25 @@ Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna 
 
 Składniki mogą odbierać parametry trasy z szablonu trasy dostarczonego w [`@page`][9] dyrektywie. Router używa parametrów trasy, aby wypełnić odpowiednie parametry składnika.
 
+::: moniker range=">= aspnetcore-5.0"
+
+Parametry opcjonalne są obsługiwane. W poniższym przykładzie `text` opcjonalny parametr przypisuje wartość segmentu trasy do `Text` właściwości składnika. Jeśli segment nie istnieje, wartość `Text` jest ustawiana na `fantastic` .
+
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
+[!code-razor[](index/samples_snapshot/RouteParameter-5x.razor?highlight=1,6-7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](index/samples_snapshot/RouteParameter-3x.razor?highlight=2,7-8)]
 
 Parametry opcjonalne nie są obsługiwane, więc dwie [`@page`][9] dyrektywy są stosowane w powyższym przykładzie. Pierwszy zezwala na nawigowanie do składnika bez parametru. Druga [`@page`][9] dyrektywa odbiera `{text}` parametr Route i przypisuje wartość do `Text` właściwości.
+
+::: moniker-end
 
 Aby uzyskać informacje dotyczące przechwytywania wszystkich parametrów trasy ( `{*pageRoute}` ), które przechwytują ścieżki między wieloma granicami folderów, zobacz <xref:blazor/fundamentals/routing#catch-all-route-parameters> .
 
@@ -265,6 +279,14 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 `Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+Zgodnie z Konwencją wartość atrybutu, która składa się z kodu C#, jest przypisywana do parametru przy użyciu [ Razor zastrzeżonego `@` symbolu](xref:mvc/views/razor#razor-syntax):
+
+* Pole nadrzędne lub właściwość: `Title="@{FIELD OR PROPERTY}` , gdzie symbol zastępczy `{FIELD OR PROPERTY}` jest polem języka C# lub właściwością składnika nadrzędnego.
+* Wynik metody: `Title="@{METHOD}"` , gdzie symbol zastępczy `{METHOD}` jest metodą języka C# składnika nadrzędnego.
+* [Wyrażenie niejawne lub jawne](xref:mvc/views/razor#implicit-razor-expressions): `Title="@({EXPRESSION})"` , gdzie symbol zastępczy `{EXPRESSION}` jest wyrażeniem języka C#.
+  
+Aby uzyskać więcej informacji, zobacz <xref:mvc/views/razor>.
 
 > [!WARNING]
 > Nie należy tworzyć składników, które zapisują do własnych *parametrów składników* , zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
@@ -294,7 +316,7 @@ Ze względu na sposób, w jaki Blazor renderuje zawartość podrzędną, składn
 > @for (int c = 0; c < 10; c++)
 > {
 >     var current = c;
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @current
 >     </ChildComponent>
 > }
@@ -305,7 +327,7 @@ Ze względu na sposób, w jaki Blazor renderuje zawartość podrzędną, składn
 > ```razor
 > @foreach(var c in Enumerable.Range(0,10))
 > {
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @c
 >     </ChildComponent>
 > }
@@ -650,7 +672,7 @@ Rozważmy następujący wadliwy `Expander` składnik, który:
 * Składnik zapisuje bezpośrednio do `Expanded` parametru, który pokazuje problem z nadpisaniem parametrów i należy go unikać.
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
@@ -702,7 +724,7 @@ Następujący zmieniony `Expander` składnik:
 * Używa pola private do obsługi wewnętrznego stanu przełączania, który pokazuje, jak uniknąć pisania bezpośrednio do parametru.
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 
@@ -865,7 +887,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

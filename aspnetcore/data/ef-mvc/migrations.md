@@ -1,10 +1,10 @@
 ---
-title: 'Samouczek: Używanie funkcji migracji ASP.NET MVC z EF Core'
-description: W tym samouczku rozpocznie się korzystanie z funkcji migracji EF Core na potrzeby zarządzania zmianami modelu danych w aplikacji ASP.NET Core MVC.
+title: Samouczek 5. stosowanie migracji do przykładowej firmy Contoso University
+description: Część 5 z serii samouczków z uczelnią w firmie Contoso. Użyj funkcji migracji EF Core, aby zarządzać zmianami modelu danych w aplikacji ASP.NET Core MVC.
 author: rick-anderson
 ms.author: riande
-ms.custom: mvc
-ms.date: 03/27/2019
+ms.custom: contperfq2
+ms.date: 11/13/2020
 ms.topic: tutorial
 no-loc:
 - appsettings.json
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 070c18db55956d79560904f53395b5001c7bce6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054037"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94674007"
 ---
-# <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Samouczek: Używanie funkcji migracji ASP.NET MVC z EF Core
+# <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>Samouczek: część 5, stosowanie migracji do przykładu z uczelnią contoso
 
 W tym samouczku Zacznij korzystać z funkcji migracji EF Core, aby zarządzać zmianami modelu danych. W kolejnych samouczkach dodasz więcej migracji w miarę zmieniania modelu danych.
 
@@ -34,7 +34,6 @@ W tym samouczku zostały wykonane następujące czynności:
 
 > [!div class="checklist"]
 > * Więcej informacji na temat migracji
-> * Zmień parametry połączenia
 > * Tworzenie początkowej migracji
 > * Sprawdzanie metod w górę i w dół
 > * Informacje o migawce modelu danych
@@ -52,22 +51,15 @@ Ta metoda zachowania synchronizacji bazy danych z modelem danych działa prawid�
 
 Aby móc korzystać z migracji, można użyć **konsoli Menedżera pakietów** (PMC) lub interfejsu wiersza polecenia.  W tych samouczkach pokazano, jak używać poleceń interfejsu wiersza polecenia. Informacje na temat obiektu PMC są na [końcu tego samouczka](#pmc).
 
-## <a name="change-the-connection-string"></a>Zmień parametry połączenia
+## <a name="drop-the-database"></a>Porzuć bazę danych
 
-W *appsettings.json* pliku Zmień nazwę bazy danych w parametrach połączenia na ContosoUniversity2 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
+Usuń bazę danych. Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` interfejsu wiersza polecenia:
 
-[!code-json[](intro/samples/cu/appsettings2.json?range=1-4)]
+ ```dotnetcli
+ dotnet ef database drop
+ ```
 
-Ta zmiana konfiguruje projekt w taki sposób, aby podczas pierwszej migracji utworzyć nową bazę danych. Nie jest to wymagane, aby rozpocząć migrację, ale zobaczysz później, dlaczego jest to dobry pomysł.
-
-> [!NOTE]
-> Alternatywą dla zmiany nazwy bazy danych jest usunięcie bazy danych. Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` interfejsu wiersza polecenia:
->
-> ```dotnetcli
-> dotnet ef database drop
-> ```
->
-> W poniższej sekcji opisano sposób uruchamiania poleceń interfejsu wiersza polecenia.
+W poniższej sekcji opisano sposób uruchamiania poleceń interfejsu wiersza polecenia.
 
 ## <a name="create-an-initial-migration"></a>Tworzenie początkowej migracji
 
@@ -94,15 +86,15 @@ W poprzednich poleceniach są wyświetlane dane wyjściowe podobne do następuj�
 
 ```console
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 Done. To undo this action, use 'ef migrations remove'
 ```
 
-Jeśli zostanie wyświetlony komunikat o błędzie " *nie można uzyskać dostępu do pliku... ContosoUniversity.dll, ponieważ jest on używany przez inny proces* ", znajdź ikonę IIS Express na pasku zadań systemu Windows, a następnie kliknij ją prawym przyciskiem myszy, a następnie kliknij pozycję **ContosoUniversity > Zatrzymaj witrynę** .
+Jeśli zostanie wyświetlony komunikat o błędzie "*nie można uzyskać dostępu do pliku... ContosoUniversity.dll, ponieważ jest on używany przez inny proces*", znajdź ikonę IIS Express na pasku zadań systemu Windows, a następnie kliknij ją prawym przyciskiem myszy, a następnie kliknij pozycję **ContosoUniversity > Zatrzymaj witrynę**.
 
 ## <a name="examine-up-and-down-methods"></a>Sprawdzanie metod w górę i w dół
 
-Po wykonaniu `migrations add` polecenia EF wygenerowało kod, który spowoduje utworzenie bazy danych od podstaw. Ten kod znajduje się w folderze *migrations* w pliku o nazwie *\<timestamp> _InitialCreate. cs* . `Up`Metoda `InitialCreate` klasy tworzy tabele bazy danych, które odpowiadają zestawom jednostek modelu danych, a `Down` Metoda usuwa je, jak pokazano w poniższym przykładzie.
+Po wykonaniu `migrations add` polecenia EF wygenerowało kod, który spowoduje utworzenie bazy danych od podstaw. Ten kod znajduje się w folderze *migrations* w pliku o nazwie *\<timestamp> _InitialCreate. cs*. `Up`Metoda `InitialCreate` klasy tworzy tabele bazy danych, które odpowiadają zestawom jednostek modelu danych, a `Down` Metoda usuwa je, jak pokazano w poniższym przykładzie.
 
 [!code-csharp[](intro/samples/cu/Migrations/20170215220724_InitialCreate.cs?range=92-118)]
 
@@ -114,7 +106,7 @@ W przypadku utworzenia początkowej migracji, gdy baza danych już istnieje, kod
 
 ## <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracja tworzy *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
+Migracja tworzy *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
 
 Aby usunąć migrację, użyj polecenia [migracji programu dotnet EF Remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) . `dotnet ef migrations remove` usuwa migrację i gwarantuje, że migawka zostanie prawidłowo zresetowana. Jeśli `dotnet ef migrations remove` to się nie powiedzie, użyj, `dotnet ef migrations remove -v` Aby uzyskać więcej informacji na temat błędu.
 
@@ -132,7 +124,7 @@ Dane wyjściowe polecenia są podobne do `migrations add` polecenia, z tą róż
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (274ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
       CREATE DATABASE [ContosoUniversity2];
@@ -155,7 +147,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-      VALUES (N'20190327172701_InitialCreate', N'2.2.0-rtm-35687');
+      VALUES (N'20190327172701_InitialCreate', N'5.0-rtm');
 Done.
 ```
 
@@ -181,20 +173,9 @@ Aby uzyskać więcej informacji na temat poleceń PMC, zobacz [konsola Menedżer
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)
 
 ## <a name="next-step"></a>Następny krok
-
-W tym samouczku zostały wykonane następujące czynności:
-
-> [!div class="checklist"]
-> * Zapoznaj się z migracjami
-> * Zapoznaj się z pakietami migracji NuGet
-> * Zmieniono parametry połączenia
-> * Tworzenie początkowej migracji
-> * Badanie metod w górę i w dół
-> * Informacje o migawce modelu danych
-> * Zastosowano migrację
 
 Przejdź do następnego samouczka, aby rozpocząć bardziej zaawansowane tematy dotyczące rozszerzania modelu danych. W sposób tworzenia i stosowania dodatkowych migracji.
 

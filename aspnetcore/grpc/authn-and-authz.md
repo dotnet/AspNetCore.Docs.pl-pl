@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 2efed6b76228227f032482346a36f528b3448de2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 833114a12c8c1ac67097b3592cf410d7a69bb628
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053569"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673981"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Uwierzytelnianie i autoryzacja w programie gRPC for ASP.NET Core
 
@@ -76,7 +76,7 @@ Klient może udostępnić token dostępu do uwierzytelniania. Serwer sprawdza to
 
 Na serwerze uwierzytelnianie tokenu okaziciela jest konfigurowane przy użyciu [oprogramowania pośredniczącego okaziciela JWT](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer).
 
-W kliencie .NET gRPC token może być wysyłany z wywołaniami jako nagłówek:
+W kliencie .NET gRPC token może być wysyłany z wywołaniami przy użyciu `Metadata` kolekcji. Wpisy w `Metadata` kolekcji są wysyłane z wywołaniem gRPC jako nagłówki http:
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -92,7 +92,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-Konfigurowanie `ChannelCredentials` w kanale jest alternatywnym sposobem wysyłania tokenu do usługi za pomocą wywołań gRPC. Poświadczenie jest uruchamiane za każdym razem, gdy nastąpi wywołanie gRPC, które pozwala uniknąć konieczności pisania kodu w wielu miejscach w celu samodzielnego przekazania tokenu.
+Konfigurowanie `ChannelCredentials` w kanale jest alternatywnym sposobem wysyłania tokenu do usługi za pomocą wywołań gRPC. `ChannelCredentials`Może zawierać `CallCredentials` , która umożliwia automatyczne ustawianie `Metadata` .
+
+`CallCredentials` jest uruchamiany za każdym razem, gdy nastąpi wywołanie gRPC, które pozwala uniknąć konieczności pisania kodu w wielu miejscach w celu samodzielnego przekazania tokenu. Należy pamiętać, że `CallCredentials` są stosowane tylko wtedy, gdy kanał jest zabezpieczony przy użyciu protokołu TLS. `CallCredentials` nie są stosowane dla niezabezpieczonych kanałów niezwiązanych z protokołem TLS.
 
 Poświadczenie w poniższym przykładzie służy do konfigurowania kanału do wysyłania tokenu przy każdym wywołaniu gRPC:
 
@@ -150,7 +152,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 Wiele ASP.NET Core obsługiwanych mechanizmów uwierzytelniania współpracuje z gRPC:
 
-* Azure Active Directory
+* Usługa Azure Active Directory
 * Certyfikat klienta
 * IdentityServer
 * Token JWT

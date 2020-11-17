@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d075faa951a34fb3856b54eb9e21593b6616b4f1
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058509"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673968"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -49,7 +49,7 @@ Ten dokument ma zastosowanie do Razor stron, kontrolerów interfejsu API i kontr
 
 ## <a name="how-filters-work"></a>Jak działają filtry
 
-Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core* , czasami określane jako *potok filtru* . Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
+Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core*, czasami określane jako *potok filtru*. Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
 
 ![Żądanie jest przetwarzane przez inne oprogramowanie pośredniczące, kierowanie oprogramowania pośredniczącego, wybór akcji i potok akcji wywołania. Przetwarzanie żądań jest kontynuowane przez wybór akcji, kierowanie oprogramowania pośredniczącego i różnych innych programów pośredniczących przed wysłaniem odpowiedzi do klienta.](filters/_static/filter-pipeline-1.png)
 
@@ -146,7 +146,7 @@ Poniższy kod stosuje `MyActionFilterAttribute` `Index2` metodę do:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-W obszarze **nagłówki odpowiedzi** , `author: Rick Anderson` i `Editor: Joe Smith` jest wyświetlana po `Sample/Index2` wywołaniu punktu końcowego.
+W obszarze **nagłówki odpowiedzi**, `author: Rick Anderson` i `Editor: Joe Smith` jest wyświetlana po `Sample/Index2` wywołaniu punktu końcowego.
 
 Poniższy kod stosuje `MyActionFilterAttribute` `AddHeaderAttribute` stronę i do Razor strony:
 
@@ -167,7 +167,7 @@ Atrybuty filtru:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Zakresy filtrów i kolejność wykonywania
 
-Filtr można dodać do potoku w jednym z trzech *zakresów* :
+Filtr można dodać do potoku w jednym z trzech *zakresów*:
 
 * Użycie atrybutu w akcji kontrolera. Atrybutów filtru nie można stosować do Razor metod obsługi stron.
 * Użycie atrybutu na kontrolerze lub Razor stronie.
@@ -555,6 +555,18 @@ Na przykład następujący filtr jest zawsze uruchamiany i ustawia wynik akcji (
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> implementuje <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> . W związku z tym `IFilterFactory` wystąpienie może być używane jako `IFilterMetadata` wystąpienie w dowolnym miejscu w potoku filtru. Gdy środowisko uruchomieniowe przygotowuje się do wywołania filtru, próbuje rzutować go na `IFilterFactory` . Jeśli rzutowanie powiedzie się, <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> Metoda zostanie wywołana w celu utworzenia `IFilterMetadata` wystąpienia, które jest wywoływane. Zapewnia to elastyczny projekt, ponieważ dokładny potok filtru nie musi być ustawiony jawnie podczas uruchamiania aplikacji.
 
+`IFilterFactory.IsReusable`:
+
+* Jest wskazówką dla fabryki, że wystąpienie filtru utworzone przez fabrykę może być ponownie używane poza zakresem żądania, który został utworzony w ramach.
+* **Nie** powinna być używana z filtrem, który zależy od usług z okresem istnienia innym niż singleton.
+
+Środowisko uruchomieniowe ASP.NET Core nie gwarantuje:
+
+Oznacza, że zostanie utworzone pojedyncze wystąpienie filtru.
+* Filtr nie zostanie ponownie żądany z kontenera DI w pewnym momencie.
+
+[!WARNING] Skonfigurować tylko `IFilterFactory.IsReusable` do zwrócenia, `true` Jeśli źródło filtrów nie jest niejednoznaczne, filtry są bezstanowe i bezpieczne do użycia w wielu żądaniach HTTP. Na przykład nie należy zwracać filtrów z funkcji DI, które są rejestrowane jako zakresy lub przejściowe, jeśli `IFilterFactory.IsReusable` zwraca `true`
+
 `IFilterFactory` można zaimplementować przy użyciu niestandardowych implementacji atrybutów jako inne podejście do tworzenia filtrów:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/AddHeaderWithFactoryAttribute.cs?name=snippet_IFilterFactory&highlight=1,4,5,6,7)]
@@ -638,7 +650,7 @@ Ten dokument ma zastosowanie do Razor stron, kontrolerów interfejsu API i kontr
 
 ## <a name="how-filters-work"></a>Jak działają filtry
 
-Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core* , czasami określane jako *potok filtru* .  Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
+Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core*, czasami określane jako *potok filtru*.  Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
 
 ![Żądanie jest przetwarzane przez inne oprogramowanie pośredniczące, kierowanie oprogramowania pośredniczącego, wybór akcji i potok wywołania akcji ASP.NET Core. Przetwarzanie żądań jest kontynuowane przez wybór akcji, kierowanie oprogramowania pośredniczącego i różnych innych programów pośredniczących przed wysłaniem odpowiedzi do klienta.](filters/_static/filter-pipeline-1.png)
 
@@ -711,7 +723,7 @@ Atrybuty filtru:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Zakresy filtrów i kolejność wykonywania
 
-Filtr można dodać do potoku w jednym z trzech *zakresów* :
+Filtr można dodać do potoku w jednym z trzech *zakresów*:
 
 * Użycie atrybutu w akcji.
 * Używanie atrybutu na kontrolerze.
@@ -723,7 +735,7 @@ Poprzedni kod dodaje trzy filtry globalnie przy użyciu kolekcji [MvcOptions. fi
 
 ### <a name="default-order-of-execution"></a>Domyślna kolejność wykonywania
 
-Jeśli istnieje wiele filtrów tego *samego typu* , zakres określa domyślną kolejność wykonywania filtrowania.  Filtry globalne Otocz filtry klas. Filtry klas Otocz filtry metod.
+Jeśli istnieje wiele filtrów tego *samego typu*, zakres określa domyślną kolejność wykonywania filtrowania.  Filtry globalne Otocz filtry klas. Filtry klas Otocz filtry metod.
 
 W wyniku zagnieżdżania filtrów, *po* kodzie filtrów działa w odwrotnej kolejności *przed* kodem. Sekwencja filtru:
 

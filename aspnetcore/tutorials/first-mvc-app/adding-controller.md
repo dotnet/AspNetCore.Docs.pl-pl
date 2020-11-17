@@ -3,7 +3,7 @@ title: Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 author: rick-anderson
 description: Część 2 z serii samouczków na ASP.NET Core MVC.
 ms.author: riande
-ms.date: 08/05/2017
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 1851a61441ed351442f86939022319ad59d10006
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: e51edc15b14a5bdd1d53e547e0b469ad608f46d0
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422622"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688411"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -44,22 +44,22 @@ Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do ko
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj kontroler >** 
-   ![ Eksplorator rozwiązań, kliknij prawym przyciskiem myszy kontrolery > Dodaj kontroler >](~/tutorials/first-mvc-app/adding-controller/_static/add_controllerCopy.png)
+   ![ Eksplorator rozwiązań, kliknij prawym przyciskiem myszy kontrolery > Dodaj kontroler >](~/tutorials/first-mvc-app/adding-controller/_static/add_controllercopyVS19v16.9.png)
 
 * W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC — pusty**
 
-  ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app/adding-controller/_static/acCopy.png)
+  ![Dodaj kontroler MVC i nadaj mu nazwę](~/tutorials/first-mvc-app/adding-controller/_static/acCopyVS19v16.9.png)
 
-* W **oknie dialogowym Dodaj pusty kontroler MVC** wpisz **HelloWorldController** i wybierz pozycję **Dodaj**.
+* W **oknie dialogowym Dodaj nowy element — MvcMovie** wprowadź **HelloWorldController.cs** i wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij prawym przyciskiem myszy) **Kontrolery > nowy plik** i Nadaj nowemu plikowi nazwę *HelloWorldController.cs*.
 
-  ![Menu kontekstowe](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
+  ![Menu kontekstowe](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_fileVSC1.51.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
@@ -158,7 +158,7 @@ Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do ko
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj** 
    ![ menu kontekstowe kontrolera >](~/tutorials/first-mvc-app/adding-controller/_static/add_controller.png)

@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056130"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673955"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core Blazor operacje przekazywania plików
 
@@ -46,7 +46,7 @@ Domyślnie użytkownik wybiera pojedyncze pliki. Dodaj `multiple` atrybut, aby z
 Aby odczytać dane z pliku wybranego przez użytkownika:
 
 * Wywołaj `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` plik i odczytaj go ze zwróconego strumienia. Aby uzyskać więcej informacji, zobacz sekcję [strumienie plików](#file-streams) .
-* Wartość <xref:System.IO.Stream> zwracana przez `OpenReadStream` wymusza maksymalny rozmiar w bajtach `Stream` odczytywanych. Domyślnie tylko pliki o rozmiarze mniejszym niż 524 288 KB (512 KB) mogą być odczytywane, zanim inne operacje odczytu spowodują wystąpienie wyjątku. Ten limit jest obecny, aby uniemożliwić deweloperom przypadkowe odczytywanie dużych plików w pamięci. `maxAllowedSize`Parametr on `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` może służyć do określania większego rozmiaru, jeśli jest to wymagane.
+* Wartość <xref:System.IO.Stream> zwracana przez `OpenReadStream` wymusza maksymalny rozmiar w bajtach `Stream` odczytywanych. Domyślnie pliki o rozmiarze większym niż 512 000 bajtów (500 KB) nie mogą zostać odczytane, zanim inne operacje odczytu spowodują wystąpienie wyjątku. Ten limit jest obecny, aby uniemożliwić deweloperom przypadkowe odczytywanie dużych plików w pamięci. `maxAllowedSize`Parametr on `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` może służyć do określania większego rozmiaru, jeśli jest to wymagane.
 * Należy unikać odczytywania przychodzącego strumienia plików bezpośrednio do pamięci. Na przykład nie Kopiuj bajtów pliku do <xref:System.IO.MemoryStream> lub Odczytaj jako tablicę bajtów. Te podejścia mogą powodować problemy z wydajnością i zabezpieczeniami, szczególnie w Blazor Server . Zamiast tego należy rozważyć kopiowanie bajtów plików do magazynu zewnętrznego, takiego jak obiekt BLOB lub plik na dysku.
 
 Składnik, który odbiera plik obrazu, może wywołać `RequestImageFileAsync` wygodną metodę na pliku, aby zmienić rozmiar danych obrazu w środowisku uruchomieniowym JavaScript przeglądarki, zanim obraz zostanie przesłany do aplikacji.

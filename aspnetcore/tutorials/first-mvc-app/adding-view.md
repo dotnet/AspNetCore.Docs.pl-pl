@@ -3,7 +3,7 @@ title: Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 author: rick-anderson
 description: Część 3 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
-ms.date: 8/04/2019
+ms.date: 11/16/2019
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce2754d22b61578bdbe5e78a69e08bdc1e83190d
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422720"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688363"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -38,11 +38,11 @@ Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klas
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji* ), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -74,11 +74,11 @@ Dodaj `Index` widok dla `HelloWorldController` .
 * W oknie dialogowym **nowy plik** :
 
   * W lewym okienku wybierz pozycję **ASP .NET Core** .
-  * Wybierz **stronę widok MVC** w środkowym okienku.
+  * W środkowym okienku wybierz pozycję **Razor Widok** .
   * Wpisz *indeks* w polu **Nazwa** .
   * Wybierz pozycję **Nowy**.
 
-![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_mac.png)
+![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_macVSM8.9.png)
 
 ---
 
@@ -92,7 +92,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 ## <a name="change-views-and-layout-pages"></a>Zmień widoki i strony układu
 
-Wybierz linki menu ( **MvcMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
+Wybierz linki menu (**MvcMovie**, **Home** i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -121,9 +121,9 @@ Poprzednia Adiustacja wprowadziła następujące zmiany:
 
 W powyższym znaczniku `asp-area=""` [atrybut pomocnika tagu zakotwiczenia](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) i wartość atrybutu zostały pominięte, ponieważ ta aplikacja nie korzysta z [obszarów](xref:mvc/controllers/areas).
 
-**Uwaga** : `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
+**Uwaga**: `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
 
-Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC** :
+Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC**:
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -207,11 +207,11 @@ Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klas
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji* ), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -261,7 +261,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 ## <a name="change-views-and-layout-pages"></a>Zmień widoki i strony układu
 
-Wybierz linki menu ( **MvcMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
+Wybierz linki menu (**MvcMovie**, **Home** i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -281,9 +281,9 @@ W powyższym znaczniku `asp-area` [atrybut pomocnika tagu kotwicy](xref:mvc/view
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**Uwaga** : `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
+**Uwaga**: `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
 
-Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC** :
+Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC**:
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 

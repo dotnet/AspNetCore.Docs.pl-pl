@@ -3,7 +3,7 @@ title: Część 4. Dodawanie modelu do aplikacji ASP.NET Core MVC
 author: rick-anderson
 description: Część 4 samouczków z serii ASP.NET Core MVC.
 ms.author: riande
-ms.date: 01/13/2020
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fa1d79bed56f17afe69697a7e24ec200e6a0ab22
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422727"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688452"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Część 4. Dodawanie modelu do aplikacji ASP.NET Core MVC
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Tomasz Dykstra](https://github.com/tdykstra)
 
-W tej sekcji dodasz klasy do zarządzania filmami w bazie danych. Te klasy będą częścią " **m** odelu" aplikacji **m** VC.
+W tej sekcji dodasz klasy do zarządzania filmami w bazie danych. Te klasy będą częścią "**m** odelu" aplikacji **m** VC.
 
 Te klasy są używane z [Entity Framework Core](/ef/core) (Ef Core) do pracy z bazą danych. EF Core to struktura obiektu mapowania relacyjnego (ORM), która upraszcza kod dostępu do danych, który trzeba napisać.
 
@@ -40,7 +40,7 @@ W tym samouczku najpierw napiszesz klasy modelu, a EF Core tworzy bazę danych.
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij plik *Movie.cs*.
 
@@ -69,7 +69,7 @@ Zaktualizuj plik *Movie.cs* przy użyciu następującego kodu:
 
 ## <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -105,6 +105,14 @@ Powtórz powyższe kroki, aby zainstalować następujące pakiety NuGet:
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Microsoft.EntityFrameworkCore.Design`
 
+Uruchom następujące polecenie interfejsu wiersza polecenia platformy .NET:
+
+```dotnetcli
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+Poprzednie polecenie dodaje narzędzie do tworzenia [szkieletu ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+
 ---
 
 <a name="dc"></a>
@@ -127,7 +135,7 @@ Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microso
 
 ASP.NET Core jest skompilowany przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) muszą być zarejestrowane przy użyciu funkcji "DI" podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka. W tej sekcji rejestrujesz kontekst bazy danych przy użyciu funkcji DI Container.
 
-Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
+Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
 
 ```csharp
 using MvcMovie.Data;
@@ -136,13 +144,13 @@ using Microsoft.EntityFrameworkCore;
 
 Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 ---
 
@@ -154,13 +162,13 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 
 Dodaj parametry połączenia do *appsettings.json* pliku:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
 
 ---
 
@@ -170,7 +178,7 @@ Kompiluj projekt jako sprawdzenie błędów kompilatora.
 
 Użyj narzędzia do tworzenia szkieletu, aby utworzyć strony z przykładem tworzenie, odczytywanie, aktualizowanie i usuwanie (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -193,14 +201,14 @@ Ukończ okno dialogowe **Dodawanie kontrolera** :
 
 Program Visual Studio tworzy:
 
-* Kontroler filmów ( *controllers/MoviesController. cs* )
-* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron ( *widoki/filmy/ \* . cshtml* )
+* Kontroler filmów (*controllers/MoviesController. cs*)
+* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron (*widoki/filmy/ \* . cshtml*)
 
 Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 
 * W systemie Linux wyeksportuj ścieżkę narzędzia do tworzenia szkieletu:
 
@@ -218,7 +226,7 @@ Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 
 * Uruchom następujące polecenie:
 
@@ -240,7 +248,7 @@ Nie można jeszcze użyć stron szkieletowych, ponieważ baza danych nie istniej
 
 Użyj funkcji [migracji](xref:data/ef-mvc/migrations) EF Core, aby utworzyć bazę danych. Migracje to zestaw narzędzi umożliwiających tworzenie i aktualizowanie bazy danych w celu dopasowania jej do modelu danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -296,7 +304,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
   Jeśli zostanie wyświetlony wyjątek podobny do jednego z następujących:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
@@ -316,11 +324,11 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
   > [!NOTE]
   > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj strony **Edytuj** , **szczegóły** i **Usuń** .
+* Przetestuj strony **Edytuj**, **szczegóły** i **Usuń** .
 
 ## <a name="dependency-injection-in-the-controller"></a>Wstrzykiwanie zależności w kontrolerze
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Otwórz plik *controllers/MoviesController. cs* i zapoznaj się z konstruktorem:
 
@@ -426,7 +434,7 @@ Ponieważ `Model` obiekt jest silnie określony (jako `IEnumerable<Movie>` obiek
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij plik *Movie.cs*.
 
@@ -455,7 +463,7 @@ Zaktualizuj plik *Movie.cs* przy użyciu następującego kodu:
 
 ## <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -513,7 +521,7 @@ Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microso
 
 ASP.NET Core jest skompilowany przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) muszą być zarejestrowane przy użyciu funkcji "DI" podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka. W tej sekcji rejestrujesz kontekst bazy danych przy użyciu funkcji DI Container.
 
-Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
+Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
 
 ```csharp
 using MvcMovie.Data;
@@ -522,7 +530,7 @@ using Microsoft.EntityFrameworkCore;
 
 Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
 
@@ -540,7 +548,7 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 
 Dodaj parametry połączenia do *appsettings.json* pliku:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
 
@@ -556,7 +564,7 @@ Kompiluj projekt jako sprawdzenie błędów kompilatora.
 
 Użyj narzędzia do tworzenia szkieletu, aby utworzyć strony z przykładem tworzenie, odczytywanie, aktualizowanie i usuwanie (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -579,14 +587,14 @@ Ukończ okno dialogowe **Dodawanie kontrolera** :
 
 Program Visual Studio tworzy:
 
-* Kontroler filmów ( *controllers/MoviesController. cs* )
-* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron ( *widoki/filmy/ \* . cshtml* )
+* Kontroler filmów (*controllers/MoviesController. cs*)
+* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron (*widoki/filmy/ \* . cshtml*)
 
 Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 
 * W systemie Linux wyeksportuj ścieżkę narzędzia do tworzenia szkieletu:
 
@@ -604,7 +612,7 @@ Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 
 * Uruchom następujące polecenie:
 
@@ -626,7 +634,7 @@ Nie można jeszcze użyć stron szkieletowych, ponieważ baza danych nie istniej
 
 Użyj funkcji [migracji](xref:data/ef-mvc/migrations) EF Core, aby utworzyć bazę danych. Migracje to zestaw narzędzi umożliwiających tworzenie i aktualizowanie bazy danych w celu dopasowania jej do modelu danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -682,7 +690,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
   Jeśli zostanie wyświetlony wyjątek podobny do jednego z następujących:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
@@ -702,11 +710,11 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
   > [!NOTE]
   > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj strony **Edytuj** , **szczegóły** i **Usuń** .
+* Przetestuj strony **Edytuj**, **szczegóły** i **Usuń** .
 
 ## <a name="dependency-injection-in-the-controller"></a>Wstrzykiwanie zależności w kontrolerze
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Otwórz plik *controllers/MoviesController. cs* i zapoznaj się z konstruktorem:
 
@@ -812,7 +820,7 @@ Ponieważ `Model` obiekt jest silnie określony (jako `IEnumerable<Movie>` obiek
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij **film** klasy.
 
@@ -831,7 +839,7 @@ Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Naz
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -856,9 +864,9 @@ Ukończ okno dialogowe **Dodawanie kontrolera** :
 
 Program Visual Studio tworzy:
 
-* [Klasa kontekstu bazy danych](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core ( *Data/MvcMovieContext. cs* )
-* Kontroler filmów ( *controllers/MoviesController. cs* )
-* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron ( *widoki/filmy/ \* . cshtml* )
+* [Klasa kontekstu bazy danych](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core (*Data/MvcMovieContext. cs*)
+* Kontroler filmów (*controllers/MoviesController. cs*)
+* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron (*widoki/filmy/ \* . cshtml*)
 
 Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (tworzenie, odczytywanie, aktualizowanie i usuwanie) jest znane jako *rusztowanie*.
 
@@ -867,7 +875,7 @@ Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipe
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 * Zainstaluj narzędzie do tworzenia szkieletu:
 
   ```dotnetcli
@@ -892,7 +900,7 @@ Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipe
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 * Zainstaluj narzędzie do tworzenia szkieletu:
 
   ```dotnetcli
@@ -913,7 +921,7 @@ Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipe
 
 Jeśli uruchomisz aplikację i klikniesz link do **filmu MVC** , zostanie wyświetlony komunikat o błędzie podobny do następującego:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```
 An unhandled exception occurred while processing the request.
@@ -946,7 +954,7 @@ W tej sekcji zostały wykonane następujące zadania:
 * Dodawanie początkowej migracji.
 * Zaktualizuj bazę danych przy użyciu początkowej migracji.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -979,7 +987,7 @@ Schemat bazy danych jest oparty na modelu określonym w `MvcMovieContext` klasie
 
 ASP.NET Core jest skompilowany przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane przy użyciu funkcji "DI" podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Narzędzie do tworzenia szkieletów automatycznie utworzyło kontekst bazy danych i zarejestrował go przy użyciu DI kontenera.
 
@@ -1021,7 +1029,7 @@ Pominięto [krok migracji](#pmc).
   > [!NOTE]
   > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj linki **Edytuj** , **Szczegóły** i **Usuń**.
+* Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
 Zapoznaj się z `Startup` klasą:
 

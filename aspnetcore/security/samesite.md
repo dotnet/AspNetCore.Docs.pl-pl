@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f1aa388015bd540a6fda263eac53753ada63bf79
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051619"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673994"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>Pracuj z SameSite cookie s w ASP.NET Core
 
@@ -166,7 +166,7 @@ W programie `Startup.Configure` Dodaj kod, który wywołuje <xref:Microsoft.AspN
 
 W programie `Startup.ConfigureServices` Dodaj kod podobny do poniższego:
 
-::: moniker range="= aspnetcore-3.1"
+::: moniker range=">= aspnetcore-3.1"
 
 [!code-csharp[](samesite/sample/Startup31.cs?name=snippet)]
 
@@ -202,7 +202,7 @@ Przetestuj aplikacje sieci Web przy użyciu wersji klienta, która może być zg
 
 ### <a name="test-with-chrome"></a>Testowanie za pomocą przeglądarki Chrome
 
-Chrome 78 + daje mylące wyniki, ponieważ ma tymczasowe środki zaradcze. Program Chrome 78 + tymczasowe środki zaradcze dopuszczają cookie niedawne dwa minuty. Program Chrome 76 lub 77 z włączonymi odpowiednimi flagami testu zapewnia dokładniejsze wyniki. Aby przetestować nowe zachowanie SameSite, przełącz `chrome://flags/#same-site-by-default-cookies` się na **włączone** . Starsze wersje programu Chrome (75 i poniżej) zostały zgłoszone w celu niepowodzenia z nowym `None` ustawieniem. Zobacz [Obsługa starszych przeglądarek](#sob) w tym dokumencie.
+Chrome 78 + daje mylące wyniki, ponieważ ma tymczasowe środki zaradcze. Program Chrome 78 + tymczasowe środki zaradcze dopuszczają cookie niedawne dwa minuty. Program Chrome 76 lub 77 z włączonymi odpowiednimi flagami testu zapewnia dokładniejsze wyniki. Aby przetestować nowe zachowanie SameSite, przełącz `chrome://flags/#same-site-by-default-cookies` się na **włączone**. Starsze wersje programu Chrome (75 i poniżej) zostały zgłoszone w celu niepowodzenia z nowym `None` ustawieniem. Zobacz [Obsługa starszych przeglądarek](#sob) w tym dokumencie.
 
 Firma Google nie udostępnia starszych wersji programu Chrome. Postępuj zgodnie z instrukcjami podanymi w części [pobieranie chromu](https://www.chromium.org/getting-involved/download-chromium) , aby przetestować starsze wersje programu Chrome. **Nie** Pobieraj programu Chrome z linków dostarczonych przez wyszukiwanie starszych wersji programu Chrome.
 

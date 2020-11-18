@@ -167,7 +167,7 @@
           href: /learn/modules/create-razor-pages-aspnet-core/
         - name: Aplikacje internetowego interfejsu API >>
           displayName: tutorial
-          href: /learn/modules/build-web-api-net-core/
+          href: /learn/modules/build-web-api-aspnet-core/
         - name: Mikrousługi natywne dla chmury
           items:
             - name: Tworzenie i wdrażanie >>

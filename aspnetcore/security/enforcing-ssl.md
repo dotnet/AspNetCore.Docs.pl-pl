@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051125"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703673"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -136,7 +136,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
 ::: moniker-end
 
-* W obszarze programowanie Ustaw adres URL HTTPS w *launchsettings.jsna* . Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
+* W obszarze programowanie Ustaw adres URL HTTPS w *launchsettings.jsna*. Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
 
 * Skonfiguruj punkt końcowy adresu URL HTTPS dla wdrożenia publicznej krawędzi serwera [Kestrel](xref:fundamentals/servers/kestrel) lub serwera [HTTP.sys](xref:fundamentals/servers/httpsys) . Aplikacja używa tylko **jednego portu HTTPS** . Oprogramowanie pośredniczące odnajduje port za pośrednictwem programu <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
@@ -193,7 +193,7 @@ Ustawienia domyślne oprogramowania pośredniczącego do wysyłania [Status307Te
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Podczas konfigurowania usług w programie *Startup.cs* :
+Podczas konfigurowania usług w programie *Startup.cs*:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -214,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-Podczas konfigurowania usług w programie *Startup.cs* :
+Podczas konfigurowania usług w programie *Startup.cs*:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -323,7 +323,7 @@ Usuń zaznaczenie pola wyboru **Konfiguruj dla protokołu HTTPS** .
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli) 
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli) 
 
 Użyj `--no-https` opcji. Na przykład
 
@@ -450,6 +450,20 @@ Aby rozwiązać problemy z certyfikatami w programie Visual Studio, zobacz [bł�
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express certyfikat SSL używany z programem Visual Studio
 
 Aby rozwiązać problemy z certyfikatem IIS Express, wybierz pozycję **napraw** w Instalatorze programu Visual Studio. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/dotnet/aspnetcore/issues/16892)w serwisie GitHub.
+
+<a name="trust-ff"></a>
+
+### <a name="firefox-sec_error_inadequate_key_usage-certificate-error"></a>Błąd certyfikatu Firefox SEC_ERROR_INADEQUATE_KEY_USAGE
+
+Przeglądarka Firefox używa własnego magazynu certyfikatów i w związku z tym nie ufa [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) lub certyfikatów deweloperów [Kestrel](xref:fundamentals/servers/kestrel) .
+
+Aby użyć programu Firefox z IIS Express lub Kestrel, ustaw  `security.enterprise_roots.enabled` = `true`
+
+1. Wprowadź `about:config` w przeglądarce Firefox.
+1. Wybierz pozycję **Zaakceptuj ryzyko i Kontynuuj** , jeśli akceptujesz ryzyko.
+1. Wybierz pozycję **Pokaż wszystko**
+1. Zbiór `security.enterprise_roots.enabled` = `true`
+1. Zamknij i uruchom ponownie przeglądarkę Firefox
 
 ## <a name="additional-information"></a>Dodatkowe informacje
 

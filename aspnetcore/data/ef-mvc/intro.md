@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550650"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703738"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Samouczek: wprowadzenie do EF Core w aplikacji sieci Web ASP.NET MVC
 
@@ -76,7 +76,7 @@ Użytkownicy mogą wyświetlać i aktualizować informacje dotyczące uczniów, 
 1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
 1. W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
 1. W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `ContosoUniversity` w polu **Nazwa projektu**. Ważne jest, aby użyć tej dokładnej nazwy, z uwzględnieniem wielkich liter, więc każdy pasuje do tego, `namespace` kiedy kod jest kopiowany.
-1. Wybierz przycisk **Utwórz**.
+1. Wybierz pozycję **Utwórz**.
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
     1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
     1. **ASP.NET Core aplikacji sieci Web (Model-View-Controller)**.
@@ -90,7 +90,7 @@ Kilka podstawowych zmian powoduje skonfigurowanie menu witryny, układu i strony
 Otwórz *Widok widoki/Shared/_Layout. cshtml* i wprowadź następujące zmiany:
 
 * Zmień każde wystąpienie elementu `ContosoUniversity` na `Contoso University` . Istnieją trzy wystąpienia.
-* Dodaj pozycje menu dla **informacji o** programie, **studentów** , **kursy** , **Instruktorzy** i **działy** , a następnie usuń wpis menu **prywatność** .
+* Dodaj pozycje menu dla **informacji o** programie, **studentów**, **kursy**, **Instruktorzy** i **działy**, a następnie usuń wpis menu **prywatność** .
 
 Powyższe zmiany są wyróżnione w następującym kodzie:
 
@@ -110,7 +110,7 @@ Ten samouczek używa SQL Server, a pakiet dostawcy to [Microsoft. EntityFramewor
 
 Pakiet EF SQL Server i jego zależności `Microsoft.EntityFrameworkCore` oraz `Microsoft.EntityFrameworkCore.Relational` zapewnia obsługę środowiska uruchomieniowego dla EF.
 
-Dodaj pakiet NuGet [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) oraz pakiet NuGet [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) . W konsoli Menedżera programów (PMC) wprowadź następujące polecenia, aby dodać pakiety NuGet:
+Dodaj pakiet NuGet [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) oraz pakiet NuGet [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) . W konsoli Menedżera pakietów (PMC) wprowadź następujące polecenia, aby dodać pakiety NuGet:
 
 ```powershell
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
@@ -142,7 +142,7 @@ W folderze *modele* Utwórz `Student` klasę o następującym kodzie:
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-`ID`Właściwość jest kolumną klucza podstawowego ( **PK** ) tabeli bazy danych, która odnosi się do tej klasy. Domyślnie EF interpretuje właściwość o nazwie `ID` lub `classnameID` jako klucz podstawowy. Na przykład klucz podstawowy może być nazwany, `StudentID` a nie `ID` .
+`ID`Właściwość jest kolumną klucza podstawowego (**PK**) tabeli bazy danych, która odnosi się do tej klasy. Domyślnie EF interpretuje właściwość o nazwie `ID` lub `classnameID` jako klucz podstawowy. Na przykład klucz podstawowy może być nazwany, `StudentID` a nie `ID` .
 
 `Enrollments`Właściwość jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji zawierają inne jednostki, które są powiązane z tą jednostką. `Enrollments`Właściwość `Student` jednostki:
 
@@ -150,7 +150,7 @@ W folderze *modele* Utwórz `Student` klasę o następującym kodzie:
 * Jeśli konkretny `Student` wiersz w bazie danych ma dwa powiązane `Enrollment` wiersze:
   * `Student` `Enrollments` Właściwość nawigacji tej jednostki zawiera te dwie `Enrollment` jednostki.
   
-`Enrollment` wiersze zawierają wartość klucza podstawowego ucznia w `StudentID` kolumnie klucz obcy ( **FK** ).
+`Enrollment` wiersze zawierają wartość klucza podstawowego ucznia w `StudentID` kolumnie klucz obcy (**FK**).
 
 Jeśli właściwość nawigacji może zawierać wiele jednostek:
 
@@ -231,7 +231,7 @@ Otwórz *appsettings.json* plik i Dodaj parametry połączenia, jak pokazano w n
 
 Dodaj <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> do `ConfigureServices` , jak pokazano w poniższym kodzie:
 
-[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=1=2,22-23)]
+[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=6)]
 
 `AddDatabaseDeveloperPageExceptionFilter`Zapewnia przydatne informacje o błędzie w [środowisku programistycznym](xref:fundamentals/environments).
 
@@ -442,7 +442,7 @@ Użytkownicy mogą wyświetlać i aktualizować informacje dotyczące uczniów, 
 
 * Zaczekaj, aż pojawi się okno dialogowe **Nowa aplikacja sieci Web ASP.NET Core** .
 
-* Wybierz pozycję **.NET Core** , **ASP.NET Core 2,2** i szablon **aplikacji sieci Web (Model-View-Controller)** .
+* Wybierz pozycję **.NET Core**, **ASP.NET Core 2,2** i szablon **aplikacji sieci Web (Model-View-Controller)** .
 
 * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
 
@@ -458,7 +458,7 @@ Otwórz *Widok widoki/Shared/_Layout. cshtml* i wprowadź następujące zmiany:
 
 * Zmień każde wystąpienie "ContosoUniversity" na "Uniwersytet firmy Contoso". Istnieją trzy wystąpienia.
 
-* Dodaj pozycje menu dla **informacji o** programie, **studentów** , **kursy** , **Instruktorzy** i **działy** , a następnie usuń wpis menu **prywatność** .
+* Dodaj pozycje menu dla **informacji o** programie, **studentów**, **kursy**, **Instruktorzy** i **działy**, a następnie usuń wpis menu **prywatność** .
 
 Zmiany są wyróżnione.
 
@@ -652,7 +652,7 @@ Zamknij okno przeglądarki.
 
 Jeśli okno SSOX nie jest jeszcze otwarte, wybierz je z menu **Widok** w programie Visual Studio.
 
-W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych** , a następnie kliknij pozycję Nazwa bazy danych, która znajduje się w parametrach połączenia w *appsettings.json* pliku.
+W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych**, a następnie kliknij pozycję Nazwa bazy danych, która znajduje się w parametrach połączenia w *appsettings.json* pliku.
 
 Rozwiń węzeł **tabele** , aby wyświetlić tabele w bazie danych.
 

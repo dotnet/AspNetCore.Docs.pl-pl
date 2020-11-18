@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: ca49564136e030fdaf86eefac56146fcb79f7bad
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
+ms.sourcegitcommit: 54fdca99f30b18d69cf0753ca3c84c7dab8f2b0e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673955"
+ms.locfileid: "94691173"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core Blazor operacje przekazywania plików
 
@@ -53,6 +53,9 @@ Składnik, który odbiera plik obrazu, może wywołać `RequestImageFileAsync` w
 
 Poniższy przykład ilustruje przekazywanie wielu plików obrazu w składniku. `InputFileChangeEventArgs.GetMultipleFiles` umożliwia odczytywanie wielu plików. Określ maksymalną liczbę plików, które należy odczytać, aby uniemożliwić złośliwemu użytkownikowi przekazanie większej liczby plików niż oczekiwano. `InputFileChangeEventArgs.File` zezwala na odczytywanie pierwszego i tylko pliku, jeśli przekazywanie plików nie obsługuje wielu plików.
 
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs> znajduje się w <xref:Microsoft.AspNetCore.Components.Forms?displayProperty=fullName> przestrzeni nazw, co jest zazwyczaj jedną z przestrzeni nazw w pliku aplikacji `_Imports.razor` .
+
 ```razor
 <h3>Upload PNG images</h3>
 
@@ -75,7 +78,7 @@ Poniższy przykład ilustruje przekazywanie wielu plików obrazu w składniku. `
 }
 
 @code {
-    IList<string> imageDataUrls = new List<string>();
+    private IList<string> imageDataUrls = new List<string>();
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {

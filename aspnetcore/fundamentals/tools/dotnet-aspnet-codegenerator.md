@@ -4,7 +4,7 @@ author: rick-anderson
 description: ASP.NET Core projekty są szkieletami poleceń dotnet ASPNET-CodeGenerator.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 07/04/2019
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 88d761b09833a14de5af9f9610753174867aa09a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8844b0014cac58f414d79df4c64bc0efac75bfe1
+ms.sourcegitcommit: d29535ea0b4197443fd884aaa6e5b4b763d04fc7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059991"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920706"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet ASPNET-CodeGenerator
 
@@ -31,9 +31,9 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 `dotnet aspnet-codegenerator` -Uruchamia aparat tworzenia szkieletów ASP.NET Core. `dotnet aspnet-codegenerator` jest wymagany tylko dla szkieletu z wiersza polecenia, nie jest potrzebny do korzystania z szkieletów w programie Visual Studio.
 
-Ten artykuł dotyczy [zestawu .NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) i nowszych wersji.
+## <a name="install-and-update-aspnet-codegenerator"></a>Instalowanie i aktualizowanie ASPNET-CodeGenerator
 
-## <a name="installing-aspnet-codegenerator"></a>Instalowanie ASPNET-CodeGenerator
+Zainstaluj [zestaw SDK platformy .NET](https://dotnet.microsoft.com/download).
 
 `dotnet-aspnet-codegenerator` jest [globalnym narzędziem](/dotnet/core/tools/global-tools) , które musi być zainstalowane. Następujące polecenie instaluje najnowszą stabilną wersję `dotnet-aspnet-codegenerator` Narzędzia:
 
@@ -45,6 +45,17 @@ Następujące polecenie aktualizuje `dotnet-aspnet-codegenerator` najnowszą sta
 
 ```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
+```
+
+## <a name="uninstall-aspnet-codegenerator"></a>Odinstaluj ASPNET-CodeGenerator
+
+Może być konieczne odinstalowanie programu w `aspnet-codegenerator` celu rozwiązania problemów. Na przykład jeśli zainstalowano wersję zapoznawczą programu `aspnet-codegenerator` , należy ją odinstalować przed zainstalowaniem wydanej wersji.
+
+Następujące polecenia Odinstalowuje `dotnet-aspnet-codegenerator` Narzędzie i instaluje najnowszą stabilną wersję:
+
+```dotnetcli
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 ## <a name="synopsis"></a>Streszczenie
@@ -106,10 +117,10 @@ Określa ścieżkę do pliku projektu do uruchomienia (nazwa folderu lub pełna 
 
 Poniższe sekcje zawierają szczegółowe informacje o opcjach dostępnych dla obsługiwanych generatorów:
 
-* Warstwowy
+* Obszar
 * Kontroler
 * Identity  
-* Razorstronic
+* Razorstrona
 * Widok
 
 <a name="area"></a>
@@ -155,7 +166,7 @@ dotnet aspnet-codegenerator controller -h
 
 Aby zapoznać się z przykładem, zobacz Tworzenie [szkieletu modelu filmu](xref:tutorials/first-mvc-app/adding-model) `dotnet aspnet-codegenerator controller` .
 
-### <a name="no-locrazorpage"></a>Razorstronic
+### <a name="no-locrazorpage"></a>Razorstrona
 
 <a name="rp"></a>
 

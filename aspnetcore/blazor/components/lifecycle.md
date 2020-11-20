@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 8a2dc802a1d05ead7445e350e3aef0ce7dfb2bb8
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637720"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981924"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -39,7 +39,7 @@ Zdarzenia cyklu życia składnika:
 1. Jeśli składnik jest renderowany po raz pierwszy w żądaniu:
    * Utwórz wystąpienie składnika.
    * Wykonaj iniekcję właściwości. Uruchom [`SetParametersAsync`](#before-parameters-are-set) .
-   * Wywołanie [`OnInitialized{Async}`](#component-initialization-methods) . W przypadku <xref:System.Threading.Tasks.Task> zwrócenia elementu <xref:System.Threading.Tasks.Task> jest oczekiwany, a następnie jest renderowany składnik. Jeśli element <xref:System.Threading.Tasks.Task> nie jest zwracany, renderowanie składnika.
+   * Wywołanie [`OnInitialized{Async}`](#component-initialization-methods) . W przypadku <xref:System.Threading.Tasks.Task> zwrócenia elementu <xref:System.Threading.Tasks.Task> jest oczekiwany, a składnik jest renderowany. Jeśli element <xref:System.Threading.Tasks.Task> nie jest zwracany, składnik jest renderowany.
 1. Wywołaj [`OnParametersSet{Async}`](#after-parameters-are-set) i Renderuj składnik. Jeśli <xref:System.Threading.Tasks.Task> jest zwracany z `OnParametersSetAsync` , <xref:System.Threading.Tasks.Task> jest oczekiwany, a następnie składnik jest ponownie renderowany.
 
 ![Zdarzenia cyklu życia składnika::: No-Loc (Razor)::: składnik w::: No-Loc (Blazor)::](lifecycle/_static/lifecycle1.png)
@@ -109,7 +109,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor Serveraplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *twice* :
+Blazor Serveraplikacje, które dwukrotnie wywołują [swoje wywołanie zawartości](xref:blazor/fundamentals/additional-scenarios#render-mode) <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> *twice*:
 
 * Gdy składnik jest początkowo renderowany statycznie jako część strony.
 * Drugi raz, gdy przeglądarka nawiąże połączenie z serwerem.
@@ -230,7 +230,7 @@ Aby uzyskać informacje na temat obsługi błędów podczas wykonywania metody c
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Stanowe Ponowne nawiązywanie połączenia po przeprowadzeniu prerenderowania
 
-W Blazor Server aplikacji, gdy <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> jest <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , składnik jest początkowo renderowany statycznie jako część strony. Gdy przeglądarka nawiąże połączenie z serwerem, składnik jest renderowany *ponownie* , a składnik jest teraz interaktywny. Jeśli [`OnInitialized{Async}`](#component-initialization-methods) istnieje metoda cyklu życia do inicjowania składnika, metoda jest wykonywana *dwukrotnie* :
+W Blazor Server aplikacji, gdy <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> jest <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , składnik jest początkowo renderowany statycznie jako część strony. Gdy przeglądarka nawiąże połączenie z serwerem, składnik jest renderowany *ponownie*, a składnik jest teraz interaktywny. Jeśli [`OnInitialized{Async}`](#component-initialization-methods) istnieje metoda cyklu życia do inicjowania składnika, metoda jest wykonywana *dwukrotnie*:
 
 * Gdy składnik jest wstępnie renderowany statycznie.
 * Po nawiązaniu połączenia z serwerem.

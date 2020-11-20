@@ -19,16 +19,19 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 680b44a705b66be0aab824487119cdb118b44d0f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055311"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981885"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Grupy Azure Active Directory (AAD), role administratorów i role zdefiniowane przez użytkownika
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Javier Calvarro Nelson](https://github.com/javiercn)
+
+> [!NOTE]
+> Ten artykuł ma zastosowanie do Blazor aplikacji ASP.NET Core w wersji 3,1 z programem Microsoft Identity v 1.0 i została zaplanowana do aktualizacji na 5,0 przy użyciu wersji Identity 2.0. Aby uzyskać więcej informacji, zobacz [ Blazor WASM with AAD/B2C Groups and Roles (#17683 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/17683).
 
 Azure Active Directory (AAD) oferuje kilka metod autoryzacji, które mogą być połączone z ASP.NET Core Identity :
 
@@ -515,7 +518,7 @@ Wywołanie interfejs API programu Graph **przez aplikację interfejsu API serwer
 
 ### <a name="azure-configuration"></a>Konfiguracja platformy Azure
 
-* Upewnij się, że rejestracja aplikacji *serwera* ma przydaną **aplikację** (nie **delegowaną** ) interfejs API programu Graph zakresem `Directory.Read.All` , który jest poziomem dostępu o najniższych uprawnieniach dla grup zabezpieczeń. Upewnij się, że do zakresu zastosowana jest zgoda administratora, po wprowadzeniu przypisania zakresu.
+* Upewnij się, że rejestracja aplikacji *serwera* ma przydaną **aplikację** (nie **delegowaną**) interfejs API programu Graph zakresem `Directory.Read.All` , który jest poziomem dostępu o najniższych uprawnieniach dla grup zabezpieczeń. Upewnij się, że do zakresu zastosowana jest zgoda administratora, po wprowadzeniu przypisania zakresu.
 * Przypisz nowy wpis tajny klienta do aplikacji *serwera* . Zanotuj wpis tajny konfiguracji aplikacji w sekcji [Ustawienia aplikacji](#app-settings) .
 
 ### <a name="app-settings"></a>Ustawienia aplikacji

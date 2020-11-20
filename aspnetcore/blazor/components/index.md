@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637707"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981872"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -268,7 +268,7 @@ Aby uzyskać informacje dotyczące przechwytywania wszystkich parametrów trasy 
 
 ### <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą mieć *Parametry składnika* , które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą zawierać *Parametry składnika*, które są zdefiniowane przy użyciu publicznej prostej lub złożonej właściwości w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 `Components/ChildComponent.razor`:
 
@@ -289,7 +289,7 @@ Zgodnie z Konwencją wartość atrybutu, która składa się z kodu C#, jest prz
 Aby uzyskać więcej informacji, zobacz <xref:mvc/views/razor>.
 
 > [!WARNING]
-> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników* , zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
+> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników*, zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
 
 ## <a name="child-content"></a>Zawartość podrzędna
 
@@ -887,7 +887,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 84747e2d13275a23e83dc2dc0f666cb0c8d001b1
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634629"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981950"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
@@ -148,7 +148,7 @@ Blazor Program zawiera wbudowane `InputRadio` i `InputRadioGroup` składniki upr
 
 ### <a name="component-virtualization"></a>Wirtualizacja składników
 
-Popraw postrzeganą wydajność renderowania składników przy użyciu Blazor wbudowanej obsługi wirtualizacji platformy. Aby uzyskać więcej informacji, zobacz <xref:blazor/forms-validation#radio-buttons>.
+Popraw postrzeganą wydajność renderowania składników przy użyciu Blazor wbudowanej obsługi wirtualizacji platformy. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/virtualization>.
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` Obsługa zdarzeń
 
@@ -353,7 +353,7 @@ Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania do
    ```
    <!-- review: KeepAlivePingInterval not found in RC1. Try testing with RC1. See https://github.com/dotnet/aspnetcore/pull/22565/files see C:/Users/riande/source/repos/WebApplication128/WebApplication128 -->
 
-### <a name="containers"></a>Kontenery
+### <a name="containers"></a>Containers
 
 Przed rozpoczęciem programu .NET 5,0, kompilowanie i publikowanie *pliku dockerfile* dla aplikacji ASP.NET Core wymaga pobrania całego zestaw .NET Core SDK i ASP.NET Core obrazu. W tej wersji jest zmniejszana liczba bajtów obrazów zestawu SDK, a bajty pobierane dla ASP.NET Core obrazu są w znacznym stopniu eliminowane. Aby uzyskać więcej informacji, zobacz [ten komentarz dotyczący problemu](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)w serwisie GitHub.
 
@@ -390,7 +390,7 @@ Zobacz [uwierzytelnianie Kerberos i kontrola dostępu oparta na rolach (RBAC)](x
 
 Dane JSON mogą być odczytywane i zapisywane przy `HttpRequest` `HttpResponse` użyciu <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> metod New i `WriteAsJsonAsync` Extension. Te metody rozszerzające używają [System.Text.Jsna](xref:System.Text.Json) serializatorze do obsługi danych JSON. Nowa `HasJsonContentType` Metoda rozszerzenia może również sprawdzić, czy żądanie ma typ zawartości JSON.
 
-Metody rozszerzenia JSON można łączyć z [routingiem punktów końcowych](xref:fundamentals/routing) w celu utworzenia interfejsów API JSON w stylu programowania wywoływanych * **Route do Code** _. Jest to nowa opcja dla deweloperów, którzy chcą w prosty sposób tworzyć podstawowe interfejsy API JSON. Na przykład aplikacja sieci Web, która ma tylko kilku punktów końcowych, może wybrać użycie trasy do kodu, a nie pełnej funkcjonalności ASP.NET Core MVC:
+Metody rozszerzenia JSON można łączyć z [routingiem punktów końcowych](xref:fundamentals/routing) w celu utworzenia interfejsów API JSON w stylu programowania wywoływanych ***Route do Code** _. Jest to nowa opcja dla deweloperów, którzy chcą w prosty sposób tworzyć podstawowe interfejsy API JSON. Na przykład aplikacja sieci Web, która ma tylko kilku punktów końcowych, może wybrać użycie trasy do kodu, a nie pełnej funkcjonalności ASP.NET Core MVC:
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>

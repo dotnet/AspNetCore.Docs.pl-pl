@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 49300d32096e577db9b13a0510cc310b91ddb51d
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 4de34a75da932b41190caa8434ac5be8cc0710fd
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365356"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981937"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Powiązanie modelu w ASP.NET Core
 
@@ -67,7 +67,7 @@ Struktura następnie wywołuje `GetById` metodę, przekazując wartość 2 dla `
 
 W poprzednim przykładzie elementy docelowe powiązań modelu to parametry metody, które są typami prostymi. Elementy docelowe mogą być również właściwościami typu złożonego. Po pomyślnym powiązaniu każdej właściwości [Walidacja modelu](xref:mvc/models/validation) jest wykonywana dla tej właściwości. Rekord danych powiązanych z modelem oraz wszelkie błędy powiązań lub walidacji są przechowywane w [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) lub [PageModel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState). Aby dowiedzieć się, czy ten proces zakończył się pomyślnie, aplikacja sprawdza flagę [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) .
 
-## <a name="targets"></a>Targets (Obiekty docelowe)
+## <a name="targets"></a>Obiekty docelowe
 
 Powiązanie modelu próbuje znaleźć wartości dla następujących rodzajów obiektów docelowych:
 
@@ -204,7 +204,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
-* [Typu](xref:System.ComponentModel.BooleanConverter)
+* [Wartość logiczna](xref:System.ComponentModel.BooleanConverter)
 * [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
@@ -214,7 +214,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
+* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)
@@ -304,7 +304,7 @@ Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszac
 
 ### <a name="modelbinder-attribute"></a>[ModelBinder] — atrybut
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> można zastosować do typów, właściwości lub parametrów. Umożliwia określenie typu spinacza modelu używanego do powiązania określonego wystąpienia lub typu. Na przykład:
+<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> można zastosować do typów, właściwości lub parametrów. Umożliwia określenie typu spinacza modelu używanego do powiązania określonego wystąpienia lub typu. Przykład:
 
 ```C#
 [HttpPost]
@@ -339,7 +339,7 @@ Można stosować tylko do właściwości modelu, a nie do parametrów metody. Un
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -384,7 +384,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 
@@ -488,7 +488,7 @@ Przekazany plik uwzględniony w żądaniu HTTP.  Obsługiwane jest również `IE
 
 ### <a name="cancellationtoken"></a>CancellationToken
 
-Służy do anulowania działania w kontrolerach asynchronicznych.
+Akcje można opcjonalnie powiązać `CancellationToken` jako parametr. To wiąże <xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted> się z tym, że w przypadku przerwania połączenia z żądaniem http zostało przerwane. Akcje mogą używać tego parametru, aby anulować długotrwałe operacje asynchroniczne, które są wykonywane w ramach akcji kontrolera.
 
 ### <a name="formcollection"></a>Formularz
 
@@ -616,7 +616,7 @@ Struktura następnie wywołuje `GetById` metodę, przekazując wartość 2 dla `
 
 W poprzednim przykładzie elementy docelowe powiązań modelu to parametry metody, które są typami prostymi. Elementy docelowe mogą być również właściwościami typu złożonego. Po pomyślnym powiązaniu każdej właściwości [Walidacja modelu](xref:mvc/models/validation) jest wykonywana dla tej właściwości. Rekord danych powiązanych z modelem oraz wszelkie błędy powiązań lub walidacji są przechowywane w [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) lub [PageModel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState). Aby dowiedzieć się, czy ten proces zakończył się pomyślnie, aplikacja sprawdza flagę [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) .
 
-## <a name="targets"></a>Targets (Obiekty docelowe)
+## <a name="targets"></a>Obiekty docelowe
 
 Powiązanie modelu próbuje znaleźć wartości dla następujących rodzajów obiektów docelowych:
 
@@ -753,7 +753,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
-* [Typu](xref:System.ComponentModel.BooleanConverter)
+* [Wartość logiczna](xref:System.ComponentModel.BooleanConverter)
 * [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
@@ -763,7 +763,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
+* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)
@@ -867,7 +867,7 @@ Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszac
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -912,7 +912,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 

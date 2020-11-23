@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 45e2a1a5e6a9f00294147db769454b78c5b866e5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059939"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417581"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>Tworzenie internetowych interfejsów API JSON z usługi gRPC
 
@@ -39,7 +39,7 @@ Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
 
 gRPC to nowoczesny sposób komunikacji między aplikacjami. gRPC używa protokołu HTTP/2, przesyłania strumieniowego, protobuf i komunikatów z wiadomościami, aby tworzyć wysokiej wydajności usługi w czasie rzeczywistym.
 
-Jedno ograniczenie z gRPC nie dotyczy każdej platformy. Przeglądarki nie obsługują w pełni protokołu HTTP/2, co umożliwia tworzenie i wprowadzanie danych w notacji JSON do aplikacji przeglądarki. Nawet w przypadku korzyści, które gRPC, REST i JSON mają ważne miejsce w nowoczesnych aplikacjach. Kompilowanie interfejsów API sieci Web gRPC * **i** _ JSON pozwala uzyskać niepożądane koszty związane z programowaniem aplikacji.
+Jedno ograniczenie z gRPC nie dotyczy każdej platformy. Przeglądarki nie obsługują w pełni protokołu HTTP/2, co umożliwia tworzenie i wprowadzanie danych w notacji JSON do aplikacji przeglądarki. Nawet w przypadku korzyści, które gRPC, REST i JSON mają ważne miejsce w nowoczesnych aplikacjach. Kompilowanie interfejsów API sieci Web gRPC ***i** _ JSON pozwala uzyskać niepożądane koszty związane z programowaniem aplikacji.
 
 W tym dokumencie omówiono sposób tworzenia interfejsów API sieci Web JSON przy użyciu usług gRPC Services.
 
@@ -137,7 +137,7 @@ Chcemy mierzyć zainteresowanie deweloperem w interfejsie API HTTP gRPC. Jeśli 
 
 Największą różnicą między GRPC-Gateway i gRPC interfejsu API protokołu HTTP jest GRPC-Gateway używa generowania kodu w celu utworzenia serwera zwrotnego serwera proxy. Zwrotny serwer proxy tłumaczy wywołania RESTful na gRPC, a następnie wysyła je do usługi gRPC.
 
-Aby zainstalować i użyć usługi GRPC-Gateway, zapoznaj się z [dokumentacją GRPC-Gateway](https://grpc-ecosystem.github.io/grpc-gateway/docs/usage.html).
+Aby zainstalować i użyć usługi GRPC-Gateway, zobacz [plik Readme GRPC-Gateway](https://github.com/grpc-ecosystem/grpc-gateway/#grpc-gateway).
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

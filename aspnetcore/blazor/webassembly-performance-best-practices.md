@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 423745d734d8da2b8f3f974f9b4dd1a0265d4877
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054739"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417386"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
@@ -32,8 +32,8 @@ Autorzy [Pranav Krishnamoorthy](https://github.com/pranavkm) i [Steve Sanderson]
 
 Blazor WebAssembly jest starannie zaprojektowany i zoptymalizowany pod kątem wysokiej wydajności w najbardziej realistycznych scenariuszach interfejsu użytkownika aplikacji. Jednak generowanie najlepszych wyników zależy od deweloperów korzystających z odpowiednich wzorców i funkcji. Należy wziąć pod uwagę następujące aspekty:
 
-* **Przepływność środowiska uruchomieniowego** : kod platformy .NET działa w interpreterze środowiska uruchomieniowego webassembly, więc PRZEPŁYWNOŚĆ procesora CPU jest ograniczona. W wymagających scenariuszach aplikacja korzysta z [optymalizacji szybkości renderowania](#optimize-rendering-speed).
-* **Czas uruchamiania** : aplikacja przenosi środowisko uruchomieniowe platformy .NET do przeglądarki, dlatego ważne jest, aby użyć funkcji [minimalizujących rozmiar pobieranych aplikacji](#minimize-app-download-size).
+* **Przepływność środowiska uruchomieniowego**: kod platformy .NET działa w interpreterze środowiska uruchomieniowego webassembly, więc PRZEPŁYWNOŚĆ procesora CPU jest ograniczona. W wymagających scenariuszach aplikacja korzysta z [optymalizacji szybkości renderowania](#optimize-rendering-speed).
+* **Czas uruchamiania**: aplikacja przenosi środowisko uruchomieniowe platformy .NET do przeglądarki, dlatego ważne jest, aby użyć funkcji [minimalizujących rozmiar pobieranych aplikacji](#minimize-app-download-size).
 
 ## <a name="optimize-rendering-speed"></a>Optymalizuj szybkość renderowania
 
@@ -150,7 +150,7 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/components/virtualization>.
 
 Większość Blazor składników nie wymaga agresywnej optymalizacji. Wynika to z faktu, że większość składników nie jest często powtarzana w interfejsie użytkownika i nie jest uruchamiana z dużą częstotliwością. Na przykład `@page` składniki i składniki reprezentujące jednopoziomowe elementy interfejsu użytkownika, takie jak okna dialogowe lub formularze, najprawdopodobniej pojawiają się tylko jeden w czasie i ponownie renderują w odpowiedzi na gest użytkownika. Te składniki nie tworzą obciążenia o wysokim poziomie renderowania, dzięki czemu można swobodnie korzystać z dowolnej kombinacji potrzebnych funkcji, bez obaw o wydajność renderowania.
 
-Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Przykład:
+Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Na przykład:
 
  * Duże zagnieżdżone formularze mogą mieć setki poszczególnych wejść, etykiet i innych elementów.
  * Siatki mogą zawierać tysiące komórek.
@@ -297,7 +297,7 @@ W poprzednim przykładzie `Data` różni się dla każdej komórki, ale `Options
 
 `<CascadingValue>`Składnik ma opcjonalny parametr o nazwie `IsFixed` .
 
- * Jeśli `IsFixed` wartość jest `false` (domyślnie), a następnie każdy odbiorca wartości kaskadowej skonfiguruje subskrypcję do odbierania powiadomień o zmianach. W takim przypadku każda z nich `[CascadingParameter]` jest **znacznie droższa** niż regularna `[Parameter]` ze względu na śledzenie subskrypcji.
+ * Jeśli `IsFixed` wartość jest `false` (domyślnie), a następnie każdy odbiorca wartości kaskadowej skonfiguruje subskrypcję do odbierania powiadomień o zmianach. W takim przypadku każdy `[CascadingParameter]` jest **znacznie droższy** niż regularna `[Parameter]` ze względu na śledzenie subskrypcji.
  * Jeśli `IsFixed` wartość jest `true` (na przykład `<CascadingValue Value="@someValue" IsFixed="true">` ), adresaci Pobiera wartość początkową, ale *nie* konfiguruje żadnej subskrypcji do odbierania aktualizacji. W takim przypadku każdy `[CascadingParameter]` jest lekki i **nie jest droższy** od zwykłego `[Parameter]` .
 
 Tak, gdzie to możliwe, należy używać `IsFixed="true"` na wartościach kaskadowych. Można to zrobić zawsze, gdy wartość jest podawana nie zmienia się w czasie. We wspólnym wzorcu, w którym składnik przechodzi `this` jako wartość kaskadowo, należy użyć `IsFixed="true"` :

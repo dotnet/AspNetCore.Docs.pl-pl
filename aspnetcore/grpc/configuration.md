@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować gRPC dla aplikacji .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 11/23/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: e0b782a254cafc440638ca77a3b9ac885dc3575e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059965"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417594"
 ---
 # <a name="grpc-for-net-configuration"></a>Konfiguracja programu gRPC for .NET
 
 ## <a name="configure-services-options"></a>Konfigurowanie opcji usług
 
-usługi gRPC Services są skonfigurowane `AddGrpc` w *Startup.cs* . W poniższej tabeli opisano opcje konfigurowania usług gRPC:
+usługi gRPC Services są skonfigurowane `AddGrpc` w *Startup.cs*. W poniższej tabeli opisano opcje konfigurowania usług gRPC:
 
 | Opcja | Wartość domyślna | Opis |
 | ------ | ------------- | ----------- |
@@ -65,6 +65,7 @@ Konfiguracja klienta gRPC jest ustawiona na `GrpcChannelOptions` . W poniższej 
 | <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | Maksymalny rozmiar komunikatu w bajtach, który może zostać odebrany przez klienta. Jeśli klient odbiera komunikat, który przekracza ten limit, zgłasza wyjątek. Zwiększenie tej wartości umożliwia klientowi otrzymywanie większych komunikatów, ale może mieć negatywny wpływ na użycie pamięci. Po ustawieniu na wartość `null` rozmiar komunikatu jest nieograniczony. |
 | Poświadczenia | `null` | `ChannelCredentials`Wystąpienie. Poświadczenia służą do dodawania metadanych uwierzytelniania do wywołań gRPC. |
 | CompressionProviders | gzip | Kolekcja dostawców kompresji służąca do kompresowania i dekompresowania komunikatów. Niestandardowych dostawców kompresji można utworzyć i dodać do kolekcji. Domyślnie skonfigurowane dostawcy obsługują kompresję w formacie **gzip** . |
+| ThrowOperationCanceledOnCancellation | `false` | Jeśli jest ustawiona na, klienci zgłaszają w `true` <xref:System.OperationCanceledException> przypadku anulowania wywołania lub przekroczenia jego terminu ostatecznego. |
 
 Następujący kod:
 

@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: a9494feacbe783b20a9f5eb98ef9e481f2c713fa
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360895"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417633"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
@@ -98,7 +98,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz menu linki **Razor PagesMovie** , **Home** i **privacy**. Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* .
+Wybierz menu linki **Razor PagesMovie**, **Home** i **privacy**. Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* .
 
 Otwórz i Przeanalizuj plik *Pages/Shared/_Layout. cshtml* .
 
@@ -119,7 +119,7 @@ Rozważ następujące znaczniki ze *stron/filmów/pliku Index . cshtml* :
 
 Poprzedni wyróżniony znacznik jest przykładem Razor przejścia do języka C#. `{`Znaki i `}` należy ująć w blok kodu w języku C#.
 
-`PageModel`Klasa bazowa zawiera `ViewData` Właściwość słownika, która może służyć do przekazywania danych do widoku. Obiekty są dodawane do `ViewData` słownika przy użyciu znaku * **wartość** _ wzorca. W poprzednim przykładzie `Title` Właściwość jest dodawana do `ViewData` słownika.
+`PageModel`Klasa bazowa zawiera `ViewData` Właściwość słownika, która może służyć do przekazywania danych do widoku. Obiekty są dodawane do `ViewData` słownika przy użyciu znaku ***wartość** _ wzorca. W poprzednim przykładzie `Title` Właściwość jest dodawana do `ViewData` słownika.
 
 `Title`Właściwość jest używana w pliku _Pages/shared/_Layout. cshtml *. Poniższy znacznik pokazuje pierwsze kilka wierszy pliku *_Layout. cshtml* .
 
@@ -151,7 +151,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
 1. Zapisz zmiany i przetestuj aplikację, wybierając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-1. Przetestuj **Narzędzia główne** , **RpMovie** , **Create** , **Edytuj** i **Delete** linki. Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+1. Przetestuj **Narzędzia główne**, **RpMovie**, **Create** , **Edytuj** i **Delete** linki. Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
 > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Aby uzyskać instrukcje dotyczące dodawania przecinków dziesiętnych, zobacz ten problem w usłudze [GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
@@ -189,7 +189,7 @@ Przejrzyj pliki *stron/filmów/ Create . cshtml* Razor :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Program Visual Studio wyświetla następujące znaczniki w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 
@@ -237,12 +237,6 @@ Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post"
 
 ::: moniker range="< aspnetcore-3.0"
 
-Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-Ten samouczek służy do badania Razor stron utworzonych przez tworzenie szkieletów w [poprzednim samouczku](xref:tutorials/razor-pages/model).
-
-[Wyświetl lub Pobierz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22) przykład.
-
 ## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>CreateStrony, Delete , szczegóły i edycja
 
 Sprawdzanie *stron/filmów/ Index cshtml.cs* strony:
@@ -284,7 +278,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 <xref:System.Web.Mvc.Html.DisplayNameExtensions.DisplayNameFor%2A?displayProperty=nameWithType>Pomocnik html sprawdza właściwość, do `Title` której istnieje odwołanie w wyrażeniu lambda, aby określić nazwę wyświetlaną. Wyrażenie lambda jest sprawdzane, a nie oceniane. Oznacza to, że nie ma żadnych naruszeń dostępu `model` , gdy, `model.Movie` , lub `model.Movie[0]` są `null` puste. Gdy wyrażenie lambda zostanie obliczone, na przykład w przypadku `@Html.DisplayFor(modelItem => item.Title)` wartości właściwości modelu są oceniane.
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz menu linki **Razor PagesMovie** , **Home** i **privacy**. Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* .
+Wybierz menu linki **Razor PagesMovie**, **Home** i **privacy**. Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* .
 
 Otwórz i Przeanalizuj plik *Pages/Shared/_Layout. cshtml* .
 
@@ -332,7 +326,7 @@ Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-hel
 
 Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-Przetestuj inne linki ( **Home** , **RpMovie** , **Create** , **Edit** i **Delete** ). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+Przetestuj inne linki (**Home**, **RpMovie**, **Create** , **Edit** i **Delete** ). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
 > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Ten [problem w usłudze GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) zawiera instrukcje dotyczące dodawania przecinków dziesiętnych.
@@ -367,7 +361,7 @@ Przejrzyj pliki *stron/filmów/ Create . cshtml* Razor :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Program Visual Studio Wyświetla `<form method="post">` tag w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 

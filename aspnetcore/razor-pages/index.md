@@ -1,7 +1,7 @@
 ---
 title: Wprowadzenie do Razor stron w ASP.NET Core
 author: Rick-Anderson
-description: Dowiedz się Razor , jak strony w ASP.NET Core sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i wydajniejsze niż używanie MVC.
+description: Wyjaśnia Razor , jak strony w ASP.NET Core sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i wydajniejsze niż używanie MVC.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
@@ -18,16 +18,15 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 89e06d00e9312a428c4e164b0dc60527fe12d904
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: bc5f3c85d7ace120dec8369f4550a097b4f258ce
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430877"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417646"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Wprowadzenie do Razor stron w ASP.NET Core
 
-::: moniker range=">= aspnetcore-3.0"
 
 [Rick Anderson](https://twitter.com/RickAndMSFT) i [Ryan Nowak](https://github.com/rynowak)
 
@@ -39,25 +38,49 @@ Ten dokument zawiera wprowadzenie do Razor stron. Nie jest to samouczek krok po 
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
+
+[!INCLUDE[](~/includes/net-core-prereqs-mac-5.0.md)]
+
+---
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="rpvs17"></a>
 
 ## <a name="create-a-no-locrazor-pages-project"></a>Tworzenie Razor projektu stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobacz Wprowadzenie do [ Razor stron](xref:tutorials/razor-pages/razor-pages-start) Razor .
 
@@ -73,7 +96,7 @@ Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobac
 
 ## <a name="no-locrazor-pages"></a>Razor Page
 
-Razor Strony są włączone w *Startup.cs* :
+Razor Strony są włączone w *Startup.cs*:
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -138,9 +161,9 @@ Zgodnie z Konwencją `PageModel` Klasa jest wywoływana `<PageName>Model` i znaj
 `PageModel`Klasa umożliwia rozdzielenie logiki strony od jej prezentacji. Definiuje procedury obsługi stron dla żądań wysyłanych do strony oraz dane używane do renderowania strony. Ta separacja umożliwia:
 
 * Zarządzanie zależnościami stron przy użyciu [iniekcji zależności](xref:fundamentals/dependency-injection).
-* [Testowanie jednostek](xref:test/razor-pages-tests)
+* [Testowanie jednostkowe](xref:test/razor-pages-tests)
 
-Strona ma `OnPostAsync` *metodę obsługi* , która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Można dodać metody obsługi dla dowolnego zlecenia HTTP. Najczęstsze procedury obsługi to:
+Strona ma `OnPostAsync` *metodę obsługi*, która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Można dodać metody obsługi dla dowolnego zlecenia HTTP. Najczęstsze procedury obsługi to:
 
 * `OnGet` — na potrzeby inicjowania stanu wymaganego dla strony. W poprzednim kodzie `OnGet` Metoda wyświetla stronę *onmode. cshtml* Razor .
 * `OnPost` — na potrzeby obsługi przesłanych formularzy.
@@ -167,7 +190,7 @@ Plik widoku *Pages/Create. cshtml* :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
-Renderowany kod HTML ze *stron/Create. cshtml* :
+Renderowany kod HTML ze *stron/Create. cshtml*:
 
 [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
@@ -216,7 +239,7 @@ Przeglądanie pliku widoku *stron/Create. cshtml* :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml)]
 
-Skojarzona `PageModel` Klasa ( *index.cshtml.cs* ):
+Skojarzona `PageModel` Klasa (*index.cshtml.cs*):
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
@@ -358,7 +381,7 @@ Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Ukła
 
 Zanotujmy Tę stronę, korzystając z zalet niektórych z tych funkcji.
 
-Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml* :
+Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*:
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Shared/_Layout2.cshtml?hightlight=12)]
 
@@ -370,7 +393,7 @@ Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*
 
 Aby uzyskać więcej informacji, zobacz [stronę układu](xref:mvc/views/layout).
 
-Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml* :
+Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml*:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -396,7 +419,7 @@ Dodaj plik *Pages/_ViewImports. cshtml* :
 
 `@namespace`Dyrektywa ustawia przestrzeń nazw dla strony. `@model`Dyrektywa nie musi zawierać przestrzeni nazw.
 
-Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml* , określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
+Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml*, określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
 
 Na przykład `PageModel` Klasa *Pages/Customers/Edit. cshtml. cs* jawnie ustawia przestrzeń nazw:
 
@@ -420,7 +443,7 @@ Zaktualizowane *strony/Create. cshtml* plik widoku z *_ViewImports. cshtml* i po
 
 W poprzednim kodzie, *_ViewImports. cshtml* zaimportował przestrzeń nazw i pomocników tagów. Plik układu zaimportował pliki JavaScript.
 
-Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml* , które przechwytuje walidację po stronie klienta.
+Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml*, które przechwytuje walidację po stronie klienta.
 
 Aby uzyskać więcej informacji o widokach częściowych, zobacz <xref:mvc/views/partial> .
 
@@ -622,17 +645,7 @@ Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilder
 
 ::: moniker range="< aspnetcore-3.0"
 
-[Rick Anderson](https://twitter.com/RickAndMSFT) i [Ryan Nowak](https://github.com/rynowak)
-
-Razor Strony to nowy aspekt ASP.NET Core MVC, który sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i bardziej produktywne.
-
-Jeśli szukasz samouczka korzystającego z podejścia Model-View-Controller, zobacz Wprowadzenie do [ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc).
-
-Ten dokument zawiera wprowadzenie do Razor stron. Nie jest to samouczek krok po kroku. Jeśli okaże się, że niektóre sekcje są zbyt zaawansowane, zobacz [wprowadzenie do Razor stron](xref:tutorials/razor-pages/razor-pages-start). Aby zapoznać się z omówieniem ASP.NET Core, zobacz [wprowadzenie do ASP.NET Core](xref:index).
-
-## <a name="prerequisites"></a>Wymagania wstępne
-
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -650,7 +663,7 @@ Ten dokument zawiera wprowadzenie do Razor stron. Nie jest to samouczek krok po 
 
 ## <a name="create-a-no-locrazor-pages-project"></a>Tworzenie Razor projektu stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobacz Wprowadzenie do [ Razor stron](xref:tutorials/razor-pages/razor-pages-start) Razor .
 
@@ -668,7 +681,7 @@ Uruchom `dotnet new webapp` polecenie w wierszu polecenia.
 
 ## <a name="no-locrazor-pages"></a>Razor Page
 
-Razor Strony są włączone w *Startup.cs* :
+Razor Strony są włączone w *Startup.cs*:
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -733,7 +746,7 @@ Zgodnie z Konwencją `PageModel` Klasa jest wywoływana `<PageName>Model` i znaj
 * Zarządzanie zależnościami stron przy użyciu [iniekcji zależności](xref:fundamentals/dependency-injection).
 * [Testowanie jednostkowe](xref:test/razor-pages-tests) stron.
 
-Strona ma `OnPostAsync` *metodę obsługi* , która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Metody procedury obsługi można dodać dla dowolnego czasownika HTTP. Najczęstsze procedury obsługi to:
+Strona ma `OnPostAsync` *metodę obsługi*, która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Metody procedury obsługi można dodać dla dowolnego czasownika HTTP. Najczęstsze procedury obsługi to:
 
 * `OnGet` — na potrzeby inicjowania stanu wymaganego dla strony. Przykład [OnGet](#OnGet) .
 * `OnPost` — na potrzeby obsługi przesłanych formularzy.
@@ -768,11 +781,11 @@ Razor Domyślnie strony powiążą właściwości tylko z `GET` niezleceniami. U
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Strona główna ( *index. cshtml* ):
+Strona główna (*index. cshtml*):
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml)]
 
-Skojarzona `PageModel` Klasa ( *index.cshtml.cs* ):
+Skojarzona `PageModel` Klasa (*index.cshtml.cs*):
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
 
@@ -874,11 +887,11 @@ Nie trzeba pisać kodu do [weryfikacji przed fałszerstwem](xref:security/anti-r
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
 
-Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml* , *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku Razor widoków konwencjonalnych.
+Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml*, *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku Razor widoków konwencjonalnych.
 
 Zanotujmy Tę stronę, korzystając z zalet niektórych z tych funkcji.
 
-Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml* :
+Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_LayoutSimple.cshtml)]
 
@@ -889,7 +902,7 @@ Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*
 
 Aby uzyskać więcej informacji, zobacz [stronę układu](xref:mvc/views/layout) .
 
-Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml* :
+Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml*:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -915,7 +928,7 @@ Gdy `@namespace` dyrektywa jest używana jawnie na stronie:
 
 Dyrektywa ustawia przestrzeń nazw dla strony. `@model`Dyrektywa nie musi zawierać przestrzeni nazw.
 
-Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml* , określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
+Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml*, określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
 
 Na przykład `PageModel` Klasa *Pages/Customers/Edit. cshtml. cs* jawnie ustawia przestrzeń nazw:
 
@@ -937,7 +950,7 @@ Zaktualizowane *strony/Utwórz plik widoku. cshtml* :
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml* , które przechwytuje walidację po stronie klienta.
+Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml*, które przechwytuje walidację po stronie klienta.
 
 Aby uzyskać więcej informacji o widokach częściowych, zobacz <xref:mvc/views/partial> .
 
@@ -968,7 +981,7 @@ Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują
 
 Nazwa strony jest ścieżką do strony z folderu głównego */Pages* , włącznie z wiodącym `/` (na przykład `/Index` ). Powyższe przykłady generowania adresów URL oferują ulepszone opcje i możliwości funkcjonalne w porównaniu z zakodowana adresem URL. Generowanie adresów URL używa [routingu](xref:mvc/controllers/routing) i może generować i kodować parametry zgodnie ze sposobem zdefiniowania trasy w ścieżce docelowej.
 
-Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana z różnymi `RedirectToPage` parametrami *stron/Customers/Create. cshtml* :
+Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana z różnymi `RedirectToPage` parametrami *stron/Customers/Create. cshtml*:
 
 | RedirectToPage (x)| Strona |
 | ----------------- | ------------ |
@@ -1025,7 +1038,7 @@ W układzie tytuł jest odczytywany ze słownika ViewData:
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core uwidacznia Właściwość [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Controller_TempData) na [kontrolerze](/dotnet/api/microsoft.aspnetcore.mvc.controller). Ta właściwość przechowuje dane, dopóki nie zostanie odczytana. `Keep`Metody i `Peek` mogą służyć do badania danych bez usuwania. `TempData` jest przydatne w przypadku przekierowania, gdy dane są potrzebne dla więcej niż jednego żądania.
+ASP.NET Core uwidacznia Właściwość [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata#Microsoft_AspNetCore_Mvc_Controller_TempData) na [kontrolerze](/dotnet/api/microsoft.aspnetcore.mvc.controller). Ta właściwość przechowuje dane, dopóki nie zostanie odczytana. `Keep`Metody i `Peek` mogą służyć do badania danych bez usuwania. `TempData` jest przydatne w przypadku przekierowania, gdy dane są potrzebne dla więcej niż jednego żądania.
 
 Poniższy kod ustawia wartość `Message` użycia `TempData` :
 

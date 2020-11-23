@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 7f90e4c424aa4bb76be7c226acd2f16261e0dfe6
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981950"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417555"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
@@ -130,7 +130,7 @@ W przypadku OpenAPI domyślnie włączone środowisko uruchamiania aplikacji (F5
 
 ## Blazor
 
-### <a name="performance-improvements"></a>Usprawnienia wydajności
+### <a name="performance-improvements"></a>Ulepszenia wydajności
 
 W przypadku platformy .NET 5 Wprowadziliśmy znaczące ulepszenia Blazor WebAssembly wydajności środowiska uruchomieniowego z określonym fokusem na potrzeby skomplikowanych renderingów interfejsu użytkownika i serializacji JSON. W naszych testach wydajności Blazor WebAssembly w przypadku większości scenariuszy środowisko .NET 5 jest szybsze od dwóch do trzech razy. Aby uzyskać więcej informacji, zobacz [Blog ASP.NET: aktualizacje ASP.NET Core w programie .NET 5 Release Candidate 1](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements).
 
@@ -328,7 +328,7 @@ Poniższy przykład pokazuje, jak określić konkretny punkt końcowy przy użyc
 
 Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania domeny wirtualnej w ramach negocjacji protokołu SSL. W praktyce oznacza to, że nazwa domeny wirtualnej lub nazwa hosta może służyć do identyfikowania punktu końcowego sieci.
 
-## <a name="performance-improvements"></a>Usprawnienia wydajności
+## <a name="performance-improvements"></a>Ulepszenia wydajności
 
 ### <a name="http2"></a>HTTP/2
 
@@ -353,7 +353,7 @@ Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania do
    ```
    <!-- review: KeepAlivePingInterval not found in RC1. Try testing with RC1. See https://github.com/dotnet/aspnetcore/pull/22565/files see C:/Users/riande/source/repos/WebApplication128/WebApplication128 -->
 
-### <a name="containers"></a>Containers
+### <a name="containers"></a>Kontenery
 
 Przed rozpoczęciem programu .NET 5,0, kompilowanie i publikowanie *pliku dockerfile* dla aplikacji ASP.NET Core wymaga pobrania całego zestaw .NET Core SDK i ASP.NET Core obrazu. W tej wersji jest zmniejszana liczba bajtów obrazów zestawu SDK, a bajty pobierane dla ASP.NET Core obrazu są w znacznym stopniu eliminowane. Aby uzyskać więcej informacji, zobacz [ten komentarz dotyczący problemu](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)w serwisie GitHub.
 
@@ -361,7 +361,7 @@ Przed rozpoczęciem programu .NET 5,0, kompilowanie i publikowanie *pliku docker
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Azure Active Directory uwierzytelnianie z firmą Microsoft. Identity . Witrynę
 
-Szablony projektów ASP.NET Core teraz integrują się z usługą <xref:Microsoft.Identity.Web?displayProperty=fullName> w celu obsługi uwierzytelniania przy użyciu [katalogu aktywności platformy Azure](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD). [Microsoft. Identity .. Pakiet internetowy](https://www.nuget.org/packages/Microsoft.Identity.Web/) oferuje następujące informacje:
+Szablony projektów ASP.NET Core teraz integrują się z usługą <xref:Microsoft.Identity.Web?displayProperty=fullName> w celu obsługi uwierzytelniania przy użyciu usługi [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD). [Microsoft. Identity .. Pakiet internetowy](https://www.nuget.org/packages/Microsoft.Identity.Web/) oferuje następujące informacje:
 
 * Lepsze środowisko uwierzytelniania za pomocą usługi Azure AD.
 * Łatwiejszy sposób uzyskiwania dostępu do zasobów platformy Azure w imieniu użytkowników, w tym [Microsoft Graph](/graph/overview). Zobacz [Microsoft. Identity .. Przykład sieci Web](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2), który rozpoczyna się od podstawowej nazwy logowania i przechodzi przez wiele dzierżawców przy użyciu interfejsów API platformy Azure, przy użyciu Microsoft Graph i ochrony własnych interfejsów API. `Microsoft.Identity.Web` jest dostępny razem z platformą .NET 5.

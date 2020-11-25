@@ -5,7 +5,7 @@ description: Dowiedz się, jak tworzyć i używać Razor składników, w tym jak
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/09/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981872"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035687"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
-[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Tobias Bartsch](https://www.aveo-solutions.com/)
+[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), [Scott Addie](https://github.com/scottaddie)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -85,7 +85,7 @@ Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowan
 
 Składniki to zwykłe klasy języka C# i można je umieścić w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w `Pages` folderze. Składniki niestronicowe są często umieszczane w `Shared` folderze lub do folderu niestandardowego dodanego do projektu.
 
-### <a name="namespaces"></a>Namespaces
+### <a name="namespaces"></a>Przestrzenie nazw
 
 Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorSample` i znajduje się `Counter` w `Pages` folderze:
 
@@ -886,6 +886,64 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 ```
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
+
+## <a name="whitespace-rendering-behavior"></a>Zachowanie renderowania odstępów
+
+::: moniker range=">= aspnetcore-5.0"
+
+O ile [`@preservewhitespace`](xref:mvc/views/razor#preservewhitespace) dyrektywa nie jest używana z wartością `true` , dodatkowe odstępy są usuwane domyślnie, jeśli:
+
+* Początkowe lub końcowe w obrębie elementu.
+* Interlinia lub kończąca się w `RenderFragment` parametrze. Na przykład zawartość podrzędna została przeniesiona do innego składnika.
+* Poprzedza lub następuje blok kodu w języku C#, taki jak `@if` lub `@foreach` .
+
+Usunięcie odstępu może mieć wpływ na renderowane dane wyjściowe podczas korzystania z reguły CSS, np `white-space: pre` .. Aby wyłączyć tę optymalizację wydajności i zachować odstęp, wykonaj jedną z następujących czynności:
+
+* Dodaj `@preservewhitespace true` dyrektywę w górnej części `.razor` pliku, aby zastosować preferencję do określonego składnika.
+* Dodaj `@preservewhitespace true` dyrektywę wewnątrz pliku, `_Imports.razor` Aby zastosować preferencję do całego podkatalogu lub całego projektu.
+
+W większości przypadków żadna akcja nie jest wymagana, ponieważ aplikacje zwykle nadal zachowują się normalnie (ale szybciej). W przypadku wyłączania odstępu powoduje dowolnego problemu dla określonego składnika, użyj `@preservewhitespace true` w tym składniku, aby wyłączyć tę optymalizację.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Biały znak jest zachowywany w kodzie źródłowym składnika. Odstępy — renderowanie tekstu tylko w Document Object Model przeglądarki (DOM), nawet gdy nie ma efektu wizualnego.
+
+Rozważmy następujący Razor Kod składnika:
+
+```razor
+<ul>
+    @foreach (var item in Items)
+    {
+        <li>
+            @item.Text
+        </li>
+    }
+</ul>
+```
+
+W poprzednim przykładzie pokazano następujący niezbędny odstęp:
+
+* Poza `@foreach` blokiem kodu.
+* Wokół `<li>` elementu.
+* Wokół `@item.Text` danych wyjściowych.
+
+Lista zawierająca 100 elementów powoduje 402 obszary odstępu, a żaden z dodatkowych białych znaków nie ma wizualnego wpływu na renderowane dane wyjściowe.
+
+Podczas renderowania statycznego kodu HTML dla składników, odstęp wewnątrz znacznika nie jest zachowywany. Na przykład Wyświetl źródło następującego składnika w renderowanych danych wyjściowych:
+
+```razor
+<img     alt="My image"   src="img.png"     />
+```
+
+Odstęp nie jest zachowywany w powyższym Razor znaczniku:
+
+```razor
+<img alt="My image" src="img.png" />
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować aplikację ASP.NET Core przy użyc
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2020
+ms.date: 11/24/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c04dcc65f7518d2d8b32cdce7a7fbb756dd8ec3a
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417542"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035869"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -108,20 +108,20 @@ Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON
 
 <a name="security"></a>
 
-## <a name="security-and-secret-manager"></a>Security and Secret Manager
+## <a name="security-and-user-secrets"></a>Zabezpieczenia i wpisy tajne użytkownika
 
 Wskazówki dotyczące danych konfiguracyjnych:
 
-Nigdy nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu. Za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets) można przechowywać wpisy tajne.
+Nigdy nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu. Za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets) można przechowywać wpisy tajne.
 * Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.
 * Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.
 
-[Domyślnie](#default)program [Secret Manager](xref:security/app-secrets) odczytuje ustawienia konfiguracji po *appsettings.json* i *appSettings.* `Environment` *. JSON*.
+[Domyślnie](#default)Źródło konfiguracji kluczy tajnych użytkownika jest rejestrowane po źródłach konfiguracji JSON. W związku z tym klucze tajne użytkownika mają pierwszeństwo przed kluczami w *appsettings.json* i *appSettings.* `Environment` *. JSON*.
 
 Aby uzyskać więcej informacji na temat przechowywania haseł lub innych poufnych danych:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Menedżer wpisów tajnych używa [dostawcy konfiguracji plików](#fcp) do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.
+* <xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Narzędzie Secret Manager używa [dostawcy konfiguracji plików](#fcp) do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji. Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.
 
@@ -129,7 +129,7 @@ Aby uzyskać więcej informacji na temat przechowywania haseł lub innych poufny
 
 ## <a name="environment-variables"></a>Zmienne środowiskowe
 
-Przy użyciu konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> ładowana konfiguracja ze zmiennej środowiskowej par klucz-wartość po odczytu *appsettings.json* , *appSettings.* `Environment` *. JSON* i [Menedżer wpisów tajnych](xref:security/app-secrets). W związku z tym kluczowe wartości są odczytywane z wartości zastąpienia środowiska odczytywane z *appsettings.json* , *appSettings.* `Environment` *. JSON* i Menedżer wpisów tajnych.
+Przy użyciu konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> ładowana konfiguracja ze zmiennej środowiskowej par klucz-wartość po odczytu *appsettings.json* , *appSettings.* `Environment` *. JSON* i wpisy [tajne użytkownika](xref:security/app-secrets). W związku z tym kluczowe wartości są odczytywane z wartości zastąpienia środowiska odczytywane z *appsettings.json* , *appSettings.* `Environment` *. JSON* i wpisy tajne użytkownika.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -243,7 +243,7 @@ Zmienne środowiskowe ustawione w *launchSettings.jsna* zastępują te ustawieni
 Korzystając z konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> ładuje konfigurację z par klucz-wartość argumentu wiersza polecenia po następujących źródłach konfiguracji:
 
 * *appsettings.json* i *AppSettings*. `Environment` . pliki *JSON* .
-* Wpisy [tajne aplikacji (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.
+* Wpisy [tajne aplikacji](xref:security/app-secrets) w środowisku deweloperskim.
 * Zmienne środowiskowe.
 
 [Domyślnie](#default)wartości konfiguracji ustawione w wierszu polecenia przesłaniają wartości konfiguracyjne ustawione dla wszystkich innych dostawców konfiguracji.
@@ -355,7 +355,7 @@ W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET
 | [Dostawca konfiguracji plików](#file-configuration-provider) | Pliki INI, JSON i XML |
 | [Dostawca konfiguracji klucza dla plików](#key-per-file-configuration-provider) | Pliki katalogu |
 | [Dostawca konfiguracji pamięci](#memory-configuration-provider) | Kolekcje w pamięci |
-| [Menedżer wpisów tajnych](xref:security/app-secrets)  | Plik w katalogu profilu użytkownika |
+| [Wpisy tajne użytkownika](xref:security/app-secrets) | Plik w katalogu profilu użytkownika |
 
 Źródła konfiguracji są odczytywane w kolejności, w jakiej zostały określone dostawcy konfiguracji. Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.
 
@@ -363,7 +363,7 @@ Typową sekwencją dostawców konfiguracji jest:
 
 1. *appsettings.json*
 1. *AppSettings*. `Environment` . *kod JSON*
-1. [Menedżer wpisów tajnych](xref:security/app-secrets)
+1. [Wpisy tajne użytkownika](xref:security/app-secrets)
 1. Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).
 1. Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).
 
@@ -865,7 +865,7 @@ Poniższe zasady dotyczą aplikacji korzystających z [hosta sieci Web](xref:fun
 * Podano konfigurację aplikacji z:
   * *appsettings.json* przy użyciu [dostawcy konfiguracji plików](#file-configuration-provider).
   * *appSettings. {Environment}. JSON* przy użyciu [dostawcy konfiguracji pliku](#file-configuration-provider).
-  * [Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku przy użyciu zestawu wpisów.
+  * [Klucze tajne użytkownika](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku przy użyciu zestawu wpisów.
   * Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).
   * Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).
 
@@ -880,7 +880,7 @@ Aby zabezpieczyć poufne dane konfiguracji, należy zastosować następujące ro
 Aby uzyskać więcej informacji, zobacz następujące tematy:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Menedżer wpisów tajnych używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym. Dostawca konfiguracji plików został opisany w dalszej części tego tematu.
+* <xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Narzędzie Secret Manager używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym. Dostawca konfiguracji plików został opisany w dalszej części tego tematu.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji. Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.
 
@@ -983,7 +983,7 @@ W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET
 | [Dostawca konfiguracji plików](#file-configuration-provider) | Pliki (INI, JSON, XML) |
 | [Dostawca konfiguracji klucza dla plików](#key-per-file-configuration-provider) | Pliki katalogu |
 | [Dostawca konfiguracji pamięci](#memory-configuration-provider) | Kolekcje w pamięci |
-| Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tematy dotyczące *zabezpieczeń* ) | Plik w katalogu profilu użytkownika |
+| Wpisy [tajne użytkownika](xref:security/app-secrets) (tematy dotyczące *zabezpieczeń* ) | Plik w katalogu profilu użytkownika |
 
 Źródła konfiguracji są odczytywane w kolejności, w jakiej dostawcy konfiguracji są określeni podczas uruchamiania. Dostawcy konfiguracji opisane w tym temacie są opisane w kolejności alfabetycznej, a nie w kolejności, w jakiej kod ich rozmieszcza. Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.
 
@@ -991,7 +991,7 @@ Typową sekwencją dostawców konfiguracji jest:
 
 1. Pliki ( *appsettings.json* , *appSettings. { Environment}. JSON*, gdzie `{Environment}` to bieżące środowisko hostingu aplikacji)
 1. [Usługa Azure Key Vault](xref:security/key-vault-configuration)
-1. Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tylko środowisko programistyczne)
+1. Wpisy [tajne użytkownika](xref:security/app-secrets) (tylko środowisko programistyczne)
 1. Zmienne środowiskowe
 1. Argumenty wiersza polecenia
 
@@ -1067,7 +1067,7 @@ Aby uaktywnić konfigurację wiersza polecenia, <xref:Microsoft.Extensions.Confi
 `CreateDefaultBuilder` ładuje również:
 
 * Opcjonalna konfiguracja z *appsettings.json* i *appSettings. { Environment}. JSON* — pliki.
-* Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.
+* Wpisy [tajne użytkownika](xref:security/app-secrets) w środowisku deweloperskim.
 * Zmienne środowiskowe.
 
 `CreateDefaultBuilder` dodaje dostawcę konfiguracji wiersza polecenia Last. Argumenty wiersza polecenia przekazane w czasie wykonywania zastępują konfigurację ustawioną przez innych dostawców.
@@ -1182,7 +1182,7 @@ Aby uaktywnić konfigurację zmiennych środowiskowych, wywołaj <xref:Microsoft
 
 * Konfiguracja aplikacji z nieoznaczonych zmiennych środowiskowych przez wywołanie `AddEnvironmentVariables` bez prefiksu.
 * Opcjonalna konfiguracja z *appsettings.json* i *appSettings. { Environment}. JSON* — pliki.
-* Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.
+* Wpisy [tajne użytkownika](xref:security/app-secrets) w środowisku deweloperskim.
 * Argumenty wiersza polecenia.
 
 Dostawca konfiguracji zmiennych środowiskowych jest wywoływany po ustanowieniu konfiguracji z poziomu kluczy tajnych użytkownika i plików *AppSettings* . Wywołanie dostawcy w tym miejscu pozwala odczytywać zmienne środowiskowe w czasie wykonywania w celu przesłania konfiguracji ustawionych przez klucze tajne użytkownika i pliki *AppSettings* .
@@ -1342,7 +1342,7 @@ Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#defaul
 `CreateDefaultBuilder` ładuje również:
 
 * Zmienne środowiskowe.
-* Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.
+* Wpisy [tajne użytkownika](xref:security/app-secrets) w środowisku deweloperskim.
 * Argumenty wiersza polecenia.
 
 Dostawca konfiguracji JSON został ustanowiony jako pierwszy. W związku z tym klucze tajne użytkownika, zmienne środowiskowe i argumenty wiersza polecenia przesłaniają konfigurację ustawioną przez pliki *AppSettings* .

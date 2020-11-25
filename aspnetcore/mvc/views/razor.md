@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059198"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035713"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)i [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) ( *. Razor* ).
+Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) (*. Razor*).
 
 ## <a name="rendering-html"></a>Renderowanie HTML
 
@@ -658,7 +658,7 @@ Razor uwidacznia `Model` Właściwość do uzyskiwania dostępu do modelu przeka
 
 Dla Razor przykładu stron przedstawionych w poniższej tabeli:
 
-* Każda Strona importuje *strony/_ViewImports. cshtml* .
+* Każda Strona importuje *strony/_ViewImports. cshtml*.
 * *Strona/_ViewImports. cshtml* zawiera `@namespace Hello.World` .
 * Każda Strona ma `Hello.World` jako element główny przestrzeni nazw.
 
@@ -694,6 +694,20 @@ Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z plikie
 ::: moniker range="< aspnetcore-3.0"
 
 `@page`Dyrektywa w pierwszym wierszu pliku *. cshtml* wskazuje, że plik jest Razor stroną. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index>.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### `@preservewhitespace`
+
+*Ten scenariusz dotyczy tylko Razor składników ( `.razor` ).*
+
+Gdy jest ustawiona na `false` (domyślnie), biały znak w renderowanej adjustacji ze Razor składników ( `.razor` ) jest usuwany, jeśli:
+
+* Początkowe lub końcowe w obrębie elementu.
+* Interlinia lub kończąca się w `RenderFragment` parametrze. Na przykład zawartość podrzędna została przeniesiona do innego składnika.
+* Poprzedza lub następuje blok kodu w języku C#, taki jak `@if` lub `@foreach` .
 
 ::: moniker-end
 
@@ -969,7 +983,7 @@ Kompilowanie projektu w konfiguracji *debugowania* powoduje zwrócenie następuj
            Index.g.cshtml.cs
 ```
 
-Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml* , Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs* .
+Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml*, Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs*.
 
 ::: moniker-end
 
@@ -994,8 +1008,8 @@ Ustaw punkt przerwania na `return csharpDocument;` instrukcji `CustomTemplateEng
 RazorAparat widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach. Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:
 
 * Źródło na podstawie pliku:
-  * W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter. Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml* , */views/Home/test.cshtml* i innymi wariantami wielkości liter.
-  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i with `EmbeddedFileProvider` ) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, w odniesieniu do `return View("Test")` */views/Home/test.cshtml* .
+  * W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter. Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml*, */views/Home/test.cshtml* i innymi wariantami wielkości liter.
+  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i with `EmbeddedFileProvider` ) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, w odniesieniu do `return View("Test")` */views/Home/test.cshtml*.
 * Wstępnie skompilowane widoki: w przypadku ASP.NET Core 2,0 i nowszych wyszukiwanie wstępnie skompilowanych widoków nie uwzględnia wielkości liter we wszystkich systemach operacyjnych. Zachowanie jest takie samo jak zachowanie dostawcy plików fizycznych w systemie Windows. Jeśli dwa skompilowane widoki różnią się tylko wielkością liter, wynik wyszukiwania jest niejednoznaczny.
 
 Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i katalogów do wielkości liter:

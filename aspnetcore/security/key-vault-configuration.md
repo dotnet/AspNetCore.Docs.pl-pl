@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: fcd5524bed11cca2380ffd8956f437f742729b55
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 7f5cd3de38f1e45d9b188c513a0e62ca658b2992
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417617"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035908"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault dostawcę konfiguracji w programie ASP.NET Core
 
@@ -54,7 +54,7 @@ Aby uzyskać więcej informacji na temat konfigurowania przykładowej aplikacji 
 
 ## <a name="secret-storage-in-the-development-environment"></a>Magazyn tajny w środowisku programistycznym
 
-Ustaw wpisy tajne lokalnie przy użyciu [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Gdy aplikacja Przykładowa zostanie uruchomiona na komputerze lokalnym w środowisku deweloperskim, wpisy tajne są ładowane z lokalnego magazynu lokalnych wpisów tajnych.
+Ustaw wpisy tajne lokalnie przy użyciu [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Po uruchomieniu przykładowej aplikacji na komputerze lokalnym w środowisku programistycznym klucze tajne są ładowane z magazynu kluczy tajnych użytkownika lokalnego.
 
 Narzędzie Secret Manager wymaga `<UserSecretsId>` właściwości w pliku projektu aplikacji. Ustaw wartość właściwości ( `{GUID}` ) na dowolny unikatowy identyfikator GUID:
 
@@ -398,7 +398,7 @@ Aby uzyskać więcej informacji na temat konfigurowania przykładowej aplikacji 
 
 ## <a name="secret-storage-in-the-development-environment"></a>Magazyn tajny w środowisku programistycznym
 
-Ustaw wpisy tajne lokalnie przy użyciu [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Gdy aplikacja Przykładowa zostanie uruchomiona na komputerze lokalnym w środowisku deweloperskim, wpisy tajne są ładowane z lokalnego magazynu lokalnych wpisów tajnych.
+Ustaw wpisy tajne lokalnie przy użyciu [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Po uruchomieniu przykładowej aplikacji na komputerze lokalnym w środowisku programistycznym klucze tajne są ładowane z magazynu kluczy tajnych użytkownika lokalnego.
 
 Narzędzie Secret Manager wymaga `<UserSecretsId>` właściwości w pliku projektu aplikacji. Ustaw wartość właściwości ( `{GUID}` ) na dowolny unikatowy identyfikator GUID:
 

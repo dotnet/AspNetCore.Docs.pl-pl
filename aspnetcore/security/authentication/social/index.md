@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.openlocfilehash: f7bc7c6a14d014f8c3c283fb09718b9191b7b478
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 11/25/2020
-ms.locfileid: "95870454"
+ms.locfileid: "96035830"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym w ASP.NET Core
 
@@ -46,9 +46,9 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 * Tworzenie nowego projektu.
 * Wybierz pozycję **ASP.NET Core aplikacja sieci Web** i przycisk **dalej**.
-* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację**. Wybierz pozycję **Utwórz**.
+* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację**. Wybierz przycisk **Utwórz**.
 * Wybierz najnowszą wersję ASP.NET Core z listy rozwijanej (**ASP.NET Core {X. Y}**), a następnie wybierz pozycję **aplikacja sieci Web**.
-* W obszarze **uwierzytelnianie** wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników**. Wybierz pozycję **OK**.
+* W obszarze **uwierzytelnianie** wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników**. Wybierz przycisk **OK**.
 * W oknie **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -86,7 +86,7 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>Używanie klucza tajnego do przechowywania tokenów przypisanych przez dostawców logowania
 
-Dostawcy logowania społecznościowego przypisują **tokeny** i **identyfikatory aplikacji** podczas procesu rejestracji. Dokładne nazwy tokenów różnią się w zależności od dostawcy. Te tokeny reprezentują poświadczenia używane przez aplikację w celu uzyskania dostępu do interfejsu API. Tokeny stanowią "wpisy tajne", które mogą być połączone z konfiguracją aplikacji za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets#secret-manager). Program Secret Manager jest bezpieczniejszym rozwiązaniem do przechowywania tokenów w pliku konfiguracji, na przykład *appsettings.json* .
+Dostawcy logowania społecznościowego przypisują **tokeny** i **identyfikatory aplikacji** podczas procesu rejestracji. Dokładne nazwy tokenów różnią się w zależności od dostawcy. Te tokeny reprezentują poświadczenia używane przez aplikację w celu uzyskania dostępu do interfejsu API. Tokeny stanowią "klucze tajne użytkownika", które mogą być połączone z konfiguracją aplikacji za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets#secret-manager). Klucze tajne użytkownika są bezpieczniejszym rozwiązaniem alternatywnym do przechowywania tokenów w pliku konfiguracji, na przykład *appsettings.json* .
 
 > [!IMPORTANT]
 > Menedżer wpisów tajnych służy tylko do celów deweloperskich. Za pomocą [dostawcy konfiguracji Azure Key Vault](xref:security/key-vault-configuration)można przechowywać i chronić wpisy tajne środowiska Azure test i produkcyjne.

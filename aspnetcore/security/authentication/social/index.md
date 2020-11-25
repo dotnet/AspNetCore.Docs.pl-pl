@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053309"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870454"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym w ASP.NET Core
 
 Autorzy [Valeriy Novytskyy](https://github.com/01binary) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-W tym samouczku przedstawiono sposób tworzenia aplikacji ASP.NET Core 3,0, która umożliwia użytkownikom logowanie się przy użyciu uwierzytelniania OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania.
+W tym samouczku przedstawiono sposób tworzenia aplikacji ASP.NET Core, która umożliwia użytkownikom logowanie się przy użyciu protokołu OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania.
 
 Dostawcy [serwisu Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins)i [Microsoft](xref:security/authentication/microsoft-logins) są objęci następującymi sekcjami i używają początkowego projektu utworzonego w tym artykule. Inni dostawcy są dostępni w pakietach innych firm, takich jak [ASPNET. Security. OAuth. Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) i [ASPNET. Security. OpenID Connect. Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers).
 
@@ -45,11 +45,11 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Tworzenie nowego projektu.
-* Wybierz pozycję **ASP.NET Core aplikacja sieci Web** i przycisk **dalej** .
-* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację** . Wybierz pozycję **Utwórz** .
-* Wybierz najnowszą wersję ASP.NET Core z listy rozwijanej ( **ASP.NET Core {X. Y}** ), a następnie wybierz pozycję **aplikacja sieci Web** .
-* W obszarze **uwierzytelnianie** wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników** . Wybierz pozycję **OK** .
-* W oknie **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Utwórz** .
+* Wybierz pozycję **ASP.NET Core aplikacja sieci Web** i przycisk **dalej**.
+* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację**. Wybierz pozycję **Utwórz**.
+* Wybierz najnowszą wersję ASP.NET Core z listy rozwijanej (**ASP.NET Core {X. Y}**), a następnie wybierz pozycję **aplikacja sieci Web**.
+* W obszarze **uwierzytelnianie** wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników**. Wybierz pozycję **OK**.
+* W oknie **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -79,7 +79,7 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 ## <a name="apply-migrations"></a>Zastosuj migracje
 
 * Uruchom aplikację i wybierz łącze **zarejestruj** .
-* Wprowadź adres e-mail i hasło dla nowego konta, a następnie wybierz pozycję **zarejestruj** .
+* Wprowadź adres e-mail i hasło dla nowego konta, a następnie wybierz pozycję **zarejestruj**.
 * Postępuj zgodnie z instrukcjami, aby zastosować migracje.
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]

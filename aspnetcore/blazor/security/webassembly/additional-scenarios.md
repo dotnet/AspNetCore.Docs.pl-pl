@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: baed18df2d127b592f420aac0432e0b28f076d46
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: bb502533bca24e82792db8814b75b16407f20339
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508048"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870389"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -34,7 +34,7 @@ Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](ht
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> jest <xref:System.Net.Http.DelegatingHandler> używany do dołączania tokenów dostępu do <xref:System.Net.Http.HttpResponseMessage> wystąpień wychodzących. Tokeny są uzyskiwane przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> usługi, która jest rejestrowana przez platformę. Jeśli nie można uzyskać tokenu, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> zgłaszany jest wyjątek. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> ma <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu.
 
-Dla wygody, struktura zapewnia <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> wstępnie skonfigurowany adres podstawowy aplikacji jako autoryzowany adres URL. **Tokeny dostępu są dodawane tylko wtedy, gdy identyfikator URI żądania jest w podstawowym identyfikatorze URI aplikacji.** Gdy identyfikatory URI żądania wychodzącego nie znajdują się w podstawowym identyfikatorze URI aplikacji, użyj [niestandardowej `AuthorizationMessageHandler` klasy ( *zalecane* )](#custom-authorizationmessagehandler-class) lub [Skonfiguruj `AuthorizationMessageHandler`](#configure-authorizationmessagehandler).
+Dla wygody, struktura zapewnia <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> wstępnie skonfigurowany adres podstawowy aplikacji jako autoryzowany adres URL. **Tokeny dostępu są dodawane tylko wtedy, gdy identyfikator URI żądania jest w podstawowym identyfikatorze URI aplikacji.** Gdy identyfikatory URI żądania wychodzącego nie znajdują się w podstawowym identyfikatorze URI aplikacji, użyj [niestandardowej `AuthorizationMessageHandler` klasy (*zalecane*)](#custom-authorizationmessagehandler-class) lub [Skonfiguruj `AuthorizationMessageHandler`](#configure-authorizationmessagehandler).
 
 > [!NOTE]
 > Oprócz konfiguracji aplikacji klienta dostępu do interfejsu API serwera, interfejs API serwera musi również zezwalać na żądania między źródłami (CORS), gdy klient i serwer nie znajdują się na tym samym adresie podstawowym. Aby uzyskać więcej informacji na temat konfiguracji funkcji CORS po stronie serwera, zobacz sekcję [udostępnianie zasobów między źródłami (CORS)](#cross-origin-resource-sharing-cors) w dalszej części tego artykułu.
@@ -884,6 +884,31 @@ app.UseEndpoints(endpoints =>
 
 W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.cshtml` stronę w folderze aplikacji serwera `Pages` . Wklej zawartość z *`Client`* `wwwroot/index.html` pliku aplikacji do `Pages/_Host.cshtml` pliku. Aktualizuj zawartość pliku:
 
+::: moniker range=">= aspnetcore-5.0"
+
+* Dodaj `@page "_Host"` na początku pliku.
+* Zastąp `<div id="app">Loading...</div>` tag następującym:
+
+  ```cshtml
+  <div id="app">
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
+              render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </div>
+  ```
+  
+  W poprzednim przykładzie symbol zastępczy `{CLIENT APP ASSEMBLY NAME}` jest nazwą zestawu aplikacji klienta (na przykład `BlazorSample.Client` ).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * Dodaj `@page "_Host"` na początku pliku.
 * Zastąp `<app>Loading...</app>` tag następującym:
 
@@ -891,7 +916,7 @@ W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.c
   <app>
       @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
       {
-          <component type="typeof(Wasm.Authentication.Client.App)" 
+          <component type="typeof({CLIENT APP ASSEMBLY NAME}.App)" 
               render-mode="Static" />
       }
       else
@@ -900,6 +925,10 @@ W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.c
       }
   </app>
   ```
+  
+  W poprzednim przykładzie symbol zastępczy `{CLIENT APP ASSEMBLY NAME}` jest nazwą zestawu aplikacji klienta (na przykład `BlazorSample.Client` ).
+
+::: moniker-end
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>Opcje aplikacji hostowanych i dostawców logowania innych firm
 

@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88e97d88341789a76a79da8d92098c2e00396fe7
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053712"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870428"
 ---
 # <a name="request-features-in-aspnet-core"></a>Zażądaj funkcji w ASP.NET Core
 
 Przez [Steve Smith](https://ardalis.com/)
 
-`HttpContext`Interfejs API używany przez aplikacje i oprogramowanie pośredniczące do przetwarzania żądań ma warstwę abstrakcji undernieth ją jako *interfejsy funkcji* . Każdy interfejs funkcji zawiera szczegółowy podzestaw funkcji uwidocznionych przez program `HttpContext` . Te interfejsy mogą być dodawane, modyfikowane, opakowane, zastępowane lub nawet usuwane przez serwer lub oprogramowanie pośredniczące, gdy żądanie jest przetwarzane bez konieczności ponownego implementowania całego programu `HttpContext` . Mogą być również używane do makietowania funkcjonalności podczas testowania.
+`HttpContext`Interfejs API używany przez aplikacje i oprogramowanie pośredniczące do przetwarzania żądań ma warstwę abstrakcji poniżej o nazwie *interfejsy funkcji*. Każdy interfejs funkcji zawiera szczegółowy podzestaw funkcji uwidocznionych przez program `HttpContext` . Te interfejsy mogą być dodawane, modyfikowane, opakowane, zastępowane lub nawet usuwane przez serwer lub oprogramowanie pośredniczące, gdy żądanie jest przetwarzane bez konieczności ponownego implementowania całego programu `HttpContext` . Mogą być również używane do makietowania funkcjonalności podczas testowania.
 
 ## <a name="feature-collections"></a>Kolekcje funkcji
 

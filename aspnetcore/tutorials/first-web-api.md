@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 569744b2cbec062ec9abab9db1c94960f1f912e7
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 9299ba685c95ced522fc725854a66252e67fc799
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570253"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96024989"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -34,7 +34,7 @@ Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą AS
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -63,7 +63,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -79,7 +79,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
@@ -140,7 +140,7 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API z obsługą [struktury Swagger](xref:tutorials/web-api-help-pages-using-swagger).
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
@@ -149,7 +149,7 @@ Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
   Zostanie uruchomiony program Visual Studio:
 
 * Serwer sieci Web IIS Express.
-* Domyślna przeglądarka i nawiguje do `https://localhost:<port>/https://localhost:5001/swagger/index.html` , gdzie `<port>` jest losowo wybranym numerem portu.
+* Domyślna przeglądarka i nawiguje do `https://localhost:<port>/swagger/index.html` , gdzie `<port>` jest losowo wybranym numerem portu.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -227,7 +227,7 @@ Ze względu na to, że program Swagger został usunięty, poprzedzający znaczni
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
@@ -249,7 +249,7 @@ Ze względu na to, że program Swagger został usunięty, poprzedzający znaczni
 
 * Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
-* Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
+* Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
 * Zastąp kod szablonu następującym:
 
@@ -265,15 +265,13 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
 * W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
-* Wybierz kartę **Przeglądaj** , a następnie wpisz * * Microsoft.
-**EntityFrameworkCore. SqlServer** w polu wyszukiwania.
+* Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
-* Zaznacz pole wyboru **Uwzględnij wersję wstępną** , aby uzyskać dostęp do wersji 5,0 RC. 
 * W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .
 * Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
 * Użyj powyższych instrukcji, aby dodać pakiet NuGet **Microsoft. EntityFrameworkCore. inMemory** .
@@ -312,11 +310,11 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.
-* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj**.
+* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.
 * Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
   * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model**.
@@ -330,8 +328,8 @@ Uruchom następujące polecenia:
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
@@ -560,7 +558,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -589,7 +587,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -605,7 +603,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
@@ -666,7 +664,7 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
@@ -723,7 +721,7 @@ Zwracany jest kod JSON podobny do następującego:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
@@ -745,7 +743,7 @@ Zwracany jest kod JSON podobny do następującego:
 
 * Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
-* Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
+* Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -761,7 +759,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
@@ -803,11 +801,11 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.
-* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework** , a następnie wybierz pozycję **Dodaj**.
+* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.
 * Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
   * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model**.
@@ -1048,7 +1046,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range="< aspnetcore-3.0"
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -1080,7 +1078,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites-21"></a>Wymagania wstępne 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -1096,7 +1094,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project-21"></a>Tworzenie projektu sieci Web 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
@@ -1140,7 +1138,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 Szablon projektu tworzy `values` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
@@ -1166,7 +1164,7 @@ Zostanie zwrócony następujący kod JSON:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
@@ -1188,7 +1186,7 @@ Zostanie zwrócony następujący kod JSON:
 
 * Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
-* Nazwij klasę *TodoItem* , a następnie kliknij pozycję **New (nowy** ).
+* Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -1204,7 +1202,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
@@ -1234,7 +1232,7 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="add-a-controller-21"></a>Dodawanie kontrolera 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element**.
@@ -1298,7 +1296,7 @@ Ten [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) atrybut oznacz
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=TodoController&highlight=3)]
 
-* Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller". W przypadku tego przykładu nazwa klasy kontrolera to kontroler do **zrobienia** , więc nazwa kontrolera to "do zrobienia". W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.
+* Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller". W przypadku tego przykładu nazwa klasy kontrolera to kontroler do **zrobienia**, więc nazwa kontrolera to "do zrobienia". W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.
 * Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]` ), Dodaj go do ścieżki. Ten przykład nie używa szablonu. Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
 
 W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania. Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej `id` parametrze.
@@ -1323,13 +1321,13 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Uruchom wpis.
 * Wyłącz **weryfikację certyfikatu SSL**.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Z poziomu preferencji programu **Poster**  >  **Preferences** (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**. Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia** , a następnie wyłącz weryfikację certyfikatu SSL.
+* Z poziomu preferencji programu **Poster**  >  **Preferences** (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**. Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia**, a następnie wyłącz weryfikację certyfikatu SSL.
 
 ---
   
@@ -1346,7 +1344,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
 ## <a name="add-a-create-method-21"></a>Dodawanie metody Create 2,1
 
-Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoController. cs* : 
+Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoController. cs*: 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 

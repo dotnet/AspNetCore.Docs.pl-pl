@@ -20,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: b4dcbe9536107cdc5b0342782abc4bad0b89a8dc
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: fa113a3e0a2a69fb4aa1318056dcfc6e261490f6
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360969"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "96025032"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
@@ -53,7 +53,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -69,13 +69,13 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>CreateRazoraplikacja internetowa stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom program Visual Studio i wybierz **Create Nowy projekt**. Aby uzyskać więcej informacji, zobacz [ Create Nowy projekt w programie Visual Studio](/visualstudio/ide/create-new-project).
 
    ![::: No-Loc (Create)::: nowy projekt z okna uruchamiania](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. W oknie dialogowym **Create Nowy projekt** wybierz pozycję **ASP.NET Core aplikacja sieci Web** , a następnie wybierz przycisk **dalej**.
+1. W oknie dialogowym **Create Nowy projekt** wybierz pozycję **ASP.NET Core aplikacja sieci Web**, a następnie wybierz przycisk **dalej**.
 
     ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/5/np.png)
     
@@ -125,7 +125,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 1. W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
     1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-    1. Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję programu .NET 5. x.
+    1. Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję programu .NET 5. x.
     1. Wybierz pozycję **Dalej**.
 
 1. Nadaj projektowi nazwę *Razor PagesMovie* i wybierz opcję **Create** .
@@ -201,7 +201,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -217,7 +217,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>CreateRazoraplikacja internetowa stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Create Nowa aplikacja sieci Web ASP.NET Core i kliknij przycisk **dalej**.
@@ -225,7 +225,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 * Nazwij projekt **Razor PagesMovie**. Ważne jest, aby nazwa projektu *Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-* Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Create** .
+* Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web**, a następnie wybierz pozycję **Create** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/3/npx.png)
 
@@ -266,11 +266,11 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 3. x.
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
 
   Wybierz pozycję **Dalej**.
 
-* Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Create** .
+* Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Create** .
 
   ![macOS Nazwij projekt](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -343,7 +343,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -359,7 +359,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>CreateRazoraplikacja internetowa stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 
@@ -371,7 +371,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-* Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Create** .
+* Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web**, a następnie wybierz pozycję **Create** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2_2.2.png)
 
@@ -410,11 +410,11 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 2. x.
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
 
   Wybierz pozycję **Dalej**.
 
-* Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Create** .
+* Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Create** .
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -424,12 +424,11 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
   Uruchamianie aplikacji za pomocą <kbd>klawiszy CTRL + F5</kbd> (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu bez debugowania, aby móc szybko uruchomić aplikację i wyświetlić zmiany.
-
 
   [!INCLUDE[](~/includes/trustCertVS.md)]
 

@@ -20,11 +20,11 @@ no-loc:
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
 ms.openlocfilehash: 461f6d2105d38c5dbea2f8cf479e027c2edede14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057625"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024945"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia
 
@@ -43,7 +43,7 @@ Te informacje mogą być ważne w przetwarzaniu żądań, na przykład w przekie
 
 Zgodnie z Konwencją serwery proxy przesyłają dalej informacje w nagłówkach HTTP.
 
-| Header | Opis |
+| Nagłówek | Opis |
 | ------ | ----------- |
 | X-Forwarded-For | Zawiera informacje o kliencie, który zainicjował żądanie i kolejne serwery proxy w łańcuchu serwerów proxy. Ten parametr może zawierać adresy IP (i opcjonalnie numery portów). W łańcuchu serwerów proxy pierwszy parametr wskazuje klienta, na którym żądanie zostało po raz pierwszy wykonane. Kolejne identyfikatory serwerów proxy są następujące. Ostatni serwer proxy w łańcuchu nie znajduje się na liście parametrów. Adres IP ostatniego serwera proxy i opcjonalnie numer portu są dostępne jako zdalny adres IP w warstwie transportowej. |
 | X-Forwarded-proto | Wartość schematu inicjującego (HTTP/HTTPS). Ta wartość może być również listą schematów, jeśli żądanie przełączyło wiele serwerów proxy. |
@@ -401,7 +401,7 @@ Te informacje mogą być ważne w przetwarzaniu żądań, na przykład w przekie
 
 Zgodnie z Konwencją serwery proxy przesyłają dalej informacje w nagłówkach HTTP.
 
-| Header | Opis |
+| Nagłówek | Opis |
 | ------ | ----------- |
 | X-Forwarded-For | Zawiera informacje o kliencie, który zainicjował żądanie i kolejne serwery proxy w łańcuchu serwerów proxy. Ten parametr może zawierać adresy IP (i opcjonalnie numery portów). W łańcuchu serwerów proxy pierwszy parametr wskazuje klienta, na którym żądanie zostało po raz pierwszy wykonane. Kolejne identyfikatory serwerów proxy są następujące. Ostatni serwer proxy w łańcuchu nie znajduje się na liście parametrów. Adres IP ostatniego serwera proxy i opcjonalnie numer portu są dostępne jako zdalny adres IP w warstwie transportowej. |
 | X-Forwarded-proto | Wartość schematu inicjującego (HTTP/HTTPS). Ta wartość może być również listą schematów, jeśli żądanie przełączyło wiele serwerów proxy. |

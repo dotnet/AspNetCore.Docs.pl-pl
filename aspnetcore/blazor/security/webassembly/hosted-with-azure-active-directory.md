@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 17f96be762ece8c59577445eb2ae630a8ee3b3dd
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: 0542e7556b82c22a8844f4d1f4b2ba852a420246
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234481"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96025072"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core przy użyciu Azure Active Directory
 
@@ -35,7 +35,11 @@ W tym artykule opisano sposób tworzenia [hostowanej Blazor WebAssembly aplikacj
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> W przypadku Blazor WebAssembly aplikacji utworzonych w programie Visual Studio, które są skonfigurowane do obsługi kont w katalogu organizacji usługi AAD, program Visual Studio nie skonfiguruje aplikacji poprawnie na potrzeby generowania projektu. Zostanie to rozkierowane w przyszłej wersji programu Visual Studio. W tym artykule pokazano, jak utworzyć aplikację za pomocą polecenia interfejs wiersza polecenia platformy .NET Core `dotnet new` . Jeśli wolisz utworzyć aplikację za pomocą programu Visual Studio przed zaktualizowaniem IDE dla najnowszych Blazor szablonów w ASP.NET Core 5,0, zapoznaj się z każdą sekcją tego artykułu i Potwierdź lub zaktualizuj konfigurację aplikacji po utworzeniu aplikacji przez program Visual Studio.
+> W przypadku Blazor WebAssembly aplikacji utworzonych w programie Visual Studio, które są skonfigurowane do obsługi kont w katalogu organizacji usługi AAD, program Visual Studio nie obecnie konfiguruje projekty rozwiązania lub Azure Portal rejestracje aplikacji na potrzeby generowania projektu. Zostanie to rozkierowane w przyszłej wersji programu Visual Studio.
+>
+> W tym artykule pokazano, jak utworzyć rozwiązanie i rejestracje portalu aplikacji platformy Azure za pomocą polecenia platformy .NET CLI `dotnet new` oraz ręcznie tworząc rejestracje aplikacji w Azure Portal.
+>
+> Jeśli wolisz utworzyć rozwiązanie i rejestracje aplikacji platformy Azure w programie Visual Studio przed zaktualizowaniem środowiska IDE, zapoznaj się z **_każdą sekcją tego artykułu_** i Potwierdź lub zaktualizuj konfiguracje aplikacji oraz rejestracje aplikacji po utworzeniu rozwiązania przez program Visual Studio.
 
 ::: moniker-end
 
@@ -49,12 +53,12 @@ Postępuj zgodnie ze wskazówkami w [przewodniku szybki start: Konfigurowanie dz
 
 Postępuj zgodnie ze wskazówkami w [przewodniku szybki start: Zarejestruj aplikację przy użyciu platformy tożsamości firmy Microsoft](/azure/active-directory/develop/quickstart-register-app) i kolejnych tematów usługi Azure AAD, aby zarejestrować aplikację w usłudze AAD dla *aplikacji interfejsu API serwera* , a następnie wykonaj następujące czynności:
 
-1. W **Azure Active Directory**  >  **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja** .
-1. Podaj **nazwę** aplikacji (na przykład **Blazor Server AAD** ).
-1. Wybierz **obsługiwane typy kont** . W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
+1. W **Azure Active Directory**  >  **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja**.
+1. Podaj **nazwę** aplikacji (na przykład **Blazor Server AAD**).
+1. Wybierz **obsługiwane typy kont**. W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
 1. *Aplikacja interfejsu API serwera* nie wymaga **identyfikatora URI przekierowania** w tym scenariuszu, więc pozostaw listę rozwijaną w **sieci Web** i nie wprowadzaj identyfikatora URI przekierowania.
 1. Wyczyść pole wyboru **uprawnienia**  >  **Udziel uprawnień administrator do OpenID Connect i uprawnień offline_access** .
-1. Wybierz pozycję **Zarejestruj** .
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz następujące informacje:
 
@@ -64,15 +68,15 @@ Zapisz następujące informacje:
 
 W obszarze **uprawnienia interfejsu API** usuń uprawnienie **Microsoft Graph**  >  **User. Read** , ponieważ aplikacja nie wymaga dostępu do profilu logowania lub użytkownika.
 
-W obszarze **Uwidacznianie interfejsu API** :
+W obszarze **Uwidacznianie interfejsu API**:
 
-1. Wybierz polecenie **Dodaj zakres** .
-1. Wybierz przycisk **Zapisz i kontynuuj** .
+1. Wybierz polecenie **Dodaj zakres**.
+1. Wybierz przycisk **Zapisz i kontynuuj**.
 1. Podaj **nazwę zakresu** (na przykład `API.Access` ).
 1. Podaj **nazwę wyświetlaną zgody administratora** (na przykład `Access API` ).
 1. Podaj **Opis zgody administratora** (na przykład `Allows the app to access server app API endpoints.` ).
-1. Upewnij się, że **stan** jest ustawiony na **włączone** .
-1. Wybierz pozycję **Dodaj zakres** .
+1. Upewnij się, że **stan** jest ustawiony na **włączone**.
+1. Wybierz pozycję **Dodaj zakres**.
 
 Zapisz następujące informacje:
 
@@ -85,53 +89,53 @@ Postępuj zgodnie ze wskazówkami w [przewodniku szybki start: Zarejestruj aplik
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja** .
-1. Podaj **nazwę** aplikacji (na przykład **Blazor klienta AAD** ).
-1. Wybierz **obsługiwane typy kont** . W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
+1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja**.
+1. Podaj **nazwę** aplikacji (na przykład **Blazor klienta AAD**).
+1. Wybierz **obsługiwane typy kont**. W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
 1. Ustaw listę rozwijaną **URI przekierowania** na **aplikację jednostronicową (Spa)** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we *`Server`* właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
 1. Wyczyść pole wyboru **uprawnienia** > **Udziel uprawnień administrator do OpenID Connect i uprawnień offline_access** .
-1. Wybierz pozycję **Zarejestruj** .
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz *`Client`* Identyfikator aplikacji aplikacji (na przykład `4369008b-21fa-427c-abaa-9b53bf58e538` ).
 
-W **Authentication** obszarze > **Konfiguracja platformy** uwierzytelniania > **aplikacja jednostronicowa (Spa)** :
+W **Authentication** obszarze > **Konfiguracja platformy** uwierzytelniania > **aplikacja jednostronicowa (Spa)**:
 
 1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
 1. W przypadku **niejawnego udzielenia** upewnij się, że **nie** wybrano pól wyboru dla **tokenów dostępu** i **tokenów identyfikatorów** .
 1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
-1. Wybierz ikonę **Zapisz** .
+1. Wybierz ikonę **Zapisz**.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja** .
-1. Podaj **nazwę** aplikacji (na przykład **Blazor klienta AAD** ).
-1. Wybierz **obsługiwane typy kont** . W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
+1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja**.
+1. Podaj **nazwę** aplikacji (na przykład **Blazor klienta AAD**).
+1. Wybierz **obsługiwane typy kont**. W tym środowisku możesz wybrać **tylko konta w tym katalogu organizacji** (pojedynczy dzierżawca).
 1. Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** jako **Sieć Web** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we *`Server`* właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
 1. Wyczyść pole wyboru **uprawnienia** > **Udziel uprawnień administrator do OpenID Connect i uprawnień offline_access** .
-1. Wybierz pozycję **Zarejestruj** .
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz *`Client`* Identyfikator aplikacji aplikacji (na przykład `4369008b-21fa-427c-abaa-9b53bf58e538` ).
 
-W **Authentication** obszarze > **konfiguracje platformy** uwierzytelniania w > **sieci Web** :
+W **Authentication** obszarze > **konfiguracje platformy** uwierzytelniania w > **sieci Web**:
 
 1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
-1. W przypadku **niejawnego przydzielenia** zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów** .
+1. W przypadku **niejawnego przydzielenia** zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów**.
 1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
-1. Wybierz ikonę **Zapisz** .
+1. Wybierz ikonę **Zapisz**.
 
 ::: moniker-end
 
-W **uprawnienia interfejsu API** :
+W **uprawnienia interfejsu API**:
 
 1. Upewnij się, że aplikacja ma **Microsoft Graph**  >  uprawnienie **użytkownika. odczyt** .
-1. Wybierz pozycję **Dodaj uprawnienia** , a następnie **Moje interfejsy API** .
-1. Wybierz *aplikację interfejsu API serwera* z kolumny **Nazwa** (na przykład **Blazor Server AAD** ).
+1. Wybierz pozycję **Dodaj uprawnienia** , a następnie **Moje interfejsy API**.
+1. Wybierz *aplikację interfejsu API serwera* z kolumny **Nazwa** (na przykład **Blazor Server AAD**).
 1. Otwórz listę **interfejsów API** .
 1. Włącz dostęp do interfejsu API (na przykład `API.Access` ).
-1. Wybierz pozycję **Dodaj uprawnienia** .
-1. Wybierz przycisk **Udziel zgody administratora na {nazwa dzierżawy}** . Wybierz pozycję **Tak** , aby potwierdzić.
+1. Wybierz pozycję **Dodaj uprawnienia**.
+1. Wybierz przycisk **Udziel zgody administratora na {nazwa dzierżawy}** . Wybierz pozycję **Tak**, aby potwierdzić.
 
 ### <a name="create-the-app"></a>Tworzenie aplikacji
 
@@ -331,7 +335,7 @@ Przykład:
 
 ### <a name="weatherforecast-controller"></a>Kontroler WeatherForecast
 
-Kontroler WeatherForecast ( *controllers/WeatherForecastController. cs* ) ujawnia chroniony interfejs API z [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybutem zastosowanym do kontrolera. **Ważne** jest, aby zrozumieć, że:
+Kontroler WeatherForecast (*controllers/WeatherForecastController. cs*) ujawnia chroniony interfejs API z [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybutem zastosowanym do kontrolera. **Ważne** jest, aby zrozumieć, że:
 
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Atrybut w tym kontrolerze interfejsu API jest jedynym warunkiem, że ten interfejs API jest chroniony przed nieautoryzowanym dostępem.
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Atrybut używany w Blazor WebAssembly aplikacji służy tylko jako Wskazówka dla aplikacji, którą użytkownik powinien mieć autoryzację, aby aplikacja działała poprawnie.
@@ -444,7 +448,7 @@ builder.Services.AddMsalAuthentication(options =>
 > [!NOTE]
 > Blazor WebAssemblySzablon automatycznie dodaje schemat `api://` do argumentu identyfikatora aplikacji, który został przesłany w `dotnet new` poleceniu. Podczas generowania aplikacji z Blazor szablonu projektu upewnij się, że wartość domyślnego zakresu tokenu dostępu używa poprawnej wartości identyfikatora URI aplikacji niestandardowej podanej w Azure Portal lub wartości z **jednym** z następujących formatów:
 >
-> * Gdy domena wydawcy katalogu jest **zaufana** , domyślnym zakresem tokenu dostępu jest zazwyczaj wartość podobna do poniższego przykładu, gdzie `API.Access` jest domyślną nazwą zakresu:
+> * Gdy domena wydawcy katalogu jest **zaufana**, domyślnym zakresem tokenu dostępu jest zazwyczaj wartość podobna do poniższego przykładu, gdzie `API.Access` jest domyślną nazwą zakresu:
 >
 >   ```csharp
 >   options.ProviderOptions.DefaultAccessTokenScopes.Add(
@@ -453,7 +457,7 @@ builder.Services.AddMsalAuthentication(options =>
 >
 >   Sprawdź wartość dla podwójnego schematu ( `api://api://...` ). Jeśli jest obecny schemat podwójny, usuń pierwszy `api://` schemat z wartości.
 >
-> * Gdy domena wydawcy katalogu nie jest **zaufana** , domyślnym zakresem tokenu dostępu jest zwykle wartość podobna do poniższego przykładu, gdzie `API.Access` jest domyślną nazwą zakresu:
+> * Gdy domena wydawcy katalogu nie jest **zaufana**, domyślnym zakresem tokenu dostępu jest zwykle wartość podobna do poniższego przykładu, gdzie `API.Access` jest domyślną nazwą zakresu:
 >
 >   ```csharp
 >   options.ProviderOptions.DefaultAccessTokenScopes.Add(
@@ -530,7 +534,7 @@ Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/webassembly/additional-scenarios>
 * [Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

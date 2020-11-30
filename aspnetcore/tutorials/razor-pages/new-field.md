@@ -21,12 +21,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 2dca5a9552dd2800212f8cd78ace0578b3d38cdb
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 5263063d82d79dbeeca3e4cec007d240ca8a452a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360882"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332183"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
 
@@ -123,7 +123,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 1. Wybierz bazę danych w SSOX.
 1. Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Delete** .
 1. Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-1. Wybierz pozycję **OK**.
+1. Wybierz przycisk **OK**.
 1. W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
    ```powershell
@@ -165,7 +165,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 
 Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania w `SeedData.Initialize` metodzie.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzednie: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search) 
@@ -264,7 +264,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Delete** .
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz pozycję **OK**.
+* Wybierz przycisk **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -306,7 +306,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 
 Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania w `SeedData.Initialize` metodzie.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzednie: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search) 
@@ -397,14 +397,14 @@ Nazwa "Rating" jest arbitralna i jest używana do nazwy pliku migracji. Warto u�
 
 <a name="ssox"></a>
 
-W przypadku usunięcia wszystkich rekordów w DdatabaseB inicjator będzie wypełniać DdatabaseB i zawierać `Rating` pole. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [programu SQL Server Eksplorator obiektów](xref:tutorials/razor-pages/sql#ssox) (SSOX).
+W przypadku usunięcia wszystkich rekordów w bazie danych inicjator będzie wypełniać bazę danych i zawierać `Rating` pole. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [programu SQL Server Eksplorator obiektów](xref:tutorials/razor-pages/sql#ssox) (SSOX).
 
 Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponownego utworzenia bazy danych. Aby usunąć bazę danych w programie SSOX:
 
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Delete** .
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz pozycję **OK**.
+* Wybierz przycisk **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -432,7 +432,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 > * [Wstępne wypełnianie danych](/ef/core/modeling/data-seeding)
 > * [Instrukcja ALTER TABLE w programie SQLite](https://sqlite.org/lang_altertable.html)
 
-Delete Baza danych programu i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych ( *MvcMovie. DB* ). Następnie uruchom `ef database update` polecenie:
+Delete Baza danych programu i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych (*MvcMovie. DB*). Następnie uruchom `ef database update` polecenie:
 
 ```dotnetcli
 dotnet ef database update
@@ -442,7 +442,7 @@ dotnet ef database update
 
 Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania w `SeedData.Initialize` metodzie.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/3i7uMxiGGR8)
 

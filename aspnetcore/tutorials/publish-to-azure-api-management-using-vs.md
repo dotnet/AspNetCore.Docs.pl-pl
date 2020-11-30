@@ -4,14 +4,14 @@ author: codemillmatt
 description: Dowiedz się, jak opublikować internetowy interfejs API ASP.NET Core na platformie Azure API Management przy użyciu programu Visual Studio.
 ms.author: masoucou
 ms.custom: devx-track-csharp, mvc
-ms.date: 08/26/2020
+ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
-ms.openlocfilehash: 3cc6b8c0bd93f133151e1c8ad18a55b11975a9be
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945761"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332234"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>Publikowanie ASP.NET Core internetowego interfejsu API w usłudze Azure API Management przy użyciu programu Visual Studio
 
@@ -77,7 +77,7 @@ Wykonaj następujące kroki, aby opublikować internetowy interfejs API ASP.NET 
 
 Wykonaj następujące kroki, aby opublikować internetowy interfejs API ASP.NET Core na platformie Azure API Management:
 
-1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt i wybierz polecenie **Publikuj**:
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt i wybierz polecenie **Publikuj**:
 
     ![Menu kontekstowe otwierane z wyróżnionym linkiem publikowania](publish-to-azure-api-management-using-vs/_static/publish_menu.png)
 
@@ -93,7 +93,7 @@ Wykonaj następujące kroki, aby opublikować internetowy interfejs API ASP.NET 
 
     ![Okno dialogowe publikowania: wybierz wystąpienie usługi platformy Azure](publish-to-azure-api-management-using-vs/_static/publish_dialog_create_new_app_svc.png)
 
-    Zostanie wyświetlone okno dialogowe **tworzenie App Service** . Pola **Nazwa aplikacji**, **Grupa zasobów**i zapis **planu App Service** są wypełniane. Te nazwy można zachować lub zmienić.
+    Zostanie wyświetlone okno dialogowe **tworzenie App Service** . Pola **Nazwa aplikacji**, **Grupa zasobów** i zapis **planu App Service** są wypełniane. Te nazwy można zachować lub zmienić.
 1. Wybierz przycisk **Utwórz**.
 
     ![Okno dialogowe Tworzenie usługi App Service](publish-to-azure-api-management-using-vs/_static/publish_dialog_app_svc_attributes.png)
@@ -108,11 +108,15 @@ Na tym etapie należy dodać interfejs API do usługi Azure API Management. Pozo
 
 1. Otwórz API Management wystąpienie usługi utworzone wcześniej w Azure Portal. Wybierz blok **interfejsy API** :
 
-    ![Blok interfejsów API wybrany z wystąpienia usługi API Management](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+  ![Blok interfejsów API wybrany z wystąpienia usługi API Management](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+
+1. Wybierz trzy kropki obok pozycji **echo API** , a następnie wybierz polecenie **Usuń** z menu podręcznego, aby je usunąć.
+
+  ![Usuwanie interfejsu API ECHA z wystąpienia usługi API Management](publish-to-azure-api-management-using-vs/_static/portal_delete_echo.png)
 
 1. W panelu **Dodaj nowy interfejs API** wybierz kafelek **pusty interfejs API** :
 
-    ![Ekran z wyróżnionym pustym kafelkiem interfejsu API](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
+  ![Ekran z wyróżnionym pustym kafelkiem interfejsu API](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
 
 1. Wprowadź następujące wartości w wyświetlonym oknie dialogowym **Tworzenie pustego interfejsu API** :    
 
@@ -198,7 +202,7 @@ Wdrożony ASP.NET Core Web API można przetestować na platformie Azure API Mana
 
 1. Otwórz kartę **Test**.
 1. Wybierz **/** lub **Pobierz** operację.
-1. Wybierz pozycję **Send** (Wyślij).
+1. Wybierz pozycję **Wyślij**.
 
     ![Zrzut ekranu portalu przed testem](publish-to-azure-api-management-using-vs/_static/portal_pre_test.png)
 
@@ -226,5 +230,5 @@ Po zakończeniu testowania aplikacji przejdź do [Azure Portal](https://portal.a
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-- [Azure API Management](/azure/api-management/api-management-key-concepts)
+- [API Management platformy Azure](/azure/api-management/api-management-key-concepts)
 - [Azure App Service](/azure/app-service/app-service-web-overview)

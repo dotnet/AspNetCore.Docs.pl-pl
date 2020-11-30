@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 7323cf11ad4556443def4068873e6805b449058a
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674020"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320151"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -39,7 +39,7 @@ Jest to pierwsza z serii samouczków, które pokazują, jak używać rdzenia Ent
 
 * Jeśli Razor dopiero zaczynasz korzystać z stron, przejdź do serii samouczek wprowadzenie [do Razor stron](xref:tutorials/razor-pages/razor-pages-start) .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -117,7 +117,7 @@ To run the app after downloading the completed project:
 
 ## <a name="create-the-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
 1. W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
@@ -125,7 +125,7 @@ To run the app after downloading the completed project:
 1. Wybierz pozycję **Utwórz**.
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
     1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
-    1. **ASP.NET Core aplikacji sieci Web (Model-View-Controller)**.
+    1. **ASP.NET Core aplikacji sieci Web**.
     1. **Create** 
        Utwórz ![ Nowe okno dialogowe projektu ASP.NET Core](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     
@@ -226,7 +226,7 @@ W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygene
 * Klasa EF Core `DbContext` . Kontekst jest klasą główną, która koordynuje Entity Framework funkcji dla danego modelu danych. Pochodzi od <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> klasy.
 * Razor strony obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` jednostki.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Utwórz folder *stron/uczniów* .
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
@@ -303,7 +303,7 @@ Proces tworzenia szkieletu:
 
 Narzędzie do tworzenia szkieletu generuje parametry połączenia w *appsettings.json* pliku.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Parametry połączenia określają [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb):
 
@@ -352,7 +352,7 @@ ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/depe
 
 Narzędzie do tworzenia szkieletów automatycznie zarejestrowało klasę kontekstu z kontenerem iniekcji zależności.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Program szkieleter dodał następujące wyróżnione wiersze:
 
@@ -374,7 +374,7 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 
 Dodaj <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> do `ConfigureServices` , jak pokazano w poniższym kodzie:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!code-csharp[Main](intro/samples/cu50/Startup.cs?name=snippet_ConfigureServices&highlight=8)]
 
@@ -436,7 +436,7 @@ W *program.cs* Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Ini
   DbInitializer.Initialize(context);
   ```
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -457,7 +457,7 @@ Odpowiedz przy użyciu `Y` , aby usunąć bazę danych.
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
 * W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
@@ -535,7 +535,7 @@ Jest to pierwsza z serii samouczków, które pokazują, jak używać rdzenia Ent
 
 * Jeśli Razor dopiero zaczynasz korzystać z stron, przejdź do serii samouczek wprowadzenie [do Razor stron](xref:tutorials/razor-pages/razor-pages-start) .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -569,7 +569,7 @@ Styl interfejsu użytkownika tej witryny jest oparty na wbudowanych szablonach p
 
 Skorzystaj z linku w górnej części strony, aby uzyskać kod źródłowy dla ukończonego projektu. Folder *cu30* ma kod dla ASP.NET Core wersji 3,0 samouczka. Pliki odzwierciedlające stan kodu dla samouczków 1-7 można znaleźć w folderze *cu30snapshots* .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
@@ -612,7 +612,7 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 ## <a name="create-the-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Wybierz **ASP.NET Core aplikacji sieci Web**.
@@ -714,7 +714,7 @@ W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygene
 * Klasa *kontekstu* EF Core. Kontekst jest klasą główną, która koordynuje Entity Framework funkcji dla danego modelu danych. Pochodzi od `Microsoft.EntityFrameworkCore.DbContext` klasy.
 * Razor strony obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` jednostki.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Utwórz folder *uczniów* w folderze *strony* .
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
@@ -790,7 +790,7 @@ Proces tworzenia szkieletu:
 
 ## <a name="database-connection-string"></a>Parametry połączenia z bazą danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 *appsettings.json* Plik określa parametry połączenia [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).
 
@@ -831,7 +831,7 @@ ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/depe
 
 Narzędzie do tworzenia szkieletów automatycznie zarejestrowało klasę kontekstu z kontenerem iniekcji zależności.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W programie `ConfigureServices` wyróżnione wiersze zostały dodane przez program do tworzenia szkieletu:
 
@@ -887,7 +887,7 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
   DbInitializer.Initialize(context);
   ```
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -907,7 +907,7 @@ Drop-Database
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
 * W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
@@ -970,7 +970,7 @@ Przykładowa aplikacja jest witryną internetową fikcyjnej firmy Contoso Univer
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
@@ -1000,7 +1000,7 @@ Styl interfejsu użytkownika tej witryny jest zbliżony do zawartości wygenerow
 
 ## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web ContosoUniversity Pages
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Utwórz nową aplikację sieci Web ASP.NET Core. Nazwij projekt **ContosoUniversity**. Ważne jest, aby nazwa projektu *ContosoUniversity* , tak aby przestrzenie nazw były zgodne, gdy kod jest kopiowany/wklejany.
@@ -1096,7 +1096,7 @@ W tej sekcji model ucznia jest szkieletem. Oznacza to, że narzędzie tworzenia 
 * Skompiluj projekt.
 * Utwórz folder *strony/uczniowie* .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* > **Dodaj** > **nowy element szkieletowy**.
 * W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
@@ -1215,7 +1215,7 @@ W *program.cs* Zmień metodę, `Main` Aby wywołać `Initialize` :
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -1271,7 +1271,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

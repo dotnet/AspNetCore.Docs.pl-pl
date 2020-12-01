@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/26/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 2c5bc221901d9e41984fb591755a8ad94e7e1420
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 6627825239d815d2c8bcad98e22340f07f921ab9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570240"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420022"
 ---
 # <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>Część 4 z serii samouczków na Razor stronach
 
@@ -35,7 +33,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https:/
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
-`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs* :
+`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -74,7 +72,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
    ![Menu Widok](sql/_static/5/ssox.png)
 
-1. Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków** :
+1. Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków**:
 
    ![Menu kontekstowe są otwierane w tabeli filmów](sql/_static/5/design.png)
 
@@ -82,7 +80,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
    Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o nazwie `ID` dla klucza podstawowego.
 
-1. Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane** :
+1. Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane**:
 
    ![Otwórz tabelę filmów pokazującą dane tabeli](sql/_static/vd22.png)
 
@@ -118,7 +116,7 @@ Istnieje wiele narzędzi innych firm, które można pobrać, aby zarządzać baz
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
 
-Create Nowa klasa o nazwie `SeedData` w folderze *models* o następującym kodzie:
+Utwórz nową klasę o nazwie `SeedData` w folderze *models* o następującym kodzie:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -154,11 +152,11 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-1. Delete wszystkie rekordy w bazie danych. Korzystanie z linków do usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
+1. Usuń wszystkie rekordy z bazy danych. Korzystanie z linków do usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 
 1. Wymuś inicjalizację aplikacji przez wywołanie metod w `Startup` klasie, więc metoda inicjatora jest uruchamiana. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Zatrzymaj i uruchom ponownie usługi IIS przy użyciu dowolnej z następujących metod:
 
-   1. Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień, a następnie wybierz polecenie **Zakończ** lub **Zatrzymaj lokację** :
+   1. Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień, a następnie wybierz polecenie **Zakończ** lub **Zatrzymaj lokację**:
 
       ![Ikona paska zadań IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -169,7 +167,7 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Delete wszystkie rekordy w bazie danych, więc zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
+Usuń wszystkie rekordy z bazy danych, dzięki czemu zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
 
 ---
 
@@ -177,7 +175,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 ![Aplikacja filmowa otwarta w przeglądarce przedstawiająca dane filmu](sql/_static/5/m55.png)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzednie: Rusztowania Razor ](xref:tutorials/razor-pages/page) 
@@ -189,7 +187,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
-`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs* :
+`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -228,7 +226,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków** :
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków**:
 
   ![Menu kontekstowe są otwierane w tabeli filmów](sql/_static/design.png)
 
@@ -236,7 +234,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
 Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o nazwie `ID` dla klucza podstawowego.
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane** :
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane**:
 
   ![Otwórz tabelę filmów pokazującą dane tabeli](sql/_static/vd22.png)
 
@@ -272,7 +270,7 @@ Istnieje wiele narzędzi innych firm, które można pobrać, aby zarządzać baz
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
 
-Create Nowa klasa o nazwie `SeedData` w folderze *models* o następującym kodzie:
+Utwórz nową klasę o nazwie `SeedData` w folderze *models* o następującym kodzie:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -308,10 +306,10 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Delete wszystkie rekordy w bazie danych. Użyj linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox).
+* Usuń wszystkie rekordy z bazy danych. Użyj linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox).
 * Wymuś inicjalizację aplikacji przez wywołanie metod w `Startup` klasie, więc metoda inicjatora jest uruchamiana. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Zatrzymaj i uruchom ponownie usługi IIS przy użyciu dowolnej z następujących metod:
 
-  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę** :
+  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę**:
 
     ![Ikona paska zadań IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -322,7 +320,7 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Delete wszystkie rekordy w bazie danych, więc zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
+Usuń wszystkie rekordy z bazy danych, dzięki czemu zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
 
 ---
 
@@ -330,7 +328,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 ![Aplikacja filmowa otwarta w programie Chrome pokazująca dane filmu](sql/_static/m55https.png)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzednie: Rusztowania Razor ](xref:tutorials/razor-pages/page) 
@@ -342,7 +340,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
-`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs* :
+`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -390,7 +388,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków** :
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków**:
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](sql/_static/design.png)
 
@@ -398,7 +396,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
 Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o nazwie `ID` dla klucza podstawowego.
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane** :
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane**:
 
   ![Otwórz tabelę filmów pokazującą dane tabeli](sql/_static/vd22.png)
 
@@ -416,7 +414,7 @@ Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o 
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
 
-Create Nowa klasa o nazwie `SeedData` w folderze *models* o następującym kodzie:
+Utwórz nową klasę o nazwie `SeedData` w folderze *models* o następującym kodzie:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -452,10 +450,10 @@ Logowanie użytkownika "Nazwa użytkownika" nie powiodło się.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* Delete wszystkie rekordy w bazie danych. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
+* Usuń wszystkie rekordy z bazy danych. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Wymuś inicjalizację aplikacji przez wywołanie metod w `Startup` klasie, więc metoda inicjatora jest uruchamiana. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Można to zrobić przy użyciu następujących metod:
 
-  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę** :
+  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę**:
 
     ![Ikona paska zadań IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -466,11 +464,11 @@ Logowanie użytkownika "Nazwa użytkownika" nie powiodło się.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Delete wszystkie rekordy w bazie danych, więc zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
+Usuń wszystkie rekordy z bazy danych, dzięki czemu zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Delete wszystkie rekordy w bazie danych, więc zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
+Usuń wszystkie rekordy z bazy danych, dzięki czemu zostanie uruchomiona Metoda inicjatora. Zatrzymaj i uruchom aplikację, aby wypełniać bazę danych.
 
 ---
 
@@ -480,7 +478,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 Następny samouczek czyści prezentację danych.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/A_5ff11sDHY)
 

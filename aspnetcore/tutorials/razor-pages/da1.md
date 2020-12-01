@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/20/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 7146c1955a578502a63578de4f1abce932cb8b32
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360611"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419970"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Część 5. aktualizowanie wygenerowanych stron w aplikacji ASP.NET Core
 
@@ -55,7 +53,7 @@ Przejdź do *stron/filmów* i umieść kursor na linku **edycji** , aby zobaczy�
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku https://localhost:1234/Movies/Edit/5](~/tutorials/razor-pages/da1/edit7.png)
 
-**Edytuj** , **szczegóły** i **Delete** linki są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/ Index . cshtml* .
+Linki **Edytuj**, **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/ Index . cshtml* .
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -77,7 +75,7 @@ Użyj **widoku źródła** z przeglądarki, aby sprawdzić wygenerowane znacznik
 
 ### <a name="add-route-template"></a>Dodawanie szablonu trasy
 
-Zaktualizuj, szczegóły i Delete Razor strony, aby użyć `{id:int}` szablonu trasy. Zmień dyrektywę Page dla każdej z tych stron z `@page` na `@page "{id:int}"` . Uruchom aplikację, a następnie Wyświetl źródło.
+Zaktualizuj strony Edytuj, szczegóły i Usuń, Razor Aby użyć `{id:int}` szablonu trasy. Zmień dyrektywę Page dla każdej z tych stron z `@page` na `@page "{id:int}"` . Uruchom aplikację, a następnie Wyświetl źródło.
 
 Wygenerowany kod HTML dodaje identyfikator do części ścieżki adresu URL:
 
@@ -117,7 +115,7 @@ Aby przetestować `catch` blok:
 
 1. Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)` .
 1. Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
-1. W innym oknie przeglądarki wybierz **Delete** łącze dla tego samego filmu, a następnie usuń film.
+1. W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 1. W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
 
 Kod produkcyjny może chcieć wykryć konflikty współbieżności. Aby uzyskać więcej informacji, zobacz sekcję [obsługa konfliktów współbieżności](xref:data/ef-rp/concurrency) .
@@ -146,9 +144,9 @@ Po opublikowaniu strony filmy/Edycja:
 * W przypadku wystąpienia błędów w stanie modelu, na przykład, `ReleaseDate` nie można przekonwertować na datę, formularz jest ponownie wyświetlany z przesłanymi wartościami.
 * Jeśli nie ma żadnych błędów modelu, film zostanie zapisany.
 
-Metody GET protokołu HTTP w Index , Create i są Delete Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na Create Razor stronie podąża za podobnym wzorcem `OnPostAsync` metody na Razor stronie edytowania.
+Metody GET protokołu HTTP na Index stronach, Create i DELETE są Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na stronie Tworzenie jest Razor zgodna z podobnym wzorcem do `OnPostAsync` metody na Razor stronie edytowania.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni: Pracuj z bazą danych](xref:tutorials/razor-pages/sql) 
@@ -176,7 +174,7 @@ Przejdź do stron/filmów i umieść kursor na linku **edycji** , aby zobaczyć 
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku http://localhost:1234/Movies/Edit/5](~/tutorials/razor-pages/da1/edit7.png)
 
-**Edytuj** , **szczegóły** i **Delete** linki są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/ Index . cshtml* .
+Linki **Edytuj**, **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/ Index . cshtml* .
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -194,7 +192,7 @@ Użyj **widoku źródła** z przeglądarki, aby sprawdzić wygenerowane znacznik
 
 Linki dynamicznie generowane przekażą identyfikator filmu ciągiem zapytania. Na przykład, `?id=1` w  `https://localhost:5001/Movies/Details?id=1` .
 
-Zaktualizuj stronę Edytowanie, szczegóły i Delete Razor strony, aby użyć szablonu trasy "{ID: int}". Zmień dyrektywę Page dla każdej z tych stron z `@page` na `@page "{id:int}"` . Uruchom aplikację, a następnie Wyświetl źródło. Wygenerowany kod HTML dodaje identyfikator do części ścieżki adresu URL:
+Zaktualizuj strony edytowania, szczegółów i usuwania, Razor Aby użyć szablonu trasy "{ID: int}". Zmień dyrektywę Page dla każdej z tych stron z `@page` na `@page "{id:int}"` . Uruchom aplikację, a następnie Wyświetl źródło. Wygenerowany kod HTML dodaje identyfikator do części ścieżki adresu URL:
 
 ```html
 <td>
@@ -232,7 +230,7 @@ Aby przetestować `catch` blok:
 
 * Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)`
 * Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
-* W innym oknie przeglądarki wybierz **Delete** łącze dla tego samego filmu, a następnie usuń film.
+* W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 * W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
 
 Kod produkcyjny może chcieć wykryć konflikty współbieżności. Aby uzyskać więcej informacji, zobacz sekcję [obsługa konfliktów współbieżności](xref:data/ef-rp/concurrency) .
@@ -261,11 +259,11 @@ Po opublikowaniu strony filmy/Edycja:
 * W przypadku wystąpienia błędów w stanie modelu na przykład `ReleaseDate` nie można przekonwertować ich na datę, formularz zostanie wyświetlony z przesłanymi wartościami.
 * Jeśli nie ma żadnych błędów modelu, film zostanie zapisany.
 
-Metody GET protokołu HTTP w Index , Create i są Delete Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na Create Razor stronie podąża za podobnym wzorcem `OnPostAsync` metody na Razor stronie edytowania.
+Metody GET protokołu HTTP na Index stronach, Create i DELETE są Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na stronie Tworzenie jest Razor zgodna z podobnym wzorcem do `OnPostAsync` metody na Razor stronie edytowania.
 
 W następnym samouczku zostanie dodane Wyszukiwanie.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/yLnnleREMtQ)
 

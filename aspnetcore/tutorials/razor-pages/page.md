@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/25/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417633"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420035"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
@@ -47,7 +45,7 @@ Ten samouczek służy do badania Razor stron utworzonych przez tworzenie szkiele
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>CreateStrony, Delete , szczegóły i edycja
+## <a name="the-create-delete-details-and-edit-pages"></a>Strony tworzenie, usuwanie, szczegóły i edycja
 
 Sprawdzanie *stron/filmów/ Index cshtml.cs* strony:
 
@@ -65,7 +63,7 @@ Gdy `OnGet` zwraca `void` lub `OnGetAsync` zwraca `Task` , nie jest używana ins
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Privacy.cshtml.cs?name=snippet)]
 
-Gdy typem zwracanym jest `IActionResult` lub `Task<IActionResult>` , należy podać instrukcję return. Na przykład, *strony/filmy/ Create cshtml.cs* `OnPostAsync` :
+Gdy typem zwracanym jest `IActionResult` lub `Task<IActionResult>` , należy podać instrukcję return. Na przykład: *Pages/Films/Create. cshtml. cs.* `OnPostAsync`
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -151,7 +149,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
 1. Zapisz zmiany i przetestuj aplikację, wybierając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-1. Przetestuj **Narzędzia główne**, **RpMovie**, **Create** , **Edytuj** i **Delete** linki. Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+1. Przetestuj linki **Home**, **RpMovie**, **Create**, **Edit** i **delete** . Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
 > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Aby uzyskać instrukcje dotyczące dodawania przecinków dziesiętnych, zobacz ten problem w usłudze [GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
@@ -162,15 +160,15 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
 Poprzedzające znaczniki ustawiają plik układu na *Pages/Shared/_Layout. cshtml* dla wszystkich Razor plików w folderze *Pages* . Aby uzyskać więcej informacji, zobacz [Układ](xref:razor-pages/index#layout) .
 
-### <a name="the-no-loccreate-page-model"></a>CreateModel strony
+### <a name="the-create-page-model"></a>Model tworzenia strony
 
-Sprawdzanie *stron/filmów/ Create cshtml.cs* strony:
+Obejrzyj model stron */filmów/Utwórz. cshtml. cs* :
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet`Metoda inicjuje wszystkie Stany potrzebne dla strony. CreateStrona nie ma żadnego stanu do zainicjowania, więc `Page` jest zwracana. W dalszej części tego samouczka `OnGet` przedstawiono przykład inicjowania stanu. `Page`Metoda tworzy `PageResult` obiekt, który renderuje stronę *Create . cshtml* .
+`OnGet`Metoda inicjuje wszystkie Stany potrzebne dla strony. Strona tworzenia nie ma żadnego stanu do zainicjowania, więc `Page` jest zwracana. W dalszej części tego samouczka `OnGet` przedstawiono przykład inicjowania stanu. `Page`Metoda tworzy `PageResult` obiekt, który renderuje stronę *Create. cshtml* .
 
-`Movie`Właściwość używa atrybutu [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) do przystąpienia do [powiązania modelu](xref:mvc/models/model-binding). Gdy Create formularz zapisuje wartości formularza, środowisko uruchomieniowe ASP.NET Core tworzy powiązanie wartości ogłoszonych z `Movie` modelem.
+`Movie`Właściwość używa atrybutu [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) do przystąpienia do [powiązania modelu](xref:mvc/models/model-binding). Gdy formularz tworzenia zapisuje wartości formularza, środowisko uruchomieniowe ASP.NET Core tworzy powiązanie opublikowanych wartości z `Movie` modelem.
 
 `OnPostAsync`Metoda jest uruchamiana, gdy strona zapisuje dane formularza:
 
@@ -183,13 +181,13 @@ Jeśli nie ma błędów modelu:
 * Dane są zapisywane.
 * Przeglądarka zostanie przekierowana na Index stronę.
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor Strona
+### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
 
-Przejrzyj pliki *stron/filmów/ Create . cshtml* Razor :
+Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Program Visual Studio wyświetla następujące znaczniki w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 
@@ -199,7 +197,7 @@ Program Visual Studio wyświetla następujące znaczniki w wyróżnionej pogrubi
 * `<input asp-for="Movie.Title" class="form-control" />`
 * `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
 
-![Widok VS17::: No-Loc (Create)::. cshtml](page/_static/th3.png)
+![Widok VS17 na stronie Tworzenie. cshtml](page/_static/th3.png)
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -227,7 +225,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu, z wyjątkiem
 
 Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post">` , takich jak, zobacz [pomocnicy tagów w ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni: Dodawanie modelu](xref:tutorials/razor-pages/model) 
@@ -237,7 +235,7 @@ Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post"
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>CreateStrony, Delete , szczegóły i edycja
+## <a name="the-create-delete-details-and-edit-pages"></a>Strony tworzenie, usuwanie, szczegóły i edycja
 
 Sprawdzanie *stron/filmów/ Index cshtml.cs* strony:
 
@@ -247,7 +245,7 @@ Razor Strony pochodzą od `PageModel` . Zgodnie z Konwencją `PageModel` Klasa p
 
 Gdy żądanie zostanie wykonane na stronie, `OnGetAsync` Metoda zwraca listę filmów na Razor stronie. `OnGetAsync` lub `OnGet` jest wywoływana na Razor stronie w celu zainicjowania stanu dla strony. W takim przypadku `OnGetAsync` Pobiera listę filmów i wyświetla je.
 
-Gdy `OnGet` zwraca `void` lub `OnGetAsync` zwraca `Task` , nie jest używana żadna metoda Return. Gdy typem zwracanym jest `IActionResult` lub `Task<IActionResult>` , należy podać instrukcję return. Na przykład, *strony/filmy/ Create cshtml.cs* `OnPostAsync` :
+Gdy `OnGet` zwraca `void` lub `OnGetAsync` zwraca `Task` , nie jest używana żadna metoda Return. Gdy typem zwracanym jest `IActionResult` lub `Task<IActionResult>` , należy podać instrukcję return. Na przykład: *Pages/Films/Create. cshtml. cs.* `OnPostAsync`
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -326,7 +324,7 @@ Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-hel
 
 Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-Przetestuj inne linki (**Home**, **RpMovie**, **Create** , **Edit** i **Delete** ). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+Przetestuj inne linki (**Narzędzia główne**, **RpMovie**, **Utwórz**, **Edytuj** i **Usuń**). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
 > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Ten [problem w usłudze GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) zawiera instrukcje dotyczące dodawania przecinków dziesiętnych.
@@ -337,15 +335,15 @@ Przetestuj inne linki (**Home**, **RpMovie**, **Create** , **Edit** i **Delete**
 
 Poprzedzające znaczniki ustawiają plik układu na *Pages/Shared/_Layout. cshtml* dla wszystkich Razor plików w folderze *Pages* . Aby uzyskać więcej informacji, zobacz [Układ](xref:razor-pages/index#layout) .
 
-### <a name="the-no-loccreate-page-model"></a>CreateModel strony
+### <a name="the-create-page-model"></a>Model tworzenia strony
 
-Sprawdzanie *stron/filmów/ Create cshtml.cs* strony:
+Obejrzyj model stron */filmów/Utwórz. cshtml. cs* :
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet`Metoda inicjuje wszystkie Stany potrzebne dla strony. CreateStrona nie ma żadnego stanu do zainicjowania, więc `Page` jest zwracana. W dalszej części tego samouczka zobaczysz `OnGet` stan zainicjowania metody. `Page`Metoda tworzy `PageResult` obiekt, który renderuje stronę *Create . cshtml* .
+`OnGet`Metoda inicjuje wszystkie Stany potrzebne dla strony. Strona tworzenia nie ma żadnego stanu do zainicjowania, więc `Page` jest zwracana. W dalszej części tego samouczka zobaczysz `OnGet` stan zainicjowania metody. `Page`Metoda tworzy `PageResult` obiekt, który renderuje stronę *Create. cshtml* .
 
-`Movie`Właściwość używa atrybutu [[BindProperty]] <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> do przystąpienia do [powiązania modelu](xref:mvc/models/model-binding). Gdy Create formularz zapisuje wartości formularza, środowisko uruchomieniowe ASP.NET Core tworzy powiązanie wartości ogłoszonych z `Movie` modelem.
+`Movie`Właściwość używa atrybutu [[BindProperty]] <xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> do przystąpienia do [powiązania modelu](xref:mvc/models/model-binding). Gdy formularz tworzenia zapisuje wartości formularza, środowisko uruchomieniowe ASP.NET Core tworzy powiązanie opublikowanych wartości z `Movie` modelem.
 
 `OnPostAsync`Metoda jest uruchamiana, gdy strona zapisuje dane formularza:
 
@@ -355,17 +353,17 @@ Jeśli występują jakieś błędy modelu, formularz jest ponownie wyświetlany 
 
 Jeśli nie ma żadnych błędów modelu, dane zostaną zapisane i przeglądarka zostanie przekierowana na Index stronę.
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>Create Razor Strona
+### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
 
-Przejrzyj pliki *stron/filmów/ Create . cshtml* Razor :
+Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Program Visual Studio Wyświetla `<form method="post">` tag w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 
-![Widok VS17::: No-Loc (Create)::. cshtml](page/_static/th.png)
+![Widok VS17 na stronie Tworzenie. cshtml](page/_static/th.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -389,7 +387,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu, z wyjątkiem
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/zxgKjPYnOMM)
 

@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 00c1be2704d92c7d4f868e6eaa346bd8e9901dbf
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360845"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419983"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
@@ -47,7 +45,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione instrukcje using i właściwości do *stron/filmów/ Index . cshtml.cs* :
+Dodaj następujące wyróżnione instrukcje using i właściwości do *stron/filmów/ Index . cshtml.cs*:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=3,23,24,25,26,27)]
 
@@ -136,7 +134,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 1. Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni: aktualizowanie stron](xref:tutorials/razor-pages/da1) 
@@ -150,7 +148,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione właściwości do *stron/filmów/ Index . cshtml.cs* :
+Dodaj następujące wyróżnione właściwości do *stron/filmów/ Index . cshtml.cs*:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
@@ -237,7 +235,7 @@ Aktualizowanie *Index . cshtml* [ `<form>` element] ( https://developer.mozilla.
 Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
 Powyższy kod używa pomocnika [SELECT tag](xref:mvc/views/working-with-forms#the-select-tag-helper) i znacznika opcji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/4B6pHtdyo08)
 

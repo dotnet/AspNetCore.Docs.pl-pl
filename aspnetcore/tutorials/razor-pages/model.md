@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 11/11/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6244ac8798fb470a88802389961968fb52bd3c0a
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: b2e840e20d034b42b2dc4a525b1dd76e44bbe3a8
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550697"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420061"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
@@ -37,7 +35,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 W tej sekcji są dodawane klasy do zarządzania filmami w bazie danych. Klasy modelu aplikacji używają [Entity Framework Core (Ef Core)](/ef/core) do pracy z bazą danych. EF Core to Mapowanie obiektowo-relacyjne (O/RM), które upraszcza dostęp do danych. Najpierw należy napisać klasy modelu, a EF Core utworzyć bazę danych.
 
-Klasy modelu są znane jako klasy POCO (od " **P** Lain- **O** LD **k** LR **O** biekty"), ponieważ nie mają zależności od EF Core. Definiują właściwości danych przechowywanych w bazie danych programu.
+Klasy modelu są znane jako klasy POCO (od "**P** Lain-**O** LD **k** LR **O** biekty"), ponieważ nie mają zależności od EF Core. Definiują właściwości danych przechowywanych w bazie danych programu.
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
@@ -103,7 +101,7 @@ Dodaj parametry połączenia do *appsettings.json* pliku, jak pokazano w następ
 
 ### <a name="register-the-database-context"></a>Rejestrowanie kontekstu bazy danych
 
-1. Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
+1. Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
 
    ```csharp
    using RazorPagesMovie.Data;
@@ -143,11 +141,11 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 ## <a name="scaffold-the-movie-model"></a>Tworzenie szkieletu modelu filmu
 
-W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla Create operacji, odczytu, aktualizacji i Delete (CRUD) dla modelu filmu.
+W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-1. Create folder *stron/filmów* :
+1. Utwórz folder *stron/filmów* :
    1. Kliknij prawym przyciskiem myszy folder *strony* > **Dodaj** > **Nowy folder**.
    1. Nazwij foldery *filmów*.
 
@@ -174,15 +172,15 @@ W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia s
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Otwórz powłokę poleceń w katalogu projektu, który zawiera pliki *program.cs* , *Startup.cs* i *. csproj* .
+* Otwórz powłokę poleceń w katalogu projektu, który zawiera pliki *program.cs*, *Startup.cs* i *. csproj* .
 
-* **Dla systemu Windows** : Uruchom następujące polecenie:
+* **Dla systemu Windows**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
-* **W przypadku systemów macOS i Linux** : Uruchom następujące polecenie:
+* **W przypadku systemów macOS i Linux**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
@@ -196,7 +194,7 @@ W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia s
 | `-dc`  | `DbContext`Klasa, która ma zostać użyta. |
 | `-udl` | Użyj układu domyślnego. |
 | `-outDir` | Ścieżka względna folderu wyjściowego do tworzenia widoków. |
-| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i Create stron |
+| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i tworzenia stron |
 
 Użyj `-h` opcji, aby uzyskać pomoc dotyczącą `aspnet-codegenerator razorpage` polecenia:
 
@@ -214,7 +212,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-1. Create folder *stron/filmów* :
+1. Utwórz folder *stron/filmów* :
    1. Kliknij przycisk sterowania w folderze *strony* > **Dodaj** > **Nowy folder**.
    1. Nazwij foldery *filmów*.
 
@@ -248,7 +246,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 * *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
@@ -261,7 +259,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 Proces tworzenia szkieletu tworzy następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 
 Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
@@ -269,7 +267,7 @@ Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 * *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
@@ -282,11 +280,11 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 <a name="pmc"></a>
 
-## <a name="no-loccreate-the-initial-database-schema-using-efs-migration-feature"></a>Create początkowy schemat bazy danych przy użyciu funkcji migracji EF
+## <a name="create-the-initial-database-schema-using-efs-migration-feature"></a>Utwórz początkowy schemat bazy danych przy użyciu funkcji migracji EF
 
 Funkcja migracji w Entity Framework Core zapewnia sposób:
 
-* Create początkowy schemat bazy danych.
+* Utwórz początkowy schemat bazy danych.
 * Uaktualnij przyrostowo schemat bazy danych, aby zachować synchronizację z modelem danych aplikacji.  Istniejące dane w bazie danych są zachowywane.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
@@ -326,7 +324,7 @@ Zignoruj ostrzeżenie, ponieważ zostanie ono rozkierowane w późniejszym kroku
 
 `migrations`Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` . `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji została wybrana nazwa opisująca migrację.
 
-`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _Initial Create . cs* , który tworzy bazę danych.
+`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -340,7 +338,7 @@ Zapoznaj się z tą `Startup.ConfigureServices` metodą. Podświetlony wiersz zo
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak Create , Odczyt, aktualizacja i Delete , dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
+`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak tworzenie, Odczyt, aktualizowanie i usuwanie, dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Data/RazorPagesMovieContext.cs)]
 
@@ -369,18 +367,18 @@ Zapoznaj się z tą `Up` metodą.
 
    Pominięto [krok migracji](#pmc).
 
-1. Przetestuj **Create** link.
+1. Przetestuj link **tworzenia** .
 
-   ![::: No-Loc (Create)::: Page](model/_static/conan5.png)
+   ![Tworzenie strony](model/_static/conan5.png)
 
    > [!NOTE]
    > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-1. Przetestuj **Edytowanie** , **szczegóły** i **Delete** linki.
+1. Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
@@ -468,7 +466,7 @@ Dodaj parametry połączenia do *appsettings.json* pliku, jak pokazano w następ
 
 ### <a name="register-the-database-context"></a>Rejestrowanie kontekstu bazy danych
 
-Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
+Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
 
 ```csharp
 using RazorPagesMovie.Data;
@@ -509,11 +507,11 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 ## <a name="scaffold-the-movie-model"></a>Tworzenie szkieletu modelu filmu
 
-W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla Create operacji, odczytu, aktualizacji i Delete (CRUD) dla modelu filmu.
+W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Create folder *stron/filmów* :
+Utwórz folder *stron/filmów* :
 
 * Kliknij prawym przyciskiem myszy folder *strony* > **Dodaj** > **Nowy folder**.
 * Nazwij foldery *filmów*.
@@ -529,7 +527,7 @@ W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor strony z uż
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * Z listy rozwijanej **Klasa modelu** wybierz pozycję **film ( Razor PagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę z Razor PagesMovie. **Modele**. Razor PagesMovieContext do Razor PagesMovie. **Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę z Razor PagesMovie.**Modele**. Razor PagesMovieContext do Razor PagesMovie.**Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/3/arp.png)
@@ -541,15 +539,15 @@ Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Otwórz okno polecenia w katalogu projektu, który zawiera pliki *program.cs* , *Startup.cs* i *. csproj* .
+* Otwórz okno polecenia w katalogu projektu, który zawiera pliki *program.cs*, *Startup.cs* i *. csproj* .
 
-* **Dla systemu Windows** : Uruchom następujące polecenie:
+* **Dla systemu Windows**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
-* **W przypadku systemów macOS i Linux** : Uruchom następujące polecenie:
+* **W przypadku systemów macOS i Linux**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
@@ -563,7 +561,7 @@ Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (
 | `-dc`  | `DbContext`Klasa, która ma zostać użyta. |
 | `-udl` | Użyj układu domyślnego. |
 | `-outDir` | Ścieżka względna folderu wyjściowego do tworzenia widoków. |
-| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i Create stron |
+| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i tworzenia stron |
 
 Użyj `-h` opcji, aby uzyskać pomoc dotyczącą `aspnet-codegenerator razorpage` polecenia:
 
@@ -581,7 +579,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Create folder *stron/filmów* :
+Utwórz folder *stron/filmów* :
 
 * Kliknij prawym przyciskiem myszy folder *strony* > **Dodaj** > **Nowy folder**.
 * Nazwij foldery *filmów*.
@@ -597,7 +595,7 @@ W oknie dialogowym **Nowa rusztowania** wybierz pozycję **Razor strony z Entity
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * W menu rozwijanym **Klasa modelu** wybierz lub wpisz **film ( Razor PagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wpisz nazwę nowej klasy, Razor PagesMovie. **Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
+* W wierszu **klasy kontekstu danych** wpisz nazwę nowej klasy, Razor PagesMovie.**Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/arpMac.png)
@@ -628,7 +626,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 * *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
@@ -641,7 +639,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 * *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
@@ -654,7 +652,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 Proces tworzenia szkieletu tworzy następujące pliki:
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 
 Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
@@ -701,7 +699,7 @@ Zignoruj ostrzeżenie, ponieważ zostanie ono rozkierowane w późniejszym kroku
 
 Polecenie migrations generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` . `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji została wybrana nazwa opisująca migrację.
 
-`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku  *migrations/ \<time-stamp> _Initial Create . cs* , który tworzy bazę danych.
+`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku  *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -715,7 +713,7 @@ Zapoznaj się z tą `Startup.ConfigureServices` metodą. Podświetlony wiersz zo
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak Create , Odczyt, aktualizacja i Delete , dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
+`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak tworzenie, Odczyt, aktualizowanie i usuwanie, dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
@@ -744,18 +742,18 @@ Login failed for user 'User-name'.
 
 Pominięto [krok migracji](#pmc).
 
-* Przetestuj **Create** link.
+* Przetestuj link **tworzenia** .
 
-  ![::: No-Loc (Create)::: Page](model/_static/conan5.png)
+  ![Tworzenie strony](model/_static/conan5.png)
 
   > [!NOTE]
   > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj **Edytowanie** , **szczegóły** i **Delete** linki.
+* Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
@@ -852,7 +850,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 2.2.6
 
 ### <a name="register-the-database-context"></a>Rejestrowanie kontekstu bazy danych
 
-Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
+Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
 
 ```csharp
 using RazorPagesMovie.Models;
@@ -895,11 +893,11 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 ## <a name="scaffold-the-movie-model"></a>Tworzenie szkieletu modelu filmu
 
-W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla Create operacji, odczytu, aktualizacji i Delete (CRUD) dla modelu filmu.
+W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Create folder *stron/filmów* :
+Utwórz folder *stron/filmów* :
 
 * Kliknij prawym przyciskiem myszy folder *strony* > **Dodaj** > **Nowy folder**.
 * Nazwij foldery *filmów*.
@@ -931,15 +929,15 @@ to use Data, it should not use models. That will make the namespace the same for
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Otwórz okno polecenia w katalogu projektu, który zawiera pliki *program.cs* , *Startup.cs* i *. csproj* .
+* Otwórz okno polecenia w katalogu projektu, który zawiera pliki *program.cs*, *Startup.cs* i *. csproj* .
 
-* **Dla systemu Windows** : Uruchom następujące polecenie:
+* **Dla systemu Windows**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
-* **W przypadku systemów macOS i Linux** : Uruchom następujące polecenie:
+* **W przypadku systemów macOS i Linux**: Uruchom następujące polecenie:
 
   ```dotnetcli
   dotnet-aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
@@ -953,7 +951,7 @@ to use Data, it should not use models. That will make the namespace the same for
 | `-dc`  | `DbContext`Klasa, która ma zostać użyta. |
 | `-udl` | Użyj układu domyślnego. |
 | `-outDir` | Ścieżka względna folderu wyjściowego do tworzenia widoków. |
-| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i Create stron |
+| `--referenceScriptLibraries` | Dodaje `_ValidationScriptsPartial` do edycji i tworzenia stron |
 
 Użyj `-h` opcji, aby uzyskać pomoc dotyczącą `aspnet-codegenerator razorpage` polecenia:
 
@@ -965,7 +963,7 @@ Aby uzyskać więcej informacji, zobacz [dotnet-ASPNET-CodeGenerator](xref:funda
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Create folder *stron/filmów* :
+Utwórz folder *stron/filmów* :
 
 * Kliknij przycisk sterowania w folderze *strony* > **Dodaj** > **Nowy folder**.
 * Nazwij foldery *filmów*.
@@ -994,7 +992,7 @@ Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
 ### <a name="files-created"></a>Utworzone pliki
 
-* *Strony/filmy* : Create , Delete , szczegóły, Edytuj i Index .
+* *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i Index .
 * *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="file-updated"></a>Zaktualizowano plik
@@ -1027,7 +1025,7 @@ Update-Database
 
 `Add-Migration`Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` , w pliku *Razor PagesMovieContext.cs* . `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji Nazwa opisująca migrację jest używana. Aby uzyskać więcej informacji, zobacz <xref:data/ef-mvc/migrations>.
 
-`Update-Database`Polecenie uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _Initial Create . cs* . `Up`Metoda tworzy bazę danych.
+`Update-Database`Polecenie uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* . `Up`Metoda tworzy bazę danych.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1058,7 +1056,7 @@ Zapoznaj się z tą `Startup.ConfigureServices` metodą. Podświetlony wiersz zo
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak Create , Odczyt, aktualizacja i Delete , dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
+`RazorPagesMovieContext`Współrzędne EF Core funkcje, takie jak tworzenie, Odczyt, aktualizowanie i usuwanie, dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](xref:Microsoft.EntityFrameworkCore.DbContext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -1087,18 +1085,18 @@ Login failed for user 'User-name'.
 
 Pominięto [krok migracji](#pmc).
 
-* Przetestuj **Create** link.
+* Przetestuj link **tworzenia** .
 
-  ![::: No-Loc (Create)::: Page](model/_static/conan.png)
+  ![Tworzenie strony](model/_static/conan.png)
 
   > [!NOTE]
   > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj **Edytowanie** , **szczegóły** i **Delete** linki.
+* Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 

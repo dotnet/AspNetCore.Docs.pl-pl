@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/29/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: d69ab3452f4f15e916049e5c772a20fe9f9fac65
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: f155922c9cb5ea7fdbad0963221ceddd19f4fe60
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570227"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419957"
 ---
 # <a name="part-8-of-tutorial-series-on-no-locrazor-pages"></a>Część 8 serii samouczków na Razor stronach.
 
@@ -36,7 +34,7 @@ W tej sekcji logika walidacji jest dodawana do `Movie` modelu. Reguły sprawdzan
 
 ## <a name="validation"></a>Walidacja
 
-Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** EPEAT **Y** ourself"). Razor Strony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
+Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D** on't **R** EPEAT **Y** ourself"). Razor Strony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
 
 * Zmniejsz ilość kodu w aplikacji.
 * Spraw, aby kod był mniej podatny na błędy i łatwiejszy do testowania i konserwowania.
@@ -85,7 +83,7 @@ Automatyczne Wymuszanie reguł sprawdzania poprawności przez ASP.NET Core ułat
 
 Uruchom aplikację i przejdź do stron/filmów.
 
-Wybierz **Create Nowy** link. Wypełnij formularz z nieprawidłowymi wartościami. Gdy program jQuery po stronie klienta wykryje błąd, zostanie wyświetlony komunikat o błędzie.
+Wybierz łącze **Utwórz nowy** . Wypełnij formularz z nieprawidłowymi wartościami. Gdy program jQuery po stronie klienta wykryje błąd, zostanie wyświetlony komunikat o błędzie.
 
 ![Formularz widoku filmu z wieloma błędami walidacji po stronie klienta jQuery](validation/_static/val.png)
 
@@ -93,11 +91,11 @@ Wybierz **Create Nowy** link. Wypełnij formularz z nieprawidłowymi wartościam
 
 Zwróć uwagę, jak formularz automatycznie renderuje komunikat o błędzie walidacji w każdym polu zawierającym nieprawidłową wartość. Błędy są wymuszane po stronie klienta, przy użyciu języków JavaScript i jQuery oraz po stronie serwera, gdy użytkownik ma wyłączone JavaScript.
 
-Znacząca korzyść polega na tym, że żadne zmiany w kodzie **nie** były wymagane na Create stronach ani w edycji. Po zastosowaniu adnotacji danych do modelu interfejs użytkownika weryfikacji został włączony. RazorStrony utworzone w tym samouczku automatycznie pobierają reguły sprawdzania poprawności, używając atrybutów walidacji we właściwościach `Movie` klasy modelu. Sprawdzanie poprawności testu za pomocą strony Edycja, to samo sprawdzanie poprawności jest stosowane.
+Znacząca korzyść polega na tym, że zmiany kodu **nie** były wymagane na stronach tworzenia i edytowania. Po zastosowaniu adnotacji danych do modelu interfejs użytkownika weryfikacji został włączony. RazorStrony utworzone w tym samouczku automatycznie pobierają reguły sprawdzania poprawności, używając atrybutów walidacji we właściwościach `Movie` klasy modelu. Sprawdzanie poprawności testu za pomocą strony Edycja, to samo sprawdzanie poprawności jest stosowane.
 
 Dane formularza nie są ogłaszane na serwerze, dopóki nie zostaną wykryte błędy weryfikacji po stronie klienta. Sprawdź, czy dane formularza nie zostały ogłoszone przy użyciu co najmniej jednej z następujących metod:
 
-* Umieść punkt przerwania w `OnPostAsync` metodzie. Prześlij formularz, wybierając **Create** lub **Zapisz**. Punkt przerwania nigdy nie trafi.
+* Umieść punkt przerwania w `OnPostAsync` metodzie. Prześlij formularz, wybierając pozycję **Utwórz** lub **Zapisz**. Punkt przerwania nigdy nie trafi.
 * Użyj [Narzędzia programu Fiddler](https://www.telerik.com/fiddler).
 * Użyj narzędzi deweloperskich przeglądarki do monitorowania ruchu sieciowego.
 
@@ -108,7 +106,7 @@ Gdy język JavaScript jest wyłączony w przeglądarce, przesłanie formularza z
 Opcjonalna, testowa weryfikacja po stronie serwera:
 
 1. Wyłącz język JavaScript w przeglądarce. Język JavaScript można wyłączyć za pomocą narzędzi deweloperskich przeglądarki. Jeśli nie można wyłączyć języka JavaScript w przeglądarce, wypróbuj inną przeglądarkę.
-1. Ustaw punkt przerwania w `OnPostAsync` metodzie lub na Create stronie edycji.
+1. Ustaw punkt przerwania w `OnPostAsync` metodzie strony Utwórz lub Edytuj.
 1. Prześlij formularz z nieprawidłowymi danymi.
 1. Sprawdź, czy stan modelu jest nieprawidłowy:
 
@@ -121,7 +119,7 @@ Opcjonalna, testowa weryfikacja po stronie serwera:
   
 Alternatywnie można [wyłączyć weryfikację po stronie klienta na serwerze](xref:mvc/models/validation#disable-client-side-validation).
 
-Poniższy kod przedstawia część strony *Create . cshtml* podświetloną we wcześniejszej części samouczka. Jest on używany przez Create i edytuje strony do:
+Poniższy kod przedstawia część strony *Create. cshtml* podświetloną wcześniej w samouczku. Jest on używany przez strony Tworzenie i edytowanie na:
 
 * Wyświetlanie formularza początkowego.
 * Ponownie Wyświetl formularz w przypadku błędu.
@@ -130,7 +128,7 @@ Poniższy kod przedstawia część strony *Create . cshtml* podświetloną we wc
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta. [Pomocnik tagów walidacji](xref:mvc/views/working-with-forms#the-validation-tag-helpers) wyświetla błędy walidacji. Aby uzyskać więcej informacji, zobacz [Walidacja](xref:mvc/models/validation) .
 
-CreateStrony edycji i nie mają żadnych reguł walidacji. Reguły walidacji i ciągi błędów są określone tylko w `Movie` klasie. Te reguły sprawdzania poprawności są automatycznie stosowane do Razor stron, które edytują `Movie` model.
+Na stronach tworzenie i edytowanie nie są dostępne żadne reguły sprawdzania poprawności. Reguły walidacji i ciągi błędów są określone tylko w `Movie` klasie. Te reguły sprawdzania poprawności są automatycznie stosowane do Razor stron, które edytują `Movie` model.
 
 Gdy wymagana jest zmiana logiki walidacji, jest ona wykonywana tylko w modelu. Walidacja jest stosowana spójnie w całej aplikacji. Logika walidacji jest definiowana w jednym miejscu. Sprawdzanie poprawności w jednym miejscu pomaga zachować czysty kod i ułatwić jego utrzymywanie i aktualizowanie.
 
@@ -254,7 +252,7 @@ Aby uzyskać informacje na temat wdrażania na platformie Azure, zobacz [Samoucz
 
 Dziękujemy za zakończenie tego wprowadzenia do Razor stron. [Wprowadzenie do Razor Strony i EF Core](xref:data/ef-rp/intro) są doskonałym zaobserwują się z tym samouczkiem.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/working-with-forms>
 * <xref:fundamentals/localization>

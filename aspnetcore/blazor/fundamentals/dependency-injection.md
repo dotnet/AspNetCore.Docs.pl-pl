@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 0cec9a1ea6f6df52103ab190c85518ddc42a573f
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c68deb5237754872e11bfd9c83275b9a3b147319
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507931"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556518"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -154,7 +154,7 @@ Usługi można skonfigurować przy użyciu okresów istnienia podanych w poniżs
 
 | Okres istnienia | Opis |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor Server model hostingu obsługuje `Scoped` okres istnienia. W Blazor Server aplikacjach do zakresu rejestracji usługi w zakresie jest *dołączany* zakres. Z tego powodu usługi w zakresie są preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce w Blazor WebAssembly aplikacji. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi.</p><p>Blazor ServerModel hostingu obsługuje `Scoped` okres istnienia między żądaniami HTTP, ale nie w przypadku komunikatów połączeń i obwodów usługi SingalR między składnikami, które są ładowane na komputerze klienckim. RazorCzęści strony lub MVC w aplikacji traktują usługi o określonym zakresie w normalny sposób i ponownie tworzy usługi na *każdym żądaniu HTTP* podczas nawigowania między stronami lub widokami albo ze strony lub widoku do składnika. Usługi o określonym zakresie nie są odtworzone podczas nawigowania między składnikami na kliencie, gdzie komunikacja z serwerem odbywa się przez SignalR połączenie obwodu użytkownika, a nie za pośrednictwem żądań HTTP. W następujących scenariuszach składników na kliencie usługi o określonym zakresie są odtworzone, ponieważ dla użytkownika zostanie utworzony nowy obwód:</p><ul><li>Użytkownik zamknie okno przeglądarki. Użytkownik otworzy nowe okno i nawiguje z powrotem do aplikacji.</li><li>Użytkownik zamknie ostatnią kartę aplikacji w oknie przeglądarki. Użytkownik otworzy nową kartę i nawiguje z powrotem do aplikacji.</li><li>Użytkownik wybiera przycisk Załaduj ponownie/Odśwież w przeglądarce.</li></ul><p>Aby uzyskać więcej informacji o zachowaniu stanu użytkownika w ramach usług w zakresie w Blazor Server aplikacjach, zobacz <xref:blazor/hosting-models?pivots=server> .</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
 

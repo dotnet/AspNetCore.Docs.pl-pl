@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053868"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901174"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
@@ -184,7 +184,7 @@ Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygn
 * Przechwycono wyjątek bazy danych.
 * Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-Dodaj komunikat o błędzie do *stron/uczniów/Delete. cshtml* :
+Dodaj komunikat o błędzie do *stron/uczniów/Delete. cshtml*:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -345,9 +345,9 @@ Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygn
 `OnPostAsync`Metoda pobiera wybraną jednostkę, a następnie wywołuje metodę [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) w celu ustawienia stanu jednostki na `Deleted` . Gdy `SaveChanges` jest wywoływana, generowane jest polecenie SQL Delete. W przypadku `Remove` niepowodzenia:
 
 * Przechwycono wyjątek bazy danych.
-* Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
+* Metoda usuwania strony `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-Dodaj komunikat o błędzie do strony usuwania Razor ( *strony/uczniowie/Delete. cshtml* ):
+Dodaj komunikat o błędzie do strony usuwania Razor (*strony/uczniowie/Delete. cshtml*):
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -405,7 +405,7 @@ Ale jeśli chcesz użyć `Include` innych jednostek, `FindAsync` nie jest już t
 
 ## <a name="customize-the-details-page"></a>Dostosuj stronę szczegółów
 
-Przejdź do `Pages/Students` strony. Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Students/index. cshtml* .
+Przejdź do `Pages/Students` strony. Linki **Edytuj**, **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Students/index. cshtml* .
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
@@ -439,7 +439,7 @@ Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkq
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Wyświetl powiązane rejestracje na stronie szczegółów
 
-Otwórz *stronę/uczniów/szczegóły. cshtml* . Dodaj następujący wyróżniony kod, aby wyświetlić listę rejestracji:
+Otwórz *stronę/uczniów/szczegóły. cshtml*. Dodaj następujący wyróżniony kod, aby wyświetlić listę rejestracji:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 

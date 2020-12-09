@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9b19c782d1d42ddaba590f05bab31899402f681a
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061447"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901226"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Buforowanie w pamięci w ASP.NET Core
 
@@ -84,6 +84,9 @@ Bieżąca godzina i w pamięci podręcznej są wyświetlane:
 
 [!code-cshtml[](memory/3.0sample/WebCacheSample/Views/Home/Cache.cshtml)]
 
+Poniższy kod używa metody rozszerzenia [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_System_TimeSpan_) do buforowania danych dla względnego czasu bez tworzenia `MemoryCacheEntryOptions` obiektu.
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_set)]
+
 Buforowana `DateTime` wartość pozostaje w pamięci podręcznej, gdy istnieją żądania w określonym limicie czasu.
 
 Poniższy kod używa [GetOrCreate](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.getorcreate#Microsoft_Extensions_Caching_Memory_CacheExtensions_GetOrCreate__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_System_Func_Microsoft_Extensions_Caching_Memory_ICacheEntry___0__) i [GetOrCreateAsync](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.getorcreateasync#Microsoft_Extensions_Caching_Memory_CacheExtensions_GetOrCreateAsync__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_System_Func_Microsoft_Extensions_Caching_Memory_ICacheEntry_System_Threading_Tasks_Task___0___) do buforowania danych.
@@ -122,7 +125,7 @@ Poniższy przykład:
 
 `MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
-Przykład:
+Na przykład:
 
 * Jeśli aplikacja sieci Web była przede wszystkim buforowania ciągów, każdy rozmiar wpisu pamięci podręcznej może być długością ciągu.
 * Aplikacja może określić rozmiar wszystkich wpisów jako 1, a limit rozmiaru to liczba wpisów.
@@ -298,7 +301,7 @@ Poniższy przykład:
 
 `MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
-Przykład:
+Na przykład:
 
 * Jeśli aplikacja sieci Web była przede wszystkim buforowania ciągów, każdy rozmiar wpisu pamięci podręcznej może być długością ciągu.
 * Aplikacja może określić rozmiar wszystkich wpisów jako 1, a limit rozmiaru to liczba wpisów.

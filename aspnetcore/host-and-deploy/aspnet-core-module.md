@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: a644214c208ece38bc118c31cf3c9265706706ea
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d0e6c0c31890c58aaca936fc6f1e92cb9a1ab456
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061499"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901239"
 ---
 # <a name="aspnet-core-module"></a>Moduł ASP.NET Core
 
@@ -206,19 +206,19 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślne |
+| Atrybut | Opis | Domyślny |
 | --------- | ----------- | :-----: |
-| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath** .</p> | |
+| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, token jest przekazywany do procesu podrzędnego, który nasłuchuje w `%ASPNETCORE_PORT%` formie nagłówka `'MS-ASPNETCORE-WINAUTHTOKEN'` na żądanie. Jest odpowiedzialny za ten proces, aby wywołać metodę CloseHandle na tym tokenie na żądanie.</p> | `true` |
 | `hostingModel` | <p>Opcjonalny atrybut ciągu.</p><p>Określa model hostingu jako proces ( `InProcess` / `inprocess` ) lub out-of-Process ( `OutOfProcess` / `outofprocess` ).</p> | `InProcess`<br>`inprocess` |
 | `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w ustawieniu **processPath** , które może być przypadające na aplikację.</p><p>&dagger;W przypadku hostingu w procesie wartość jest ograniczona do `1` .</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100`&dagger; |
 | `processPath` | <p>Wymagany atrybut ciągu.</p><p>Ścieżka do pliku wykonywalnego, który uruchamia proces nasłuchiwanie żądań HTTP. Obsługiwane są ścieżki względne. Jeśli ścieżka zaczyna się od `.` , ścieżka jest uznawana za względną względem katalogu głównego witryny.</p> | |
 | `rapidFailsPerMinute` | <p>Opcjonalny atrybut Integer.</p><p>Określa, ile razy proces określony w **processPath** może ulec awarii na minutę. W przypadku przekroczenia tego limitu moduł przestaje uruchomić proces przez pozostałą część minuty.</p><p>Nieobsługiwane w przypadku hostingu w procesie.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `100` |
-| `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p><p>Nie dotyczy hostingu w procesie. W przypadku hostingu w procesie moduł czeka na aplikację w celu przetworzenia żądania.</p><p>Prawidłowe wartości segmentów minut i sekund ciągu mieszczą się w zakresie 0-59. Użycie **60** w wartości minut lub sekund skutkuje *błędem wewnętrznego serwera 500* .</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
+| `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p><p>Nie dotyczy hostingu w procesie. W przypadku hostingu w procesie moduł czeka na aplikację w celu przetworzenia żądania.</p><p>Prawidłowe wartości segmentów minut i sekund ciągu mieszczą się w zakresie 0-59. Użycie **60** w wartości minut lub sekund skutkuje *błędem wewnętrznego serwera 500*.</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
 | `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny zostanie bezpiecznie zamknięty po wykryciu pliku *app_offline.htm* .</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
-| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie* : proces **nie** jest ponownie uruchamiany i **nie używa ustawienia** **rapidFailsPerMinute** .</p><p>Podczas hostingu *poza procesem* : moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie uruchomi **rapidFailsPerMinute** liczby razy w ostatniej minucie.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
-| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile** .</p> | `false` |
+| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie*: proces **nie** jest ponownie uruchamiany i **nie używa ustawienia** **rapidFailsPerMinute** .</p><p>Podczas hostingu *poza procesem*: moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie uruchomi **rapidFailsPerMinute** liczby razy w ostatniej minucie.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
+| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
 | `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako `stdout_20180205194132_1934.log` w folderze, `logs` gdy zapisywany w dniu 2/5/2018 o godzinie 19:41:32 z identyfikatorem procesu 1934.</p> | `aspnetcore-stdout` |
 
 ### <a name="set-environment-variables"></a>Ustawianie zmiennych środowiskowych
@@ -439,7 +439,7 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C
 
 * `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 
@@ -507,7 +507,7 @@ Następujące cechy są stosowane podczas hostingu w procesie:
 
 * Wykryto rozłączenia klientów. Token anulowania [HttpContext. RequestAborted](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*) został anulowany po rozłączeniu klienta.
 
-* W ASP.NET Core 2.2.1 lub wcześniejszym <xref:System.IO.Directory.GetCurrentDirectory*> zwraca katalog procesów roboczych procesu uruchomionego przez usługi IIS, a nie katalog aplikacji (na przykład *C:\Windows\System32\inetsrv* for *w3wp.exe* ).
+* W ASP.NET Core 2.2.1 lub wcześniejszym <xref:System.IO.Directory.GetCurrentDirectory*> zwraca katalog procesów roboczych procesu uruchomionego przez usługi IIS, a nie katalog aplikacji (na przykład *C:\Windows\System32\inetsrv* for *w3wp.exe*).
 
   Przykładowy kod, który ustawia bieżący katalog aplikacji, znajduje się w [klasie CurrentDirectoryHelpers](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/2.x/CurrentDirectoryHelpers.cs). Wywołaj `SetCurrentDirectory` metodę. Kolejne wywołania w celu <xref:System.IO.Directory.GetCurrentDirectory*> udostępnienia katalogu aplikacji.
 
@@ -621,7 +621,7 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślne |
+| Atrybut | Opis | Domyślny |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w `processPath` .</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
@@ -630,10 +630,10 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 | `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w `processPath` ustawieniu, które może być przypadające na aplikację.</p><p>&dagger;W przypadku hostingu w procesie wartość jest ograniczona do `1` .</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100`&dagger; |
 | `processPath` | <p>Wymagany atrybut ciągu.</p><p>Ścieżka do pliku wykonywalnego, który uruchamia proces nasłuchiwanie żądań HTTP. Obsługiwane są ścieżki względne. Jeśli ścieżka zaczyna się od `.` , ścieżka jest uznawana za względną względem katalogu głównego witryny.</p> | |
 | `rapidFailsPerMinute` | <p>Opcjonalny atrybut Integer.</p><p>Określa, ile razy proces określony w programie `processPath` może ulec awarii na minutę. W przypadku przekroczenia tego limitu moduł przestaje uruchomić proces przez pozostałą część minuty.</p><p>Nieobsługiwane w przypadku hostingu w procesie.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `100` |
-| `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p><p>Nie dotyczy hostingu w procesie. W przypadku hostingu w procesie moduł czeka na aplikację w celu przetworzenia żądania.</p><p>Prawidłowe wartości segmentów minut i sekund ciągu mieszczą się w zakresie 0-59. Użycie **60** w wartości minut lub sekund skutkuje *błędem wewnętrznego serwera 500* .</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
+| `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p><p>Nie dotyczy hostingu w procesie. W przypadku hostingu w procesie moduł czeka na aplikację w celu przetworzenia żądania.</p><p>Prawidłowe wartości segmentów minut i sekund ciągu mieszczą się w zakresie 0-59. Użycie **60** w wartości minut lub sekund skutkuje *błędem wewnętrznego serwera 500*.</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
 | `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka na łagodne zamknięcie pliku wykonywalnego, gdy `app_offline.htm` zostanie wykryty.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
-| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie* : proces **nie** jest ponownie uruchamiany i **nie używa tego** `rapidFailsPerMinute` Ustawienia.</p><p>Podczas hostingu *poza procesem* : moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie, i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie powiedzie się `rapidFailsPerMinute` w ciągu ostatniej minuty.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
-| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w programie `processPath` są przekierowywane do pliku określonego w **stdoutLogFile** .</p> | `false` |
+| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie*: proces **nie** jest ponownie uruchamiany i **nie używa tego** `rapidFailsPerMinute` Ustawienia.</p><p>Podczas hostingu *poza procesem*: moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie, i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie powiedzie się `rapidFailsPerMinute` w ciągu ostatniej minuty.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
+| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w programie `processPath` są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
 | `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego `stdout` `stderr` proces określony w `processPath` jest rejestrowany. Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) są dodawane do ostatniego segmentu `stdoutLogFile` ścieżki. Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako `stdout_20180205194132_1934.log` w folderze, `logs` gdy zapisywany w dniu 2/5/2018 o godzinie 19:41:32 z identyfikatorem procesu 1934.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ustawianie zmiennych środowiskowych
@@ -800,7 +800,7 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C
 
 ### <a name="module"></a>Moduł
 
-**IIS (x86/amd64)** :
+**IIS (x86/amd64)**:
 
 * `%windir%\System32\inetsrv\aspnetcore.dll`
 
@@ -810,7 +810,7 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C
 
 * `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (x86/amd64)** :
+**IIS Express (x86/amd64)**:
 
 * `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
@@ -834,7 +834,7 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C
 
 * `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 
@@ -928,9 +928,9 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślne |
+| Atrybut | Opis | Domyślny |
 | --------- | ----------- | :-----: |
-| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath** .</p>| |
+| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p>| |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, token jest przekazywany do procesu podrzędnego, który nasłuchuje na% ASPNETCORE_PORT% jako nagłówek "MS-ASPNETCORE-WINAUTHTOKEN" na żądanie. Jest odpowiedzialny za ten proces, aby wywołać metodę CloseHandle na tym tokenie na żądanie.</p> | `true` |
 | `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w ustawieniu **processPath** , które może być przypadające na aplikację.</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100` |
@@ -939,8 +939,8 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 | `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
 | `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny zostanie bezpiecznie zamknięty po wykryciu pliku *app_offline.htm* .</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
 | `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces. Moduł podejmuje próbę ponownego uruchomienia procesu, gdy odbierze nowe żądanie i kontynuuje ponowne uruchomienie procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie będzie mogła uruchomić **rapidFailsPerMinute** liczbę razy w ostatniej minucie.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
-| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile** .</p> | `false` |
-| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce muszą istnieć, aby moduł mógł utworzyć plik dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( *log* ) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako *stdout_20180205194132_1934. log* w folderze *Logs* , gdy jest zapisywany na 2/5/2018 o godzinie 19:41:32 przy użyciu identyfikatora procesu 1934.</p> | `aspnetcore-stdout` |
+| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
+| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce muszą istnieć, aby moduł mógł utworzyć plik dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako *stdout_20180205194132_1934. log* w folderze *Logs* , gdy jest zapisywany na 2/5/2018 o godzinie 19:41:32 przy użyciu identyfikatora procesu 1934.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ustawianie zmiennych środowiskowych
 
@@ -986,7 +986,7 @@ Użycie dziennika stdout jest zalecane tylko w przypadku rozwiązywania problem�
 
 Nie używaj dziennika stdout w celu uzyskania ogólnych celów rejestrowania aplikacji. Aby rejestrować procedury w aplikacji ASP.NET Core, użyj biblioteki rejestrowania, która ogranicza rozmiar pliku dziennika i obraca dzienniki. Aby uzyskać więcej informacji, zobacz [dostawców rejestrowania innych](xref:fundamentals/logging/index#third-party-logging-providers)firm.
 
-Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika składa się przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( *log* ) do ostatniego segmentu `stdoutLogFile` ścieżki (zazwyczaj *stdout* ), które są rozdzielane znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się od *stdout* , dziennik aplikacji o identyfikatorze PID 1934 utworzony w 2/5/2018 o 19:42:32 ma nazwę pliku *stdout_20180205194132_1934. log* .
+Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika składa się przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) do ostatniego segmentu `stdoutLogFile` ścieżki (zazwyczaj *stdout*), które są rozdzielane znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się od *stdout*, dziennik aplikacji o identyfikatorze PID 1934 utworzony w 2/5/2018 o 19:42:32 ma nazwę pliku *stdout_20180205194132_1934. log*.
 
 Poniższy przykładowy `aspNetCore` element konfiguruje rejestrowanie stdout w ścieżce względnej `.\log\` . Upewnij się, że tożsamość użytkownika puli aplikacji ma uprawnienia do zapisu w podanej ścieżce.
 
@@ -1025,12 +1025,12 @@ W przypadku korzystania z konfiguracji udostępnionej usług IIS wykonaj następ
 
 Aby określić wersję zainstalowanego modułu ASP.NET Core:
 
-1. W systemie hostingu przejdź do *%windir%\System32\inetsrv* .
+1. W systemie hostingu przejdź do *%windir%\System32\inetsrv*.
 1. Znajdź plik *aspnetcore.dll* .
 1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości** z menu kontekstowego.
 1. Wybierz kartę **szczegóły** . **Wersja pliku** i **Wersja produktu** reprezentują zainstalowaną wersję modułu.
 
-Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C: \\ Użytkownicy \\ % username% \\ AppData \\ Local \\ temp* . Plik ma nazwę *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log* .
+Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C: \\ Użytkownicy \\ % username% \\ AppData \\ Local \\ temp*. Plik ma nazwę *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log*.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Lokalizacje pliku modułu, schematu i konfiguracji
 
@@ -1058,7 +1058,7 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C
 
 * %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 
@@ -1078,5 +1078,5 @@ Pliki można znaleźć, wyszukując *aspnetcore* w pliku *applicationHost.config
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>
-* [Źródło odwołania do modułu ASP.NET Core (gałąź główna)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2): Użyj listy rozwijanej **rozgałęzienie** , aby wybrać konkretną wersję (na przykład `release/3.1` ).
+* [Źródło odwołania do modułu ASP.NET Core [gałąź domyślna (główna)]](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2): Użyj listy rozwijanej **rozgałęzienie** , aby wybrać konkretną wersję (na przykład `release/3.1` ).
 * <xref:host-and-deploy/iis/modules>

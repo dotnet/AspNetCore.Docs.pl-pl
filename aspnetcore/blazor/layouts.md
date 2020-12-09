@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 9462b73ad67394e79de08e7d2b13bf6a3145a04e
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c6f9815f473380f96092d663cdd785fd19109701
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507970"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855303"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -34,10 +34,10 @@ Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i
 
 Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/components/data-binding), [iniekcji zależności](xref:blazor/fundamentals/dependency-injection)i innych scenariuszy składników.
 
-Aby przekształcić *składnik* do *układu* , składnik:
+Aby skonwertować składnik do układu:
 
-* Dziedziczy z <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> , który definiuje <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Właściwość dla renderowanej zawartości wewnątrz układu.
-* Używa Razor składni `@Body` do określenia lokalizacji w znaczniku układu, w którym jest renderowana zawartość.
+* Dziedzicz składnik <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> . <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>Definiuje <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Właściwość dla renderowanej zawartości wewnątrz układu.
+* Użyj Razor składni, `@Body` Aby określić lokalizację w znacznikach układu, w którym jest renderowana zawartość.
 
 Poniższy przykład kodu pokazuje Razor szablon składnika układu `MainLayout.razor` . Układ dziedziczy <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> i ustawia `@Body` między paskiem nawigacyjnym i stopką:
 

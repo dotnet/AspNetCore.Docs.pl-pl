@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94339987"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855290"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -922,7 +922,7 @@ Po skompilowaniu aplikacji wygenerowany `blazor.boot.json` manifest opisuje skr�
 
 Najczęstsze przyczyny tego niepowodzenia to:
 
- * Odpowiedź serwera sieci Web jest błędem (na przykład *404 — nie można znaleźć* lub *500 — wewnętrzny błąd serwera* ) zamiast pliku, którego żądała przeglądarka. Jest on raportowany przez przeglądarkę jako błąd sprawdzania integralności, a nie jako błąd odpowiedzi.
+ * Odpowiedź serwera sieci Web jest błędem (na przykład *404 — nie można znaleźć* lub *500 — wewnętrzny błąd serwera*) zamiast pliku, którego żądała przeglądarka. Jest on raportowany przez przeglądarkę jako błąd sprawdzania integralności, a nie jako błąd odpowiedzi.
  * Coś zmieniło zawartość plików między kompilacją a dostarczeniem plików do przeglądarki. Może się tak zdarzyć:
    * Jeśli narzędzia kompilacji lub kompilacje ręcznie modyfikują dane wyjściowe kompilacji.
    * Jeśli jakiś aspekt procesu wdrażania zmodyfikował pliki. Na przykład jeśli korzystasz z mechanizmu wdrożenia opartego na usłudze git, weź pod uwagę, że git w sposób przezroczysty konwertuje końce wierszy w stylu systemu Windows do końca wiersza w stylu Unix, jeśli zatwierdzisz pliki w systemie Windows i wyewidencjonujesz je w systemie Linux. Zmiana końców wierszy plików zmienia wartości skrótów SHA-256. Aby uniknąć tego problemu, rozważ [użycie `.gitattributes` programu do traktowania artefaktów kompilacji jako `binary` plików](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes).
@@ -934,11 +934,33 @@ Aby zdiagnozować, które z nich mają zastosowanie w Twoim przypadku:
  1. Otwórz narzędzia deweloperskie w przeglądarce i sprawdź kartę *Sieć* . W razie potrzeby Załaduj ponownie stronę, aby zobaczyć listę żądań i odpowiedzi. Znajdź plik wyzwalający błąd na tej liście.
  1. Sprawdź kod stanu HTTP w odpowiedzi. Jeśli serwer zwróci coś innego niż *200-OK* (lub inny kod stanu 2xx), wystąpił problem po stronie serwera do zdiagnozowania. Na przykład kod stanu 403 oznacza problem z autoryzacją, natomiast kod stanu 500 oznacza, że serwer kończy się nieokreślonym sposobem. Zapoznaj się z dziennikami po stronie serwera, aby zdiagnozować i naprawić aplikację.
  1. Jeśli kod stanu to *200-OK* dla zasobu, zapoznaj się z zawartością odpowiedzi w narzędziach deweloperskich przeglądarki i sprawdź, czy zawartość jest zgodna z oczekiwanymi danymi. Typowym problemem jest na przykład Nieskonfigurowanie routingu w taki sposób, aby żądania zwracały `index.html` dane nawet dla innych plików. Upewnij się, że odpowiedzi na `.wasm` żądania to pliki binarne webassembly, a odpowiedzi na `.dll` żądania to pliki binarne zestawu platformy .NET. W przeciwnym razie masz problem z Routing po stronie serwera do zdiagnozowania.
+ 1. Sprawdź poprawność opublikowanych i wdrożonych danych wyjściowych aplikacji za pomocą [skryptu Rozwiązywanie problemów ze integralnością programu PowerShell](#troubleshoot-integrity-powershell-script).
 
 Jeśli potwierdzasz, że serwer zwraca poprawne dane plausibly, konieczne może być zmodyfikowanie zawartości między kompilacją i dostarczeniem pliku. Aby zbadać to:
 
  * Zapoznaj się z mechanizmem kompilowania łańcucha narzędzi i wdrażania na wypadek modyfikacji plików po skompilowaniu plików. Przykładem takiej sytuacji jest to, że program git przekształca końce wierszy plików zgodnie z wcześniejszym opisem.
  * Zapoznaj się z konfiguracją serwer sieci Web lub sieć CDN w przypadku, gdy są skonfigurowane do dynamicznego modyfikowania odpowiedzi (na przykład próba zminifikować HTML). Serwer sieci Web może zaimplementować kompresję HTTP (na przykład zwracając `content-encoding: br` lub `content-encoding: gzip` ), ponieważ nie ma to wpływu na wynik po dekompresji. *Nie* jest jednak konieczne, aby serwer sieci Web modyfikował nieskompresowane dane.
+
+### <a name="troubleshoot-integrity-powershell-script"></a>Rozwiązywanie problemów z integralnością skryptu programu PowerShell
+
+Użyj [`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true) skryptu programu PowerShell, aby zweryfikować opublikowaną i wdrożoną Blazor aplikację. Skrypt jest dostarczany jako punkt wyjścia, gdy aplikacja ma problemy ze integralnością, których Blazor nie można zidentyfikować w strukturze. Dla Twoich aplikacji może być wymagane dostosowanie skryptu.
+
+Skrypt sprawdza pliki w `publish` folderze i pobrane ze wdrożonej aplikacji w celu wykrywania problemów w różnych manifestach zawierających skróty integralności. Te testy powinny wykrywać najczęstsze problemy:
+
+* Plik został zmodyfikowany w opublikowanym danych wyjściowych bez jego realizacji.
+* Aplikacja nie została poprawnie wdrożona w miejscu docelowym wdrożenia lub coś uległo zmianie w środowisku docelowym wdrożenia.
+* Istnieją różnice między wdrożoną aplikacją a danymi wyjściowymi publikowania aplikacji.
+
+Wywołaj skrypt za pomocą następującego polecenia w powłoce poleceń programu PowerShell:
+
+```powershell
+.\integrity.ps1 {BASE URL} {PUBLISH OUTPUT FOLDER}
+```
+
+Symbole zastępcze
+
+* `{BASE URL}`: Adres URL wdrożonej aplikacji.
+* `{PUBLISH OUTPUT FOLDER}`: Ścieżka do `publish` folderu lub lokalizacji aplikacji, w której aplikacja została opublikowana do wdrożenia.
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>Wyłącz sprawdzanie integralności dla aplikacji innych niż PWA
 

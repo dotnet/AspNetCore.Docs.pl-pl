@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320151"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855511"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -122,7 +122,7 @@ To run the app after downloading the completed project:
 1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
 1. W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
 1. W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `ContosoUniversity` w polu **Nazwa projektu**. Ważne jest, aby użyć tej dokładnej nazwy, z uwzględnieniem wielkich liter, więc każdy pasuje do tego, `namespace` kiedy kod jest kopiowany.
-1. Wybierz pozycję **Utwórz**.
+1. Wybierz przycisk **Utwórz**.
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
     1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
     1. **ASP.NET Core aplikacji sieci Web**.
@@ -479,7 +479,7 @@ Serwer sieci Web ma ograniczoną liczbę dostępnych wątków, a w przypadku du�
 
 Kod asynchroniczny wprowadza niewielką ilość zapasową w czasie wykonywania. W przypadku niskiego ruchu zwiększenie wydajności jest nieznaczne, a jednocześnie w przypadku dużego ruchu, potencjalne udoskonalenia wydajności są istotne.
 
-W poniższym kodzie słowo kluczowe [Async](/dotnet/csharp/language-reference/keywords/async) , `Task<T>` wartość zwracana, `await` słowo kluczowe i `ToListAsync` Metoda sprawiają, że kod jest wykonywany asynchronicznie.
+W poniższym kodzie słowo kluczowe [Async](/dotnet/csharp/language-reference/keywords/async) , `Task` wartość zwracana, `await` słowo kluczowe i `ToListAsync` Metoda sprawiają, że kod jest wykonywany asynchronicznie.
 
 ```csharp
 public async Task OnGetAsync()
@@ -491,7 +491,7 @@ public async Task OnGetAsync()
 * `async`Słowo kluczowe instruuje kompilator, aby:
   * Generuj wywołania zwrotne dla części treści metody.
   * Utwórz obiekt [zadania](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) , który jest zwracany.
-* `Task<T>`Typ zwracany reprezentuje bieżącą liczbę zadań.
+* `Task`Typ zwracany reprezentuje bieżącą liczbę zadań.
 * `await`Słowo kluczowe powoduje, że kompilator dzieli metodę na dwie części. Pierwsza część jest zakończona operacją uruchomioną asynchronicznie. Druga część jest umieszczana w metodzie wywołania zwrotnego, która jest wywoływana po zakończeniu operacji.
 * `ToListAsync` jest asynchroniczną wersją `ToList` metody rozszerzenia.
 
@@ -1271,7 +1271,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

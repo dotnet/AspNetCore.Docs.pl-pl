@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417555"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855498"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
@@ -130,7 +130,7 @@ W przypadku OpenAPI domyślnie włączone środowisko uruchamiania aplikacji (F5
 
 ## Blazor
 
-### <a name="performance-improvements"></a>Ulepszenia wydajności
+### <a name="performance-improvements"></a>Usprawnienia wydajności
 
 W przypadku platformy .NET 5 Wprowadziliśmy znaczące ulepszenia Blazor WebAssembly wydajności środowiska uruchomieniowego z określonym fokusem na potrzeby skomplikowanych renderingów interfejsu użytkownika i serializacji JSON. W naszych testach wydajności Blazor WebAssembly w przypadku większości scenariuszy środowisko .NET 5 jest szybsze od dwóch do trzech razy. Aby uzyskać więcej informacji, zobacz [Blog ASP.NET: aktualizacje ASP.NET Core w programie .NET 5 Release Candidate 1](https://devblogs.microsoft.com/aspnet/asp-net-core-updates-in-net-5-release-candidate-1/#blazor-webassembly-performance-improvements).
 
@@ -285,7 +285,7 @@ Dodano pomoc techniczną do konfigurowania Kestrel opcji specyficznych dla punkt
 * Używane protokoły HTTP
 * Używane protokoły TLS
 * Wybrano certyfikat
-* Tryb certyfikatu cient
+* Tryb certyfikatu klienta
 
 Konfiguracja pozwala określić, który certyfikat jest wybierany w oparciu o określoną nazwę serwera. Nazwa serwera jest częścią rozszerzenia Oznaczanie nazwy serwera (SNI) do protokołu TLS wskazanego przez klienta. KestrelKonfiguracja programu obsługuje również prefiks wieloznaczny w nazwie hosta.
 
@@ -328,7 +328,7 @@ Poniższy przykład pokazuje, jak określić konkretny punkt końcowy przy użyc
 
 Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania domeny wirtualnej w ramach negocjacji protokołu SSL. W praktyce oznacza to, że nazwa domeny wirtualnej lub nazwa hosta może służyć do identyfikowania punktu końcowego sieci.
 
-## <a name="performance-improvements"></a>Ulepszenia wydajności
+## <a name="performance-improvements"></a>Usprawnienia wydajności
 
 ### <a name="http2"></a>HTTP/2
 

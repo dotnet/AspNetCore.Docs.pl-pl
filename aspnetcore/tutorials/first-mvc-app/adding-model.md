@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.openlocfilehash: d99d5bfd84c8c7e7d0c479964211591be434330c
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94688452"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855524"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Część 4. Dodawanie modelu do aplikacji ASP.NET Core MVC
 
@@ -40,7 +40,7 @@ W tym samouczku najpierw napiszesz klasy modelu, a EF Core tworzy bazę danych.
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij plik *Movie.cs*.
 
@@ -69,7 +69,7 @@ Zaktualizuj plik *Movie.cs* przy użyciu następującego kodu:
 
 ## <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -144,7 +144,7 @@ using Microsoft.EntityFrameworkCore;
 
 Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
@@ -162,7 +162,7 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 
 Dodaj parametry połączenia do *appsettings.json* pliku:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
@@ -178,7 +178,7 @@ Kompiluj projekt jako sprawdzenie błędów kompilatora.
 
 Użyj narzędzia do tworzenia szkieletu, aby utworzyć strony z przykładem tworzenie, odczytywanie, aktualizowanie i usuwanie (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -228,6 +228,12 @@ Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 * Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs* i *. csproj* ).
 
+* Wyeksportuj ścieżkę narzędzia szkieletu:
+
+  ```console
+  export PATH=$HOME/.dotnet/tools:$PATH
+  ```
+
 * Uruchom następujące polecenie:
 
   ```dotnetcli
@@ -248,7 +254,7 @@ Nie można jeszcze użyć stron szkieletowych, ponieważ baza danych nie istniej
 
 Użyj funkcji [migracji](xref:data/ef-mvc/migrations) EF Core, aby utworzyć bazę danych. Migracje to zestaw narzędzi umożliwiających tworzenie i aktualizowanie bazy danych w celu dopasowania jej do modelu danych.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -304,7 +310,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
   Jeśli zostanie wyświetlony wyjątek podobny do jednego z następujących:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
@@ -328,7 +334,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
 ## <a name="dependency-injection-in-the-controller"></a>Wstrzykiwanie zależności w kontrolerze
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Otwórz plik *controllers/MoviesController. cs* i zapoznaj się z konstruktorem:
 
@@ -434,7 +440,7 @@ Ponieważ `Model` obiekt jest silnie określony (jako `IEnumerable<Movie>` obiek
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij plik *Movie.cs*.
 
@@ -463,7 +469,7 @@ Zaktualizuj plik *Movie.cs* przy użyciu następującego kodu:
 
 ## <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -530,7 +536,7 @@ using Microsoft.EntityFrameworkCore;
 
 Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
 
@@ -548,13 +554,13 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 
 Dodaj parametry połączenia do *appsettings.json* pliku:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-13)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-13)]
 
 ---
 
@@ -564,7 +570,7 @@ Kompiluj projekt jako sprawdzenie błędów kompilatora.
 
 Użyj narzędzia do tworzenia szkieletu, aby utworzyć strony z przykładem tworzenie, odczytywanie, aktualizowanie i usuwanie (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -634,7 +640,7 @@ Nie można jeszcze użyć stron szkieletowych, ponieważ baza danych nie istniej
 
 Użyj funkcji [migracji](xref:data/ef-mvc/migrations) EF Core, aby utworzyć bazę danych. Migracje to zestaw narzędzi umożliwiających tworzenie i aktualizowanie bazy danych w celu dopasowania jej do modelu danych.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -690,7 +696,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
   Jeśli zostanie wyświetlony wyjątek podobny do jednego z następujących:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
@@ -714,7 +720,7 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 
 ## <a name="dependency-injection-in-the-controller"></a>Wstrzykiwanie zależności w kontrolerze
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Otwórz plik *controllers/MoviesController. cs* i zapoznaj się z konstruktorem:
 
@@ -820,7 +826,7 @@ Ponieważ `Model` obiekt jest silnie określony (jako `IEnumerable<Movie>` obiek
 
 ## <a name="add-a-data-model-class"></a>Dodaj klasę modelu danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij **film** klasy.
 
@@ -839,7 +845,7 @@ Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Naz
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
 
@@ -921,7 +927,7 @@ Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipe
 
 Jeśli uruchomisz aplikację i klikniesz link do **filmu MVC** , zostanie wyświetlony komunikat o błędzie podobny do następującego:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ```
 An unhandled exception occurred while processing the request.
@@ -954,7 +960,7 @@ W tej sekcji zostały wykonane następujące zadania:
 * Dodawanie początkowej migracji.
 * Zaktualizuj bazę danych przy użyciu początkowej migracji.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów** (PMC).
 
@@ -987,7 +993,7 @@ Schemat bazy danych jest oparty na modelu określonym w `MvcMovieContext` klasie
 
 ASP.NET Core jest skompilowany przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane przy użyciu funkcji "DI" podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Narzędzie do tworzenia szkieletów automatycznie utworzyło kontekst bazy danych i zarejestrował go przy użyciu DI kontenera.
 

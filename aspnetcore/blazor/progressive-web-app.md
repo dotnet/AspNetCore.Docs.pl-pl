@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c8ff2fc0f2f4d4e75f535f379ec94ea9de2e3ecb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055701"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855446"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
@@ -45,7 +45,7 @@ Słowo *progresywne* służy do opisywania takich aplikacji, ponieważ:
 
 ## <a name="create-a-project-from-the-pwa-template"></a>Tworzenie projektu na podstawie szablonu PWA
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Gdy tworzysz nową **Blazor WebAssembly aplikację** w oknie dialogowym **Tworzenie nowego projektu** , zaznacz pole wyboru **aplikacja sieci Web progresywna** :
 
@@ -75,7 +75,7 @@ Podczas odwiedzania aplikacji utworzonej przy użyciu szablonu PWA użytkownicy 
 
 ![Okno dialogowe potwierdzenia w usłudze Google Chrome prezentuje przycisk Zainstaluj użytkownikowi dla aplikacji "my::: No-Loc (Blazor):::P wa".](progressive-web-app/_static/image2.png)
 
-W systemie iOS osoby odwiedzające mogą zainstalować program PWA przy użyciu przycisku **udostępniania** Safari i jego opcji **Dodaj do homescreen** . W programie Chrome dla systemu Android użytkownicy powinni wybrać przycisk **menu** w prawym górnym rogu, a następnie **dodać do ekranu głównego** .
+W systemie iOS osoby odwiedzające mogą zainstalować program PWA przy użyciu przycisku **udostępniania** Safari i jego opcji **Dodaj do homescreen** . W programie Chrome dla systemu Android użytkownicy powinni wybrać przycisk **menu** w prawym górnym rogu, a następnie **dodać do ekranu głównego**.
 
 Po zainstalowaniu aplikacja zostanie wyświetlona w osobnym oknie bez paska adresu:
 
@@ -145,7 +145,7 @@ Jako model psychiczny Możesz pomyśleć o tym, że w trybie offline — w przyp
 
 BlazorSzablon PWA tworzy aplikacje, które automatycznie próbują zaktualizować się w tle zawsze, gdy użytkownik odwiedza i ma działające połączenie sieciowe. Oto jak to działa:
 
-* Podczas kompilacji projekt generuje *manifest zasobów roboczych usługi* . Domyślnie jest to nazywane `service-worker-assets.js` . Manifest zawiera listę wszystkich zasobów statycznych wymaganych przez aplikację do działania w trybie offline, takich jak zestawy .NET, pliki JavaScript i CSS, w tym ich skróty zawartości. Lista zasobów jest załadowana przez proces roboczy usługi, aby uzyskać informację o tym, które zasoby mają być buforowane.
+* Podczas kompilacji projekt generuje *manifest zasobów roboczych usługi*. Domyślnie jest to nazywane `service-worker-assets.js` . Manifest zawiera listę wszystkich zasobów statycznych wymaganych przez aplikację do działania w trybie offline, takich jak zestawy .NET, pliki JavaScript i CSS, w tym ich skróty zawartości. Lista zasobów jest załadowana przez proces roboczy usługi, aby uzyskać informację o tym, które zasoby mają być buforowane.
 * Za każdym razem, gdy użytkownik odwiedzi aplikację, ponowne żądania przeglądarki `service-worker.js` i `service-worker-assets.js` w tle. Pliki są porównywane bajtowo z istniejącym zainstalowanym pracownikiem usługi. Jeśli serwer zwróci zmianę zawartości dla dowolnego z tych plików, proces roboczy usługi próbuje zainstalować nową wersję programu.
 * Podczas instalowania nowej wersji, proces roboczy usługi tworzy nową, oddzielną pamięć podręczną dla zasobów w trybie offline i rozpoczyna zapełnianie pamięci podręcznej zasobami wymienionymi w temacie `service-worker-assets.js` . Ta logika jest implementowana w `onInstall` funkcji wewnątrz `service-worker.published.js` .
 * Proces zostanie zakończony pomyślnie, gdy wszystkie zasoby są ładowane bez błędu, a wszystkie skróty zawartości są zgodne. Jeśli to się powiedzie, nowy proces roboczy usługi przechodzi w stan *oczekiwania na aktywację* . Gdy tylko użytkownik zamknie aplikację (żadne pozostałe karty lub okna aplikacji), nowy proces roboczy usługi zostanie *uaktywniony* i będzie używany do kolejnych odwiedzin aplikacji. Stary proces roboczy usługi i jego pamięć podręczna są usuwane.
@@ -301,4 +301,5 @@ Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała 
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
+* [Rozwiązywanie problemów z integralnością skryptu programu PowerShell](xref:blazor/host-and-deploy/webassembly#troubleshoot-integrity-powershell-script)
 * [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: a2738ab40e2a463a0166ce8916ed6f1b05ea1d08
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035687"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855381"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -274,6 +274,13 @@ Składniki mogą zawierać *Parametry składnika*, które są zdefiniowane przy 
 
 [!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
+Do parametrów składnika można przypisać wartość domyślną:
+
+```csharp
+[Parameter]
+public string Title { get; set; } = "Panel Title from Child";
+```
+
 W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wartość `Title` właściwości `ChildComponent` .
 
 `Pages/ParentComponent.razor`:
@@ -461,7 +468,7 @@ Odwołania do składników zapewniają sposób odwoływania się do wystąpienia
 }
 ```
 
-Gdy składnik jest renderowany, `loginDialog` pole zostanie wypełnione `MyLoginDialog` wystąpieniem składnika podrzędnego. Następnie można wywołać metody .NET w wystąpieniu składnika.
+Gdy składnik jest renderowany, `loginDialog` pole zostanie wypełnione `CustomLoginDialog` wystąpieniem składnika podrzędnego. Następnie można wywołać metody .NET w wystąpieniu składnika.
 
 > [!IMPORTANT]
 > `loginDialog`Zmienna jest wypełniana tylko po wyrenderowaniu składnika, a jego wyjście zawiera `MyLoginDialog` element. Dopóki składnik nie zostanie renderowany, nie ma niczego do odwołania.

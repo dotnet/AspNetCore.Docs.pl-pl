@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: ca8aa126a44ea417017f0be0372e818a95ad8413
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9c65abd5a055bb677a14921296316e7e03760bc2
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053751"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855368"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -96,12 +96,13 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO> | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
 | [Uwierzytelnianie. schematy](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Określ dozwolone schematy uwierzytelniania. Można je zmodyfikować w dowolnym momencie przed wyjęciem odbiornika. Wartości są dostarczane przez [Wyliczenie AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic` ,, `Kerberos` , `Negotiate` `None` i `NTLM` . | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Próba buforowania [trybu jądra](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) dla odpowiedzi z uprawnionymi nagłówkami. Odpowiedź nie może zawierać `Set-Cookie` nagłówków, `Vary` , ani `Pragma` . Musi zawierać `Cache-Control` nagłówek, który jest, `public` a lub albo `shared-max-age` lub `max-age` `Expires` . | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching> | Próba buforowania [trybu jądra](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) dla odpowiedzi z uprawnionymi nagłówkami. Odpowiedź nie może zawierać `Set-Cookie` nagłówków, `Vary` , ani `Pragma` . Musi zawierać `Cache-Control` nagłówek, który jest, `public` a lub albo `shared-max-age` lub `max-age` `Expires` . | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Http503Verbosity> | Zachowanie HTTP.sys podczas odrzucania żądań ze względu na warunki ograniczające. | [Http503VerbosityLevel. <br> Prosty](xref:Microsoft.AspNetCore.Server.HttpSys.Http503VerbosityLevel) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Maksymalna liczba współbieżnych akceptacji. | 5 &times; [środowisko. <br> ProcessorCount](xref:System.Environment.ProcessorCount) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Maksymalna liczba jednoczesnych połączeń do zaakceptowania. Użyj `-1` do nieskończoności. Użyj `null` , aby użyć ustawienia dla całego komputera w rejestrze. | `null`<br>(cały komputer<br>konfigurowania |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Zobacz sekcję <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30000000 bajtów<br>(~ 28,6 MB) |
@@ -109,8 +110,8 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 | `RequestQueueMode` | Wskazuje, czy serwer jest odpowiedzialny za tworzenie i Konfigurowanie kolejki żądań, czy też ma zostać dołączony do istniejącej kolejki.<br>W przypadku dołączania do istniejącej kolejki nie mają zastosowania większość istniejących opcji konfiguracji. | `RequestQueueMode.Create` |
 | `RequestQueueName` | Nazwa kolejki żądań HTTP.sys. | `null` (Kolejka anonimowa) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Wskaż, czy zapisy treści odpowiedzi nie powiodą się, ponieważ rozłączenia klienta nie powiedzie się, jeśli wyjątki lub są normalnie kompletne. | `false`<br>(normalne zakończenie) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Uwidoczni konfigurację HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , która może być również skonfigurowana w rejestrze. Postępuj zgodnie z linkami interfejsu API, aby dowiedzieć się więcej na temat każdego ustawienia, w tym wartości domyślnych:<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): czas dozwolony na opróżnianie przez interfejs API serwera HTTP treści jednostki w ramach połączenia Keep-Alive.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): czas dozwolony dla treści jednostki żądania.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): czas dozwolony dla interfejsu API serwera HTTP do analizowania nagłówka żądania.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): czas dozwolony dla połączenia bezczynnego.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): Minimalna szybkość wysyłania dla odpowiedzi.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): czas, przez który żądanie pozostanie w kolejce żądań przed jego usunięciem.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Określ, <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> Aby zarejestrować się w HTTP.sys. Najbardziej przydatne jest [UrlPrefixCollection. Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), który służy do dodawania prefiksu do kolekcji. Można je zmodyfikować w dowolnym momencie przed wyjęciem odbiornika. |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Uwidoczni konfigurację HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , która może być również skonfigurowana w rejestrze. Postępuj zgodnie z linkami interfejsu API, aby dowiedzieć się więcej na temat każdego ustawienia, w tym wartości domyślnych:<ul><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody?displayProperty=nameWithType>: Czas, w którym interfejs API serwera HTTP może opróżniać treść jednostki na Keep-Alive połączenie.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody?displayProperty=nameWithType>: Czas dozwolony dla treści jednostki żądania.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait?displayProperty=nameWithType>: Czas dozwolony dla interfejsu API serwera HTTP do analizowania nagłówka żądania.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection?displayProperty=nameWithType>: Czas dozwolony dla połączenia bezczynnego.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond?displayProperty=nameWithType>: Minimalna szybkość wysyłania odpowiedzi.</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue?displayProperty=nameWithType>: Czas, przez który żądanie pozostanie w kolejce żądań, zanim aplikacja zostanie przez nią wystawiona.</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Określ, <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> Aby zarejestrować się w HTTP.sys. Jest to najbardziej użyteczne rozwiązanie <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add%2A?displayProperty=nameWithType> , które służy do dodawania prefiksu do kolekcji. Można je zmodyfikować w dowolnym momencie przed wyjęciem odbiornika. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -151,8 +152,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
-   * **.NET Core** : Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
-   * **.NET Framework** : Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
+   * **.NET Core**: Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
+   * **.NET Framework**: Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
 
    Jeśli aplikacja jest [wdrożeniem](/dotnet/core/deploying/#self-contained-deployments-scd)niezależnym, aplikacja zawiera środowisko uruchomieniowe w ramach wdrożenia. Na serwerze nie jest wymagana instalacja platformy.
 
@@ -180,7 +181,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Przedrejestruj prefiksy adresów URL na serwerze.
 
-   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe* . *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
+   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe*. *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
 
    Użyj narzędzia *netsh.exe* , aby zarejestrować adresy URL dla aplikacji:
 
@@ -221,7 +222,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    W celach referencyjnych Zapisz identyfikator GUID w aplikacji jako tag pakietu:
 
    * W programie Visual Studio:
-     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości** .
+     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości**.
      * Wybierz kartę **pakiet** .
      * Wprowadź identyfikator GUID, który został utworzony w polu **Tagi** .
    * Gdy nie korzystasz z programu Visual Studio:
@@ -254,7 +255,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   Dokumentacja referencyjna dla *netsh.exe* :
+   Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
@@ -366,7 +367,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -419,8 +420,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
-   * **.NET Core** : Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
-   * **.NET Framework** : Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
+   * **.NET Core**: Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
+   * **.NET Framework**: Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
 
    Jeśli aplikacja jest [wdrożeniem](/dotnet/core/deploying/#self-contained-deployments-scd)niezależnym, aplikacja zawiera środowisko uruchomieniowe w ramach wdrożenia. Na serwerze nie jest wymagana instalacja platformy.
 
@@ -448,7 +449,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Przedrejestruj prefiksy adresów URL na serwerze.
 
-   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe* . *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
+   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe*. *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
 
    Użyj narzędzia *netsh.exe* , aby zarejestrować adresy URL dla aplikacji:
 
@@ -489,7 +490,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    W celach referencyjnych Zapisz identyfikator GUID w aplikacji jako tag pakietu:
 
    * W programie Visual Studio:
-     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości** .
+     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości**.
      * Wybierz kartę **pakiet** .
      * Wprowadź identyfikator GUID, który został utworzony w polu **Tagi** .
    * Gdy nie korzystasz z programu Visual Studio:
@@ -522,7 +523,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   Dokumentacja referencyjna dla *netsh.exe* :
+   Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
@@ -619,7 +620,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -672,8 +673,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
-   * **.NET Core** : Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
-   * **.NET Framework** : Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
+   * **.NET Core**: Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
+   * **.NET Framework**: Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
 
    Jeśli aplikacja jest [wdrożeniem](/dotnet/core/deploying/#self-contained-deployments-scd)niezależnym, aplikacja zawiera środowisko uruchomieniowe w ramach wdrożenia. Na serwerze nie jest wymagana instalacja platformy.
 
@@ -701,7 +702,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Przedrejestruj prefiksy adresów URL na serwerze.
 
-   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe* . *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
+   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe*. *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
 
    Użyj narzędzia *netsh.exe* , aby zarejestrować adresy URL dla aplikacji:
 
@@ -742,7 +743,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    W celach referencyjnych Zapisz identyfikator GUID w aplikacji jako tag pakietu:
 
    * W programie Visual Studio:
-     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości** .
+     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości**.
      * Wybierz kartę **pakiet** .
      * Wprowadź identyfikator GUID, który został utworzony w polu **Tagi** .
    * Gdy nie korzystasz z programu Visual Studio:
@@ -775,7 +776,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   Dokumentacja referencyjna dla *netsh.exe* :
+   Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
@@ -872,7 +873,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -925,8 +926,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
-   * **.NET Core** : Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
-   * **.NET Framework** : Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
+   * **.NET Core**: Jeśli aplikacja wymaga platformy .NET Core, uzyskaj i uruchom Instalatora **środowiska uruchomieniowego platformy .NET Core** z [programu .NET Core downloads](https://dotnet.microsoft.com/download). Nie instaluj pełnego zestawu SDK na serwerze.
+   * **.NET Framework**: Jeśli aplikacja wymaga .NET Framework, zobacz [Podręcznik instalacji .NET Framework](/dotnet/framework/install/). Zainstaluj wymagane .NET Framework. Instalator dla najnowszej .NET Framework jest dostępny na stronie [plików do pobrania w programie .NET Core](https://dotnet.microsoft.com/download) .
 
    Jeśli aplikacja jest [wdrożeniem](/dotnet/core/deploying/#self-contained-deployments-scd)niezależnym, aplikacja zawiera środowisko uruchomieniowe w ramach wdrożenia. Na serwerze nie jest wymagana instalacja platformy.
 
@@ -954,7 +955,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 1. Przedrejestruj prefiksy adresów URL na serwerze.
 
-   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe* . *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
+   Wbudowane narzędzie do konfigurowania HTTP.sys jest *netsh.exe*. *netsh.exe* służy do zastrzegania PREFIKSÓW adresów URL i przypisywania certyfikatów X. 509. Narzędzie wymaga uprawnień administratora.
 
    Użyj narzędzia *netsh.exe* , aby zarejestrować adresy URL dla aplikacji:
 
@@ -995,7 +996,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    W celach referencyjnych Zapisz identyfikator GUID w aplikacji jako tag pakietu:
 
    * W programie Visual Studio:
-     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości** .
+     * Otwórz właściwości projektu aplikacji, klikając prawym przyciskiem myszy aplikację w **Eksplorator rozwiązań** i wybierając pozycję **Właściwości**.
      * Wybierz kartę **pakiet** .
      * Wprowadź identyfikator GUID, który został utworzony w polu **Tagi** .
    * Gdy nie korzystasz z programu Visual Studio:
@@ -1028,7 +1029,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   Dokumentacja referencyjna dla *netsh.exe* :
+   Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 1e571966b78f93e29e7901dd9648fbe3aca52726
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419983"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855485"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
@@ -70,7 +70,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-Zapytanie jest zdefiniowane *tylko* w tym momencie, **nie** zostało uruchomione względem bazy danych.
+Zapytanie jest tylko ***zdefiniowane** _ w tym momencie _*_nie_*_ zostało uruchomione względem bazy danych.
 
 Jeśli `SearchString` Właściwość nie ma wartości null lub jest pusta, zapytanie o filmy jest modyfikowane w celu odfiltrowania ciągu wyszukiwania:
 
@@ -95,7 +95,7 @@ Powyższe ograniczenie trasy umożliwia przeszukiwanie tytułu jako dane trasy (
 
 ![::: No-Loc (index)::: View z wyrazem "Ghost" dodanym do adresu URL i zwrotną listą filmów dwóch filmów, Ghostbusters i Ghostbusters 2](search/_static/g2.png)
 
-Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). Powiązanie modelu *_jest *_* nierozróżniana wielkość liter.
+Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). W powiązaniu modelu _*_nie_*_ jest rozróżniana wielkość liter.
 
 Jednak użytkownicy nie mogą zmieniać adresu URL w celu wyszukania filmu. W tym kroku zostanie dodany interfejs użytkownika do filtrowania filmów. Jeśli dodano ograniczenie trasy `"{searchString?}"` , usuń je.
 
@@ -134,7 +134,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 1. Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni: aktualizowanie stron](xref:tutorials/razor-pages/da1) 
@@ -235,7 +235,7 @@ Aktualizowanie *Index . cshtml* [ `<form>` element] ( https://developer.mozilla.
 Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
 Powyższy kod używa pomocnika [SELECT tag](xref:mvc/views/working-with-forms#the-select-tag-helper) i znacznika opcji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/4B6pHtdyo08)
 

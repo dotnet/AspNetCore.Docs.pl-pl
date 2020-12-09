@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417581"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855468"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>Tworzenie internetowych interfejsów API JSON z usługi gRPC
 
@@ -105,6 +105,21 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 Jest to przykład podstawowy. Zobacz [HttpRule](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule) , aby uzyskać więcej opcji dostosowywania.
+
+### <a name="enable-swaggeropenapi-support"></a>Włącz obsługę struktury Swagger/OpenAPI
+
+Swagger (OpenAPI) to specyfikacja języka niezależny od opisująca opisywanie interfejsów API REST. Interfejs API protokołu HTTP gRPC można zintegrować z usługą [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) w celu wygenerowania punktu końcowego struktury Swagger dla usług RESTful gRPC. Punktu końcowego struktury Swagger można używać z [interfejsem użytkownika programu Swagger](https://swagger.io/swagger-ui/) i innymi narzędziami.
+
+Aby włączyć strukturę Swagger przy użyciu interfejsu API HTTP gRPC:
+
+1. Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. GRPC. Swagger](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.Swagger).
+2. Skonfiguruj Swashbuckle w *Startup.cs*. `AddGrpcSwagger`Metoda konfiguruje Swashbuckle w celu uwzględnienia punktów końcowych interfejsu API http gRPC.
+
+[!code-csharp[](~/grpc/httpapi/Startup.cs?name=snippet_1&highlight=6-10,15-19)]
+
+Aby potwierdzić, że usługa Swashbuckle generuje strukturę Swagger dla usług RESTful gRPC, uruchom aplikację i przejdź do strony interfejsu użytkownika struktury Swagger:
+
+![Interfejs użytkownika struktury Swagger](~/grpc/httpapi/static/swaggerui.png)
 
 ### <a name="grpc-http-api-vs-grpc-web"></a>gRPC HTTP API vs gRPC-Web
 

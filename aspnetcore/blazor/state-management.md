@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 24f845bc1d98331f2ee54710d17beb6ffa95ad88
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570149"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855420"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -43,6 +43,9 @@ Przykłady stanu użytkownika znajdującego się w pamięci przeglądarki obejmu
 * Wartości ustawione za poorednictwem wywołań [międzyoperacyjnych języka JavaScript](xref:blazor/call-javascript-from-dotnet) .
 
 Gdy użytkownik zamknie i ponownie otworzy swoją przeglądarkę lub załaduje stronę, stan użytkownika znajdujący się w pamięci przeglądarki zostanie utracony.
+
+> [!NOTE]
+> [Chroniony magazyn przeglądarki](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) ( <xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> przestrzeń nazw) opiera się na ASP.NET Core ochrony danych i jest obsługiwany tylko w przypadku Blazor Server aplikacji.
 
 ## <a name="persist-state-across-browser-sessions"></a>Stan utrwalania w sesjach przeglądarki
 
@@ -68,12 +71,12 @@ Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 <h2 id="server-side-storage-wasm">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne są następujące opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Table Storage
+* Magazyn tabel
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w każdej nowej sesji przeglądarki.
 
@@ -177,12 +180,12 @@ Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 <h2 id="server-side-storage-server">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne są następujące opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Table Storage
+* Magazyn tabel
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w dowolnym nowym obwodie.
 
@@ -468,7 +471,7 @@ ASP.NET Core magazynu chronionej przeglądarki wykorzystuje [ochronę danych ASP
 >
 > Pakiet jest dostępny tylko do użytku w aplikacjach ASP.NET Core 3,1 Blazor Server .
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 1. Dodaj odwołanie do pakietu do [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
 1. W `Pages/_Host.cshtml` pliku Dodaj następujący skrypt wewnątrz tagu zamykającego `</body>` :

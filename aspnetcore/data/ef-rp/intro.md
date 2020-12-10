@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/intro
 ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 12/10/2020
 ms.locfileid: "96855511"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
@@ -126,7 +126,7 @@ To run the app after downloading the completed project:
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
     1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
     1. **ASP.NET Core aplikacji sieci Web**.
-    1. **Create** 
+    1.  
        Utwórz ![ Nowe okno dialogowe projektu ASP.NET Core](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)

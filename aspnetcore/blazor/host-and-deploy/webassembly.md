@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855290"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011874"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -910,9 +910,7 @@ Po Blazor WebAssembly pobraniu plików startowych aplikacji nakazuje ona przepro
 
 Jeśli serwer sieci Web zwróci odpowiedzi, które nie pasują do oczekiwanych skrótów SHA-256, zobaczysz błąd podobny do poniższego, pojawia się w konsoli dewelopera przeglądarki:
 
-```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
-```
+> Nie można znaleźć prawidłowego skrótu w atrybucie "Integrity" dla zasobu " https://myapp.example.com/\_framework/My BlazorApp.dll" z obliczoną integralnością SHA-256 "IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY =". Zasób został zablokowany.
 
 W większości przypadków *nie* jest to problem ze sprawdzaniem integralności. Zamiast tego oznacza to, że występuje jakiś inny problem, a Kontrola integralności ostrzega o tym, że ten problem wystąpi.
 
@@ -961,6 +959,13 @@ Symbole zastępcze
 
 * `{BASE URL}`: Adres URL wdrożonej aplikacji.
 * `{PUBLISH OUTPUT FOLDER}`: Ścieżka do `publish` folderu lub lokalizacji aplikacji, w której aplikacja została opublikowana do wdrożenia.
+
+> [!NOTE]
+> Aby sklonować `dotnet/AspNetCore.Docs` repozytorium GitHub do systemu, który używa skanera antywirusowego [BitDefender](https://www.bitdefender.com) , Dodaj wyjątek do BitDefender dla `integrity.ps1` skryptu. Dodaj wyjątek do BitDefender przed klonem repozytorium, aby uniknąć posiadania skryptu poddanego kwarantannie przez skaner wirusów. Poniższy przykład jest typową ścieżką do skryptu dla sklonowanego repozytorium w systemie Windows. Dostosuj ścieżkę w razie konieczności. Symbol zastępczy `{USER}` jest segmentem ścieżki użytkownika.
+>
+> ```
+> C:\Users\{USER}\Documents\GitHub\AspNetCore.Docs\aspnetcore\blazor\host-and-deploy\webassembly\_samples\integrity.ps1
+> ```
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>Wyłącz sprawdzanie integralności dla aplikacji innych niż PWA
 

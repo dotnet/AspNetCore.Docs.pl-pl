@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.openlocfilehash: 86b57a9cad27673b72ad174a18741f5528f9f78a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 12/10/2020
-ms.locfileid: "96855511"
+ms.locfileid: "97011861"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -237,7 +237,8 @@ W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygene
   * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)**.
   * W wierszu **klasy kontekstu danych** wybierz **+** znak (plus).
     * Zmień nazwę kontekstu danych na End `SchoolContext` zamiast `ContosoUniversityContext` . Nazwa zaktualizowanego kontekstu: `ContosoUniversity.Data.SchoolContext`
-   * Wybierz pozycję **Dodaj**.
+    * Wybierz pozycję **Dodaj** , aby zakończyć dodawanie klasy kontekstu danych.
+   * Wybierz pozycję **Dodaj** , aby zakończyć okno dialogowe **Dodawanie Razor stron** .
 
 Następujące pakiety są instalowane automatycznie:
 

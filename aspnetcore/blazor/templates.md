@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 602ad2908d607703a3b77b2047d51d912645b043
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 6d24e65acd44f98540575a3f3880fb137bfc822f
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94703725"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485917"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>BlazorSzablony ASP.NET Core
 
@@ -54,7 +54,7 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
   * [Host](xref:fundamentals/host/generic-host) ASP.NET Core ( Blazor Server )
   * Host webassembly ( Blazor WebAssembly ): kod w tym pliku jest unikatowy dla aplikacji utworzonych na podstawie Blazor WebAssembly szablonu ( `blazorwasm` ).
-    * `App`Składnik jest głównym składnikiem aplikacji. `App`Składnik jest określony jako `app` element Dom ( `<div id="app">Loading...</div>` w `wwwroot/index.html` ) do kolekcji głównych składników ( `builder.RootComponents.Add<App>("#app")` ).
+    * `App`Składnik jest głównym składnikiem aplikacji. `App`Składnik jest określony jako `div` element dom z `id` `app` ( `<div id="app">Loading...</div>` w `wwwroot/index.html` ) do kolekcji głównych składników ( `builder.RootComponents.Add<App>("#app")` ).
     * [Usługi](xref:blazor/fundamentals/dependency-injection) są dodawane i konfigurowane (na przykład `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
 
 ::: moniker-end
@@ -77,12 +77,27 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> jest wywoływana w celu skonfigurowania punktu końcowego dla połączenia w czasie rzeczywistym z przeglądarką. Połączenie jest tworzone przy użyciu [SignalR](xref:signalr/introduction) , który jest strukturą do dodawania funkcji sieci Web w czasie rzeczywistym do aplikacji.
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) jest wywoływana w celu skonfigurowania strony głównej aplikacji ( `Pages/_Host.cshtml` ) i włączenia nawigacji.
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `wwwroot/index.html` ( Blazor WebAssembly ): Strona główna aplikacji zaimplementowana jako strona HTML:
   * Po wstępnym zażądaniu dowolnej strony aplikacji jest ona renderowana i zwracana w odpowiedzi.
-  * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `app` elementu Dom ( `<app>...</app>` ).
+  * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `div` elementu dom z `id` `app` ( `<div id="app">Loading...</div>` ).
   * `_framework/blazor.webassembly.js`Plik JavaScript jest ładowany, co:
     * Pobiera środowisko uruchomieniowe platformy .NET, aplikację i zależności aplikacji.
     * Inicjuje środowisko uruchomieniowe, aby uruchomić aplikację.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `wwwroot/index.html` ( Blazor WebAssembly ): Strona główna aplikacji zaimplementowana jako strona HTML:
+  * Po wstępnym zażądaniu dowolnej strony aplikacji jest ona renderowana i zwracana w odpowiedzi.
+  * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `app` elementu Dom ( `<app>Loading...</app>` ).
+  * `_framework/blazor.webassembly.js`Plik JavaScript jest ładowany, co:
+    * Pobiera środowisko uruchomieniowe platformy .NET, aplikację i zależności aplikacji.
+    * Inicjuje środowisko uruchomieniowe, aby uruchomić aplikację.
+    
+::: moniker-end
 
 * `App.razor`: Główny składnik aplikacji, który konfiguruje Routing po stronie klienta za pomocą <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika. <xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik przechwytuje nawigację przeglądarki i renderuje stronę pasującą do żądanego adresu.
 

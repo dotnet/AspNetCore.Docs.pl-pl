@@ -4,6 +4,7 @@ author: rick-anderson
 description: Część 4 z serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 09/26/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 6627825239d815d2c8bcad98e22340f07f921ab9
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 552a74016c281af248ce735c6ed6a5a55768a16a
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420022"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486236"
 ---
 # <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>Część 4 z serii samouczków na Razor stronach
 
@@ -175,7 +176,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 ![Aplikacja filmowa otwarta w przeglądarce przedstawiająca dane filmu](sql/_static/5/m55.png)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzednie: Rusztowania Razor ](xref:tutorials/razor-pages/page) 
@@ -328,7 +329,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 ![Aplikacja filmowa otwarta w programie Chrome pokazująca dane filmu](sql/_static/m55https.png)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzednie: Rusztowania Razor ](xref:tutorials/razor-pages/page) 
@@ -478,7 +479,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 Następny samouczek czyści prezentację danych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/A_5ff11sDHY)
 

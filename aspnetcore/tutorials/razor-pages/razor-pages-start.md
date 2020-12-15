@@ -4,6 +4,7 @@ author: rick-anderson
 description: Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia Razor aplikacji sieci web ASP.NET Core Pages.
 ms.author: riande
 ms.date: 09/15/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 4b8bd9c886e615add6b0d3e372843a8ddb33ae18
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420048"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486229"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
@@ -116,7 +117,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
     ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-1. W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
+1. W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >    >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >    >  **sieci Web**  >  .
 
     ![Wybieranie szablonu aplikacji sieci Web macOS](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -124,7 +125,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
     1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
     1. Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję programu .NET 5. x.
-    1. Wybierz opcję **Dalej**.
+    1. Wybierz pozycję **Dalej**.
 
 1. Nadaj projektowi nazwę *Razor PagesMovie* i wybierz pozycję **Utwórz**.
 
@@ -257,7 +258,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
   ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >    >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >    >  **sieci Web**  >  .
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](razor-pages-start/_static/web_app_template_vsmac.png)
 
@@ -266,7 +267,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
 
-  Wybierz opcję **Dalej**.
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -403,14 +404,14 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >    >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >    >  **sieci Web**  >  .
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
 
-  Wybierz opcję **Dalej**.
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -517,7 +518,7 @@ Zawiera punkt wejścia dla programu. Aby uzyskać więcej informacji, zobacz <xr
 
 Zawiera kod, który konfiguruje zachowanie aplikacji, na przykład czy wymaga zgody na polecenie cookie s. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=F0SP7Ry4flQ&feature=youtu.be)
 

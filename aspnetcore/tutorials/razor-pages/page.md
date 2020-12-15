@@ -4,6 +4,7 @@ author: rick-anderson
 description: Część 3 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 09/25/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: a6efbb22f8b6280bd636cd1575d8a4a2bca0bb06
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420035"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486177"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
@@ -225,7 +226,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu, z wyjątkiem
 
 Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post">` , takich jak, zobacz [pomocnicy tagów w ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni: Dodawanie modelu](xref:tutorials/razor-pages/model) 
@@ -387,7 +388,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu, z wyjątkiem
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/zxgKjPYnOMM)
 

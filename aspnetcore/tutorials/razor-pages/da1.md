@@ -4,6 +4,7 @@ author: rick-anderson
 description: Część 5 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 09/20/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 46fbfb50afd03f918f9e02bcc8c1dbde9a080ca4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419970"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485943"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Część 5. aktualizowanie wygenerowanych stron w aplikacji ASP.NET Core
 
@@ -146,7 +147,7 @@ Po opublikowaniu strony filmy/Edycja:
 
 Metody GET protokołu HTTP na Index stronach, Create i DELETE są Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na stronie Tworzenie jest Razor zgodna z podobnym wzorcem do `OnPostAsync` metody na Razor stronie edytowania.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni: Pracuj z bazą danych](xref:tutorials/razor-pages/sql) 
@@ -263,7 +264,7 @@ Metody GET protokołu HTTP na Index stronach, Create i DELETE są Razor zgodne z
 
 W następnym samouczku zostanie dodane Wyszukiwanie.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/yLnnleREMtQ)
 

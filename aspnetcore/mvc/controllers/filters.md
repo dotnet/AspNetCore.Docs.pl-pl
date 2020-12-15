@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: d075faa951a34fb3856b54eb9e21593b6616b4f1
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673968"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486138"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -265,7 +265,7 @@ Filtr globalny zostanie dodany w `StartUp.ConfigureServices` :
   * `MySampleActionFilter.OnActionExecuted`
 * `Test2Controller.OnActionExecuted`
 
-`Order`Właściwość przesłania zakres podczas określania kolejności, w której są uruchamiane filtry. Filtry są sortowane najpierw według kolejności, a następnie zakres jest używany do przerwania powiązań. Wszystkie wbudowane filtry implementują `IOrderedFilter` i ustawiają `Order` wartość domyślną 0. Jak wspomniano wcześniej, filtry na poziomie kontrolera [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) ustawiają Właściwość Order `int.MinValue` dla filtrów wbudowanych, zakres określa kolejność, chyba że `Order` jest ustawiona na wartość różną od zera.
+`Order`Właściwość przesłania zakres podczas określania kolejności, w której są uruchamiane filtry. Filtry są sortowane najpierw według kolejności, a następnie zakres jest używany do przerwania powiązań. Wszystkie wbudowane filtry implementują `IOrderedFilter` i ustawiają `Order` wartość domyślną 0. Jak wspomniano wcześniej, filtry na poziomie kontrolera [](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) ustawiają Właściwość Order `int.MinValue` dla filtrów wbudowanych, zakres określa kolejność, chyba że `Order` jest ustawiona na wartość różną od zera.
 
 W poprzednim kodzie `MySampleActionFilter` ma zakres globalny, dlatego działa wcześniej `MyAction2FilterAttribute` , który ma zakres kontrolera. Aby `MyAction2FilterAttribute` najpierw wykonać przebieg, ustaw kolejność na `int.MinValue` :
 
@@ -290,7 +290,7 @@ W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHe
 
 W związku z tym `AddHeader` Filtr nigdy nie jest uruchamiany dla `SomeResource` akcji. Takie zachowanie będzie takie samo, jeśli oba filtry zostały zastosowane na poziomie metody akcji, pod warunkiem, że `ShortCircuitingResourceFilter` uruchomiono pierwsze. `ShortCircuitingResourceFilter`Przebiega najpierw ze względu na jego typ filtru lub jawne użycie `Order` właściwości.
 
-[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
+[!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet3&highlight=1,15)]
 
 ## <a name="dependency-injection"></a>Wstrzykiwanie zależności
 

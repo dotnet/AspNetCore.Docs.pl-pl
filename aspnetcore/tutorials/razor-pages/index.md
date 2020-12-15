@@ -4,6 +4,7 @@ author: rick-anderson
 description: W tej serii samouczków objaśniono podstawowe informacje na temat tworzenia Razor aplikacji sieci Web dla stron.
 ms.author: riande
 ms.date: 09/14/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: cad4cf12e475c2f7db3e62a6ae78d53777710b6f
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 2d673aef56be5701849a48f32fe9ffb36c34c0e3
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360570"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485904"
 ---
 # <a name="tutorial-create-a-no-locrazor-pages-web-app-with-aspnet-core"></a>Samouczek: Tworzenie Razor aplikacji sieci Web za pomocą ASP.NET Core
 

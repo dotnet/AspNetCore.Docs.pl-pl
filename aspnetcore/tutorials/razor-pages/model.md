@@ -4,6 +4,7 @@ author: rick-anderson
 description: Część 2 serii samouczków na Razor stronach. W tej sekcji dodawane są klasy modelu.
 ms.author: riande
 ms.date: 11/11/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: b2e840e20d034b42b2dc4a525b1dd76e44bbe3a8
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420061"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485995"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
@@ -378,7 +379,7 @@ Zapoznaj się z tą `Up` metodą.
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
@@ -753,7 +754,7 @@ Pominięto [krok migracji](#pmc).
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
@@ -1096,7 +1097,7 @@ Pominięto [krok migracji](#pmc).
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 

@@ -3,7 +3,7 @@ title: Bezpieczne przechowywanie wpisów tajnych aplikacji podczas opracowywania
 author: rick-anderson
 description: Dowiedz się, jak przechowywać i pobierać poufne informacje podczas opracowywania aplikacji ASP.NET Core.
 ms.author: scaddie
-ms.custom: mvc, contperfq2
+ms.custom: mvc, contperf-fy21q2
 ms.date: 11/24/2020
 no-loc:
 - appsettings.json
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 99b7b04076206f95c04da79283010beafdd1cc88
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 63032895ce45ad096612a8c39a2709628c12790f
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035856"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97486203"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Bezpieczne przechowywanie wpisów tajnych aplikacji podczas opracowywania w ASP.NET Core
 
@@ -101,7 +101,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 W poprzednim przykładzie dwukropek wskazuje, że `Movies` jest to literał obiektu z `ServiceApiKey` właściwością.
 
-Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której istnieje plik projektu. Przykład:
+Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której istnieje plik projektu. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -109,7 +109,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Spłaszczanie struktury JSON w programie Visual Studio
 
-Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Przykład:
+Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Na przykład:
 
 ```json
 {
@@ -203,13 +203,13 @@ Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykła
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Przykład:
+Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.json* . Przykład:
+Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.json* . Na przykład:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -361,7 +361,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 W poprzednim przykładzie dwukropek wskazuje, że `Movies` jest to literał obiektu z `ServiceApiKey` właściwością.
 
-Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której istnieje plik projektu. Przykład:
+Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której istnieje plik projektu. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -369,7 +369,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Spłaszczanie struktury JSON w programie Visual Studio
 
-Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Przykład:
+Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Na przykład:
 
 ```json
 {
@@ -448,13 +448,13 @@ Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykła
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Przykład:
+Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.json* . Przykład:
+Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.json* . Na przykład:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 

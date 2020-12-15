@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061317"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506633"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Rejestrowanie i Diagnostyka w ASP.NET Core SignalR
 
@@ -106,7 +106,7 @@ W poniższej tabeli przedstawiono poziomy dziennika dostępne dla klienta JavaSc
 
 Po skonfigurowaniu szczegółowości dzienniki zostaną zapisane w konsoli przeglądarki (lub w standardowym wyjściu w aplikacji NodeJS).
 
-Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Przykład:
+Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Na przykład:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -117,7 +117,7 @@ Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, moż
 
 Aby pobrać dzienniki z klienta .NET, można użyć `ConfigureLogging` metody z `HubConnectionBuilder` . Działa tak samo jak `ConfigureLogging` Metoda w systemach `WebHostBuilder` i `HostBuilder` . Można skonfigurować tych samych dostawców rejestrowania, których używasz w ASP.NET Core. Należy jednak ręcznie zainstalować i włączyć pakiety NuGet dla poszczególnych dostawców rejestrowania.
 
-Aby dodać rejestrowanie klienta platformy .NET do Blazor WebAssembly aplikacji, zobacz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> .
+Aby dodać rejestrowanie klienta platformy .NET do Blazor WebAssembly aplikacji, zobacz <xref:blazor/fundamentals/logging#signalr-net-client-logging> .
 
 ### <a name="console-logging"></a>Rejestrowanie konsoli
 
@@ -236,7 +236,7 @@ SignalR metryki serwera są raportowane w <xref:Microsoft.AspNetCore.Http.Connec
 
 ### <a name="observe-metrics"></a>Obserwuj metryki
 
-[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET za pomocą `Microsoft.AspNetCore.Http.Connections` nazwy dostawcy. Przykład:
+[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET za pomocą `Microsoft.AspNetCore.Http.Connections` nazwy dostawcy. Na przykład:
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections

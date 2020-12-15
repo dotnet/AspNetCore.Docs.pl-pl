@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: affca6c9b585b91787f94a13144d07bedfefdd37
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431706"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506984"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>Wyprerender i Zintegruj Razor składniki ASP.NET Core
 
@@ -37,7 +37,7 @@ Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://githu
 
 Razor składniki można zintegrować Razor ze stronami i aplikacjami MVC w hostowanym Blazor WebAssembly rozwiązaniu. Gdy strona lub widok jest renderowany, składniki mogą być wstępnie renderowane w tym samym czasie.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Aby skonfigurować renderowanie w Blazor WebAssembly aplikacji:
 
@@ -229,7 +229,7 @@ Po [skonfigurowaniu aplikacji](#configuration)Użyj wskazówek w poniższych sek
   * [Używanie składników rutowanych w aplikacji MVC](#use-routable-components-in-an-mvc-app)
 * [Renderuj składniki ze strony lub widoku](#render-components-from-a-page-or-view): dla składników, które nie są bezpośrednio trasowane z żądań użytkownika. Postępuj zgodnie z tymi wskazówkami, gdy aplikacja osadzi składniki na istniejących stronach i widokach za pomocą [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Istniejące Razor strony lub aplikacja MVC mogą integrować Razor składniki na stronach i widokach:
 
@@ -241,7 +241,7 @@ Istniejące Razor strony lub aplikacja MVC mogą integrować Razor składniki na
      <base href="~/" />
      ```
 
-     `href`Wartość ( *Ścieżka podstawowa aplikacji* ) w poprzednim przykładzie zakłada, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego ( `/` ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* <xref:blazor/host-and-deploy/index#app-base-path> artykułu.
+     `href`Wartość ( *Ścieżka podstawowa aplikacji*) w poprzednim przykładzie zakłada, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego ( `/` ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* <xref:blazor/host-and-deploy/index#app-base-path> artykułu.
 
      Plik znajduje się `_Layout.cshtml` w `Pages/Shared` folderze w Razor aplikacji lub `Views/Shared` folderze stron w aplikacji MVC.
 
@@ -307,6 +307,8 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
        </NotFound>
    </Router>
    ```
+
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 1. Dodaj `_Host.cshtml` plik do `Pages` folderu o następującej zawartości:
 
@@ -376,6 +378,8 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
        </NotFound>
    </Router>
    ```
+
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 1. Dodaj `_Host.cshtml` plik do `Views/Home` folderu o następującej zawartości:
 

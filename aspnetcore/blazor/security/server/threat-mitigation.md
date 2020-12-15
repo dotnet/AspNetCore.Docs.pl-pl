@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 0e8b26110a970526b5f6306da236a92f52e64604
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: d0ed36731d78d3e98aa294aca50492f0a3ac8174
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430958"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506698"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
@@ -43,7 +43,7 @@ W środowiskach z ograniczeniami, takimi jak wewnątrz sieci firmowej lub intran
 
 ## <a name="no-locblazor-and-shared-state"></a>Blazor i udostępniony stan
 
-[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
+[!INCLUDE[](~/blazor/includes/security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>Wyczerpanie zasobów
 
@@ -110,7 +110,7 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla Blazor 
 
 Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Blazor Server Aplikacje obejmują pewne limity domyślne i korzystają z innych ASP.NET Core i SignalR limitów ochrony przed atakami systemu DOS ustawionymi w systemie <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Server limit aplikacji | Opis | Domyślne |
+| Blazor Server limit aplikacji | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -119,7 +119,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 
 Ustaw maksymalny rozmiar komunikatu dla pojedynczego przychodzącego komunikatu z centrum <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalR i limit ASP.NET Core | Opis | Domyślne |
+| SignalR i limit ASP.NET Core | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 

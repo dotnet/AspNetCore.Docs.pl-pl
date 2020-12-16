@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: a98537f53229d098328f5b14bf1d5060001ebd80
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855240"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97592842"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
 
@@ -172,7 +172,7 @@ Użyj <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayPr
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Wykryj, kiedy Blazor Server aplikacja jest renderowana
  
-[!INCLUDE[](~/includes/blazor-prerendering.md)]
+[!INCLUDE[](~/blazor/includes/prerendering.md)]
 
 ## <a name="capture-references-to-elements"></a>Przechwyć odwołania do elementów
 
@@ -492,7 +492,7 @@ Usługa JS Interop może zakończyć się niepowodzeniem z powodu błędów siec
 
 Więcej informacji o wyczerpaniu zasobów znajduje się w temacie <xref:blazor/security/server/threat-mitigation> .
 
-[!INCLUDE[](~/includes/blazor-share-interop-code.md)]
+[!INCLUDE[](~/blazor/includes/share-interop-code.md)]
 
 ## <a name="avoid-circular-object-references"></a>Unikaj cyklicznych odwołań do obiektów
 
@@ -724,7 +724,7 @@ window.returnJSObjectReference = () => {
 ```
 
 > [!WARNING]
-> `js_string_to_mono_string`Nazwa funkcji, zachowanie i istnienie mogą ulec zmianie w przyszłej wersji platformy .NET. Na przykład:
+> `js_string_to_mono_string`Nazwa funkcji, zachowanie i istnienie mogą ulec zmianie w przyszłej wersji platformy .NET. Przykład:
 >
 > * Prawdopodobnie zmieniono nazwę funkcji.
 > * Sama funkcja może zostać usunięta na korzyść automatycznej konwersji ciągów przez strukturę.
@@ -835,7 +835,7 @@ Inne typy danych, takie jak tablice ciągów, można przekonwertować, ale wymag
 > [!WARNING]
 > Funkcje języka JavaScript udostępniane przez Blazor platformę, takie jak `js_typed_array_to_array` , `mono_obj_array_new` i `mono_obj_array_set` , podlegają zmianom nazw, zmianom behawioralnym lub usunięciu w przyszłych wersjach platformy .NET.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

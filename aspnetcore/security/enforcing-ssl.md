@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 209d055f6205eceb9efb5434427c303345791809
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3277fda0d1dcb5121a2172b3fc1e4869ed6f8430
+ms.sourcegitcommit: fc4cce2767e34f81079510f34bd54e9d0aa86497
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981963"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592872"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -306,7 +306,7 @@ W niektórych scenariuszach usługi zaplecza, w których zabezpieczenia połącz
 
 Aby zrezygnować z protokołu HTTPS/HSTS:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
 
 Usuń zaznaczenie pola wyboru **Konfiguruj dla protokołu HTTPS** .
 
@@ -323,7 +323,7 @@ Usuń zaznaczenie pola wyboru **Konfiguruj dla protokołu HTTPS** .
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli) 
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli) 
 
 Użyj `--no-https` opcji. Na przykład
 
@@ -396,6 +396,8 @@ Podsystem Windows dla systemu Linux (WSL) generuje certyfikat z podpisem własny
 ## <a name="troubleshoot-certificate-problems"></a>Rozwiązywanie problemów z certyfikatami
 
 Ta sekcja zawiera informacje ułatwiające [zainstalowanie i zaufanie](#trust)certyfikatu deweloperskiego https ASP.NET Core, ale nadal masz ostrzeżenia przeglądarki, że certyfikat nie jest zaufany. ASP.NET Core certyfikat programistyczny HTTPS jest używany przez [Kestrel](xref:fundamentals/servers/kestrel).
+
+Aby naprawić certyfikat IIS Express, zobacz [ten problem StackOverflow](https://stackoverflow.com/a/20048613/502537) .
 
 ### <a name="all-platforms---certificate-not-trusted"></a>Wszystkie platformy — certyfikat niezaufany
 

@@ -7,48 +7,48 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
-- 'appsettings.json'
-- 'ASP.NET Core Identity'
-- 'cookie'
-- 'Cookie'
-- 'Blazor'
-- 'Blazor Server'
-- 'Blazor WebAssembly'
-- 'Identity'
-- "Let's Encrypt"
-- 'Razor'
-- 'SignalR'
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d264aaee7889ec1c8ee0fe6b1f52ccc4cf355745
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057316"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854629"
 ---
-# <a name="transform-webconfig"></a><span data-ttu-id="333c5-103">Przekształcanie pliku web.config</span><span class="sxs-lookup"><span data-stu-id="333c5-103">Transform web.config</span></span>
+# <a name="transform-webconfig"></a><span data-ttu-id="4d8ac-103">Przekształcanie pliku web.config</span><span class="sxs-lookup"><span data-stu-id="4d8ac-103">Transform web.config</span></span>
 
-<span data-ttu-id="333c5-104">Autor [Vijay Ramakrishnan](https://github.com/vijayrkn)</span><span class="sxs-lookup"><span data-stu-id="333c5-104">By [Vijay Ramakrishnan](https://github.com/vijayrkn)</span></span>
+<span data-ttu-id="4d8ac-104">Autor [Vijay Ramakrishnan](https://github.com/vijayrkn)</span><span class="sxs-lookup"><span data-stu-id="4d8ac-104">By [Vijay Ramakrishnan](https://github.com/vijayrkn)</span></span>
 
-<span data-ttu-id="333c5-105">Przekształcenia do pliku *web.config* mogą być stosowane automatycznie, gdy aplikacja zostanie opublikowana w oparciu o:</span><span class="sxs-lookup"><span data-stu-id="333c5-105">Transformations to the *web.config* file can be applied automatically when an app is published based on:</span></span>
+<span data-ttu-id="4d8ac-105">Przekształcenia do pliku *web.config* mogą być stosowane automatycznie, gdy aplikacja zostanie opublikowana w oparciu o:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-105">Transformations to the *web.config* file can be applied automatically when an app is published based on:</span></span>
 
-* [<span data-ttu-id="333c5-106">Konfiguracja kompilacji</span><span class="sxs-lookup"><span data-stu-id="333c5-106">Build configuration</span></span>](#build-configuration)
-* [<span data-ttu-id="333c5-107">Profil</span><span class="sxs-lookup"><span data-stu-id="333c5-107">Profile</span></span>](#profile)
-* [<span data-ttu-id="333c5-108">Środowisko</span><span class="sxs-lookup"><span data-stu-id="333c5-108">Environment</span></span>](#environment)
-* [<span data-ttu-id="333c5-109">Niestandardowe</span><span class="sxs-lookup"><span data-stu-id="333c5-109">Custom</span></span>](#custom)
+* [<span data-ttu-id="4d8ac-106">Konfiguracja kompilacji</span><span class="sxs-lookup"><span data-stu-id="4d8ac-106">Build configuration</span></span>](#build-configuration)
+* [<span data-ttu-id="4d8ac-107">Profil</span><span class="sxs-lookup"><span data-stu-id="4d8ac-107">Profile</span></span>](#profile)
+* [<span data-ttu-id="4d8ac-108">Środowisko</span><span class="sxs-lookup"><span data-stu-id="4d8ac-108">Environment</span></span>](#environment)
+* [<span data-ttu-id="4d8ac-109">Niestandardowe</span><span class="sxs-lookup"><span data-stu-id="4d8ac-109">Custom</span></span>](#custom)
 
-<span data-ttu-id="333c5-110">Te przekształcenia występują dla jednego z następujących scenariuszy generacji *web.config* :</span><span class="sxs-lookup"><span data-stu-id="333c5-110">These transformations occur for either of the following *web.config* generation scenarios:</span></span>
+<span data-ttu-id="4d8ac-110">Te przekształcenia występują dla jednego z następujących scenariuszy generacji *web.config* :</span><span class="sxs-lookup"><span data-stu-id="4d8ac-110">These transformations occur for either of the following *web.config* generation scenarios:</span></span>
 
-* <span data-ttu-id="333c5-111">Generowane automatycznie przez `Microsoft.NET.Sdk.Web` zestaw SDK.</span><span class="sxs-lookup"><span data-stu-id="333c5-111">Generated automatically by the `Microsoft.NET.Sdk.Web` SDK.</span></span>
-* <span data-ttu-id="333c5-112">Udostępnione przez dewelopera w [katalogu głównym zawartości](xref:fundamentals/index#content-root) aplikacji.</span><span class="sxs-lookup"><span data-stu-id="333c5-112">Provided by the developer in the [content root](xref:fundamentals/index#content-root) of the app.</span></span>
+* <span data-ttu-id="4d8ac-111">Generowane automatycznie przez `Microsoft.NET.Sdk.Web` zestaw SDK.</span><span class="sxs-lookup"><span data-stu-id="4d8ac-111">Generated automatically by the `Microsoft.NET.Sdk.Web` SDK.</span></span>
+* <span data-ttu-id="4d8ac-112">Udostępnione przez dewelopera w [katalogu głównym zawartości](xref:fundamentals/index#content-root) aplikacji.</span><span class="sxs-lookup"><span data-stu-id="4d8ac-112">Provided by the developer in the [content root](xref:fundamentals/index#content-root) of the app.</span></span>
 
-## <a name="build-configuration"></a><span data-ttu-id="333c5-113">Konfiguracja kompilacji</span><span class="sxs-lookup"><span data-stu-id="333c5-113">Build configuration</span></span>
+## <a name="build-configuration"></a><span data-ttu-id="4d8ac-113">Konfiguracja kompilacji</span><span class="sxs-lookup"><span data-stu-id="4d8ac-113">Build configuration</span></span>
 
-<span data-ttu-id="333c5-114">Przekształcenia konfiguracji kompilacji są uruchamiane jako pierwsze.</span><span class="sxs-lookup"><span data-stu-id="333c5-114">Build configuration transforms are run first.</span></span>
+<span data-ttu-id="4d8ac-114">Przekształcenia konfiguracji kompilacji są uruchamiane jako pierwsze.</span><span class="sxs-lookup"><span data-stu-id="4d8ac-114">Build configuration transforms are run first.</span></span>
 
-<span data-ttu-id="333c5-115">Uwzględnij *Sieć Web. { Konfiguracja}* plik konfiguracyjny dla każdej [konfiguracji kompilacji (Debuguj | Wydanie)](/dotnet/core/tools/dotnet-publish#options) wymagające przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="333c5-115">Include a *web.{CONFIGURATION}.config* file for each [build configuration (Debug|Release)](/dotnet/core/tools/dotnet-publish#options) requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="4d8ac-115">Uwzględnij *Sieć Web. { Konfiguracja}* plik konfiguracyjny dla każdej [konfiguracji kompilacji (Debuguj | Wydanie)](/dotnet/core/tools/dotnet-publish#options) wymagające przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-115">Include a *web.{CONFIGURATION}.config* file for each [build configuration (Debug|Release)](/dotnet/core/tools/dotnet-publish#options) requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="333c5-116">W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jest ustawiana w *web.Release.config* :</span><span class="sxs-lookup"><span data-stu-id="333c5-116">In the following example, a configuration-specific environment variable is set in *web.Release.config* :</span></span>
+<span data-ttu-id="4d8ac-116">W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jest ustawiana w *web.Release.config*:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-116">In the following example, a configuration-specific environment variable is set in *web.Release.config*:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -68,21 +68,21 @@ ms.locfileid: "93057316"
 </configuration>
 ```
 
-<span data-ttu-id="333c5-117">Przekształcenie jest stosowane, gdy konfiguracja jest ustawiona na *Release* :</span><span class="sxs-lookup"><span data-stu-id="333c5-117">The transform is applied when the configuration is set to *Release* :</span></span>
+<span data-ttu-id="4d8ac-117">Przekształcenie jest stosowane, gdy konfiguracja jest ustawiona na *Release*:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-117">The transform is applied when the configuration is set to *Release*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release
 ```
 
-<span data-ttu-id="333c5-118">Właściwość programu MSBuild dla konfiguracji ma wartość `$(Configuration)` .</span><span class="sxs-lookup"><span data-stu-id="333c5-118">The MSBuild property for the configuration is `$(Configuration)`.</span></span>
+<span data-ttu-id="4d8ac-118">Właściwość programu MSBuild dla konfiguracji ma wartość `$(Configuration)` .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-118">The MSBuild property for the configuration is `$(Configuration)`.</span></span>
 
-## <a name="profile"></a><span data-ttu-id="333c5-119">Profil</span><span class="sxs-lookup"><span data-stu-id="333c5-119">Profile</span></span>
+## <a name="profile"></a><span data-ttu-id="4d8ac-119">Profil</span><span class="sxs-lookup"><span data-stu-id="4d8ac-119">Profile</span></span>
 
-<span data-ttu-id="333c5-120">Przekształcenia profilu są uruchamiane po drugiej, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration) .</span><span class="sxs-lookup"><span data-stu-id="333c5-120">Profile transformations are run second, after [Build configuration](#build-configuration) transforms.</span></span>
+<span data-ttu-id="4d8ac-120">Przekształcenia profilu są uruchamiane po drugiej, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration) .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-120">Profile transformations are run second, after [Build configuration](#build-configuration) transforms.</span></span>
 
-<span data-ttu-id="333c5-121">Uwzględnij *Sieć Web. { PROFIL}. config* dla każdej konfiguracji profilu wymagającej przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="333c5-121">Include a *web.{PROFILE}.config* file for each profile configuration requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="4d8ac-121">Uwzględnij *Sieć Web. { PROFIL}. config* dla każdej konfiguracji profilu wymagającej przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-121">Include a *web.{PROFILE}.config* file for each profile configuration requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="333c5-122">W poniższym przykładzie zmienna środowiskowa specyficzna dla profilu jest ustawiana w *web.FolderProfile.config* dla profilu publikowania folderu:</span><span class="sxs-lookup"><span data-stu-id="333c5-122">In the following example, a profile-specific environment variable is set in *web.FolderProfile.config* for a folder publish profile:</span></span>
+<span data-ttu-id="4d8ac-122">W poniższym przykładzie zmienna środowiskowa specyficzna dla profilu jest ustawiana w *web.FolderProfile.config* dla profilu publikowania folderu:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-122">In the following example, a profile-specific environment variable is set in *web.FolderProfile.config* for a folder publish profile:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -102,23 +102,23 @@ dotnet publish --configuration Release
 </configuration>
 ```
 
-<span data-ttu-id="333c5-123">Przekształcenie jest stosowane, gdy profil jest *FolderProfile* :</span><span class="sxs-lookup"><span data-stu-id="333c5-123">The transform is applied when the profile is *FolderProfile* :</span></span>
+<span data-ttu-id="4d8ac-123">Przekształcenie jest stosowane, gdy profil jest *FolderProfile*:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-123">The transform is applied when the profile is *FolderProfile*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 ```
 
-<span data-ttu-id="333c5-124">Właściwość programu MSBuild dla nazwy profilu to `$(PublishProfile)` .</span><span class="sxs-lookup"><span data-stu-id="333c5-124">The MSBuild property for the profile name is `$(PublishProfile)`.</span></span>
+<span data-ttu-id="4d8ac-124">Właściwość programu MSBuild dla nazwy profilu to `$(PublishProfile)` .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-124">The MSBuild property for the profile name is `$(PublishProfile)`.</span></span>
 
-<span data-ttu-id="333c5-125">Jeśli profil nie zostanie przekazana, domyślną nazwą profilu jest **system plików** , a *web.FileSystem.config* zostanie zastosowana, jeśli plik znajduje się w katalogu głównym zawartości aplikacji.</span><span class="sxs-lookup"><span data-stu-id="333c5-125">If no profile is passed, the default profile name is **FileSystem** and *web.FileSystem.config* is applied if the file is present in the app's content root.</span></span>
+<span data-ttu-id="4d8ac-125">Jeśli profil nie zostanie przekazana, domyślną nazwą profilu jest **system plików** , a *web.FileSystem.config* zostanie zastosowana, jeśli plik znajduje się w katalogu głównym zawartości aplikacji.</span><span class="sxs-lookup"><span data-stu-id="4d8ac-125">If no profile is passed, the default profile name is **FileSystem** and *web.FileSystem.config* is applied if the file is present in the app's content root.</span></span>
 
-## <a name="environment"></a><span data-ttu-id="333c5-126">Środowisko</span><span class="sxs-lookup"><span data-stu-id="333c5-126">Environment</span></span>
+## <a name="environment"></a><span data-ttu-id="4d8ac-126">Środowisko</span><span class="sxs-lookup"><span data-stu-id="4d8ac-126">Environment</span></span>
 
-<span data-ttu-id="333c5-127">Przekształcenia środowiska są uruchamiane trzecią po zakończeniu [konfiguracji kompilacji](#build-configuration) i przekształceń [profilu](#profile) .</span><span class="sxs-lookup"><span data-stu-id="333c5-127">Environment transformations are run third, after [Build configuration](#build-configuration) and [Profile](#profile) transforms.</span></span>
+<span data-ttu-id="4d8ac-127">Przekształcenia środowiska są uruchamiane trzecią po zakończeniu [konfiguracji kompilacji](#build-configuration) i przekształceń [profilu](#profile) .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-127">Environment transformations are run third, after [Build configuration](#build-configuration) and [Profile](#profile) transforms.</span></span>
 
-<span data-ttu-id="333c5-128">Uwzględnij *Sieć Web. { ŚRODOWISKO} plik konfiguracyjny* dla każdego [środowiska](xref:fundamentals/environments) wymagającego transformacji *web.config* .</span><span class="sxs-lookup"><span data-stu-id="333c5-128">Include a *web.{ENVIRONMENT}.config* file for each [environment](xref:fundamentals/environments) requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="4d8ac-128">Uwzględnij *Sieć Web. { ŚRODOWISKO} plik konfiguracyjny* dla każdego [środowiska](xref:fundamentals/environments) wymagającego transformacji *web.config* .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-128">Include a *web.{ENVIRONMENT}.config* file for each [environment](xref:fundamentals/environments) requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="333c5-129">W poniższym przykładzie zmienna środowiskowa specyficzna dla środowiska jest ustawiana w *web.Production.config* dla środowiska produkcyjnego:</span><span class="sxs-lookup"><span data-stu-id="333c5-129">In the following example, a environment-specific environment variable is set in *web.Production.config* for the Production environment:</span></span>
+<span data-ttu-id="4d8ac-129">W poniższym przykładzie zmienna środowiskowa specyficzna dla środowiska jest ustawiana w *web.Production.config* dla środowiska produkcyjnego:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-129">In the following example, an environment-specific environment variable is set in *web.Production.config* for the Production environment:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -138,25 +138,25 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 </configuration>
 ```
 
-<span data-ttu-id="333c5-130">Transformacja jest stosowana, gdy środowisko jest *produkcyjne* :</span><span class="sxs-lookup"><span data-stu-id="333c5-130">The transform is applied when the environment is *Production* :</span></span>
+<span data-ttu-id="4d8ac-130">Transformacja jest stosowana, gdy środowisko jest *produkcyjne*:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-130">The transform is applied when the environment is *Production*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:EnvironmentName=Production
 ```
 
-<span data-ttu-id="333c5-131">Właściwość programu MSBuild dla środowiska to `$(EnvironmentName)` .</span><span class="sxs-lookup"><span data-stu-id="333c5-131">The MSBuild property for the environment is `$(EnvironmentName)`.</span></span>
+<span data-ttu-id="4d8ac-131">Właściwość programu MSBuild dla środowiska to `$(EnvironmentName)` .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-131">The MSBuild property for the environment is `$(EnvironmentName)`.</span></span>
 
-<span data-ttu-id="333c5-132">Przy publikowaniu z programu Visual Studio i przy użyciu profilu publikowania, zobacz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> .</span><span class="sxs-lookup"><span data-stu-id="333c5-132">When publishing from Visual Studio and using a publish profile, see <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>.</span></span>
+<span data-ttu-id="4d8ac-132">Przy publikowaniu z programu Visual Studio i przy użyciu profilu publikowania, zobacz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-132">When publishing from Visual Studio and using a publish profile, see <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>.</span></span>
 
-<span data-ttu-id="333c5-133">`ASPNETCORE_ENVIRONMENT`Zmienna środowiskowa jest automatycznie dodawana do pliku *web.config* po określeniu nazwy środowiska.</span><span class="sxs-lookup"><span data-stu-id="333c5-133">The `ASPNETCORE_ENVIRONMENT` environment variable is automatically added to the *web.config* file when the environment name is specified.</span></span>
+<span data-ttu-id="4d8ac-133">`ASPNETCORE_ENVIRONMENT`Zmienna środowiskowa jest automatycznie dodawana do pliku *web.config* po określeniu nazwy środowiska.</span><span class="sxs-lookup"><span data-stu-id="4d8ac-133">The `ASPNETCORE_ENVIRONMENT` environment variable is automatically added to the *web.config* file when the environment name is specified.</span></span>
 
-## <a name="custom"></a><span data-ttu-id="333c5-134">Niestandardowy</span><span class="sxs-lookup"><span data-stu-id="333c5-134">Custom</span></span>
+## <a name="custom"></a><span data-ttu-id="4d8ac-134">Niestandardowy</span><span class="sxs-lookup"><span data-stu-id="4d8ac-134">Custom</span></span>
 
-<span data-ttu-id="333c5-135">Niestandardowe przekształcenia są uruchamiane jako ostatnie, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration), [profilu](#profile)i [środowiska](#environment) .</span><span class="sxs-lookup"><span data-stu-id="333c5-135">Custom transformations are run last, after [Build configuration](#build-configuration), [Profile](#profile), and [Environment](#environment) transforms.</span></span>
+<span data-ttu-id="4d8ac-135">Niestandardowe przekształcenia są uruchamiane jako ostatnie, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration), [profilu](#profile)i [środowiska](#environment) .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-135">Custom transformations are run last, after [Build configuration](#build-configuration), [Profile](#profile), and [Environment](#environment) transforms.</span></span>
 
-<span data-ttu-id="333c5-136">Uwzględnij plik *{CUSTOM_NAME}. Transform* dla każdej konfiguracji niestandardowej wymagającej przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="333c5-136">Include a *{CUSTOM_NAME}.transform* file for each custom configuration requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="4d8ac-136">Uwzględnij plik *{CUSTOM_NAME}. Transform* dla każdej konfiguracji niestandardowej wymagającej przekształcenia *web.config* .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-136">Include a *{CUSTOM_NAME}.transform* file for each custom configuration requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="333c5-137">W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej jest ustawiana w *Custom. Transform* :</span><span class="sxs-lookup"><span data-stu-id="333c5-137">In the following example, a custom transform environment variable is set in *custom.transform* :</span></span>
+<span data-ttu-id="4d8ac-137">W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej jest ustawiana w *Custom. Transform*:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-137">In the following example, a custom transform environment variable is set in *custom.transform*:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -176,23 +176,23 @@ dotnet publish --configuration Release /p:EnvironmentName=Production
 </configuration>
 ```
 
-<span data-ttu-id="333c5-138">Transformacja jest stosowana, gdy `CustomTransformFileName` Właściwość jest przenoszona do [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia:</span><span class="sxs-lookup"><span data-stu-id="333c5-138">The transform is applied when the `CustomTransformFileName` property is passed to the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
+<span data-ttu-id="4d8ac-138">Transformacja jest stosowana, gdy `CustomTransformFileName` Właściwość jest przenoszona do [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia:</span><span class="sxs-lookup"><span data-stu-id="4d8ac-138">The transform is applied when the `CustomTransformFileName` property is passed to the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:CustomTransformFileName=custom.transform
 ```
 
-<span data-ttu-id="333c5-139">Właściwość programu MSBuild dla nazwy profilu to `$(CustomTransformFileName)` .</span><span class="sxs-lookup"><span data-stu-id="333c5-139">The MSBuild property for the profile name is `$(CustomTransformFileName)`.</span></span>
+<span data-ttu-id="4d8ac-139">Właściwość programu MSBuild dla nazwy profilu to `$(CustomTransformFileName)` .</span><span class="sxs-lookup"><span data-stu-id="4d8ac-139">The MSBuild property for the profile name is `$(CustomTransformFileName)`.</span></span>
 
-## <a name="prevent-webconfig-transformation"></a><span data-ttu-id="333c5-140">Zapobiegaj transformacji web.config</span><span class="sxs-lookup"><span data-stu-id="333c5-140">Prevent web.config transformation</span></span>
+## <a name="prevent-webconfig-transformation"></a><span data-ttu-id="4d8ac-140">Zapobiegaj transformacji web.config</span><span class="sxs-lookup"><span data-stu-id="4d8ac-140">Prevent web.config transformation</span></span>
 
-<span data-ttu-id="333c5-141">Aby zapobiec przekształceń pliku *web.config* , ustaw właściwość MSBuild `$(IsWebConfigTransformDisabled)` :</span><span class="sxs-lookup"><span data-stu-id="333c5-141">To prevent transformations of the *web.config* file, set the MSBuild property `$(IsWebConfigTransformDisabled)`:</span></span>
+<span data-ttu-id="4d8ac-141">Aby zapobiec przekształceń pliku *web.config* , ustaw właściwość MSBuild `$(IsWebConfigTransformDisabled)` :</span><span class="sxs-lookup"><span data-stu-id="4d8ac-141">To prevent transformations of the *web.config* file, set the MSBuild property `$(IsWebConfigTransformDisabled)`:</span></span>
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="333c5-142">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="333c5-142">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="4d8ac-142">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="4d8ac-142">Additional resources</span></span>
 
-* <span data-ttu-id="333c5-143">[ Składnia transformacjiWeb.config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))</span><span class="sxs-lookup"><span data-stu-id="333c5-143">[Web.config Transformation Syntax for Web Application Project Deployment](/previous-versions/dd465326(v=vs.100))</span></span>
-* <span data-ttu-id="333c5-144">[Web.config składni transformacji dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span><span class="sxs-lookup"><span data-stu-id="333c5-144">[Web.config Transformation Syntax for Web Project Deployment Using Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span></span>
+* <span data-ttu-id="4d8ac-143">[ Składnia transformacjiWeb.config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))</span><span class="sxs-lookup"><span data-stu-id="4d8ac-143">[Web.config Transformation Syntax for Web Application Project Deployment](/previous-versions/dd465326(v=vs.100))</span></span>
+* <span data-ttu-id="4d8ac-144">[Web.config składni transformacji dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span><span class="sxs-lookup"><span data-stu-id="4d8ac-144">[Web.config Transformation Syntax for Web Project Deployment Using Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span></span>

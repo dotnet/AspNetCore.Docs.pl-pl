@@ -4,7 +4,7 @@ author: jamesnk
 description: Dowiedz się, jak wywoływać usługi gRPC Services za pomocą programu .NET gRPC Client.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/27/2020
+ms.date: 12/18/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 39f9b3fde19e31ca970668552e5829308705f513
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060966"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97699134"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 
@@ -43,7 +43,7 @@ var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-Kanał reprezentuje długotrwałe połączenie z usługą gRPC. Po utworzeniu kanału jest on konfigurowany z opcjami związanymi z wywoływaniem usługi. Na przykład `HttpClient` używane do wykonywania wywołań, maksymalnego rozmiaru wysyłania i odbierania wiadomości oraz rejestrowania można określić `GrpcChannelOptions` i użyć z `GrpcChannel.ForAddress` . Aby uzyskać pełną listę opcji, zobacz [Opcje konfiguracji klienta](xref:grpc/configuration#configure-client-options).
+Kanał reprezentuje długotrwałe połączenie z usługą gRPC. Po utworzeniu kanału zostaje on skonfigurowany z opcjami związanymi z wywoływaniem usługi. Na przykład `HttpClient` używane do wykonywania wywołań, maksymalnego rozmiaru wysyłania i odbierania wiadomości oraz rejestrowania można określić `GrpcChannelOptions` i użyć z `GrpcChannel.ForAddress` . Aby uzyskać pełną listę opcji, zobacz [Opcje konfiguracji klienta](xref:grpc/configuration#configure-client-options).
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -201,11 +201,33 @@ Aby uzyskać najlepszą wydajność i uniknąć niepotrzebnych błędów w klien
 
 W trakcie dwukierunkowego wywołania przesyłania strumieniowego klient i usługa mogą w dowolnym momencie wysyłać komunikaty do siebie. Najlepsza logika klienta do współpracy z dwukierunkowym wywołaniem różni się w zależności od logiki usługi.
 
+## <a name="access-grpc-headers"></a>Dostęp do nagłówków gRPC
+
+gRPC wywołania zwracają nagłówki odpowiedzi. Nagłówki odpowiedzi HTTP przechodzą metadane nazwy/wartości dotyczące wywołania, które nie odnosi się do zwracanego komunikatu.
+
+Nagłówki są dostępne przy użyciu `ResponseHeadersAsync` , która zwraca kolekcję metadanych. Nagłówki są zwykle zwracane z komunikatem odpowiedzi; w związku z tym należy je oczekiwać.
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+
+var headers = await call.ResponseHeadersAsync;
+var myValue = headers.GetValue("my-trailer-name");
+
+var response = await call.ResponseAsync;
+```
+
+`ResponseHeadersAsync` wykorzystywani
+
+* Musi oczekiwać na wynik `ResponseHeadersAsync` pobrania kolekcji nagłówków.
+* Nie musi być dostępny przed `ResponseAsync` (ani strumieniem odpowiedzi podczas przesyłania strumieniowego). Jeśli odpowiedź została zwrócona, `ResponseHeadersAsync` Funkcja zwraca nagłówki natychmiast.
+* Zgłosi wyjątek, jeśli wystąpił błąd połączenia lub serwera, a nagłówki nie zostały zwrócone dla wywołania gRPC.
+
 ## <a name="access-grpc-trailers"></a>Dostęp do przyczep gRPC
 
-wywołania gRPC mogą zwracać gRPC przyczep. przyczepy gRPC są używane do dostarczania metadanych nazw/wartości dotyczących wywołania. Przyczepy zapewniają podobną funkcjonalność do nagłówków HTTP, ale są odbierane na końcu wywołania.
+wywołania gRPC mogą zwracać przyczepy z odpowiedzią. Przyczepy są używane do dostarczania metadanych nazw/wartości dotyczących wywołania. Przyczepy zapewniają podobną funkcjonalność do nagłówków HTTP, ale są odbierane na końcu wywołania.
 
-gRPC przyczep są dostępne przy użyciu `GetTrailers()` , która zwraca kolekcję metadanych. Po zakończeniu odpowiedzi są zwracane przyczepy. w związku z tym przed uzyskaniem dostępu do przyczep należy oczekiwać wszystkich komunikatów odpowiedzi.
+Przyczepy są dostępne przy użyciu `GetTrailers()` , która zwraca kolekcję metadanych. Po zakończeniu odpowiedzi są zwracane przyczepy. W związku z tym przed uzyskaniem dostępu do przyczep należy oczekiwać wszystkich komunikatów odpowiedzi.
 
 Wywołania jednoargumentowe i wywołanie przesyłania strumieniowego klienta muszą oczekiwać `ResponseAsync` przed wywołaniem `GetTrailers()` :
 
@@ -237,7 +259,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.GetValue("my-trailer-name");
 ```
 
-gRPC przyczepy są również dostępne z programu `RpcException` . Usługa może zwracać przyczepy ze stanem gRPC innym niż OK. W tej sytuacji przyczepy są pobierane z wyjątku zgłoszonego przez klienta gRPC:
+Przyczepy są również dostępne z `RpcException` . Usługa może zwracać przyczepy ze stanem gRPC innym niż OK. W takiej sytuacji przyczepy są pobierane z wyjątku zgłoszonego przez klienta gRPC:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);

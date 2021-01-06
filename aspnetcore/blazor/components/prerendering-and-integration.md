@@ -21,10 +21,10 @@ no-loc:
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97506984"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>Wyprerender i Zintegruj Razor składniki ASP.NET Core
@@ -343,7 +343,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Na przykład:
+1. Dodaj składniki routingu do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -422,7 +422,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
    });
    ```
 
-1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Na przykład:
+1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Przykład:
 
    ```razor
    @page "/counter"

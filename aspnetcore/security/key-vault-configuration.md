@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 7f5cd3de38f1e45d9b188c513a0e62ca658b2992
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 4b035fe59b8576eb387ddce67943386ccab55492
+ms.sourcegitcommit: 8dfcd2b4be936950c228b4d98430622a04254cd7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035908"
+ms.lasthandoff: 12/26/2020
+ms.locfileid: "97792082"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault dostawcę konfiguracji w programie ASP.NET Core
 
@@ -41,7 +41,10 @@ W tym dokumencie wyjaśniono, jak za pomocą dostawcy konfiguracji [Azure Key Va
 
 ## <a name="packages"></a>Pakiety
 
-Dodaj odwołanie do pakietu do [Azure.Extensions.AspNetCore.Configwersja. Pakiet kluczy tajnych](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/) .
+Dodaj odwołania do pakietu dla następujących pakietów:
+
+* [Azure.Extensions.AspNetCore.Configwersja. Klucz](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets)
+* [Azure.Identity](https://www.nuget.org/packages/Azure.Identity)
 
 ## <a name="sample-app"></a>Przykładowa aplikacja
 
@@ -138,7 +141,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
 1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w *appsettings.json* pliku aplikacji.
 1. Przejdź do **magazynu kluczy** w Azure Portal.
 1. Wybierz magazyn kluczy utworzony w [magazynie wpisów tajnych w środowisku produkcyjnym z](#secret-storage-in-the-production-environment-with-azure-key-vault) sekcją Azure Key Vault.
-1. Wybierz pozycję **zasady dostępu**.
+1. Wybierz pozycję **Zasady dostępu**.
 1. Wybierz pozycję **Dodaj zasady dostępu**.
 1. Otwórz **uprawnienia do wpisów tajnych** i Udostępnij aplikację z uprawnieniami **pobierania** i **wyświetlania listy** .
 1. Wybierz pozycję **Wybierz podmiot zabezpieczeń** i wybierz zarejestrowaną aplikację według nazwy. Wybierz przycisk **Wybierz**.
@@ -193,7 +196,7 @@ Przykładowa aplikacja:
 
 * Tworzy wystąpienie `DefaultAzureCredential` klasy, poświadczenia próbuje uzyskać token dostępu ze środowiska dla zasobów platformy Azure.
 * Utworzono nową [`Azure.Security.KeyVault.Secrets.Secrets`](/dotnet/api/azure.security.keyvault.secrets) z `DefaultAzureCredential` wystąpieniem.
-* `Azure.Security.KeyVault.Secrets.Secrets`Wystąpienie jest używane z domyślną implementacją programu `Azure.Extensions.Aspnetcore.Configuration.Secrets` , która ładuje wszystkie wartości tajne i zastępuje podwójne myślniki ( `--` ) średnikami ( `:` ) w nazwach kluczy.
+* `Azure.Security.KeyVault.Secrets.Secrets`Wystąpienie jest używane z domyślną implementacją programu `Azure.Extensions.AspNetCore.Configuration.Secrets` , która ładuje wszystkie wartości tajne i zastępuje podwójne myślniki ( `--` ) średnikami ( `:` ) w nazwach kluczy.
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=12-14)]
 
@@ -227,23 +230,23 @@ config.AddAzureKeyVault(new SecretClient(new URI("Your Key Vault Endpoint"), new
 
 | Właściwość         | Opis |
 | ---------------- | ----------- |
-| `Manager`        | `Azure.Extensions.Aspnetcore.Configuration.Secrets` wystąpienie używane do kontrolowania ładowania klucza tajnego. |
+| `Manager`        | `Azure.Extensions.AspNetCore.Configuration.Secrets` wystąpienie używane do kontrolowania ładowania klucza tajnego. |
 | `ReloadInterval` | `Timespan` aby poczekać między kolejnymi próbami sondowania magazynu kluczy pod kątem zmian. Wartość domyślna to `null` (konfiguracja nie jest ponownie ładowana). |
 
 ## <a name="use-a-key-name-prefix"></a>Użyj prefiksu nazwy klucza
 
-AddAzureKeyVault zapewnia Przeciążenie, które akceptuje implementację `Azure.Extensions.Aspnetcore.Configuration.Secrets` , która umożliwia kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
+AddAzureKeyVault zapewnia Przeciążenie, które akceptuje implementację `Azure.Extensions.AspNetCore.Configuration.Secrets` , która umożliwia kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
 
 > [!WARNING]
 > Nie należy używać prefiksów w kluczach tajnych magazynu kluczy w celu umieszczenia wpisów tajnych dla wielu aplikacji w tym samym magazynie kluczy lub umieszczenia tajemnicy środowiskowej (na przykład *tworzenia* i *produkcji* wpisów tajnych) w tym samym magazynie. Firma Microsoft zaleca, aby różne aplikacje i środowiska deweloperskie i produkcyjne używały oddzielnych magazynów kluczy do izolowania środowisk aplikacji w celu uzyskania najwyższego poziomu zabezpieczeń.
 
 W poniższym przykładzie wpis tajny jest ustanowiony w magazynie kluczy (oraz za pomocą narzędzia tajnego Menedżera dla środowiska programistycznego) `5000-AppSecret` (okresy nie są dozwolone w nazwach wpisów tajnych magazynu kluczy). Ten klucz tajny reprezentuje wpis tajny aplikacji dla 5.0.0.0 wersji aplikacji. W przypadku innej wersji aplikacji 5.1.0.0 wpis tajny jest dodawany do magazynu kluczy (i przy użyciu narzędzia do zarządzania kluczami tajnymi) dla programu `5100-AppSecret` . Każda wersja aplikacji ładuje wartość tajnej wersji do swojej konfiguracji jako `AppSecret` , oddzielając ją od wersji podczas ładowania klucza tajnego.
 
-AddAzureKeyVault jest wywoływana z niestandardowym `Azure.Extensions.Aspnetcore.Configuration.Secrets` :
+AddAzureKeyVault jest wywoływana z niestandardowym `Azure.Extensions.AspNetCore.Configuration.Secrets` :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
-`Azure.Extensions.Aspnetcore.Configuration.Secrets`Implementacja reaguje na prefiksy wersji wpisów tajnych w celu załadowania odpowiedniego wpisu tajnego do konfiguracji:
+`Azure.Extensions.AspNetCore.Configuration.Secrets`Implementacja reaguje na prefiksy wersji wpisów tajnych w celu załadowania odpowiedniego wpisu tajnego do konfiguracji:
 
 * `Load` ładuje wpis tajny, gdy jego nazwa zaczyna się od prefiksu. Inne wpisy tajne nie są ładowane.
 * `GetKey`:
@@ -482,7 +485,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
 1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w *appsettings.json* pliku aplikacji.
 1. Przejdź do **magazynu kluczy** w Azure Portal.
 1. Wybierz magazyn kluczy utworzony w [magazynie wpisów tajnych w środowisku produkcyjnym z](#secret-storage-in-the-production-environment-with-azure-key-vault) sekcją Azure Key Vault.
-1. Wybierz pozycję **zasady dostępu**.
+1. Wybierz pozycję **Zasady dostępu**.
 1. Wybierz pozycję **Dodaj zasady dostępu**.
 1. Otwórz **uprawnienia do wpisów tajnych** i Udostępnij aplikację z uprawnieniami **pobierania** i **wyświetlania listy** .
 1. Wybierz pozycję **Wybierz podmiot zabezpieczeń** i wybierz zarejestrowaną aplikację według nazwy. Wybierz przycisk **Wybierz**.

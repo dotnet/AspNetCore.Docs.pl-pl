@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/middleware/request-response
 ms.openlocfilehash: 5ad39821778ea58097169def85a940a06f1d036e
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/02/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96513112"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>Operacje żądań i odpowiedzi w ASP.NET Core
@@ -34,7 +34,7 @@ W tym artykule wyjaśniono sposób odczytywania treści żądania i zapisywania 
 
 Istnieją dwa abstrakcje treści żądania i odpowiedzi: <xref:System.IO.Stream> i <xref:System.IO.Pipelines.Pipe> . Do odczytu żądania, <xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> is <xref:System.IO.Stream> i `HttpRequest.BodyReader` <xref:System.IO.Pipelines.PipeReader> . Na potrzeby pisania odpowiedzi <xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> jest <xref:System.IO.Stream> i `HttpResponse.BodyWriter` <xref:System.IO.Pipelines.PipeWriter> .
 
-[Potoki](/dotnet/standard/io/pipelines) są zalecane za pośrednictwem strumieni. Strumienie mogą być łatwiejsze w przypadku niektórych prostych operacji, ale potoki mają zalety wydajności i są łatwiejsze w większości scenariuszy. ASP.NET Core zaczyna używać potoków zamiast strumieni wewnętrznie. Przykłady:
+[Potoki](/dotnet/standard/io/pipelines) są zalecane za pośrednictwem strumieni. Strumienie mogą być łatwiejsze w przypadku niektórych prostych operacji, ale potoki mają zalety wydajności i są łatwiejsze w większości scenariuszy. ASP.NET Core zaczyna używać potoków zamiast strumieni wewnętrznie. Przykłady obejmują:
 
 * `FormReader`
 * `TextReader`

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
 ms.openlocfilehash: 81daa1d4a996519f44e513b4f61c27cdf2b6ef5e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059809"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Obrazy platformy Docker dla ASP.NET Core
@@ -74,7 +74,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   * [macOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
-* [Git](https://git-scm.com/download)
+* [Narzędzia](https://git-scm.com/download)
 
 ## <a name="download-the-sample-app"></a>Pobieranie przykładowej aplikacji
 
@@ -86,7 +86,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 ## <a name="run-the-app-locally"></a>Lokalne uruchamianie aplikacji
 
-* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp* .
+* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp*.
 
 * Uruchom następujące polecenie, aby skompilować i uruchomić aplikację lokalnie:
 
@@ -102,7 +102,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 * W kliencie platformy Docker [Przejdź do obszaru kontenery systemu Linux](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).
 
-* Przejdź do folderu pliku dockerfile w programie *dotnet-Docker/Samples/aspnetapp* .
+* Przejdź do folderu pliku dockerfile w programie *dotnet-Docker/Samples/aspnetapp*.
 
 * Uruchom następujące polecenia, aby skompilować i uruchomić przykład w Docker:
 
@@ -158,7 +158,7 @@ Przejdź do folderu pliku platformy Docker pod adresem `dotnet-docker/samples/as
 
 W niektórych scenariuszach może zajść potrzeba wdrożenia aplikacji w kontenerze przez skopiowanie do niego plików aplikacji, które są potrzebne w czasie wykonywania. W tej sekcji pokazano, jak wdrożyć ręcznie.
 
-* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp* .
+* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp*.
 
 * Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenie:
 
@@ -256,7 +256,7 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-Jak wspomniano w poprzednim pliku dockerfile, `*.csproj` pliki są kopiowane i przywracane jako odrębne *warstwy* . Gdy `docker build` polecenie kompiluje obraz, używa wbudowanej pamięci podręcznej. Jeśli `*.csproj` pliki nie uległy zmianie od czasu `docker build` ostatniego uruchomienia polecenia, `dotnet restore` nie trzeba ponownie uruchamiać polecenia. Zamiast tego Wbudowana pamięć podręczna dla odpowiedniej `dotnet restore` warstwy jest używana ponownie. Aby uzyskać więcej informacji, zobacz [najlepsze rozwiązania dotyczące pisania wieloetapowe dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
+Jak wspomniano w poprzednim pliku dockerfile, `*.csproj` pliki są kopiowane i przywracane jako odrębne *warstwy*. Gdy `docker build` polecenie kompiluje obraz, używa wbudowanej pamięci podręcznej. Jeśli `*.csproj` pliki nie uległy zmianie od czasu `docker build` ostatniego uruchomienia polecenia, `dotnet restore` nie trzeba ponownie uruchamiać polecenia. Zamiast tego Wbudowana pamięć podręczna dla odpowiedniej `dotnet restore` warstwy jest używana ponownie. Aby uzyskać więcej informacji, zobacz [najlepsze rozwiązania dotyczące pisania wieloetapowe dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
 
 ::: moniker-end
 

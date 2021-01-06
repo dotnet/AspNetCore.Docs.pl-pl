@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
 ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
-ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93062457"
 ---
 # <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>ASP.NET Core dokumentację interfejsu API sieci Web za pomocą programu Swagger/OpenAPI
@@ -50,7 +50,7 @@ Krótko mówiąc:
 
 ## <a name="openapi-specification-openapijson"></a>OpenAPI — Specyfikacja (openapi.json)
 
-Specyfikacja OpenAPI jest dokumentem opisującym możliwości interfejsu API. Dokument jest oparty na adnotacjach XML i atrybutów w obrębie kontrolerów i modeli. Jest ona podstawową częścią przepływu OpenAPI i służy do kierowania narzędzi, takich jak SwaggerUI. Domyślnie jest on o nazwie *openapi.json* . Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
+Specyfikacja OpenAPI jest dokumentem opisującym możliwości interfejsu API. Dokument jest oparty na adnotacjach XML i atrybutów w obrębie kontrolerów i modeli. Jest ona podstawową częścią przepływu OpenAPI i służy do kierowania narzędzi, takich jak SwaggerUI. Domyślnie jest on o nazwie *openapi.json*. Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
 
 ```json
 {
@@ -144,7 +144,7 @@ Specyfikacja OpenAPI jest dokumentem opisującym możliwości interfejsu API. Do
 
 ![Interfejs użytkownika struktury Swagger](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Wybierz nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i wybierz pozycję **Wypróbuj!** .
+Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Wybierz nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i wybierz pozycję **Wypróbuj!**.
 
 ![Przykład pobierania testów struktury Swagger](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

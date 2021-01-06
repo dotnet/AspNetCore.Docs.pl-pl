@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: razor-pages/sdk
 ms.openlocfilehash: d3b01889b7634dce8ef1d6a4886a9a6ac39a6473
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060875"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>RazorZestaw SDK ASP.NET Core
@@ -37,7 +37,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker range=">= aspnetcore-3.0"
 
 * Jest wymagana do kompilowania, pakowania i publikowania projektów zawierających [Razor](xref:mvc/views/razor) pliki do ASP.NET Core MVC lub [Blazor](xref:blazor/index) projektów.
-* Zawiera zestaw wstępnie zdefiniowanych obiektów docelowych, właściwości i elementów umożliwiających Dostosowywanie kompilacji Razor plików ( *. cshtml* lub *. Razor* ).
+* Zawiera zestaw wstępnie zdefiniowanych obiektów docelowych, właściwości i elementów umożliwiających Dostosowywanie kompilacji Razor plików (*. cshtml* lub *. Razor*).
 
 RazorZestaw SDK zawiera `Content` elementy z `Include` atrybutami ustawionymi `**\*.cshtml` na `**\*.razor` wzorce i obsługi symboli wieloznacznych. Zgodne pliki są publikowane.
 
@@ -62,7 +62,7 @@ Większość aplikacji sieci Web nie jest wymagana do jawnego odwoływania się 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Aby użyć Razor zestawu SDK do kompilowania bibliotek klas zawierających Razor widoki lub Razor strony, zalecamy rozpoczęcie od Razor szablonu projektu Biblioteka klas (RCL). RCL, który jest używany do kompilowania Blazor plików ( *. Razor* ) w minimalnym stopniu wymaga odwołania do pakietu [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) . RCL, który jest używany do kompilowania Razor widoków lub stron (pliki *. cshtml* ), wymaga minimalnej `netcoreapp3.0` lub nowszej, a `FrameworkReference` w pliku projektu znajduje się w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) .
+Aby użyć Razor zestawu SDK do kompilowania bibliotek klas zawierających Razor widoki lub Razor strony, zalecamy rozpoczęcie od Razor szablonu projektu Biblioteka klas (RCL). RCL, który jest używany do kompilowania Blazor plików (*. Razor*) w minimalnym stopniu wymaga odwołania do pakietu [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) . RCL, który jest używany do kompilowania Razor widoków lub stron (pliki *. cshtml* ), wymaga minimalnej `netcoreapp3.0` lub nowszej, a `FrameworkReference` w pliku projektu znajduje się w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) .
 
 ::: moniker-end
 
@@ -130,14 +130,14 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 | `RazorTargetName` | Nazwa pliku (bez rozszerzenia) zestawu utworzonego przez Razor . |
 | `RazorOutputPath` | RazorKatalog wyjściowy. |
 | `RazorCompileToolset` | Służy do określenia zestawu narzędzi używanego do kompilowania Razor zestawów. Prawidłowe wartości to `Implicit` , `RazorSDK` , i `PrecompilationTool` . |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config* , *JSON* i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config*, *JSON* i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
 | `EnableDefaultRazorGenerateItems` | Gdy `true` , zawiera pliki *. cshtml* z `Content` elementów w `RazorGenerate` elementach. |
 | `GenerateRazorTargetAssemblyInfo` | Gdy `true` program generuje plik *. cs* zawierający atrybuty określone przez `RazorAssemblyAttribute` i zawiera plik w danych wyjściowych kompilacji. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Gdy `true` program dodaje domyślny zestaw atrybutów zestawu do `RazorAssemblyAttribute` . |
-| `CopyRazorGenerateFilesToPublishDirectory` | Gdy `true` kopiuje `RazorGenerate` pliki elementów ( *. cshtml* ) do katalogu publikowania. Zazwyczaj Razor pliki nie są wymagane dla opublikowanej aplikacji, jeśli uczestniczą w kompilacji w czasie kompilacji lub w czasie publikacji. Wartość domyślna to `false` . |
+| `CopyRazorGenerateFilesToPublishDirectory` | Gdy `true` kopiuje `RazorGenerate` pliki elementów (*. cshtml*) do katalogu publikowania. Zazwyczaj Razor pliki nie są wymagane dla opublikowanej aplikacji, jeśli uczestniczą w kompilacji w czasie kompilacji lub w czasie publikacji. Wartość domyślna to `false` . |
 | `PreserveCompilationReferences` | Gdy `true` Kopiuj elementy zestawu odwołań do katalogu publikowania. Zazwyczaj zestawy referencyjne nie są wymagane dla opublikowanej aplikacji, jeśli Razor kompilacja odbywa się podczas kompilacji lub czasu publikacji. Ustaw na, `true` Jeśli opublikowana aplikacja wymaga kompilacji środowiska uruchomieniowego. Na przykład ustaw wartość na `true` Jeśli aplikacja modyfikuje pliki *. cshtml* w czasie wykonywania lub użyje widoków osadzonych. Wartość domyślna to `false` . |
-| `IncludeRazorContentInPack` | Gdy `true` wszystkie Razor elementy zawartości ( *. cshtml* ) są oznaczone do uwzględnienia w wygenerowanym pakiecie NuGet. Wartość domyślna to `false` . |
-| `EmbedRazorGenerateSources` | Gdy `true` program dodaje Razor elementy generat ( *. cshtml* ) jako osadzone pliki do wygenerowanego Razor zestawu. Wartość domyślna to `false` . |
+| `IncludeRazorContentInPack` | Gdy `true` wszystkie Razor elementy zawartości (*. cshtml* ) są oznaczone do uwzględnienia w wygenerowanym pakiecie NuGet. Wartość domyślna to `false` . |
+| `EmbedRazorGenerateSources` | Gdy `true` program dodaje Razor elementy generat (*. cshtml*) jako osadzone pliki do wygenerowanego Razor zestawu. Wartość domyślna to `false` . |
 | `UseRazorBuildServer` | Gdy `true` program używa procesu trwałego serwera kompilacji do odciążania operacji generowania kodu. Wartość domyślna to `UseSharedCompilation` . |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Gdy `true` zestaw SDK generuje dodatkowe atrybuty używane przez MVC w czasie wykonywania w celu przeprowadzenia odnajdywania części aplikacji. |
 | `DefaultWebContentItemExcludes` | Wzorzec obsługi symboli wieloznacznych dla elementów elementów, które mają być wykluczone z `Content` grupy elementów w projektach przeznaczonych dla sieci Web lub Razor zestawu SDK |
@@ -154,14 +154,14 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 | `RazorTargetName` | Nazwa pliku (bez rozszerzenia) zestawu utworzonego przez Razor . |
 | `RazorOutputPath` | RazorKatalog wyjściowy. |
 | `RazorCompileToolset` | Służy do określenia zestawu narzędzi używanego do kompilowania Razor zestawów. Prawidłowe wartości to `Implicit` , `RazorSDK` , i `PrecompilationTool` . |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config* , *JSON* i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config*, *JSON* i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
 | `EnableDefaultRazorGenerateItems` | Gdy `true` , zawiera pliki *. cshtml* z `Content` elementów w `RazorGenerate` elementach. |
 | `GenerateRazorTargetAssemblyInfo` | Gdy `true` program generuje plik *. cs* zawierający atrybuty określone przez `RazorAssemblyAttribute` i zawiera plik w danych wyjściowych kompilacji. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Gdy `true` program dodaje domyślny zestaw atrybutów zestawu do `RazorAssemblyAttribute` . |
-| `CopyRazorGenerateFilesToPublishDirectory` | Gdy `true` kopiuje `RazorGenerate` pliki elementów ( *. cshtml* ) do katalogu publikowania. Zazwyczaj Razor pliki nie są wymagane dla opublikowanej aplikacji, jeśli uczestniczą w kompilacji w czasie kompilacji lub w czasie publikacji. Wartość domyślna to `false` . |
+| `CopyRazorGenerateFilesToPublishDirectory` | Gdy `true` kopiuje `RazorGenerate` pliki elementów (*. cshtml*) do katalogu publikowania. Zazwyczaj Razor pliki nie są wymagane dla opublikowanej aplikacji, jeśli uczestniczą w kompilacji w czasie kompilacji lub w czasie publikacji. Wartość domyślna to `false` . |
 | `CopyRefAssembliesToPublishDirectory` | Gdy `true` Kopiuj elementy zestawu odwołań do katalogu publikowania. Zazwyczaj zestawy referencyjne nie są wymagane dla opublikowanej aplikacji, jeśli Razor kompilacja odbywa się podczas kompilacji lub czasu publikacji. Ustaw na, `true` Jeśli opublikowana aplikacja wymaga kompilacji środowiska uruchomieniowego. Na przykład ustaw wartość na `true` Jeśli aplikacja modyfikuje pliki *. cshtml* w czasie wykonywania lub użyje widoków osadzonych. Wartość domyślna to `false` . |
-| `IncludeRazorContentInPack` | Gdy `true` wszystkie Razor elementy zawartości ( *. cshtml* ) są oznaczone do uwzględnienia w wygenerowanym pakiecie NuGet. Wartość domyślna to `false` . |
-| `EmbedRazorGenerateSources` | Gdy `true` program dodaje Razor elementy generat ( *. cshtml* ) jako osadzone pliki do wygenerowanego Razor zestawu. Wartość domyślna to `false` . |
+| `IncludeRazorContentInPack` | Gdy `true` wszystkie Razor elementy zawartości (*. cshtml* ) są oznaczone do uwzględnienia w wygenerowanym pakiecie NuGet. Wartość domyślna to `false` . |
+| `EmbedRazorGenerateSources` | Gdy `true` program dodaje Razor elementy generat (*. cshtml*) jako osadzone pliki do wygenerowanego Razor zestawu. Wartość domyślna to `false` . |
 | `UseRazorBuildServer` | Gdy `true` program używa procesu trwałego serwera kompilacji do odciążania operacji generowania kodu. Wartość domyślna to `UseSharedCompilation` . |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Gdy `true` zestaw SDK generuje dodatkowe atrybuty używane przez MVC w czasie wykonywania w celu przeprowadzenia odnajdywania części aplikacji. |
 | `DefaultWebContentItemExcludes` | Wzorzec obsługi symboli wieloznacznych dla elementów elementów, które mają być wykluczone z `Content` grupy elementów w projektach przeznaczonych dla sieci Web lub Razor zestawu SDK |

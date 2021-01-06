@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c37f0a3c528b6285fbf35f41eed781fb76c68de4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061213"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854603"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>Różnice między ASP.NET SignalR i ASP.NET Core SignalR
 
@@ -203,8 +203,8 @@ Zależność od jQuery została usunięta, jednak projekty nadal mogą korzysta�
 
 ### <a name="internet-explorer-support"></a>Obsługa programu Internet Explorer
 
-ASP.NET Core SignalR obsługuje program Microsoft Internet Explorer 11 lub nowszy, natomiast ASP.NET SignalR obsługuje program Microsoft Internet Explorer 8 lub nowszy.
-Więcej informacji na temat obsługi przeglądarki można znaleźć na [obsługiwanych platformach](xref:signalr/supported-platforms#javascript-client).
+ASP.NET Core SignalR nie obsługuje programu Microsoft Internet Explorer, natomiast ASP.NET SignalR obsługuje program Microsoft Internet Explorer 8 lub nowszy.
+Aby uzyskać więcej informacji, zobacz <xref:signalr/supported-platforms#javascript-client>.
 
 ### <a name="javascript-client-method-syntax"></a>Składnia metody klienta JavaScript
 
@@ -293,7 +293,7 @@ ASP.NET SignalR obsługuje SQL Server i Redis. ASP.NET Core SignalR obsługuje u
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Centra](xref:signalr/hubs)
+* [Koncentratory](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)
 * [Klient .NET](xref:signalr/dotnet-client)
 * [Obsługiwane platformy](xref:signalr/supported-platforms)

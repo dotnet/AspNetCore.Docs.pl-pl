@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
-ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
+ms.openlocfilehash: 55289dd7048c08ac61432c7cc062e74d2e69ee24
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97011874"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753130"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -135,9 +135,17 @@ Aby uzyskać informacje na temat wdrażania do Azure App Service, zobacz <xref:t
 
 ### <a name="app-configuration"></a>Konfiguracja aplikacji
 
-Aby skonfigurować rozwiązanie hostowane Blazor do obsługi wielu Blazor WebAssembly aplikacji:
+Rozwiązania hostowane Blazor mogą obsługiwać wiele Blazor WebAssembly aplikacji.
 
-* Użyj istniejącego rozwiązania hostowanego Blazor lub Utwórz nowe rozwiązanie na podstawie Blazor szablonu hostowanego projektu.
+> [!NOTE]
+> W przykładzie w tej sekcji odwołuje się do korzystania z *rozwiązania* Visual Studio, ale użycie programu Visual Studio i rozwiązania Visual Studio nie jest wymagane, aby wiele aplikacji klienckich działało w Blazor WebAssembly scenariuszu hostowanych aplikacji. Jeśli nie używasz programu Visual Studio, zignoruj `{SOLUTION NAME}.sln` plik i wszystkie inne pliki utworzone dla programu Visual Studio.
+
+W poniższym przykładzie:
+
+* Początkowa (pierwsza) aplikacja kliencka jest domyślnym projektem klienta rozwiązania utworzonego na podstawie Blazor WebAssembly szablonu projektu. Pierwsza aplikacja kliencka jest dostępna w przeglądarce z adresu URL `/FirstApp` na porcie 5001 lub na hoście `firstapp.com` .
+* Druga aplikacja kliencka jest dodawana do rozwiązania `SecondBlazorApp.Client` . Druga aplikacja kliencka jest dostępna w przeglądarce z adresu URL `/SecondApp` na porcie 5002 lub na hoście `secondapp.com` .
+
+Użyj istniejącego rozwiązania hostowanego Blazor lub Utwórz nowe rozwiązanie z Blazor szablonu hostowanego projektu:
 
 * W pliku projektu aplikacji klienckiej Dodaj `<StaticWebAssetBasePath>` Właściwość do `<PropertyGroup>` wartości, `FirstApp` Aby ustawić ścieżkę bazową dla statycznych zasobów projektu:
 
@@ -150,9 +158,19 @@ Aby skonfigurować rozwiązanie hostowane Blazor do obsługi wielu Blazor WebAss
 
 * Dodaj drugą aplikację kliencką do rozwiązania:
 
-  * Dodaj folder o nazwie `SecondClient` do folderu rozwiązania.
+  * Dodaj folder o nazwie `SecondClient` do folderu rozwiązania. Folder rozwiązania utworzony na podstawie szablonu projektu zawiera następujący plik rozwiązania i foldery po `SecondClient` dodaniu folderu:
+  
+    * `Client` system32\drivers\etc
+    * `SecondClient` system32\drivers\etc
+    * `Server` system32\drivers\etc
+    * `Shared` system32\drivers\etc
+    * `{SOLUTION NAME}.sln` rozszerzeniem
+    
+    Symbol zastępczy `{SOLUTION NAME}` jest nazwą rozwiązania.
+
   * Utwórz Blazor WebAssembly aplikację o nazwie `SecondBlazorApp.Client` w `SecondClient` folderze z Blazor WebAssembly szablonu projektu.
-  * W pliku projektu aplikacji:
+
+  * W `SecondBlazorApp.Client` pliku projektu aplikacji:
 
     * Dodaj `<StaticWebAssetBasePath>` Właściwość do `<PropertyGroup>` wartości z `SecondApp` :
 
@@ -173,14 +191,17 @@ Aby skonfigurować rozwiązanie hostowane Blazor do obsługi wielu Blazor WebAss
 
       Symbol zastępczy `{SOLUTION NAME}` jest nazwą rozwiązania.
 
-* W pliku projektu aplikacji serwera Utwórz odwołanie do projektu dla dodanej aplikacji klienckiej:
+* W pliku projektu aplikacji serwera Utwórz odwołanie do projektu dla dodanej `SecondBlazorApp.Client` aplikacji klienckiej:
 
   ```xml
   <ItemGroup>
-    ...
+    <ProjectReference Include="..\Client\{SOLUTION NAME}.Client.csproj" />
     <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+    <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
   </ItemGroup>
   ```
+  
+  Symbol zastępczy `{SOLUTION NAME}` jest nazwą rozwiązania.
 
 * W pliku aplikacji serwera `Properties/launchSettings.json` Skonfiguruj `applicationUrl` profil Kestrel ( `{SOLUTION NAME}.Server` ), aby uzyskać dostęp do aplikacji klienckich na portach 5001 i 5002:
 

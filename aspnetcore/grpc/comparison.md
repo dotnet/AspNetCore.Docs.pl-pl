@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059952"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
@@ -37,12 +37,12 @@ Poniższa tabela zawiera porównanie funkcji między gRPC i interfejsami API pro
 
 | Cechy          | gRPC                                               | Interfejsy API protokołu HTTP z JSON           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
-| Kontrakt         | Wymagane ( *. proto* )                                | Opcjonalnie (OpenAPI)            |
+| Kontrakt         | Wymagane (*. proto*)                                | Opcjonalnie (OpenAPI)            |
 | Protokół         | HTTP/2                                             | HTTP                          |
 | Ładunku          | [Protobuf (mały, binarny)](#performance)           | JSON (duże, czytelne dla ludzi)  |
 | Prescriptiveness | [Specyfikacja Strict](#strict-specification)      | Sypki. Wszystkie protokoły HTTP są prawidłowe.     |
 | Przesyłanie strumieniowe        | [Klient, serwer, dwukierunkowa](#streaming)       | Klient, serwer                |
-| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Tak                           |
+| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Yes                           |
 | Zabezpieczenia         | Transport (TLS)                                    | Transport (TLS)               |
 | Generowanie kodu klienta | [Tak](#code-generation)                      | Narzędzia OpenAPI + inne firmy |
 
@@ -92,11 +92,11 @@ Propagowanie terminu i anulowania za pomocą podrzędnych wywołań gRPC ułatwi
 
 gRPC doskonale nadaje się do następujących scenariuszy:
 
-* **Mikrousługi** : gRPC został zaprojektowany z myślą o małym opóźnieniu i komunikacji o dużej przepływności. gRPC doskonale nadaje się do lekkich mikrousług, w których wydajność jest krytyczna.
-* **Komunikacja punkt-punkt w czasie rzeczywistym** : gRPC ma doskonałą obsługę przesyłania strumieniowego dwukierunkowego. usługi gRPC umożliwiają wypychanie komunikatów w czasie rzeczywistym bez sondowania.
-* **Środowiska Polyglot** : narzędzia gRPC obsługują wszystkie popularne języki deweloperskie, co sprawia, że gRPC to dobry wybór w środowiskach wielojęzycznych.
-* **Środowiska ograniczone sieci** : komunikaty gRPC są serializowane z protobuf, formatem uproszczonego komunikatu. Komunikat gRPC jest zawsze krótszy niż odpowiedni komunikat JSON.
-* **Komunikacja między procesami (IPC)** : transport IPC, taki jak gniazda domen systemu UNIX i nazwane potoki, może być używany z gRPC do komunikacji między aplikacjami na tym samym komputerze. Aby uzyskać więcej informacji, zobacz <xref:grpc/interprocess>.
+* **Mikrousługi**: gRPC został zaprojektowany z myślą o małym opóźnieniu i komunikacji o dużej przepływności. gRPC doskonale nadaje się do lekkich mikrousług, w których wydajność jest krytyczna.
+* **Komunikacja punkt-punkt w czasie rzeczywistym**: gRPC ma doskonałą obsługę przesyłania strumieniowego dwukierunkowego. usługi gRPC umożliwiają wypychanie komunikatów w czasie rzeczywistym bez sondowania.
+* **Środowiska Polyglot**: narzędzia gRPC obsługują wszystkie popularne języki deweloperskie, co sprawia, że gRPC to dobry wybór w środowiskach wielojęzycznych.
+* **Środowiska ograniczone sieci**: komunikaty gRPC są serializowane z protobuf, formatem uproszczonego komunikatu. Komunikat gRPC jest zawsze krótszy niż odpowiedni komunikat JSON.
+* **Komunikacja między procesami (IPC)**: transport IPC, taki jak gniazda domen systemu UNIX i nazwane potoki, może być używany z gRPC do komunikacji między aplikacjami na tym samym komputerze. Aby uzyskać więcej informacji, zobacz <xref:grpc/interprocess>.
 
 ## <a name="grpc-weaknesses"></a>słabe gRPC
 
@@ -126,7 +126,7 @@ Funkcje takie jak [odbicie serwera](https://github.com/grpc/grpc/blob/master/doc
 
 Inne struktury są zalecane w porównaniu z gRPC w następujących scenariuszach:
 
-* **Interfejsy API dostępne dla przeglądarki** : gRPC nie jest w pełni obsługiwane w przeglądarce. gRPC — sieć Web może oferować pomoc techniczną przeglądarki, ale ma ograniczenia i wprowadza serwer proxy serwera.
+* **Interfejsy API dostępne dla przeglądarki**: gRPC nie jest w pełni obsługiwane w przeglądarce. gRPC — sieć Web może oferować pomoc techniczną przeglądarki, ale ma ograniczenia i wprowadza serwer proxy serwera.
 * **Rozgłaszanie komunikacji** w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje. Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta. [SignalR](xref:signalr/introduction) jest przydatną strukturą dla tego scenariusza. SignalR ma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/directory-structure
 ms.openlocfilehash: 918bc11e06b8f2bea5506d3b61f462e15998efa0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059861"
 ---
 # <a name="aspnet-core-directory-structure"></a>Struktura katalogów ASP.NET Core
@@ -45,7 +45,7 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 &dagger;Wskazuje katalog
 
-Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości* , nazywaną również *ścieżką bazową aplikacji* , wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
+Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*, nazywaną również *ścieżką bazową aplikacji*, wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
 
 Katalog *wwwroot* (jeśli istnieje) zawiera tylko zasoby statyczne.
 
@@ -75,7 +75,7 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 &dagger;Wskazuje katalog
 
-Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości* , nazywaną również *ścieżką bazową aplikacji* , wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
+Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*, nazywaną również *ścieżką bazową aplikacji*, wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
 
 Katalog *wwwroot* (jeśli istnieje) zawiera tylko zasoby statyczne.
 

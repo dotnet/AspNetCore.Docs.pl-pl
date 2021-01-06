@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/migrations
 ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061109"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Część 4 Razor strony z migracjami EF Core w programie ASP.NET Core
@@ -44,7 +44,7 @@ Zamiast upuszczania i ponownego tworzenia bazy danych, gdy zmieni się model dan
 
 ## <a name="drop-the-database"></a>Porzuć bazę danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Użyj **Eksplorator obiektów SQL Server** (SSOX), aby usunąć bazę danych, lub uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -72,7 +72,7 @@ Drop-Database
 
 ## <a name="create-an-initial-migration"></a>Tworzenie początkowej migracji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Uruchom następujące polecenia w obszarze PMC:
 
@@ -114,7 +114,7 @@ Parametr name migracji ("InitialCreate" w przykładzie) jest używany jako nazwa
 
 ## <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracja tworzy *migawkę* bieżącego modelu danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa zmiany, porównując bieżący model danych z plikiem migawki.
+Migracja tworzy *migawkę* bieżącego modelu danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa zmiany, porównując bieżący model danych z plikiem migawki.
 
 Ponieważ plik migawek śledzi stan modelu danych, nie można usunąć migracji, usuwając `<timestamp>_<migrationname>.cs` plik. Aby wykonać kopię zapasową najnowszej migracji, należy użyć `migrations remove` polecenia. To polecenie usuwa migrację i gwarantuje, że migawka zostanie prawidłowo zresetowana. Aby uzyskać więcej informacji, zobacz [migracja programu dotnet EF Usuń](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
@@ -188,7 +188,7 @@ Zamiast upuszczania i ponownego tworzenia bazy danych, gdy zmieni się model, mi
 
 Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` polecenia:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -214,7 +214,7 @@ Wprowadź następujące polecenie w oknie polecenia:
 
 Kompilowanie projektu i Tworzenie pierwszej migracji.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration InitialCreate
@@ -251,11 +251,11 @@ Wcześniej baza danych została porzucona i nie istnieje, dlatego migracji tworz
 
 ### <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracje tworzą *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
+Migracje tworzą *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
 
 Aby usunąć migrację, użyj następującego polecenia:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Remove-Migration
 

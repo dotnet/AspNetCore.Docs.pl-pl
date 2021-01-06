@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/sort-filter-page
 ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061044"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
@@ -62,7 +62,7 @@ Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zap
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Kod używa [warunkowego operatora języka C#?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy, przyjmuje trzy operandy. Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na `name_desc` . Jeśli `sortOrder` parametr ma wartość * *_not_* _ null lub `NameSort` jest pusty, jest ustawiony na pusty ciąg.
+Kod używa [warunkowego operatora języka C#?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy, przyjmuje trzy operandy. Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na `name_desc` . Jeśli `sortOrder` parametr ma wartość **_not_* _ null lub `NameSort` jest pusty, jest ustawiony na pusty ciąg.
 
 Te dwie instrukcje umożliwiają stronie ustawienie hiperłączy nagłówka kolumny w następujący sposób:
 
@@ -151,7 +151,7 @@ Przetestuj aplikację:
 
 * Wybierz kartę **studenci** i wprowadź ciąg wyszukiwania. Jeśli używasz oprogramowania SQLite, filtr nie uwzględnia wielkości liter tylko w przypadku zaimplementowania `ToUpper` wcześniej pokazanego kodu.
 
-* Wybierz pozycję **Wyszukaj** .
+* Wybierz pozycję **Wyszukaj**.
 
 Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Przykład:
 
@@ -353,8 +353,8 @@ Powyższy kod ma następujące działanie:
 Aby sprawdzić, czy sortowanie działa:
 
 * Uruchom aplikację i wybierz kartę **studenci** .
-* Kliknij pozycję **nazwisko** .
-* Kliknij pozycję **Data rejestracji** .
+* Kliknij pozycję **nazwisko**.
+* Kliknij pozycję **Data rejestracji**.
 
 Aby lepiej zrozumieć kod:
 
@@ -406,7 +406,7 @@ Poprzedni kod używa `<form>` [pomocnika tagów](xref:mvc/views/tag-helpers/intr
 Przetestuj aplikację:
 
 * Wybierz kartę **studenci** i wprowadź ciąg wyszukiwania.
-* Wybierz pozycję **Wyszukaj** .
+* Wybierz pozycję **Wyszukaj**.
 
 Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania.
 
@@ -475,7 +475,7 @@ Dwa znaki zapytania `PaginatedList.CreateAsync` reprezentują [operator łączen
 
 ## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Dodawanie linków stronicowania do strony ucznia Razor
 
-Zaktualizuj znaczniki w *uczniów/index. cshtml* . Zmiany są wyróżnione:
+Zaktualizuj znaczniki w *uczniów/index. cshtml*. Zmiany są wyróżnione:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 

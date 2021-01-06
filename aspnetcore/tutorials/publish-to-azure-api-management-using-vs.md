@@ -7,10 +7,10 @@ ms.custom: devx-track-csharp, mvc
 ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
 ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96332234"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>Publikowanie ASP.NET Core internetowego interfejsu API w usłudze Azure API Management przy użyciu programu Visual Studio
@@ -228,7 +228,7 @@ Po zakończeniu testowania aplikacji przejdź do [Azure Portal](https://portal.a
 
 <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
-- [API Management platformy Azure](/azure/api-management/api-management-key-concepts)
+- [Azure API Management](/azure/api-management/api-management-key-concepts)
 - [Azure App Service](/azure/app-service/app-service-web-overview)

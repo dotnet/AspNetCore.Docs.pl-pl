@@ -5,7 +5,7 @@ description: Dowiedz się, jak Blazor aplikacje mogą wstrzyknąć usługi do sk
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/11/2020
+ms.date: 12/19/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: af6b645fc3c398414c85c78e1cfeb213e538c2a6
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 3f2b4eff5422acbec80b2fd9b801101271cc3f75
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506802"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808728"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -98,7 +98,7 @@ Usługi można skonfigurować przy użyciu okresów istnienia podanych w poniżs
 
 | Okres istnienia | Opis |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi.</p><p>Blazor ServerModel hostingu obsługuje `Scoped` okres istnienia między żądaniami HTTP, ale nie w przypadku komunikatów połączeń i obwodów usługi SingalR między składnikami, które są ładowane na komputerze klienckim. RazorCzęści strony lub MVC w aplikacji traktują usługi o określonym zakresie w normalny sposób i ponownie tworzy usługi na *każdym żądaniu HTTP* podczas nawigowania między stronami lub widokami albo ze strony lub widoku do składnika. Usługi o określonym zakresie nie są odtworzone podczas nawigowania między składnikami na kliencie, gdzie komunikacja z serwerem odbywa się przez SignalR połączenie obwodu użytkownika, a nie za pośrednictwem żądań HTTP. W następujących scenariuszach składników na kliencie usługi o określonym zakresie są odtworzone, ponieważ dla użytkownika zostanie utworzony nowy obwód:</p><ul><li>Użytkownik zamknie okno przeglądarki. Użytkownik otworzy nowe okno i nawiguje z powrotem do aplikacji.</li><li>Użytkownik zamknie ostatnią kartę aplikacji w oknie przeglądarki. Użytkownik otworzy nową kartę i nawiguje z powrotem do aplikacji.</li><li>Użytkownik wybiera przycisk Załaduj ponownie/Odśwież w przeglądarce.</li></ul><p>Aby uzyskać więcej informacji o zachowaniu stanu użytkownika w ramach usług w zakresie w Blazor Server aplikacjach, zobacz <xref:blazor/hosting-models?pivots=server> .</p> |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi.</p><p>Blazor ServerModel hostingu obsługuje `Scoped` okres istnienia w żądaniach HTTP, ale nie między SignalR komunikatami połączenia/obwodu między składnikami, które są ładowane na komputerze klienckim. RazorCzęści strony lub MVC w aplikacji traktują usługi o określonym zakresie w normalny sposób i ponownie tworzy usługi na *każdym żądaniu HTTP* podczas nawigowania między stronami lub widokami albo ze strony lub widoku do składnika. Usługi o określonym zakresie nie są odtworzone podczas nawigowania między składnikami na kliencie, gdzie komunikacja z serwerem odbywa się przez SignalR połączenie obwodu użytkownika, a nie za pośrednictwem żądań HTTP. W następujących scenariuszach składników na kliencie usługi o określonym zakresie są odtworzone, ponieważ dla użytkownika zostanie utworzony nowy obwód:</p><ul><li>Użytkownik zamknie okno przeglądarki. Użytkownik otworzy nowe okno i nawiguje z powrotem do aplikacji.</li><li>Użytkownik zamknie ostatnią kartę aplikacji w oknie przeglądarki. Użytkownik otworzy nową kartę i nawiguje z powrotem do aplikacji.</li><li>Użytkownik wybiera przycisk Załaduj ponownie/Odśwież w przeglądarce.</li></ul><p>Aby uzyskać więcej informacji o zachowaniu stanu użytkownika w ramach usług w zakresie w Blazor Server aplikacjach, zobacz <xref:blazor/hosting-models?pivots=server> .</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
 
@@ -106,7 +106,7 @@ System DI jest oparty na systemie DI w ASP.NET Core. Aby uzyskać więcej inform
 
 ## <a name="request-a-service-in-a-component"></a>Żądanie usługi w składniku
 
-Po dodaniu usług do kolekcji usług należy wstrzyknąć usługi do składników za pomocą dyrektywy [ \@ wstrzykiwania](xref:mvc/views/razor#inject) Razor . [`@inject`](xref:mvc/views/razor#inject) ma dwa parametry:
+Po dodaniu usług do kolekcji usług należy wstrzyknąć usługi do składników za pomocą [`@inject`](xref:mvc/views/razor#inject) Razor dyrektywy, która ma dwa parametry:
 
 * Typ: typ usługi do dodania.
 * Property: Nazwa właściwości otrzymującej wstrzykiwaną usługę App Service. Właściwość nie wymaga ręcznego tworzenia. Kompilator tworzy właściwość.
@@ -192,8 +192,6 @@ Dostępne są dwie wersje <xref:Microsoft.AspNetCore.Components.OwningComponentB
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/blazor-server-ef-core>.
 
-::: moniker range="< aspnetcore-5.0"
-
 ## <a name="detect-transient-disposables"></a>Wykrywanie przejściowych jednorazowych
 
 Poniższe przykłady przedstawiają sposób wykrywania jednorazowych usług przejściowych w aplikacji, która powinna być używana <xref:Microsoft.AspNetCore.Components.OwningComponentBase> . Aby uzyskać więcej informacji, zobacz [klasy składników podstawowych narzędzi, aby zarządzać sekcją di Scope](#utility-base-component-classes-to-manage-a-di-scope) .
@@ -206,17 +204,17 @@ Poniższe przykłady przedstawiają sposób wykrywania jednorazowych usług prze
 
 `TransientDisposable`Wykryto w poniższym przykładzie ( `Program.cs` ):
 
-<!-- moniker range=">= aspnetcore-5.0"
+::: moniker range=">= aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/5.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-moniker-end 
+::: moniker-end 
 
-moniker range="< aspnetcore-5.0" -->
+::: moniker range="< aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-<!-- moniker-end -->
+::: moniker-end
 
 ::: zone-end
 
@@ -242,9 +240,22 @@ W `Program.CreateHostBuilder` programie `Program.cs` :
 
 ::: zone-end
 
-::: moniker-end
+Aplikacja może rejestrować przejściowe jednorazowe, bez zgłaszania wyjątku. Jednak próba rozpoznania przejściowych wyników jednorazowych w <xref:System.InvalidOperationException> , jak pokazano w poniższym przykładzie.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+`Pages/TransientDisposable.razor`:
+
+```razor
+@page "/transient-disposable"
+@inject TransientDisposable TransientDisposable
+
+<h1>Transient Disposable Detection</h1>
+```
+
+Przejdź do `TransientDisposable` składnika w `/transient-disposable` i <xref:System.InvalidOperationException> jest generowany, gdy struktura próbuje utworzyć wystąpienie `TransientDisposable` :
+
+> System. InvalidOperationException: próba rozpoznania przejściowej jednorazowej usługi TransientDisposable w niewłaściwym zakresie. Użyj \<T> klasy bazowej składnika "OwningComponentBase" dla usługi "t", którą próbujesz rozwiązać.
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/dependency-injection>
 * [`IDisposable` Wskazówki dotyczące wystąpień przejściowych i współużytkowanych](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)

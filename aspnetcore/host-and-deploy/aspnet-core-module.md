@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/aspnet-core-module
 ms.openlocfilehash: d0e6c0c31890c58aaca936fc6f1e92cb9a1ab456
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901239"
 ---
 # <a name="aspnet-core-module"></a>Moduł ASP.NET Core
@@ -206,7 +206,7 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
@@ -621,7 +621,7 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w `processPath` .</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
@@ -928,7 +928,7 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p>| |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |

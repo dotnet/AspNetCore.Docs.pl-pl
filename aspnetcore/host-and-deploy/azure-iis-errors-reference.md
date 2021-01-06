@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
 ms.openlocfilehash: b009cc61a94e618a48d96ecbd770ef6371308f6a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059848"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
@@ -40,8 +40,8 @@ Zbierz wymienione poniżej informacje.
 * Wpisy dziennika zdarzeń aplikacji
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
-    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter** .
-    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
+    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter**.
+    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** >  na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS: Postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
@@ -177,7 +177,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że  > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
@@ -277,7 +277,7 @@ Rozwiązywanie problemów:
 
 Upewnij się, że plik *web.config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji lub że aplikacja podrzędna nie dziedziczy programów obsługi aplikacji nadrzędnej.
 
-Sekcjaweb.configaplikacji nadrzędnej `<system.webServer>` jest *web.config* umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
+Sekcjaweb.configaplikacji nadrzędnej `<system.webServer>` jest  umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>Nieprawidłowa ścieżka dziennika stdout
 
@@ -328,8 +328,8 @@ Zbierz wymienione poniżej informacje.
 * Wpisy dziennika zdarzeń aplikacji
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
-    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter** .
-    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
+    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter**.
+    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** >  na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS: Postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
@@ -455,7 +455,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że  > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 

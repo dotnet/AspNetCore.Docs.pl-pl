@@ -21,10 +21,10 @@ no-loc:
 uid: blazor/fundamentals/logging
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 10c96bd2d0cc64f3bd035e7079b0996eb5768595
-ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/18/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97666836"
 ---
 # <a name="aspnet-core-no-locblazor-logging"></a>BlazorRejestrowanie ASP.NET Core

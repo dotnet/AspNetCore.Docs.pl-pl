@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/cicd
 ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
-ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96901213"
 ---
 # <a name="continuous-integration-and-deployment"></a>Ciągła integracja i ciągłe wdrażanie
@@ -111,7 +111,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Wybierz źródło — GitHub](media/cicd/vsts-select-source.png)
 
-1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Na przykład:
+1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Przykład:
 
     ![Nazwa połączenia GitHub](media/cicd/vsts-repo-authz.png)
 
@@ -225,7 +225,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Włącz integrację ciągłą](media/cicd/enable-ci.png)
 
-1. Przejdź do karty z **kolejką** na **Azure Pipelines**  >  stronie **kompilacje** Azure Pipelines w Azure DevOps Services. Kompilacja w kolejce pokazuje gałąź i zatwierdzenie, które wyzwoliły kompilację:
+1. Przejdź do karty z **kolejką** na   >  stronie **kompilacje** Azure Pipelines w Azure DevOps Services. Kompilacja w kolejce pokazuje gałąź i zatwierdzenie, które wyzwoliły kompilację:
 
     ![Kompilacja umieszczona w kolejce](media/cicd/build-queued.png)
 

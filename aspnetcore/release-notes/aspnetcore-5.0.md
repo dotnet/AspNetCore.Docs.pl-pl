@@ -19,10 +19,10 @@ no-loc:
 - Kestrel
 uid: aspnetcore-5.0
 ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855498"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
@@ -353,7 +353,7 @@ Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania do
    ```
    <!-- review: KeepAlivePingInterval not found in RC1. Try testing with RC1. See https://github.com/dotnet/aspnetcore/pull/22565/files see C:/Users/riande/source/repos/WebApplication128/WebApplication128 -->
 
-### <a name="containers"></a>Kontenery
+### <a name="containers"></a>Containers
 
 Przed rozpoczęciem programu .NET 5,0, kompilowanie i publikowanie *pliku dockerfile* dla aplikacji ASP.NET Core wymaga pobrania całego zestaw .NET Core SDK i ASP.NET Core obrazu. W tej wersji jest zmniejszana liczba bajtów obrazów zestawu SDK, a bajty pobierane dla ASP.NET Core obrazu są w znacznym stopniu eliminowane. Aby uzyskać więcej informacji, zobacz [ten komentarz dotyczący problemu](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)w serwisie GitHub.
 

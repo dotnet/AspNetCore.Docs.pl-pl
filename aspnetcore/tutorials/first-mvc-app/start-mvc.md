@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
 ms.openlocfilehash: c96e7107c85bf36f55f6571c71c20d09bc94ddb3
-ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94688532"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
@@ -48,7 +48,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -64,12 +64,12 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
 1. W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
 1. W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `MvcMovie` w polu **Nazwa projektu**. Ważne jest, aby użyć tej dokładnej nazwy, z uwzględnieniem wielkich liter, więc każdy pasuje do tego, `namespace` kiedy kod jest kopiowany.
-1. Wybierz pozycję **Utwórz**.
+1. Wybierz przycisk **Utwórz**.
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
     1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
     1. **ASP.NET Core aplikacji sieci Web (Model-View-Controller)**.
@@ -105,7 +105,7 @@ W samouczku założono znajomość VS Code. Aby uzyskać więcej informacji, zob
 
   ![macOS nowe rozwiązanie](start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >    >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
@@ -114,7 +114,7 @@ W samouczku założono znajomość VS Code. Aby uzyskać więcej informacji, zob
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, należy wybrać najnowszą wersję 5. x.
 
-  Wybierz opcję **Dalej**.
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -124,7 +124,7 @@ W samouczku założono znajomość VS Code. Aby uzyskać więcej informacji, zob
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 
@@ -200,7 +200,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -216,7 +216,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
@@ -258,7 +258,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
   ![macOS nowe rozwiązanie](start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >    >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
@@ -267,7 +267,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
 
-  Wybierz opcję **Dalej**.
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -277,7 +277,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 
@@ -353,7 +353,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -368,7 +368,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 ---
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
@@ -411,14 +411,14 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
   ![macOS nowe rozwiązanie](./start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję  >  aplikacja sieci Web **aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >    >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
 
-  Wybierz opcję **Dalej**.
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -426,7 +426,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 

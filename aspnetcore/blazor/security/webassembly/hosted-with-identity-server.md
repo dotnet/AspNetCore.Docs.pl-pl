@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 147f1d6cdea0b9992b8be333db4cb06e30c7feaf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 80196945bc6891d5517d7da0e07ca1b0debddd28
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055220"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854691"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -35,11 +35,11 @@ W tym artykule wyjaśniono, jak utworzyć [hostowaną Blazor WebAssembly aplikac
 > [!NOTE]
 > Aby skonfigurować autonomiczną lub hostowaną Blazor WebAssembly aplikację do korzystania z istniejącego Identity wystąpienia serwera zewnętrznego, postępuj zgodnie ze wskazówkami w temacie <xref:blazor/security/webassembly/standalone-with-authentication-library> .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
-1. Po wybraniu szablonu **Blazor WebAssembly aplikacji** w oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Zmień** w obszarze **uwierzytelnianie** .
+1. Po wybraniu szablonu **Blazor WebAssembly aplikacji** w oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Zmień** w obszarze **uwierzytelnianie**.
 
 1. Wybierz opcję **konta poszczególnych użytkowników** z opcją **Zapisz konta użytkowników w aplikacji** , aby przechowywać użytkowników w ramach aplikacji przy użyciu [Identity](xref:security/authentication/identity) systemu ASP.NET Core.
 
@@ -215,19 +215,19 @@ Domyślnie konfiguracja aplikacji jest ładowana zgodnie z Konwencją z programu
 
 ### <a name="imports-file"></a>Importuje plik
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-hosted.md)]
 
 ### <a name="index-page"></a>Strona indeksu
 
-[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-authentication.md)]
 
 ### <a name="app-component"></a>Składnik aplikacji
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ### <a name="redirecttologin-component"></a>Składnik RedirectToLogin
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ### <a name="logindisplay-component"></a>Składnik LoginDisplay
 
@@ -271,11 +271,11 @@ Domyślnie konfiguracja aplikacji jest ładowana zgodnie z Konwencją z programu
 
 ### <a name="authentication-component"></a>Składnik uwierzytelniania
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
 ### <a name="fetchdata-component"></a>Składnik FetchData
 
-[!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
+[!INCLUDE[](~/blazor/includes/security/fetchdata-component.md)]
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
@@ -466,7 +466,7 @@ W *`Client`* aplikacji metody autoryzacji składników są w tym momencie funkcj
 
 `User.Identity.Name` jest wypełniana w *`Client`* aplikacji nazwą użytkownika, która jest zazwyczaj ich adresem e-mail logowania.
 
-[!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+[!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
 ## <a name="host-in-azure-app-service-with-a-custom-domain"></a>Host w Azure App Service z domeną niestandardową
 
@@ -476,7 +476,7 @@ W tym scenariuszu hostingu **nie** należy używać tego samego certyfikatu dla 
 
 * Korzystanie z różnych certyfikatów dla tych dwóch wymagań jest dobrym sposobem na bezpieczeństwo, ponieważ izoluje klucze prywatne do każdego celu.
 * Certyfikaty TLS do komunikacji z przeglądarkami są zarządzane niezależnie bez wpływu na Identity Podpisywanie tokenu serwera.
-* Gdy [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) dostarcza certyfikat do aplikacji App Service dla niestandardowego powiązania domeny, Identity serwer nie może uzyskać tego samego certyfikatu z Azure Key Vault na potrzeby podpisywania tokenu. Chociaż skonfigurowanie Identity serwera do korzystania z tego samego certyfikatu TLS z ścieżki fizycznej jest możliwe, umieszczenie certyfikatów zabezpieczeń w kontroli źródła jest **słabo praktyczne i należy je unikać w większości scenariuszy** .
+* Gdy [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) dostarcza certyfikat do aplikacji App Service dla niestandardowego powiązania domeny, Identity serwer nie może uzyskać tego samego certyfikatu z Azure Key Vault na potrzeby podpisywania tokenu. Chociaż skonfigurowanie Identity serwera do korzystania z tego samego certyfikatu TLS z ścieżki fizycznej jest możliwe, umieszczenie certyfikatów zabezpieczeń w kontroli źródła jest **słabo praktyczne i należy je unikać w większości scenariuszy**.
 
 W poniższych wskazówkach certyfikat z podpisem własnym jest tworzony w Azure Key Vault wyłącznie dla Identity podpisywania tokenu serwera. IdentityKonfiguracja serwera używa certyfikatu magazynu kluczy za pośrednictwem `My`  >  `CurrentUser` magazynu certyfikatów aplikacji. Inne certyfikaty używane na potrzeby ruchu HTTPS z domenami niestandardowymi są tworzone i konfigurowane niezależnie od Identity certyfikatu podpisywania serwera.
 
@@ -493,7 +493,7 @@ Aby skonfigurować aplikację, Azure App Service i Azure Key Vault do hostowania
 
    Aby utworzyć certyfikat, należy użyć jednej z następujących metod lub innego odpowiedniego narzędzia lub usługi online:
 
-   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [Usługa Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
    * [MakeCert w systemie Windows](/windows/desktop/seccrypto/makecert)
    * [OpenSSL](https://www.openssl.org)
 
@@ -512,13 +512,13 @@ Aby skonfigurować aplikację, Azure App Service i Azure Key Vault do hostowania
    * Wartość: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
 
    W Azure Portal Zapisywanie ustawień aplikacji jest procesem dwuetapowym: Zapisz `WEBSITE_LOAD_CERTIFICATES` ustawienie klucz-wartość, a następnie wybierz przycisk **Zapisz** w górnej części bloku.
-1. Wybierz **Ustawienia protokołu TLS/SSL** aplikacji. Wybierz pozycję **certyfikaty kluczy prywatnych (pfx)** . W celu zaimportowania certyfikatu lokacji na potrzeby komunikacji przy użyciu protokołu HTTPS i certyfikatu podpisywania serwera z podpisem własnym należy użyć dwa razy **zaimportuj certyfikat Key Vault** Identity .
+1. Wybierz **Ustawienia protokołu TLS/SSL** aplikacji. Wybierz pozycję **certyfikaty kluczy prywatnych (pfx)**. W celu zaimportowania certyfikatu lokacji na potrzeby komunikacji przy użyciu protokołu HTTPS i certyfikatu podpisywania serwera z podpisem własnym należy użyć dwa razy **zaimportuj certyfikat Key Vault** Identity .
 1. Przejdź do bloku **domeny niestandardowe** . W witrynie sieci Web rejestratora domen Użyj **adresu IP** i **identyfikatora weryfikacji domeny niestandardowej** w celu skonfigurowania domeny. Typowa konfiguracja domeny obejmuje:
    * **Rekord a** **hosta** `@` i wartość adresu IP z Azure Portal.
    * **Rekord TXT** z **hostem** `asuid` i wartością identyfikatora weryfikacyjnego wygenerowaną przez platformę Azure i udostępnianą przez Azure Portal.
 
    Upewnij się, że poprawnie Zapisano zmiany w witrynie sieci Web rejestratora domen. Niektóre witryny sieci Web rejestratorów wymagają dwuetapowego procesu zapisywania rekordów domeny: co najmniej jeden rekord jest zapisywany osobno, a następnie przez aktualizację rejestracji domeny za pomocą oddzielnego przycisku.
-1. Wróć do bloku **domen niestandardowych** w Azure Portal. Wybierz pozycję **Dodaj domenę niestandardową** . Wybierz opcję **rekordu A** . Podaj domenę i wybierz pozycję **Weryfikuj** . Jeśli rekordy domeny są poprawne i propagowane przez Internet, Portal umożliwia wybranie przycisku **Dodaj domenę niestandardową** .
+1. Wróć do bloku **domen niestandardowych** w Azure Portal. Wybierz pozycję **Dodaj domenę niestandardową**. Wybierz opcję **rekordu A** . Podaj domenę i wybierz pozycję **Weryfikuj**. Jeśli rekordy domeny są poprawne i propagowane przez Internet, Portal umożliwia wybranie przycisku **Dodaj domenę niestandardową** .
 
    Zmiana rejestracji domeny w ramach serwerów nazw domen internetowych (DNS) po ich przetworzeniu przez rejestrator domen może potrwać kilka dni. Jeśli rekordy domeny nie są aktualizowane w ciągu trzech dni roboczych, upewnij się, że rekordy są poprawnie ustawione przy użyciu rejestratora domen i skontaktuj się z działem obsługi klienta.
 1. W bloku **domeny niestandardowe** **stan protokołu SSL** dla domeny jest oznaczony `Not Secure` . Wybierz łącze **Dodaj powiązanie** . Wybierz certyfikat HTTPS lokacji z magazynu kluczy dla niestandardowego powiązania domeny.
@@ -538,7 +538,7 @@ Aby skonfigurować aplikację, Azure App Service i Azure Key Vault do hostowania
    },
    ```
 
-1. W programie Visual Studio Utwórz [profil publikowania](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) Azure App Service dla projektu *serwera* . Na pasku menu wybierz kolejno opcje: **Kompiluj**  >  **Publikuj**  >  **nowe**  >  **Azure App Service platformy Azure**  >  **Azure App Service** (system Windows lub Linux). Gdy program Visual Studio jest połączony z subskrypcją platformy Azure, można ustawić **Widok** zasobów platformy Azure według **typu zasobu** . Przejdź na listę **aplikacji sieci Web** , aby znaleźć App Service aplikacji i wybierz ją. Wybierz pozycję **Zakończ** .
+1. W programie Visual Studio Utwórz [profil publikowania](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) Azure App Service dla projektu *serwera* . Na pasku menu wybierz kolejno opcje: **Kompiluj**  >  **Publikuj**  >  **nowe**  >  **Azure App Service platformy Azure**  >   (system Windows lub Linux). Gdy program Visual Studio jest połączony z subskrypcją platformy Azure, można ustawić **Widok** zasobów platformy Azure według **typu zasobu**. Przejdź na listę **aplikacji sieci Web** , aby znaleźć App Service aplikacji i wybierz ją. Wybierz pozycję **Zakończ**.
 1. Gdy program Visual Studio powróci do okna **publikowania** , automatycznie wykrywane są zależności usługi key i SQL Server Database.
 
    W przypadku usługi magazynu kluczy nie są wymagane żadne zmiany w konfiguracji domyślnej.
@@ -552,10 +552,10 @@ Aby skonfigurować aplikację, Azure App Service i Azure Key Vault do hostowania
 
 Dokumentacja platformy Azure zawiera dodatkowe szczegóły dotyczące korzystania z usług platformy Azure i domen niestandardowych z powiązaniem TLS w App Service, w tym informacje na temat używania rekordów CNAME zamiast rekordów. Więcej informacji można znaleźć w następujących zasobach:
 
-* [Dokumentacja App Service](/azure/app-service/)
+* [Dokumentacja usługi App Service](/azure/app-service/)
 * [Samouczek: mapowanie istniejącej niestandardowej nazwy DNS na Azure App Service](/azure/app-service/app-service-web-tutorial-custom-domain)
 * [Zabezpiecz niestandardową nazwę DNS z powiązaniem TLS/SSL w Azure App Service](/azure/app-service/configure-ssl-bindings)
-* [Azure Key Vault](/azure/key-vault/)
+* [Usługa Azure Key Vault](/azure/key-vault/)
 
 Zalecamy używanie nowego okna przeglądarki w trybie prywatnym lub incognito dla każdego przebiegu testu aplikacji po zmianie aplikacji, konfiguracji aplikacji lub usług platformy Azure w Azure Portal. cookieWyzwolenie z poprzedniego przebiegu testowego może spowodować niepowodzenie uwierzytelniania lub autoryzacji podczas testowania lokacji nawet wtedy, gdy konfiguracja lokacji jest poprawna. Aby uzyskać więcej informacji na temat sposobu konfigurowania programu Visual Studio, aby otworzyć nowe okno przeglądarki w trybie prywatnym lub incognito dla każdego przebiegu testowego, zobacz sekcję [ Cookie s i dane lokacji](#cookies-and-site-data) .
 
@@ -567,7 +567,7 @@ W przypadku rozwiązywania problemów z ładowaniem certyfikatu wykonaj następu
 Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
 ```
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

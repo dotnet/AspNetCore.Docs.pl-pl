@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/read-related-data
 ms.openlocfilehash: e52e4aefc18b84f85bea28a9724894eed50ca54a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061070"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
@@ -81,7 +81,7 @@ Aby wyświetlić nazwę przypisanego działu dla kursu:
 
 ### <a name="scaffold-course-pages"></a>Strony kursu szkieletowego
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami na [stronach uczniów tworzenia szkieletów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -180,7 +180,7 @@ Utwórz *SchoolViewModels/InstructorIndexData. cs* przy użyciu następującego 
 
 ### <a name="scaffold-instructor-pages"></a>Strony instruktorów dla szkieletów
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami w temacie Tworzenie [szkieletu stron uczniów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -285,7 +285,7 @@ Poprzedni kod wprowadza następujące zmiany:
   <tr class="@selectedRow">
   ```
 
-* Dodaje nowe hiperłącze z etykietą **SELECT** . Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
+* Dodaje nowe hiperłącze z etykietą **SELECT**. Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -396,7 +396,7 @@ Aby wyświetlić nazwę przypisanego działu na liście kursów:
 
 ### <a name="scaffold-the-course-model"></a>Tworzenie szkieletu modelu kursu
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-the-student-model) i Użyj `Course` klasy modelu.
 
@@ -483,7 +483,7 @@ W folderze *SchoolViewModels* Utwórz *InstructorIndexData.cs* przy użyciu nast
 
 ### <a name="scaffold-the-instructor-model"></a>Tworzenie szkieletu modelu instruktora
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-the-student-model) i Użyj `Instructor` klasy modelu.
 
@@ -531,7 +531,7 @@ Poprzedzające znaczniki wprowadzają następujące zmiany:
 
   `http://localhost:1234/Instructors/2`
 
-* Tytuł strony to **Instruktorzy** .
+* Tytuł strony to **Instruktorzy**.
 * Dodano kolumnę **pakietu Office** , która `item.OfficeAssignment.Location` jest wyświetlana tylko wtedy, gdy `item.OfficeAssignment` nie ma wartości null. Ponieważ jest to relacja "jeden do zera" lub "jeden", nie może być powiązana jednostka OfficeAssignment.
 
   ```html
@@ -554,7 +554,7 @@ Poprzedzające znaczniki wprowadzają następujące zmiany:
   <tr class="@selectedRow">
   ```
 
-* Dodano nowe hiperłącze z etykietą **SELECT** . Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
+* Dodano nowe hiperłącze z etykietą **SELECT**. Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -613,7 +613,7 @@ Zaktualizuj zapytanie w `OnGetAsync` metodzie na *stronach/instruktorów/index. 
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-Aktualizowanie *stron/instruktorów/index. cshtml* . Dodaj następujący znacznik na końcu pliku:
+Aktualizowanie *stron/instruktorów/index. cshtml*. Dodaj następujący znacznik na końcu pliku:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/interprocess
 ms.openlocfilehash: d806a340d8540fce8af6ccc6ff68325e4b733922
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059887"
 ---
 # <a name="inter-process-communication-with-grpc"></a>Komunikacja między procesami przy użyciu gRPC
@@ -33,7 +33,7 @@ wywołania gRPC między klientem a usługą są zwykle wysyłane za pośrednictw
 
 ## <a name="server-configuration"></a>Konfiguracja serwera
 
-Niestandardowe transporty są obsługiwane przez [Kestrel](xref:fundamentals/servers/kestrel). Kestrel konfiguruje się w *program.cs* :
+Niestandardowe transporty są obsługiwane przez [Kestrel](xref:fundamentals/servers/kestrel). Kestrel konfiguruje się w *program.cs*:
 
 ```csharp
 public static readonly string SocketPath = Path.Combine(Path.GetTempPath(), "socket.tmp");

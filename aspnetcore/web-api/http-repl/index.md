@@ -4,7 +4,7 @@ author: scottaddie
 description: Dowiedz się, jak przeglądać i testować ASP.NET Core internetowy interfejs API za pomocą narzędzia globalnego HttpRepl .NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: mvc, devx-track-azurecli
+ms.custom: mvc
 ms.date: 11/12/2020
 no-loc:
 - appsettings.json
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 1027887738740d50c30e24e800c0402b1ce4ad02
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634616"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854668"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>Testowanie interfejsów API sieci Web za pomocą HttpRepl
 
@@ -39,7 +39,7 @@ Pętla HTTP Read-eval-Print (REPL) to:
 Obsługiwane są następujące [czasowniki http](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) :
 
 * [USUNIĘTY](#test-http-delete-requests)
-* [Pobierz](#test-http-get-requests)
+* [GET](#test-http-get-requests)
 * [MTP](#test-http-head-requests)
 * [Opcje](#test-http-options-requests)
 * [WYSŁANA](#test-http-patch-requests)
@@ -604,7 +604,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby wydać żądanie HTTP PUT:
 
-1. *Opcjonalnie* : Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
+1. *Opcjonalnie*: Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
 
     ```console
     https://localhost:5001/fruits> get
@@ -666,7 +666,7 @@ Aby wydać żądanie HTTP PUT:
     Server: Kestrel
     ```
 
-1. *Opcjonalne* : wydaj `get` polecenie, aby zobaczyć modyfikacje. Na przykład, jeśli wpisano "wiśnię" w edytorze tekstu, `get` zwraca następujące dane wyjściowe:
+1. *Opcjonalne*: wydaj `get` polecenie, aby zobaczyć modyfikacje. Na przykład, jeśli wpisano "wiśnię" w edytorze tekstu, `get` zwraca następujące dane wyjściowe:
 
     ```console
     https://localhost:5001/fruits> get
@@ -717,7 +717,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby wydać żądanie HTTP DELETE:
 
-1. *Opcjonalnie* : Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
+1. *Opcjonalnie*: Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
 
     ```console
     https://localhost:5001/fruits> get
@@ -757,7 +757,7 @@ Aby wydać żądanie HTTP DELETE:
     Server: Kestrel
     ```
 
-1. *Opcjonalne* : wydaj `get` polecenie, aby zobaczyć modyfikacje. W tym przykładzie `get` zwraca następujące dane wyjściowe:
+1. *Opcjonalne*: wydaj `get` polecenie, aby zobaczyć modyfikacje. W tym przykładzie `get` zwraca następujące dane wyjściowe:
 
     ```console
     https://localhost:5001/fruits> get
@@ -1123,7 +1123,7 @@ Po uruchomieniu poprzedniego polecenia powłoka poleceń zawiera tylko następuj
 https://localhost:5001/>
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Żądania interfejsu API REST](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [Repozytorium GitHub HttpRepl](https://github.com/dotnet/HttpRepl)

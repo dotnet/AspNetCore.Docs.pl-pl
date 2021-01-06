@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/request-features
 ms.openlocfilehash: 88e97d88341789a76a79da8d92098c2e00396fe7
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95870428"
 ---
 # <a name="request-features-in-aspnet-core"></a>Zażądaj funkcji w ASP.NET Core

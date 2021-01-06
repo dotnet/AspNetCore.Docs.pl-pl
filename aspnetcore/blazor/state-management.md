@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 6e6f3047da30490caff4f820003a3018e8c26aaa
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 5b7a6fefd13d7255fbe3ae7010df48c6211fa755
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506617"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854341"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -128,7 +128,7 @@ Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStor
 
 [!INCLUDE[](~/blazor/includes/state-container.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zapisz stan aplikacji przed operacją uwierzytelniania](xref:blazor/security/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)
 * <xref:blazor/call-web-api>
@@ -421,7 +421,7 @@ Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wok
 
 ```razor
 <CounterStateProvider>
-    <Router AppAssembly="typeof(Startup).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         ...
     </Router>
 </CounterStateProvider>
@@ -666,7 +666,7 @@ Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wok
 
 ```razor
 <CounterStateProvider>
-    <Router AppAssembly="typeof(Startup).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         ...
     </Router>
 </CounterStateProvider>

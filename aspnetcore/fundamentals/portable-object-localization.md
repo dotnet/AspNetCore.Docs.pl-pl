@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f9c0ecd32f0e5c05782c2db76eff92bb64845db7
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053725"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878402"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
 
@@ -38,7 +38,7 @@ W tym artykule omówiono procedurę używania plików przenośnych obiektów (PO
 
 ## <a name="what-is-a-po-file"></a>Co to jest plik ZZ?
 
-Pliki do zakupu są dystrybuowane jako pliki tekstowe zawierające przetłumaczone ciągi dla danego języka. Niektóre zalety korzystania z plików *. resx* są następujące:
+Pliki do zakupu są dystrybuowane jako pliki tekstowe zawierające przetłumaczone ciągi dla danego języka. Niektóre zalety korzystania z plików ZZ zamiast plików *resx* obejmują:
 - Pliki PO serwisie obsługują pluralizacja; pliki *resx* nie obsługują pluralizacja.
 - Pliki ZZ nie są kompilowane jak pliki *resx* . W związku z tym wyspecjalizowane narzędzia i kroki kompilacji nie są wymagane.
 - Pliki PO pracy działają dobrze z narzędziami do edycji w trybie online.
@@ -89,11 +89,11 @@ Plik *. csproj* zawiera teraz wiersz podobny do następującego (numer wersji mo
 
 ### <a name="registering-the-service"></a>Rejestrowanie usługi
 
-Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs* :
+Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs*:
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs* :
+Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs*:
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -215,7 +215,7 @@ msgstr "Bonjour le monde!"
 
 Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR` . Tłumaczenie nie będzie odbywać się podczas nawigowania do `/Home/Contact?culture=fr-FR` .
 
-Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml* , przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
+Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml*, przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -304,11 +304,11 @@ Plik *. csproj* zawiera teraz wiersz podobny do następującego (numer wersji mo
 
 ### <a name="registering-the-service"></a>Rejestrowanie usługi
 
-Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs* :
+Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs*:
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs* :
+Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs*:
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -430,7 +430,7 @@ msgstr "Bonjour le monde!"
 
 Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR` . Tłumaczenie nie będzie odbywać się podczas nawigowania do `/Home/Contact?culture=fr-FR` .
 
-Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml* , przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
+Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml*, przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 

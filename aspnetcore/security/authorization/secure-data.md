@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051944"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854655"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Tworzenie aplikacji sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 
@@ -93,7 +93,7 @@ Ten samouczek jest zaawansowany. Należy zapoznać się z:
 
 [Pobierz](xref:index#how-to-download-a-sample) aplikację [startową](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) .
 
-Uruchom aplikację, naciśnij link **ContactManager** i sprawdź, czy można tworzyć, edytować i usuwać kontakty.
+Uruchom aplikację, naciśnij link **ContactManager** i sprawdź, czy można tworzyć, edytować i usuwać kontakty. Aby utworzyć aplikację startową, zobacz [Tworzenie aplikacji Starter](#create-the-starter-app).
 
 ## <a name="secure-user-data"></a>Zabezpieczanie danych użytkownika
 
@@ -128,7 +128,7 @@ Ustaw rezerwowe zasady uwierzytelniania, aby wymagać uwierzytelnienia użytkown
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-Poprzedni wyróżniony kod ustawia [rezerwowe zasady uwierzytelniania](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy). Rezerwowe zasady uwierzytelniania wymagają * *_Wszyscy_* użytkownicy mają być uwierzytelniani, z wyjątkiem Razor stron, kontrolerów lub metod akcji z atrybutem uwierzytelniania. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu uwierzytelniania zamiast rezerwowych zasad uwierzytelniania.
+Poprzedni wyróżniony kod ustawia [rezerwowe zasady uwierzytelniania](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy). Rezerwowe zasady uwierzytelniania wymagają **_Wszyscy_* użytkownicy mają być uwierzytelniani, z wyjątkiem Razor stron, kontrolerów lub metod akcji z atrybutem uwierzytelniania. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu uwierzytelniania zamiast rezerwowych zasad uwierzytelniania.
 
 Rezerwowe zasady uwierzytelniania:
 
@@ -152,7 +152,7 @@ Dodaj [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanony
 
 ### <a name="configure-the-test-account"></a>Konfigurowanie konta testowego
 
-`SeedData`Klasa tworzy dwa konta: administrator i Menedżer. Użyj [Narzędzia Secret Manager](xref:security/app-secrets) , aby ustawić hasło dla tych kont. Ustaw hasło z katalogu projektu (katalog zawierający *program.cs* ):
+`SeedData`Klasa tworzy dwa konta: administrator i Menedżer. Użyj [Narzędzia Secret Manager](xref:security/app-secrets) , aby ustawić hasło dla tych kont. Ustaw hasło z katalogu projektu (katalog zawierający *program.cs*):
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -335,15 +335,15 @@ Prostym sposobem przetestowania ukończonej aplikacji jest uruchomienie trzech r
 | Użytkownik                | Wypełnianie przez aplikację | Opcje                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nie                | Edytuj/Usuń własne dane.                |
-| manager@contoso.com | Tak               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
-| admin@contoso.com   | Tak               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
+| manager@contoso.com | Yes               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
+| admin@contoso.com   | Yes               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
 
 Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do usuwania i edytowania z osoby kontaktowej administratora. Wklej te linki do przeglądarki użytkownika testowego, aby sprawdzić, czy użytkownik testowy nie może wykonać tych operacji.
 
 ## <a name="create-the-starter-app"></a>Tworzenie aplikacji Starter
 
 * Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
-  * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników** .
+  * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
   * `-uld` Określa LocalDB zamiast oprogramowania SQLite
 
@@ -351,7 +351,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* Dodaj *modele/Contact. cs* :
+* Dodaj *modele/Contact. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -488,7 +488,7 @@ Dodaj [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanony
 
 ### <a name="configure-the-test-account"></a>Konfigurowanie konta testowego
 
-`SeedData`Klasa tworzy dwa konta: administrator i Menedżer. Użyj [Narzędzia Secret Manager](xref:security/app-secrets) , aby ustawić hasło dla tych kont. Ustaw hasło z katalogu projektu (katalog zawierający *program.cs* ):
+`SeedData`Klasa tworzy dwa konta: administrator i Menedżer. Użyj [Narzędzia Secret Manager](xref:security/app-secrets) , aby ustawić hasło dla tych kont. Ustaw hasło z katalogu projektu (katalog zawierający *program.cs*):
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -662,15 +662,15 @@ Prostym sposobem przetestowania ukończonej aplikacji jest uruchomienie trzech r
 | Użytkownik                | Wypełnianie przez aplikację | Opcje                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nie                | Edytuj/Usuń własne dane.                |
-| manager@contoso.com | Tak               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
-| admin@contoso.com   | Tak               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
+| manager@contoso.com | Yes               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
+| admin@contoso.com   | Yes               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
 
 Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do usuwania i edytowania z osoby kontaktowej administratora. Wklej te linki do przeglądarki użytkownika testowego, aby sprawdzić, czy użytkownik testowy nie może wykonać tych operacji.
 
 ## <a name="create-the-starter-app"></a>Tworzenie aplikacji Starter
 
 * Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
-  * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników** .
+  * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
   * `-uld` Określa LocalDB zamiast oprogramowania SQLite
 
@@ -678,7 +678,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* Dodaj *modele/Contact. cs* :
+* Dodaj *modele/Contact. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 

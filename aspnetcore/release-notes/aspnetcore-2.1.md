@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 199ca62f71df5c0ee5ca2f78caf53ad8d6be1179
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059718"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854564"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Co nowego w ASP.NET Core 2,1
 
@@ -93,7 +93,7 @@ ASP.NET Core udostępnia interfejsy API i szablony, które pomagają spełnić n
 
 Wprowadzono nowy pakiet, który usprawnia tworzenie i wykonywanie testów. Pakiet [Microsoft. AspNetCore. MVC. test](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) obsługuje następujące zadania:
 
-* Kopiuje plik zależności ( *\* . deps* ) z testowanej aplikacji do folderu *bin* projektu testowego.
+* Kopiuje plik zależności (*\* . deps*) z testowanej aplikacji do folderu *bin* projektu testowego.
 * Ustawia katalog główny zawartości dla elementu głównego projektu przetestowanej aplikacji, co umożliwia znalezienie plików statycznych i stron/widoków podczas wykonywania testów.
 * Udostępnia klasę [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) do usprawnienia uruchamiania przetestowanej aplikacji z [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver).
 
@@ -141,9 +141,9 @@ ASP.NET Core 2,1 obejmuje nową `IHttpClientFactory` usługę, która ułatwia k
 
 Aby uzyskać więcej informacji, zobacz [Inicjowanie żądań HTTP](xref:fundamentals/http-requests).
 
-## <a name="kestrel-transport-configuration"></a>Konfiguracja transportu Kestrel
+## <a name="kestrel-libuv-transport-configuration"></a>Konfiguracja transportu Kestrel libuv
 
-W wersji ASP.NET Core 2,1 Kestrel domyślny transport nie jest już oparty na Libuv, ale zamiast w oparciu o zarządzane gniazda. Aby uzyskać więcej informacji, zobacz [Kestrel Web Server implementation: transport Configuration](xref:fundamentals/servers/kestrel#transport-configuration).
+W wersji ASP.NET Core 2,1 Kestrel domyślny transport nie jest już oparty na Libuv, ale zamiast w oparciu o zarządzane gniazda. Aby uzyskać więcej informacji, zobacz [Kestrel Web Server implementation: Libuv transport Configuration](xref:fundamentals/servers/kestrel#libuv-transport-configuration).
 
 ## <a name="generic-host-builder"></a>Ogólny Konstruktor hosta
 
@@ -173,7 +173,7 @@ W 2,1 Razor strony szukają Razor zasobów (takich jak układy i części) w nas
 
 ## <a name="no-locrazor-pages-in-an-area"></a>Razor Strony w obszarze
 
-Razor Strony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages* .
+Razor Strony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages*.
 
 ## <a name="mvc-compatibility-version"></a>Wersja zgodności MVC
 

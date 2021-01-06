@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/call-javascript-from-dotnet
 ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/15/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97592842"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
@@ -835,7 +835,7 @@ Inne typy danych, takie jak tablice ciągów, można przekonwertować, ale wymag
 > [!WARNING]
 > Funkcje języka JavaScript udostępniane przez Blazor platformę, takie jak `js_typed_array_to_array` , `mono_obj_array_new` i `mono_obj_array_set` , podlegają zmianom nazw, zmianom behawioralnym lub usunięciu w przyszłych wersjach platformy .NET.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

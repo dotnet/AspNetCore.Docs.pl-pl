@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060537"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
@@ -66,7 +66,7 @@ Zaktualizuj *strony/kursy/Utwórz. cshtml. cs* przy użyciu następującego kodu
 Powyższy kod ma następujące działanie:
 
 * Pochodzi od `DepartmentNamePageModel` .
-* Używa `TryUpdateModelAsync` do zapobiegania [overposting](xref:data/ef-rp/crud#overposting)przepisywaniu.
+* Używa `TryUpdateModelAsync` do zapobiegania [](xref:data/ef-rp/crud#overposting)przepisywaniu.
 * Usuwa `ViewData["DepartmentID"]` . `DepartmentNameSL` z klasy podstawowej jest jednoznacznie określonym modelem i będzie używany przez Razor stronę. Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
 
 ### <a name="update-the-course-create-no-locrazor-page"></a>Aktualizowanie strony tworzenia kursu Razor
@@ -77,7 +77,7 @@ Zaktualizuj *strony/kursy/Utwórz. cshtml* przy użyciu następującego kodu:
 
 Poprzedni kod wprowadza następujące zmiany:
 
-* Zmienia podpis z **DepartmentID** na **dział** .
+* Zmienia podpis z **DepartmentID** na **dział**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 * Dodaje opcję "Wybierz dział". Ta zmiana renderuje "Select Department" na liście rozwijanej, gdy nie wybrano jeszcze żadnego działu, a nie pierwszego działu.
 * Dodaje komunikat weryfikacyjny, gdy nie wybrano działu.
@@ -105,10 +105,10 @@ Aktualizowanie *stron/kursów/Edit. cshtml* przy użyciu następującego kodu:
 Poprzedni kod wprowadza następujące zmiany:
 
 * Wyświetla identyfikator kursu. Zazwyczaj klucz podstawowy (PK) jednostki nie jest wyświetlany. PKs są zwykle oznaczane przez użytkowników. W tym przypadku klucz podstawowy jest numerem kursu.
-* Zmienia podpis dla listy rozwijanej działu od **DepartmentID** do **działu** .
+* Zmienia podpis dla listy rozwijanej działu od **DepartmentID** do **działu**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** .
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Aktualizowanie szczegółów kursu i stron usuwania
 
@@ -195,7 +195,7 @@ Aktualizowanie *stron/instruktorów/Edit. cshtml. cs* przy użyciu następujące
 Powyższy kod ma następujące działanie:
 
 * Pobiera bieżącą `Instructor` jednostkę z bazy danych przy użyciu eager ładowania dla `OfficeAssignment` `CourseAssignment` właściwości nawigacji, i `CourseAssignment.Course` .
-* Aktualizuje pobraną `Instructor` jednostkę z wartościami ze spinacza modelu. `TryUpdateModel`zapobiega [overposting](xref:data/ef-rp/crud#overposting)zastępowaniu.
+* Aktualizuje pobraną `Instructor` jednostkę z wartościami ze spinacza modelu. `TryUpdateModel`zapobiega [](xref:data/ef-rp/crud#overposting)zastępowaniu.
 * Jeśli lokalizacja biura jest pusta, ustawia `Instructor.OfficeAssignment` wartość na null. Gdy `Instructor.OfficeAssignment` ma wartość null, powiązany wiersz w `OfficeAssignment` tabeli jest usuwany.
 * Wywołuje `PopulateAssignedCourseData` w `OnGetAsync` celu podania informacji dla pól wyboru przy użyciu `AssignedCourseData` klasy model widoku.
 * Wywołuje `UpdateInstructorCourses` program `OnPostAsync` , aby zastosować informacje z pól wyboru do edytowanej jednostki instruktora.
@@ -281,7 +281,7 @@ Zaktualizuj model tworzenia strony przy użyciu następującego kodu:
 Powyższy kod ma następujące działanie:
 
 * Pochodzi od `DepartmentNamePageModel` .
-* Używa `TryUpdateModelAsync` do zapobiegania [overposting](xref:data/ef-rp/crud#overposting)przepisywaniu.
+* Używa `TryUpdateModelAsync` do zapobiegania [](xref:data/ef-rp/crud#overposting)przepisywaniu.
 * Zamienia wartość `ViewData["DepartmentID"]` na `DepartmentNameSL` (z klasy bazowej).
 
 `ViewData["DepartmentID"]` jest zastępowany silną typem `DepartmentNameSL` . Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
@@ -294,7 +294,7 @@ Zaktualizuj *strony/kursy/Utwórz. cshtml* przy użyciu następującego kodu:
 
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
-* Zmienia podpis z **DepartmentID** na **dział** .
+* Zmienia podpis z **DepartmentID** na **dział**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 * Dodaje opcję "Wybierz dział". Ta zmiana renderuje "Select Department" zamiast pierwszego działu.
 * Dodaje komunikat weryfikacyjny, gdy nie wybrano działu.
@@ -320,10 +320,10 @@ Aktualizowanie *stron/kursów/Edit. cshtml* przy użyciu następującego znaczni
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
 * Wyświetla identyfikator kursu. Zazwyczaj klucz podstawowy (PK) jednostki nie jest wyświetlany. PKs są zwykle oznaczane przez użytkowników. W tym przypadku klucz podstawowy jest numerem kursu.
-* Zmienia podpis z **DepartmentID** na **dział** .
+* Zmienia podpis z **DepartmentID** na **dział**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** .
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
 
 Przetestuj zaktualizowany kod. Tworzenie, edytowanie i usuwanie kursu.
 
@@ -368,7 +368,7 @@ Zaktualizuj program instruktors Edytuj model strony przy użyciu następującego
 Powyższy kod ma następujące działanie:
 
 * Pobiera bieżącą `Instructor` jednostkę z bazy danych przy użyciu eager ładowania dla `OfficeAssignment` właściwości nawigacji.
-* Aktualizuje pobraną `Instructor` jednostkę z wartościami ze spinacza modelu. `TryUpdateModel`zapobiega [overposting](xref:data/ef-rp/crud#overposting)zastępowaniu.
+* Aktualizuje pobraną `Instructor` jednostkę z wartościami ze spinacza modelu. `TryUpdateModel`zapobiega [](xref:data/ef-rp/crud#overposting)zastępowaniu.
 * Jeśli lokalizacja biura jest pusta, ustawia `Instructor.OfficeAssignment` wartość na null. Gdy `Instructor.OfficeAssignment` ma wartość null, powiązany wiersz w `OfficeAssignment` tabeli jest usuwany.
 
 ### <a name="update-the-instructor-edit-page"></a>Aktualizowanie strony edytowania instruktora

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d264aaee7889ec1c8ee0fe6b1f52ccc4cf355745
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057316"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854629"
 ---
 # <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
@@ -48,7 +48,7 @@ Przekształcenia konfiguracji kompilacji są uruchamiane jako pierwsze.
 
 Uwzględnij *Sieć Web. { Konfiguracja}* plik konfiguracyjny dla każdej [konfiguracji kompilacji (Debuguj | Wydanie)](/dotnet/core/tools/dotnet-publish#options) wymagające przekształcenia *web.config* .
 
-W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jest ustawiana w *web.Release.config* :
+W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jest ustawiana w *web.Release.config*:
 
 ```xml
 <?xml version="1.0"?>
@@ -68,7 +68,7 @@ W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jes
 </configuration>
 ```
 
-Przekształcenie jest stosowane, gdy konfiguracja jest ustawiona na *Release* :
+Przekształcenie jest stosowane, gdy konfiguracja jest ustawiona na *Release*:
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -102,7 +102,7 @@ W poniższym przykładzie zmienna środowiskowa specyficzna dla profilu jest ust
 </configuration>
 ```
 
-Przekształcenie jest stosowane, gdy profil jest *FolderProfile* :
+Przekształcenie jest stosowane, gdy profil jest *FolderProfile*:
 
 ```dotnetcli
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
@@ -138,7 +138,7 @@ W poniższym przykładzie zmienna środowiskowa specyficzna dla środowiska jest
 </configuration>
 ```
 
-Transformacja jest stosowana, gdy środowisko jest *produkcyjne* :
+Transformacja jest stosowana, gdy środowisko jest *produkcyjne*:
 
 ```dotnetcli
 dotnet publish --configuration Release /p:EnvironmentName=Production
@@ -156,7 +156,7 @@ Niestandardowe przekształcenia są uruchamiane jako ostatnie, po przeprowadzeni
 
 Uwzględnij plik *{CUSTOM_NAME}. Transform* dla każdej konfiguracji niestandardowej wymagającej przekształcenia *web.config* .
 
-W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej jest ustawiana w *Custom. Transform* :
+W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej jest ustawiana w *Custom. Transform*:
 
 ```xml
 <?xml version="1.0"?>

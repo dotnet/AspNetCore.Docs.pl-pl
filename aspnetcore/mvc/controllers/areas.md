@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053530"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878415"
 ---
 # <a name="areas-in-aspnet-core"></a>Obszary w ASP.NET Core
 
@@ -63,7 +63,7 @@ Typowy ASP.NET Core aplikacja internetowa korzystająca z obszarów, kontroleró
 
 ### <a name="area-folder-structure"></a>Struktura folderów obszaru
 
-Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi* . Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
+Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi*. Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
 
 * Project name (Nazwa projektu)
   * Obszary
@@ -149,7 +149,7 @@ Folder główny aplikacji jest folderem zawierającym *Startup.cs* w aplikacji i
 
 ### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
- */Views/_ViewImports. cshtml* , dla MVC i */Pages/_ViewImports. cshtml* dla Razor stron nie są importowane do widoków w obszarach. Użyj jednej z następujących metod, aby udostępnić widok Imports do wszystkich widoków:
+ */Views/_ViewImports. cshtml*, dla MVC i */Pages/_ViewImports. cshtml* dla Razor stron nie są importowane do widoków w obszarach. Użyj jednej z następujących metod, aby udostępnić widok Imports do wszystkich widoków:
 
 * Dodaj *_ViewImports. cshtml* do [folderu głównego aplikacji](#arf). *_ViewImports. cshtml* w folderze głównym aplikacji zostanie zastosowane do wszystkich widoków w aplikacji.
 * Skopiuj plik *_ViewImports. cshtml* do odpowiedniego folderu widoku w obszarze obszary.
@@ -211,7 +211,7 @@ Weź pod uwagę obszar *usług* przykładowego kodu, który nie zawiera pliku *_
 
 W powyższym znaczniku:
 
-* W pełni kwalifikowana nazwa domeny musi zostać użyta do określenia modelu ( `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ).
+* W pełni kwalifikowana nazwa klasy musi być użyta do określenia modelu ( `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ).
 * [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) są włączani przez `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 W przykładowym pobieranym obszarze produkty znajdują się następujące *_ViewImports. cshtml* :
@@ -265,7 +265,7 @@ Typowy ASP.NET Core aplikacja internetowa korzystająca z obszarów, kontroleró
 
 ### <a name="area-folder-structure"></a>Struktura folderów obszaru
 
-Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi* . Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
+Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi*. Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
 
 * Project name (Nazwa projektu)
   * Obszary

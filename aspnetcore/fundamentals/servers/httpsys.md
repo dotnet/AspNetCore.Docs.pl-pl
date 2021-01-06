@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/servers/httpsys
 ms.openlocfilehash: 9c65abd5a055bb677a14921296316e7e03760bc2
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/08/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96855368"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
@@ -96,7 +96,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO> | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -148,7 +148,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    W systemie Windows utwórz certyfikaty z podpisem własnym za pomocą [polecenia cmdlet New-SelfSignedCertificate programu PowerShell](/powershell/module/pkiclient/new-selfsignedcertificate). Aby zapoznać się z nieobsługiwanym przykładem, zobacz [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
 
-   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie **Local Machine** > **osobistym** komputera lokalnego na serwerze.
+   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie  > **osobistym** komputera lokalnego na serwerze.
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
@@ -367,7 +367,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -416,7 +416,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    W systemie Windows utwórz certyfikaty z podpisem własnym za pomocą [polecenia cmdlet New-SelfSignedCertificate programu PowerShell](/powershell/module/pkiclient/new-selfsignedcertificate). Aby zapoznać się z nieobsługiwanym przykładem, zobacz [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
 
-   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie **Local Machine** > **osobistym** komputera lokalnego na serwerze.
+   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie  > **osobistym** komputera lokalnego na serwerze.
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
@@ -620,7 +620,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -669,7 +669,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    W systemie Windows utwórz certyfikaty z podpisem własnym za pomocą [polecenia cmdlet New-SelfSignedCertificate programu PowerShell](/powershell/module/pkiclient/new-selfsignedcertificate). Aby zapoznać się z nieobsługiwanym przykładem, zobacz [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
 
-   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie **Local Machine** > **osobistym** komputera lokalnego na serwerze.
+   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie  > **osobistym** komputera lokalnego na serwerze.
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 
@@ -873,7 +873,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -922,7 +922,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    W systemie Windows utwórz certyfikaty z podpisem własnym za pomocą [polecenia cmdlet New-SelfSignedCertificate programu PowerShell](/powershell/module/pkiclient/new-selfsignedcertificate). Aby zapoznać się z nieobsługiwanym przykładem, zobacz [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1).
 
-   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie **Local Machine** > **osobistym** komputera lokalnego na serwerze.
+   Zainstaluj certyfikaty z podpisem własnym lub certyfikat podpisany przez urząd certyfikacji w magazynie  > **osobistym** komputera lokalnego na serwerze.
 
 1. Jeśli aplikacja jest [wdrożeniem zależnym od platformy](/dotnet/core/deploying/#framework-dependent-deployments-fdd), zainstaluj platformę .net core, .NET Framework lub obie (Jeśli aplikacja jest aplikacją platformy .NET Core przeznaczoną dla .NET Framework).
 

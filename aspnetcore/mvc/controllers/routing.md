@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 59ad373cefaa12370aa7c02a367125c7a94f59a6
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422603"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854538"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -220,7 +220,7 @@ Gdy dwa punkty końcowe pasują do routingu, routing musi wykonać jedną z nast
 * Wybierz najlepszego kandydata.
 * Zgłoś wyjątek.
 
-Na przykład:
+Przykład:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -260,7 +260,7 @@ Nazwy tras:
 * Nie mają wpływu na pasujące adresy URL ani obsługę żądań.
 * Są używane tylko do generowania adresów URL.
 
-Koncepcja nazwy trasy jest reprezentowana w obszarze Routing jako [IEndpointNameMetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata). **Nazwa trasy** i nazwa **punktu końcowego** :
+Koncepcja nazwy trasy jest reprezentowana w obszarze Routing jako [IEndpointNameMetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata). **Nazwa trasy** i nazwa **punktu końcowego**:
 
 * Są zamienne.
 * Który jest używany w dokumentacji i kodu zależy od opisanego interfejsu API.
@@ -432,10 +432,10 @@ W poniższej tabeli opisano `[Route]` atrybuty w poprzednim kodzie:
 
 | Atrybut               | Łączy z `[Route("Home")]` | Definiuje szablon trasy |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | Tak | `"Home"` |
-| `[Route("Index")]` | Tak | `"Home/Index"` |
+| `[Route("")]` | Yes | `"Home"` |
+| `[Route("Index")]` | Yes | `"Home/Index"` |
 | `[Route("/")]` | **Nie** | `""` |
-| `[Route("About")]` | Tak | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -472,7 +472,7 @@ Dodanie `Order` do jednego z atrybutów trasy rozwiązuje niejednoznaczność:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo3Controller.cs?name=snippet3& highlight=2)]
 
-Za pomocą powyższego kodu program `/home` uruchamia `HomeController.Index` punkt końcowy. , Aby przejść do `MyDemoController.MyIndex` żądania `/home/MyIndex` . **Uwaga** :
+Za pomocą powyższego kodu program `/home` uruchamia `HomeController.Index` punkt końcowy. , Aby przejść do `MyDemoController.MyIndex` żądania `/home/MyIndex` . **Uwaga**:
 
 * Poprzedni kod jest przykładem lub słabym projektem routingu. Została użyta do zilustrowania `Order` właściwości.
 * `Order`Właściwość rozwiązuje tylko niejednoznaczność, ale nie można dopasować tego szablonu. Lepszym rozwiązaniem jest usunięcie `[Route("Home")]` szablonu.
@@ -485,12 +485,7 @@ W niektórych przypadkach błąd HTTP 500 jest zwracany z niejednoznacznych tras
 
 ## <a name="token-replacement-in-route-templates-controller-action-area"></a>Zastępowanie tokenu w szablonach tras [Controller], [Action], [obszar]
 
-Dla wygody atrybut trasy obsługują zastępowanie tokenów dla zarezerwowanych parametrów trasy przez załączanie tokenu w jednym z następujących:
-
-* Nawiasy kwadratowe: `[]`
-* Nawiasy klamrowe: `{}`
-
-Tokeny `[action]` , `[area]` i `[controller]` są zastępowane wartościami nazwy akcji, obszaru i nazwy kontrolera z akcji, w której zdefiniowano trasę:
+Dla wygody, trasy atrybutu obsługują *Zastępowanie tokenu* przez ujęcie tokenu w nawiasy kwadratowe ( `[` , `]` ). Tokeny `[action]` , `[area]` i `[controller]` są zastępowane wartościami nazwy akcji, obszaru i nazwy kontrolera z akcji, w której zdefiniowano trasę:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet)]
 
@@ -717,7 +712,7 @@ Jeśli wartość `{ d = Donovan }` zostanie dodana:
 * Wartość `{ d = David }` jest ignorowana.
 * Wygenerowana Ścieżka adresu URL to `Alice/Bob/Carol/Donovan` .
 
-**Ostrzeżenie** : ścieżki URL są hierarchiczne. W poprzednim przykładzie, jeśli wartość `{ c = Cheryl }` jest dodawana:
+**Ostrzeżenie**: ścieżki URL są hierarchiczne. W poprzednim przykładzie, jeśli wartość `{ c = Cheryl }` jest dodawana:
 
 * Obie wartości `{ c = Carol, d = David }` są ignorowane.
 * Nie jest już dostępna wartość `d` i generowanie adresu URL nie powiodło się.
@@ -1000,7 +995,7 @@ app.UseMvc(routes =>
 });
 ```
 
-`blog`Trasa w tym miejscu jest *dedykowaną tradycyjną trasą* , co oznacza, że używa systemu routingu konwencjonalnego, ale jest przeznaczona dla konkretnej akcji. Ponieważ `controller` i `action` nie pojawiają się w szablonie trasy jako parametry, mogą mieć tylko wartości domyślne i w związku z tym trasa będzie zawsze mapowana na akcję `BlogController.Article` .
+`blog`Trasa w tym miejscu jest *dedykowaną tradycyjną trasą*, co oznacza, że używa systemu routingu konwencjonalnego, ale jest przeznaczona dla konkretnej akcji. Ponieważ `controller` i `action` nie pojawiają się w szablonie trasy jako parametry, mogą mieć tylko wartości domyślne i w związku z tym trasa będzie zawsze mapowana na akcję `BlogController.Article` .
 
 Trasy w kolekcji tras są uporządkowane i będą przetwarzane w kolejności, w jakiej zostały dodane. W tym przykładzie `blog` zostanie podjęta próba trasy przed `default` trasą.
 
@@ -1013,7 +1008,7 @@ W ramach przetwarzania żądań MVC sprawdzi, czy wartości trasy mogą być uż
 
 ### <a name="disambiguating-actions"></a>Niejednoznaczne akcje
 
-Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Na przykład:
+Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Przykład:
 
 ```csharp
 public class ProductsController : Controller
@@ -1164,7 +1159,7 @@ public class ProductsApiController : Controller
 Nazwy tras mogą służyć do generowania adresów URL na podstawie określonej trasy. Nazwy tras nie mają wpływu na zachowanie routingu w adresie URL i są używane tylko na potrzeby generowania adresów URL. Nazwy tras muszą być unikatowe w całej aplikacji.
 
 > [!NOTE]
-> Jest to zróżnicowane dla konwencjonalnej *trasy domyślnej* , która definiuje `id` parametr jako opcjonalny ( `{id?}` ). Ta możliwość precyzyjnego określania interfejsów API ma zalety, takich jak umożliwienie `/products` i `/products/5` wysyłanie ich do różnych akcji.
+> Jest to zróżnicowane dla konwencjonalnej *trasy domyślnej*, która definiuje `id` parametr jako opcjonalny ( `{id?}` ). Ta możliwość precyzyjnego określania interfejsów API ma zalety, takich jak umożliwienie `/products` i `/products/5` wysyłanie ich do różnych akcji.
 
 <a name="routing-combining-ref-label"></a>
 
@@ -1592,7 +1587,7 @@ Przy założeniu domyślnej trasy konwencjonalnej, ścieżka URL `/Products/Edit
 
 Gdy `HttpGetAttribute` zostanie wykonane, zobaczy, że *Edit ()* jest dopasowaniem do *Get* i nie jest dopasowaniem dla żadnego innego zlecenia http. `Edit(...)`Akcja nie ma zdefiniowanych żadnych ograniczeń i dlatego będzie pasować do dowolnego czasownika http. Dlatego przy założeniu, że `POST` `Edit(...)` dopasowań są tylko. Jednak w przypadku `GET` obu akcji można nadal dopasować się, jednak akcja z funkcją `IActionConstraint` jest zawsze uznawana za *lepszą* od akcji bez. Dlatego, że jest `Edit()` `[HttpGet]` traktowany jako bardziej szczegółowy i zostanie wybrany, jeśli obie akcje mogą być zgodne.
 
-Koncepcyjnie, `IActionConstraint` jest formą *przeciążenia* , ale zamiast przeciążać metody o tej samej nazwie, przeciążanie między akcjami, które pasują do tego samego adresu URL. Funkcja routingu atrybutów używa także `IActionConstraint` i może powodować, że działania z różnych kontrolerów są traktowane jako kandydaci.
+Koncepcyjnie, `IActionConstraint` jest formą *przeciążenia*, ale zamiast przeciążać metody o tej samej nazwie, przeciążanie między akcjami, które pasują do tego samego adresu URL. Funkcja routingu atrybutów używa także `IActionConstraint` i może powodować, że działania z różnych kontrolerów są traktowane jako kandydaci.
 
 <a name="iactionconstraint-impl-ref-label"></a>
 

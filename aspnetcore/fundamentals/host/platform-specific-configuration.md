@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
 ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061057"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Używanie zestawów startowych hostingu w ASP.NET Core
@@ -106,35 +106,35 @@ Utwórz uruchamianie hostingu przy użyciu jednego z następujących typów proj
 
 Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka zawiera `HostingStartup` atrybut.
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary* . Biblioteka klas:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
 
 `ServiceKeyInjection` <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji.
 
-*HostingStartupLibrary/ServiceKeyInjection. cs* :
+*HostingStartupLibrary/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwóch kluczy ustawionych przez zestaw startowy obsługujący bibliotekę klas:
 
-*HostingStartupApp/Pages/index. cshtml. cs* :
+*HostingStartupApp/Pages/index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage* . Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
 
-*HostingStartupPackage/ServiceKeyInjection. cs* :
+*HostingStartupPackage/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwóch kluczy ustawionych przez zestaw startowy obsługujący pakiet:
 
-*HostingStartupApp/Pages/index. cshtml. cs* :
+*HostingStartupApp/Pages/index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -170,7 +170,7 @@ Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHost
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-Podczas kompilowania `IHostingStartup` projektu plik zależności ( *.deps.json* ) ustawia `runtime` lokalizację zestawu do folderu *bin* :
+Podczas kompilowania `IHostingStartup` projektu plik zależności (*.deps.json*) ustawia `runtime` lokalizację zestawu do folderu *bin* :
 
 [!code-json[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -222,7 +222,7 @@ public class ConfigurationInjection : IHostingStartup
 
 W przypadku biblioteki klas lub uruchamiania hostingu obsługiwanej przez aplikację konsoli Określ nazwę zestawu startowego hostingu w `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej. Zmienna środowiskowa to rozdzielana średnikami lista zestawów.
 
-Tylko hosting zestawów startowych jest skanowany dla `HostingStartup` atrybutu. W przypadku przykładowej aplikacji, *HostingStartupApp* , aby odnaleźć opisane wcześniej uruchomienia hostingu, zmienna środowiskowa jest ustawiona na następującą wartość:
+Tylko hosting zestawów startowych jest skanowany dla `HostingStartup` atrybutu. W przypadku przykładowej aplikacji, *HostingStartupApp*, aby odnaleźć opisane wcześniej uruchomienia hostingu, zmienna środowiskowa jest ustawiona na następującą wartość:
 
 ```
 HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
@@ -244,11 +244,11 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 Gdy są obecne wiele asemblerów uruchamiania, ich <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> metody są wykonywane w kolejności, w jakiej są wymienione zestawy.
 
-## <a name="activation"></a>Uaktywnienie
+## <a name="activation"></a>Aktywacja
 
 Opcje hostingu aktywacji uruchamiania są następujące:
 
-* [Magazyn środowiska uruchomieniowego](#runtime-store): aktywacja nie wymaga odwołania do czasu kompilacji na potrzeby aktywacji. Przykładowa aplikacja umieszcza zestaw startowy obsługujący i pliki zależności w folderze, *wdrożeniu* , aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielomaszynowym. Folder *wdrożenia* zawiera także skrypt programu PowerShell, który tworzy lub modyfikuje zmienne środowiskowe w systemie wdrażania, aby umożliwić uruchamianie hostingu.
+* [Magazyn środowiska uruchomieniowego](#runtime-store): aktywacja nie wymaga odwołania do czasu kompilacji na potrzeby aktywacji. Przykładowa aplikacja umieszcza zestaw startowy obsługujący i pliki zależności w folderze, *wdrożeniu*, aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielomaszynowym. Folder *wdrożenia* zawiera także skrypt programu PowerShell, który tworzy lub modyfikuje zmienne środowiskowe w systemie wdrażania, aby umożliwić uruchamianie hostingu.
 * Odwołanie do czasu kompilacji wymagane do aktywacji
   * [Pakiet NuGet](#nuget-package)
   * [Folder bin projektu](#project-bin-folder)
@@ -352,7 +352,7 @@ W przykładowej aplikacji (projekt *RuntimeStore* ) Kompilowanie magazynu środo
 
 Przykłady sposobu ustawiania zmiennych środowiskowych dla różnych systemów operacyjnych znajdują się w temacie [Używanie wielu środowisk](xref:fundamentals/environments).
 
-**Wdrożenie**
+**Wdrażanie**
 
 Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, aplikacja Przykładowa tworzy folder *wdrożenia* w opublikowanych danych wyjściowych zawierający:
 
@@ -364,7 +364,7 @@ Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, 
 
 Rozszerzenie uruchamiania hostingu można dostarczyć w pakiecie NuGet. Pakiet ma `HostingStartup` atrybut. Typy uruchamiania hostingu udostępniane przez pakiet są udostępniane aplikacji przy użyciu jednej z następujących metod:
 
-* Plik projektu aplikacji rozszerzonej udostępnia odwołanie do pakietu dla uruchomienia hostingu w pliku projektu aplikacji (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji ( *.deps.json* ). Takie podejście ma zastosowanie do pakietu zestawu startowego hostingu opublikowanego w [NuGet.org](https://www.nuget.org/).
+* Plik projektu aplikacji rozszerzonej udostępnia odwołanie do pakietu dla uruchomienia hostingu w pliku projektu aplikacji (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji (*.deps.json*). Takie podejście ma zastosowanie do pakietu zestawu startowego hostingu opublikowanego w [NuGet.org](https://www.nuget.org/).
 * Plik zależności uruchamiania hostingu jest udostępniany aplikacji rozszerzonej, zgodnie z opisem w sekcji [Magazyn środowiska uruchomieniowego](#runtime-store) (bez odwołania w czasie kompilacji).
 
 Aby uzyskać więcej informacji na temat pakietów NuGet i magazynu środowiska uruchomieniowego, zobacz następujące tematy:
@@ -377,12 +377,12 @@ Aby uzyskać więcej informacji na temat pakietów NuGet i magazynu środowiska 
 
 Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony przez *bin* w aplikacji rozszerzonej. Typy uruchamiania hostingu udostępniane przez zestaw są udostępniane aplikacji przy użyciu jednej z następujących metod:
 
-* Plik projektu aplikacji rozszerzonej tworzy odwołanie do zestawu do uruchomienia hostingu (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji ( *.deps.json* ). Takie podejście ma zastosowanie, gdy scenariusz wdrażania wywoła odwołanie do zestawu uruchamiania hostingu (plik *. dll* ) i przenosząc zestaw do jednego z tych metod:
+* Plik projektu aplikacji rozszerzonej tworzy odwołanie do zestawu do uruchomienia hostingu (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji (*.deps.json*). Takie podejście ma zastosowanie, gdy scenariusz wdrażania wywoła odwołanie do zestawu uruchamiania hostingu (plik *. dll* ) i przenosząc zestaw do jednego z tych metod:
   * Projekt zużywający.
   * Lokalizacja dostępna przez projekt zużywający.
 * Plik zależności uruchamiania hostingu jest udostępniany aplikacji rozszerzonej, zgodnie z opisem w sekcji [Magazyn środowiska uruchomieniowego](#runtime-store) (bez odwołania w czasie kompilacji).
 * Podczas określania .NET Framework, zestaw jest ładowany w domyślnym kontekście ładowania, który na .NET Framework oznacza, że zestaw znajduje się w jednej z następujących lokalizacji:
-  * Ścieżka bazowa aplikacji: folder *bin* , w którym znajduje się plik wykonywalny ( *. exe* ) aplikacji.
+  * Ścieżka bazowa aplikacji: folder *bin* , w którym znajduje się plik wykonywalny (*. exe*) aplikacji.
   * Globalna pamięć podręczna zestawów (GAC): Magazyn GAC przechowuje zestawy, które są dostępne dla kilku .NET Framework aplikacji. Aby uzyskać więcej informacji, zobacz [jak: Instalowanie zestawu w globalnej pamięci podręcznej zestawów](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) w dokumentacji .NET Framework.
 
 ## <a name="sample-code"></a>Przykładowy kod
@@ -390,9 +390,9 @@ Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
 
 * Dwa zestawy startowe hostingu (biblioteki klas) ustawiają parę par klucz-wartość konfiguracji w pamięci:
-  * Pakiet NuGet ( *HostingStartupPackage* )
-  * Biblioteka klas ( *HostingStartupLibrary* )
-* Uruchamianie hostingu jest aktywowane z zestawu wdrożonego w sklepie uruchomieniowym ( *StartupDiagnostics* ). Zestaw dodaje dwie middlewares do aplikacji podczas uruchamiania, które dostarczają informacji diagnostycznych na:
+  * Pakiet NuGet (*HostingStartupPackage*)
+  * Biblioteka klas (*HostingStartupLibrary*)
+* Uruchamianie hostingu jest aktywowane z zestawu wdrożonego w sklepie uruchomieniowym (*StartupDiagnostics*). Zestaw dodaje dwie middlewares do aplikacji podczas uruchamiania, które dostarczają informacji diagnostycznych na:
   * Zarejestrowane usługi
   * Adres (schemat, host, baza ścieżki, ścieżka, ciąg zapytania)
   * Połączenie (zdalny adres IP, Port zdalny, lokalny adres IP, port lokalny, certyfikat klienta)
@@ -405,7 +405,7 @@ Aby uruchomić przykład:
 
 1. Skompiluj pakiet *HostingStartupPackage* przy użyciu polecenia [pakietu dotnet Pack](/dotnet/core/tools/dotnet-pack) .
 1. Dodaj nazwę zestawu pakietu *HostingStartupPackage* do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
-1. Skompiluj i uruchom aplikację. Odwołanie do pakietu jest obecne w aplikacji rozszerzonej (odwołanie w czasie kompilacji). `<PropertyGroup>`W pliku projektu aplikacji określa dane wyjściowe projektu pakietu ( *.. /HostingStartupPackage/bin/Debug* ) jako źródło pakietu. Dzięki temu aplikacja może korzystać z pakietu bez przekazywania pakietu do [NuGet.org](https://www.nuget.org/). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
+1. Skompiluj i uruchom aplikację. Odwołanie do pakietu jest obecne w aplikacji rozszerzonej (odwołanie w czasie kompilacji). `<PropertyGroup>`W pliku projektu aplikacji określa dane wyjściowe projektu pakietu (*.. /HostingStartupPackage/bin/Debug*) jako źródło pakietu. Dzięki temu aplikacja może korzystać z pakietu bez przekazywania pakietu do [NuGet.org](https://www.nuget.org/). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
 
    ```xml
    <PropertyGroup>
@@ -425,8 +425,8 @@ dotnet nuget locals all --clear
 
 1. Skompiluj bibliotekę klas *HostingStartupLibrary* za pomocą polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) .
 1. Dodaj nazwę zestawu *HostingStartupLibrary* biblioteki klas do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
-1. *bin* — Wdróż zestaw biblioteki klas w aplikacji, kopiując plik *HostingStartupLibrary.dll* z skompilowanych danych wyjściowych biblioteki klas do folderu *bin/debug* aplikacji.
-1. Skompiluj i uruchom aplikację. `<ItemGroup>`Plik projektu aplikacji odwołuje się do zestawu biblioteki klas ( *.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll* ) (odwołanie w czasie kompilacji). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
+1. *bin*— Wdróż zestaw biblioteki klas w aplikacji, kopiując plik *HostingStartupLibrary.dll* z skompilowanych danych wyjściowych biblioteki klas do folderu *bin/debug* aplikacji.
+1. Skompiluj i uruchom aplikację. `<ItemGroup>`Plik projektu aplikacji odwołuje się do zestawu biblioteki klas (*.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*) (odwołanie w czasie kompilacji). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
 
    ```xml
    <ItemGroup>
@@ -444,8 +444,8 @@ dotnet nuget locals all --clear
 1. Projekt *StartupDiagnostics* używa [programu PowerShell](/powershell/scripting/powershell-scripting) do modyfikacji *StartupDiagnostics.deps.jsw* pliku. Program PowerShell jest instalowany domyślnie w systemie Windows, począwszy od systemu Windows 7 z dodatkiem SP1 i Windows Server 2008 R2 z dodatkiem SP1. Aby uzyskać program PowerShell na innych platformach, zobacz [Instalowanie różnych wersji programu PowerShell](/powershell/scripting/install/installing-powershell).
 1. Wykonaj skrypt *build.ps1* w folderze *RuntimeStore* . Skrypt:
    * Generuje `StartupDiagnostics` pakiet w folderze *obj\packages* .
-   * Generuje magazyn środowiska uruchomieniowego dla `StartupDiagnostics` programu w folderze *Store* . `dotnet store`Polecenie w skrypcie używa `win7-x64` [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog) do uruchomienia hostingu wdrożonego w systemie Windows. Podczas zapewniania uruchamiania hostingu dla innego środowiska uruchomieniowego należy zastąpić prawidłowy identyfikator RID w wierszu 37 skryptu. Magazyn środowiska uruchomieniowego programu `StartupDiagnostics` będzie później przenoszony do magazynu środowiska uruchomieniowego użytkownika lub systemu na komputerze, na którym zostanie użyty zestaw. Lokalizacja instalacji magazynu środowiska uruchomieniowego użytkownika dla `StartupDiagnostics` zestawu to *. dotnet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll* .
-   * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. app/3.0.0/StartupDiagnostics.deps.json* .
+   * Generuje magazyn środowiska uruchomieniowego dla `StartupDiagnostics` programu w folderze *Store* . `dotnet store`Polecenie w skrypcie używa `win7-x64` [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog) do uruchomienia hostingu wdrożonego w systemie Windows. Podczas zapewniania uruchamiania hostingu dla innego środowiska uruchomieniowego należy zastąpić prawidłowy identyfikator RID w wierszu 37 skryptu. Magazyn środowiska uruchomieniowego programu `StartupDiagnostics` będzie później przenoszony do magazynu środowiska uruchomieniowego użytkownika lub systemu na komputerze, na którym zostanie użyty zestaw. Lokalizacja instalacji magazynu środowiska uruchomieniowego użytkownika dla `StartupDiagnostics` zestawu to *. dotnet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll*.
+   * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. app/3.0.0/StartupDiagnostics.deps.json*.
    * Umieszcza plik *deploy.ps1* w folderze *wdrożenia* .
 1. Uruchom skrypt *deploy.ps1* w folderze *Deployment* . Dołączenie skryptu:
    * `StartupDiagnostics` do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
@@ -504,35 +504,35 @@ Utwórz uruchamianie hostingu przy użyciu jednego z następujących typów proj
 
 Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka zawiera `HostingStartup` atrybut.
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary* . Biblioteka klas:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
 
 `ServiceKeyInjection` <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji.
 
-*HostingStartupLibrary/ServiceKeyInjection. cs* :
+*HostingStartupLibrary/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwóch kluczy ustawionych przez zestaw startowy obsługujący bibliotekę klas:
 
-*HostingStartupApp/Pages/index. cshtml. cs* :
+*HostingStartupApp/Pages/index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage* . Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
 
-*HostingStartupPackage/ServiceKeyInjection. cs* :
+*HostingStartupPackage/ServiceKeyInjection. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwóch kluczy ustawionych przez zestaw startowy obsługujący pakiet:
 
-*HostingStartupApp/Pages/index. cshtml. cs* :
+*HostingStartupApp/Pages/index. cshtml. cs*:
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -568,7 +568,7 @@ Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHost
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-Podczas kompilowania `IHostingStartup` projektu plik zależności ( *.deps.json* ) ustawia `runtime` lokalizację zestawu do folderu *bin* :
+Podczas kompilowania `IHostingStartup` projektu plik zależności (*.deps.json*) ustawia `runtime` lokalizację zestawu do folderu *bin* :
 
 [!code-json[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -620,7 +620,7 @@ public class ConfigurationInjection : IHostingStartup
 
 W przypadku biblioteki klas lub uruchamiania hostingu obsługiwanej przez aplikację konsoli Określ nazwę zestawu startowego hostingu w `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej. Zmienna środowiskowa to rozdzielana średnikami lista zestawów.
 
-Tylko hosting zestawów startowych jest skanowany dla `HostingStartup` atrybutu. W przypadku przykładowej aplikacji, *HostingStartupApp* , aby odnaleźć opisane wcześniej uruchomienia hostingu, zmienna środowiskowa jest ustawiona na następującą wartość:
+Tylko hosting zestawów startowych jest skanowany dla `HostingStartup` atrybutu. W przypadku przykładowej aplikacji, *HostingStartupApp*, aby odnaleźć opisane wcześniej uruchomienia hostingu, zmienna środowiskowa jest ustawiona na następującą wartość:
 
 ```
 HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
@@ -630,11 +630,11 @@ Zestaw startowy obsługujący hosting można również ustawić przy użyciu ust
 
 Gdy są obecne wiele asemblerów uruchamiania, ich <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> metody są wykonywane w kolejności, w jakiej są wymienione zestawy.
 
-## <a name="activation"></a>Uaktywnienie
+## <a name="activation"></a>Aktywacja
 
 Opcje hostingu aktywacji uruchamiania są następujące:
 
-* [Magazyn środowiska uruchomieniowego](#runtime-store): aktywacja nie wymaga odwołania do czasu kompilacji na potrzeby aktywacji. Przykładowa aplikacja umieszcza zestaw startowy obsługujący i pliki zależności w folderze, *wdrożeniu* , aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielomaszynowym. Folder *wdrożenia* zawiera także skrypt programu PowerShell, który tworzy lub modyfikuje zmienne środowiskowe w systemie wdrażania, aby umożliwić uruchamianie hostingu.
+* [Magazyn środowiska uruchomieniowego](#runtime-store): aktywacja nie wymaga odwołania do czasu kompilacji na potrzeby aktywacji. Przykładowa aplikacja umieszcza zestaw startowy obsługujący i pliki zależności w folderze, *wdrożeniu*, aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielomaszynowym. Folder *wdrożenia* zawiera także skrypt programu PowerShell, który tworzy lub modyfikuje zmienne środowiskowe w systemie wdrażania, aby umożliwić uruchamianie hostingu.
 * Odwołanie do czasu kompilacji wymagane do aktywacji
   * [Pakiet NuGet](#nuget-package)
   * [Folder bin projektu](#project-bin-folder)
@@ -738,7 +738,7 @@ W przykładowej aplikacji (projekt *RuntimeStore* ) Kompilowanie magazynu środo
 
 Przykłady sposobu ustawiania zmiennych środowiskowych dla różnych systemów operacyjnych znajdują się w temacie [Używanie wielu środowisk](xref:fundamentals/environments).
 
-**Wdrożenie**
+**Wdrażanie**
 
 Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, aplikacja Przykładowa tworzy folder *wdrożenia* w opublikowanych danych wyjściowych zawierający:
 
@@ -750,7 +750,7 @@ Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, 
 
 Rozszerzenie uruchamiania hostingu można dostarczyć w pakiecie NuGet. Pakiet ma `HostingStartup` atrybut. Typy uruchamiania hostingu udostępniane przez pakiet są udostępniane aplikacji przy użyciu jednej z następujących metod:
 
-* Plik projektu aplikacji rozszerzonej udostępnia odwołanie do pakietu dla uruchomienia hostingu w pliku projektu aplikacji (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji ( *.deps.json* ). Takie podejście ma zastosowanie do pakietu zestawu startowego hostingu opublikowanego w [NuGet.org](https://www.nuget.org/).
+* Plik projektu aplikacji rozszerzonej udostępnia odwołanie do pakietu dla uruchomienia hostingu w pliku projektu aplikacji (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji (*.deps.json*). Takie podejście ma zastosowanie do pakietu zestawu startowego hostingu opublikowanego w [NuGet.org](https://www.nuget.org/).
 * Plik zależności uruchamiania hostingu jest udostępniany aplikacji rozszerzonej, zgodnie z opisem w sekcji [Magazyn środowiska uruchomieniowego](#runtime-store) (bez odwołania w czasie kompilacji).
 
 Aby uzyskać więcej informacji na temat pakietów NuGet i magazynu środowiska uruchomieniowego, zobacz następujące tematy:
@@ -763,12 +763,12 @@ Aby uzyskać więcej informacji na temat pakietów NuGet i magazynu środowiska 
 
 Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony przez *bin* w aplikacji rozszerzonej. Typy uruchamiania hostingu udostępniane przez zestaw są udostępniane aplikacji przy użyciu jednej z następujących metod:
 
-* Plik projektu aplikacji rozszerzonej tworzy odwołanie do zestawu do uruchomienia hostingu (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji ( *.deps.json* ). Takie podejście ma zastosowanie, gdy scenariusz wdrażania wywoła odwołanie do zestawu uruchamiania hostingu (plik *. dll* ) i przenosząc zestaw do jednego z tych metod:
+* Plik projektu aplikacji rozszerzonej tworzy odwołanie do zestawu do uruchomienia hostingu (odwołanie w czasie kompilacji). Wraz z odwołaniem w czasie kompilacji, zestaw startowy hostingu i wszystkie jego zależności są zawarte w pliku zależności aplikacji (*.deps.json*). Takie podejście ma zastosowanie, gdy scenariusz wdrażania wywoła odwołanie do zestawu uruchamiania hostingu (plik *. dll* ) i przenosząc zestaw do jednego z tych metod:
   * Projekt zużywający.
   * Lokalizacja dostępna przez projekt zużywający.
 * Plik zależności uruchamiania hostingu jest udostępniany aplikacji rozszerzonej, zgodnie z opisem w sekcji [Magazyn środowiska uruchomieniowego](#runtime-store) (bez odwołania w czasie kompilacji).
 * Podczas określania .NET Framework, zestaw jest ładowany w domyślnym kontekście ładowania, który na .NET Framework oznacza, że zestaw znajduje się w jednej z następujących lokalizacji:
-  * Ścieżka bazowa aplikacji: folder *bin* , w którym znajduje się plik wykonywalny ( *. exe* ) aplikacji.
+  * Ścieżka bazowa aplikacji: folder *bin* , w którym znajduje się plik wykonywalny (*. exe*) aplikacji.
   * Globalna pamięć podręczna zestawów (GAC): Magazyn GAC przechowuje zestawy, które są dostępne dla kilku .NET Framework aplikacji. Aby uzyskać więcej informacji, zobacz [jak: Instalowanie zestawu w globalnej pamięci podręcznej zestawów](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac) w dokumentacji .NET Framework.
 
 ## <a name="sample-code"></a>Przykładowy kod
@@ -776,9 +776,9 @@ Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
 
 * Dwa zestawy startowe hostingu (biblioteki klas) ustawiają parę par klucz-wartość konfiguracji w pamięci:
-  * Pakiet NuGet ( *HostingStartupPackage* )
-  * Biblioteka klas ( *HostingStartupLibrary* )
-* Uruchamianie hostingu jest aktywowane z zestawu wdrożonego w sklepie uruchomieniowym ( *StartupDiagnostics* ). Zestaw dodaje dwie middlewares do aplikacji podczas uruchamiania, które dostarczają informacji diagnostycznych na:
+  * Pakiet NuGet (*HostingStartupPackage*)
+  * Biblioteka klas (*HostingStartupLibrary*)
+* Uruchamianie hostingu jest aktywowane z zestawu wdrożonego w sklepie uruchomieniowym (*StartupDiagnostics*). Zestaw dodaje dwie middlewares do aplikacji podczas uruchamiania, które dostarczają informacji diagnostycznych na:
   * Zarejestrowane usługi
   * Adres (schemat, host, baza ścieżki, ścieżka, ciąg zapytania)
   * Połączenie (zdalny adres IP, Port zdalny, lokalny adres IP, port lokalny, certyfikat klienta)
@@ -791,7 +791,7 @@ Aby uruchomić przykład:
 
 1. Skompiluj pakiet *HostingStartupPackage* przy użyciu polecenia [pakietu dotnet Pack](/dotnet/core/tools/dotnet-pack) .
 1. Dodaj nazwę zestawu pakietu *HostingStartupPackage* do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
-1. Skompiluj i uruchom aplikację. Odwołanie do pakietu jest obecne w aplikacji rozszerzonej (odwołanie w czasie kompilacji). `<PropertyGroup>`W pliku projektu aplikacji określa dane wyjściowe projektu pakietu ( *.. /HostingStartupPackage/bin/Debug* ) jako źródło pakietu. Dzięki temu aplikacja może korzystać z pakietu bez przekazywania pakietu do [NuGet.org](https://www.nuget.org/). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
+1. Skompiluj i uruchom aplikację. Odwołanie do pakietu jest obecne w aplikacji rozszerzonej (odwołanie w czasie kompilacji). `<PropertyGroup>`W pliku projektu aplikacji określa dane wyjściowe projektu pakietu (*.. /HostingStartupPackage/bin/Debug*) jako źródło pakietu. Dzięki temu aplikacja może korzystać z pakietu bez przekazywania pakietu do [NuGet.org](https://www.nuget.org/). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
 
    ```xml
    <PropertyGroup>
@@ -811,8 +811,8 @@ dotnet nuget locals all --clear
 
 1. Skompiluj bibliotekę klas *HostingStartupLibrary* za pomocą polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) .
 1. Dodaj nazwę zestawu *HostingStartupLibrary* biblioteki klas do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
-1. *bin* — Wdróż zestaw biblioteki klas w aplikacji, kopiując plik *HostingStartupLibrary.dll* z skompilowanych danych wyjściowych biblioteki klas do folderu *bin/debug* aplikacji.
-1. Skompiluj i uruchom aplikację. `<ItemGroup>`Plik projektu aplikacji odwołuje się do zestawu biblioteki klas ( *.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll* ) (odwołanie w czasie kompilacji). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
+1. *bin*— Wdróż zestaw biblioteki klas w aplikacji, kopiując plik *HostingStartupLibrary.dll* z skompilowanych danych wyjściowych biblioteki klas do folderu *bin/debug* aplikacji.
+1. Skompiluj i uruchom aplikację. `<ItemGroup>`Plik projektu aplikacji odwołuje się do zestawu biblioteki klas (*.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll*) (odwołanie w czasie kompilacji). Aby uzyskać więcej informacji, zobacz uwagi w pliku projektu HostingStartupApp.
 
    ```xml
    <ItemGroup>
@@ -830,8 +830,8 @@ dotnet nuget locals all --clear
 1. Projekt *StartupDiagnostics* używa [programu PowerShell](/powershell/scripting/powershell-scripting) do modyfikacji *StartupDiagnostics.deps.jsw* pliku. Program PowerShell jest instalowany domyślnie w systemie Windows, począwszy od systemu Windows 7 z dodatkiem SP1 i Windows Server 2008 R2 z dodatkiem SP1. Aby uzyskać program PowerShell na innych platformach, zobacz [Instalowanie różnych wersji programu PowerShell](/powershell/scripting/install/installing-powershell).
 1. Wykonaj skrypt *build.ps1* w folderze *RuntimeStore* . Skrypt:
    * Generuje `StartupDiagnostics` pakiet w folderze *obj\packages* .
-   * Generuje magazyn środowiska uruchomieniowego dla `StartupDiagnostics` programu w folderze *Store* . `dotnet store`Polecenie w skrypcie używa `win7-x64` [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog) do uruchomienia hostingu wdrożonego w systemie Windows. Podczas zapewniania uruchamiania hostingu dla innego środowiska uruchomieniowego należy zastąpić prawidłowy identyfikator RID w wierszu 37 skryptu. Magazyn środowiska uruchomieniowego programu `StartupDiagnostics` będzie później przenoszony do magazynu środowiska uruchomieniowego użytkownika lub systemu na komputerze, na którym zostanie użyty zestaw. Lokalizacja instalacji magazynu środowiska uruchomieniowego użytkownika dla `StartupDiagnostics` zestawu to *. dotnet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll* .
-   * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. App/2.2.0/StartupDiagnostics.deps.json* .
+   * Generuje magazyn środowiska uruchomieniowego dla `StartupDiagnostics` programu w folderze *Store* . `dotnet store`Polecenie w skrypcie używa `win7-x64` [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog) do uruchomienia hostingu wdrożonego w systemie Windows. Podczas zapewniania uruchamiania hostingu dla innego środowiska uruchomieniowego należy zastąpić prawidłowy identyfikator RID w wierszu 37 skryptu. Magazyn środowiska uruchomieniowego programu `StartupDiagnostics` będzie później przenoszony do magazynu środowiska uruchomieniowego użytkownika lub systemu na komputerze, na którym zostanie użyty zestaw. Lokalizacja instalacji magazynu środowiska uruchomieniowego użytkownika dla `StartupDiagnostics` zestawu to *. dotnet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll*.
+   * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. App/2.2.0/StartupDiagnostics.deps.json*.
    * Umieszcza plik *deploy.ps1* w folderze *wdrożenia* .
 1. Uruchom skrypt *deploy.ps1* w folderze *Deployment* . Dołączenie skryptu:
    * `StartupDiagnostics` do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.

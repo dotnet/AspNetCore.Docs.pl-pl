@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/get-started-with-nswag
 ms.openlocfilehash: 78d58d4d544c33862cf502ce63e83560e8009c65
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060576"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Wprowadzenie do NSwag i ASP.NET Core
@@ -59,7 +59,7 @@ Aby użyć oprogramowania [NSwag](https://github.com/RicoSuter/NSwag) ASP.NET Co
 
 Aby zainstalować pakiet NuGet NSwag, należy użyć jednej z następujących metod:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
@@ -122,12 +122,12 @@ Aby skorzystać z możliwości generowania kodu w programie NSwag, należy wybra
 ### <a name="generate-code-with-nswagstudio"></a>Generuj kod przy użyciu NSwagStudio
 
 * Zainstaluj program NSwagStudio, postępując zgodnie z instrukcjami w [repozytorium GitHub NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio). Na stronie wydanie NSwag można pobrać wersję narzędzia XCOPY, którą można uruchomić bez uprawnień instalacji i administratora.
-* Uruchom NSwagStudio i wprowadź *swagger.jsna* adres URL pliku w polu tekstowym **adres URL specyfikacji struktury Swagger** . Przykładowy adres URL to *http://localhost:44354/swagger/v1/swagger.json* .
+* Uruchom NSwagStudio i wprowadź *swagger.jsna* adres URL pliku w polu tekstowym **adres URL specyfikacji struktury Swagger** . Przykładowy adres URL to *http://localhost:44354/swagger/v1/swagger.json*.
 * Kliknij przycisk **Utwórz kopię lokalną** , aby wygenerować reprezentację JSON specyfikacji struktury Swagger.
 
   ![Utwórz lokalną kopię specyfikacji struktury Swagger](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)
 
-* W obszarze dane **wyjściowe** kliknij pole wyboru **Klient CSharp** . W zależności od projektu można również wybrać **klienta TypeScript** lub **kontroler internetowego interfejsu API CSharp** . W przypadku wybrania opcji **kontroler internetowego interfejsu API CSharp** Specyfikacja usługi ponownie kompiluje usługę, służącą jako generacja odwrotna.
+* W obszarze dane **wyjściowe** kliknij pole wyboru **Klient CSharp** . W zależności od projektu można również wybrać **klienta TypeScript** lub **kontroler internetowego interfejsu API CSharp**. W przypadku wybrania opcji **kontroler internetowego interfejsu API CSharp** Specyfikacja usługi ponownie kompiluje usługę, służącą jako generacja odwrotna.
 * Kliknij przycisk **Generuj dane wyjściowe** , aby utworzyć kompletną implementację klienta C# w projekcie *TodoApi. NSwag* . Aby wyświetlić wygenerowany kod klienta, kliknij kartę **Klient CSharp** :
 
 ```csharp
@@ -205,11 +205,11 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj** .
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj**.
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -227,7 +227,7 @@ Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* W *okienko rozwiązania* naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik** .
+* W *okienko rozwiązania* naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik**.
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -236,7 +236,7 @@ Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* Otwórz okno dialogowe **Opcje projektu** > **Build** > **kompilator** kompilacji
+* Otwórz okno dialogowe **Opcje projektu** >  > **kompilator** kompilacji
 * Zaznacz pole **Generuj dokumentację XML** w sekcji **Opcje ogólne** .
 
 ::: moniker-end

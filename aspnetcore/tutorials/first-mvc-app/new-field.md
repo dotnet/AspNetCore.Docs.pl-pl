@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/new-field
 ms.openlocfilehash: ce119d79bc96f01803b63c715332ec3d287473ff
-ms.sourcegitcommit: df808efa68574dd674f1985aa9d03f4f5fab883f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/18/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94851185"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
@@ -47,7 +47,7 @@ Dodaj `Rating` Właściwość do *modeli/filmów. cs*:
 
 Tworzenie aplikacji
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
  Ctrl+Shift+B
 
@@ -121,7 +121,7 @@ Istnieje kilka metod rozpoznawania błędu:
 
 W tym samouczku zostanie użyta Migracje Code First.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
 

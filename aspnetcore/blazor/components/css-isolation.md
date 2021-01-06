@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/components/css-isolation
 ms.openlocfilehash: 92545eab4004f6b67080f79d64b94bb424d5a102
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "96320086"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorIzolacja ASP.NET Core CSS

@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060043"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu obserwatora plików
@@ -217,7 +217,7 @@ Niektóre opcje konfiguracji mogą być przesyłane `dotnet watch` przez zmienne
 | ------------- | ------------- |
 | `DOTNET_USE_POLLING_FILE_WATCHER`                | W przypadku ustawienia wartości "1" lub "true" program `dotnet watch` używa obserwatora pliku sondowania zamiast CoreFx `FileSystemWatcher` . Używane podczas oglądania plików w udziałach sieciowych lub zainstalowanych woluminów platformy Docker.                       |
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Domyślnie program `dotnet watch` optymalizuje kompilację, unikając niektórych operacji, takich jak uruchamianie przywracania lub ponowne ocenianie zestawu obserwowanych plików podczas każdej zmiany pliku. W przypadku ustawienia wartości "1" lub "true" te optymalizacje są wyłączone. |
-| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna* . W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna*. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` próbuje odświeżyć przeglądarki po wykryciu zmian plików. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. To zachowanie jest również pomijane, jeśli `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` jest ustawiona. |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` w witrynie GitHub

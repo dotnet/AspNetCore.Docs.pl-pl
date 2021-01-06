@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr
 ms.openlocfilehash: 1dad2264250bf43ec6c1df679b8754a82a5addfd
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/23/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "95417672"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Samouczek: wprowadzenie do ASP.NET Core SignalR
@@ -44,7 +44,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -60,7 +60,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 ## <a name="create-a-web-app-project"></a>Tworzenie projektu aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
 
 * Z menu wybierz pozycję **plik > nowy projekt**.
 
@@ -102,7 +102,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET Core 3,1. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.
 
@@ -224,7 +224,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Naciśnij **klawisze CTRL + F5** , aby uruchomić aplikację bez debugowania.
 
@@ -276,7 +276,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 ## <a name="prerequisites"></a>Wymagania wstępne    
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)   
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2017-2.2.md)] 
 
@@ -292,7 +292,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web 
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)  
 
 * Z menu wybierz pozycję **plik > nowy projekt**. 
 
@@ -333,7 +333,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakietu. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.   
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)  
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.  
 
@@ -457,7 +457,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji  
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)   
 
 * Naciśnij **klawisze CTRL + F5** , aby uruchomić aplikację bez debugowania.   
 

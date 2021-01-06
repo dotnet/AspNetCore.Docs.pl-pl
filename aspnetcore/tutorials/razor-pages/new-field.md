@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: 2961fcaa8bbb93527eb80f5aa7b18ef04761fb50
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/14/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "97486164"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
@@ -121,7 +121,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 1. Wybierz bazę danych w SSOX.
 1. Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 1. Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-1. Wybierz przycisk **OK**.
+1. Wybierz pozycję **OK**.
 1. W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
    ```powershell
@@ -262,7 +262,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz przycisk **OK**.
+* Wybierz pozycję **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -402,7 +402,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz przycisk **OK**.
+* Wybierz pozycję **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell

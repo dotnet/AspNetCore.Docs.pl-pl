@@ -1,8 +1,8 @@
-# <a name="aspnet-core-integration-testing-sample"></a>Przykład testowania integracji ASP.NET rdzenia
+# <a name="aspnet-core-integration-testing-sample"></a>Przykład testowania integracji ASP.NET Core
 
-W tym przykładzie przedstawiono testowanie integracji aplikacji [ASP.NET Core Razor Pages.](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) W tym przykładzie przedstawiono funkcje opisane w [integration testy w ASP.NET tematu Core.](https://docs.microsoft.com/aspnet/core/test/integration-tests)
+Ten przykład ilustruje testowanie integracji aplikacji [Razor Pages ASP.NET Core](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) . Ten przykład pokazuje funkcje opisane w [testach integracji w ASP.NET Core](https://docs.microsoft.com/aspnet/core/test/integration-tests) temacie.
 
-Jeśli nie używasz IDE z wbudowanymi funkcjami testowania, wykonaj następujące polecenie w wierszu polecenia w folderze *tests/RazorPagesProject.Tests:*
+Jeśli nie korzystasz ze środowiska IDE z wbudowanymi funkcjami testowania, wykonaj następujące polecenie w wierszu polecenia w folderze *Tests/RazorPagesProject. Tests* :
 
 ```console
 dotnet test

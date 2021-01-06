@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056000"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
@@ -91,7 +91,7 @@ W Blazor Server aplikacji Dostosuj środowisko w `Pages/_Host.cshtml` pliku:
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor Server Aplikacja reaguje na Nieobsłużone wyjątki
 
-Blazor Server jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód* . Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
+Blazor Server jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
 * Najnowsze renderowane dane wyjściowe składników.
 * Bieżący zestaw delegatów obsługi zdarzeń, które mogą być wyzwalane przez zdarzenia po stronie klienta.

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/concurrency
 ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053998"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Część 8 Razor strony z EF Core w ASP.NET Core — współbieżność
@@ -56,7 +56,7 @@ Optymistyczna współbieżność umożliwia konflikty współbieżności, a nast
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget30.png)
 
-Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date30.png)
 
@@ -110,7 +110,7 @@ modelBuilder.Entity<Department>()
   .IsRowVersion();
 ```
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W przypadku bazy danych SQL Server `[Timestamp]` atrybut klasy Entity został zdefiniowany jako tablica bajtowa:
 
@@ -156,7 +156,7 @@ Dodanie `RowVersion` Właściwości zmienia model danych, który wymaga migracji
 
 Skompiluj projekt. 
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Uruchom następujące polecenie w obszarze PMC:
 
@@ -181,7 +181,7 @@ To polecenie:
 
   [!code-csharp[](intro/samples/cu30/Migrations/SchoolContextModelSnapshot.cs?name=snippet_Department&highlight=15-17)]
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Uruchom następujące polecenie w obszarze PMC:
 
@@ -212,7 +212,7 @@ To polecenie:
 
 ## <a name="scaffold-department-pages"></a>Strony działu szkieletu
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami na [stronach uczniów tworzenia szkieletów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -280,7 +280,7 @@ Poniższy kod dodaje niestandardowy komunikat o błędzie dla każdej kolumny, k
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_Error)]
 
-Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz** , zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
+Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz**, zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
@@ -304,12 +304,12 @@ Powyższy kod ma następujące działanie:
 Otwórz dwa wystąpienia przeglądarki edycji dla działu angielskiego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** .
+* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**.
 * Na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu w języku angielskim.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
+Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-130.png)
 
@@ -319,7 +319,7 @@ Zmień inne pole w drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-230.png)
 
-Kliknij pozycję **Zapisz** . Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
+Kliknij pozycję **Zapisz**. Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error30.png)
 
@@ -360,12 +360,12 @@ Tworzenie działu testowego.
 Otwórz dwa wystąpienia przeglądarki usuwania dla działu testowego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie** .
+* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie**.
 * Kliknij hiperłącze **Edytuj** dla działu testowego.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
+Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 
@@ -408,7 +408,7 @@ Optymistyczna współbieżność umożliwia konflikty współbieżności, a nast
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget.png)
 
-Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date.png)
 
@@ -524,7 +524,7 @@ Poprzednie polecenia:
 
 ## <a name="scaffold-the-departments-model"></a>Tworzenie szkieletu modelu działów
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-student-pages) i Użyj `Department` klasy modelu.
 
@@ -576,7 +576,7 @@ Poniższy kod dodaje niestandardowy komunikat o błędzie dla każdej kolumny, k
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_err)]
 
-Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz** , zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
+Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz**, zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
@@ -600,12 +600,12 @@ Poprzedzające znaczniki:
 Otwórz dwa wystąpienia przeglądarki edycji dla działu angielskiego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** .
+* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**.
 * Na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu w języku angielskim.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
+Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-1.png)
 
@@ -615,7 +615,7 @@ Zmień inne pole w drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-2.png)
 
-Kliknij pozycję **Zapisz** . Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
+Kliknij pozycję **Zapisz**. Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error.png)
 
@@ -658,12 +658,12 @@ Tworzenie działu testowego.
 Otwórz dwa wystąpienia przeglądarki usuwania dla działu testowego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie** .
+* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie**.
 * Kliknij hiperłącze **Edytuj** dla działu testowego.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
+Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 

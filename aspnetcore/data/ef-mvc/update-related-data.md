@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/update-related-data
 ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053946"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: aktualizowanie powiązanych danych — ASP.NET MVC z EF Core
@@ -93,7 +93,7 @@ W obszarze *widoki/kursy/Utwórz. cshtml* Dodaj opcję "Wybierz dział" do listy
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
-W obszarze *widoki/kursy/Edytuj. cshtml* wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml* .
+W obszarze *widoki/kursy/Edytuj. cshtml* wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml*.
 
 Ponadto w obszarze *widoki/kursy/Edytuj. cshtml* Dodaj pole numer kursu przed polem **tytuł** . Ponieważ numer kursu jest kluczem podstawowym, jest wyświetlany, ale nie można go zmienić.
 
@@ -105,21 +105,21 @@ W obszarze *widoki/kursy/Usuń. cshtml* Dodaj pole numer kursu z góry i zmień 
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
-W obszarze *widoki/kursy/szczegóły. cshtml* wprowadź tę samą zmianę, która właśnie została wykonana dla elementu *DELETE. cshtml* .
+W obszarze *widoki/kursy/szczegóły. cshtml* wprowadź tę samą zmianę, która właśnie została wykonana dla elementu *DELETE. cshtml*.
 
 ### <a name="test-the-course-pages"></a>Testowanie stron kursów
 
-Uruchom aplikację, wybierz kartę **kursy** , kliknij pozycję **Utwórz nową** , a następnie wprowadź dane, aby utworzyć nowy kurs:
+Uruchom aplikację, wybierz kartę **kursy** , kliknij pozycję **Utwórz nową**, a następnie wprowadź dane, aby utworzyć nowy kurs:
 
 ![Strona tworzenia kursu](update-related-data/_static/course-create.png)
 
-Kliknij pozycję **Utwórz** . Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
+Kliknij przycisk **Utwórz**. Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
 
 Kliknij pozycję **Edytuj** na kursie na stronie indeks kursów.
 
 ![Strona edytowania kursu](update-related-data/_static/course-edit.png)
 
-Zmień dane na stronie i kliknij przycisk **Zapisz** . Zostanie wyświetlona strona indeks kursów z zaktualizowanymi danymi kursu.
+Zmień dane na stronie i kliknij przycisk **Zapisz**. Zostanie wyświetlona strona indeks kursów z zaktualizowanymi danymi kursu.
 
 ## <a name="add-instructors-edit-page"></a>Dodaj stronę edycji instruktorów
 
@@ -177,7 +177,7 @@ W obszarze *widoki/instruktorzy/Edit. cshtml* Dodaj nowe pole do edytowania loka
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
-Uruchom aplikację, wybierz kartę **Instruktorzy** , a następnie kliknij przycisk **Edytuj** na instruktorze. Zmień **lokalizację biura** , a następnie kliknij przycisk **Zapisz** .
+Uruchom aplikację, wybierz kartę **Instruktorzy** , a następnie kliknij przycisk **Edytuj** na instruktorze. Zmień **lokalizację biura** , a następnie kliknij przycisk **Zapisz**.
 
 ![Strona edycji instruktora](update-related-data/_static/instructor-edit-office.png)
 
@@ -207,7 +207,7 @@ Kod dodaje eager ładowania dla `Courses` właściwości nawigacji i wywołuje n
 
 Kod w `PopulateAssignedCourseData` metodzie odczytuje przez wszystkie jednostki kursu w celu załadowania listy kursów przy użyciu klasy model widoku. Dla każdego kursu kod sprawdza, czy kurs istnieje we `Courses` właściwości nawigacji instruktora. Aby utworzyć efektywne wyszukiwanie podczas sprawdzania, czy kurs jest przypisany do instruktora, kursy przypisane do instruktora są umieszczane w `HashSet` kolekcji. `Assigned`Właściwość jest ustawiona na wartość true dla kursów, do których jest przypisany instruktor. Widok użyje tej właściwości, aby określić, które pola wyboru muszą być wyświetlane jako wybrane. Na koniec lista jest przenoszona do widoku w temacie `ViewData` .
 
-Następnie Dodaj kod, który jest wykonywany, gdy użytkownik kliknie przycisk **Zapisz** . Zastąp `EditPost` metodę poniższym kodem i Dodaj nową metodę, która aktualizuje `Courses` Właściwość nawigacji jednostki instruktora.
+Następnie Dodaj kod, który jest wykonywany, gdy użytkownik kliknie przycisk **Zapisz**. Zastąp `EditPost` metodę poniższym kodem i Dodaj nową metodę, która aktualizuje `Courses` Właściwość nawigacji jednostki instruktora.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=1,3,12,13,25,39-40&name=snippet_EditPostCourses)]
 

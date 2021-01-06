@@ -20,22 +20,22 @@ no-loc:
 - SignalR
 uid: host-and-deploy/web-farm
 ms.openlocfilehash: ee78e80a4eda3089943765700aa6bb62c6c1e07d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057521"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>ASP.NET Core hosta w kolektywie serwerów sieci Web
 
 [Krzysztof Ross](https://github.com/Tratcher)
 
-*Farma sieci Web* jest grupą zawierającą co najmniej dwa serwery sieci Web (lub *węzły* ), które obsługują wiele wystąpień aplikacji. Gdy żądania użytkowników docierają do kolektywu serwerów sieci Web, *moduł równoważenia obciążenia* dystrybuuje żądania do węzłów kolektywu serwerów sieci Web. Usprawnienia farmy sieci Web:
+*Farma sieci Web* jest grupą zawierającą co najmniej dwa serwery sieci Web (lub *węzły*), które obsługują wiele wystąpień aplikacji. Gdy żądania użytkowników docierają do kolektywu serwerów sieci Web, *moduł równoważenia obciążenia* dystrybuuje żądania do węzłów kolektywu serwerów sieci Web. Usprawnienia farmy sieci Web:
 
-* **Niezawodność/dostępność** : Jeśli co najmniej jeden węzeł ulegnie awarii, moduł równoważenia obciążenia może kierować żądania do innych działających węzłów, aby kontynuować przetwarzanie żądań.
-* **Pojemność/wydajność** : wiele węzłów może przetwarzać więcej żądań niż pojedynczy serwer. Moduł równoważenia obciążenia równoważy obciążenie przez dystrybuowanie żądań do węzłów.
-* **Skalowalność** : gdy wymagana jest większa lub mniejsza pojemność, można zwiększyć lub zmniejszyć liczbę aktywnych węzłów w celu dopasowania do obciążenia. Technologie platformy farmy sieci Web, takie jak [Azure App Service](https://azure.microsoft.com/services/app-service/), mogą automatycznie dodawać lub usuwać węzły na żądanie administratora systemu lub automatycznie bez udziału człowieka.
-* **Łatwość konserwacji** : węzły kolektywu serwerów sieci Web mogą polegać na zestawie usług udostępnionych, co ułatwia zarządzanie systemem. Na przykład węzły kolektywu serwerów sieci Web mogą polegać na jednym serwerze bazy danych i wspólnej lokalizacji sieciowej dla zasobów statycznych, takich jak obrazy i pliki do pobrania.
+* **Niezawodność/dostępność**: Jeśli co najmniej jeden węzeł ulegnie awarii, moduł równoważenia obciążenia może kierować żądania do innych działających węzłów, aby kontynuować przetwarzanie żądań.
+* **Pojemność/wydajność**: wiele węzłów może przetwarzać więcej żądań niż pojedynczy serwer. Moduł równoważenia obciążenia równoważy obciążenie przez dystrybuowanie żądań do węzłów.
+* **Skalowalność**: gdy wymagana jest większa lub mniejsza pojemność, można zwiększyć lub zmniejszyć liczbę aktywnych węzłów w celu dopasowania do obciążenia. Technologie platformy farmy sieci Web, takie jak [Azure App Service](https://azure.microsoft.com/services/app-service/), mogą automatycznie dodawać lub usuwać węzły na żądanie administratora systemu lub automatycznie bez udziału człowieka.
+* **Łatwość konserwacji**: węzły kolektywu serwerów sieci Web mogą polegać na zestawie usług udostępnionych, co ułatwia zarządzanie systemem. Na przykład węzły kolektywu serwerów sieci Web mogą polegać na jednym serwerze bazy danych i wspólnej lokalizacji sieciowej dla zasobów statycznych, takich jak obrazy i pliki do pobrania.
 
 W tym temacie opisano konfigurację i zależności dla aplikacji ASP.NET Core hostowanych w kolektywie serwerów sieci Web, które są zależne od udostępnionych zasobów.
 
@@ -60,7 +60,7 @@ Ochrona danych i buforowanie wymagają konfiguracji aplikacji wdrożonych w kole
 
 ### <a name="data-protection"></a>Ochrona danych
 
-[System ochrony danych ASP.NET Core](xref:security/data-protection/introduction) jest używany przez aplikacje do ochrony danych. Ochrona danych opiera się na zestawie kluczy kryptograficznych przechowywanych w *pęku kluczy* . Gdy system ochrony danych jest zainicjowany, stosuje [domyślne ustawienia](xref:security/data-protection/configuration/default-settings) , które przechowują pierścień kluczy lokalnie. W ramach konfiguracji domyślnej unikatowy pierścień kluczy jest przechowywany w każdym węźle kolektywu serwerów sieci Web. W związku z tym każdy węzeł kolektywu serwerów sieci Web nie może odszyfrować danych szyfrowanych przez aplikację w żadnym innym węźle. Konfiguracja domyślna nie jest zazwyczaj odpowiednia do hostowania aplikacji w kolektywie serwerów sieci Web. Alternatywą dla implementacji pierścienia klucza współdzielonego jest zawsze kierowanie żądań użytkowników do tego samego węzła. Aby uzyskać więcej informacji na temat konfiguracji systemu ochrony danych dla wdrożeń farmy sieci Web, zobacz <xref:security/data-protection/configuration/overview> .
+[System ochrony danych ASP.NET Core](xref:security/data-protection/introduction) jest używany przez aplikacje do ochrony danych. Ochrona danych opiera się na zestawie kluczy kryptograficznych przechowywanych w *pęku kluczy*. Gdy system ochrony danych jest zainicjowany, stosuje [domyślne ustawienia](xref:security/data-protection/configuration/default-settings) , które przechowują pierścień kluczy lokalnie. W ramach konfiguracji domyślnej unikatowy pierścień kluczy jest przechowywany w każdym węźle kolektywu serwerów sieci Web. W związku z tym każdy węzeł kolektywu serwerów sieci Web nie może odszyfrować danych szyfrowanych przez aplikację w żadnym innym węźle. Konfiguracja domyślna nie jest zazwyczaj odpowiednia do hostowania aplikacji w kolektywie serwerów sieci Web. Alternatywą dla implementacji pierścienia klucza współdzielonego jest zawsze kierowanie żądań użytkowników do tego samego węzła. Aby uzyskać więcej informacji na temat konfiguracji systemu ochrony danych dla wdrożeń farmy sieci Web, zobacz <xref:security/data-protection/configuration/overview> .
 
 ### <a name="caching"></a>Buforowanie
 
@@ -86,7 +86,7 @@ Gdy ochrona danych lub buforowanie nie jest skonfigurowane dla środowiska kolek
 
 Rozważ użytkownikowi, który zaloguje się do aplikacji przy użyciu cookie uwierzytelniania. Użytkownik loguje się do aplikacji w jednym węźle kolektywu serwerów sieci Web. Jeśli następne żądanie zostanie odebrane w tym samym węźle, na którym się zalogowano, aplikacja będzie mogła odszyfrować uwierzytelnianie cookie i zezwala na dostęp do zasobu aplikacji. Jeśli następne żądanie zostanie odebrane w innym węźle, aplikacja nie może odszyfrować uwierzytelniania cookie z węzła, w którym zalogowany jest użytkownik, a autoryzacja dla żądanego zasobu kończy się niepowodzeniem.
 
-Gdy którykolwiek z następujących objawów występuje **sporadycznie** , problem zwykle jest śledzony do nieprawidłowej ochrony danych lub konfiguracji buforowania dla środowiska farmy sieci Web:
+Gdy którykolwiek z następujących objawów występuje **sporadycznie**, problem zwykle jest śledzony do nieprawidłowej ochrony danych lub konfiguracji buforowania dla środowiska farmy sieci Web:
 
 * Przerwy uwierzytelniania: uwierzytelnianie jest błędnie cookie skonfigurowane lub nie można go odszyfrować. Logowanie OAuth (Facebook, Microsoft, Twitter) lub OpenIdConnect kończy się niepowodzeniem z błędem "korelacja nie powiodła się".
 * Przerwy autoryzacji: Identity zostały utracone.

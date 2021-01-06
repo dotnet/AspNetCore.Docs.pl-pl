@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/metapackage-app
 ms.openlocfilehash: 225bb1f55c099a476319191726c5a661f9a4893a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057807"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>Microsoft. AspNetCore. App dla ASP.NET Core
@@ -55,7 +55,7 @@ ASP.NET Core współdzielona struktura:
 
 Ta funkcja wymaga ASP.NET Core 2. x przeznaczonych dla platformy .NET Core 2. x.
 
-Pakiet [Microsoft. AspNetCore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App) [metapackage](/dotnet/core/packages#metapackages) dla ASP.NET Core:
+Pakiet [Microsoft. AspNetCore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App) [](/dotnet/core/packages#metapackages) dla ASP.NET Core:
 
 * Nie obejmuje zależności innych firm, z wyjątkiem [JSON.NET](https://www.nuget.org/packages/Newtonsoft.Json/), [remotion. LINQ](https://www.nuget.org/packages/Remotion.Linq/)i [IX-Async](https://www.nuget.org/packages/System.Interactive.Async/). Te zależności innych firm są uważane za niezbędne do zapewnienia funkcji głównych funkcji.
 * Obejmuje wszystkie obsługiwane pakiety przez zespół ASP.NET Core, z wyjątkiem tych, które zawierają zależności innych firm (inne niż wspomniane wcześniej).
@@ -93,7 +93,7 @@ Poprzedzający znacznik reprezentuje typowy szablon ASP.NET Core 2. x. Nie okre�
 
 Niejawna wersja jest ustawiona na `major.minor.0` dla aplikacji przenośnych. Mechanizm przekazujący przechodzenie do platformy udostępnionej będzie uruchamiał aplikację w najnowszej zgodnej wersji wśród zainstalowanych platform udostępnionych. Aby zagwarantować, że ta sama wersja jest używana w środowisku deweloperskim, testowym i produkcyjnym, upewnij się, że ta sama wersja udostępnionej platformy jest zainstalowana we wszystkich środowiskach. W przypadku aplikacji z własnym niejawnym numerem wersji jest ustawiana `major.minor.patch` Struktura udostępniona w zainstalowanym zestawie SDK.
 
-Określenie numeru wersji w `Microsoft.AspNetCore.App` odwołaniu nie gwarantuje **not** , że zostanie wybrana wersja udostępnionej platformy. Na przykład załóżmy, że jest określona wersja "2.2.1", ale zainstalowano "2.2.3". W takim przypadku aplikacja będzie używać "2.2.3". Chociaż nie jest to zalecane, można wyłączyć funkcję wycofywania do przodu (poprawka i/lub pomocnicza). Aby uzyskać więcej informacji na temat przetworzenia i konfigurowania zachowań hosta dotnet, zobacz [przewinięcie hosta dotnet do przodu](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
+Określenie numeru wersji w `Microsoft.AspNetCore.App` odwołaniu nie gwarantuje  , że zostanie wybrana wersja udostępnionej platformy. Na przykład załóżmy, że jest określona wersja "2.2.1", ale zainstalowano "2.2.3". W takim przypadku aplikacja będzie używać "2.2.3". Chociaż nie jest to zalecane, można wyłączyć funkcję wycofywania do przodu (poprawka i/lub pomocnicza). Aby uzyskać więcej informacji na temat przetworzenia i konfigurowania zachowań hosta dotnet, zobacz [przewinięcie hosta dotnet do przodu](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
 
 ::: moniker-end
 

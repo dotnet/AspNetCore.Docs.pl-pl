@@ -18,17 +18,17 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 657072803f59feb99de8b31ddb3a6433d832aa30
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059627"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Część 7, Dodawanie wyszukiwania do aplikacji ASP.NET Core MVC
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-W tej sekcji dodasz możliwość wyszukiwania do `Index` metody akcji, która umożliwia wyszukiwanie filmów według *gatunku* lub *nazwy* .
+W tej sekcji dodasz możliwość wyszukiwania do `Index` metody akcji, która umożliwia wyszukiwanie filmów według *gatunku* lub *nazwy*.
 
 Zaktualizuj metodę znajdującą się `Index` wewnątrz *kontrolerów/MoviesController. cs* przy użyciu następującego kodu:
 
@@ -55,7 +55,7 @@ Przejdź do adresu `/Movies/Index`. Dołącz ciąg zapytania, taki jak `?searchS
 
 ![Widok indeksu](~/tutorials/first-mvc-app/search/_static/ghost.png)
 
-Jeśli zmienisz podpis `Index` metody w taki sposób, aby miał parametr o nazwie `id` , `id` parametr będzie zgodny z opcjonalnym `{id}` symbolem zastępczym dla tras domyślnych ustawionych w *Startup.cs* .
+Jeśli zmienisz podpis `Index` metody w taki sposób, aby miał parametr o nazwie `id` , `id` parametr będzie zgodny z opcjonalnym `{id}` symbolem zastępczym dla tras domyślnych ustawionych w *Startup.cs*.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/monitor
 ms.openlocfilehash: 74e789828bf5d54e3457f235657f8ed7086df80d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056754"
 ---
 # <a name="monitor-and-debug"></a>Monitorowanie i debugowanie
@@ -49,11 +49,11 @@ App Service aplikacje sieci Web są łatwo monitorowane w czasie rzeczywistym. A
 
     ![Zrzut ekranu przedstawiający panel przegląd](./media/monitoring/overview.png)
 
-    * **Http 5xx** : liczba błędów po stronie serwera, zazwyczaj wyjątków w kodzie ASP.NET Core.
-    * **Dane w** : dane przychodzące z aplikacji sieci Web.
+    * **Http 5xx**: liczba błędów po stronie serwera, zazwyczaj wyjątków w kodzie ASP.NET Core.
+    * **Dane w**: dane przychodzące z aplikacji sieci Web.
     * **Dane wyjściowe: dane wychodzące** z aplikacji sieci Web do klientów.
-    * **Żądania** : liczba żądań HTTP.
-    * **Średni czas odpowiedzi** : Średni czas odpowiedzi aplikacji sieci Web na żądania HTTP.
+    * **Żądania**: liczba żądań HTTP.
+    * **Średni czas odpowiedzi**: Średni czas odpowiedzi aplikacji sieci Web na żądania HTTP.
 
     Na tej stronie znajdują się również różne narzędzia samoobsługowe umożliwiające rozwiązywanie problemów i optymalizację.
 
@@ -80,8 +80,8 @@ App Service aplikacje sieci Web są łatwo monitorowane w czasie rzeczywistym. A
 
     ![Konfiguracja Application Insights](./media/monitoring/new-app-insights.png)
 
-1. Dla **środowiska uruchomieniowego/platformy** wybierz pozycję **ASP.NET Core** . Zaakceptuj ustawienia domyślne.
-1. Wybierz pozycję **OK** . Jeśli zostanie wyświetlony monit o potwierdzenie, wybierz pozycję **Kontynuuj** .
+1. Dla **środowiska uruchomieniowego/platformy** wybierz pozycję **ASP.NET Core**. Zaakceptuj ustawienia domyślne.
+1. Wybierz pozycję **OK**. Jeśli zostanie wyświetlony monit o potwierdzenie, wybierz pozycję **Kontynuuj**.
 1. Po utworzeniu zasobu kliknij nazwę Application Insights zasobu, aby przejść bezpośrednio do strony Application Insights.
 
     ![Nowy zasób Application Insights jest gotowy](./media/monitoring/new-app-insights-done.png)
@@ -97,14 +97,14 @@ Application Insights zapewnia przydatne informacje po stronie serwera bez dodatk
 Dzienniki serwera sieci Web i aplikacji są domyślnie wyłączone w Azure App Service. Włącz dzienniki, wykonując następujące czynności:
 
 1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *mywebapp \<unique_number\>* .
-1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** . Wybierz pozycję **dzienniki diagnostyczne** .
+1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** . Wybierz pozycję **dzienniki diagnostyczne**.
 
     ![Łącze do dzienników diagnostycznych](./media/monitoring/logging.png)
 
-1. Włącz **Rejestrowanie aplikacji (system plików)** . Jeśli zostanie wyświetlony monit, kliknij pole, aby zainstalować rozszerzenia w celu włączenia rejestrowania aplikacji w aplikacji sieci Web.
-1. Ustaw **rejestrowanie serwera sieci Web** w **systemie plików** .
+1. Włącz **Rejestrowanie aplikacji (system plików)**. Jeśli zostanie wyświetlony monit, kliknij pole, aby zainstalować rozszerzenia w celu włączenia rejestrowania aplikacji w aplikacji sieci Web.
+1. Ustaw **rejestrowanie serwera sieci Web** w **systemie plików**.
 1. Wprowadź **okres przechowywania** w dniach. Na przykład 30.
-1. Kliknij pozycję **Zapisz** .
+1. Kliknij pozycję **Zapisz**.
 
 Dla aplikacji sieci Web generowane są dzienniki ASP.NET Core i serwera sieci Web (App Service). Można je pobrać przy użyciu informacji dotyczących protokołu FTP/FTPS. Hasło jest takie samo jak w przypadku poświadczeń wdrożenia utworzonych wcześniej w tym przewodniku. Dzienniki mogą być [przesyłane strumieniowo bezpośrednio do komputera lokalnego przy użyciu programu PowerShell lub interfejsu wiersza polecenia platformy Azure](/azure/app-service/web-sites-enable-diagnostic-log#download). Dzienniki mogą być również [wyświetlane w Application Insights](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights).
 
@@ -113,7 +113,7 @@ Dla aplikacji sieci Web generowane są dzienniki ASP.NET Core i serwera sieci We
 Dzienniki aplikacji i serwera sieci Web mogą być przesyłane strumieniowo w czasie rzeczywistym za pomocą portalu.
 
 1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *mywebapp \<unique_number\>* .
-1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** i wybierz pozycję **strumień dzienników** .
+1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** i wybierz pozycję **strumień dzienników**.
 
     ![Zrzut ekranu przedstawiający link strumienia dziennika](./media/monitoring/log-stream.png)
 

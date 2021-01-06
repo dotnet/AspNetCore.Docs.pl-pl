@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/file-providers
 ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059445"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dostawcy plików w ASP.NET Core
@@ -115,7 +115,7 @@ Użyj [wzorców globalizowania](#glob-patterns) , aby określić jeden lub więc
 
 Aplikacja Przykładowa *FileProviderSample* tworzy `ManifestEmbeddedFileProvider` i przekazuje aktualnie wykonywany zestaw do jego konstruktora.
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -162,7 +162,7 @@ Niektóre systemy plików, takie jak kontenery platformy Docker i udziały sieci
 
 ### <a name="glob-patterns"></a>Wzorce globalizowania
 
-Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)* . Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
+Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)*. Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
 
 **`*`**  
 Dopasowuje wszystko na bieżącym poziomie folderu, dowolnej nazwie pliku lub dowolnym rozszerzeniu pliku. Dopasowania są kończone przez `/` `.` znaki i w ścieżce pliku.
@@ -262,7 +262,7 @@ Użyj [wzorców globalizowania](#glob-patterns) , aby określić jeden lub więc
 
 Przykładowa aplikacja tworzy `ManifestEmbeddedFileProvider` i przekazuje aktualnie wykonywany zestaw do jego konstruktora.
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -304,7 +304,7 @@ Niektóre systemy plików, takie jak kontenery platformy Docker i udziały sieci
 
 ## <a name="glob-patterns"></a>Wzorce globalizowania
 
-Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)* . Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
+Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)*. Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
 
 **`*`**  
 Dopasowuje wszystko na bieżącym poziomie folderu, dowolnej nazwie pliku lub dowolnym rozszerzeniu pliku. Dopasowania są kończone przez `/` `.` znaki i w ścieżce pliku.

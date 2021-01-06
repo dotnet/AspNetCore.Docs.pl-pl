@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/windows-service
 ms.openlocfilehash: 31a738e7aa8779171dfa09a5678d7240b8f62343
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057235"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>ASP.NET Core hosta w usłudze systemu Windows
@@ -62,7 +62,7 @@ Aplikacja wymaga odwołania do pakietu dla elementu [Microsoft. Extensions. host
   * Zastąp domyślny poziom dziennika `Logging:EventLog:LogLevel:Default` kluczem w *appsettings.json* / *appSettings. { Environment}. JSON* lub inny dostawca konfiguracji.
   * Tylko Administratorzy mogą tworzyć nowe źródła zdarzeń. Gdy nie można utworzyć źródła zdarzeń przy użyciu nazwy aplikacji, w źródle *aplikacji* jest rejestrowane ostrzeżenie, a dzienniki zdarzeń są wyłączone.
 
-W `CreateHostBuilder` programie *program.cs* :
+W `CreateHostBuilder` programie *program.cs*:
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -97,7 +97,7 @@ Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xr
 
 ### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny ( *. exe* ), nazywany *plik wykonywalny zależny od platformy* .
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
 Jeśli używasz [zestawu Web SDK](#sdk), plik *web.config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true` .
 
@@ -153,13 +153,13 @@ Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Dir
 
 Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc* .
-1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika** .
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
 1. Otwórz okno **Logowanie jako usługa** .
-1. Wybierz pozycję **Dodaj użytkownika lub grupę** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane** . Wybierz pozycję **Znajdź teraz** . Wybierz z listy konto użytkownika. Wybierz pozycję **OK** . Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz pozycję **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -277,7 +277,7 @@ Aby rozwiązać problem z aplikacją usługi systemu Windows, zobacz <xref:test/
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
 * Usługa nie jest w stanie uruchomienia.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32* .
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32*.
 * Użytkownik nie ma uprawnień do *logowania się jako usługa* .
 * Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania `New-Service` polecenia programu PowerShell.
 * Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).
@@ -399,9 +399,9 @@ Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xr
 
 ### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny ( *. exe* ), nazywany *plik wykonywalny zależny od platformy* .
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny ( *exe* ) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
 Plik *web.config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true` .
 
@@ -465,13 +465,13 @@ Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Dir
 
 Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc* .
-1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika** .
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
 1. Otwórz okno **Logowanie jako usługa** .
-1. Wybierz pozycję **Dodaj użytkownika lub grupę** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane** . Wybierz pozycję **Znajdź teraz** . Wybierz z listy konto użytkownika. Wybierz pozycję **OK** . Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz pozycję **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -611,7 +611,7 @@ Aby rozwiązać problem z aplikacją usługi systemu Windows, zobacz <xref:test/
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
 * Usługa nie jest w stanie uruchomienia.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32* .
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32*.
 * Użytkownik nie ma uprawnień do *logowania się jako usługa* .
 * Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania `New-Service` polecenia programu PowerShell.
 * Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).
@@ -733,11 +733,11 @@ Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xr
 
 ### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny ( *. exe* ), nazywany *plik wykonywalny zależny od platformy* .
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny ( *exe* ) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
-Właściwość `<UseAppHost>` ma ustawioną wartość `true`. Ta właściwość zapewnia usługę ze ścieżką aktywacji (plik wykonywalny, *exe* ) dla FDD.
+Właściwość `<UseAppHost>` ma ustawioną wartość `true`. Ta właściwość zapewnia usługę ze ścieżką aktywacji (plik wykonywalny, *exe*) dla FDD.
 
 Plik *web.config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true` .
 
@@ -802,13 +802,13 @@ Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Dir
 
 Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc* .
-1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika** .
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
 1. Otwórz okno **Logowanie jako usługa** .
-1. Wybierz pozycję **Dodaj użytkownika lub grupę** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane** . Wybierz pozycję **Znajdź teraz** . Wybierz z listy konto użytkownika. Wybierz pozycję **OK** . Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz pozycję **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -948,7 +948,7 @@ Aby rozwiązać problem z aplikacją usługi systemu Windows, zobacz <xref:test/
   * *bin/Release/{Target Framework}/Publish* (FDD)
   * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
 * Usługa nie jest w stanie uruchomienia.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32* .
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c: \\ Windows \\ system32*.
 * Użytkownik nie ma uprawnień do *logowania się jako usługa* .
 * Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania `New-Service` polecenia programu PowerShell.
 * Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).

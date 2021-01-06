@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054843"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Łączenie i zminifikować zasobów statycznych w ASP.NET Core
@@ -55,7 +55,7 @@ Minifikacja zmniejsza funkcję do następujących:
 
 Oprócz usuwania komentarzy i niepotrzebnych białych znaków, nazwy następujących parametrów i zmiennych zostały zmienione w następujący sposób:
 
-Oryginał | Zmiany
+Oryginalne | Zmiany
 --- | :---:
 `imageTagAndImageID` | `t`
 `imageContext` | `a`
@@ -90,25 +90,25 @@ W ASP.NET Core 2,0 lub starszych szablon projektu MVC i Razor Pages udostępnia 
 
 ::: moniker range=">= aspnetcore-2.1"
 
-W ASP.NET Core 2,1 lub nowszej Dodaj nowy plik JSON o nazwie *bundleconfig.json* , do Razor elementu głównego projektu MVC lub Pages. Dołącz następujący kod JSON do tego pliku jako punkt początkowy:
+W ASP.NET Core 2,1 lub nowszej Dodaj nowy plik JSON o nazwie *bundleconfig.json*, do Razor elementu głównego projektu MVC lub Pages. Dołącz następujący kod JSON do tego pliku jako punkt początkowy:
 
 ::: moniker-end
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-*bundleconfig.jsw* pliku definiuje opcje dla każdego pakietu. W poprzednim przykładzie została zdefiniowana jedna konfiguracja pakietu dla plików niestandardowych JavaScript ( *wwwroot/js/site.js* ) i arkusza stylów ( *wwwroot/CSS/site. css* ).
+*bundleconfig.jsw* pliku definiuje opcje dla każdego pakietu. W poprzednim przykładzie została zdefiniowana jedna konfiguracja pakietu dla plików niestandardowych JavaScript (*wwwroot/js/site.js*) i arkusza stylów (*wwwroot/CSS/site. css*).
 
 Opcje konfiguracji obejmują:
 
 * `outputFileName`: Nazwa pliku pakietu do wyprowadzenia. Może zawierać ścieżkę względną z *bundleconfig.js* pliku. **Wymagane**
-* `inputFiles`: Tablica plików do powiązania ze sobą. Są to względne ścieżki do pliku konfiguracji. **opcjonalne** , * pusta wartość powoduje pusty plik wyjściowy. Obsługiwane są wzorce [obsługi symboli wieloznacznych](https://www.tldp.org/LDP/abs/html/globbingref.html) .
-* `minify`: Opcje minifikacja dla typu danych wyjściowych. **opcjonalne** , *domyślne — `minify: { enabled: true }`*
+* `inputFiles`: Tablica plików do powiązania ze sobą. Są to względne ścieżki do pliku konfiguracji. **opcjonalne**, * pusta wartość powoduje pusty plik wyjściowy. Obsługiwane są wzorce [obsługi symboli wieloznacznych](https://www.tldp.org/LDP/abs/html/globbingref.html) .
+* `minify`: Opcje minifikacja dla typu danych wyjściowych. **opcjonalne**, *domyślne — `minify: { enabled: true }`*
   * Opcje konfiguracji są dostępne dla każdego typu pliku wyjściowego.
     * [Minifier CSS](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [Minifier JavaScript](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [Minifier HTML](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: Flaga oznaczająca, czy dodać wygenerowane pliki do pliku projektu. **opcjonalne** , *Domyślnie-false*
-* `sourceMap`: Flaga oznaczająca, czy generować mapę źródłową dla powiązanego pliku. **opcjonalne** , *Domyślnie-false*
+* `includeInProject`: Flaga oznaczająca, czy dodać wygenerowane pliki do pliku projektu. **opcjonalne**, *Domyślnie-false*
+* `sourceMap`: Flaga oznaczająca, czy generować mapę źródłową dla powiązanego pliku. **opcjonalne**, *Domyślnie-false*
 * `sourceMapRootPath`: Ścieżka katalogu głównego do przechowywania wygenerowanego pliku mapy źródłowej.
 
 ## <a name="add-files-to-workflow"></a>Dodaj pliki do przepływu pracy
@@ -117,7 +117,7 @@ Rozważmy przykład, w którym dodatkowy *niestandardowy plik CSS* został dodan
 
 [!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
 
-Aby zminifikować *niestandardowy. css* i powiązać go z plikiem *site. css* w pliku *site. min. css* , Dodaj ścieżkę względną do *bundleconfig.jsna* :
+Aby zminifikować *niestandardowy. css* i powiązać go z plikiem *site. css* w pliku *site. min. css* , Dodaj ścieżkę względną do *bundleconfig.jsna*:
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
 
@@ -179,7 +179,7 @@ Dodaj *package.js* do pliku, w następujący `devDependencies` sposób, do katal
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
-Zainstaluj zależności, uruchamiając następujące polecenie na tym samym poziomie co *package.jsna* :
+Zainstaluj zależności, uruchamiając następujące polecenie na tym samym poziomie co *package.jsna*:
 
 ```bash
 npm i

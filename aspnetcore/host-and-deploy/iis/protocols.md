@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/protocols
 ms.openlocfilehash: 4d0dc1239467e92c4127f631709c2ffd6098bfc5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057417"
 ---
 # <a name="use-aspnet-core-with-http2-on-iis"></a>Używanie ASP.NET Core z protokołem HTTP/2 w usługach IIS

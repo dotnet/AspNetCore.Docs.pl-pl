@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056845"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
@@ -46,7 +46,7 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 3.0 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -63,31 +63,31 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
-1. Uruchom program Visual Studio. W oknie uruchamiania wybierz pozycję **Kontynuuj bez kodu** .
-1. Przejdź do **Tools** > **opcji Narzędzia Opcje** > **projekty i rozwiązania** > **Sieć Web zarządzanie pakietami** > **zewnętrznych narzędzi sieci Web** .
-1. Wybierz z listy wpis *$ (Path)* . Kliknij strzałkę w górę, aby przenieść wpis do drugiej pozycji na liście, a następnie wybierz **przycisk OK** .
+1. Uruchom program Visual Studio. W oknie uruchamiania wybierz pozycję **Kontynuuj bez kodu**.
+1. Przejdź do  > **opcji Narzędzia Opcje** > **projekty i rozwiązania** > **Sieć Web zarządzanie pakietami** > **zewnętrznych narzędzi sieci Web**.
+1. Wybierz z listy wpis *$ (Path)* . Kliknij strzałkę w górę, aby przenieść wpis do drugiej pozycji na liście, a następnie wybierz **przycisk OK**.
 
     ![Konfiguracja programu Visual Studio](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
 
 Konfiguracja programu Visual Studio została ukończona.
 
-1. Użyj opcji menu **plik**  >  **Nowy**  >  **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** . Wybierz opcję **Dalej** .
-1. Nadaj nazwę projekt *SignalR WebPack* , a następnie wybierz pozycję **Utwórz** .
-1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 3,1* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz** .
+1. Użyj opcji menu **plik**  >  **Nowy**  >  **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** . Wybierz pozycję **Dalej**.
+1. Nadaj nazwę projekt *SignalR WebPack*, a następnie wybierz pozycję **Utwórz**.
+1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 3,1* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz**.
 
 Dodaj `Microsoft.TypeScript.MSBuild` pakiet do projektu:
 
-1. W **Eksplorator rozwiązań** (prawego okienka) kliknij prawym przyciskiem myszy węzeł projektu i wybierz polecenie **Zarządzaj pakietami NuGet** . Na karcie **Przeglądaj** Wyszukaj `Microsoft.TypeScript.MSBuild` pozycję, a następnie kliknij pozycję **Zainstaluj** po prawej stronie, aby zainstalować pakiet.
+1. W **Eksplorator rozwiązań** (prawego okienka) kliknij prawym przyciskiem myszy węzeł projektu i wybierz polecenie **Zarządzaj pakietami NuGet**. Na karcie **Przeglądaj** Wyszukaj `Microsoft.TypeScript.MSBuild` pozycję, a następnie kliknij pozycję **Zainstaluj** po prawej stronie, aby zainstalować pakiet.
 
-Program Visual Studio dodaje pakiet NuGet w węźle **zależności** w **Eksplorator rozwiązań** , włączając kompilację języka TypeScript w projekcie.
+Program Visual Studio dodaje pakiet NuGet w węźle **zależności** w **Eksplorator rozwiązań**, włączając kompilację języka TypeScript w projekcie.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Uruchom następujące polecenie w **zintegrowanym terminalu** :
+Uruchom następujące polecenie w **zintegrowanym terminalu**:
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
@@ -97,7 +97,7 @@ code -r SignalRWebPack
 * `dotnet new`Polecenie tworzy pustą aplikację sieci web ASP.NET Core w katalogu *SignalR pakietu WebPack* .
 * `code`Polecenie otwiera folder *SignalR WebPack* w bieżącym wystąpieniu Visual Studio Code.
 
-Uruchom następujące polecenie interfejs wiersza polecenia platformy .NET Core w **zintegrowanym terminalu** :
+Uruchom następujące polecenie interfejs wiersza polecenia platformy .NET Core w **zintegrowanym terminalu**:
 
 ```dotnetcli
 dotnet add package Microsoft.TypeScript.MSBuild
@@ -132,7 +132,7 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
     Niektóre szczegóły polecenia do uwagi:
 
     * Numer wersji następuje po `@` znaku dla każdej nazwy pakietu. npm instaluje te określone wersje pakietu.
-    * `-E`Opcja wyłącza domyślne zachowanie npm w pisaniu operatorów zakresu [wersji semantycznej](https://semver.org/) w celu *package.jsna* . Na przykład, `"webpack": "4.41.5"` jest używany zamiast `"webpack": "^4.41.5"` . Ta opcja Zapobiega niezamierzonym uaktualnianiu do nowszych wersji pakietu.
+    * `-E`Opcja wyłącza domyślne zachowanie npm w pisaniu operatorów zakresu [wersji semantycznej](https://semver.org/) w celu *package.jsna*. Na przykład, `"webpack": "4.41.5"` jest używany zamiast `"webpack": "^4.41.5"` . Ta opcja Zapobiega niezamierzonym uaktualnianiu do nowszych wersji pakietu.
 
     Więcej szczegółów można znaleźć w dokumentacji [npm-Install](https://docs.npmjs.com/cli/install) .
 
@@ -152,13 +152,13 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
     * `release`: Pakietuje zasoby po stronie klienta w trybie produkcyjnym.
     * `publish`: Uruchamia skrypt służący `release` do łączenia zasobów po stronie klienta w trybie produkcyjnym. Wywołuje polecenie [publikowania](/dotnet/core/tools/dotnet-publish) interfejs wiersza polecenia platformy .NET Core, aby opublikować aplikację.
 
-1. Utwórz plik o nazwie *webpack.config.js* , w katalogu głównym projektu, przy użyciu następującego kodu:
+1. Utwórz plik o nazwie *webpack.config.js*, w katalogu głównym projektu, przy użyciu następującego kodu:
 
     [!code-javascript[webpack.config.js](signalr-typescript-webpack/sample/3.x/webpack.config.js)]
 
     Poprzedni plik konfiguruje kompilację pakietu WebPack. Niektóre szczegóły konfiguracji do uwagi:
 
-    * `output`Właściwość zastępuje domyślną wartość *rozkłu* . Pakiet jest emitowany w katalogu *wwwroot* .
+    * `output`Właściwość zastępuje domyślną wartość *rozkłu*. Pakiet jest emitowany w katalogu *wwwroot* .
     * `resolve.extensions`Tablica zawiera kod *js* do zaimportowania SignalR klienta JavaScript.
 
 1. Utwórz nowy katalog *src* w katalogu głównym projektu do przechowywania zasobów po stronie klienta.
@@ -259,7 +259,7 @@ W aplikacji jest obecnie wyświetlany podstawowy formularz służący do wysyła
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 
@@ -303,7 +303,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 2,2 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -320,11 +320,11 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
-1. Przejdź do **Tools** > **opcji Narzędzia Opcje** > **projekty i rozwiązania** > **Sieć Web zarządzanie pakietami** > **zewnętrznych narzędzi sieci Web** .
+1. Przejdź do  > **opcji Narzędzia Opcje** > **projekty i rozwiązania** > **Sieć Web zarządzanie pakietami** > **zewnętrznych narzędzi sieci Web**.
 1. Wybierz z listy wpis *$ (Path)* . Kliknij strzałkę w górę, aby przenieść wpis do drugiej pozycji na liście.
 
     ![Konfiguracja programu Visual Studio](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
@@ -332,12 +332,12 @@ Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Pa
 Konfiguracja programu Visual Studio została ukończona. Czas na utworzenie projektu.
 
 1. Użyj opcji menu **plik** > **Nowy** > **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** .
-1. Nadaj nazwę projekt *SignalR WebPack* , a następnie wybierz pozycję **Utwórz** .
-1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 2,2* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz** .
+1. Nadaj nazwę projekt *SignalR WebPack*, a następnie wybierz pozycję **Utwórz**.
+1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 2,2* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Uruchom następujące polecenie w **zintegrowanym terminalu** :
+Uruchom następujące polecenie w **zintegrowanym terminalu**:
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
@@ -372,7 +372,7 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
     Niektóre szczegóły polecenia do uwagi:
 
     * Numer wersji następuje po `@` znaku dla każdej nazwy pakietu. npm instaluje te określone wersje pakietu.
-    * `-E`Opcja wyłącza domyślne zachowanie npm w pisaniu operatorów zakresu [wersji semantycznej](https://semver.org/) w celu *package.jsna* . Na przykład, `"webpack": "4.29.3"` jest używany zamiast `"webpack": "^4.29.3"` . Ta opcja Zapobiega niezamierzonym uaktualnianiu do nowszych wersji pakietu.
+    * `-E`Opcja wyłącza domyślne zachowanie npm w pisaniu operatorów zakresu [wersji semantycznej](https://semver.org/) w celu *package.jsna*. Na przykład, `"webpack": "4.29.3"` jest używany zamiast `"webpack": "^4.29.3"` . Ta opcja Zapobiega niezamierzonym uaktualnianiu do nowszych wersji pakietu.
 
     Więcej szczegółów można znaleźć w dokumentacji [npm-Install](https://docs.npmjs.com/cli/install) .
 
@@ -398,7 +398,7 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
 
     Poprzedni plik konfiguruje kompilację pakietu WebPack. Niektóre szczegóły konfiguracji do uwagi:
 
-    * `output`Właściwość zastępuje domyślną wartość *rozkłu* . Pakiet jest emitowany w katalogu *wwwroot* .
+    * `output`Właściwość zastępuje domyślną wartość *rozkłu*. Pakiet jest emitowany w katalogu *wwwroot* .
     * `resolve.extensions`Tablica zawiera kod *js* do zaimportowania SignalR klienta JavaScript.
 
 1. Utwórz nowy katalog *src* w katalogu głównym projektu do przechowywania zasobów po stronie klienta.
@@ -434,7 +434,7 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
 
 ## <a name="configure-the-aspnet-core-app"></a>Konfigurowanie aplikacji ASP.NET Core
 
-1. Kod podany w `Startup.Configure` metodzie wyświetla *Hello World!* . Zastąp `app.Run` wywołanie metody wywołaniami do [UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_).
+1. Kod podany w `Startup.Configure` metodzie wyświetla *Hello World!*. Zastąp `app.Run` wywołanie metody wywołaniami do [UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_).
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseStaticDefaultFiles)]
 
@@ -496,7 +496,7 @@ W aplikacji jest obecnie wyświetlany prosty formularz służący do wysyłania 
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 

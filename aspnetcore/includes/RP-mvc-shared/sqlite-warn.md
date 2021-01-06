@@ -9,7 +9,7 @@
 >* Porzucenie starej tabeli.
 >* Zmiana nazwy nowej tabeli.
 >
->Więcej informacji zawierają następujące zasoby:
+>Więcej informacji można znaleźć w następujących zasobach:
 >
 > * [Ograniczenia dostawcy bazy danych EF Core SQLite](/ef/core/providers/sqlite/limitations)
 > * [Dostosowywanie kodu migracji](/ef/core/managing-schemas/migrations/#customize-migration-code)

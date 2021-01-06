@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/sort-filter-page
 ms.openlocfilehash: 8e425d413471912c763c4892a90e9d12039efec4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053985"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Samouczek: Dodawanie sortowania, filtrowania i stronicowania — ASP.NET MVC z EF Core
@@ -80,7 +80,7 @@ Ten kod może uzyskać pełne informacje z dużą liczbą kolumn. [W ostatnim sa
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-view"></a>Dodawanie hiperłączy nagłówka kolumny do widoku indeksu ucznia
 
-Zastąp kod w *widokach/uczniów/index. cshtml* , używając poniższego kodu do dodawania hiperłączy nagłówka kolumny. Zmienione wiersze są wyróżnione.
+Zastąp kod w *widokach/uczniów/index. cshtml*, używając poniższego kodu do dodawania hiperłączy nagłówka kolumny. Zmienione wiersze są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
@@ -105,7 +105,7 @@ Dodano `searchString` parametr do `Index` metody. Wartość ciągu wyszukiwania 
 > [!NOTE]
 > W tym miejscu wywoływana jest `Where` Metoda `IQueryable` obiektu, a filtr zostanie przetworzony na serwerze. W niektórych scenariuszach może być wywoływana `Where` Metoda jako metoda rozszerzająca w kolekcji w pamięci. (Na przykład załóżmy, że zmienisz odwołanie na `_context.Students` tak, aby zamiast EF `DbSet` odwołuje się do metody repozytorium, która zwraca `IEnumerable` kolekcję). Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 >
->Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter:  *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())* . Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
+>Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter:  *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())*. Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Dodawanie pola wyszukiwania do widoku indeksu ucznia
 

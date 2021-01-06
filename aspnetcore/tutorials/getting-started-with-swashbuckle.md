@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
 ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057612"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
@@ -43,7 +43,7 @@ Pakiet Swashbuckle składa się z trzech głównych składników:
 
 Swashbuckle można dodać przy użyciu następujących metod:
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
@@ -71,7 +71,7 @@ Swashbuckle można dodać przy użyciu następujących metod:
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Uruchom następujące polecenie w **zintegrowanym terminalu** :
+Uruchom następujące polecenie w **zintegrowanym terminalu**:
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -176,11 +176,11 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 Komentarze XML można włączyć przy użyciu następujących metod:
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+#### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj** .
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj**.
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -189,7 +189,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Właściwości** .
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Właściwości**.
 * Sprawdź pole **plik dokumentacji XML** w sekcji **dane wyjściowe** na karcie **kompilacja** .
 
 ::: moniker-end
@@ -198,7 +198,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* W *okienko rozwiązania* naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik** .
+* W *okienko rozwiązania* naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik**.
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -207,7 +207,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* Otwórz okno dialogowe **Opcje projektu** > **Build** > **kompilator** kompilacji
+* Otwórz okno dialogowe **Opcje projektu** >  > **kompilator** kompilacji
 * Zaznacz pole **Generuj dokumentację XML** w sekcji **Opcje ogólne** .
 
 ::: moniker-end
@@ -409,7 +409,7 @@ Obecność tego atrybutu zmienia zachowanie interfejsu użytkownika i zmienia ź
 },
 ```
 
-Dodaj `[Produces("application/json")]` atrybut do kontrolera interfejsu API. Celem jest zadeklarowanie, że działania kontrolera obsługują typ zawartości odpowiedzi dla *aplikacji/JSON* :
+Dodaj `[Produces("application/json")]` atrybut do kontrolera interfejsu API. Celem jest zadeklarowanie, że działania kontrolera obsługują typ zawartości odpowiedzi dla *aplikacji/JSON*:
 
 ::: moniker range="<= aspnetcore-2.0"
 

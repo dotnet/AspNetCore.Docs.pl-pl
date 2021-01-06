@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: dad9136439b61ad98523061d181fe44d3bf1273d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054752"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Korzystanie z interfejsu wiersza polecenia LibMan z ASP.NET Core
@@ -119,11 +119,11 @@ Następujące opcje są dostępne dla `libman init` polecenia:
 
 * `-d|--default-destination <PATH>`
 
-  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli nie `destination` zdefiniowano żadnej właściwości dla biblioteki w *libman.js* . `<PATH>`Wartość jest zapisywana we `defaultDestination` właściwości *libman.json* .
+  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli nie `destination` zdefiniowano żadnej właściwości dla biblioteki w *libman.js*. `<PATH>`Wartość jest zapisywana we `defaultDestination` właściwości *libman.json*.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>`Wartość jest zapisywana we `defaultProvider` właściwości *libman.json* . Zamień `<PROVIDER>` na jedną z następujących wartości:
+  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>`Wartość jest zapisywana we `defaultProvider` właściwości *libman.json*. Zamień `<PROVIDER>` na jedną z następujących wartości:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -179,7 +179,7 @@ Następujące opcje są dostępne dla `libman install` polecenia:
 
 * `-d|--destination <PATH>`
 
-  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` Właściwość nie jest określona w *libman.jsna* , ta opcja jest wymagana.
+  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` Właściwość nie jest określona w *libman.jsna*, ta opcja jest wymagana.
 
 * `--files <FILE>`
 
@@ -191,7 +191,7 @@ Następujące opcje są dostępne dla `libman install` polecenia:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Jeśli nie zostanie określony, `defaultProvider` Właściwość w *libman.js* jest używana. Jeśli żadna `defaultProvider` Właściwość nie jest określona w *libman.jsna* , ta opcja jest wymagana.
+  Jeśli nie zostanie określony, `defaultProvider` Właściwość w *libman.js* jest używana. Jeśli żadna `defaultProvider` Właściwość nie jest określona w *libman.jsna*, ta opcja jest wymagana.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -273,7 +273,7 @@ Po zaakceptowaniu domyślnego miejsca docelowego *libman.jsw* pliku przypomina n
 
 ## <a name="restore-library-files"></a>Przywróć pliki biblioteki
 
-`libman restore`Polecenie instaluje pliki bibliotek zdefiniowane w *libman.jsna* . Mają zastosowanie następujące zasady:
+`libman restore`Polecenie instaluje pliki bibliotek zdefiniowane w *libman.jsna*. Mają zastosowanie następujące zasady:
 
 * Jeśli w katalogu głównym projektu nie istnieje *libman.jsw* pliku, zwracany jest błąd.
 * Jeśli Biblioteka określa dostawcę, `defaultProvider` Właściwość w *libman.js* jest ignorowana.
@@ -294,7 +294,7 @@ Następujące opcje są dostępne dla `libman restore` polecenia:
 
 ### <a name="examples"></a>Przykłady
 
-Aby przywrócić pliki biblioteki zdefiniowane w *libman.jsna* :
+Aby przywrócić pliki biblioteki zdefiniowane w *libman.jsna*:
 
 ```console
 libman restore
@@ -329,8 +329,8 @@ libman clean
 
 Polecenie `libman uninstall`:
 
-* Usuwa wszystkie pliki skojarzone z określoną biblioteką z lokalizacji docelowej w *libman.jsna* .
-* Usuwa skojarzoną konfigurację biblioteki z *libman.jsna* .
+* Usuwa wszystkie pliki skojarzone z określoną biblioteką z lokalizacji docelowej w *libman.jsna*.
+* Usuwa skojarzoną konfigurację biblioteki z *libman.jsna*.
 
 Wystąpił błąd, gdy:
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/change-tokens
 ms.openlocfilehash: f20d44c7767b284f727ce19a46224dae0cf6a5e1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053777"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Wykrywanie zmian przy użyciu tokenów zmiany w ASP.NET Core
@@ -67,7 +67,7 @@ Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania 
 
 ## <a name="monitor-for-configuration-changes"></a>Monitorowanie zmian konfiguracji
 
-Domyślnie szablony ASP.NET Core używają [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.json* i *appsettings.Production.json* ) w celu załadowania ustawień konfiguracji aplikacji.
+Domyślnie szablony ASP.NET Core używają [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.json* i *appsettings.Production.json*) w celu załadowania ustawień konfiguracji aplikacji.
 
 Te pliki są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile (IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) , <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> która akceptuje `reloadOnChange` parametr. `reloadOnChange` wskazuje, czy należy ponownie załadować konfigurację w przypadku zmian w pliku. To ustawienie jest dostępne w <xref:Microsoft.Extensions.Hosting.Host> metodzie wygodnej <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> :
 
@@ -85,7 +85,7 @@ Przykładowa aplikacja przedstawia dwie implementacje monitorowania zmian konfig
 
 Plik konfiguracji `FileSystemWatcher` może wyzwolić wiele wywołań zwrotnych tokenów dla jednej zmiany pliku konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz w przypadku wyzwolenia wielu wywołań zwrotnych tokenów, implementacja próbki sprawdza skróty plików. W przykładzie zastosowano mieszanie plików SHA1. Ponowna próba jest zaimplementowana z wycofywaniem wykładniczym. Ponowienie próby jest możliwe, ponieważ może wystąpić zablokowanie pliku, który tymczasowo uniemożliwia Obliczanie nowego skrótu pliku.
 
-*Narzędzia/Narzędzia. cs* :
+*Narzędzia/Narzędzia. cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -115,7 +115,7 @@ Przykład implementuje:
 
 Przykład ustanawia `IConfigurationMonitor` interfejs.
 
-*Rozszerzenia/ConfigurationMonitor. cs* :
+*Rozszerzenia/ConfigurationMonitor. cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -141,7 +141,7 @@ Wystąpienie `ConfigurationMonitor` jest zarejestrowane jako usługa w `Startup.
 
 Strona indeks zapewnia kontrolę nad konfiguracją przez użytkownika. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane do `IndexModel` .
 
-*Pages/index. cshtml. cs* :
+*Pages/index. cshtml. cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -153,7 +153,7 @@ Gdy `OnPostStartMonitoring` jest wyzwalane, monitorowanie jest włączone, a bie
 
 Przyciski w interfejsie użytkownika włączają i wyłączają monitorowanie.
 
-*Pages/index. cshtml* :
+*Pages/index. cshtml*:
 
 [!code-cshtml[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -170,11 +170,11 @@ Przykład używa `GetFileContent` do:
 * Zwróć zawartość pliku.
 * Zaimplementuj algorytm ponawiania prób z wycofywaniem z powrotem, aby uwzględnić przypadki, w których blokada pliku tymczasowo uniemożliwia odczytywanie pliku.
 
-*Narzędzia/Narzędzia. cs* :
+*Narzędzia/Narzędzia. cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService`Jest tworzony w celu obsługi wyszukiwania plików w pamięci podręcznej. `GetFileContent`Wywołanie metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego ( *Services/FileService. cs* ).
+`FileService`Jest tworzony w celu obsługi wyszukiwania plików w pamięci podręcznej. `GetFileContent`Wywołanie metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego (*Services/FileService. cs*).
 
 Jeśli buforowana zawartość nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną wykonane następujące akcje:
 
@@ -194,7 +194,7 @@ W pliku `Startup.ConfigureServices`:
 
 Model strony ładuje zawartość pliku przy użyciu usługi.
 
-Na stronie indeksu `OnGet` ( *strony/index. cshtml. cs* ):
+Na stronie indeksu `OnGet` (*strony/index. cshtml. cs*):
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
@@ -265,7 +265,7 @@ Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania 
 
 ## <a name="monitor-for-configuration-changes"></a>Monitorowanie zmian konfiguracji
 
-Domyślnie szablony ASP.NET Core używają [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.json* i *appsettings.Production.json* ) w celu załadowania ustawień konfiguracji aplikacji.
+Domyślnie szablony ASP.NET Core używają [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.json* i *appsettings.Production.json*) w celu załadowania ustawień konfiguracji aplikacji.
 
 Te pliki są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile (IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) , <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> która akceptuje `reloadOnChange` parametr. `reloadOnChange` wskazuje, czy należy ponownie załadować konfigurację w przypadku zmian w pliku. To ustawienie jest dostępne w <xref:Microsoft.AspNetCore.WebHost> metodzie wygodnej <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> :
 
@@ -283,7 +283,7 @@ Przykładowa aplikacja przedstawia dwie implementacje monitorowania zmian konfig
 
 Plik konfiguracji `FileSystemWatcher` może wyzwolić wiele wywołań zwrotnych tokenów dla jednej zmiany pliku konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz w przypadku wyzwolenia wielu wywołań zwrotnych tokenów, implementacja próbki sprawdza skróty plików. W przykładzie zastosowano mieszanie plików SHA1. Ponowna próba jest zaimplementowana z wycofywaniem wykładniczym. Ponowienie próby jest możliwe, ponieważ może wystąpić zablokowanie pliku, który tymczasowo uniemożliwia Obliczanie nowego skrótu pliku.
 
-*Narzędzia/Narzędzia. cs* :
+*Narzędzia/Narzędzia. cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -313,7 +313,7 @@ Przykład implementuje:
 
 Przykład ustanawia `IConfigurationMonitor` interfejs.
 
-*Rozszerzenia/ConfigurationMonitor. cs* :
+*Rozszerzenia/ConfigurationMonitor. cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -339,7 +339,7 @@ Wystąpienie `ConfigurationMonitor` jest zarejestrowane jako usługa w `Startup.
 
 Strona indeks zapewnia kontrolę nad konfiguracją przez użytkownika. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane do `IndexModel` .
 
-*Pages/index. cshtml. cs* :
+*Pages/index. cshtml. cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -351,7 +351,7 @@ Gdy `OnPostStartMonitoring` jest wyzwalane, monitorowanie jest włączone, a bie
 
 Przyciski w interfejsie użytkownika włączają i wyłączają monitorowanie.
 
-*Pages/index. cshtml* :
+*Pages/index. cshtml*:
 
 [!code-cshtml[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -368,11 +368,11 @@ Przykład używa `GetFileContent` do:
 * Zwróć zawartość pliku.
 * Zaimplementuj algorytm ponawiania prób z wycofywaniem z powrotem, aby uwzględnić przypadki, w których blokada pliku tymczasowo uniemożliwia odczytywanie pliku.
 
-*Narzędzia/Narzędzia. cs* :
+*Narzędzia/Narzędzia. cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService`Jest tworzony w celu obsługi wyszukiwania plików w pamięci podręcznej. `GetFileContent`Wywołanie metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego ( *Services/FileService. cs* ).
+`FileService`Jest tworzony w celu obsługi wyszukiwania plików w pamięci podręcznej. `GetFileContent`Wywołanie metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego (*Services/FileService. cs*).
 
 Jeśli buforowana zawartość nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną wykonane następujące akcje:
 
@@ -392,7 +392,7 @@ W pliku `Startup.ConfigureServices`:
 
 Model strony ładuje zawartość pliku przy użyciu usługi.
 
-Na stronie indeksu `OnGet` ( *strony/index. cshtml. cs* ):
+Na stronie indeksu `OnGet` (*strony/index. cshtml. cs*):
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 

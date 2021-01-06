@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/using-browserlink
 ms.openlocfilehash: 80f05acab55af973faf08b5db79ea4cbaf896b14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054492"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Link przeglądarki w ASP.NET Core
@@ -35,7 +35,7 @@ Link przeglądarki to funkcja programu Visual Studio. Tworzy kanał komunikacyjn
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików ( *. cshtml* ) środowiska uruchomieniowego zgodnie z opisem w temacie <xref:mvc/views/view-compilation> . Razor zmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
+Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików (*. cshtml*) środowiska uruchomieniowego zgodnie z opisem w temacie <xref:mvc/views/view-compilation> . Razor zmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
 
 ::: moniker-end
 
@@ -47,7 +47,7 @@ Podczas konwertowania projektu ASP.NET Core 2,0 na ASP.NET Core 2,1 i przejścia
 
 ::: moniker range="= aspnetcore-2.0"
 
-Szablony projektu **aplikacji sieci Web** , **pustej** i **internetowego interfejsu API** ASP.NET Core 2,0 używają [pakietu Microsoft. AspNetCore. All](xref:fundamentals/metapackage), który zawiera odwołanie do pakietu dla [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). W związku z tym używanie `Microsoft.AspNetCore.All` pakietu nie wymaga żadnych dalszych działań w celu udostępnienia linku przeglądarki do użycia.
+Szablony projektu **aplikacji sieci Web**, **pustej** i **internetowego interfejsu API** ASP.NET Core 2,0 używają [pakietu Microsoft. AspNetCore. All](xref:fundamentals/metapackage), który zawiera odwołanie do pakietu dla [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). W związku z tym używanie `Microsoft.AspNetCore.All` pakietu nie wymaga żadnych dalszych działań w celu udostępnienia linku przeglądarki do użycia.
 
 ::: moniker-end
 
@@ -57,7 +57,7 @@ Szablon projektu **aplikacji sieci Web** ASP.NET Core 1. x zawiera odwołanie do
 
 ::: moniker-end
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 Wywołanie `UseBrowserLink` `Startup.Configure` metody:
 
@@ -86,8 +86,8 @@ Gdy masz otwarty projekt ASP.NET Core, program Visual Studio wyświetli kontrolk
 Za pomocą kontrolki paska narzędzi łącza przeglądarki można:
 
 * Odśwież aplikację sieci Web w kilku przeglądarkach jednocześnie.
-* Otwórz **pulpit nawigacyjny linku do przeglądarki** .
-* Włącza lub wyłącza **link przeglądarki** . Uwaga: łącze przeglądarki jest domyślnie wyłączone w programie Visual Studio.
+* Otwórz **pulpit nawigacyjny linku do przeglądarki**.
+* Włącza lub wyłącza **link przeglądarki**. Uwaga: łącze przeglądarki jest domyślnie wyłączone w programie Visual Studio.
 * Włączać lub wyłączać funkcję [autosynchronizacji CSS](#enable-or-disable-css-auto-sync).
 
 ## <a name="refresh-the-web-app-in-several-browsers-at-once"></a>Odśwież aplikację sieci Web w kilku przeglądarkach jednocześnie
@@ -96,7 +96,7 @@ Aby wybrać jedną przeglądarkę sieci Web, która ma być uruchamiana podczas 
 
 ![Menu rozwijane F5](using-browserlink/_static/debug-target-dropdown-menu.png)
 
-Aby otworzyć wiele przeglądarek jednocześnie, wybierz pozycję **Przeglądaj za pomocą...** z tego samego listy rozwijanej. Naciśnij i przytrzymaj klawisz <kbd>Ctrl</kbd> , aby wybrać przeglądarki, a następnie kliknij przycisk **Przeglądaj** :
+Aby otworzyć wiele przeglądarek jednocześnie, wybierz pozycję **Przeglądaj za pomocą...** z tego samego listy rozwijanej. Naciśnij i przytrzymaj klawisz <kbd>Ctrl</kbd> , aby wybrać przeglądarki, a następnie kliknij przycisk **Przeglądaj**:
 
 ![Otwórz wiele przeglądarek jednocześnie](using-browserlink/_static/open-many-browsers-at-once.png)
 

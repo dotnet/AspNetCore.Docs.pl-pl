@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/linux-apache
 ms.openlocfilehash: 0bae3f888a1b7a3c2860b85754779189c636d86f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057703"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hostowanie ASP.NET Core w systemie Linux przy użyciu oprogramowania Apache
@@ -38,7 +38,7 @@ Korzystając z tego przewodnika, Dowiedz się, jak skonfigurować [Apache](https
 * Zainstaluj środowisko uruchomieniowe platformy .NET Core na serwerze.
    1. Odwiedź [stronę pobieranie platformy .NET Core](https://dotnet.microsoft.com/download/dotnet-core).
    1. Wybierz najnowszą wersję programu .NET Core niebędącą podglądem.
-   1. Pobierz najnowszą wersję środowiska uruchomieniowego bez podglądu w tabeli w obszarze **Uruchamianie aplikacji — środowisko uruchomieniowe** .
+   1. Pobierz najnowszą wersję środowiska uruchomieniowego bez podglądu w tabeli w obszarze **Uruchamianie aplikacji — środowisko uruchomieniowe**.
    1. Wybierz łącze **instrukcje dotyczące Menedżera pakietów** systemu Linux i postępuj zgodnie z instrukcjami CentOS.
 * Istniejąca aplikacja ASP.NET Core.
 
@@ -53,7 +53,7 @@ Jeśli aplikacja jest uruchamiana lokalnie i nie jest skonfigurowana do nawiązy
 * Skonfiguruj aplikację do obsługi bezpiecznych połączeń lokalnych. Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja protokołu HTTPS](#https-configuration) .
 * Usuń `https://localhost:5001` (jeśli istnieje) z `applicationUrl` Właściwości we *właściwościach/launchSettings.jsw* pliku.
 
-Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) ze środowiska programistycznego, aby spakować aplikację do katalogu (na przykład *bin/Release/ &lt; target_framework_moniker &gt; /Publish* ), które można uruchomić na serwerze:
+Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) ze środowiska programistycznego, aby spakować aplikację do katalogu (na przykład *bin/Release/ &lt; target_framework_moniker &gt; /Publish*), które można uruchomić na serwerze:
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -61,7 +61,7 @@ dotnet publish --configuration Release
 
 Aplikację można również opublikować jako [samodzielne wdrożenie](/dotnet/core/deploying/#self-contained-deployments-scd) , jeśli wolisz, aby nie obsługiwać środowiska uruchomieniowego .NET Core na serwerze.
 
-Skopiuj aplikację ASP.NET Core na serwer przy użyciu narzędzia, które integruje się z przepływem pracy organizacji (na przykład SCP, SFTP). Często można zlokalizować aplikacje sieci Web w katalogu *var* (na przykład *var/www/helloapp* ).
+Skopiuj aplikację ASP.NET Core na serwer przy użyciu narzędzia, które integruje się z przepływem pracy organizacji (na przykład SCP, SFTP). Często można zlokalizować aplikacje sieci Web w katalogu *var* (na przykład *var/www/helloapp*).
 
 > [!NOTE]
 > W obszarze scenariusza wdrożenia produkcyjnego przepływ pracy ciągłej integracji wykonuje zadania publikowania aplikacji i kopiowania zasobów na serwer.
@@ -218,7 +218,7 @@ WantedBy=multi-user.target
 
 W poprzednim przykładzie użytkownik zarządzający usługą jest określony przez `User` opcję. Użytkownik ( `apache` ) musi istnieć i mieć właściwy własność plików aplikacji.
 
-Użyj `TimeoutStopSec` , aby skonfigurować czas oczekiwania na wyłączenie aplikacji po odebraniu początkowego sygnału przerwania. Jeśli aplikacja nie zostanie zamknięta w tym okresie, SIGKILL jest wystawiony, aby zakończyć działanie aplikacji. Podaj wartość jako bezjednostkowe sekundy (na przykład `150` ), wartość przedziału czasu (na przykład `2min 30s` ) lub `infinity` Aby wyłączyć limit czasu. `TimeoutStopSec` Wartością domyślną jest wartość `DefaultTimeoutStopSec` w pliku konfiguracji Menedżera ( *systemd-system. conf* , *System. conf. d* , *systemed-User. conf* , *User. conf. d* ). Domyślny limit czasu dla większości dystrybucji wynosi 90 sekund.
+Użyj `TimeoutStopSec` , aby skonfigurować czas oczekiwania na wyłączenie aplikacji po odebraniu początkowego sygnału przerwania. Jeśli aplikacja nie zostanie zamknięta w tym okresie, SIGKILL jest wystawiony, aby zakończyć działanie aplikacji. Podaj wartość jako bezjednostkowe sekundy (na przykład `150` ), wartość przedziału czasu (na przykład `2min 30s` ) lub `infinity` Aby wyłączyć limit czasu. `TimeoutStopSec` Wartością domyślną jest wartość `DefaultTimeoutStopSec` w pliku konfiguracji Menedżera (*systemd-system. conf*, *System. conf. d*, *systemed-User. conf*, *User. conf. d*). Domyślny limit czasu dla większości dystrybucji wynosi 90 sekund.
 
 ```
 # The default value is 90 seconds for most distributions.
@@ -266,7 +266,7 @@ Main PID: 9021 (dotnet)
             └─9021 /usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
 ```
 
-Gdy zwrotny serwer proxy został skonfigurowany i Kestrel zarządzany za pomocą *systemu* , aplikacja sieci Web jest w pełni skonfigurowana i można uzyskać do niej dostęp z przeglądarki na komputerze lokalnym pod adresem `http://localhost` . Sprawdzanie nagłówków odpowiedzi, nagłówek **serwera** wskazuje, że aplikacja ASP.NET Core jest obsługiwana przez Kestrel:
+Gdy zwrotny serwer proxy został skonfigurowany i Kestrel zarządzany za pomocą *systemu*, aplikacja sieci Web jest w pełni skonfigurowana i można uzyskać do niej dostęp z przeglądarki na komputerze lokalnym pod adresem `http://localhost` . Sprawdzanie nagłówków odpowiedzi, nagłówek **serwera** wskazuje, że aplikacja ASP.NET Core jest obsługiwana przez Kestrel:
 
 ```
 HTTP/1.1 200 OK
@@ -279,7 +279,7 @@ Transfer-Encoding: chunked
 
 ### <a name="view-logs"></a>Wyświetlanie dzienników
 
-Ponieważ aplikacja sieci Web używająca Kestrel jest zarządzana przy użyciu *systemu* , zdarzenia i procesy są rejestrowane w scentralizowanym dzienniku. Ten dziennik zawiera jednak wpisy dla wszystkich usług i procesów zarządzanych przez *system* . Aby wyświetlić `kestrel-helloapp.service` konkretne elementy, użyj następującego polecenia:
+Ponieważ aplikacja sieci Web używająca Kestrel jest zarządzana przy użyciu *systemu*, zdarzenia i procesy są rejestrowane w scentralizowanym dzienniku. Ten dziennik zawiera jednak wpisy dla wszystkich usług i procesów zarządzanych przez *system*. Aby wyświetlić `kestrel-helloapp.service` konkretne elementy, użyj następującego polecenia:
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service
@@ -350,7 +350,7 @@ Polecenie [dotnet Run](/dotnet/core/tools/dotnet-run) używa *Właściwości/lau
 
 Skonfiguruj aplikację do korzystania z certyfikatu podczas opracowywania dla `dotnet run` polecenia lub środowiska programistycznego (F5 lub CTRL + F5 w Visual Studio Code), korzystając z jednej z następujących metod:
 
-* [Zastąp domyślny certyfikat z konfiguracji](xref:fundamentals/servers/kestrel#configuration) ( *zalecane* )
+* [Zastąp domyślny certyfikat z konfiguracji](xref:fundamentals/servers/kestrel#configuration) (*zalecane*)
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
 **Konfigurowanie zwrotnego serwera proxy dla połączeń zabezpieczonych za pośrednictwem protokołu HTTPS**
@@ -425,7 +425,7 @@ sudo yum install mod_headers
 
 #### <a name="secure-apache-from-clickjacking-attacks"></a>Zabezpiecz ataki Apache from clickjacking
 
-[Clickjacking](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger), znana także jako *atak polegająca na zaskarżeniu interfejsu użytkownika* , to złośliwy atak polegający na tym, że odwiedzanie witryny sieci Web jest trudne do kliknięcia linku lub przycisku na innej stronie niż aktualnie odwiedzane. Użyj `X-FRAME-OPTIONS` , aby zabezpieczyć lokację.
+[Clickjacking](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger), znana także jako *atak polegająca na zaskarżeniu interfejsu użytkownika*, to złośliwy atak polegający na tym, że odwiedzanie witryny sieci Web jest trudne do kliknięcia linku lub przycisku na innej stronie niż aktualnie odwiedzane. Użyj `X-FRAME-OPTIONS` , aby zabezpieczyć lokację.
 
 Aby wyeliminować ataki clickjacking:
 
@@ -459,7 +459,7 @@ W tym przykładzie przedstawiono sposób konfigurowania i konfigurowania oprogra
 sudo yum install mod_proxy_balancer
 ```
 
-W pliku konfiguracyjnym przedstawionym poniżej dodatkowe wystąpienie `helloapp` jest skonfigurowane do uruchamiania na porcie 5001. Sekcja *proxy* jest ustawiana z konfiguracją modułu równoważenia obciążenia z dwoma elementami członkowskimi w celu zrównoważenia *byrequests* .
+W pliku konfiguracyjnym przedstawionym poniżej dodatkowe wystąpienie `helloapp` jest skonfigurowane do uruchamiania na porcie 5001. Sekcja *proxy* jest ustawiana z konfiguracją modułu równoważenia obciążenia z dwoma elementami członkowskimi w celu zrównoważenia *byrequests*.
 
 ```
 <VirtualHost *:*>
@@ -499,7 +499,7 @@ W pliku konfiguracyjnym przedstawionym poniżej dodatkowe wystąpienie `helloapp
 
 ### <a name="rate-limits"></a>Limity szybkości
 
-Za pomocą *mod_ratelimit* , który jest uwzględniony w module *http* , przepustowość klientów może być ograniczona:
+Za pomocą *mod_ratelimit*, który jest uwzględniony w module *http* , przepustowość klientów może być ograniczona:
 
 ```bash
 sudo nano /etc/httpd/conf.d/ratelimit.conf

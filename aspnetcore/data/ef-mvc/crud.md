@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/crud
 ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054297"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Samouczek: Implementowanie funkcji CRUD — ASP.NET MVC z EF Core
@@ -60,7 +60,7 @@ W obszarze *controllers/StudentsController. cs* Metoda akcji dla widoku szczegó
 
 ### <a name="route-data"></a>Dane trasy
 
-Wartość klucza, która jest przenoszona do `Details` metody, pochodzi z *danych trasy* . Dane trasy to dane, które spinacz modelu znalazł w segmencie adresu URL. Na przykład trasa domyślna określa segmenty kontrolera, akcji i identyfikatora:
+Wartość klucza, która jest przenoszona do `Details` metody, pochodzi z *danych trasy*. Dane trasy to dane, które spinacz modelu znalazł w segmencie adresu URL. Na przykład trasa domyślna określa segmenty kontrolera, akcji i identyfikatora:
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
@@ -104,7 +104,7 @@ Aby uzyskać więcej informacji na temat pomocników tagów, zobacz <xref:mvc/vi
 
 ### <a name="add-enrollments-to-the-details-view"></a>Dodawanie rejestracji do widoku szczegółów
 
-Otwórz *Widok/studenci/szczegóły. cshtml* . Każde pole jest wyświetlane przy użyciu `DisplayNameFor` i `DisplayFor` pomocników, jak pokazano w następującym przykładzie:
+Otwórz *Widok/studenci/szczegóły. cshtml*. Każde pole jest wyświetlane przy użyciu `DisplayNameFor` i `DisplayFor` pomocników, jak pokazano w następującym przykładzie:
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
@@ -165,7 +165,7 @@ Alternatywny sposób zapobiegania przechodzeniu, który jest preferowany przez w
 
 Kod w *widokach/Students/Create. cshtml* używa `label` `input` `span` dla każdego pola pomocników tagów, i (dla komunikatów sprawdzania poprawności).
 
-Uruchom aplikację, wybierz kartę **uczniowie** i kliknij pozycję **Utwórz nową** .
+Uruchom aplikację, wybierz kartę **uczniowie** i kliknij pozycję **Utwórz nową**.
 
 Wprowadź nazwy i datę. Spróbuj wprowadzić nieprawidłową datę, jeśli jest to możliwe. (Niektóre przeglądarki wymuszają użycie selektora dat). Następnie kliknij przycisk **Utwórz** , aby wyświetlić komunikat o błędzie.
 
@@ -235,7 +235,7 @@ Uruchom aplikację, wybierz kartę **uczniowie** , a następnie kliknij hiperlin
 
 ![Strona edycji uczniów](crud/_static/student-edit.png)
 
-Zmień niektóre dane i kliknij przycisk **Zapisz** . Zostanie otwarta strona **indeks** i zobaczysz zmienione dane.
+Zmień niektóre dane i kliknij przycisk **Zapisz**. Zostanie otwarta strona **indeks** i zobaczysz zmienione dane.
 
 ## <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
 
@@ -277,7 +277,7 @@ Uruchom aplikację, wybierz kartę **uczniowie** i kliknij hiperłącze **Usuń*
 
 ![Usuń stronę potwierdzenia](crud/_static/student-delete.png)
 
-Kliknij polecenie **Usuń** . Strona indeks zostanie wyświetlona bez usuniętego ucznia. (W samouczku współbieżności zostanie wyświetlony przykładowy kod obsługi błędu).
+Kliknij polecenie **Usuń**. Strona indeks zostanie wyświetlona bez usuniętego ucznia. (W samouczku współbieżności zostanie wyświetlony przykładowy kod obsługi błędu).
 
 ## <a name="close-database-connections"></a>Zamknij połączenia bazy danych
 

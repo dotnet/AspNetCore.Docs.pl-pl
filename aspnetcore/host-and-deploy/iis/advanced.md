@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/advanced
 ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058619"
 ---
 # <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>Zaawansowana konfiguracja modułu ASP.NET Core i usług IIS
@@ -123,7 +123,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
 Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
 
-1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** . W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)** .
+1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera**. W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)**.
 
    ![W kroku wybierz role serwera zostanie wybrana rola IIS serwera sieci Web.](index/_static/server-roles-ws2016.png)
 
@@ -132,32 +132,32 @@ Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
    ![Domyślne usługi ról są wybrane w kroku Wybierz usługi ról.](index/_static/role-services-ws2016.png)
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Przejdź do kroku **potwierdzenia** , aby zainstalować rolę i usługi serwera sieci Web. Po zainstalowaniu roli **serwera sieci Web (IIS)** nie jest wymagane ponowne uruchomienie serwera ani usług IIS.
 
 **Systemy operacyjne Windows dla komputerów stacjonarnych**
 
-Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web** .
+Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web**.
 
 1. Przejdź do pozycji **Panel sterowania**  >  **programy**  >  **programy i funkcje**  >  **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 
 1. Otwórz węzeł **Internet Information Services** . Otwórz węzeł **Narzędzia do zarządzania siecią Web** .
 
-1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS** .
+1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS**.
 
-1. Zaznacz pole wyboru **usług World Wide Web Services** .
+1. Zaznacz pole wyboru **usług World Wide Web Services**.
 
 1. Zaakceptuj domyślne funkcje **usług World Wide Web Services** lub Dostosuj funkcje usług IIS.
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Jeśli instalacja usług IIS wymaga ponownego uruchomienia, należy ponownie uruchomić system.
 
@@ -181,9 +181,9 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Dodaj lokację główną w Menedżerze usług IIS przy użyciu aplikacji podrzędnej w folderze w lokacji głównej.
 
-1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację** .
+1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK** .
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK**.
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -210,7 +210,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
 1. Otwórz Eksploratora Windows i przejdź do katalogu.
 
-1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości** .
+1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości**.
 
 1. Na karcie **zabezpieczenia** wybierz przycisk **Edytuj** , a następnie przycisk **Dodaj** .
 
@@ -220,7 +220,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Wybierz pozycję **OK** .
+1. Wybierz pozycję **OK**.
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -276,25 +276,25 @@ Upewnij się, że funkcja inicjowania roli inicjalizacji aplikacji IIS jest wł�
 Na komputerach z systemem Windows 7 lub nowszym w przypadku lokalnego korzystania z usług IIS:
 
 1. Przejdź do pozycji **Panel sterowania**  >  **programy**  >  **programy i funkcje**  >  **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Otwórz **Internet Information Services**  >  **World Wide Web Services**  >  **funkcje projektowania aplikacji** Internet Information Services World Wide Web Services.
-1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
+1. Otwórz   >    >  **funkcje projektowania aplikacji** Internet Information Services World Wide Web Services.
+1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
 
 W systemie Windows Server 2008 R2 lub nowszym:
 
-1. Otwórz **Kreatora dodawania ról i funkcji** .
+1. Otwórz **Kreatora dodawania ról i funkcji**.
 1. W panelu **Wybierz usługi ról** Otwórz węzeł **Programowanie aplikacji** .
-1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
+1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
 
 Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji dla lokacji:
 
 * Za pomocą Menedżera usług IIS:
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
-  1. Domyślny **tryb uruchamiania** to `OnDemand` . Ustaw **tryb uruchamiania** na `AlwaysRunning` . Wybierz pozycję **OK** .
+  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
+  1. Domyślny **tryb uruchamiania** to `OnDemand` . Ustaw **tryb uruchamiania** na `AlwaysRunning` . Wybierz pozycję **OK**.
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
-  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web**  >  **Advanced Settings** .
-  1. Ustawienie domyślnego **wstępnego ładowania jest włączone** `False` . Ustaw **funkcję wstępnego ładowania** na `True` . Wybierz pozycję **OK** .
+  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web**  >  .
+  1. Ustawienie domyślnego **wstępnego ładowania jest włączone** `False` . Ustaw **funkcję wstępnego ładowania** na `True` . Wybierz pozycję **OK**.
 
 * Przy użyciu `web.config` , Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku aplikacji `web.config` :
 
@@ -316,8 +316,8 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczynności puli aplikacji przy użyciu Menedżera usług IIS:
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
-1. Domyślny **limit czasu bezczynności (w minutach)** to `20` minuty. Ustaw **limit czasu bezczynności (w minutach)** na `0` (zero). Wybierz pozycję **OK** .
+1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
+1. Domyślny **limit czasu bezczynności (w minutach)** to `20` minuty. Ustaw **limit czasu bezczynności (w minutach)** na `0` (zero). Wybierz pozycję **OK**.
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](xref:host-and-deploy/iis/out-of-process-hosting) aplikacji, użyj jednej z następujących metod:
@@ -335,7 +335,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](xref:host-
 
 ### <a name="module"></a>Moduł
 
-**IIS (x86/amd64)** :
+**IIS (x86/amd64)**:
 
 * `%windir%\System32\inetsrv\aspnetcore.dll`
 
@@ -345,7 +345,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](xref:host-
 
 * `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (x86/amd64)** :
+**IIS Express (x86/amd64)**:
 
 * `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
@@ -369,7 +369,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](xref:host-
 
 * `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 

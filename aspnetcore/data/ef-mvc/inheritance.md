@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/inheritance
 ms.openlocfilehash: 581a31bad4069523699fbbac63862c9dff12034d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054219"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Samouczek: implementowanie dziedziczenia-ASP.NET MVC z EF Core
@@ -88,17 +88,17 @@ W folderze modele Utwórz Person.cs i Zastąp kod szablonu następującym kodem:
 
 ## <a name="update-instructor-and-student"></a>Aktualizuj instruktora i uczniów
 
-W *Instructor.cs* , pochodny klasy instruktora od klasy Person i Usuń pola klucza i nazwy. Kod będzie wyglądać podobnie do poniższego przykładu:
+W *Instructor.cs*, pochodny klasy instruktora od klasy Person i Usuń pola klucza i nazwy. Kod będzie wyglądać podobnie do poniższego przykładu:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_AfterInheritance&highlight=8)]
 
-Wprowadź te same zmiany w programie *student.cs* .
+Wprowadź te same zmiany w programie *student.cs*.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_AfterInheritance&highlight=8)]
 
 ## <a name="add-person-to-the-model"></a>Dodawanie osoby do modelu
 
-Dodaj typ jednostki osoby do *SchoolContext.cs* . Nowe wiersze są wyróżnione.
+Dodaj typ jednostki osoby do *SchoolContext.cs*. Nowe wiersze są wyróżnione.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_AfterInheritance&highlight=19,30)]
 

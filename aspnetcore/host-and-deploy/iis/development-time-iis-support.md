@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
 ms.openlocfilehash: ab892b2cdfa61378ac7328c0380c8a6cffc6d376
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058457"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Obsługa usług IIS w czasie opracowywania w programie Visual Studio dla platformy ASP.NET Core
@@ -44,7 +44,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Wybierz pozycję **OK** .
+1. Zaznacz pole wyboru **Internet Information Services** . Wybierz pozycję **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
@@ -52,7 +52,7 @@ Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
 Usługi IIS muszą mieć skonfigurowaną witrynę sieci Web z następującymi:
 
-* **Nazwa hosta** : zazwyczaj **Domyślna witryna sieci Web** jest używana z **nazwą hosta** `localhost` . Jednak każda prawidłowa witryna sieci Web usług IIS z unikatową nazwą hosta działa.
+* **Nazwa hosta**: zazwyczaj **Domyślna witryna sieci Web** jest używana z **nazwą hosta** `localhost` . Jednak każda prawidłowa witryna sieci Web usług IIS z unikatową nazwą hosta działa.
 * **Powiązanie witryny**
   * W przypadku aplikacji wymagających protokołu HTTPS Utwórz powiązanie z portem 443 z certyfikatem. Zwykle używany jest **certyfikat deweloperski IIS Express** , ale każdy prawidłowy certyfikat działa.
   * W przypadku aplikacji korzystających z protokołu HTTP upewnij się, że istnieje powiązanie do opublikowania 80 lub utwórz powiązanie z portem 80 dla nowej lokacji.
@@ -80,7 +80,7 @@ W przypadku projektu korzystającego z protokołu HTTP, [przekierowania https i 
 
 Utwórz nowy profil uruchamiania, aby dodać obsługę usług IIS w czasie projektowania:
 
-1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** . Wybierz pozycję **Właściwości** . Otwórz kartę **debugowanie** .
+1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań**. Wybierz pozycję **Właściwości**. Otwórz kartę **debugowanie** .
 1. W obszarze **profil** wybierz przycisk **Nowy** . Nazwij profil "IIS" w oknie podręcznym. Wybierz **przycisk OK** , aby utworzyć profil.
 1. Dla ustawienia **uruchamiania** wybierz z listy pozycję **IIS** .
 1. Zaznacz pole wyboru dla opcji **Uruchom przeglądarkę** i podaj adres URL punktu końcowego.
@@ -128,7 +128,7 @@ Upewnij się, `applicationUrl` że `launchUrl` punkty końcowe i używają tego 
 
 Uruchom program Visual Studio jako administrator:
 
-* Upewnij się, że na liście rozwijanej konfiguracja kompilacji jest ustawiona wartość **Debuguj** .
+* Upewnij się, że na liście rozwijanej konfiguracja kompilacji jest ustawiona wartość **Debuguj**.
 * Ustaw [przycisk Rozpocznij debugowanie](/visualstudio/debugger/debugger-feature-tour) na profil **usług IIS** i wybierz przycisk, aby uruchomić aplikację.
 
 Program Visual Studio może monitować o ponowne uruchomienie, jeśli nie jest uruchomiony jako administrator. Jeśli zostanie wyświetlony monit, uruchom ponownie program Visual Studio.
@@ -159,7 +159,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Wybierz pozycję **OK** .
+1. Zaznacz pole wyboru **Internet Information Services** . Wybierz pozycję **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
@@ -167,7 +167,7 @@ Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
 Usługi IIS muszą mieć skonfigurowaną witrynę sieci Web z następującymi:
 
-* **Nazwa hosta** : zazwyczaj **Domyślna witryna sieci Web** jest używana z **nazwą hosta** `localhost` . Jednak każda prawidłowa witryna sieci Web usług IIS z unikatową nazwą hosta działa.
+* **Nazwa hosta**: zazwyczaj **Domyślna witryna sieci Web** jest używana z **nazwą hosta** `localhost` . Jednak każda prawidłowa witryna sieci Web usług IIS z unikatową nazwą hosta działa.
 * **Powiązanie witryny**
   * W przypadku aplikacji wymagających protokołu HTTPS Utwórz powiązanie z portem 443 z certyfikatem. Zwykle używany jest **certyfikat deweloperski IIS Express** , ale każdy prawidłowy certyfikat działa.
   * W przypadku aplikacji korzystających z protokołu HTTP upewnij się, że istnieje powiązanie do opublikowania 80 lub utwórz powiązanie z portem 80 dla nowej lokacji.
@@ -195,7 +195,7 @@ W przypadku projektu korzystającego z protokołu HTTP, [przekierowania https i 
 
 Utwórz nowy profil uruchamiania, aby dodać obsługę usług IIS w czasie projektowania:
 
-1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** . Wybierz pozycję **Właściwości** . Otwórz kartę **debugowanie** .
+1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań**. Wybierz pozycję **Właściwości**. Otwórz kartę **debugowanie** .
 1. W obszarze **profil** wybierz przycisk **Nowy** . Nazwij profil "IIS" w oknie podręcznym. Wybierz **przycisk OK** , aby utworzyć profil.
 1. Dla ustawienia **uruchamiania** wybierz z listy pozycję **IIS** .
 1. Zaznacz pole wyboru dla opcji **Uruchom przeglądarkę** i podaj adres URL punktu końcowego.
@@ -243,7 +243,7 @@ Upewnij się, `applicationUrl` że `launchUrl` punkty końcowe i używają tego 
 
 Uruchom program Visual Studio jako administrator:
 
-* Upewnij się, że na liście rozwijanej konfiguracja kompilacji jest ustawiona wartość **Debuguj** .
+* Upewnij się, że na liście rozwijanej konfiguracja kompilacji jest ustawiona wartość **Debuguj**.
 * Ustaw [przycisk Rozpocznij debugowanie](/visualstudio/debugger/debugger-feature-tour) na profil **usług IIS** i wybierz przycisk, aby uruchomić aplikację.
 
 Program Visual Studio może monitować o ponowne uruchomienie, jeśli nie jest uruchomiony jako administrator. Jeśli zostanie wyświetlony monit, uruchom ponownie program Visual Studio.

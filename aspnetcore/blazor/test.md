@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/test
 ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054869"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>Testowanie składników w ASP.NET Core Blazor
@@ -42,7 +42,7 @@ Aby przetestować Blazor składnik, *składnik objęty testem* (Wytnij) to:
 
 Dwa typowe podejścia do testowania Blazor składników to kompleksowe (E2E) testowanie i testowanie jednostkowe:
 
-* **Testowanie jednostkowe** : [testy jednostkowe](/dotnet/core/testing/) są napisywane przy użyciu biblioteki testów jednostkowych, która zapewnia:
+* **Testowanie jednostkowe**: [testy jednostkowe](/dotnet/core/testing/) są napisywane przy użyciu biblioteki testów jednostkowych, która zapewnia:
   * Renderowanie składnika.
   * Inspekcja danych wyjściowych i stanu składnika.
   * Wyzwalanie obsługi zdarzeń i metod cyklu życia.
@@ -50,7 +50,7 @@ Dwa typowe podejścia do testowania Blazor składników to kompleksowe (E2E) tes
 
   [bUnit](https://github.com/egil/bUnit) to przykład biblioteki, która umożliwia Razor testowanie jednostkowe składnika.
 
-* **Testowanie E2E** : Test Runner uruchamia Blazor aplikację zawierającą wycięte i automatyzuje wystąpienie przeglądarki. Narzędzie do testowania sprawdza i współdziała z wycinaniem przez przeglądarkę. [Selen](https://github.com/SeleniumHQ/selenium) to przykład platformy testowania E2E, która może być używana z Blazor aplikacjami.
+* **Testowanie E2E**: Test Runner uruchamia Blazor aplikację zawierającą wycięte i automatyzuje wystąpienie przeglądarki. Narzędzie do testowania sprawdza i współdziała z wycinaniem przez przeglądarkę. [Selen](https://github.com/SeleniumHQ/selenium) to przykład platformy testowania E2E, która może być używana z Blazor aplikacjami.
 
 W teście jednostkowym Blazor dotyczy tylko składnika ( Razor /c #). Zależności zewnętrzne, takie jak usługi i międzyoperacyjność w programie JS, muszą być makietne. W testowaniu E2E Blazor składnik i całość infrastruktury pomocniczej są częścią testu, w tym CSS, js i interfejsów API Dom i Browser.
 
@@ -68,8 +68,8 @@ Poniższa tabela zawiera podsumowanie różnic między dwoma podejściami do tes
 | -------------------------------- | -------------------------------- | --------------------------------------- |
 | Zakres testu                       | Blazor tylko składnik ( Razor /c #) | Blazor składnik ( Razor /c #) z CSS/JS |
 | Czas wykonywania testu              | )                     | Sekundy                                 |
-| Dostęp do wystąpienia składnika | Tak                              | Nie                                      |
-| Poufne dla środowiska     | Nie                               | Tak                                     |
+| Dostęp do wystąpienia składnika | Yes                              | Nie                                      |
+| Poufne dla środowiska     | Nie                               | Yes                                     |
 | Niezawodność                      | Bardziej niezawodne                    | Mniej niezawodne                           |
 
 ## <a name="choose-the-most-appropriate-test-approach"></a>Wybierz najbardziej odpowiednie podejście testowe
@@ -143,11 +143,11 @@ public void CounterShouldIncrementWhenSelected()
 
 W każdym kroku testu odbywają się następujące działania:
 
-* *Porządkowanie* : `Counter` składnik jest renderowany przy użyciu bUnit `TestContext` . Element akapitu wycinania ( `<p>` ) został znaleziony i przypisany do `paraElm` .
+* *Porządkowanie*: `Counter` składnik jest renderowany przy użyciu bUnit `TestContext` . Element akapitu wycinania ( `<p>` ) został znaleziony i przypisany do `paraElm` .
 
-* *Działanie* : element Button ( `<button>` ) jest zlokalizowany, a następnie wybierany przez wywołanie `Click` , które powinno zwiększyć licznik i zaktualizować zawartość znacznika akapitu ( `<p>` ). Zawartość tekstowa elementu akapitu jest uzyskiwana przez wywołanie `TextContent` .
+* *Działanie*: element Button ( `<button>` ) jest zlokalizowany, a następnie wybierany przez wywołanie `Click` , które powinno zwiększyć licznik i zaktualizować zawartość znacznika akapitu ( `<p>` ). Zawartość tekstowa elementu akapitu jest uzyskiwana przez wywołanie `TextContent` .
 
-* *Assert* : `MarkupMatches` jest wywoływana dla zawartości tekstowej w celu sprawdzenia, czy pasuje do oczekiwanego ciągu, czyli `Current count: 1` .
+* *Assert*: `MarkupMatches` jest wywoływana dla zawartości tekstowej w celu sprawdzenia, czy pasuje do oczekiwanego ciągu, czyli `Current count: 1` .
 
 > [!NOTE]
 > `MarkupMatches`Metoda Assert różni się od zwykłego potwierdzenia porównania ciągów (na przykład `Assert.Equal("Current count: 1", paraElmText);` ) `MarkupMatches` wykonuje porównanie semantyczne danych wejściowych i oczekiwanych znaczników HTML. Porównanie semantyczne ma świadomość semantyki języka HTML, co oznacza, że ignorowanie nieznaczących białych znaków. Powoduje to bardziej stabilne testy. Aby uzyskać więcej informacji, zobacz [Dostosowywanie semantycznego porównania kodu HTML](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison).

@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
 ms.openlocfilehash: b4850821317b6907452793ef09194844c90c0137
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93050774"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Część 6, metody kontrolera i widoki w ASP.NET Core
@@ -44,7 +44,7 @@ Przejdź do `Movies` kontrolera i przytrzymaj wskaźnik myszy nad linkiem **edyc
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku https://localhost:5001/Movies/Edit/5](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez pomocnika podstawowego tagu zakotwiczenia MVC w pliku *views/filmy/index. cshtml* .
+Linki **Edytuj**, **szczegóły** i **Usuń** są generowane przez pomocnika podstawowego tagu zakotwiczenia MVC w pliku *views/filmy/index. cshtml* .
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -108,7 +108,7 @@ Zwróć uwagę, że druga `Edit` Metoda działania jest poprzedzona `[HttpPost]`
 
 `HttpPost`Ten atrybut określa, że ta `Edit` Metoda może być wywoływana *tylko* w przypadku `POST` żądań. Można zastosować `[HttpGet]` atrybut do pierwszej metody edycji, ale nie jest to konieczne, ponieważ jest to `[HttpGet]` wartość domyślna.
 
-Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu żądania](xref:security/anti-request-forgery) i jest sparowany z tokenem chroniącym przed fałszerstwem wygenerowanym w pliku widoku edycji ( *widoki/filmy/Edit. cshtml* ). Plik widoku edycji generuje token chroniący przed fałszerstwem za pomocą [pomocnika tagu formularza](xref:mvc/views/working-with-forms).
+Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu żądania](xref:security/anti-request-forgery) i jest sparowany z tokenem chroniącym przed fałszerstwem wygenerowanym w pliku widoku edycji (*widoki/filmy/Edit. cshtml*). Plik widoku edycji generuje token chroniący przed fałszerstwem za pomocą [pomocnika tagu formularza](xref:mvc/views/working-with-forms).
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 

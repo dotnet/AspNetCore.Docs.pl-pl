@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-2.2
 ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059705"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Co nowego w ASP.NET Core 2,2
@@ -87,7 +87,7 @@ We wcześniejszych wersjach ASP.NET Core opcje Kestrel są konfigurowane przez w
 
 ## <a name="iis-in-process-hosting"></a>Hosting w procesie usług IIS
 
-W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwera proxy. W 2,2 moduł ASP.NET Core może wykonać rozruch CoreCLR i hostowanie aplikacji w procesie roboczym usług IIS ( *w3wp.exe* ). Hosting w procesie zapewnia wydajność i zyski z diagnostyki podczas pracy z usługami IIS.
+W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwera proxy. W 2,2 moduł ASP.NET Core może wykonać rozruch CoreCLR i hostowanie aplikacji w procesie roboczym usług IIS (*w3wp.exe*). Hosting w procesie zapewnia wydajność i zyski z diagnostyki podczas pracy z usługami IIS.
 
 Aby uzyskać więcej informacji, zobacz [hosting w procesie dla usług IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 

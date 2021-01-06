@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/complex-data-model
 ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054479"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Samouczek: Tworzenie złożonego modelu danych — ASP.NET MVC z EF Core
@@ -118,11 +118,11 @@ dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
 ```
 
-`migrations add`Polecenie ostrzega o utracie danych, ponieważ zmiana powoduje krótszą długość dla dwóch kolumn.  Migracja tworzy plik o nazwie *\<timeStamp> _MaxLengthOnNames. cs* . Ten plik zawiera kod w `Up` metodzie, która zaktualizuje bazę danych w taki sposób, aby była zgodna z bieżącym modelem danych. `database update`Polecenie uruchomiło ten kod.
+`migrations add`Polecenie ostrzega o utracie danych, ponieważ zmiana powoduje krótszą długość dla dwóch kolumn.  Migracja tworzy plik o nazwie *\<timeStamp> _MaxLengthOnNames. cs*. Ten plik zawiera kod w `Up` metodzie, która zaktualizuje bazę danych w taki sposób, aby była zgodna z bieżącym modelem danych. `database update`Polecenie uruchomiło ten kod.
 
 Sygnatura czasowa poprzedzona nazwą pliku migracji jest używana przez Entity Framework do porządkowania migracji. Można utworzyć wiele migracji przed uruchomieniem polecenia Update-Database, a następnie wszystkie migracje zostaną zastosowane w kolejności, w której zostały utworzone.
 
-Uruchom aplikację, wybierz kartę **uczniowie** , kliknij pozycję **Utwórz nową** , a następnie spróbuj wprowadzić nazwy dłuższe niż 50 znaków. Aplikacja powinna uniemożliwiać wykonanie tej czynności. 
+Uruchom aplikację, wybierz kartę **uczniowie** , kliknij pozycję **Utwórz nową**, a następnie spróbuj wprowadzić nazwy dłuższe niż 50 znaków. Aplikacja powinna uniemożliwiać wykonanie tej czynności. 
 
 ### <a name="the-column-attribute"></a>Atrybut Column
 
@@ -188,7 +188,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 ![Jednostka instruktora](complex-data-model/_static/instructor-entity.png)
 
-Utwórz *modele/instruktor. cs* , zastępując kod szablonu następującym kodem:
+Utwórz *modele/instruktor. cs*, zastępując kod szablonu następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_BeforeInheritance)]
 

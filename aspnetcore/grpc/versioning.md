@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/versioning
 ms.openlocfilehash: 38204b16d041f21221862c566b90a6a9571d26a1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058704"
 ---
 # <a name="versioning-grpc-services"></a>Przechowywanie wersji usług gRPC
@@ -94,7 +94,7 @@ Nazwa pakietu jest połączona z nazwą usługi, aby zidentyfikować adres usłu
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-Implementacje usługi z wersjami są zarejestrowane w *Startup.cs* :
+Implementacje usługi z wersjami są zarejestrowane w *Startup.cs*:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -117,7 +117,7 @@ Publikowanie wielu wersji usługi duplikuje ją. Aby zmniejszyć duplikowanie, r
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-Usługi i komunikaty generowane z różnymi nazwami pakietów są **różnymi typami .NET** . Przeniesienie logiki biznesowej do scentralizowanej lokalizacji wymaga mapowania komunikatów do typów wspólnych.
+Usługi i komunikaty generowane z różnymi nazwami pakietów są **różnymi typami .NET**. Przeniesienie logiki biznesowej do scentralizowanej lokalizacji wymaga mapowania komunikatów do typów wspólnych.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

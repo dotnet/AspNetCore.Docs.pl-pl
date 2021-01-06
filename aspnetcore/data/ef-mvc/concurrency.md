@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054375"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Samouczek: obsługa współbieżności ASP.NET MVC z EF Core
@@ -69,7 +69,7 @@ Alternatywą dla pesymistycznej współbieżności jest Optymistyczna współbie
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget.png)
 
-Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date.png)
 
@@ -117,7 +117,7 @@ W obszarze *modele/dział. cs* Dodaj właściwość śledzenia o nazwie rowversi
 
 Ten `Timestamp` atrybut określa, że ta kolumna zostanie uwzględniona w klauzuli WHERE poleceń Update i DELETE wysyłanych do bazy danych. Ten atrybut jest wywoływany, `Timestamp` ponieważ poprzednie wersje SQL Server używały `timestamp` typu danych SQL przed zastąpieniem go przez program SQL Server `rowversion` . Typ .NET dla `rowversion` jest tablicą bajtów.
 
-Jeśli wolisz używać interfejsu API Fluent, możesz użyć `IsConcurrencyToken` metody (w *danych/SchoolContext. cs* ), aby określić właściwość śledzenia, jak pokazano w następującym przykładzie:
+Jeśli wolisz używać interfejsu API Fluent, możesz użyć `IsConcurrencyToken` metody (w *danych/SchoolContext. cs*), aby określić właściwość śledzenia, jak pokazano w następującym przykładzie:
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -206,9 +206,9 @@ W obszarze *widoki/działy/Edit. cshtml* wprowadź następujące zmiany:
 
 ## <a name="test-concurrency-conflicts"></a>Testuj konflikty współbieżności
 
-Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** , a następnie kliknij hiperłącze **Edytuj** dla działu angielskiego. Dwie karty przeglądarki zawierają teraz te same informacje.
+Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**, a następnie kliknij hiperłącze **Edytuj** dla działu angielskiego. Dwie karty przeglądarki zawierają teraz te same informacje.
 
-Zmień pole na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
+Zmień pole na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-1.png)
 
@@ -218,7 +218,7 @@ Zmień pole na drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-2.png)
 
-Kliknij pozycję **Zapisz** . Zostanie wyświetlony komunikat o błędzie:
+Kliknij pozycję **Zapisz**. Zostanie wyświetlony komunikat o błędzie:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error.png)
 
@@ -274,13 +274,13 @@ Powoduje to wprowadzenie następujących zmian:
 
 * Dodaje ukryte pole dla `RowVersion` właściwości.
 
-Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** , a następnie na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu angielskiego.
+Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**, a następnie na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu angielskiego.
 
-W pierwszym oknie Zmień jedną z wartości, a następnie kliknij przycisk **Zapisz** :
+W pierwszym oknie Zmień jedną z wartości, a następnie kliknij przycisk **Zapisz**:
 
 ![Strona Edycja działu po zmianie przed usunięciem](concurrency/_static/edit-after-change-for-delete.png)
 
-Na drugiej karcie kliknij pozycję **Usuń** . Zobaczysz komunikat o błędzie współbieżności, a wartości działu są odświeżane z aktualną wartością w bazie danych.
+Na drugiej karcie kliknij pozycję **Usuń**. Zobaczysz komunikat o błędzie współbieżności, a wartości działu są odświeżane z aktualną wartością w bazie danych.
 
 ![Strona potwierdzenia usunięcia działu z błędem współbieżności](concurrency/_static/delete-error.png)
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/tools-and-downloads
 ms.openlocfilehash: 8c7f10a6b6f8504efaba6054533aba034982820c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056572"
 ---
 # <a name="tools-and-downloads"></a>Narzędzia i pliki do pobrania

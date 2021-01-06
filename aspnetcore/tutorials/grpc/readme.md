@@ -9,10 +9,10 @@ products:
 - vs
 urlFragment: create-grpc-client
 ms.openlocfilehash: a71a446a3cdb58e08de2e6f38210b4f0b1cef819
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/13/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "83382546"
 ---
 # <a name="create-a-grpc-client-and-server-in-aspnet-core-31"></a>Tworzenie klienta i serwera gRPC w ASP.NET Core 3,1

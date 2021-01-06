@@ -15,24 +15,24 @@ Klasa opcji:
 
 * Nie może być abstrakcyjny z publicznym konstruktorem bez parametrów.
 * Wszystkie publiczne właściwości odczytu i zapisu typu są powiązane.
-* Pola ***nie*** są powiązane. W poprzednim kodzie `Position` nie jest powiązany. `Position`Właściwość jest używana, więc ciąg `"Position"` nie musi być trudno zakodowany w aplikacji podczas wiązania klasy z dostawcą konfiguracji.
+* Pola **nie** są powiązane. W poprzednim kodzie `Position` nie jest powiązany. `Position`Właściwość jest używana, więc ciąg `"Position"` nie musi być trudno zakodowany w aplikacji podczas wiązania klasy z dostawcą konfiguracji.
 
 Następujący kod:
 
-* Wywołuje [ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) , aby powiązać `PositionOptions` klasę z `Position` sekcją.
+_ Wywołuje [ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) , aby powiązać `PositionOptions` klasę z `Position` sekcją.
 * Wyświetla `Position` dane konfiguracji.
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Pages/Test22.cshtml.cs?name=snippet)]
 
 W powyższym kodzie domyślnie zmiany w pliku konfiguracji JSON po rozpoczęciu aplikacji są odczytywane.
 
-[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)tworzy powiązania i zwraca określony typ. `ConfigurationBinder.Get<T>`może być wygodniejsze niż używanie `ConfigurationBinder.Bind` . Poniższy kod przedstawia sposób użycia `ConfigurationBinder.Get<T>` z `PositionOptions` klasą:
+[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) tworzy powiązania i zwraca określony typ. `ConfigurationBinder.Get<T>` może być wygodniejsze niż używanie `ConfigurationBinder.Bind` . Poniższy kod przedstawia sposób użycia `ConfigurationBinder.Get<T>` z `PositionOptions` klasą:
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Pages/Test21.cshtml.cs?name=snippet)]
 
 W powyższym kodzie domyślnie zmiany w pliku konfiguracji JSON po rozpoczęciu aplikacji są odczytywane.
 
-Alternatywne podejście w przypadku używania ***wzorca opcji*** ma na celu powiązanie `Position` sekcji i dodanie jej do [kontenera usługi iniekcji zależności](xref:fundamentals/dependency-injection). W poniższym kodzie `PositionOptions` został dodany do kontenera usługi z <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> i powiązana z konfiguracją:
+Alternatywne podejście w przypadku używania **wzorca * opcji** _ ma wiązać się z `Position` sekcją i dodać ją do [kontenera usługi iniekcji zależności](xref:fundamentals/dependency-injection). W poniższym kodzie `PositionOptions` został dodany do kontenera usługi z <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure_> i powiązana z konfiguracją:
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Startup.cs?name=snippet)]
 

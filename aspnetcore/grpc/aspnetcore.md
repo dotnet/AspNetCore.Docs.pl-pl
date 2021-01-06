@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/aspnetcore
 ms.openlocfilehash: b120aa4ab6922445f2c53f3b1cb3bd5c159d8a84
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057833"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>Usługi gRPC na platformie ASP.NET Core
@@ -33,7 +33,7 @@ W tym dokumencie przedstawiono sposób rozpoczynania pracy z usługami gRPC Serv
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -51,7 +51,7 @@ W tym dokumencie przedstawiono sposób rozpoczynania pracy z usługami gRPC Serv
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Szczegółowe instrukcje dotyczące tworzenia projektu gRPC można znaleźć w temacie Wprowadzenie do [usług gRPC Services](xref:tutorials/grpc/grpc-start) .
 
@@ -67,7 +67,7 @@ gRPC wymaga pakietu [gRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNe
 
 ### <a name="configure-grpc"></a>Konfigurowanie gRPC
 
-W *Startup.cs* :
+W *Startup.cs*:
 
 * gRPC jest włączona z `AddGrpc` metodą.
 * Każda usługa gRPC jest dodawana do potoku routingu za pomocą `MapGrpcService` metody.
@@ -98,7 +98,7 @@ W środowisku produkcyjnym należy jawnie skonfigurować protokół TLS. W poni�
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
-Alternatywnie można skonfigurować punkty końcowe Kestrel w *program.cs* :
+Alternatywnie można skonfigurować punkty końcowe Kestrel w *program.cs*:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 

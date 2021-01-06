@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054388"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Samouczek: informacje na temat scenariuszy zaawansowanych — ASP.NET MVC z EF Core
@@ -63,7 +63,7 @@ Gdy jest zawsze prawdziwe w przypadku wykonywania poleceń SQL w aplikacji sieci
 
 `DbSet<TEntity>`Klasa zawiera metodę, której można użyć do wykonania zapytania zwracającego jednostkę typu `TEntity` . Aby zobaczyć, jak to działa, Zmień kod w `Details` metodzie kontrolera działu.
 
-W *DepartmentsController.cs* , w `Details` metodzie, Zastąp kod pobierający dział z `FromSql` wywołaniem metody, jak pokazano w następującym wyróżnionym kodzie:
+W *DepartmentsController.cs*, w `Details` metodzie, Zastąp kod pobierający dział z `FromSql` wywołaniem metody, jak pokazano w następującym wyróżnionym kodzie:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_RawSQL&highlight=8,9,10)]
 
@@ -103,9 +103,9 @@ Gdy kontroler przetwarza żądanie narzędzia HttpGet, nic nie jest zwracane w `
 
 Po kliknięciu przycisku **Aktualizuj** Metoda HTTPPOST jest wywoływana, a mnożnik ma wartość wprowadzoną w polu tekstowym. Następnie kod wykonuje instrukcję SQL, która aktualizuje kursy i zwraca liczbę odnośnych wierszy do widoku w `ViewData` . Gdy widok pobiera `RowsAffected` wartość, wyświetlana jest liczba zaktualizowanych wierszy.
 
-W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *widoki/kursy* , a następnie kliknij polecenie **Dodaj > nowy element** .
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *widoki/kursy* , a następnie kliknij polecenie **Dodaj > nowy element**.
 
-W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję **Razor Wyświetl** i nazwij nowy widok *UpdateCourseCredits. cshtml* .
+W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję **Razor Wyświetl** i nazwij nowy widok *UpdateCourseCredits. cshtml*.
 
 W obszarze *widoki/kursy/UpdateCourseCredits. cshtml* Zastąp kod szablonu następującym kodem:
 
@@ -225,7 +225,7 @@ Komunikat o błędzie:
 
 Rozwiązanie:
 
-Zatrzymaj lokację w IIS Express. Przejdź do paska zadań systemu Windows, Znajdź IIS Express i kliknij prawym przyciskiem myszy jego ikonę, wybierz witrynę firmy Contoso University, a następnie kliknij pozycję **Zatrzymaj lokację** .
+Zatrzymaj lokację w IIS Express. Przejdź do paska zadań systemu Windows, Znajdź IIS Express i kliknij prawym przyciskiem myszy jego ikonę, wybierz witrynę firmy Contoso University, a następnie kliknij pozycję **Zatrzymaj lokację**.
 
 ### <a name="migration-scaffolded-with-no-code-in-up-and-down-methods"></a>Migracja szkieletowa bez kodu w metodach up i Down
 
@@ -243,7 +243,7 @@ Podczas wprowadzania zmian schematu w bazie danych, która ma istniejące dane, 
 
 Najprostszym podejściem jest zmiana nazwy bazy danych w programie *appsettings.json* . Przy następnym uruchomieniu `database update` zostanie utworzona nowa baza danych.
 
-Aby usunąć bazę danych w programie SSOX, kliknij prawym przyciskiem myszy bazę danych, kliknij polecenie **Usuń** , a następnie w oknie dialogowym **Usuwanie bazy danych** wybierz pozycję **Zamknij istniejące połączenia** i kliknij przycisk **OK** .
+Aby usunąć bazę danych w programie SSOX, kliknij prawym przyciskiem myszy bazę danych, kliknij polecenie **Usuń**, a następnie w oknie dialogowym **Usuwanie bazy danych** wybierz pozycję **Zamknij istniejące połączenia** i kliknij przycisk **OK**.
 
 Aby usunąć bazę danych przy użyciu interfejsu wiersza polecenia, uruchom `database drop` polecenie CLI:
 

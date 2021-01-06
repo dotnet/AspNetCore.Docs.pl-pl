@@ -1,3 +1,3 @@
-# <a name="aspnet-core-logging-sample-application"></a>ASP.NET Przykładowa aplikacja rejestrowania rdzenia
+# <a name="aspnet-core-logging-sample-application"></a>Przykładowa aplikacja do rejestrowania ASP.NET Core
 
-Ta przykładowa aplikacja jest dla [ASP.NET Core Logging](https://docs.microsoft.com/aspnet/core/fundamentals/logging/index) artykuł i jest oparty na przykładzie utworzony dla [pierwszego interfejsu API sieci Web z samouczka ASP.NET Core MVC.](https://docs.microsoft.com/aspnet/core/tutorials/first-web-api)
+Ta przykładowa aplikacja dotyczy artykułu dotyczącego [rejestrowania ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/logging/index) i jest oparta na przykładzie utworzonym dla [pierwszego internetowego interfejsu API za pomocą samouczka ASP.NET Core MVC](https://docs.microsoft.com/aspnet/core/tutorials/first-web-api) .

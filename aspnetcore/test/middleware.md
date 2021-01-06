@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/middleware
 ms.openlocfilehash: 2dd5fa127af4432c612bb654d50eb4147aea6868
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051437"
 ---
 # <a name="test-aspnet-core-middleware"></a>Testowanie ASP.NET Core oprogramowania pośredniczącego
@@ -68,7 +68,7 @@ Wyślij żądanie przy użyciu <xref:System.Net.Http.HttpClient> :
 
 Potwierdź wynik. Najpierw ustaw potwierdzenie jako przeciwieństwo oczekiwanego wyniku. Początkowy przebieg z fałszywie pozytywnym potwierdzeniem potwierdza, że test zakończy się niepowodzeniem, gdy oprogramowanie pośredniczące działa prawidłowo. Uruchom test i upewnij się, że test zakończy się niepowodzeniem.
 
-W poniższym przykładzie oprogramowanie pośredniczące powinno zwrócić kod stanu 404 ( *nie można go znaleźć* ) po zażądaniu głównego punktu końcowego. Wykonaj pierwszy przebieg testu z `Assert.NotEqual( ... );` , co powinno zakończyć się niepowodzeniem:
+W poniższym przykładzie oprogramowanie pośredniczące powinno zwrócić kod stanu 404 (*nie można go znaleźć*) po zażądaniu głównego punktu końcowego. Wykonaj pierwszy przebieg testu z `Assert.NotEqual( ... );` , co powinno zakończyć się niepowodzeniem:
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/http-requests
 ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059497"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Wykonywanie żądań HTTP przy użyciu IHttpClientFactory w ASP.NET Core
@@ -378,9 +378,9 @@ Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExten
 
 Klienci utworzeni za pomocą `IHttpClientFactory` rejestrowania komunikatów dzienników dla wszystkich żądań. Włącz odpowiedni poziom informacji w konfiguracji rejestrowania, aby wyświetlić domyślne komunikaty dziennika. Dodatkowe rejestrowanie, takie jak rejestrowanie nagłówków żądań, jest uwzględniane tylko na poziomie śledzenia.
 
-Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient* , na przykład rejestruje komunikaty z kategorią "System .NET. http. HttpClient. **MyNamedClient** . LogicalHandler". Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
+Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient*, na przykład rejestruje komunikaty z kategorią "System .NET. http. HttpClient. **MyNamedClient**. LogicalHandler". Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
 
-Rejestrowanie odbywa się również w potoku obsługi żądania. W przykładzie *MyNamedClient* te komunikaty są rejestrowane z kategorią dziennika "System .NET. http. HttpClient. **MyNamedClient** . ClientHandler". W przypadku żądania dzieje się tak po uruchomieniu wszystkich innych programów obsługi i natychmiast przed wysłaniem żądania. W odpowiedzi to rejestrowanie obejmuje stan odpowiedzi, zanim przejdzie do powrotem za pomocą potoku programu obsługi.
+Rejestrowanie odbywa się również w potoku obsługi żądania. W przykładzie *MyNamedClient* te komunikaty są rejestrowane z kategorią dziennika "System .NET. http. HttpClient. **MyNamedClient**. ClientHandler". W przypadku żądania dzieje się tak po uruchomieniu wszystkich innych programów obsługi i natychmiast przed wysłaniem żądania. W odpowiedzi to rejestrowanie obejmuje stan odpowiedzi, zanim przejdzie do powrotem za pomocą potoku programu obsługi.
 
 Włączenie rejestrowania poza i wewnątrz potoku umożliwia inspekcję zmian wprowadzonych przez inne programy obsługi potoku. Może to obejmować zmiany w nagłówkach żądania lub w kodzie stanu odpowiedzi.
 
@@ -472,11 +472,11 @@ Użycie `IHttpClientFactory` w ten sposób jest dobrym sposobem refaktoryzacji i
 
 ### <a name="named-clients"></a>Nazwani klienci
 
-Jeśli aplikacja wymaga wielu odrębnych użycia `HttpClient` , z których każdy ma inną konfigurację, opcja służy do korzystania z **nazwanych klientów** . Konfigurację dla nazwy `HttpClient` można określić podczas rejestracji w `Startup.ConfigureServices` .
+Jeśli aplikacja wymaga wielu odrębnych użycia `HttpClient` , z których każdy ma inną konfigurację, opcja służy do korzystania z **nazwanych klientów**. Konfigurację dla nazwy `HttpClient` można określić podczas rejestracji w `Startup.ConfigureServices` .
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-W powyższym kodzie `AddHttpClient` jest wywoływana, dostarczając nazwę *GitHub* . Ten klient ma zainstalowaną domyślną konfigurację &mdash; , a w tym adres podstawowy i dwa nagłówki wymagane do pracy z interfejsem API usługi GitHub.
+W powyższym kodzie `AddHttpClient` jest wywoływana, dostarczając nazwę *GitHub*. Ten klient ma zainstalowaną domyślną konfigurację &mdash; , a w tym adres podstawowy i dwa nagłówki wymagane do pracy z interfejsem API usługi GitHub.
 
 Przy każdym `CreateClient` wywołaniu jest tworzone nowe wystąpienie programu `HttpClient` i zostanie wywołana akcja konfiguracji.
 
@@ -696,7 +696,7 @@ Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExten
 
 Klienci utworzeni za pomocą `IHttpClientFactory` rejestrowania komunikatów dzienników dla wszystkich żądań. Włącz odpowiedni poziom informacji w konfiguracji rejestrowania, aby wyświetlić domyślne komunikaty dziennika. Dodatkowe rejestrowanie, takie jak rejestrowanie nagłówków żądań, jest uwzględniane tylko na poziomie śledzenia.
 
-Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient* , na przykład rejestruje komunikaty z kategorią `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` . Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
+Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient*, na przykład rejestruje komunikaty z kategorią `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` . Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
 
 Rejestrowanie odbywa się również w potoku obsługi żądania. W przykładzie *MyNamedClient* te komunikaty są rejestrowane w kategorii dzienników `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` . W przypadku żądania dzieje się tak po uruchomieniu wszystkich innych programów obsługi i natychmiast przed wysłaniem żądania w sieci. W odpowiedzi to rejestrowanie obejmuje stan odpowiedzi, zanim przejdzie do powrotem za pomocą potoku programu obsługi.
 
@@ -777,11 +777,11 @@ Użycie `IHttpClientFactory` w ten sposób jest dobrym sposobem refaktoryzacji i
 
 ### <a name="named-clients"></a>Nazwani klienci
 
-Jeśli aplikacja wymaga wielu odrębnych użycia `HttpClient` , z których każdy ma inną konfigurację, opcja służy do korzystania z **nazwanych klientów** . Konfigurację dla nazwy `HttpClient` można określić podczas rejestracji w `Startup.ConfigureServices` .
+Jeśli aplikacja wymaga wielu odrębnych użycia `HttpClient` , z których każdy ma inną konfigurację, opcja służy do korzystania z **nazwanych klientów**. Konfigurację dla nazwy `HttpClient` można określić podczas rejestracji w `Startup.ConfigureServices` .
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-W powyższym kodzie `AddHttpClient` jest wywoływana, dostarczając nazwę *GitHub* . Ten klient ma zainstalowaną domyślną konfigurację &mdash; , a w tym adres podstawowy i dwa nagłówki wymagane do pracy z interfejsem API usługi GitHub.
+W powyższym kodzie `AddHttpClient` jest wywoływana, dostarczając nazwę *GitHub*. Ten klient ma zainstalowaną domyślną konfigurację &mdash; , a w tym adres podstawowy i dwa nagłówki wymagane do pracy z interfejsem API usługi GitHub.
 
 Przy każdym `CreateClient` wywołaniu jest tworzone nowe wystąpienie programu `HttpClient` i zostanie wywołana akcja konfiguracji.
 
@@ -1004,7 +1004,7 @@ Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExten
 
 Klienci utworzeni za pomocą `IHttpClientFactory` rejestrowania komunikatów dzienników dla wszystkich żądań. Włącz odpowiedni poziom informacji w konfiguracji rejestrowania, aby wyświetlić domyślne komunikaty dziennika. Dodatkowe rejestrowanie, takie jak rejestrowanie nagłówków żądań, jest uwzględniane tylko na poziomie śledzenia.
 
-Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient* , na przykład rejestruje komunikaty z kategorią `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` . Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
+Kategoria dziennika używana dla każdego klienta zawiera nazwę klienta programu. Klient o nazwie *MyNamedClient*, na przykład rejestruje komunikaty z kategorią `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` . Komunikaty z sufiksem *LogicalHandler* występują poza potokiem obsługi żądań. Na żądanie komunikaty są rejestrowane przed przetworzeniem przez inne procedury obsługi w potoku. W odpowiedzi komunikaty są rejestrowane po odebraniu odpowiedzi przez inne programy obsługi potoków.
 
 Rejestrowanie odbywa się również w potoku obsługi żądania. W przykładzie *MyNamedClient* te komunikaty są rejestrowane w kategorii dzienników `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` . W przypadku żądania dzieje się tak po uruchomieniu wszystkich innych programów obsługi i natychmiast przed wysłaniem żądania w sieci. W odpowiedzi to rejestrowanie obejmuje stan odpowiedzi, zanim przejdzie do powrotem za pomocą potoku programu obsługi.
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/complex-data-model
 ms.openlocfilehash: 1ac9d6303daac82f3973c5d027fe1f453dc32e02
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054102"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane
@@ -111,7 +111,7 @@ Ten `StringLength` atrybut nie uniemożliwia użytkownikowi wprowadzania białyc
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **Eksplorator obiektów SQL Server** (SSOX) Otwórz projektanta tabeli uczniów, klikając dwukrotnie tabelę **uczniów** .
 
@@ -169,7 +169,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 Uruchom aplikację i przejdź do strony uczniów. Zgłaszany jest wyjątek. Ten `[Column]` atrybut powoduje, że Dr powinien znaleźć kolumnę o nazwie `FirstName` , ale nazwa kolumny w bazie danych jest nadal `FirstMidName` .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Komunikat o błędzie jest podobny do poniższego przykładu:
 
@@ -237,7 +237,7 @@ W tym samouczku sposób, w jaki można to zrobić, jest usunięcie i ponowne utw
 
 * Uruchom aplikację i przejdź do strony uczniów.
 * Należy zauważyć, że czasy nie są wprowadzane ani wyświetlane wraz z datami.
-* Wybierz pozycję **Utwórz nową** , a następnie spróbuj wprowadzić nazwę dłuższą niż 50 znaków.
+* Wybierz pozycję **Utwórz nową**, a następnie spróbuj wprowadzić nazwę dłuższą niż 50 znaków.
 
 > [!Note]
 > W poniższych sekcjach Kompilowanie aplikacji na niektórych etapach powoduje wygenerowanie błędów kompilatora. Instrukcje określają, kiedy należy skompilować aplikację.
@@ -473,7 +473,7 @@ Modele danych rozpoczynają się od siebie i rosną. Tabele sprzężenia bez ła
 
 ### <a name="composite-key"></a>Klucz złożony
 
-Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent* . W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje, że:
 
@@ -538,7 +538,7 @@ Na powyższym diagramie przedstawiono:
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
 
-Zaktualizuj kod w *danych/Dbinitializeer. cs* :
+Zaktualizuj kod w *danych/Dbinitializeer. cs*:
 
 [!code-csharp[](intro/samples/cu30/Data/DbInitializer.cs)]
 
@@ -548,7 +548,7 @@ Poprzedni kod zawiera dane inicjatora dla nowych jednostek. Większość tego ko
 
 Skompiluj projekt.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W obszarze PMC Uruchom następujące polecenie.
 
@@ -591,7 +591,7 @@ W następnej sekcji zobaczysz, jak uniknąć tego błędu.
 Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zastosować do niej zmiany. Ten samouczek przedstawia dwie alternatywy:
 
 * [Porzuć i ponownie utwórz bazę danych](#drop). Wybierz tę sekcję, jeśli używasz oprogramowania SQLite.
-* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Instrukcje w tej sekcji działają tylko w przypadku SQL Server, a **nie dla oprogramowania SQLite** . 
+* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Instrukcje w tej sekcji działają tylko w przypadku SQL Server, a **nie dla oprogramowania SQLite**. 
 
 Dowolny wybór działa dla SQL Server. Chociaż metoda Apply-Migration jest bardziej złożona i czasochłonna, jest to preferowane podejście do rzeczywistych środowisk produkcyjnych. 
 
@@ -603,7 +603,7 @@ Dowolny wybór działa dla SQL Server. Chociaż metoda Apply-Migration jest bard
 
 Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę danych:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -639,7 +639,7 @@ Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę da
 
 Uruchom aplikację. Uruchomienie aplikacji uruchamia `DbInitializer.Initialize` metodę. `DbInitializer.Initialize`Wypełnia nową bazę danych.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Otwórz bazę danych w programie SSOX:
 
@@ -650,7 +650,7 @@ Otwórz bazę danych w programie SSOX:
 
 * Zapoznaj się z tabelą **CourseAssignment** :
 
-  * Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane** .
+  * Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane**.
   * Sprawdź, czy tabela **CourseAssignment** zawiera dane.
 
   ![CourseAssignment dane w SSOX](complex-data-model/_static/ssox-ci-data.png)
@@ -703,7 +703,7 @@ Sposób obsługi pokazanej tutaj sytuacji jest uproszczony dla tego samouczka. A
 * Dołącz kod lub skrypty, aby dodać `Department` wiersze i powiązane `Course` wiersze do nowych `Department` wierszy.
 * Nie używaj działu "Temp" ani wartości domyślnej dla `Course.DepartmentID` .
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -806,8 +806,8 @@ Poprzedni kod ogranicza nazwy do nie więcej niż 50 znaków. Ten `StringLength`
 Uruchom aplikację:
 
 * Przejdź do strony uczniów.
-* Wybierz pozycję **Utwórz nową** , a następnie wprowadź nazwę o długości większej niż 50 znaków.
-* Wybierz pozycję **Utwórz** , a po stronie klienta zostanie wyświetlony komunikat o błędzie.
+* Wybierz pozycję **Utwórz nową**, a następnie wprowadź nazwę o długości większej niż 50 znaków.
+* Wybierz pozycję **Utwórz**, a po stronie klienta zostanie wyświetlony komunikat o błędzie.
 
 ![Strona indeksu studentów przedstawiająca błędy długości ciągu](complex-data-model/_static/string-length-errors.png)
 
@@ -842,7 +842,7 @@ Aby zaktualizować bazę danych:
 * Skompiluj projekt.
 * Otwórz okno polecenia w folderze projektu. Wprowadź następujące polecenia, aby utworzyć nową migrację i zaktualizować bazę danych:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ColumnFirstName
@@ -1181,7 +1181,7 @@ Modele danych rozpoczynają się od siebie i rosną. Sprzężenia bez ładunku (
 
 ### <a name="composite-key"></a>Klucz złożony
 
-FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent* . W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje:
 
@@ -1196,7 +1196,7 @@ Klucz złożony gwarantuje:
 
 ## <a name="update-the-db-context"></a>Aktualizowanie kontekstu bazy danych
 
-Dodaj następujący wyróżniony kod do *danych/SchoolContext. cs* :
+Dodaj następujący wyróżniony kod do *danych/SchoolContext. cs*:
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_BeforeInheritance&highlight=15-18,25-31)]
 
@@ -1246,7 +1246,7 @@ Na powyższym diagramie przedstawiono:
 
 ## <a name="seed-the-db-with-test-data"></a>Wypełnianie bazy danych danymi testowymi
 
-Zaktualizuj kod w *danych/Dbinitializeer. cs* :
+Zaktualizuj kod w *danych/Dbinitializeer. cs*:
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Final)]
 
@@ -1256,7 +1256,7 @@ Poprzedni kod zawiera dane inicjatora dla nowych jednostek. Większość tego ko
 
 Skompiluj projekt.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ComplexDataModel
@@ -1290,7 +1290,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zastosować w niej przyszłe zmiany. Ten samouczek przedstawia dwa podejścia:
 
 * [Porzuć i ponownie utwórz bazę danych](#drop)
-* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Chociaż ta metoda jest bardziej złożona i czasochłonna, jest preferowanym podejściem dla rzeczywistych środowisk produkcyjnych. **Uwaga** : jest to opcjonalna sekcja samouczka. Możesz wykonać kroki porzucenia i utworzyć ponownie i pominąć tę sekcję. Jeśli chcesz wykonać kroki opisane w tej sekcji, nie wykonuj kroków usuwania i ponownego tworzenia. 
+* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Chociaż ta metoda jest bardziej złożona i czasochłonna, jest preferowanym podejściem dla rzeczywistych środowisk produkcyjnych. **Uwaga**: jest to opcjonalna sekcja samouczka. Możesz wykonać kroki porzucenia i utworzyć ponownie i pominąć tę sekcję. Jeśli chcesz wykonać kroki opisane w tej sekcji, nie wykonuj kroków usuwania i ponownego tworzenia. 
 
 <a name="drop"></a>
 
@@ -1298,7 +1298,7 @@ Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zas
 
 Kod w zaktualizowanych `DbInitializer` dodaje dane inicjatora dla nowych jednostek. Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę danych:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -1333,7 +1333,7 @@ Otwórz bazę danych w programie SSOX:
 
 Zapoznaj się z tabelą **CourseAssignment** :
 
-* Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane** .
+* Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane**.
 * Sprawdź, czy tabela **CourseAssignment** zawiera dane.
 
 ![CourseAssignment dane w SSOX](complex-data-model/_static/ssox-ci-data.png)

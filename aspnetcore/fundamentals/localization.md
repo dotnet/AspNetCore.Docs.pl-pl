@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/localization
 ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059523"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
@@ -140,7 +140,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -158,9 +158,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -213,11 +213,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA** i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -281,19 +281,19 @@ Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu uż
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
 
-1. Naciśnij pozycję **Języki** .
+1. Naciśnij pozycję **Języki**.
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe** .
+1. Naciśnij pozycję **Ustaw preferencje językowe**.
 
-1. Naciśnij pozycję **Dodaj język** .
+1. Naciśnij pozycję **Dodaj język**.
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
 
 ### <a name="use-a-custom-provider"></a>Używanie dostawcy niestandardowego
 
@@ -494,7 +494,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -512,9 +512,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -567,11 +567,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA** i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -637,19 +637,19 @@ Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu uż
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
 
-1. Naciśnij pozycję **Języki** .
+1. Naciśnij pozycję **Języki**.
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe** .
+1. Naciśnij pozycję **Ustaw preferencje językowe**.
 
-1. Naciśnij pozycję **Dodaj język** .
+1. Naciśnij pozycję **Dodaj język**.
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
 
 ### <a name="use-a-custom-provider"></a>Używanie dostawcy niestandardowego
 
@@ -849,7 +849,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -867,9 +867,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -922,11 +922,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA** i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -992,19 +992,19 @@ Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu uż
 
 ### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
 
-1. Naciśnij pozycję **Języki** .
+1. Naciśnij pozycję **Języki**.
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe** .
+1. Naciśnij pozycję **Ustaw preferencje językowe**.
 
-1. Naciśnij pozycję **Dodaj język** .
+1. Naciśnij pozycję **Dodaj język**.
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
 
 ### <a name="the-content-language-http-header"></a>Nagłówek HTTP w języku zawartości
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/globalization-localization
 ms.openlocfilehash: f8f261f25d854a9bf36ad3299f4af392d5c4fafd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93055883"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
@@ -67,7 +67,7 @@ Następujące typy pól mają określone wymagania dotyczące formatowania i nie
 
 [`@bind`](xref:mvc/views/razor#bind) obsługuje `@bind:culture` parametr, aby zapewnić <xref:System.Globalization.CultureInfo?displayProperty=fullName> analizę i formatowanie wartości. Określanie kultury nie jest zalecane w przypadku używania `date` `number` typów pól i. `date` i `number` ma wbudowaną Blazor obsługę, która udostępnia wymaganą kulturę.
 
-## <a name="localization"></a>Localization
+## <a name="localization"></a>Lokalizacja
 
 ### Blazor WebAssembly
 

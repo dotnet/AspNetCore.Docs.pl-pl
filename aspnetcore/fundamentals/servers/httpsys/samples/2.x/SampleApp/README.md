@@ -1,3 +1,3 @@
-# <a name="aspnet-core-httpsys-sample"></a>ASP.NET rdzeń HTTP.sys Przykład
+# <a name="aspnet-core-httpsys-sample"></a>Przykład HTTP.sys ASP.NET Core
 
-W tym przykładzie przedstawiono użycie protokołu HTTP.sys. W tym przykładzie przedstawiono funkcje opisane w temacie [implementacji serwera sieci web HTTP.sys.](https://docs.microsoft.com/aspnet/core/fundamentals/servers/httpsys)
+Ten przykład ilustruje użycie HTTP.sys. Ten przykład pokazuje funkcje opisane w temacie [ Implementacja serwera sieci webHTTP.sys](https://docs.microsoft.com/aspnet/core/fundamentals/servers/httpsys) .

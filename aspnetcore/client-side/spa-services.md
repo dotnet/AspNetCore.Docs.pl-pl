@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: client-side/spa-services
 ms.openlocfilehash: 1b9f5b4b4e066cdd3dd5fbfa666c7a087949979f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054648"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Korzystanie z usług JavaScript do tworzenia aplikacji jednostronicowych w ASP.NET Core
@@ -133,7 +133,7 @@ Otrzymany `UserName` argument jest serializowany przy użyciu wbudowanego serial
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-Nazwy właściwości przesyłane przez pomocników tagów są reprezentowane przy użyciu notacji **PascalCase** . Przeciwieństwo do języka JavaScript, gdzie te same nazwy właściwości są reprezentowane przez **CamelCase** . Domyślna konfiguracja serializacji JSON jest odpowiedzialna za tę różnicę.
+Nazwy właściwości przesyłane przez pomocników tagów są reprezentowane przy użyciu notacji **PascalCase** . Przeciwieństwo do języka JavaScript, gdzie te same nazwy właściwości są reprezentowane przez **CamelCase**. Domyślna konfiguracja serializacji JSON jest odpowiedzialna za tę różnicę.
 
 Aby rozwijać poprzedni przykład kodu, dane mogą być przekazywane z serwera do widoku przez Hydrating `globals` Właściwości dostarczonej do `resolve` funkcji:
 
@@ -161,7 +161,7 @@ npm i -D aspnet-webpack
 
 ### <a name="webpack-dev-middleware-configuration"></a>Konfiguracja oprogramowania pośredniczącego WebPack dev
 
-Oprogramowanie pośredniczące programu WebPack dla deweloperów jest rejestrowane w potoku żądania HTTP przez następujący kod *Startup.cs* w `Configure` metodzie pliku Startup.cs:
+Oprogramowanie pośredniczące programu WebPack dla deweloperów jest rejestrowane w potoku żądania HTTP przez następujący kod  w `Configure` metodzie pliku Startup.cs:
 
 [!code-csharp[](../client-side/spa-services/sample/SpaServicesSampleApp/Startup.cs?name=snippet_WebpackMiddlewareRegistration&highlight=4)]
 
@@ -253,10 +253,10 @@ dotnet new angular
 
 Istnieją dwa podstawowe tryby konfiguracji środowiska uruchomieniowego:
 
-* **Programowanie** :
+* **Programowanie**:
   * Zawiera mapy źródłowe ułatwiające debugowanie.
   * Nie optymalizuje kodu po stronie klienta pod kątem wydajności.
-* **Produkcja** :
+* **Produkcja**:
   * Wyklucza mapy źródłowe.
   * Optymalizuje kod po stronie klienta za pomocą funkcji grupowania i minifikacja.
 

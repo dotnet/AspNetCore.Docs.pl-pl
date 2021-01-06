@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
 ms.openlocfilehash: 995db4c8c9d0c0f1f77b1fd3665e707975406a7f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053621"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Rozwiązywanie problemów z lokalizacją ASP.NET Core
@@ -118,4 +118,4 @@ Gdy główna przestrzeń nazw zestawu różni się od nazwy zestawu, lokalizacja
 
 ## <a name="resources--build-action"></a>Akcja kompilacji & zasobów
 
-W przypadku używania plików zasobów do lokalizacji należy pamiętać, że mają one odpowiednią akcję kompilacji. Powinny to być **zasoby osadzone** , w przeciwnym razie `ResourceStringLocalizer` nie można znaleźć tych zasobów.
+W przypadku używania plików zasobów do lokalizacji należy pamiętać, że mają one odpowiednią akcję kompilacji. Powinny to być **zasoby osadzone**, w przeciwnym razie `ResourceStringLocalizer` nie można znaleźć tych zasobów.

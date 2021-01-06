@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: spa/angular
 ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054570"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Użyj szablonu projektu kątowego z ASP.NET Core
@@ -45,7 +45,7 @@ cd my-new-app
 
 Uruchom aplikację z poziomu programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
 
 Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
 
@@ -66,7 +66,7 @@ Now listening on: http://localhost:<port>
 Przejdź do tego adresu URL w przeglądarce.
 
 > [!WARNING]
-> Aplikacja uruchamia wystąpienie kątowego serwera interfejsu wiersza polecenia w tle. Rejestrowany jest komunikat podobny do następującego: Usługa *anie na żywo serwer programistyczny nasłuchuje na hoście lokalnym: &lt; otherport &gt; , Otwórz przeglądarkę do http://localhost:&lt ; otherport &gt; /* . Zignoruj ten komunikat, &mdash; ponieważ **nie** jest to adres URL połączonej ASP.NET Core i aplikacji interfejsu wiersza polecenia.
+> Aplikacja uruchamia wystąpienie kątowego serwera interfejsu wiersza polecenia w tle. Rejestrowany jest komunikat podobny do następującego: Usługa *anie na żywo serwer programistyczny nasłuchuje na hoście lokalnym: &lt; otherport &gt; , Otwórz przeglądarkę do http://localhost:&lt ; otherport &gt; /*. Zignoruj ten komunikat, &mdash; ponieważ **nie** jest to adres URL połączonej ASP.NET Core i aplikacji interfejsu wiersza polecenia.
 
 ---
 

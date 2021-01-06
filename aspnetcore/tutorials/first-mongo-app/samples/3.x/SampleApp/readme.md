@@ -9,10 +9,10 @@ products:
 - vs
 urlFragment: aspnetcore-webapi-mongodb
 ms.openlocfilehash: 95a2a6fcda0a4f7148183981f7dbacd06388329d
-ms.sourcegitcommit: 58722eb309767e462bdbf3082bd38737a4ef168f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/27/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "84106523"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Tworzenie internetowego interfejsu API za pomocą ASP.NET Core i MongoDB
@@ -173,7 +173,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 ## <a name="add-a-configuration-model"></a>Dodaj model konfiguracji
 
-1. Dodaj następujące wartości konfiguracji bazy danych do pliku *appSettings. JSON*:
+1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.jsna*:
 
     ```javascript
     {
@@ -206,7 +206,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
     }
     ```
 
-    Powyższa `BookstoreDatabaseSettings` Klasa jest używana do przechowywania wartości właściwości *appSettings. JSON* `BookstoreDatabaseSettings` . Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
+    Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.jsw* `BookstoreDatabaseSettings` wartościach właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -225,7 +225,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
     Powyższy kod ma następujące działanie:
 
-    * Wystąpienie konfiguracji, do którego są powiązane sekcje pliku *appSettings. JSON* , `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w pliku *appSettings. JSON*.
+    * Wystąpienie konfiguracji, do którego są powiązane *appsettings.jsw* pliku, `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.jsna*.
     * `IBookstoreDatabaseSettings`Interfejs jest rejestrowany przy użyciu programu di z pojedynczym [okresem istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes). Po dowstrzykiwaniu wystąpienie interfejsu jest rozpoznawane jako `BookstoreDatabaseSettings` obiekt.
 
 1. Dodaj następujący kod na początku *Startup.cs* , aby rozwiązać `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` odwołania i:
@@ -283,7 +283,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
     }
     ```
 
-    W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do wartości konfiguracyjnych *appSettings. JSON* , które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
+    W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.jsna* wartościach konfiguracji, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -326,10 +326,10 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
     ```
 
 * [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): reprezentuje bazę danych Mongo do wykonywania operacji. W tym samouczku do uzyskiwania dostępu do danych w określonej kolekcji jest stosowana ogólna Metoda [getcollection \<TDocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) . Wykonaj operacje CRUD w odniesieniu do kolekcji po wywołaniu tej metody. W `GetCollection<TDocument>(collection)` wywołaniu metody:
-  * `collection`reprezentuje nazwę kolekcji.
-  * `TDocument`reprezentuje typ obiektu CLR przechowywany w kolekcji.
+  * `collection` reprezentuje nazwę kolekcji.
+  * `TDocument` reprezentuje typ obiektu CLR przechowywany w kolekcji.
 
-`GetCollection<TDocument>(collection)`zwraca obiekt [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) reprezentujący kolekcję. W tym samouczku następujące metody są wywoływane w kolekcji:
+`GetCollection<TDocument>(collection)` zwraca obiekt [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) reprezentujący kolekcję. W tym samouczku następujące metody są wywoływane w kolekcji:
 
 * [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Usuwa pojedynczy dokument pasujący do podanych kryteriów wyszukiwania.
 * [Find \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): zwraca wszystkie dokumenty w kolekcji pasujące do podanych kryteriów wyszukiwania.
@@ -421,7 +421,7 @@ Poprzedni kontroler interfejsu API sieci Web:
 
 * Używa `BookService` klasy do wykonywania operacji CRUD.
 * Zawiera metody akcji do obsługi żądań HTTP GET, POST, PUT i DELETE.
-* Wywołuje <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` metodę akcji, aby zwrócić odpowiedź [http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) . Kod stanu 201 jest standardową odpowiedzią dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze. `CreatedAtRoute`dodaje również `Location` nagłówek do odpowiedzi. `Location`Nagłówek określa identyfikator URI nowo utworzonej książki.
+* Wywołuje <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` metodę akcji, aby zwrócić odpowiedź [http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) . Kod stanu 201 jest standardową odpowiedzią dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze. `CreatedAtRoute` dodaje również `Location` nagłówek do odpowiedzi. `Location`Nagłówek określa identyfikator URI nowo utworzonej książki.
 
 ## <a name="test-the-web-api"></a>Testowanie interfejsu API sieci Web
 
@@ -491,7 +491,7 @@ Aby spełnić powyższe wymagania, należy wprowadzić następujące zmiany:
 
     W przypadku poprzedniej zmiany nazwy właściwości w serializowanej odpowiedzi JSON interfejsu API sieci Web pasują do odpowiednich nazw właściwości w typie obiektu CLR. Na przykład, `Book` `Author` Serializacja właściwości klasy jako `Author` .
 
-1. W *modelach/książka. cs*Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
+1. W *modelach/książka. cs* Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
 
     ```csharp
     [BsonElement("Name")]

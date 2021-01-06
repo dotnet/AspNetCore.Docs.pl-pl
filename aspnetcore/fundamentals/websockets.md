@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/websockets
 ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057781"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>Obsługa obiektów WebSockets w ASP.NET Core
@@ -128,7 +128,7 @@ Jeśli klient nie zawsze wysyła komunikaty i nie chcesz przekroczyć limitu cza
 
 ## <a name="websocket-origin-restriction"></a>Ograniczenie pochodzenia obiektu WebSocket
 
-Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSockets. Przeglądarki **nie** :
+Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSockets. Przeglądarki **nie**:
 
 * Wykonaj żądania funkcji CORS przed inspekcją.
 * Przestrzeganie ograniczeń określonych w `Access-Control` nagłówkach podczas wykonywania żądań WebSocket.
@@ -158,13 +158,13 @@ Aby włączyć obsługę protokołu WebSocket w systemie Windows Server 2012 lub
 > [!NOTE]
 > Te kroki nie są wymagane w przypadku korzystania z IIS Express
 
-1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** .
-1. Wybierz opcję **Instalacja oparta na rolach lub oparta na funkcjach** . Wybierz opcję **Dalej** .
-1. Wybierz odpowiedni serwer (serwer lokalny jest domyślnie wybrany). Wybierz opcję **Dalej** .
-1. Rozwiń węzeł **serwer sieci Web (IIS)** w drzewie **role** , rozwiń węzeł **serwer sieci Web** , a następnie rozwiń węzeł **Programowanie aplikacji** .
-1. Wybierz pozycję **Protokół WebSocket** . Wybierz opcję **Dalej** .
-1. Jeśli nie są potrzebne dodatkowe funkcje, wybierz pozycję **dalej** .
-1. Wybierz pozycję **Zainstaluj** .
+1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera**.
+1. Wybierz opcję **Instalacja oparta na rolach lub oparta na funkcjach**. Wybierz pozycję **Dalej**.
+1. Wybierz odpowiedni serwer (serwer lokalny jest domyślnie wybrany). Wybierz pozycję **Dalej**.
+1. Rozwiń węzeł **serwer sieci Web (IIS)** w drzewie **role** , rozwiń węzeł **serwer sieci Web**, a następnie rozwiń węzeł **Programowanie aplikacji**.
+1. Wybierz pozycję **Protokół WebSocket**. Wybierz pozycję **Dalej**.
+1. Jeśli nie są potrzebne dodatkowe funkcje, wybierz pozycję **dalej**.
+1. Wybierz pozycję **Zainstaluj**.
 1. Po zakończeniu instalacji wybierz pozycję **Zamknij** , aby zakończyć pracę kreatora.
 
 Aby włączyć obsługę protokołu WebSocket w systemie Windows 8 lub nowszym:
@@ -173,12 +173,12 @@ Aby włączyć obsługę protokołu WebSocket w systemie Windows 8 lub nowszym:
 > Te kroki nie są wymagane w przypadku korzystania z IIS Express
 
 1. Przejdź do pozycji **Panel sterowania**  >  **programy**  >  **programy i funkcje**  >  **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Otwórz następujące węzły: **Internet Information Services**  >  **World Wide Web Services**  >  **Application Development Features** .
-1. Wybierz funkcję **protokołu WebSocket** . Wybierz pozycję **OK** .
+1. Otwórz następujące węzły: **Internet Information Services**  >  **World Wide Web Services**  >  **Application Development Features**.
+1. Wybierz funkcję **protokołu WebSocket** . Wybierz pozycję **OK**.
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Wyłącz protokół WebSocket przy użyciu socket.io na Node.js
 
-W przypadku korzystania z obsługi protokołu WebSocket w programie [Socket.IO](https://socket.io/) na [Node.js](https://nodejs.org/)należy wyłączyć domyślny moduł WebSocket usług IIS przy użyciu `webSocket` elementu w *web.config* lub *applicationHost.config* . Jeśli ten krok nie zostanie wykonany, moduł WebSocket usług IIS podejmie próbę obsługi komunikacji z użyciem protokołu WebSocket zamiast Node.js i aplikacji.
+W przypadku korzystania z obsługi protokołu WebSocket w programie [Socket.IO](https://socket.io/) na [Node.js](https://nodejs.org/)należy wyłączyć domyślny moduł WebSocket usług IIS przy użyciu `webSocket` elementu w *web.config* lub *applicationHost.config*. Jeśli ten krok nie zostanie wykonany, moduł WebSocket usług IIS podejmie próbę obsługi komunikacji z użyciem protokołu WebSocket zamiast Node.js i aplikacji.
 
 ```xml
 <system.webServer>
@@ -192,7 +192,7 @@ W przypadku korzystania z obsługi protokołu WebSocket w programie [Socket.IO](
 
 ![Początkowy stan strony sieci Web](websockets/_static/start.png)
 
-Wybierz pozycję **Połącz** , aby wysłać żądanie protokołu WebSocket do podanego adresu URL. Wprowadź wiadomość testową i wybierz pozycję **Wyślij** . Po zakończeniu wybierz pozycję **Zamknij gniazdo** . Sekcja **dziennika komunikacji** zgłasza poszczególne akcje otwierania, wysyłania i zamykania w miarę ich działania.
+Wybierz pozycję **Połącz** , aby wysłać żądanie protokołu WebSocket do podanego adresu URL. Wprowadź wiadomość testową i wybierz pozycję **Wyślij**. Po zakończeniu wybierz pozycję **Zamknij gniazdo**. Sekcja **dziennika komunikacji** zgłasza poszczególne akcje otwierania, wysyłania i zamykania w miarę ich działania.
 
 ![Początkowy stan strony sieci Web](websockets/_static/end.png)
 

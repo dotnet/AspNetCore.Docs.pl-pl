@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: index
 ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93052230"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
@@ -58,7 +58,7 @@ Platforma ASP.NET Core MVC udostępnia funkcje, które umożliwiają tworzenie [
 
 ## <a name="client-side-development"></a>Programowanie po stronie klienta
 
-ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index) , [kątowe](xref:spa/angular), [reagowanie](xref:spa/react)i [ładowania początkowego](https://getbootstrap.com/). Aby uzyskać więcej informacji, zobacz <xref:blazor/index> i Tematy pokrewne w obszarze *programowanie po stronie klienta* .
+ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index) , [kątowe](xref:spa/angular), [reagowanie](xref:spa/react)i [ładowania początkowego](https://getbootstrap.com/). Aby uzyskać więcej informacji, zobacz <xref:blazor/index> i Tematy pokrewne w obszarze *programowanie po stronie klienta*.
 
 <a name="target-framework"></a>
 
@@ -137,7 +137,7 @@ Platforma ASP.NET Core MVC udostępnia funkcje, które umożliwiają tworzenie [
 
 ## <a name="client-side-development"></a>Programowanie po stronie klienta
 
-ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index) , [kątowe](xref:spa/angular), [reagowanie](xref:spa/react)i [ładowania początkowego](https://getbootstrap.com/). Aby uzyskać więcej informacji, zobacz <xref:blazor/index> i Tematy pokrewne w obszarze *programowanie po stronie klienta* .
+ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index) , [kątowe](xref:spa/angular), [reagowanie](xref:spa/react)i [ładowania początkowego](https://getbootstrap.com/). Aby uzyskać więcej informacji, zobacz <xref:blazor/index> i Tematy pokrewne w obszarze *programowanie po stronie klienta*.
 
 <a name="target-framework"></a>
 
@@ -199,7 +199,7 @@ Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET do ASP.NET Core 
 Wiele artykułów i samouczków zawiera linki do kodu przykładowego.
 
 1. [Pobierz plik zip repozytorium ASP.NET](https://codeload.github.com/dotnet/AspNetCore.Docs/zip/master).
-1. Rozpakuj plik *Docs-master.zip* .
+1. Rozpakuj plik *Docs-master.zip*.
 1. Adres URL linku do przykładu pomoże Ci przejść do katalogu przykładu.
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Dyrektywy preprocesora w przykładowym kodzie

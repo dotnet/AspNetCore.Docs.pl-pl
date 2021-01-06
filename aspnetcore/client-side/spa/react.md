@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: spa/react
 ms.openlocfilehash: 6c3539d96329489189f49a3af0c718791824be6b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054453"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Użyj szablonu projektu reagowanie z ASP.NET Core
@@ -47,7 +47,7 @@ cd my-new-app
 
 Uruchom aplikację z poziomu programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
 

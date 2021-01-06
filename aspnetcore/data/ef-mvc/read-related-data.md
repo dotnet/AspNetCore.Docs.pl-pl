@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054063"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: odczytywanie powiązanych danych — ASP.NET MVC z EF Core
@@ -189,7 +189,7 @@ Wprowadzono następujące zmiany w istniejącym kodzie:
 
 * Zmieniono klasę modelu na `InstructorIndexData` .
 
-* Zmieniono tytuł strony z **indeksu** na **Instruktorzy** .
+* Zmieniono tytuł strony z **indeksu** na **Instruktorzy**.
 
 * Dodano kolumnę **pakietu Office** , która `item.OfficeAssignment.Location` jest wyświetlana tylko wtedy, gdy `item.OfficeAssignment` nie ma wartości null. (Ponieważ jest to relacja "jeden do zera" lub jeden-do-jednego, nie może być powiązana jednostka OfficeAssignment).
 

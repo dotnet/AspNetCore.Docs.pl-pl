@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: da6876e0540579dac5fb9e92362b38a398bca4d5
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: 92941d21820de90eb2ae8fb76c21c588ed9f1ffb
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972083"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024759"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRKlient Java ASP.NET Core
 
@@ -108,12 +108,43 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
     })).build();
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="passing-class-information-in-java"></a>Przekazywanie informacji o klasie w języku Java
+
+Podczas wywoływania `on` , `invoke` , lub `stream` metod `HubConnection` w kliencie Java, użytkownicy powinni przekazać `Type` obiekt, a nie `Class<?>` obiekt, aby opisać wszelkie ogólne `Object` przekazane do metody. `Type`Można uzyskać za pomocą podanej `TypeReference` klasy. Na przykład przy użyciu niestandardowej klasy generycznej o nazwie `Foo<T>` , poniższy kod pobiera `Type` :
+
+```java
+Type fooType = new TypeReference<Foo<String>>() { }).getType();
+```
+
+W przypadku elementów innych niż ogólne, takich jak elementy podstawowe lub inne niesparametryzowane typy, takie jak `String` , można po prostu użyć wbudowanej wartości `.class` .
+
+Podczas wywoływania jednej z tych metod z co najmniej jednym typem obiektu należy użyć składni generycznej podczas wywoływania metody. Na przykład podczas rejestrowania `on` procedury obsługi dla metody o nazwie `func` , która przyjmuje jako argumenty ciąg i `Foo<String>` obiekt, użyj następującego kodu, aby ustawić akcję do drukowania argumentów:
+
+```java
+hubConnection.<String, Foo<String>>on("func", (param1, param2) ->{
+    System.out.println(param1);
+    System.out.println(param2);
+}, String.class, fooType);
+```
+
+Ta konwencja jest konieczna, ponieważ nie można pobrać pełnych informacji o typach złożonych przy użyciu `Object.getClass` metody z powodu usunięcia typu w języku Java. Na przykład wywołanie metody `getClass` `ArrayList<String>` nie zwróci `Class<ArrayList<String>>` , ale raczej nie `Class<ArrayList>` daje deserializacji wystarczającej ilości informacji do poprawnego deserializacji komunikatu przychodzącego. Ten sam element ma wartość true w przypadku obiektów niestandardowych.
+
+::: moniker-end
+
 ## <a name="known-limitations"></a>Znane ograniczenia
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-* Obsługiwany jest tylko protokół JSON.
 * Transport zdarzeń powrotu i przesyłania do serwera nie jest obsługiwany.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+* Transport zdarzeń powrotu i przesyłania do serwera nie jest obsługiwany.
+* Obsługiwany jest tylko protokół JSON.
 
 ::: moniker-end
 

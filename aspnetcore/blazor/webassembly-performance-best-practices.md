@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0753ef0f1cde7bbb45ecc09b97fecb5ce364811c
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95417386"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024655"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
@@ -43,16 +43,16 @@ Poniższe sekcje zawierają zalecenia dotyczące minimalizowania obciążeń ren
 
 W środowisku uruchomieniowym składniki istnieją jako hierarchia. Składnik główny ma składniki podrzędne. Z kolei dzieci mają własne składniki podrzędne i tak dalej. W przypadku wystąpienia zdarzenia, takiego jak użytkownik, który wybiera przycisk, w ten sposób Blazor decyduje o tym, które składniki mają być przerenderowane:
 
- 1. Samo zdarzenie jest wysyłane do składnika, który wyrenderuje procedurę obsługi zdarzenia. Po wykonaniu procedury obsługi zdarzeń ten składnik jest renderowany.
- 1. Zawsze, gdy dowolny składnik jest przerenderowany, dostarcza nową kopię wartości parametrów do poszczególnych składników podrzędnych.
- 1. W przypadku otrzymania nowego zestawu wartości parametrów każdy składnik wybiera, czy ma być przerenderowany. Domyślnie składniki są rerenderowane, jeśli wartości parametrów mogły ulec zmianie (na przykład, jeśli są to obiekty modyfikowalne).
+1. Samo zdarzenie jest wysyłane do składnika, który wyrenderuje procedurę obsługi zdarzenia. Po wykonaniu procedury obsługi zdarzeń ten składnik jest renderowany.
+1. Zawsze, gdy dowolny składnik jest przerenderowany, dostarcza nową kopię wartości parametrów do poszczególnych składników podrzędnych.
+1. W przypadku otrzymania nowego zestawu wartości parametrów każdy składnik wybiera, czy ma być przerenderowany. Domyślnie składniki są rerenderowane, jeśli wartości parametrów mogły ulec zmianie (na przykład, jeśli są to obiekty modyfikowalne).
 
 Ostatnie dwa kroki tej sekwencji kontynuują rekursywnie hierarchię składników. W wielu przypadkach całe poddrzewo jest renderowane. Oznacza to, że zdarzenia ukierunkowane na składniki wyższego poziomu mogą spowodować kosztowne procesy ponownego renderowania, ponieważ wszystko poniżej tego punktu musi być renderowane.
 
 Jeśli chcesz przerwać ten proces i zapobiec obsłużeniu rekursji do określonego poddrzewa, możesz:
 
- * Upewnij się, że wszystkie parametry określonego składnika są typami pierwotnymi (na przykład,,,, `string` `int` `bool` `DateTime` i innych). Wbudowana logika do wykrywania zmian automatycznie pomija ponowne renderowanie, jeśli żadna z tych wartości parametrów nie została zmieniona. Jeśli renderuje składnik podrzędny z `<Customer CustomerId="@item.CustomerId" />` , gdzie `CustomerId` jest `int` wartością, wówczas nie jest on ponownie renderowany z wyjątkiem `item.CustomerId` zmian.
- * Jeśli musisz zaakceptować wartości parametrów niepierwotnych, takie jak niestandardowe typy modeli, wywołania zwrotne zdarzeń lub <xref:Microsoft.AspNetCore.Components.RenderFragment> wartości, możesz przesłonić, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Aby kontrolować decyzję o tym, czy należy renderować, co zostało opisane w sekcji [ `ShouldRender` użycie](#use-of-shouldrender) .
+* Upewnij się, że wszystkie parametry określonego składnika są typami pierwotnymi (na przykład,,,, `string` `int` `bool` `DateTime` i innych). Wbudowana logika do wykrywania zmian automatycznie pomija ponowne renderowanie, jeśli żadna z tych wartości parametrów nie została zmieniona. Jeśli renderuje składnik podrzędny z `<Customer CustomerId="@item.CustomerId" />` , gdzie `CustomerId` jest `int` wartością, wówczas nie jest on ponownie renderowany z wyjątkiem `item.CustomerId` zmian.
+* Jeśli musisz zaakceptować wartości parametrów niepierwotnych, takie jak niestandardowe typy modeli, wywołania zwrotne zdarzeń lub <xref:Microsoft.AspNetCore.Components.RenderFragment> wartości, możesz przesłonić, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Aby kontrolować decyzję o tym, czy należy renderować, co zostało opisane w sekcji [ `ShouldRender` użycie](#use-of-shouldrender) .
 
 Po pominięciu odrenderowania całych poddrzew może być możliwe usunięcie ogromnej większości kosztów renderowania w przypadku wystąpienia zdarzenia.
 
@@ -109,38 +109,7 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/components/lifecycle>.
 
 Podczas renderowania dużych ilości interfejsu użytkownika w obrębie pętli, na przykład lista lub siatka z tysiącami wpisów, zawiera ilość operacji renderowania może prowadzić do opóźnienia w renderowaniu interfejsu użytkownika i w ten sposób słabe środowisko użytkownika. W przypadku, gdy użytkownik widzi tylko niewielką liczbę elementów jednocześnie bez przewijania, wydaje się, że wastefule to wiele czasu renderowania elementów, które nie są obecnie widoczne.
 
-Aby rozwiązać ten krok, program Blazor udostępnia wbudowany [ `<Virtualize>` składnik](xref:blazor/components/virtualization) , który tworzy wygląd i zachowanie przewijania z arbitralnie dużej listy, ale w rzeczywistości renderuje tylko elementy listy, które znajdują się w bieżącym okienku ekranu przewijania. Na przykład oznacza to, że aplikacja może mieć listę z 100 000 wpisów, ale płacisz kosztem renderowania 20 elementów, które są widoczne w dowolnym momencie. Użycie `<Virtualize>` składnika może skalować wydajność interfejsu użytkownika według kolejności wielkości.
-
-`<Virtualize>` można użyć, gdy:
-
- * Renderowanie zestawu elementów danych w pętli.
- * Większość elementów nie jest widoczna z powodu przewijania.
- * Renderowane elementy mają dokładnie taki sam rozmiar. Gdy użytkownik przewija do dowolnego punktu, składnik może obliczyć widoczne elementy do wyświetlenia.
-
-Poniżej przedstawiono przykład niezwirtualizowanej listy:
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    @foreach (var flight in allFlights)
-    {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    }
-</div>
-```
-
-Jeśli `allFlights` Kolekcja zawiera 10 000 elementów, tworzy wystąpienie i renderuje wystąpienia 10 000 `<FlightSummary>` składników. W porównaniu poniżej przedstawiono przykład listy zwirtualizowanej:
-
-```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
-    <Virtualize Items="@allFlights" Context="flight">
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
-    </Virtualize>
-</div>
-```
-
-Mimo że wynikowy interfejs użytkownika wygląda tak samo dla użytkownika, w tle, tylko tworzy wystąpienie składnika i renderuje jako wiele `<FlightSummary>` wystąpień wymagane do wypełnienia regionu przewijania. Zestaw `<FlightSummary>` wyświetlanych wystąpień jest ponownie obliczany i renderowany podczas przewijania użytkownika.
-
-`<Virtualize>` ma także inne korzyści. Na przykład gdy składnik żąda danych z zewnętrznego interfejsu API, `<Virtualize>` zezwala składnikowi na pobieranie tylko wycinków rekordów, które odpowiadają bieżącemu widocznemu regionowi, zamiast pobierać wszystkie dane z kolekcji.
+Aby rozwiązać ten wpływ, program Blazor udostępnia `Virtualize` składnik, który tworzy wygląd i zachowanie przewijania dla arbitralnie dużej listy, ale tylko renderuje elementy listy, które znajdują się w bieżącym okienku ekranu przewijania. Na przykład oznacza to, że aplikacja może mieć listę z 100 000 wpisów, ale płacisz kosztem renderowania 20 elementów, które są widoczne w dowolnym momencie. Użycie `Virtualize` składnika może skalować wydajność interfejsu użytkownika według kolejności wielkości.
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/components/virtualization>.
 
@@ -150,11 +119,11 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/components/virtualization>.
 
 Większość Blazor składników nie wymaga agresywnej optymalizacji. Wynika to z faktu, że większość składników nie jest często powtarzana w interfejsie użytkownika i nie jest uruchamiana z dużą częstotliwością. Na przykład `@page` składniki i składniki reprezentujące jednopoziomowe elementy interfejsu użytkownika, takie jak okna dialogowe lub formularze, najprawdopodobniej pojawiają się tylko jeden w czasie i ponownie renderują w odpowiedzi na gest użytkownika. Te składniki nie tworzą obciążenia o wysokim poziomie renderowania, dzięki czemu można swobodnie korzystać z dowolnej kombinacji potrzebnych funkcji, bez obaw o wydajność renderowania.
 
-Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Przykład:
+Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Na przykład:
 
- * Duże zagnieżdżone formularze mogą mieć setki poszczególnych wejść, etykiet i innych elementów.
- * Siatki mogą zawierać tysiące komórek.
- * Wykresy punktowe mogą mieć miliony punktów danych.
+* Duże zagnieżdżone formularze mogą mieć setki poszczególnych wejść, etykiet i innych elementów.
+* Siatki mogą zawierać tysiące komórek.
+* Wykresy punktowe mogą mieć miliony punktów danych.
 
 Jeśli modeluje każdą jednostkę jako oddzielne wystąpienia składnika, będzie wiele z nich, aby wydajność renderowania stała się krytyczna. Ta sekcja zawiera wskazówki dotyczące podejmowania takich składników w sposób uproszczony, co sprawia, że interfejs użytkownika pozostanie szybko i będzie odpowiadać.
 
@@ -162,8 +131,8 @@ Jeśli modeluje każdą jednostkę jako oddzielne wystąpienia składnika, będz
 
 Każdy składnik jest oddzielną wyspa, która może być niezależna od elementów nadrzędnych i podrzędnych. Wybierając sposób dzielenia interfejsu użytkownika na hierarchię składników, można przejąć kontrolę nad szczegółowością renderowania interfejsu użytkownika. Może to być dobre lub złe w przypadku wydajności.
 
- * Dzieląc interfejs użytkownika na więcej składników, można przetworzyć mniejsze części interfejsu użytkownika, gdy wystąpią zdarzenia. Na przykład gdy użytkownik kliknie przycisk w wierszu tabeli, może być możliwe tylko przerenderowanie pojedynczego wiersza zamiast całej strony lub tabeli.
- * Jednak każdy dodatkowy składnik wiąże się z dodatkowym obciążeniem pamięci i procesora, aby zająć się niezależnym stanem i wyrenderowaniem.
+* Dzieląc interfejs użytkownika na więcej składników, można przetworzyć mniejsze części interfejsu użytkownika, gdy wystąpią zdarzenia. Na przykład gdy użytkownik kliknie przycisk w wierszu tabeli, może być możliwe tylko przerenderowanie pojedynczego wiersza zamiast całej strony lub tabeli.
+* Jednak każdy dodatkowy składnik wiąże się z dodatkowym obciążeniem pamięci i procesora, aby zająć się niezależnym stanem i wyrenderowaniem.
 
 Podczas dostrajania wydajności programu Blazor WebAssembly .NET 5 mierzy się obciążenie renderowania wokół 0,06 MS na wystąpienie składnika. Jest to oparte na prostym składniku, który akceptuje trzy parametry działające na typowym laptopie. Wewnętrznie narzuty są duże ze względu na pobieranie stanu poszczególnych składników ze słowników oraz przekazywanie i otrzymywanie parametrów. Dzięki mnożenia można zobaczyć, że dodanie 2 000 dodatkowych wystąpień składników spowodowałoby dodanie 0,12 sekund do czasu renderowania, a interfejs użytkownika byłby wolny dla użytkowników.
 
@@ -297,8 +266,8 @@ W poprzednim przykładzie `Data` różni się dla każdej komórki, ale `Options
 
 `<CascadingValue>`Składnik ma opcjonalny parametr o nazwie `IsFixed` .
 
- * Jeśli `IsFixed` wartość jest `false` (domyślnie), a następnie każdy odbiorca wartości kaskadowej skonfiguruje subskrypcję do odbierania powiadomień o zmianach. W takim przypadku każdy `[CascadingParameter]` jest **znacznie droższy** niż regularna `[Parameter]` ze względu na śledzenie subskrypcji.
- * Jeśli `IsFixed` wartość jest `true` (na przykład `<CascadingValue Value="@someValue" IsFixed="true">` ), adresaci Pobiera wartość początkową, ale *nie* konfiguruje żadnej subskrypcji do odbierania aktualizacji. W takim przypadku każdy `[CascadingParameter]` jest lekki i **nie jest droższy** od zwykłego `[Parameter]` .
+* Jeśli `IsFixed` wartość jest `false` (domyślnie), a następnie każdy odbiorca wartości kaskadowej skonfiguruje subskrypcję do odbierania powiadomień o zmianach. W takim przypadku każdy `[CascadingParameter]` jest **znacznie droższy** niż regularna `[Parameter]` ze względu na śledzenie subskrypcji.
+* Jeśli `IsFixed` wartość jest `true` (na przykład `<CascadingValue Value="@someValue" IsFixed="true">` ), adresaci Pobiera wartość początkową, ale *nie* konfiguruje żadnej subskrypcji do odbierania aktualizacji. W takim przypadku każdy `[CascadingParameter]` jest lekki i **nie jest droższy** od zwykłego `[Parameter]` .
 
 Tak, gdzie to możliwe, należy używać `IsFixed="true"` na wartościach kaskadowych. Można to zrobić zawsze, gdy wartość jest podawana nie zmienia się w czasie. We wspólnym wzorcu, w którym składnik przechodzi `this` jako wartość kaskadowo, należy użyć `IsFixed="true"` :
 
@@ -338,9 +307,9 @@ Jednym z głównych aspektów narzutu na składnik renderowania jest zapisanie p
 
 W niektórych ekstremalnych przypadkach warto uniknąć odbicia i zaimplementować własną logikę ustawienia parametru ręcznie. Może to być stosowane w przypadku:
 
- * Masz składnik, który renderuje bardzo często (na przykład, w interfejsie użytkownika znajdują się setki lub tysiące kopii tego elementu).
- * Akceptuje wiele parametrów.
- * Okaże się, że narzuty odbioru parametrów mają zauważalny wpływ na czas odpowiedzi interfejsu użytkownika.
+* Masz składnik, który renderuje bardzo często (na przykład, w interfejsie użytkownika znajdują się setki lub tysiące kopii tego elementu).
+* Akceptuje wiele parametrów.
+* Okaże się, że narzuty odbioru parametrów mają zauważalny wpływ na czas odpowiedzi interfejsu użytkownika.
 
 W takich przypadkach można przesłonić metodę wirtualną składnika <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> i wdrożyć własną logikę specyficzną dla danego składnika. W poniższym przykładzie zamierzone jest uniknięcie przeszukiwania słownika:
 
@@ -452,8 +421,8 @@ Ta technika może być jeszcze bardziej ważna dla Blazor Server , ponieważ ka�
 
 Wywołania między programami .NET i JavaScript obejmują kilka dodatkowych kosztów, ponieważ:
 
- * Domyślnie wywołania są asynchroniczne.
- * Domyślnie parametry i zwracane wartości są serializowane w formacie JSON. Ma to na celu zapewnienie łatwego w zrozumieniu mechanizmu konwersji między typami .NET i JavaScript.
+* Domyślnie wywołania są asynchroniczne.
+* Domyślnie parametry i zwracane wartości są serializowane w formacie JSON. Ma to na celu zapewnienie łatwego w zrozumieniu mechanizmu konwersji między typami .NET i JavaScript.
 
 Ponadto Blazor Server te wywołania są przesyłane przez sieć.
 

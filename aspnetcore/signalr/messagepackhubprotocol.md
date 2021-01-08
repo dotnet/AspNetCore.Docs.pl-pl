@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7c3640e9cd2c5d392400a115813584861f789554
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058171"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024694"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>Użyj protokołu MessagePack Hub w programie SignalR for ASP.NET Core
 
@@ -97,10 +97,10 @@ Po zainstalowaniu pakietu npm można użyć modułu bezpośrednio za pośrednict
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js* .
+W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js*.
 
 > [!NOTE]
-> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js* , wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js* .
+> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js*, wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js*.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -120,6 +120,26 @@ const connection = new signalR.HubConnectionBuilder()
 > [!NOTE]
 > W tej chwili nie ma opcji konfiguracji dla protokołu MessagePack na kliencie JavaScript.
 
+### <a name="java-client"></a>Klient Java
+
+Aby włączyć MessagePack za pomocą języka Java, zainstaluj `com.microsoft.signalr.messagepack` pakiet. W przypadku korzystania z Gradle Dodaj następujący wiersz do `dependencies` sekcji pliku *Build. Gradle* :
+
+```gradle
+implementation 'com.microsoft.signalr.messagepack:signalr-messagepack:5.0.0'
+```
+
+Korzystając z Maven, Dodaj następujące wiersze wewnątrz `<dependencies>` elementu *pom.xml* pliku:
+
+[!code-xml[pom.xml dependency element messagePack](java-client/sample/pom.xml?name=snippet_dependencyElement_messagePack)]
+
+Wywołanie `withHubProtocol(new MessagePackHubProtocol())` metody `HubConnectionBuilder` .
+
+```java
+HubConnection messagePackConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
+    .withHubProtocol(new MessagePackHubProtocol())
+    .build();
+```
+
 ## <a name="messagepack-quirks"></a>MessagePack osobliwości
 
 Należy pamiętać o kilku kwestiach dotyczących korzystania z protokołu centrum MessagePack.
@@ -136,7 +156,7 @@ public class ChatMessage
 }
 ```
 
-Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Przykład:
+Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Na przykład:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -187,6 +207,10 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 ```
 
 Aby uzyskać więcej informacji na temat tego ograniczenia, zobacz sekcję problemu w usłudze GitHub [/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
+
+### <a name="chars-and-strings-in-java"></a>Znaki i ciągi w języku Java
+
+W kliencie Java `char` obiekty są serializowane jako obiekty jednoznakowe `String` . Jest to w przeciwieństwie do klienta języka C# i języka JavaScript, który serializować je jako `short` obiekty. Sama Specyfikacja MessagePack nie definiuje zachowania dla `char` obiektów, dlatego należy do autora biblioteki, aby określić sposób serializacji. Różnica w zachowaniu między naszymi klientami polega na bibliotekach użytych dla naszych implementacji.
 
 ## <a name="related-resources"></a>Powiązane zasoby
 
@@ -277,10 +301,10 @@ Po zainstalowaniu pakietu npm można użyć modułu bezpośrednio za pośrednict
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js* .
+W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js*.
 
 > [!NOTE]
-> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js* , wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js* .
+> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js*, wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js*.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -316,7 +340,7 @@ public class ChatMessage
 }
 ```
 
-Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Przykład:
+Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Na przykład:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -457,10 +481,10 @@ Po zainstalowaniu pakietu npm można użyć modułu bezpośrednio za pośrednict
 
 *node_modules\\@aspnet\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js*
 
-W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js* .
+W przeglądarce należy `msgpack5` również odwołać się do biblioteki. Użyj `<script>` znacznika, aby utworzyć odwołanie. Bibliotekę można znaleźć pod adresem *node_modules\msgpack5\dist\msgpack5.js*.
 
 > [!NOTE]
-> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js* , wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js* .
+> W przypadku korzystania z `<script>` elementu kolejność jest ważna. Jeśli *signalr-protocol-msgpack.js* jest przywoływana przed *msgpack5.js*, wystąpi błąd podczas próby nawiązania połączenia z MessagePack. *signalr.js* jest również wymagany przed *signalr-protocol-msgpack.js*.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -496,7 +520,7 @@ public class ChatMessage
 }
 ```
 
-Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Przykład:
+Podczas wysyłania z klienta JavaScript należy użyć `PascalCased` nazw właściwości, ponieważ wielkość liter musi być zgodna z klasą języka C#. Na przykład:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });

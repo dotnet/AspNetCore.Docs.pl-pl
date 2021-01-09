@@ -19,19 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 96a7dde9a5a756e40125ffda4c54fbf24fdc616a
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94981885"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058262"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Grupy Azure Active Directory (AAD), role administratorów i role zdefiniowane przez użytkownika
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Javier Calvarro Nelson](https://github.com/javiercn)
 
 > [!NOTE]
-> Ten artykuł ma zastosowanie do Blazor aplikacji ASP.NET Core w wersji 3,1 z programem Microsoft Identity v 1.0 i została zaplanowana do aktualizacji na 5,0 przy użyciu wersji Identity 2.0. Aby uzyskać więcej informacji, zobacz [ Blazor WASM with AAD/B2C Groups and Roles (#17683 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/17683).
+> Ten artykuł ma zastosowanie do Blazor ASP.NET Core aplikacji w wersji 3,1 z firmą Microsoft Identity 1,0 i wkrótce zostanie zaktualizowany do 5,0 z Identity 2,0. Aby uzyskać więcej informacji, zobacz następujący problem z usługą GitHub i żądanie ściągnięcia. Karta **zmiany plików** w żądaniu ściągnięcia zawiera wersję roboczą tekstu i przykłady aktualizacji artykułu. Po przejrzeniu i ostatecznych aktualizacjach żądanie ściągnięcia zostanie scalone z zestawem dokumentacji na żywo.
+>
+> * Problem: [ Blazor WASM z grupami i rolami usługi AAD (#17683 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/17683)
+> * Żądanie ściągnięcia: [ Blazor temat grupy i role usługi AAD 5,0 (#20856 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/pull/20856)
 
 Azure Active Directory (AAD) oferuje kilka metod autoryzacji, które mogą być połączone z ASP.NET Core Identity :
 
@@ -535,7 +538,7 @@ W pliku ustawień aplikacji ( `appsettings.json` lub `appsettings.Production.jso
 },
 ```
 
-Przykład:
+Na przykład:
 
 ```json
 "AzureAd": {

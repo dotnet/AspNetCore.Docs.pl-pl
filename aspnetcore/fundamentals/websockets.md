@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6edf2017cc889321cfb484e643b75711fd66004d
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057781"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058353"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>Obsługa obiektów WebSockets w ASP.NET Core
 
@@ -67,7 +67,6 @@ Dodaj oprogramowanie pośredniczące obiektów WebSockets do `Configure` metody 
 Można skonfigurować następujące ustawienia:
 
 * `KeepAliveInterval` -Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
-* `ReceiveBufferSize` — Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
 
 ::: moniker-end
 
@@ -76,7 +75,6 @@ Można skonfigurować następujące ustawienia:
 Można skonfigurować następujące ustawienia:
 
 * `KeepAliveInterval` -Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
-* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize> — Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
 * `AllowedOrigins` -Lista dozwolonych wartości nagłówka pierwotnego dla żądań protokołu WebSocket. Domyślnie wszystkie źródła są dozwolone. Aby uzyskać szczegółowe informacje, zobacz sekcję "ograniczenie pochodzenia protokołu WebSocket" poniżej.
 
 ::: moniker-end
@@ -188,11 +186,10 @@ W przypadku korzystania z obsługi protokołu WebSocket w programie [Socket.IO](
 
 ## <a name="sample-app"></a>Przykładowa aplikacja
 
-[Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) , która jest dołączona do tego artykułu, jest aplikacją echo. Ma stronę sieci Web, która udostępnia połączenia protokołu WebSocket, a serwer wysyła wszystkie komunikaty odebrane z powrotem do klienta. Uruchom aplikację z wiersza polecenia (nie jest on skonfigurowany do uruchamiania z programu Visual Studio z IIS Express) i przejdź do http://localhost:5000 . Na stronie sieci Web zostanie wyświetlony stan połączenia w lewym górnym rogu:
+[Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) , która jest dołączona do tego artykułu, jest aplikacją echo. Ma ona stronę sieci Web, która udostępnia połączenia protokołu WebSocket, a serwer wysyła wszystkie komunikaty odebrane z powrotem do klienta. Przykładowa aplikacja nie jest skonfigurowana do uruchamiania z programu Visual Studio z IIS Express, więc Uruchom aplikację w powłoce poleceń [`dotnet run`](/dotnet/core/tools/dotnet-run) i przejdź do przeglądarki `http://localhost:5000` . Na stronie sieci Web zostanie wyświetlony stan połączenia:
 
-![Początkowy stan strony sieci Web](websockets/_static/start.png)
+![Początkowy stan strony sieci Web przed połączeniem z usługą WebSockets](websockets/_static/start.png)
 
 Wybierz pozycję **Połącz** , aby wysłać żądanie protokołu WebSocket do podanego adresu URL. Wprowadź wiadomość testową i wybierz pozycję **Wyślij**. Po zakończeniu wybierz pozycję **Zamknij gniazdo**. Sekcja **dziennika komunikacji** zgłasza poszczególne akcje otwierania, wysyłania i zamykania w miarę ich działania.
 
-![Początkowy stan strony sieci Web](websockets/_static/end.png)
-
+![Końcowy stan strony sieci Web po wysłaniu i odebraniu wiadomości testowych połączenia z usługą WebSockets](websockets/_static/end.png)

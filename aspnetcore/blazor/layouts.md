@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 3cb7c6184c13a003b4f4294f887d8938caa42f97
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 417f69e797296cdcd01fc4ce326388512a406368
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506906"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058275"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -32,7 +32,7 @@ Autorzy [Rainer Stropek](https://www.timecockpit.com) i [Luke Latham](https://gi
 
 Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i logo firmy, są zwykle częścią ogólnego układu aplikacji i są używane przez każdy składnik w aplikacji. Kopiowanie kodu tych elementów do wszystkich składników aplikacji nie jest efektywnym podejściem. Za każdym razem, gdy jeden z elementów wymaga aktualizacji, należy zaktualizować każdy składnik. Taka duplikacja jest trudna do utrzymania i może prowadzić do niespójnej zawartości z upływem czasu. *Układy* rozwiązują ten problem.
 
-Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/components/data-binding), [iniekcji zależności](xref:blazor/fundamentals/dependency-injection)i innych scenariuszy składników.
+Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/components/data-binding), [iniekcji zależności](xref:blazor/fundamentals/dependency-injection)i innych scenariuszy składników. Układy stosują się tylko do składników rutowanych Razor , które mają [`@page`](xref:mvc/views/razor#page) dyrektywy.
 
 Aby skonwertować składnik do układu:
 
@@ -79,7 +79,7 @@ Określanie układu jako domyślnego układu w routerze jest przydatnym rozwiąz
 
 ## <a name="specify-a-layout-in-a-component"></a>Określanie układu w składniku
 
-Użyj Razor dyrektywy, `@layout` Aby zastosować układ do składnika. Kompilator konwertuje `@layout` do <xref:Microsoft.AspNetCore.Components.LayoutAttribute> , który jest stosowany do klasy składnika.
+Użyj [`@layout`](xref:mvc/views/razor#layout) Razor dyrektywy, aby zastosować układ do Razor składnika obsługującego Routing, który ma także [`@page`](xref:mvc/views/razor#page) dyrektywę. Kompilator konwertuje `@layout` do <xref:Microsoft.AspNetCore.Components.LayoutAttribute> , który jest stosowany do klasy składnika.
 
 Zawartość następującego `MasterList` składnika jest wstawiana do `MasterLayout` pozycji `@Body` :
 
@@ -105,6 +105,9 @@ Określanie układu w programie `_Imports.razor` przesłania układ określony j
 
 > [!WARNING]
 > **Nie** dodawaj Razor `@layout` dyrektywy do `_Imports.razor` pliku głównego, co spowoduje nieskończoną pętlę układów w aplikacji. Aby kontrolować domyślny układ aplikacji, określ układ w `Router` składniku. Aby uzyskać więcej informacji, zobacz sekcję dotyczącą [układu domyślnego](#default-layout) .
+
+> [!NOTE]
+> [`@layout`](xref:mvc/views/razor#layout) Razor Dyrektywa stosuje tylko układ do obsługi Razor składników w [`@page`](xref:mvc/views/razor#page) dyrektywach.
 
 ## <a name="nested-layouts"></a>Układy zagnieżdżone
 

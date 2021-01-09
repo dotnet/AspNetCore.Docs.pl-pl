@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: b01b1c70be010ba0ad9bbd2c1114e5d8341b3261
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e5f9a07db742ce2e26f03c0b6e1caa1904e4e0d9
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506867"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058236"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -53,7 +53,9 @@ Przetwarzanie zdarzeń w Document Object Model (DOM):
 
 `Render`Cykl życia:
 
-1. Jeśli nie jest to pierwsze renderowanie składnika lub [`ShouldRender`](#suppress-ui-refreshing) jest oceniane jako `false` , nie wykonuj dalszych operacji na składniku.
+1. Zatrzymaj dalsze operacje renderowania na składniku:
+   * Po pierwszym wykonaniu.
+   * Gdy [`ShouldRender`](#suppress-ui-refreshing) jest `false` .
 1. Kompiluj porównanie drzewa renderowania (różnica) i Renderuj składnik.
 1. Oczekiwanie na zaktualizowanie modelu DOM.
 1. Wywołanie [`OnAfterRender{Async}`](#after-component-render) .

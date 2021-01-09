@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b1adca435b48db22a176d33a216c07d6647a6695
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054063"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058314"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: odczytywanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -59,7 +59,7 @@ Istnieje kilka sposobów, że oprogramowanie Object-Relational Mapping (ORM), ta
 
   ![Przykład oddzielnych zapytań](read-related-data/_static/separate-queries.png)
 
-* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Przykład:
+* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Na przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -183,7 +183,17 @@ Następnie, jeśli wybrano kurs, wybrany kurs zostanie pobrany z listy kursów w
 
 W obszarze *widoki/instruktorzy/index. cshtml* Zastąp kod szablonu poniższym kodem. Zmiany są wyróżnione.
 
-[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+::: moniker range=">= aspnetcore-2.2"
+
+[!code-cshtml[](intro/samples/5cu-snap/Views/Instructors/Index.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.1"
+
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-62&highlight=1,3-7,15-19,24,26-31,41-52,54)]
+
+::: moniker-end
 
 Wprowadzono następujące zmiany w istniejącym kodzie:
 
@@ -193,7 +203,7 @@ Wprowadzono następujące zmiany w istniejącym kodzie:
 
 * Dodano kolumnę **pakietu Office** , która `item.OfficeAssignment.Location` jest wyświetlana tylko wtedy, gdy `item.OfficeAssignment` nie ma wartości null. (Ponieważ jest to relacja "jeden do zera" lub jeden-do-jednego, nie może być powiązana jednostka OfficeAssignment).
 
-  ```html
+  ```cshtml
   @if (item.OfficeAssignment != null)
   {
       @item.OfficeAssignment.Location
@@ -202,20 +212,11 @@ Wprowadzono następujące zmiany w istniejącym kodzie:
 
 * Dodano kolumnę **kursów** , która wyświetla nauczanie kursów przez każdego instruktora. Aby uzyskać więcej informacji, zobacz sekcję [jawne przejście liniowe](xref:mvc/views/razor#explicit-line-transition) w Razor artykule Składnia artykułu.
 
-* Dodano kod, który dynamicznie dodaje `class="success"` do `tr` elementu wybranego instruktora. Ustawia kolor tła dla wybranego wiersza przy użyciu klasy Bootstrap.
-
-  ```html
-  string selectedRow = "";
-  if (item.ID == (int?)ViewData["InstructorID"])
-  {
-      selectedRow = "success";
-  }
-  <tr class="@selectedRow">
-  ```
+* Dodano kod, który warunkowo dodaje klasę kodu CSS Bootstrap do `tr` elementu wybranego instruktora. Ta klasa ustawia kolor tła dla wybranego wiersza.
 
 * Dodano nowe hiperłącze z etykietą **SELECT** zaraz przed innymi łączami w każdym wierszu, co powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody.
 
-  ```html
+  ```cshtml
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 

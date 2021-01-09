@@ -5,7 +5,7 @@ description: Dowiedz się więcej o obsłudze błędów przy użyciu ASP.NET Cor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 07/23/2020
+ms.date: 1/11/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: 0efcf1bbeeb65cf7f4420f8c50fb4adf7d1d016d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 92e9350a7892f8f38f64d4ebd68d54a97ec7e994
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052529"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058379"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Obsługa błędów w ASP.NET Core interfejsów API sieci Web
 
@@ -80,7 +80,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, należy ustawić `Accept` nagłówek żądania HTTP na `text/html` Typ nośnika. Przykład:
+Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, należy ustawić `Accept` nagłówek żądania HTTP na `text/html` Typ nośnika. Na przykład:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -127,7 +127,9 @@ Odpowiedź w formacie HTML jest przydatna podczas testowania za pomocą narzędz
 ::: moniker-end
 
 > [!WARNING]
-> Stronę wyjątku dla deweloperów należy włączyć tylko wtedy, **gdy aplikacja jest uruchomiona w środowisku deweloperskim** . Nie chcesz udostępniać szczegółowych informacji o wyjątku publicznie, gdy aplikacja jest uruchamiana w środowisku produkcyjnym. Aby uzyskać więcej informacji na temat konfigurowania środowisk, zobacz <xref:fundamentals/environments> .
+> Stronę wyjątku dla deweloperów należy włączyć tylko wtedy, **gdy aplikacja jest uruchomiona w środowisku deweloperskim**. Nie udostępniaj publicznie szczegółowych informacji o wyjątkach, gdy aplikacja jest uruchamiana w środowisku produkcyjnym. Aby uzyskać więcej informacji na temat konfigurowania środowisk, zobacz <xref:fundamentals/environments> .
+>
+> Nie zaznaczaj metody akcji procedury obsługi błędów z atrybutami metody HTTP, takimi jak `HttpGet` . Jawne czasowniki uniemożliwiają niektórym żądaniem osiągnięcie metody akcji. Zezwalaj na anonimowy dostęp do metody, jeśli nieuwierzytelnieni użytkownicy powinni zobaczyć błąd.
 
 ## <a name="exception-handler"></a>Procedura obsługi wyjątków
 
@@ -222,6 +224,8 @@ Wyjątek obsługujący oprogramowanie pośredniczące może również dostarczy�
 
     ::: moniker-end
 
+    Poprzedni kod wywołuje [ControllerBase. problem](xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A) w celu utworzenia <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> odpowiedzi.
+
 ## <a name="use-exceptions-to-modify-the-response"></a>Modyfikowanie odpowiedzi przy użyciu wyjątków
 
 Zawartość odpowiedzi można modyfikować poza kontrolerem. W przypadku interfejsu API sieci Web ASP.NET 4. x jeden ze sposobów na to zrobić przy użyciu <xref:System.Web.Http.HttpResponseException> typu. ASP.NET Core nie zawiera równoważnego typu. Pomoc techniczną dla programu `HttpResponseException` można dodać, wykonując następujące czynności:
@@ -234,7 +238,7 @@ Zawartość odpowiedzi można modyfikować poza kontrolerem. W przypadku interfe
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
-    W poprzednim filtrze Magiczna liczba 10 jest odejmowana od maksymalnej wartości całkowitej. Odjęcie tej liczby umożliwia wykonywanie innych filtrów na bardzo końcu potoku.
+    Poprzedni filtr Określa `Order` maksymalną wartość całkowitą minus 10. Pozwala to na wykonywanie innych filtrów na końcu potoku.
 
 1. W programie `Startup.ConfigureServices` Dodaj filtr akcji do kolekcji filters:
 
@@ -337,3 +341,7 @@ Użyj <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> w
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
 
 ::: moniker-end
+
+## <a name="custom-middleware-to-handle-exceptions"></a>Niestandardowe oprogramowanie pośredniczące do obsługi wyjątków
+
+Wartości domyślne w oprogramowaniu do obsługi wyjątków działają dobrze w przypadku większości aplikacji. W przypadku aplikacji, które wymagają wyspecjalizowanej obsługi wyjątków, należy rozważyć [dostosowanie obsługi wyjątków przez oprogramowanie pośredniczące](xref:fundamentals/error-handling#exception-handler-lambda).

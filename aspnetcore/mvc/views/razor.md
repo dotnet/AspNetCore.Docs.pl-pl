@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035713"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058288"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
 
@@ -497,7 +497,7 @@ W obszarze [ Razor składniki](xref:blazor/components/index)Użyj `@code` , `@fu
 
 ::: moniker-end
 
-Przykład:
+Na przykład:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -611,7 +611,7 @@ W przypadku rick@contoso.com przekazywania "" w modelu widok generuje następuj�
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@layout`Dyrektywa określa układ Razor składnika. Składniki układu są używane do uniknięcia duplikowania kodu i niespójności. Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.
+`@layout`Dyrektywa określa układ dla składników rutowanych Razor , które mają [`@page`](#page) dyrektywę. Składniki układu są używane do uniknięcia duplikowania kodu i niespójności. Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.
 
 ::: moniker-end
 

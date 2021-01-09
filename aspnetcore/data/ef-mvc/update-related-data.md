@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 9ad0de9984b42c2b14dfaf48c74660915de93be1
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053946"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058327"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: aktualizowanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -34,7 +34,7 @@ Na poniższych ilustracjach przedstawiono niektóre ze stron, z którymi będzie
 
 ![Strona edytowania kursu](update-related-data/_static/course-edit.png)
 
-![Strona edycji instruktora](update-related-data/_static/instructor-edit-courses.png)
+![Edytuj stronę instruktora](update-related-data/_static/instructor-edit-courses.png)
 
 W tym samouczku zostały wykonane następujące czynności:
 
@@ -91,7 +91,7 @@ Aby zoptymalizować wydajność szczegółów kursu i stron usuwania, Dodaj `AsN
 
 W obszarze *widoki/kursy/Utwórz. cshtml* Dodaj opcję "Wybierz dział" do listy rozwijanej **dział** , Zmień podpis z **DepartmentID** na **Wydział** i Dodaj komunikat weryfikacji.
 
-[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-35)]
 
 W obszarze *widoki/kursy/Edytuj. cshtml* wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml*.
 
@@ -113,7 +113,7 @@ Uruchom aplikację, wybierz kartę **kursy** , kliknij pozycję **Utwórz nową*
 
 ![Strona tworzenia kursu](update-related-data/_static/course-create.png)
 
-Kliknij przycisk **Utwórz**. Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
+Kliknij pozycję **Utwórz**. Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
 
 Kliknij pozycję **Edytuj** na kursie na stronie indeks kursów.
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 706564bb8607d0bb25c092c31a72e5790c825ee4
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
+ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024681"
+ms.lasthandoff: 01/11/2021
+ms.locfileid: "98065535"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>BlazorWirtualizacja składników ASP.NET Core
 
@@ -41,10 +41,10 @@ Popraw postrzeganą wydajność renderowania składników przy użyciu Blazor wb
 Bez wirtualizacji typowa lista może używać pętli języka C# [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) do renderowania każdego elementu na liście:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     @foreach (var flight in allFlights)
     {
-        <FlightSummary @key="flight.FlightId" Flight="@flight" />
+        <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     }
 </div>
 ```
@@ -54,17 +54,17 @@ Jeśli lista zawiera tysiące elementów, renderowanie listy może zająć dużo
 Zamiast wyrenderować każdy element na liście wszystkie jednocześnie, Zastąp [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) pętlę `Virtualize` składnikiem i określ stałe źródło elementu z <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.Items%2A?displayProperty=nameWithType> . Renderowane są tylko te elementy, które są obecnie widoczne:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights" Context="flight">
         <FlightSummary @key="flight.FlightId" Details="@flight.Summary" />
     </Virtualize>
 </div>
 ```
 
-Jeśli nie określisz kontekstu do składnika przy użyciu `Context` , użyj `context` wartości ( `context.{PROPERTY}` / `@context.{PROPERTY}` ) w szablonie zawartości elementu:
+Jeśli nie określisz kontekstu do składnika przy użyciu `Context` , użyj `context` wartości z szablonu zawartości elementu:
 
 ```razor
-<div class="all-flights" style="height:500px;overflow-y:scroll">
+<div style="height:500px;overflow-y:scroll">
     <Virtualize Items="@allFlights">
         <FlightSummary @key="context.FlightId" Details="@context.Summary" />
     </Virtualize>
@@ -72,12 +72,12 @@ Jeśli nie określisz kontekstu do składnika przy użyciu `Context` , użyj `co
 ```
 
 > [!NOTE]
-> Proces mapowania obiektów modelu do elementów i składników można kontrolować za pomocą `@key` atrybutu dyrektywy [] [linki XREF: MVC/views/Razor # Key]. `@key` powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza.
+> Proces mapowania obiektów modelu do elementów i składników można kontrolować przy użyciu [`@key`](xref:mvc/views/razor#key) atrybutu dyrektywy. `@key` powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza.
 >
 > Aby uzyskać więcej informacji, zobacz następujące artykuły:
 >
-> <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> <xref:mvc/views/razor#key>
+> * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
+> * <xref:mvc/views/razor#key>
 
 `Virtualize`Składnik:
 
@@ -93,7 +93,7 @@ Zawartość elementu `Virtualize` składnika może obejmować:
 
 ## <a name="item-provider-delegate"></a>Delegat dostawcy elementów
 
-Jeśli nie chcesz ładować wszystkich elementów do pamięci, możesz określić metodę delegata dostawcy elementów dla parametru składnika, <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> który asynchronicznie pobiera żądane elementy na żądanie:
+Jeśli nie chcesz ładować wszystkich elementów do pamięci, możesz określić metodę delegata dostawcy elementów dla parametru składnika, <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemsProvider%2A?displayProperty=nameWithType> który asynchronicznie pobiera żądane elementy na żądanie. W poniższym przykładzie `LoadEmployees` Metoda dostarcza elementy do `Virtualize` składnika:
 
 ```razor
 <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
@@ -108,7 +108,7 @@ Dostawca elementów odbiera obiekt <xref:Microsoft.AspNetCore.Components.Web.Vir
 
 `Virtualize`Składnik może akceptować tylko **jedno źródło elementu** z jego parametrów, więc nie próbuj jednocześnie używać dostawcy elementów i przypisywać kolekcji do programu `Items` . Jeśli oba są przypisane, <xref:System.InvalidOperationException> jest generowany, gdy parametry składnika są ustawione w czasie wykonywania.
 
-Poniższy przykład ładuje pracowników z `EmployeeService` :
+Poniższy `LoadEmployees` przykład metody ładuje pracowników z `EmployeeService` (niepokazywany):
 
 ```csharp
 private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
@@ -149,7 +149,7 @@ Ponieważ żądanie elementów ze zdalnego źródła danych może zająć troch�
 
 ## <a name="item-size"></a>Rozmiar elementu
 
-Można ustawić rozmiar każdego elementu w pikselach <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (domyślnie: 50px):
+Można ustawić rozmiar każdego elementu w pikselach <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (domyślnie: 50):
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: 44c507fb5e0ff4477a84bfc1e4d0c62180c8dd37
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854538"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252841"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -43,7 +43,7 @@ Ten dokument:
 * Wyjaśnia interakcje między MVC i Routing:
   * Jak typowe aplikacje MVC używają funkcji routingu.
   * Obejmuje zarówno:
-    * [UNC routingu](#cr) zwykle używany z kontrolerami i widokami.
+    * [Konwencjonalne Routing](#cr) zazwyczaj jest używany z kontrolerami i widokami.
     * *Routing atrybutów* używany z interfejsami API REST. Jeśli jesteś głównie zainteresowani routingiem interfejsów API REST, przejdź do sekcji [Routing atrybutów dla interfejsów API REST](#ar) .
   * Szczegóły dotyczące routingu zaawansowanego znajdują się w temacie [Routing](xref:fundamentals/routing) .
 * Odnosi się do domyślnego systemu routingu dodanego w ASP.NET Core 3,0, nazywanego routingiem punktu końcowego. Możliwe jest używanie kontrolerów z poprzednią wersją routingu w celu zapewnienia zgodności. Instrukcje można znaleźć w [przewodniku migracji 2.2-3.0](xref:migration/22-to-30) . Zapoznaj się z [wersją 2,2 tego dokumentu](xref:mvc/controllers/routing?view=aspnetcore-2.2) dotyczącą materiałów referencyjnych w starszym systemie routingu.
@@ -220,7 +220,7 @@ Gdy dwa punkty końcowe pasują do routingu, routing musi wykonać jedną z nast
 * Wybierz najlepszego kandydata.
 * Zgłoś wyjątek.
 
-Przykład:
+Na przykład:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -432,10 +432,10 @@ W poniższej tabeli opisano `[Route]` atrybuty w poprzednim kodzie:
 
 | Atrybut               | Łączy z `[Route("Home")]` | Definiuje szablon trasy |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | Yes | `"Home"` |
-| `[Route("Index")]` | Yes | `"Home/Index"` |
+| `[Route("")]` | Tak | `"Home"` |
+| `[Route("Index")]` | Tak | `"Home/Index"` |
 | `[Route("/")]` | **Nie** | `""` |
-| `[Route("About")]` | Yes | `"Home/About"` |
+| `[Route("About")]` | Tak | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -570,7 +570,7 @@ Trasy atrybutów obsługują tę samą składnię wbudowaną co konwencjonalne t
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
-W poprzednim kodzie, `[HttpPost("product/{id:int}")]` stosuje ograniczenie trasy. `ProductsController.ShowProduct`Akcja jest dopasowywana tylko przez ścieżki URL, takie jak `/product/3` . Część szablonu trasy `{id:int}` ogranicza ten segment tylko do liczb całkowitych.
+W poprzednim kodzie, `[HttpPost("product14/{id:int}")]` stosuje ograniczenie trasy. `Products14Controller.ShowProduct`Akcja jest dopasowywana tylko przez ścieżki URL, takie jak `/product14/3` . Część szablonu trasy `{id:int}` ogranicza ten segment tylko do liczb całkowitych.
 
 Aby uzyskać szczegółowy opis składni szablonu trasy, zobacz [odwołanie do szablonu trasy](xref:fundamentals/routing#route-template-reference) .
 
@@ -1008,7 +1008,7 @@ W ramach przetwarzania żądań MVC sprawdzi, czy wartości trasy mogą być uż
 
 ### <a name="disambiguating-actions"></a>Niejednoznaczne akcje
 
-Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Przykład:
+Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Na przykład:
 
 ```csharp
 public class ProductsController : Controller

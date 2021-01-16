@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c4e0d70b41221f272bb4b1fe82cfa531ec6fcf15
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6a8fd8e3498dda9b7c10834791e64df6276e2823
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94431070"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253023"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hostowanie ASP.NET Core w systemie Linux za pomocą Nginx
 
@@ -97,7 +97,7 @@ Ze względu na to, że żądania są przekazywane przez zwrotny serwer proxy, u�
 
 [!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
-Wywołaj <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> metodę w górnej części `Startup.Configure` przed wywołaniem innego oprogramowania pośredniczącego. Skonfiguruj oprogramowanie pośredniczące do przesyłania dalej `X-Forwarded-For` `X-Forwarded-Proto` nagłówków i:
+Wywołaj <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders%2A> metodę w górnej części `Startup.Configure` przed wywołaniem innego oprogramowania pośredniczącego. Skonfiguruj oprogramowanie pośredniczące do przesyłania dalej `X-Forwarded-For` `X-Forwarded-Proto` nagłówków i:
 
 ```csharp
 using Microsoft.AspNetCore.HttpOverrides;
@@ -114,7 +114,7 @@ app.UseAuthentication();
 
 Jeśli wartość nie <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> jest określona dla oprogramowania pośredniczącego, domyślne nagłówki są do przodu `None` .
 
-Serwery proxy uruchomione na adresach sprzężenia zwrotnego ( `127.0.0.0/8` , `[::1]` ), w tym standardowy adres localhost ( `127.0.0.1` ), są domyślnie zaufane. Jeśli inne zaufane serwery proxy lub sieci w organizacji obsługują żądania między Internetem a serwerem sieci Web, należy dodać je do listy <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> lub <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> z <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Poniższy przykład dodaje zaufany serwer proxy pod adresem IP 10.0.0.100 do przesyłanych nagłówków pośredniczących `KnownProxies` w programie `Startup.ConfigureServices` :
+Serwery proxy uruchomione na adresach sprzężenia zwrotnego ( `127.0.0.0/8` , `[::1]` ), w tym standardowy adres localhost ( `127.0.0.1` ), są domyślnie zaufane. Jeśli inne zaufane serwery proxy lub sieci w organizacji obsługują żądania między Internetem a serwerem sieci Web, należy dodać je do listy <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies%2A> lub <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks%2A> z <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Poniższy przykład dodaje zaufany serwer proxy pod adresem IP 10.0.0.100 do przesyłanych nagłówków pośredniczących `KnownProxies` w programie `Startup.ConfigureServices` :
 
 ```csharp
 using System.Net;
@@ -146,7 +146,7 @@ Sprawdź, czy w przeglądarce jest wyświetlana domyślna strona docelowa dla Ng
 
 ### <a name="configure-nginx"></a>Konfigurowanie serwera Nginx
 
-Aby skonfigurować Nginx jako zwrotny serwer proxy do przekazywania żądań HTTP do aplikacji ASP.NET Core, zmodyfikuj `/etc/nginx/sites-available/default` . Otwórz go w edytorze tekstów i Zastąp zawartość następującym:
+Aby skonfigurować Nginx jako zwrotny serwer proxy do przekazywania żądań HTTP do aplikacji ASP.NET Core, zmodyfikuj `/etc/nginx/sites-available/default` . Otwórz go w edytorze tekstów i Zastąp zawartość następującym fragmentem kodu:
 
 ```nginx
 server {
@@ -165,7 +165,7 @@ server {
 }
 ```
 
-Jeśli aplikacja jest SignalR aplikacją lub jest Blazor Server odpowiednio wyświetlana <xref:signalr/scale#linux-with-nginx> , <xref:blazor/host-and-deploy/server#linux-with-nginx> Aby uzyskać więcej informacji.
+Jeśli aplikacja jest SignalR Blazor Server aplikacją lub, <xref:signalr/scale#linux-with-nginx> <xref:blazor/host-and-deploy/server#linux-with-nginx> Aby uzyskać więcej informacji, zobacz i.
 
 Gdy nie są `server_name` zgodne, Nginx używa serwera domyślnego. W przypadku braku zdefiniowanego serwera domyślnego pierwszy serwer w pliku konfiguracji jest domyślnym serwerem. Najlepszym rozwiązaniem jest dodanie określonego serwera domyślnego, który zwraca kod stanu 444 w pliku konfiguracji. Domyślnym przykładem konfiguracji serwera jest:
 
@@ -177,10 +177,20 @@ server {
 }
 ```
 
-W przypadku powyższego pliku konfiguracji i domyślnego serwera Nginx akceptuje publiczny ruch na porcie 80 z nagłówkiem hosta `example.com` lub `*.example.com` . Żądania niepasujące do tych hostów nie zostaną przekazane do Kestrel. Nginx przekazuje pasujące żądania do Kestrel w `http://localhost:5000` . Zobacz [, jak Nginx przetwarza żądanie,](https://nginx.org/docs/http/request_processing.html) Aby uzyskać więcej informacji. Aby zmienić adres IP/port Kestrel, zobacz [Kestrel: Konfiguracja punktu końcowego](xref:fundamentals/servers/kestrel#endpoint-configuration).
+::: moniker range=">= aspnetcore-5.0"
+
+W przypadku powyższego pliku konfiguracji i domyślnego serwera Nginx akceptuje publiczny ruch na porcie 80 z nagłówkiem hosta `example.com` lub `*.example.com` . Żądania niepasujące do tych hostów nie zostaną przekazane do Kestrel. Nginx przekazuje pasujące żądania do Kestrel w `http://localhost:5000` . Aby uzyskać więcej informacji, zobacz [jak Nginx przetwarza żądanie](https://nginx.org/docs/http/request_processing.html). Aby zmienić adres IP/port Kestrel, zobacz [Kestrel: Konfiguracja punktu końcowego](xref:fundamentals/servers/kestrel/endpoints).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+W przypadku powyższego pliku konfiguracji i domyślnego serwera Nginx akceptuje publiczny ruch na porcie 80 z nagłówkiem hosta `example.com` lub `*.example.com` . Żądania niepasujące do tych hostów nie zostaną przekazane do Kestrel. Nginx przekazuje pasujące żądania do Kestrel w `http://localhost:5000` . Aby uzyskać więcej informacji, zobacz [jak Nginx przetwarza żądanie](https://nginx.org/docs/http/request_processing.html). Aby zmienić adres IP/port Kestrel, zobacz [Kestrel: Konfiguracja punktu końcowego](xref:fundamentals/servers/kestrel#endpoint-configuration).
+
+::: moniker-end
 
 > [!WARNING]
-> Niepowodzenie określenia odpowiedniej [dyrektywy server_name](https://nginx.org/docs/http/server_names.html) uwidacznia aplikację pod kątem luk w zabezpieczeniach. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.example.com` ) nie ma znaczenia dla tego zagrożenia bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , który jest narażony). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+> Niepowodzenie określenia odpowiedniej [dyrektywy server_name](https://nginx.org/docs/http/server_names.html) uwidacznia aplikację pod kątem luk w zabezpieczeniach. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.example.com` ) nie ma znaczenia dla tego zagrożenia bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , który jest narażony). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 Po nawiązaniu konfiguracji Nginx Uruchom polecenie, `sudo nginx -t` Aby zweryfikować składnię plików konfiguracji. Jeśli test pliku konfiguracji zakończy się pomyślnie, Wymuś Nginx aby pobrać zmiany, uruchamiając polecenie `sudo nginx -s reload` .
 
@@ -189,9 +199,9 @@ Aby bezpośrednio uruchomić aplikację na serwerze:
 1. Przejdź do katalogu aplikacji.
 1. Uruchom aplikację: `dotnet <app_assembly.dll>` , gdzie `app_assembly.dll` to nazwa pliku zestawu aplikacji.
 
-Jeśli aplikacja działa na serwerze, ale nie odpowiada za pośrednictwem Internetu, sprawdź zaporę serwera i upewnij się, że port 80 jest otwarty. W przypadku korzystania z maszyny wirtualnej usługi Azure Ubuntu Dodaj regułę sieciowej grupy zabezpieczeń (sieciowej grupy zabezpieczeń), która umożliwia ruch przychodzący portu 80. Nie ma potrzeby włączania reguły portu 80 dla ruchu wychodzącego, ponieważ ruch wychodzący jest automatycznie udzielany, gdy reguła ruchu przychodzącego jest włączona.
+Jeśli aplikacja działa na serwerze, ale nie odpowiada za pośrednictwem Internetu, sprawdź zaporę serwera i upewnij się, że jest otwarty port 80. W przypadku korzystania z maszyny wirtualnej usługi Azure Ubuntu Dodaj regułę sieciowej grupy zabezpieczeń (sieciowej grupy zabezpieczeń), która umożliwia ruch przychodzący portu 80. Nie ma potrzeby włączania reguły portu 80 dla ruchu wychodzącego, ponieważ ruch wychodzący jest automatycznie udzielany, gdy reguła ruchu przychodzącego jest włączona.
 
-Po zakończeniu testowania aplikacji Zamknij aplikację z `Ctrl+C` poziomu wiersza polecenia.
+Po zakończeniu testowania aplikacji Zamknij aplikację przy użyciu <kbd>klawisza Ctrl</kbd>  +  <kbd>C</kbd> w wierszu polecenia.
 
 ## <a name="monitor-the-app"></a>Monitorowanie aplikacji
 
@@ -205,7 +215,7 @@ Utwórz plik definicji usługi:
 sudo nano /etc/systemd/system/kestrel-helloapp.service
 ```
 
-Poniżej znajduje się przykładowy plik usługi dla aplikacji:
+Poniższy przykład to plik usługi dla aplikacji:
 
 ```ini
 [Unit]
@@ -298,7 +308,7 @@ Ponieważ aplikacja internetowa korzystająca z usługi Kestrel jest zarządzana
 sudo journalctl -fu kestrel-helloapp.service
 ```
 
-Aby można było kontynuować filtrowanie, opcje czasu `--since today` , takie jak, `--until 1 hour ago` lub ich kombinacje mogą zmniejszyć liczbę zwróconych wpisów.
+Aby można było kontynuować filtrowanie, opcje czasu, takie jak `--since today` , `--until 1 hour ago` , lub ich kombinacje mogą zmniejszyć liczbę zwróconych wpisów.
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
@@ -375,18 +385,29 @@ Skonfiguruj serwer przy użyciu dodatkowych wymaganych modułów. Rozważ użyci
 
 **Konfigurowanie aplikacji do połączeń lokalnych (HTTPS)**
 
-Polecenie [dotnet Run](/dotnet/core/tools/dotnet-run) używa `Properties/launchSettings.json` pliku aplikacji, który konfiguruje aplikację do nasłuchiwania na adresach URL dostarczonych przez `applicationUrl` Właściwość (na przykład `https://localhost:5001;http://localhost:5000` ).
+Polecenie [dotnet Run](/dotnet/core/tools/dotnet-run) używa *Właściwości/launchSettings.jsaplikacji w* pliku, co umożliwia skonfigurowanie aplikacji do nasłuchiwania na adresach URL dostarczonych przez `applicationUrl` Właściwość. Na przykład `https://localhost:5001;http://localhost:5000`.
 
 Skonfiguruj aplikację do korzystania z certyfikatu w środowisku programistycznym dla `dotnet run` polecenia lub środowiska programistycznego (<kbd>F5</kbd> lub <kbd>Ctrl</kbd> + <kbd>F5</kbd> w Visual Studio Code), korzystając z jednej z następujących metod:
+
+::: moniker range=">= aspnetcore-5.0"
+
+* [Zastąp domyślny certyfikat z konfiguracji](xref:fundamentals/servers/kestrel/endpoints#configuration) (*zalecane*)
+* [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel/endpoints#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 * [Zastąp domyślny certyfikat z konfiguracji](xref:fundamentals/servers/kestrel#configuration) (*zalecane*)
 * [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
+::: moniker-end
+
 **Konfigurowanie zwrotnego serwera proxy dla połączeń zabezpieczonych za pośrednictwem protokołu HTTPS**
 
-* Skonfiguruj serwer do nasłuchiwania ruchu HTTPS na porcie `443` , określając prawidłowy certyfikat wystawiony przez zaufany urząd certyfikacji (CA).
+* Skonfiguruj serwer do nasłuchiwania ruchu HTTPS na porcie 443, określając prawidłowy certyfikat wystawiony przez zaufany urząd certyfikacji (CA).
 
-* Ochrona zabezpieczeń poprzez zastosowanie niektórych praktyk przedstawionych w następującym `/etc/nginx/nginx.conf` pliku. Przykłady obejmują wybranie silniejszego szyfru i przekierowanie całego ruchu przez protokół HTTP do protokołu HTTPS.
+* Ochrona zabezpieczeń poprzez zastosowanie niektórych praktyk przedstawionych w następującym pliku */etc/nginx/Nginx.conf* . Przykłady obejmują wybranie silniejszego szyfru i przekierowanie całego ruchu przez protokół HTTP do protokołu HTTPS.
 
   > [!NOTE]
   > W przypadku środowisk programistycznych zaleca się używanie przekierowań tymczasowych (302) zamiast trwałych przekierowań (301). Buforowanie łączy może spowodować niestabilne zachowanie w środowiskach deweloperskich.
@@ -400,11 +421,11 @@ Skonfiguruj aplikację do korzystania z certyfikatu w środowisku programistyczn
   * Nie dodawaj nagłówka HSTS.
   * Wybierz krótką `max-age` wartość.
 
-Dodaj `/etc/nginx/proxy.conf` plik konfiguracji:
+Dodaj plik konfiguracji */etc/nginx/proxy.conf* :
 
 [!code-nginx[](linux-nginx/proxy.conf)]
 
-**Zastąp** zawartość `/etc/nginx/nginx.conf` pliku konfiguracji następującym plikiem. Przykład zawiera obie `http` sekcje i `server` w jednym pliku konfiguracyjnym.
+**Zastąp** zawartość pliku konfiguracji */etc/nginx/Nginx.conf* następującym plikiem. Przykład zawiera obie `http` sekcje i `server` w jednym pliku konfiguracyjnym.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
@@ -417,7 +438,7 @@ Dodaj `/etc/nginx/proxy.conf` plik konfiguracji:
 
 Aby wyeliminować ataki clickjacking:
 
-1. Edytuj `nginx.conf` plik:
+1. Edytuj plik *Nginx. conf* :
 
    ```bash
    sudo nano /etc/nginx/nginx.conf
@@ -432,7 +453,7 @@ Aby wyeliminować ataki clickjacking:
 
 Ten nagłówek zapobiega większości przeglądarek z wykrywaniem MIME odpowiedzi w odniesieniu do zadeklarowanego typu zawartości, ponieważ nagłówek instruuje przeglądarkę, aby nie przesłaniał typu zawartości odpowiedzi. Jeśli na `nosniff` serwerze jest wyświetlana zawartość `text/html` , przeglądarka renderuje ją jako `text/html` .
 
-1. Edytuj `nginx.conf` plik:
+1. Edytuj plik *Nginx. conf* :
 
    ```bash
    sudo nano /etc/nginx/nginx.conf

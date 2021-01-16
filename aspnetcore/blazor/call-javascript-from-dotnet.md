@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 2502f43f4eaf245996827f704462ec340bbb8e07
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97592842"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252542"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
 
@@ -527,7 +527,7 @@ var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
-`import`Identyfikator w poprzednim przykładzie jest specjalnym identyfikatorem używanym specjalnie do importowania modułu JavaScript. Określ moduł przy użyciu jego stabilnej statycznej ścieżki zasobów sieci Web: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` . Symbol zastępczy `{LIBRARY NAME}` jest nazwą biblioteki. Symbol zastępczy `{PATH UNDER WWWROOT}` jest ścieżką do skryptu w sekcji `wwwroot` .
+`import`Identyfikator w poprzednim przykładzie jest specjalnym identyfikatorem używanym specjalnie do importowania modułu JavaScript. Określ moduł przy użyciu jego stabilnej statycznej ścieżki zasobów sieci Web: `./_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` . Segment ścieżki dla bieżącego katalogu ( `./` ) jest wymagany, aby można było utworzyć poprawną statyczną ścieżkę zasobu do pliku JavaScript. Symbol zastępczy `{LIBRARY NAME}` jest nazwą biblioteki. Symbol zastępczy `{PATH UNDER WWWROOT}` jest ścieżką do skryptu w sekcji `wwwroot` .
 
 <xref:Microsoft.JSInterop.IJSRuntime> Importuje moduł jako `IJSObjectReference` , który reprezentuje odwołanie do obiektu JavaScript z kodu platformy .NET. Użyj `IJSObjectReference` do wywołania wyeksportowanych funkcji języka JavaScript z modułu:
 
@@ -655,29 +655,9 @@ Ponadto w poprzednim przykładzie pokazano, jak można hermetyzować logikę Jav
 
 ## <a name="size-limits-on-js-interop-calls"></a>Limity rozmiaru dla wywołań międzyoperacyjnych w JS
 
-W programie Blazor WebAssembly platforma nie nakłada ograniczeń dotyczących rozmiaru danych wejściowych i wyjściowych wywołań js międzyoperacyjnych.
+W programie Blazor WebAssembly platforma nie nakłada limitu rozmiaru danych wejściowych i wyjściowych w programie js.
 
-W programie Blazor Server wynik wywołania elementu js Interop jest ograniczony przez maksymalny rozmiar ładunku wymuszony przez SignalR ( <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> ), który domyślnie 32 KB. Aplikacje, które próbują odpowiedzieć na wywołanie elementu JS Interop z ładunkiem większym niż <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> Zgłoś błąd. Większy limit można skonfigurować przez modyfikację <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . W poniższym przykładzie ustawiono maksymalny rozmiar komunikatu odbioru na 64 KB (64 * 1024 * 1024):
-
-```csharp
-services.AddServerSideBlazor()
-   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
-```
-
-Zwiększenie SignalR limitu jest kosztem wymaganym przez użycie większej liczby zasobów serwera i ujawnia serwerowi zwiększone ryzyko ze strony złośliwego użytkownika. Ponadto odczytywanie dużej ilości zawartości w usłudze do pamięci jako ciągów lub tablic bajtowych może również spowodować, że alokacje działające nieprawidłowo z modułem wyrzucania elementów bezużytecznych, co skutkuje dodatkowymi karami za wydajność. Jedną z opcji odczytu dużych ładunków jest rozważenie wysłania zawartości w mniejszych fragmentach i przetworzenie ładunku jako <xref:System.IO.Stream> . Można go użyć podczas odczytywania dużych ładunków JSON lub w przypadku, gdy dane są dostępne w języku JavaScript jako nieprzetworzone bajty. Przykład demonstrujący wysyłanie dużych ładunków binarnych w programie Blazor Server , które używają technik podobnych do `InputFile` składnika, można znaleźć w [przykładowej aplikacji przesyłania danych binarnych](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).
-
-Podczas opracowywania kodu, który przesyła dużą ilość danych między językami JavaScript i należy wziąć pod uwagę następujące wskazówki Blazor :
-
-* Wydziel dane na mniejsze fragmenty i Wyślij segmenty danych sekwencyjnie, dopóki wszystkie dane nie zostaną odebrane przez serwer.
-* Nie przydzielaj dużych obiektów w kodzie JavaScript i C#.
-* Nie blokuj głównego wątku interfejsu użytkownika przez długie okresy podczas wysyłania lub otrzymywania danych.
-* Zwolnij wszystkie używane pamięci, gdy proces zostanie ukończony lub anulowany.
-* Wymuś następujące dodatkowe wymagania dotyczące zabezpieczeń:
-  * Zadeklaruj maksymalny rozmiar pliku lub danych, który może zostać przesłany.
-  * Zadeklaruj minimalną szybkość przekazywania z klienta na serwerze.
-* Po odebraniu danych przez serwer dane mogą być następujące:
-  * Tymczasowo przechowywane w buforze pamięci do momentu zebrania wszystkich segmentów.
-  * Wykorzystano natychmiast. Na przykład dane mogą być przechowywane bezpośrednio w bazie danych lub zapisywane na dysku w miarę odbierania poszczególnych segmentów.
+W programie Blazor Server wywołania programu js Interop są ograniczone przez maksymalny SignalR rozmiar przychodzących komunikatów dozwolony dla metod koncentratora, które są wymuszane przez <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> (domyślnie: 32 KB). Program JS do SignalR komunikatów programu .NET większych niż <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> Zgłoś błąd. Platforma nie nakłada limitu rozmiaru SignalR komunikatu z centrum na klienta. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-dotnet-from-javascript#size-limits-on-js-interop-calls>.
   
 ## <a name="js-modules"></a>Moduły JS
 
@@ -724,7 +704,7 @@ window.returnJSObjectReference = () => {
 ```
 
 > [!WARNING]
-> `js_string_to_mono_string`Nazwa funkcji, zachowanie i istnienie mogą ulec zmianie w przyszłej wersji platformy .NET. Przykład:
+> `js_string_to_mono_string`Nazwa funkcji, zachowanie i istnienie mogą ulec zmianie w przyszłej wersji platformy .NET. Na przykład:
 >
 > * Prawdopodobnie zmieniono nazwę funkcji.
 > * Sama funkcja może zostać usunięta na korzyść automatycznej konwersji ciągów przez strukturę.

@@ -5,7 +5,7 @@ description: Dowiedz się, jak utworzyć Blazor progresywną aplikację sieci We
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 01/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f400319ef81b3d7768bdbdab84f46d3f9c50bb46
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 196e19528341e98ac06cefb08ba92f9e47d265ea
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855446"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252477"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
@@ -59,15 +59,109 @@ Gdy tworzysz nową **Blazor WebAssembly aplikację** w oknie dialogowym **Tworze
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/interfejs wiersza polecenia platformy .NET Core](#tab/visual-studio-code+netcore-cli)
 
-Utwórz projekt PWA w powłoce poleceń z `--pwa` przełącznikiem:
+Użyj następującego polecenia, aby utworzyć projekt PWA w powłoce poleceń z `--pwa` przełącznikiem:
 
 ```dotnetcli
-dotnet new blazorwasm -o MyNewProject --pwa
+dotnet new blazorwasm -o MyBlazorPwa --pwa
 ```
+
+W poprzednim poleceniu `-o|--output` opcja powoduje utworzenie nowego folderu dla aplikacji o nazwie `MyBlazorPwa` .
 
 ---
 
 Opcjonalnie można skonfigurować PWA dla aplikacji utworzonej przy użyciu szablonu hostowanego ASP.NET Core. Scenariusz PWA jest niezależny od modelu hostingu.
+
+## <a name="convert-an-existing-no-locblazor-webassembly-app-into-a-pwa"></a>Konwertowanie istniejącej Blazor WebAssembly aplikacji do PWA
+
+Przekonwertuj istniejącą Blazor WebAssembly aplikację do PWA zgodnie ze wskazówkami w tej sekcji.
+
+W pliku projektu aplikacji:
+
+* Dodaj następującą `ServiceWorkerAssetsManifest` Właściwość do `PropertyGroup` :
+
+  ```xml
+    ...
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+   ```
+
+* Dodaj następujący `ServiceWorker` element do `ItemGroup` :
+
+  ```xml
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" 
+      PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+  ```
+
+Aby uzyskać statyczne zasoby, należy użyć **jednej** z następujących metod:
+
+::: moniker range=">= aspnetcore-5.0"
+
+* Utwórz oddzielny, nowy projekt PWA przy użyciu [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń:
+
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa
+  ```
+  
+  W poprzednim poleceniu `-o|--output` opcja powoduje utworzenie nowego folderu dla aplikacji o nazwie `MyBlazorPwa` .
+  
+  Jeśli nie chcesz konwertować aplikacji dla najnowszej wersji, przekaż tę `-f|--framework` opcję. W poniższym przykładzie jest tworzona aplikacja dla ASP.NET Core w wersji 3,1:
+  
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa -f netcoreapp3.1
+  ```
+
+* Przejdź do repozytorium ASP.NET Core GitHub pod następującym adresem URL, który łączy się ze źródłem i zasobami odwołania do 5,0. Jeśli nie przekonwertujesz aplikacji na wersję 5,0, wybierz wersję, z którą pracujesz, z listy rozwijanej **Przełącz gałęzie lub Tagi** , która ma zastosowanie do Twojej aplikacji.
+
+  [Blazor WebAssemblyfolder szablonu projektu dotnet/aspnetcore (wersja 5,0 `wwwroot` )](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* Utwórz oddzielny, nowy projekt PWA za pomocą [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń. Przekaż `-f|--framework` opcję, aby wybrać wersję. W poniższym przykładzie jest tworzona aplikacja dla ASP.NET Core w wersji 3,1:
+  
+  ```dotnetcli
+  dotnet new blazorwasm -o MyBlazorPwa --pwa -f netcoreapp3.1
+  ```
+  
+  W poprzednim poleceniu `-o|--output` opcja powoduje utworzenie nowego folderu dla aplikacji o nazwie `MyBlazorPwa` .
+
+* Przejdź do repozytorium ASP.NET Core GitHub pod następującym adresem URL, który zawiera linki do źródła i zasobów odwołania do 3,1:
+
+  [Blazor WebAssemblyfolder szablonu projektu dotnet/aspnetcore (wersja 3,1 `wwwroot` )](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/ProjectTemplates/ComponentsWebAssembly.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+  > [!NOTE]
+  > Adres URL Blazor WebAssembly szablonu projektu został zmieniony po wydaniu ASP.NET Core 3,1. Zasoby referencyjne dla 5,0 lub nowszych są dostępne pod następującym adresem URL:
+  >
+  > [Blazor WebAssemblyfolder szablonu projektu dotnet/aspnetcore (wersja 5,0 `wwwroot` )](https://github.com/dotnet/aspnetcore/tree/release/5.0/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/Client/wwwroot)
+
+::: moniker-end
+
+Z folderu źródłowego `wwwroot` w aplikacji utworzonej lub z zasobów referencyjnych w `dotnet/aspnetcore` repozytorium GitHub Skopiuj następujące pliki do `wwwroot` folderu aplikacji:
+
+* `icon-512.png`
+* `manifest.json`
+* `service-worker.js`
+* `service-worker.published.js`
+
+W `wwwroot/index.html` pliku aplikacji:
+
+* Dodaj `<link>` elementy dla ikony manifestu i aplikacji:
+
+  ```html
+  <link href="manifest.json" rel="manifest" />
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+  ```
+
+* Dodaj następujący `<script>` tag w tagu zamykającym `</body>` bezpośrednio po `blazor.webassembly.js` tagu skryptu:
+
+  ```html
+      ...
+      <script>navigator.serviceWorker.register('service-worker.js');</script>
+  </body>
+  ```
 
 ## <a name="installation-and-app-manifest"></a>Manifest instalacji i aplikacji
 

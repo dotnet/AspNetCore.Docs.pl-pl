@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: d7ffcb67637593ab2909885a9e1f6de74a78361b
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5caa412773bf9c8e3bed5ebc529d48b886de6956
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855498"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253075"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
@@ -333,7 +333,7 @@ Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania do
 ### <a name="http2"></a>HTTP/2
 
 * Znaczące redukcje alokacji w ścieżce kodu HTTP/2.
-* Obsługa [HPack dynamicznej kompresji](https://tools.ietf.org/html/rfc7541) nagłówków odpowiedzi HTTP/2 w programie [Kestrel](xref:fundamentals/servers/kestrel) . Aby uzyskać więcej informacji, zobacz [rozmiar tabeli nagłówka](xref:fundamentals/servers/kestrel#header-table-size) i [HPACK: dyskretne Killer (funkcja) protokołu HTTP/2](https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/).
+* Obsługa [HPack dynamicznej kompresji](https://tools.ietf.org/html/rfc7541) nagłówków odpowiedzi HTTP/2 w programie [Kestrel](xref:fundamentals/servers/kestrel) . Aby uzyskać więcej informacji, zobacz [rozmiar tabeli nagłówka](xref:fundamentals/servers/kestrel/options#header-table-size) i [HPACK: dyskretne Killer (funkcja) protokołu HTTP/2](https://blog.cloudflare.com/hpack-the-silent-killer-feature-of-http-2/).
 * Wysyłanie ramek PING protokołu HTTP/2: protokół HTTP/2 ma mechanizm wysyłania ramek PING, aby upewnić się, że połączenie bezczynne jest nadal funkcjonalne. Zapewnienie działającego połączenia jest szczególnie przydatne podczas pracy z długimi strumieniami, które często są bezczynne, ale tylko sporadycznie widzą aktywność, na przykład gRPC strumienie. Aplikacje mogą wysyłać okresowe ramki PING w programie [Kestrel](xref:fundamentals/servers/kestrel) , ustawiając limity dla <xref:Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions> :
 
    ```csharp

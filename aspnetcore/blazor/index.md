@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 79c225a0714562a01afe67bf8e59f3b3f98a6265
-ms.sourcegitcommit: e9b8835a02f75b6378b766edb8bab23b14a4192b
+ms.openlocfilehash: 840cc87103447db2b4686994701a0e4543d11fde
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/18/2020
-ms.locfileid: "97666862"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252464"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -167,7 +167,7 @@ Blazor implementuje [.NET Standard](/dotnet/standard/net-standard), dzięki czem
 
 Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład dostęp do systemu plików, otwieranie gniazda i wątkowość) throw <xref:System.PlatformNotSupportedException> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zestaw webassembly](https://webassembly.org)
 * <xref:blazor/hosting-models>
@@ -175,6 +175,6 @@ Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 * [Przewodnik języka C#](/dotnet/csharp/)
-* <xref:mvc/views/razor>
+* [Razor odwołanie do składni dla ASP.NET Core](xref:mvc/views/razor)
 * [HTML](https://www.w3.org/html/)
 * [Firma Blazor Awesome](https://github.com/AdrienTorris/awesome-blazor) linki społeczności

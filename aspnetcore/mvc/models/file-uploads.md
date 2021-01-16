@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c32d20d4616650db004c78fb4d8ea9a4d5a3beab
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061174"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252802"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -125,7 +125,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -195,7 +195,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -436,7 +436,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
+`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -468,7 +468,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -651,7 +651,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 ### <a name="kestrel-maximum-request-body-size"></a>Maksymalny rozmiar treści żądania Kestrel
 
-W przypadku aplikacji hostowanych przez Kestrel domyślny maksymalny rozmiar treści żądania to 30 000 000 bajtów, czyli około 28,6 MB. Dostosuj limit przy użyciu opcji serwera [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) Kestrel:
+W przypadku aplikacji hostowanych przez Kestrel domyślny maksymalny rozmiar treści żądania to 30 000 000 bajtów, czyli około 28,6 MB. Dostosuj limit przy użyciu opcji serwera [MaxRequestBodySize](xref:fundamentals/servers/kestrel/options#maximum-request-body-size) Kestrel:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -667,7 +667,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> służy do ustawiania [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) dla pojedynczej strony lub akcji.
+<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> służy do ustawiania [MaxRequestBodySize](xref:fundamentals/servers/kestrel/options#maximum-request-body-size) dla pojedynczej strony lub akcji.
 
 W Razor aplikacji strony Zastosuj filtr z [Konwencją](xref:razor-pages/razor-pages-conventions) w `Startup.ConfigureServices` :
 
@@ -706,8 +706,8 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 
 Inne limity Kestrel mogą dotyczyć aplikacji hostowanych przez Kestrel:
 
-* [Maksymalna liczba połączeń klienta](xref:fundamentals/servers/kestrel#maximum-client-connections)
-* [Stawki danych żądań i odpowiedzi](xref:fundamentals/servers/kestrel#minimum-request-body-data-rate)
+* [Maksymalna liczba połączeń klienta](xref:fundamentals/servers/kestrel/options#maximum-client-connections)
+* [Stawki danych żądań i odpowiedzi](xref:fundamentals/servers/kestrel/options#minimum-request-body-data-rate)
 
 ### <a name="iis"></a>IIS
 
@@ -849,7 +849,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -919,7 +919,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -1160,7 +1160,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
+`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1192,7 +1192,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1584,7 +1584,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1654,7 +1654,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -1895,7 +1895,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
+`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1927,7 +1927,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -2222,7 +2222,13 @@ Przykłady w tym temacie polegają na zapełnieniu <xref:System.IO.MemoryStream>
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
+::: moniker range="< aspnetcore-5.0"
 * [Opróżnianie żądań połączenia HTTP](xref:fundamentals/servers/kestrel#http11-request-draining)
+::: moniker-end
+::: moniker range=">= aspnetcore-5.0"
+* [Opróżnianie żądań połączenia HTTP](xref:fundamentals/servers/kestrel/request-draining)
+::: moniker-end
+
 * [Przekazywanie plików bez ograniczeń](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Zabezpieczenia platformy Azure: ramka zabezpieczeń: sprawdzanie poprawności danych wejściowych | Środki zaradcze](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Wzorce projektowe chmury platformy Azure: wzorzec klucza portiera](/azure/architecture/patterns/valet-key)

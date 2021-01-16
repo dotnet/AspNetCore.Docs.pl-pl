@@ -18,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 01fb87205f7855f0995cbcd135b6b01f15835e3b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3a7b054adc50be57028dfa0364f80ae8733b02f7
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060602"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252711"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Częściowe widoki w ASP.NET Core
 
 [Steve Kowalski](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT)i [Scott Sauber](https://twitter.com/scottsauber)
 
-Widok częściowy to [Razor](xref:mvc/views/razor) plik znaczników ( *. cshtml* ) bez [`@page`](xref:mvc/views/razor#page) dyrektywy, która renderuje dane wyjściowe HTML *w* innym wyrenderowanym danych wyjściowych.
+Widok częściowy to [Razor](xref:mvc/views/razor) plik znaczników (*. cshtml*) bez [`@page`](xref:mvc/views/razor#page) dyrektywy, która renderuje dane wyjściowe HTML *w* innym wyrenderowanym danych wyjściowych.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Termin *częściowy widok* jest używany podczas tworzenia aplikacji MVC, gdzie pliki znaczników są nazywane *widokami* , lub Razor aplikacją Pages, gdzie pliki znaczników są nazywane *stronami* . Ten temat ogólnie odnosi się do widoków MVC i stron stron Razor jako *plików znaczników* .
+Termin *częściowy widok* jest używany podczas tworzenia aplikacji MVC, gdzie pliki znaczników są nazywane *widokami*, lub Razor aplikacją Pages, gdzie pliki znaczników są nazywane *stronami*. Ten temat ogólnie odnosi się do widoków MVC i stron stron Razor jako *plików znaczników*.
 
 ::: moniker-end
 
@@ -62,7 +62,7 @@ Widok częściowy to plik *. cshtml* , bez [`@page`](xref:mvc/views/razor#page) 
 
 W ASP.NET Core MVC kontroler <xref:Microsoft.AspNetCore.Mvc.ViewResult> może zwrócić widok lub widok częściowy. Na Razor stronach <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> można zwrócić widok częściowy reprezentowany jako <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> obiekt. Odwołania do widoków częściowych i renderowania są opisane w sekcji [odwołanie do częściowego widoku](#reference-a-partial-view) .
 
-W przeciwieństwie do widoku MVC lub renderowania stron, widok częściowy nie działa *_ViewStart. cshtml* . Aby uzyskać więcej informacji na temat *_ViewStart. cshtml* , zobacz <xref:mvc/views/layout> .
+W przeciwieństwie do widoku MVC lub renderowania stron, widok częściowy nie działa *_ViewStart. cshtml*. Aby uzyskać więcej informacji na temat *_ViewStart. cshtml*, zobacz <xref:mvc/views/layout> .
 
 Nazwy plików widoku częściowego często zaczynają się od znaku podkreślenia ( `_` ). Ta konwencja nazewnictwa nie jest wymagana, ale pomaga wizualnie odróżnić widoki częściowe od widoków i stron.
 
@@ -74,7 +74,7 @@ Widok częściowy jest plikiem znaczników *. cshtml* , który jest przechowywan
 
 Kontroler <xref:Microsoft.AspNetCore.Mvc.ViewResult> może zwrócić widok lub widok częściowy. Odwołania do widoków częściowych i renderowania są opisane w sekcji [odwołanie do częściowego widoku](#reference-a-partial-view) .
 
-W przeciwieństwie do renderowania widoku MVC widok częściowy nie działa *_ViewStart. cshtml* . Aby uzyskać więcej informacji na temat *_ViewStart. cshtml* , zobacz <xref:mvc/views/layout> .
+W przeciwieństwie do renderowania widoku MVC widok częściowy nie działa *_ViewStart. cshtml*. Aby uzyskać więcej informacji na temat *_ViewStart. cshtml*, zobacz <xref:mvc/views/layout> .
 
 Nazwy plików widoku częściowego często zaczynają się od znaku podkreślenia ( `_` ). Ta konwencja nazewnictwa nie jest wymagana, ale pomaga wizualnie odróżnić widoki częściowe od widoków.
 
@@ -274,7 +274,7 @@ Gdy do widoku częściowego odwołuje się nazwa bez rozszerzenia pliku, następ
 Następujące konwencje dotyczą odnajdywania widoku częściowego:
 
 * Różne widoki częściowe o tej samej nazwie pliku są dozwolone, gdy częściowe widoki znajdują się w różnych folderach.
-* W przypadku odwoływania się do widoku częściowego według nazwy bez rozszerzenia pliku, gdy widok częściowy znajduje się zarówno w folderze wywołującym, jak i w folderze *udostępnionym* , widok częściowy w folderze obiektu wywołującego dostarcza widok częściowy. Jeśli widok częściowy nie znajduje się w folderze wywołującym, w folderze *udostępnionym* zostanie udostępniony widok częściowy. Częściowe widoki w folderze *udostępnionym* są nazywane *widokami części udostępnionych* lub *domyślnymi widokami częściowymi* .
+* W przypadku odwoływania się do widoku częściowego według nazwy bez rozszerzenia pliku, gdy widok częściowy znajduje się zarówno w folderze wywołującym, jak i w folderze *udostępnionym* , widok częściowy w folderze obiektu wywołującego dostarcza widok częściowy. Jeśli widok częściowy nie znajduje się w folderze wywołującym, w folderze *udostępnionym* zostanie udostępniony widok częściowy. Częściowe widoki w folderze *udostępnionym* są nazywane *widokami części udostępnionych* lub *domyślnymi widokami częściowymi*.
 * Częściowe widoki mogą być *łańcucha* częściowy &mdash; Widok może wywoływać inny widok częściowy, jeśli odwołanie cykliczne nie jest tworzone przez wywołania. Ścieżki względne są zawsze względne w stosunku do bieżącego pliku, nie do głównego lub nadrzędnego pliku.
 
 > [!NOTE]
@@ -328,7 +328,7 @@ Poniższy znacznik w aplikacji przykładowej pokazuje widok *widoki/artykuły/Re
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/_ArticleSection.cshtml)]
 
-W czasie wykonywania częściowe są renderowane do renderowanego wyjściowego pliku znaczników, który sam jest renderowany w udostępnionym *_Layout. cshtml* . Pierwszy widok częściowy renderuje nazwę autora artykułu i datę publikacji:
+W czasie wykonywania częściowe są renderowane do renderowanego wyjściowego pliku znaczników, który sam jest renderowany w udostępnionym *_Layout. cshtml*. Pierwszy widok częściowy renderuje nazwę autora artykułu i datę publikacji:
 
 > Abraham Lincoln
 >
@@ -353,7 +353,7 @@ Drugi widok częściowy renderuje sekcje artykułu:
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* <xref:mvc/views/razor>
+* [Razor odwołanie do składni dla ASP.NET Core](xref:mvc/views/razor)
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>
 * <xref:mvc/views/view-components>
@@ -363,7 +363,7 @@ Drugi widok częściowy renderuje sekcje artykułu:
 
 ::: moniker range="< aspnetcore-2.1"
 
-* <xref:mvc/views/razor>
+* [Razor odwołanie do składni dla ASP.NET Core](xref:mvc/views/razor)
 * <xref:mvc/views/view-components>
 * <xref:mvc/controllers/areas>
 

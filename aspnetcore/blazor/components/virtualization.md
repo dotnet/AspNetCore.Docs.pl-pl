@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: afd2da19641b41871f06426934c39348daa54b1f
-ms.sourcegitcommit: 2fea9bfe6127bbbdbb438406c82529b2bc331944
+ms.openlocfilehash: c2b16f4bc8e69265b1d59082c3f029541f277d8b
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/11/2021
-ms.locfileid: "98065535"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252292"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>BlazorWirtualizacja składników ASP.NET Core
 
@@ -77,7 +77,7 @@ Jeśli nie określisz kontekstu do składnika przy użyciu `Context` , użyj `co
 > Aby uzyskać więcej informacji, zobacz następujące artykuły:
 >
 > * <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>
-> * <xref:mvc/views/razor#key>
+> * [Razor odwołanie do składni dla ASP.NET Core](xref:mvc/views/razor#key)
 
 `Virtualize`Składnik:
 
@@ -169,4 +169,4 @@ Można ustawić rozmiar każdego elementu w pikselach <xref:Microsoft.AspNetCore
 
 ## <a name="state-changes"></a>Zmiany stanu
 
-Podczas wprowadzania zmian do elementów renderowanych przez `Virtualize` składnik Wywołaj metodę <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wymuszenia ponownej oceny i ponownego renderowania składnika.
+Podczas wprowadzania zmian do elementów renderowanych przez `Virtualize` składnik Wywołaj metodę <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wymuszenia ponownej oceny i ponownego renderowania składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/rendering>.

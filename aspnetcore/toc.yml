@@ -344,6 +344,8 @@
               uid: blazor/components/event-handling
             - name: Cykl życia
               uid: blazor/components/lifecycle
+            - name: Renderowanie
+              uid: blazor/components/rendering
             - name: Wirtualizacja składników
               uid: blazor/components/virtualization
             - name: Składniki z szablonami
@@ -970,8 +972,29 @@
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/protocols
     - name: Kestrel
-      uid: fundamentals/servers/kestrel
       displayName: 'deploy, publish, server'
+      items:
+        - name: Omówienie
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel
+        - name: Punkty końcowe
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/endpoints
+        - name: Opcje
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/options
+        - name: HTTP/2
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/http2
+        - name: Kiedy używać odwrotnego serwera proxy
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/when-to-use-a-reverse-proxy
+        - name: Filtrowanie hostów
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/host-filtering
+        - name: Opróżnianie żądań
+          displayName: 'deploy, publish, server'
+          uid: fundamentals/servers/kestrel/request-draining
     - name: HTTP.sys
       displayName: 'deploy, publish, server'
       uid: fundamentals/servers/httpsys

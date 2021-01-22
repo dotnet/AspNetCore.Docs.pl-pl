@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 196e19528341e98ac06cefb08ba92f9e47d265ea
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 1706d3502dc68f1c25e0c35ba8f5dd44b55ce690
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252477"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658654"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
@@ -45,7 +45,7 @@ Słowo *progresywne* służy do opisywania takich aplikacji, ponieważ:
 
 ## <a name="create-a-project-from-the-pwa-template"></a>Tworzenie projektu na podstawie szablonu PWA
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Gdy tworzysz nową **Blazor WebAssembly aplikację** w oknie dialogowym **Tworzenie nowego projektu** , zaznacz pole wyboru **aplikacja sieci Web progresywna** :
 
@@ -272,10 +272,20 @@ Zmień kod na następujący:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate'
-    && !event.request.url.includes('/Identity/');
+  && !event.request.url.includes('/Identity/');
 ```
 
 W przeciwnym razie niezależnie od łączności sieciowej proces roboczy usługi przechwytuje żądania dotyczące takich adresów URL i rozwiązuje je za pomocą polecenia `/index.html` .
+
+Dodaj dodatkowe punkty końcowe dla zewnętrznych dostawców uwierzytelniania do sprawdzenia. W poniższym przykładzie w `/signin-google` przypadku uwierzytelniania Google do sprawdzenia zostanie dodany:
+
+```javascript
+const shouldServeIndexHtml = event.request.mode === 'navigate'
+  && !event.request.url.includes('/Identity/')
+  && !event.request.url.includes('/signin-google');
+```
+
+Nie jest wymagana żadna akcja dla środowiska programistycznego, w którym zawartość jest zawsze pobierana z sieci.
 
 ### <a name="control-asset-caching"></a>Sterowanie buforowaniem zasobów
 

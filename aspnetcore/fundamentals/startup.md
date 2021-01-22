@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 747b13abb0ce3fed2d1dc018c6dbf82db1ae7130
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e2825476c5fe36571b365ac5ee3c57ff4db61b87
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93052243"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658680"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Uruchamianie aplikacji w ASP.NET Core
 
@@ -124,7 +124,7 @@ Aby skonfigurować usługi i potok przetwarzania żądań bez użycia `Startup` 
 
 Użyj <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> :
 
-* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu aplikacji [Skonfiguruj](#the-configure-method) potok oprogramowania pośredniczącego bez jawnego wywołania do programu `Use{Middleware}` . `IStartupFilter` jest używany przez ASP.NET Core, aby dodać wartości domyślne do początku potoku bez konieczności jawnego rejestrowania przez autora aplikacji domyślnego oprogramowania pośredniczącego. `IStartupFilter` umożliwia innym wywołaniem składnika `Use{Middleware}` w imieniu autora aplikacji.
+* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu aplikacji [Skonfiguruj](#the-configure-method) potok oprogramowania pośredniczącego bez jawnego wywołania do programu `Use{Middleware}` . `IStartupFilter` jest używany przez ASP.NET Core, aby dodać wartości domyślne do początku potoku bez konieczności jawnego rejestrowania przez autora aplikacji domyślnego oprogramowania pośredniczącego. `IStartupFilter` umożliwia innym składnikom wywoływanie `Use{Middleware}` w imieniu autora aplikacji.
 * Do utworzenia potoku `Configure` metod. [IStartupFilter.Configuruj](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) może ustawić oprogramowanie pośredniczące do uruchomienia przed lub po oprogramowaniu pośredniczącym dodanym przez biblioteki.
 
 `IStartupFilter` implementuje <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> , który odbiera i zwraca `Action<IApplicationBuilder>` . <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>Definiuje klasę, aby skonfigurować potok żądania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie potoku oprogramowania pośredniczącego za pomocą IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).

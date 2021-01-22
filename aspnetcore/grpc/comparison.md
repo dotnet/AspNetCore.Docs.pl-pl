@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1ec553d54a9cad170cb322bc186bb67ac8bbded4
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059952"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658732"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
 
@@ -42,7 +42,7 @@ Poniższa tabela zawiera porównanie funkcji między gRPC i interfejsami API pro
 | Ładunku          | [Protobuf (mały, binarny)](#performance)           | JSON (duże, czytelne dla ludzi)  |
 | Prescriptiveness | [Specyfikacja Strict](#strict-specification)      | Sypki. Wszystkie protokoły HTTP są prawidłowe.     |
 | Przesyłanie strumieniowe        | [Klient, serwer, dwukierunkowa](#streaming)       | Klient, serwer                |
-| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Yes                           |
+| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Tak                           |
 | Zabezpieczenia         | Transport (TLS)                                    | Transport (TLS)               |
 | Generowanie kodu klienta | [Tak](#code-generation)                      | Narzędzia OpenAPI + inne firmy |
 
@@ -61,7 +61,7 @@ Protokół HTTP/2 nie jest wyłączny do gRPC. Wiele typów żądań, w tym inte
 
 ### <a name="code-generation"></a>Generowanie kodu
 
-Wszystkie struktury gRPC zapewniają obsługę pierwszej klasy w celu generowania kodu. Podstawowy plik do gRPC Development to [plik. proto](https://developers.google.com/protocol-buffers/docs/proto3), który definiuje kontrakt usług gRPC Services i messages. Z tego pliku struktury gRPC w kodzie generują klasę bazową usługi, komunikaty i kompletny klient.
+Wszystkie struktury gRPC zapewniają obsługę pierwszej klasy w celu generowania kodu. Podstawowy plik do gRPC Development to [ `.proto` plik](https://developers.google.com/protocol-buffers/docs/proto3), który definiuje kontrakt usług gRPC Services i komunikatów. Z tego pliku gRPC struktury generują klasę bazową usługi, komunikaty i kompletny klient.
 
 Udostępniając plik *. proto* między serwerem a klientem, można wygenerować komunikaty i kod klienta na końcu. Generowanie kodu klienta eliminuje duplikowanie komunikatów na kliencie i serwerze, a następnie tworzy klienta o jednoznacznie określonym typie. Nie trzeba pisać klienta powoduje oszczędność czasu projektowania w aplikacjach z wieloma usługami.
 

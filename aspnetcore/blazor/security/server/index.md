@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: aa24def1a003a2c2608691e6168066c740f47205
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: 5031273c3395be4365b3a6d239ebce7aaf9b66ac
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024629"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658641"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Bezpieczne Blazor Server aplikacje ASP.NET Core
 
@@ -36,7 +36,7 @@ Blazor Server aplikacje są skonfigurowane pod kątem zabezpieczeń w taki sam s
 
 Blazor ServerSzablon projektu można skonfigurować do uwierzytelniania podczas tworzenia projektu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Postępuj zgodnie ze wskazówkami programu Visual Studio w programie, <xref:blazor/tooling> Aby utworzyć nowy Blazor Server projekt z mechanizmem uwierzytelniania.
 
@@ -85,7 +85,7 @@ Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet
 
 1. Aplikacja jest tworzona dla poszczególnych użytkowników przechowywanych w aplikacji za pomocą usługi ASP.NET Core Identity .
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 Utwórz nowy Blazor Server projekt z mechanizmem uwierzytelniania przy użyciu następującego polecenia w powłoce poleceń:
 
@@ -126,6 +126,10 @@ Tworzenie szkieletu Identity w Blazor Server projekcie:
 
 * [Bez istniejącej autoryzacji](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [Z autoryzacją](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).
+
+## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>Azure App Service w systemie Linux z Identity serwerem
+
+Określ wystawcę jawnie podczas wdrażania programu w celu Azure App Service w systemie Linux z Identity serwerem. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

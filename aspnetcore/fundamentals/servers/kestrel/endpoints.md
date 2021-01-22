@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: 780250feab456fa3eedee4e023c9bc774e748291
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 5fec573013da5bcb5039b7a189fd84d964349b3a
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253988"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658745"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>Skonfiguruj punkty końcowe dla ASP.NET Core serwera sieci Web Kestrel
 
@@ -169,7 +169,7 @@ Domyślny schemat konfiguracji ustawień aplikacji HTTPS jest dostępny dla Kest
 W poniższym *appsettings.json* przykładzie:
 
 * Ustaw `AllowInvalid` na, aby `true` zezwolić na użycie nieprawidłowych certyfikatów (na przykład certyfikatów z podpisem własnym).
-* Wszystkie punkty końcowe HTTPS, które nie określają certyfikatu (w poniższym przykładzie) powracają `HttpsDefaultCert` do certyfikatu zdefiniowanego w ramach `Certificates`  >  `Default` lub w certyfikacie deweloperskim.
+* Wszystkie punkty końcowe HTTPS, które nie określają certyfikatu (w poniższym przykładzie) powracają `HttpsDefaultCert` do certyfikatu zdefiniowanego w ramach `Certificates:Default` lub w certyfikacie deweloperskim.
 
 ```json
 {
@@ -185,8 +185,16 @@ W poniższym *appsettings.json* przykładzie:
           "Password": "<certificate password>"
         }
       },
-      "HttpsInlineCertStore": {
+      "HttpsInlineCertAndKeyFile": {
         "Url": "https://localhost:5002",
+        "Certificate": {
+          "Path": "<path to .pem/.crt file>",
+          "KeyPath": "<path to .key file>",
+          "Password": "<certificate password>"
+        }
+      },
+      "HttpsInlineCertStore": {
+        "Url": "https://localhost:5003",
         "Certificate": {
           "Subject": "<subject; required>",
           "Store": "<certificate store; required>",
@@ -195,14 +203,7 @@ W poniższym *appsettings.json* przykładzie:
         }
       },
       "HttpsDefaultCert": {
-        "Url": "https://localhost:5003"
-      },
-      "Https": {
-        "Url": "https://*:5004",
-        "Certificate": {
-          "Path": "<path to .pfx file>",
-          "Password": "<certificate password>"
-        }
+        "Url": "https://localhost:5004"
       }
     },
     "Certificates": {
@@ -215,7 +216,24 @@ W poniższym *appsettings.json* przykładzie:
 }
 ```
 
-Alternatywą dla korzystania z `Path` i `Password` dla każdego węzła certyfikatu jest określenie certyfikatu przy użyciu pól magazynu certyfikatów. Certyfikat można na przykład `Certificates`  >  `Default` określić jako:
+Uwagi dotyczące schematu:
+
+* W nazwach punktów końcowych nie jest [rozróżniana wielkość liter](xref:fundamentals/configuration/index#configuration-keys-and-values). Na przykład elementy `HTTPS` i `Https` są równoważne.
+* `Url`Parametr jest wymagany dla każdego punktu końcowego. Format tego parametru jest taki sam jak parametr konfiguracji najwyższego poziomu, `Urls` z tą różnicą, że jest ograniczony do pojedynczej wartości.
+* Te punkty końcowe zastępują te zdefiniowane w konfiguracji najwyższego poziomu `Urls` zamiast dodawać je do nich. Punkty końcowe zdefiniowane w kodzie za pośrednictwem `Listen` łączą się z punktami końcowymi zdefiniowanymi w sekcji konfiguracji.
+* `Certificate`Sekcja jest opcjonalna. Jeśli `Certificate` sekcja nie jest określona, używane są wartości domyślne zdefiniowane w programie `Certificates:Default` . Jeśli wartości domyślne nie są dostępne, używany jest certyfikat deweloperski. Jeśli nie ma żadnych ustawień domyślnych i certyfikat programistyczny nie istnieje, serwer zgłasza wyjątek i nie może się uruchomić.
+* `Certificate`Sekcja obsługuje wiele [źródeł certyfikatów](#certificate-sources).
+* W [konfiguracji](xref:fundamentals/configuration/index) można zdefiniować dowolną liczbę punktów końcowych, o ile nie powodują one konfliktów portów.
+
+#### <a name="certificate-sources"></a>Źródła certyfikatów
+
+Węzły certyfikatów można skonfigurować do ładowania certyfikatów z różnych źródeł:
+
+* `Path` i `Password` ładować pliki *. pfx* .
+* `Path``KeyPath`oraz `Password` do ładowania plików *PEM* / *. CRT* i *. Key* .
+* `Subject` i `Store` ładowanie z magazynu certyfikatów.
+
+Certyfikat można na przykład `Certificates:Default` określić jako:
 
 ```json
 "Default": {
@@ -226,15 +244,9 @@ Alternatywą dla korzystania z `Path` i `Password` dla każdego węzła certyfik
 }
 ```
 
-Uwagi dotyczące schematu:
+#### <a name="configurationloader"></a>ConfigurationLoader
 
-* W nazwach punktów końcowych nie jest rozróżniana wielkość liter. Na przykład `HTTPS` i `Https` są prawidłowe.
-* `Url`Parametr jest wymagany dla każdego punktu końcowego. Format tego parametru jest taki sam jak parametr konfiguracji najwyższego poziomu, `Urls` z tą różnicą, że jest ograniczony do pojedynczej wartości.
-* Te punkty końcowe zastępują te zdefiniowane w konfiguracji najwyższego poziomu `Urls` zamiast dodawać je do nich. Punkty końcowe zdefiniowane w kodzie za pośrednictwem `Listen` łączą się z punktami końcowymi zdefiniowanymi w sekcji konfiguracji.
-* `Certificate`Sekcja jest opcjonalna. Jeśli `Certificate` sekcja nie jest określona, używane są wartości domyślne zdefiniowane we wcześniejszych scenariuszach. Jeśli żadne wartości domyślne nie są dostępne, serwer zgłasza wyjątek i nie może się uruchomić.
-* `Certificate`Sekcja obsługuje zarówno `Path` &ndash; `Password` certyfikaty, jak i `Subject` &ndash; `Store` .
-* W ten sposób można zdefiniować dowolną liczbę punktów końcowych, dopóki nie spowoduje to konfliktów portów.
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))` zwraca `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` metodę, która może służyć do uzupełniania skonfigurowanych ustawień punktu końcowego:
+`options.Configure(context.Configuration.GetSection("{SECTION}"))` zwraca <xref:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader> `.Endpoint(string name, listenOptions => { })` metodę, która może służyć do uzupełniania skonfigurowanych ustawień punktu końcowego:
 
 ```csharp
 webBuilder.UseKestrel((context, serverOptions) =>

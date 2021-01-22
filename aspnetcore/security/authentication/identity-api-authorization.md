@@ -19,30 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 8acc34c88bf62b3da1b920acc7318c94435c100e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5a6c160ebdda3ec600980aa839770f4f22a9c2fc
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051983"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658667"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
 Szablony ASP.NET Core 3,1 i nowsze oferują uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identityuwierzytelnianie i przechowywanie użytkowników są łączone z [ Identity serwerem](https://identityserver.io/) w celu zaimplementowania połączenia OpenID Connect.
 
-Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny** . Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
+Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Tworzenie aplikacji z obsługą autoryzacji interfejsu API
 
 Uwierzytelnianie i autoryzacja użytkowników mogą być używane z aplikacji jednostronicowychą kątową i reagują. Otwórz powłokę poleceń i uruchom następujące polecenie:
 
-**Kątowy** :
+**Kątowy**:
 
 ```dotnetcli
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
-**Reagowanie** :
+**Reagowanie**:
 
 ```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
@@ -98,6 +98,27 @@ Poniższe przykłady kodu bazują na [Microsoft. AspNetCore. ApiAuthorization. I
     app.UseIdentityServer();
     ```
 
+### <a name="azure-app-service-on-linux"></a>Azure App Service w systemie Linux
+
+W przypadku wdrożeń Azure App Service w systemie Linux Określ wystawcy jawnie w `Startup.ConfigureServices` :
+
+```csharp
+services.Configure<JwtBearerOptions>(
+    IdentityServerJwtConstants.IdentityServerJwtBearerScheme, 
+    options =>
+    {
+        options.Authority = "{AUTHORITY}";
+    });
+```
+
+W poprzednim kodzie `{AUTHORITY}` symbol zastępczy jest <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.Authority> używany podczas wykonywania wywołań OpenID Connect Connect.
+
+Przykład:
+
+```csharp
+options.Authority = "https://contoso-service.azurewebsites.net";
+```
+
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
 Ta metoda pomocnika konfiguruje Identity serwer tak, aby korzystał z naszej obsługiwanej konfiguracji. IdentitySerwer to zaawansowana i rozszerzalna platforma do obsługi zagadnień związanych z zabezpieczeniami aplikacji. W tym samym czasie, które ujawnia niezbędną złożoność dla najbardziej typowych scenariuszy. W związku z tym zestaw Konwencji i opcji konfiguracji jest dostarczany do użytkownika, który jest uważany za dobry punkt wyjścia. Po zmianie uwierzytelniania należy zapewnić pełną moc Identity serwera, aby dostosować uwierzytelnianie do własnych potrzeb.
@@ -151,9 +172,9 @@ W *appsettings.Development.jsna* pliku katalogu głównego projektu znajduje si�
 Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znajduje się w jego własnym module skośnym w katalogu *ClientApp\src\api-Authorization* . Moduł składa się z następujących elementów:
 
 * 3 składniki:
-  * *login. Component. TS* : obsługuje przepływ logowania aplikacji.
-  * *Wyloguj. składnik. TS* : obsługuje przepływ wylogowania aplikacji.
-  * *login-menu. składnik. TS* : element widget wyświetlający jeden z następujących zestawów linków:
+  * *login. Component. TS*: obsługuje przepływ logowania aplikacji.
+  * *Wyloguj. składnik. TS*: obsługuje przepływ wylogowania aplikacji.
+  * *login-menu. składnik. TS*: element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
 * Ochrona trasy `AuthorizeGuard` , którą można dodać do tras i wymaga uwierzytelnienia użytkownika przed odwiedzeniem trasy.
@@ -166,12 +187,12 @@ Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znaj
 Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie reagowania znajduje się w katalogu *ClientApp\src\components\api-Authorization* . Składa się z następujących elementów:
 
 * 4 składniki:
-  * *Login.js* : obsługuje przepływ logowania aplikacji.
-  * *Logout.js* : obsługuje przepływ wylogowania aplikacji.
-  * *LoginMenu.js* : element widget wyświetlający jeden z następujących zestawów linków:
+  * *Login.js*: obsługuje przepływ logowania aplikacji.
+  * *Logout.js*: obsługuje przepływ wylogowania aplikacji.
+  * *LoginMenu.js*: element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
-  * *AuthorizeRoute.js* : składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
+  * *AuthorizeRoute.js*: składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
 * Wyeksportowane `authService` wystąpienie klasy `AuthorizeService` , które obsługuje szczegóły niższego poziomu procesu uwierzytelniania i ujawnia informacje o uwierzytelnionym użytkowniku w pozostałej części aplikacji do użycia.
 
 Teraz, gdy widzisz główne składniki rozwiązania, możesz zapoznać się ze szczegółowymi scenariuszami dotyczącymi aplikacji.

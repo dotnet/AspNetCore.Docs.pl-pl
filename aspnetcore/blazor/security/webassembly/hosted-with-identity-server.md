@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: fdd7eb3c4a3b07022760a43cbde80838bfaf7c84
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: d35dd0acf626a6305f00e295e7918c82c7d6a912
+ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024798"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98658706"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -35,7 +35,7 @@ W tym artykule wyjaśniono, jak utworzyć [hostowaną Blazor WebAssembly aplikac
 > [!NOTE]
 > Aby skonfigurować autonomiczną lub hostowaną Blazor WebAssembly aplikację do korzystania z istniejącego Identity wystąpienia serwera zewnętrznego, postępuj zgodnie ze wskazówkami w temacie <xref:blazor/security/webassembly/standalone-with-authentication-library> .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
@@ -129,6 +129,10 @@ W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsł
     app.UseAuthentication();
     app.UseAuthorization();
     ```
+
+### <a name="azure-app-service-on-linux"></a>Azure App Service w systemie Linux
+
+Określ wystawcę jawnie podczas wdrażania programu w celu Azure App Service w systemie Linux. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
@@ -468,9 +472,12 @@ W *`Client`* aplikacji metody autoryzacji składników są w tym momencie funkcj
 
 [!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
-## <a name="host-in-azure-app-service-with-a-custom-domain"></a>Host w Azure App Service z domeną niestandardową
+## <a name="host-in-azure-app-service-with-a-custom-domain-and-certificate"></a>Host w Azure App Service z domeną niestandardową i certyfikatem
 
-Poniższe wskazówki wyjaśniają sposób wdrażania hostowanej Blazor WebAssembly aplikacji na Identity serwerze w celu [Azure App Service](https://azure.microsoft.com/services/app-service/) z domeną niestandardową.
+Poniższe wskazówki wyjaśniają:
+
+* Jak wdrożyć hostowaną Blazor WebAssembly aplikację na Identity serwerze w celu [Azure App Service](https://azure.microsoft.com/services/app-service/) z domeną niestandardową.
+* Jak utworzyć i używać certyfikatu TLS do komunikacji protokołu HTTPS z przeglądarkami. Chociaż wskazówki dotyczą korzystania z certyfikatu z domeną niestandardową, wskazówki są jednakowo stosowane do korzystania z domyślnej domeny aplikacji platformy Azure, na przykład `contoso.azurewebsites.net` .
 
 W tym scenariuszu hostingu **nie** należy używać tego samego certyfikatu dla [ Identity klucza podpisywania tokenu serwera](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) i bezpiecznej komunikacji protokołu HTTPS lokacji z przeglądarkami:
 

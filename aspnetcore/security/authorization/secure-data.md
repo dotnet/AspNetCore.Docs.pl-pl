@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: ebd3c0dc9baa63b30f142773d7a3d621ce4082d9
+ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854655"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98689308"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Tworzenie aplikacji sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 
@@ -129,6 +129,8 @@ Ustaw rezerwowe zasady uwierzytelniania, aby wymagać uwierzytelnienia użytkown
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
 Poprzedni wyróżniony kod ustawia [rezerwowe zasady uwierzytelniania](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy). Rezerwowe zasady uwierzytelniania wymagają **_Wszyscy_* użytkownicy mają być uwierzytelniani, z wyjątkiem Razor stron, kontrolerów lub metod akcji z atrybutem uwierzytelniania. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu uwierzytelniania zamiast rezerwowych zasad uwierzytelniania.
+
+<xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> dodaje <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> do bieżącego wystąpienia, które wymusza, że bieżący użytkownik jest uwierzytelniony.
 
 Rezerwowe zasady uwierzytelniania:
 
@@ -335,8 +337,8 @@ Prostym sposobem przetestowania ukończonej aplikacji jest uruchomienie trzech r
 | Użytkownik                | Wypełnianie przez aplikację | Opcje                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nie                | Edytuj/Usuń własne dane.                |
-| manager@contoso.com | Yes               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
-| admin@contoso.com   | Yes               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
+| manager@contoso.com | Tak               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
+| admin@contoso.com   | Tak               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
 
 Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do usuwania i edytowania z osoby kontaktowej administratora. Wklej te linki do przeglądarki użytkownika testowego, aby sprawdzić, czy użytkownik testowy nie może wykonać tych operacji.
 
@@ -662,8 +664,8 @@ Prostym sposobem przetestowania ukończonej aplikacji jest uruchomienie trzech r
 | Użytkownik                | Wypełnianie przez aplikację | Opcje                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | Nie                | Edytuj/Usuń własne dane.                |
-| manager@contoso.com | Yes               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
-| admin@contoso.com   | Yes               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
+| manager@contoso.com | Tak               | Zatwierdź/Odrzuć i edytuj/usuń własne dane. |
+| admin@contoso.com   | Tak               | Zatwierdź/Odrzuć i edytuj/usuń wszystkie dane. |
 
 Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do usuwania i edytowania z osoby kontaktowej administratora. Wklej te linki do przeglądarki użytkownika testowego, aby sprawdzić, czy użytkownik testowy nie może wykonać tych operacji.
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: e65be6e2ddc1a9de6f0ba20fe50f63b650e0bff5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: f0c7723e8de7167b4fe5021ea1ca26e7cf198581
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97792043"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710571"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core przy użyciu Azure Active Directory
 
@@ -559,6 +559,7 @@ Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/webassembly/additional-scenarios>
+* [Utwórz niestandardową wersję biblioteki MSAL JavaScript.](xref:blazor/security/webassembly/additional-scenarios#build-a-custom-version-of-the-authenticationmsal-javascript-library)
 * [Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>

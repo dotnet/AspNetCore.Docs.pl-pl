@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: fcd4569c72fd33e5135a8469155f470b73c2ff57
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: f8b31c617ef71003042d31690de49d48946ac3d5
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854525"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710649"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -512,4 +512,5 @@ Prawdopodobnie projekt nie został utworzony przy użyciu Blazor Server szablonu
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>
+* [Utwórz niestandardową wersję biblioteki MSAL JavaScript.](xref:blazor/security/webassembly/additional-scenarios#build-a-custom-version-of-the-authenticationmsal-javascript-library)
 * [Awesome Blazor :](https://github.com/AdrienTorris/awesome-blazor#authentication) przykładowe linki społeczności uwierzytelniania

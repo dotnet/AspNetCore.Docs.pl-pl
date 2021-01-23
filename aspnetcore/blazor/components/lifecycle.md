@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: acaa276efda9fb4d09a5c1b1ca59c6abde1b64ec
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 7152f45cd799128b668ec5002fb20b4f30e69585
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252396"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710662"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -296,9 +296,9 @@ Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Mvc.TagHelpe
 
 [!INCLUDE[](~/blazor/includes/prerendering.md)]
 
-## <a name="component-disposal-with-idisposable"></a>Usuwanie składnika z interfejsem IDisposable
+## <a name="component-disposal-with-idisposable"></a>Usuwanie składnika z `IDisposable`
 
-Jeśli składnik implementuje <xref:System.IDisposable> , [ `Dispose` Metoda](/dotnet/standard/garbage-collection/implementing-dispose) jest wywoływana, gdy składnik zostanie usunięty z interfejsu użytkownika. Usuwanie może odbywać się w dowolnym momencie, w tym podczas [inicjowania składnika](#component-initialization-methods). Poniższy składnik używa `@implements IDisposable` i `Dispose` metody:
+Jeśli składnik implementuje <xref:System.IDisposable> , struktura wywołuje [metodę usuwania](/dotnet/standard/garbage-collection/implementing-dispose) po usunięciu składnika z interfejsu użytkownika, w którym można wydać niezarządzane zasoby. Usuwanie może odbywać się w dowolnym momencie, w tym podczas [inicjowania składnika](#component-initialization-methods). Następujący składnik implementuje <xref:System.IDisposable> z [`@implements`](xref:mvc/views/razor#implements) Razor dyrektywą:
 
 ```razor
 @using System
@@ -314,6 +314,15 @@ Jeśli składnik implementuje <xref:System.IDisposable> , [ `Dispose` Metoda](/d
 }
 ```
 
+W przypadku asynchronicznych zadań usuwania Użyj `DisposeAsync` zamiast tego `Dispose` w poprzednim przykładzie:
+
+```csharp
+public async ValueTask DisposeAsync()
+{
+    ...
+}
+```
+
 > [!NOTE]
 > Wywoływanie metody <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> `Dispose` nie jest obsługiwane. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> może być wywoływana w ramach rozrywania modułu renderowania, dlatego żądanie aktualizacji interfejsu użytkownika nie jest obsługiwane.
 
@@ -326,6 +335,8 @@ Procedury obsługi zdarzeń anulowania subskrypcji z zdarzeń platformy .NET. Po
 * Podejście metody prywatnej
 
   [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
+  
+Aby uzyskać więcej informacji, zobacz [Oczyszczanie zasobów niezarządzanych](/dotnet/standard/garbage-collection/unmanaged) i tematy, które po nich wykonują, przy wdrażaniu `Dispose` `DisposeAsync` metod i.
 
 ## <a name="cancelable-background-work"></a>Anulowanie pracy w tle
 

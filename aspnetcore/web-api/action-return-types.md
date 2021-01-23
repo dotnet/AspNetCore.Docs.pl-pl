@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: a2866970a20785ae8fa306d484972697817b7f92
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 62c8227ca770a3a9adbe780685b140bc0e86841e
+ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058951"
+ms.lasthandoff: 01/22/2021
+ms.locfileid: "98710701"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Typy zwracane akcje kontrolera w ASP.NET Core Web API
 
@@ -92,11 +92,11 @@ Rozważ zadeklarowanie zwracanego typu sygnatury akcji jako `IAsyncEnumerable<T>
 
 Należy wziąć pod uwagę następujące działania, które zwracają rekordy produktu z ceną sprzedaży `IEnumerable<Product>` :
 
-[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.30/Controllers/ProductsController.cs?name=snippet_GetOnSaleProducts)]
+[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.31/Controllers/ProductsController.cs?name=snippet_GetOnSaleProducts)]
 
 `IAsyncEnumerable<Product>`Odpowiednik poprzedniej akcji to:
 
-[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.30/Controllers/ProductsController.cs?name=snippet_GetOnSaleProductsAsync)]
+[!code-csharp[](../web-api/action-return-types/samples/3x/WebApiSample.Api.31/Controllers/ProductsController.cs?name=snippet_GetOnSaleProductsAsync)]
 
 Obie powyższe akcje nie są blokowane w przypadku ASP.NET Core 3,0.
 

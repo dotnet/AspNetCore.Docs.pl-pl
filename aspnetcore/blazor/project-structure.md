@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: ae41d096c50d350b7fcde52da59382614e62c109
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 958fa23a1befac3696d850d5409d4021dd109c22
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658628"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751545"
 ---
 # <a name="aspnet-core-no-locblazor-project-structure"></a>BlazorStruktura projektu ASP.NET Core
 
@@ -48,7 +48,7 @@ Blazor WebAssemblySzablon ( `blazorwasm` ) tworzy początkowe pliki i strukturę
 * `Shared` folder: zawiera następujące składniki udostępnione i arkusze stylów:
   * `MainLayout` składnik ( `MainLayout.razor` ): [składnik układu](xref:blazor/layouts)aplikacji.
   * `MainLayout.razor.css`: Arkusz stylów dla układu głównego aplikacji.
-  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
   * `NavMenu.razor.css`: Arkusz stylów dla menu nawigacji aplikacji.
   * `SurveyPrompt` składnik ( `SurveyPrompt.razor` ): Blazor składnik badania.
 
@@ -58,7 +58,7 @@ Blazor WebAssemblySzablon ( `blazorwasm` ) tworzy początkowe pliki i strukturę
 
 * `Shared` folder: zawiera następujące składniki udostępnione:
   * `MainLayout` składnik ( `MainLayout.razor` ): [składnik układu](xref:blazor/layouts)aplikacji.
-  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
   * `SurveyPrompt` składnik ( `SurveyPrompt.razor` ): Blazor składnik badania.
   
 ::: moniker-end
@@ -78,6 +78,9 @@ Blazor WebAssemblySzablon ( `blazorwasm` ) tworzy początkowe pliki i strukturę
   * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `app` elementu Dom ( `<app>Loading...</app>` ).
 
 ::: moniker-end
+
+> [!NOTE]
+> Pliki JavaScript (JS) dodawane do `wwwroot/index.html` pliku powinny pojawić się przed tagiem zamykającym `</body>` . Kolejność ładowania niestandardowego kodu JS z plików JS jest ważna w niektórych scenariuszach. Na przykład upewnij się, że pliki JS z metodami międzyoperacyjnymi są uwzględniane przed Blazor plikami Framework js.
 
 * `_Imports.razor`: Zawiera wspólne Razor dyrektywy do uwzględnienia w składnikach aplikacji ( `.razor` ), takich jak [`@using`](xref:mvc/views/razor#using) dyrektywy dotyczące przestrzeni nazw.
 
@@ -115,7 +118,10 @@ Blazor ServerSzablon ( `blazorserver` ) tworzy początkowe pliki i strukturę ka
   * `Error` składnik ( `Error.razor` ): renderowane, gdy wystąpił nieobsługiwany wyjątek w aplikacji.
   * `FetchData` składnik ( `FetchData.razor` ): implementuje stronę pobieranie danych.
   * `Index` składnik ( `Index.razor` ): implementuje stronę główną.
-  
+
+> [!NOTE]
+> Pliki JavaScript (JS) dodawane do `Pages/_Host.cshtml` pliku powinny pojawić się przed tagiem zamykającym `</body>` . Kolejność ładowania niestandardowego kodu JS z plików JS jest ważna w niektórych scenariuszach. Na przykład upewnij się, że pliki JS z metodami międzyoperacyjnymi są uwzględniane przed Blazor plikami Framework js.
+
 * `Properties/launchSettings.json`: Zawiera [konfigurację środowiska deweloperskiego](xref:fundamentals/environments#development-and-launchsettingsjson).
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -123,7 +129,7 @@ Blazor ServerSzablon ( `blazorserver` ) tworzy początkowe pliki i strukturę ka
 * `Shared` folder: zawiera następujące składniki udostępnione i arkusze stylów:
   * `MainLayout` składnik ( `MainLayout.razor` ): [składnik układu](xref:blazor/layouts)aplikacji.
   * `MainLayout.razor.css`: Arkusz stylów dla układu głównego aplikacji.
-  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
   * `NavMenu.razor.css`: Arkusz stylów dla menu nawigacji aplikacji.
   * `SurveyPrompt` składnik ( `SurveyPrompt.razor` ): Blazor składnik badania.
 
@@ -133,7 +139,7 @@ Blazor ServerSzablon ( `blazorserver` ) tworzy początkowe pliki i strukturę ka
 
 * `Shared` folder: zawiera następujące składniki udostępnione:
   * `MainLayout` składnik ( `MainLayout.razor` ): [składnik układu](xref:blazor/layouts)aplikacji.
-  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu` składnik ( `NavMenu.razor` ): implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
   * `SurveyPrompt` składnik ( `SurveyPrompt.razor` ): Blazor składnik badania.
   
 ::: moniker-end

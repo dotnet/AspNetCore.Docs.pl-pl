@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: ad9920ccd830b93d083f3c5ede03702164842b6e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: e65983fb1a440057283111ea5a79a79b765607b7
+ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97753117"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98751686"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>Obsługa błędów w ASP.NET Core
 
@@ -68,7 +68,14 @@ W poniższym przykładzie <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExt
 
 RazorSzablon aplikacji strony zawiera stronę błędów (*. cshtml*) i <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> klasę ( `ErrorModel` ) w folderze *Pages* . W przypadku aplikacji MVC szablon projektu zawiera `Error` metodę akcji i widok błędów dla kontrolera macierzystego.
 
-Nie zaznaczaj metody akcji procedury obsługi błędów z atrybutami metody HTTP, takimi jak `HttpGet` . Jawne czasowniki uniemożliwiają niektórym żądaniem osiągnięcie metody akcji. Zezwalaj na anonimowy dostęp do metody, jeśli nieuwierzytelnieni użytkownicy powinni zobaczyć widok błędów.
+Wyjątek obsługujący oprogramowanie pośredniczące ponowne wykonuje żądanie przy użyciu *oryginalnej* metody http. Jeśli punkt końcowy programu obsługi błędów jest ograniczony do określonego zestawu metod HTTP, działa tylko dla tych metod HTTP. Na przykład akcja kontrolera MVC, która używa `[HttpGet]` atrybutu jest uruchamiana tylko dla żądań GET. Aby upewnić się, że *wszystkie* żądania docierają do niestandardowej strony obsługi błędów, nie ograniczaj ich do określonego zestawu metod http.
+
+Aby obsłużyć wyjątki inaczej w oparciu o oryginalną metodę HTTP:
+
+* W przypadku Razor stron Utwórz wiele metod obsługi. Na przykład użyj, aby obsłużyć `OnGet` pobieranie wyjątków i używać `OnPost` do obsługi wyjątków post.
+* W przypadku MVC Zastosuj atrybuty czasownika HTTP do wielu akcji. Na przykład użyj, aby obsłużyć `[HttpGet]` pobieranie wyjątków i używać `[HttpPost]` do obsługi wyjątków post.
+
+Aby umożliwić nieuwierzytelnionym użytkownikom wyświetlanie strony obsługi błędów niestandardowych, należy się upewnić, że obsługuje ona dostęp anonimowy.
 
 ### <a name="access-the-exception"></a>Uzyskaj dostęp do wyjątku
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a7a0c0ff44de5b04d7fa9a8f2f16f7c9f786f64b
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053088"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057073"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Zapobiegaj skryptom między lokacjami (XSS) w ASP.NET Core
 
@@ -69,7 +69,7 @@ Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera 
 
 ## <a name="javascript-encoding-using-no-locrazor"></a>Kodowanie JavaScript przy użyciu Razor
 
-Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Przykład:
+Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Na przykład:
 
 ```cshtml
 @{
@@ -162,9 +162,9 @@ Poprzedni kod generuje następujące dane wyjściowe:
 ```
 
 >[!WARNING]
-> Do * **nie** można łączyć niezaufanych danych wejściowych w języku JavaScript w celu tworzenia elementów dom lub korzystania `document.write()` z dynamicznie generowanej zawartości.
+> Do ***nie** można łączyć niezaufanych danych wejściowych w języku JavaScript w celu tworzenia elementów dom lub korzystania `document.write()` z dynamicznie generowanej zawartości.
 >
-> Użyj jednego z poniższych metod, aby zapobiec ujawnieniu kodu w oparciu o dane z modelu DOM: _ `createElement()` i przypisz wartości właściwości z odpowiednimi metodami lub właściwościami, takimi jak `node.textContent=` lub węzłem. InnerText = ".
+> Użyj jednego z poniższych metod, aby zapobiec ujawnieniu kodu do typu XSS opartego na modelu DOM: _ `createElement()` i przypisywać wartości właściwości odpowiednimi metodami lub właściwościami, takimi jak `node.textContent=` lub `node.InnerText=` .
 > * `document.CreateTextNode()` i Dołącz je do odpowiedniej lokalizacji DOM.
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ Poprzedni kod generuje następujące dane wyjściowe:
 
 Kodery HTML, JavaScript i URL są dostępne dla kodu na dwa sposoby, można je wstrzyknąć za pośrednictwem [iniekcji zależności](xref:fundamentals/dependency-injection) lub użyć domyślnych koderów zawartych w `System.Text.Encodings.Web` przestrzeni nazw. Jeśli używasz koderów domyślnych, wszystkie zastosowane do zakresów znaków, które mają być traktowane jako bezpieczne, nie zaczną obowiązywać — domyślne kodery będą używać najbezpieczniejszych reguł kodowania.
 
-Aby użyć konfigurowalnych koderów za pośrednictwem narzędzi, konstruktory powinny przyjmować parametr *HtmlEncode* , *JavaScriptEncoder* i *UrlEncoder* , zgodnie z potrzebami. Na przykład:
+Aby użyć konfigurowalnych koderów za pośrednictwem narzędzi, konstruktory powinny przyjmować parametr *HtmlEncode*, *JavaScriptEncoder* i *UrlEncoder* , zgodnie z potrzebami. Na przykład:
 
 ```csharp
 public class HomeController : Controller
@@ -195,7 +195,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Parametry kodowania adresu URL
 
-Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Przykład:
+Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Na przykład
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 2df938f3ace47472536020f9848e954fc4446f15
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: 0b555ad7befe882c4ffd06e2505a9edc1263eee2
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658589"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057086"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Bezpieczny ASP.NET Core Blazor WebAssembly
 
@@ -110,6 +110,14 @@ Aplikacje często wymagają oświadczeń dla użytkowników na podstawie wywoła
 ## <a name="azure-app-service-on-linux-with-no-locidentity-server"></a>Azure App Service w systemie Linux z Identity serwerem
 
 Określ wystawcę jawnie podczas wdrażania programu w celu Azure App Service w systemie Linux z Identity serwerem. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity/spa#azure-app-service-on-linux>.
+
+## <a name="windows-authentication"></a>Uwierzytelnianie systemu Windows
+
+Nie zalecamy używania uwierzytelniania systemu Windows z Blazor zestawem webassembly ani z żadną inną strukturą spa. Zalecamy używanie protokołów opartych na tokenach zamiast uwierzytelniania systemu Windows, takich jak OIDC z Active Directory Federation Services (ADFS).
+
+Jeśli uwierzytelnianie systemu Windows jest używane z Blazor zestawem webassembly lub z innymi platformami Spa, wymagane są dodatkowe miary do ochrony aplikacji przed tokenami fałszerstwa żądania między lokacjami (CSRF). Te same zagadnienia dotyczące programu cookie s dotyczą uwierzytelniania systemu Windows z dodaniem, że uwierzytelnianie systemu Windows nie oferuje żadnego mechanizmu, aby uniemożliwić udostępnianie kontekstu uwierzytelniania w różnych źródłach. Aplikacje korzystające z uwierzytelniania systemu Windows bez dodatkowej ochrony CSRF powinny być ograniczone do intranetu organizacji i nie mogą być używane w Internecie.
+
+Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery> .
 
 ## <a name="implementation-guidance"></a>Wskazówki dotyczące implementacji
 

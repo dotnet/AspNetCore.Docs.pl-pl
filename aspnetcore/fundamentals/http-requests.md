@@ -5,7 +5,7 @@ description: Dowiedz się więcej o używaniu interfejsu IHttpClientFactory do z
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/09/2020
+ms.date: 1/21/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 1cf3029452f87a396847f969f0f3136a75874752
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059497"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057333"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Wykonywanie żądań HTTP przy użyciu IHttpClientFactory w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/rynowak), [Steve Gordon](https://github.com/stevejgordon), [Rick Anderson](https://twitter.com/RickAndMSFT)i [Kirka Larkin](https://github.com/serpent5)
+[Kirka Larkin](https://github.com/serpent5), [Steve Gordon](https://github.com/stevejgordon), [Glenn Condron](https://github.com/glennc)i [Ryan Nowak](https://github.com/rynowak).
 
 <xref:System.Net.Http.IHttpClientFactory>Może być zarejestrowany i używany do konfigurowania i tworzenia <xref:System.Net.Http.HttpClient> wystąpień w aplikacji. `IHttpClientFactory` oferuje następujące korzyści:
 
@@ -58,7 +58,7 @@ Najlepsze podejście zależy od wymagań aplikacji.
 
 `IHttpClientFactory` można zarejestrować, wywołując `AddHttpClient` :
 
-[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
+[!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1&highlight=13)]
 
 `IHttpClientFactory`Można zażądać przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Następujący kod używa `IHttpClientFactory` do tworzenia `HttpClient` wystąpienia:
 
@@ -238,16 +238,15 @@ Aby dowiedzieć się więcej o używaniu różnych zleceń HTTP w programie `Htt
 
 `HttpClient` ma koncepcję delegowania programów obsługi, które mogą być połączone ze sobą w przypadku wychodzących żądań HTTP. `IHttpClientFactory`:
 
-* Upraszcza definiowanie programów obsługi do zastosowania dla każdego nazwanego klienta.
-* Obsługuje rejestrację i łańcuch wielu programów obsługi w celu utworzenia potoku pośredniczącego żądania wychodzącego. Każdy z tych programów obsługi jest w stanie wykonać zadania przed i po żądaniu wychodzącym. Ten wzorzec:
-
-  * Jest podobny do przychodzącego potoku oprogramowania pośredniczącego w ASP.NET Core.
-  * Program udostępnia mechanizm zarządzania problemami z obcinaniem między żądaniami HTTP, takimi jak:
-
-    * pamięć
-    * Obsługa błędów
-    * serializacji
-    * rejestrowanie
+  * Upraszcza definiowanie programów obsługi do zastosowania dla każdego nazwanego klienta.
+  * Obsługuje rejestrację i łańcuch wielu programów obsługi w celu utworzenia potoku pośredniczącego żądania wychodzącego. Każdy z tych programów obsługi jest w stanie wykonać zadania przed i po żądaniu wychodzącym. Ten wzorzec:
+  
+    * Jest podobny do przychodzącego potoku oprogramowania pośredniczącego w ASP.NET Core.
+    * Program udostępnia mechanizm zarządzania problemami z obcinaniem między żądaniami HTTP, takimi jak:
+      * pamięć
+      * Obsługa błędów
+      * serializacji
+      * rejestrowanie
 
 Aby utworzyć program obsługi delegowania:
 
@@ -262,13 +261,31 @@ Do konfiguracji dla elementu with można dodać więcej niż jeden program obsł
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup2.cs?name=snippet1)]
 
-W poprzednim kodzie, `ValidateHeaderHandler` jest zarejestrowany przy użyciu di. `IHttpClientFactory`Tworzy oddzielny zakres di dla każdej procedury obsługi. Programy obsługi mogą zależeć od usług dowolnego zakresu. Usługi, które są zależne od programów obsługi, są usuwane, gdy program obsługi zostanie usunięty.
-
-Po zarejestrowaniu <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> można wywołać, przekazując typ do procedury obsługi.
+W poprzednim kodzie, `ValidateHeaderHandler` jest zarejestrowany przy użyciu di. Po zarejestrowaniu <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> można wywołać, przekazując typ do procedury obsługi.
 
 Wiele programów obsługi można zarejestrować w kolejności, w jakiej powinny być wykonywane. Każdy program obsługi otacza następną procedurę obsługi do momentu zakończenia `HttpClientHandler` żądania:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
+
+### <a name="use-di-in-outgoing-request-middleware"></a>Użyj programu "DI" dla oprogramowania pośredniczącego żądań wychodzących
+
+Gdy `IHttpClientFactory` program tworzy nową procedurę delegowania, używa di do spełnienia parametrów konstruktora procedury obsługi. `IHttpClientFactory` tworzy **oddzielny** zakres di dla każdej procedury obsługi, co może prowadzić do zaskakujące zachowania, gdy program obsługi korzysta z usługi w *zakresie* .
+
+Rozważmy na przykład następujący interfejs i jego implementacja, która reprezentuje zadanie jako operację z identyfikatorem `OperationId` :
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/OperationScoped.cs?name=snippet_Types)]
+
+W miarę jak nazwa sugeruje, `IOperationScoped` jest zarejestrowana za pomocą di przy użyciu okresu istnienia w *zakresie* :
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Startup.cs?name=snippet_IOperationScoped&highlight=18,26)]
+
+Następująca procedura delegowania wykorzystuje i używa `IOperationScoped` do ustawiania `X-OPERATION-ID` nagłówka dla żądania wychodzącego:
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Handlers/OperationHandler.cs?name=snippet_Class&highlight=13)]
+
+W obszarze [ `HttpRequestsSample` pobieranie](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] Przejdź do `/Operation` strony i Odśwież stronę. Wartość zakresu żądania zmienia się dla każdego żądania, ale wartość zakresu procedury obsługi zmienia się co 5 sekund.
+
+Programy obsługi mogą zależeć od usług dowolnego zakresu. Usługi, które są zależne od programów obsługi, są usuwane, gdy program obsługi zostanie usunięty.
 
 Użyj jednego z następujących metod, aby udostępnić stan dla żądania za pomocą programów obsługi komunikatów:
 

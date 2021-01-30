@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel/endpoints
-ms.openlocfilehash: 5fec573013da5bcb5039b7a189fd84d964349b3a
-ms.sourcegitcommit: cc405f20537484744423ddaf87bd1e7d82b6bdf0
+ms.openlocfilehash: f9d82409f4b31a5564c7cdfa48beb303d784e213
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98658745"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057151"
 ---
 # <a name="configure-endpoints-for-the-aspnet-core-kestrel-web-server"></a>Skonfiguruj punkty końcowe dla ASP.NET Core serwera sieci Web Kestrel
 
@@ -76,24 +76,6 @@ webBuilder.ConfigureKestrel(serverOptions =>
 > [!NOTE]
 > Punkty końcowe utworzone przez wywołanie <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A> **przed** wywołaniem <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults%2A> nie mają zastosowania wartości domyślnych.
 
-## <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (Akcja \<HttpsConnectionAdapterOptions> )
-
-Określa konfigurację `Action` do uruchomienia dla każdego punktu końcowego HTTPS. Wywołanie `ConfigureHttpsDefaults` wielokrotne zastępuje przed `Action` ostatnimi `Action` parametrami.
-
-```csharp
-webBuilder.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ConfigureHttpsDefaults(listenOptions =>
-    {
-        // certificate is an X509Certificate2
-        listenOptions.ServerCertificate = certificate;
-    });
-});
-```
-
-> [!NOTE]
-> Punkty końcowe utworzone przez wywołanie <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A> **przed** wywołaniem <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults%2A> nie mają zastosowania wartości domyślnych.
-
 ## <a name="configureiconfiguration"></a>Konfiguruj (IConfiguration)
 
 Tworzy moduł ładujący konfigurację na potrzeby konfigurowania Kestrel, które pobiera <xref:Microsoft.Extensions.Configuration.IConfiguration> jako dane wejściowe. Konfiguracja musi być objęta zakresem sekcji konfiguracji dla Kestrel.
@@ -118,6 +100,24 @@ Tworzy moduł ładujący konfigurację na potrzeby konfigurowania Kestrel, któr
   }
 }
 ```
+
+## <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults (Akcja \<HttpsConnectionAdapterOptions> )
+
+Określa konfigurację `Action` do uruchomienia dla każdego punktu końcowego HTTPS. Wywołanie `ConfigureHttpsDefaults` wielokrotne zastępuje przed `Action` ostatnimi `Action` parametrami.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        // certificate is an X509Certificate2
+        listenOptions.ServerCertificate = certificate;
+    });
+});
+```
+
+> [!NOTE]
+> Punkty końcowe utworzone przez wywołanie <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen%2A> **przed** wywołaniem <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults%2A> nie mają zastosowania wartości domyślnych.
 
 ## <a name="listenoptionsusehttps"></a>ListenOptions.UseHttps
 
@@ -335,6 +335,21 @@ Obsługa SNI wymaga:
 * Uruchomiona w środowisku docelowym `netcoreapp2.1` lub nowszym. W dniu `net461` lub później wywołanie zwrotne jest wywoływane, ale `name` jest zawsze `null` . `name`Jest również, `null` Jeśli klient nie poda parametru nazwy hosta w UZGADNIANIU protokołu TLS.
 * Wszystkie witryny sieci Web działają na tym samym wystąpieniu Kestrel. Kestrel nie obsługuje udostępniania adresu IP i portu w wielu wystąpieniach bez zwrotnego serwera proxy.
 
+## <a name="ssltls-protocols"></a>Protokoły SSL/TLS
+
+Protokoły SSL są protokołami używanymi do szyfrowania i odszyfrowywania ruchu między dwoma elementami równorzędnymi, tradycyjnie klientem i serwerem.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        listenOptions.SslProtocols = SslProtocols.Tls13;
+    });
+});
+```
+
+Wartość domyślna, `SslProtocols.None` powoduje, że Kestrel używają ustawień domyślnych systemu operacyjnego w celu wybrania najlepszego protokołu. Jeśli nie masz konkretnej przyczyny wyboru protokołu, użyj ustawienia domyślnego.
 ## <a name="connection-logging"></a>Rejestrowanie połączeń
 
 Wywołanie <xref:Microsoft.AspNetCore.Hosting.ListenOptionsConnectionLoggingExtensions.UseConnectionLogging%2A> do emisji dzienników na poziomie debugowania dla komunikacji na poziomie bajtów w ramach połączenia. Rejestrowanie połączeń ułatwia rozwiązywanie problemów z komunikacją na niskim poziomie, na przykład podczas szyfrowania TLS i za serwerami proxy. Jeśli `UseConnectionLogging` jest umieszczona przed `UseHttps` , szyfrowany ruch jest rejestrowany. Jeśli `UseConnectionLogging` jest umieszczony po `UseHttps` , odszyfrowany ruch jest rejestrowany. Jest to wbudowane [oprogramowanie pośredniczące](#connection-middleware).

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: e873fdd201cf0cdc809030fde30c6a8da2899861
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: 67a63f1b4f705a4857dea2e6d1a942d4f21469f5
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751558"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057099"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -146,7 +146,7 @@ Określanie formatu dla `date` typu pola nie jest zalecane, ponieważ Blazor ma 
 
 Typowy scenariusz polega na powiązaniu właściwości w składniku podrzędnym z właściwością w jej elemencie nadrzędnym. Ten scenariusz jest nazywany *powiązaniem łańcuchowym* , ponieważ wiele poziomów powiązań występuje jednocześnie.
 
-[Parametry składnika](xref:blazor/components/index#component-parameters) umożliwiają powiązanie właściwości i pól składnika nadrzędnego z `@bind-{PROPERTY OR FIELD}` składnią.
+[Parametry składnika](xref:blazor/components/index#component-parameters) umożliwiają powiązanie właściwości składnika nadrzędnego z `@bind-{PROPERTY}` składnią.
 
 Nie można zaimplementować powiązań łańcuchowych przy użyciu [`@bind`](xref:mvc/views/razor#bind) składni w składniku podrzędnym. Procedura obsługi zdarzeń i wartość musi być określona oddzielnie, aby można było obsługiwać aktualizowanie właściwości w elemencie nadrzędnym ze składnika podrzędnego.
 

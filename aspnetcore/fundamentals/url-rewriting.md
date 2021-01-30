@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: e7bd5f4d61661dd23eb0907f896d0d32b7799aac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 55993f951bfe910fb179fdb25b8d04f81d4ee2c9
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061304"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057463"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -200,15 +200,15 @@ W poprzednim przykładzie z regułą przekierowania `redirect-rule/(.*)` nie ma 
 
 | Ścieżka                               | Dopasowanie |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
-| `/my-cool-redirect-rule/1234/5678` | Yes   |
-| `/anotherredirect-rule/1234/5678`  | Yes   |
+| `/redirect-rule/1234/5678`         | Tak   |
+| `/my-cool-redirect-rule/1234/5678` | Tak   |
+| `/anotherredirect-rule/1234/5678`  | Tak   |
 
 Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się tylko do ścieżek, jeśli zaczynają się od `rewrite-rule/` . W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Tak   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 
@@ -290,7 +290,7 @@ Jeśli masz aktywny moduł ponownego zapisywania usług IIS z skonfigurowanymi r
 
 #### <a name="unsupported-features"></a>Nieobsługiwane funkcje
 
-Oprogramowanie pośredniczące wydane z ASP.NET Core 2. x nie obsługuje następujących funkcji modułu ponownego zapisywania adresów URL usług IIS:
+Oprogramowanie pośredniczące nie obsługuje następujących funkcji modułu ponownego zapisywania adresów URL usług IIS:
 
 * Reguły ruchu wychodzącego
 * Niestandardowe zmienne serwera
@@ -554,15 +554,15 @@ W poprzednim przykładzie z regułą przekierowania `redirect-rule/(.*)` nie ma 
 
 | Ścieżka                               | Dopasowanie |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
-| `/my-cool-redirect-rule/1234/5678` | Yes   |
-| `/anotherredirect-rule/1234/5678`  | Yes   |
+| `/redirect-rule/1234/5678`         | Tak   |
+| `/my-cool-redirect-rule/1234/5678` | Tak   |
+| `/anotherredirect-rule/1234/5678`  | Tak   |
 
 Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się tylko do ścieżek, jeśli zaczynają się od `rewrite-rule/` . W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Tak   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 

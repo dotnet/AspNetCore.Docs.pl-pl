@@ -4,7 +4,7 @@ author: mjrousos
 description: Informacje o uwierzytelnianiu w ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/03/2020
+ms.date: 1/24/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: e9e4ca11d20557666c75b84e56af825d002df0f1
-ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
+ms.openlocfilehash: 72036e9c4c92ee5dd82ac4a67e766fb0e5c8f924
+ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94464006"
+ms.lasthandoff: 01/29/2021
+ms.locfileid: "99057294"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Omówienie uwierzytelniania ASP.NET Core
 
@@ -62,7 +62,19 @@ Oprogramowanie pośredniczące uwierzytelniania jest dodawane w programie `Start
 
 ## <a name="authentication-concepts"></a>Pojęcia związane z uwierzytelnianiem
 
+Uwierzytelnianie jest odpowiedzialne za dostarczanie <xref:System.Security.Claims.ClaimsPrincipal> autoryzacji na potrzeby podejmowania decyzji dotyczących uprawnień. Istnieje wiele podejścia do schematu uwierzytelniania w celu wybrania, który program obsługi uwierzytelniania jest odpowiedzialny za generowanie poprawnego zestawu oświadczeń:
+
+  * [Schemat uwierzytelniania](xref:security/authorization/limitingidentitybyscheme)został również omówiony w następnej sekcji.
+  * Domyślny schemat uwierzytelniania omówiony w następnej sekcji.
+  * Bezpośrednio Ustaw [Właściwość HttpContext. User](xref:Microsoft.AspNetCore.Http.HttpContext.User).
+
+Nie ma automatycznej sondowania schematów. Jeśli domyślny schemat nie jest określony, schemat musi być określony w atrybucie Autoryzuj, w przeciwnym razie zostanie zgłoszony następujący błąd:
+
+  InvalidOperationException: nie określono authenticationScheme i nie znaleziono DefaultAuthenticateScheme. Domyślne schematy można ustawić za pomocą polecenia addauthentication (String defaultScheme) lub addauthentication (Action &lt; AuthenticationOptions &gt; configureOptions).
+
 ### <a name="authentication-scheme"></a>Schemat uwierzytelniania
+
+[Schemat uwierzytelniania](xref:security/authorization/limitingidentitybyscheme) może wybrać, który program obsługi uwierzytelniania jest odpowiedzialny za generowanie poprawnego zestawu oświadczeń. Aby uzyskać więcej informacji, zobacz [Autoryzuj z określonym schematem](xref:security/authorization/limitingidentitybyscheme).
 
 Schematem uwierzytelniania jest nazwa, która odnosi się do:
 

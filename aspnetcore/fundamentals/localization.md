@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 67f245b7f4e4aa97b30c5318c73732617aea44c7
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059523"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217573"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -134,7 +134,7 @@ W poprzednim kodzie, `SharedResource` jest klasą odpowiadającą resx, gdzie s�
 
 ### <a name="supportedcultures-and-supporteduicultures"></a>SupportedCultures i SupportedUICultures
 
-ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `SupportedUICultures` . Obiekt [CultureInfo](/dotnet/api/system.globalization.cultureinfo) dla `SupportedCultures` określa wyniki funkcji zależnych od kultury, takich jak data, godzina, liczba i formatowanie waluty. `SupportedCultures` określa również kolejność sortowania tekstu, Konwencji wielkości liter i porównań ciągów. Zobacz [CultureInfo. CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) , aby uzyskać więcej informacji na temat sposobu, w jaki serwer pobiera kulturę. `SupportedUICultures`Określa, które przetłumaczone ciągi (z plików *resx* ) są wyszukiwane przez program [ResourceManager](/dotnet/api/system.resources.resourcemanager). `ResourceManager`Po prostu wyszukuje ciągi specyficzne dla kultury, które są określane przez `CurrentUICulture` . Każdy wątek w programie .NET `CurrentCulture` ma `CurrentUICulture` obiekty i. ASP.NET Core sprawdza te wartości podczas renderowania funkcji zależnych od kultury. Na przykład, jeśli kultura bieżącego wątku jest ustawiona na wartość "en-US" (angielski, Stany Zjednoczone), `DateTime.Now.ToLongDateString()` zostanie wyświetlona wartość "czwartek, 18 lutego, 2016", ale jeśli `CurrentCulture` jest ustawiona na "ES-es" (hiszpański, Hiszpania) dane wyjściowe będą "jueves, 18 de febrero de 2016".
+ASP.NET Core pozwala określić dwie wartości kulturowe <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedCultures> i <xref:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.SupportedUICultures> . <xref:System.Globalization.CultureInfo>Obiekt dla `SupportedCultures` określa wyniki funkcji zależnych od kultury, takich jak data, godzina, liczba i formatowanie waluty. `SupportedCultures` określa również kolejność sortowania tekstu, Konwencji wielkości liter i porównań ciągów. Aby uzyskać więcej informacji na temat sposobu, w jaki serwer uzyskuje kulturę, zobacz <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=nameWithType> i <xref:System.Globalization.CultureInfo.CurrentUICulture?displayProperty=nameWithType> . `SupportedUICultures`Określa, które przetłumaczone ciągi (z `.resx` plików) są wyszukiwane przez <xref:System.Resources.ResourceManager> . `ResourceManager`Wyszukuje ciągi specyficzne dla kultury, które są określane przez `CurrentUICulture` . Każdy wątek w programie .NET `CurrentCulture` ma `CurrentUICulture` obiekty i. Struktura sprawdza te wartości podczas renderowania funkcji zależnych od kultury. Jeśli kultura bieżącego wątku jest ustawiona na `en-US` (angielski, Stany Zjednoczone), wyświetlana wartość `DateTime.Now.ToLongDateString()` `Thursday, February 18, 2016` ;, ale jeśli `CurrentCulture` jest ustawiona na `es-ES` (hiszpański, Hiszpania), dane wyjściowe to `jueves, 18 de febrero de 2016` .
 
 ## <a name="resource-files"></a>Pliki zasobów
 
@@ -177,7 +177,7 @@ Jeśli opcja nie zostanie użyta `ResourcesPath` , plik *resx* dla widoku powini
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-Atrybut [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) udostępnia główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
+Ten <xref:Microsoft.Extensions.Localization.RootNamespaceAttribute> atrybut zawiera główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
 
 > [!WARNING]
 > Taka sytuacja może wystąpić, gdy nazwa projektu nie jest prawidłowym identyfikatorem platformy .NET. Na przykład `my-project-name.csproj` użyje głównej przestrzeni nazw `my_project_name` i nazwy zestawu `my-project-name` prowadzącej do tego błędu. 
@@ -531,7 +531,7 @@ Jeśli opcja nie zostanie użyta `ResourcesPath` , plik *resx* dla widoku powini
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-Atrybut [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) udostępnia główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
+Ten <xref:Microsoft.Extensions.Localization.RootNamespaceAttribute> atrybut zawiera główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
 
 > [!WARNING]
 > Taka sytuacja może wystąpić, gdy nazwa projektu nie jest prawidłowym identyfikatorem platformy .NET. Na przykład `my-project-name.csproj` użyje głównej przestrzeni nazw `my_project_name` i nazwy zestawu `my-project-name` prowadzącej do tego błędu. 
@@ -886,7 +886,7 @@ Jeśli opcja nie zostanie użyta `ResourcesPath` , plik *resx* dla widoku powini
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
-Atrybut [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) udostępnia główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
+Ten <xref:Microsoft.Extensions.Localization.RootNamespaceAttribute> atrybut zawiera główną przestrzeń nazw zestawu, gdy główna przestrzeń nazw zestawu jest inna niż nazwa zestawu. 
 
 > [!WARNING]
 > Taka sytuacja może wystąpić, gdy nazwa projektu nie jest prawidłowym identyfikatorem platformy .NET. Na przykład `my-project-name.csproj` użyje głównej przestrzeni nazw `my_project_name` i nazwy zestawu `my-project-name` prowadzącej do tego błędu. 

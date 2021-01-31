@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/interprocess
-ms.openlocfilehash: d806a340d8540fce8af6ccc6ff68325e4b733922
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 8c0f8fb1468e61d5aa2e7f42cb5da33c01819124
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059887"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217469"
 ---
 # <a name="inter-process-communication-with-grpc"></a>Komunikacja między procesami przy użyciu gRPC
 
@@ -64,9 +64,6 @@ Kestrel ma wbudowaną obsługę punktów końcowych programu do tworzenia. W sys
 ## <a name="client-configuration"></a>Konfiguracja klientów
 
 `GrpcChannel` obsługuje wykonywanie wywołań gRPC przez transporty niestandardowe. Po utworzeniu kanału można go skonfigurować przy użyciu programu z `SocketsHttpHandler` niestandardowym `ConnectCallback` . Wywołanie zwrotne pozwala klientowi na nawiązywanie połączeń przez transporty niestandardowe, a następnie wysyłanie żądań HTTP przez ten transport.
-
-> [!IMPORTANT]
-> `SocketsHttpHandler.ConnectCallback` jest nowym interfejsem API w programie .NET 5 Release Candidate 2.
 
 Przykład fabryki połączeń gniazd domen systemu UNIX:
 

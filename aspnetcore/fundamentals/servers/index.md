@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 91d1373d764644820d1fac6064ee503e1ef4455c
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 2acddd212639ac0a82b3c46f2225ff66d0999dd0
+ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057346"
+ms.lasthandoff: 01/31/2021
+ms.locfileid: "99217560"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Implementacje serwera sieci Web w ASP.NET Core
 
@@ -38,7 +38,7 @@ Aplikacja ASP.NET Core jest uruchamiana z użyciem implementacji serwera HTTP w 
 
 ASP.NET Core dostarcza następujące elementy:
 
-* [Serwer Kestrel](xref:fundamentals/servers/kestrel) jest domyślną implementacją międzyplatformowego serwera http. Kestrel zapewnia najlepszą wydajność i użycie pamięci, ale nie oferuje niektórych zaawansowanych funkcji, `Http.Sys` takich jak Udostępnianie portów.
+* [Serwer Kestrel](xref:fundamentals/servers/kestrel) jest domyślną implementacją międzyplatformowego serwera http. Kestrel zapewnia najlepszą wydajność i użycie pamięci, ale nie oferuje niektórych zaawansowanych funkcji w HTTP.sys. Aby uzyskać więcej informacji, zobacz [Kestrel a HTTP.sys](#korh) w tym dokumencie.
 * Serwer HTTP usług IIS jest [serwerem w procesie](#hosting-models) dla usług IIS.
 * [ SerwerHTTP.sys](xref:fundamentals/servers/httpsys) to serwer HTTP z systemem Windows oparty na [HTTP.sys sterownika jądra i interfejsu API serwera http](/windows/desktop/Http/http-api-start-page).
 
@@ -48,6 +48,26 @@ W przypadku korzystania z [usług IIS](/iis/get-started/introduction-to-iis/intr
 * W procesie innym niż proces roboczy usług IIS ( [model hostingu poza procesem](#hosting-models)) z [serwerem Kestrel](#kestrel).
 
 [Moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module) jest natywnym modułem usług IIS, który obsługuje natywne żądania usług IIS między usługami IIS a serwerem HTTP lub Kestrel IIS w procesie. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
+
+<a name="korh"></a>
+
+## <a name="kestrel-vs-httpsys"></a>Kestrel a HTTP.sys
+
+Kestrel ma następujące zalety w stosunku do HTTP.sys:
+
+  * Lepsza wydajność i użycie pamięci.
+  * Wiele platform
+  * Elastyczność, opracowana i niezależna od systemu operacyjnego.
+  * Port programistyczny i konfiguracja protokołu TLS
+  * Rozszerzalność umożliwiająca obsługę protokołów, takich jak [PPv2](https://github.com/aspnet/AspLabs/blob/master/src/ProxyProtocol/ProxyProtocol.Sample/ProxyProtocol.cs) i alternatywne transporty.
+
+Http.Sys działa jako współużytkowany składnik trybu jądra z następującymi funkcjami, które nie są dostępne dla Kestrel:
+
+  * Udostępnianie portów
+  * Uwierzytelnianie systemu Windows trybu jądra. [Kestrel obsługuje tylko uwierzytelnianie w trybie użytkownika](xref:security/authentication/windowsauth#kestrel).
+  * Szybki serwer proxy za pośrednictwem transferów kolejek
+  * Bezpośrednia transmisja plików
+  * Buforowanie odpowiedzi
 
 ## <a name="hosting-models"></a>Modele hostingu
 
@@ -74,8 +94,8 @@ ASP.NET Core jest dostarczany z [serwerem Kestrel](xref:fundamentals/servers/kes
 
 ## <a name="kestrel"></a>Kestrel
 
- [Serwer Kestrel](xref:fundamentals/servers/kestrel) jest domyślną implementacją międzyplatformowego serwera http. Kestrel zapewnia najlepszą wydajność i użycie pamięci, ale nie oferuje niektórych zaawansowanych funkcji, `Http.Sys` takich jak Udostępnianie portów.
- 
+ [Serwer Kestrel](xref:fundamentals/servers/kestrel) jest domyślną implementacją międzyplatformowego serwera http. Kestrel zapewnia najlepszą wydajność i użycie pamięci, ale nie oferuje niektórych zaawansowanych funkcji w HTTP.sys. Aby uzyskać więcej informacji, zobacz [Kestrel a HTTP.sys](#korh) w tym dokumencie.
+
 Użyj Kestrel:
 
 * Jako serwer graniczny przetwarza żądania bezpośrednio z sieci, w tym z Internetu.

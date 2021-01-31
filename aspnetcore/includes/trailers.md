@@ -1,4 +1,4 @@
-Przyczepy HTTP są podobne do nagłówków HTTP, z tą różnicą, że są wysyłane po wysłaniu treści odpowiedzi. W przypadku usług IIS i HTTP.SYS obsługiwane są tylko przyczepy z odpowiedzią HTTP/2.
+Przyczepy HTTP są podobne do nagłówków HTTP, z tą różnicą, że są wysyłane po wysłaniu treści odpowiedzi. W przypadku usług IIS i HTTP.sys obsługiwane są tylko przyczepy z odpowiedzią HTTP/2.
 
 ```csharp
 if (httpContext.Response.SupportsTrailers())

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 72ee8f5dfdf8ffd6cfcb74b13fa0738893d8e214
-ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
+ms.openlocfilehash: ee30ef89c5d7aeae83f23a81eb02235397c89ac2
+ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97486138"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99238310"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -565,7 +565,8 @@ Na przykład następujący filtr jest zawsze uruchamiany i ustawia wynik akcji (
 Oznacza, że zostanie utworzone pojedyncze wystąpienie filtru.
 * Filtr nie zostanie ponownie żądany z kontenera DI w pewnym momencie.
 
-[!WARNING] Skonfigurować tylko `IFilterFactory.IsReusable` do zwrócenia, `true` Jeśli źródło filtrów nie jest niejednoznaczne, filtry są bezstanowe i bezpieczne do użycia w wielu żądaniach HTTP. Na przykład nie należy zwracać filtrów z funkcji DI, które są rejestrowane jako zakresy lub przejściowe, jeśli `IFilterFactory.IsReusable` zwraca `true`
+> [!WARNING] 
+> Skonfigurować tylko <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable?displayProperty=nameWithType> do zwrócenia, `true` Jeśli źródło filtrów nie jest niejednoznaczne, filtry są bezstanowe i filtry są bezpieczne do użycia w wielu żądaniach HTTP. Na przykład nie zwracaj filtrów z DI, które są zarejestrowane jako zakres lub przejściowe, jeśli `IFilterFactory.IsReusable` zwraca `true` .
 
 `IFilterFactory` można zaimplementować przy użyciu niestandardowych implementacji atrybutów jako inne podejście do tworzenia filtrów:
 

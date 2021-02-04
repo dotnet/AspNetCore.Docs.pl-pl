@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: fe30c3b3be92c30dea6d0cb97e642eec1da6328b
-ms.sourcegitcommit: 72c8ada9b9644ee4751ed6869e892a8558dd8e66
+ms.openlocfilehash: efc73022d0bd8c29595f9bed1c06fe07002eb54a
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/23/2021
-ms.locfileid: "98723515"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530102"
 ---
-# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
+# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), [Scott Addie](https://github.com/scottaddie)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
@@ -38,7 +38,7 @@ Blazor aplikacje są kompilowane przy użyciu *składników* programu. Składnik
 
 Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany *Razor składnikiem*.
 
-### <a name="no-locrazor-syntax"></a>Razor obowiązuje
+### <a name="razor-syntax"></a>Razor obowiązuje
 
 Razor składniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Jeśli nie znasz Razor języka znaczników, zalecamy odczytywanie [ Razor odwołań składni dla ASP.NET Core](xref:mvc/views/razor) przed kontynuowaniem.
 
@@ -339,6 +339,11 @@ Ze względu na sposób, w jaki Blazor renderuje zawartość podrzędną, składn
 >     </ChildComponent>
 > }
 > ```
+
+Aby uzyskać informacje na temat sposobu <xref:Microsoft.AspNetCore.Components.RenderFragment> użycia jako szablonu dla Razor interfejsu użytkownika składnika, zobacz następujące artykuły:
+
+* <xref:blazor/components/templated-components>
+* <xref:blazor/webassembly-performance-best-practices#define-reusable-renderfragments-in-code>
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Korzystając atrybutów i dowolne parametry
 
@@ -824,7 +829,7 @@ W poniższym przykładzie pokazano, jak za pomocą `MarkupString` typu dodać bl
 }
 ```
 
-## <a name="no-locrazor-templates"></a>Razor przystawki
+## <a name="razor-templates"></a>Razor przystawki
 
 Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. Razor Szablony są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
 

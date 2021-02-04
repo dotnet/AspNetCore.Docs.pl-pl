@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 0bbf740cb49b77b476e7e015afee311110bbe5ea
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4e86241771e884ba9079bcdf9a09eebc6acd62c8
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060992"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530219"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>Tworzenie usług zaplecza dla natywnych aplikacji mobilnych za pomocą ASP.NET Core
 
@@ -64,7 +64,7 @@ public static string RestUrl = "http://192.168.1.207:5000/api/todoitems/{0}";
 
 ## <a name="creating-the-aspnet-core-project"></a>Tworzenie projektu ASP.NET Core
 
-Utwórz nową aplikację sieci Web ASP.NET Core w programie Visual Studio. Wybierz szablon internetowego interfejsu API i bez uwierzytelniania. Nazwij projekt *ToDoApi* .
+Utwórz nową aplikację sieci Web ASP.NET Core w programie Visual Studio. Wybierz szablon internetowego interfejsu API i bez uwierzytelniania. Nazwij projekt *ToDoApi*.
 
 ![Okno dialogowe Nowa aplikacja sieci Web ASP.NET z wybranym szablonem projektu interfejsu API sieci Web](native-mobile-backend/_static/web-api-template.png)
 
@@ -87,18 +87,18 @@ Dla tego przykładu implementacja używa tylko prywatnej kolekcji elementów:
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Services/ToDoRepository.cs)]
 
-Skonfiguruj implementację w programie *Startup.cs* :
+Skonfiguruj implementację w programie *Startup.cs*:
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Startup.cs?highlight=6&range=29-35)]
 
-W tym momencie można przystąpić do tworzenia *ToDoItemsController* .
+W tym momencie można przystąpić do tworzenia *ToDoItemsController*.
 
 > [!TIP]
 > Dowiedz się więcej o tworzeniu interfejsów API sieci Web w temacie Tworzenie [pierwszego internetowego interfejsu API za pomocą ASP.NET Core MVC i Visual Studio](../tutorials/first-web-api.md).
 
 ## <a name="creating-the-controller"></a>Tworzenie kontrolera
 
-Dodaj nowy kontroler do projektu, *ToDoItemsController* . Powinien on dziedziczyć po elemencie Microsoft. AspNetCore. MVC. Controller. Dodaj `Route` atrybut, aby wskazać, że kontroler będzie obsługiwać żądania wysyłane do ścieżek zaczynających się od `api/todoitems` . `[controller]`Token w marszrucie jest zastępowany nazwą kontrolera (z pominięciem `Controller` sufiksu) i jest szczególnie przydatny w przypadku tras globalnych. Dowiedz się więcej o [routingu](../fundamentals/routing.md).
+Dodaj nowy kontroler do projektu, *ToDoItemsController*. Powinien on dziedziczyć po elemencie Microsoft. AspNetCore. MVC. Controller. Dodaj `Route` atrybut, aby wskazać, że kontroler będzie obsługiwać żądania wysyłane do ścieżek zaczynających się od `api/todoitems` . `[controller]`Token w marszrucie jest zastępowany nazwą kontrolera (z pominięciem `Controller` sufiksu) i jest szczególnie przydatny w przypadku tras globalnych. Dowiedz się więcej o [routingu](../fundamentals/routing.md).
 
 Kontroler wymaga `IToDoRepository` funkcji do; Zażądaj wystąpienia tego typu za pomocą konstruktora kontrolera. W czasie wykonywania to wystąpienie zostanie dostarczone przy użyciu obsługi platformy w celu [iniekcji zależności](../fundamentals/dependency-injection.md).
 
@@ -166,4 +166,7 @@ Po zidentyfikowaniu wspólnych zasad dla interfejsów API można zwykle hermetyz
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Uwierzytelnianie i autoryzacja](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)
+- [Xamarin. Forms: uwierzytelnianie usługi sieci Web](/xamarin/xamarin-forms/data-cloud/authentication/)
+- [Xamarin. Forms: korzystanie z usługi sieci Web RESTful](/xamarin/xamarin-forms/data-cloud/web-services/rest)
+- [Microsoft Learn: korzystanie z usług sieci Web REST w aplikacjach platformy Xamarin](/learn/modules/consume-rest-services/)
+- [Microsoft Learn: Tworzenie interfejsu API sieci Web za pomocą ASP.NET Core](/learn/modules/build-web-api-aspnet-core/)

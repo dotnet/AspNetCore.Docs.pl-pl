@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 77d49710b9d69f6fbbe92970f1c455de32489444
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d6fa7e4524a8afdc23d4ad46354d9d8b395656a3
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056962"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99530193"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor stronach
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor stronach
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -76,13 +76,13 @@ Pełną listę atrybutów sprawdzania poprawności można znaleźć w przestrzen
 
 ### <a name="error-messages"></a>Komunikaty o błędach
 
-Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Przykład:
+Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Przykład:
+Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -92,9 +92,27 @@ W przypadku zastosowania do `Name` Właściwości komunikat o błędzie utworzon
 
 Aby dowiedzieć się, które parametry są przesyłane do `String.Format` komunikatu o błędzie określonego atrybutu, zobacz [kod źródłowy adnotacji](https://github.com/dotnet/runtime/tree/master/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations)danych.
 
-## <a name="required-attribute"></a>[Required] — atrybut
+## <a name="non-nullable-reference-types-and-required-attribute"></a>Niedopuszczające wartości null typy odwołań i atrybut [Required]
 
-System sprawdzania poprawności w programie .NET Core 3,0 lub nowszy traktuje parametry niedopuszczające wartości null lub właściwości powiązane tak, jakby miały `[Required]` atrybut. [Typy wartości](/dotnet/csharp/language-reference/keywords/value-types) , takie jak `decimal` i, `int` nie dopuszczają wartości null. To zachowanie można wyłączyć przez skonfigurowanie <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> w programie `Startup.ConfigureServices` :
+System weryfikacji traktuje parametry niedopuszczające wartości null lub właściwości powiązane tak, jakby miały `[Required]` atrybut. Przez [włączenie `Nullable` kontekstów](/dotnet/csharp/nullable-references#nullable-contexts), MVC niejawnie zaczyna sprawdzać poprawność właściwości, które nie dopuszcza wartości null, tak jakby były przypisane do `[Required]` atrybutu. Spójrzmy na poniższy kod:
+
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+}
+```
+
+Jeśli aplikacja została skompilowana przy użyciu programu `<Nullable>enable</Nullable>` , brakująca wartość elementu `Name` w formacie JSON lub post skutkuje błędem walidacji. Użyj typu referencyjnego dopuszczającego wartość null, aby zezwolić na określenie wartości zerowych lub brakujących dla `Name` Właściwości:
+
+```csharp
+public class Person
+{
+    public string? Name { get; set; }
+}
+```
+
+. To zachowanie można wyłączyć przez skonfigurowanie <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> w programie `Startup.ConfigureServices` :
 
 ```csharp
 services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
@@ -176,7 +194,7 @@ Jeśli potrzebujesz weryfikacji niedostarczonej przez wbudowane atrybuty, możes
 
 W przypadku scenariuszy, w których wbudowane atrybuty walidacji nie obsługują, można utworzyć niestandardowe atrybuty walidacji. Utwórz klasę, która dziedziczy z <xref:System.ComponentModel.DataAnnotations.ValidationAttribute> , i Zastąp <xref:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid*> metodę.
 
-`IsValid`Metoda akceptuje obiekt o nazwie *Value* , czyli dane wejściowe do zweryfikowania. Przeciążenie akceptuje również `ValidationContext` obiekt, który zawiera dodatkowe informacje, takie jak wystąpienie modelu utworzone przez powiązanie modelu.
+`IsValid`Metoda akceptuje obiekt o nazwie *Value*, czyli dane wejściowe do zweryfikowania. Przeciążenie akceptuje również `ValidationContext` obiekt, który zawiera dodatkowe informacje, takie jak wystąpienie modelu utworzone przez powiązanie modelu.
 
 Poniższy przykład sprawdza, czy Data wydania filmu w *klasycznym* gatunku nie jest późniejsza niż określony rok. `[ClassicMovie]`Atrybut:
 
@@ -210,7 +228,7 @@ Węzły najwyższego poziomu mogą korzystać <xref:Microsoft.AspNetCore.Mvc.Mod
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-Na stronie sprawdzanie wieku ( *Sprawdź. cshtml* ) Istnieją dwa formy. Pierwszy formularz przesyła `Age` wartość `99` jako parametr ciągu zapytania: `https://localhost:5001/Users/CheckAge?Age=99` .
+Na stronie sprawdzanie wieku (*Sprawdź. cshtml*) Istnieją dwa formy. Pierwszy formularz przesyła `Age` wartość `99` jako parametr ciągu zapytania: `https://localhost:5001/Users/CheckAge?Age=99` .
 
 Po przesłaniu poprawnie sformatowanego `age` parametru z ciągu zapytania, formularz sprawdza poprawność.
 
@@ -357,7 +375,7 @@ Jak wspomniano wcześniej, [pomocników tagów](xref:mvc/views/tag-helpers/intro
 
 Ta metoda renderowania `data-` atrybutów w kodzie HTML jest używana przez `ClassicMovie` atrybut w przykładowej aplikacji. Aby dodać weryfikację klienta przy użyciu tej metody:
 
-1. Utwórz klasę adaptera atrybutów dla niestandardowego atrybutu walidacji. Utwórz klasę z [AttributeAdapterBase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2). Utwórz `AddValidation` metodę, która dodaje `data-` atrybuty do renderowanych danych wyjściowych, jak pokazano w tym przykładzie:
+1. Utwórz klasę adaptera atrybutów dla niestandardowego atrybutu walidacji. Utwórz klasę z <xref:Microsoft.AspNetCore.Mvc.DataAnnotations.AttributeAdapterBase%601> . Utwórz `AddValidation` metodę, która dodaje `data-` atrybuty do renderowanych danych wyjściowych, jak pokazano w tym przykładzie:
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Validation/ClassicMovieAttributeAdapter.cs?name=snippet_Class)]
 
@@ -446,13 +464,13 @@ Pełną listę atrybutów sprawdzania poprawności można znaleźć w przestrzen
 
 ### <a name="error-messages"></a>Komunikaty o błędach
 
-Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Przykład:
+Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Przykład:
+Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -542,9 +560,9 @@ Jeśli potrzebujesz weryfikacji niedostarczonej przez wbudowane atrybuty, możes
 
 W przypadku scenariuszy, w których wbudowane atrybuty walidacji nie obsługują, można utworzyć niestandardowe atrybuty walidacji. Utwórz klasę, która dziedziczy z <xref:System.ComponentModel.DataAnnotations.ValidationAttribute> , i Zastąp <xref:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid*> metodę.
 
-`IsValid`Metoda akceptuje obiekt o nazwie *Value* , czyli dane wejściowe do zweryfikowania. Przeciążenie akceptuje również `ValidationContext` obiekt, który zawiera dodatkowe informacje, takie jak wystąpienie modelu utworzone przez powiązanie modelu.
+`IsValid`Metoda akceptuje obiekt o nazwie *Value*, czyli dane wejściowe do zweryfikowania. Przeciążenie akceptuje również `ValidationContext` obiekt, który zawiera dodatkowe informacje, takie jak wystąpienie modelu utworzone przez powiązanie modelu.
 
-Poniższy przykład sprawdza, czy Data wydania filmu w *klasycznym* gatunku nie jest późniejsza niż określony rok. Ten `[ClassicMovie2]` atrybut najpierw sprawdza gatunek i kontynuuje działanie tylko wtedy, gdy jest on *klasyczny* . W przypadku filmów identyfikowanych jako Classics sprawdza datę wydania, aby upewnić się, że nie jest ona późniejsza niż limit przesłany do konstruktora atrybutu.
+Poniższy przykład sprawdza, czy Data wydania filmu w *klasycznym* gatunku nie jest późniejsza niż określony rok. Ten `[ClassicMovie2]` atrybut najpierw sprawdza gatunek i kontynuuje działanie tylko wtedy, gdy jest on *klasyczny*. W przypadku filmów identyfikowanych jako Classics sprawdza datę wydania, aby upewnić się, że nie jest ona późniejsza niż limit przesłany do konstruktora atrybutu.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttribute.cs?name=snippet_ClassicMovieAttribute)]
 
@@ -573,7 +591,7 @@ Węzły najwyższego poziomu mogą korzystać <xref:Microsoft.AspNetCore.Mvc.Mod
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAge)]
 
-Na stronie sprawdzanie wieku ( *Sprawdź. cshtml* ) Istnieją dwa formy. Pierwszy formularz przesyła `Age` wartość `99` jako ciąg zapytania: `https://localhost:5001/Users/CheckAge?Age=99` .
+Na stronie sprawdzanie wieku (*Sprawdź. cshtml*) Istnieją dwa formy. Pierwszy formularz przesyła `Age` wartość `99` jako ciąg zapytania: `https://localhost:5001/Users/CheckAge?Age=99` .
 
 Po przesłaniu poprawnie sformatowanego `age` parametru z ciągu zapytania, formularz sprawdza poprawność.
 
@@ -728,7 +746,7 @@ Jak wspomniano wcześniej, [pomocników tagów](xref:mvc/views/tag-helpers/intro
 
 Ta metoda renderowania `data-` atrybutów w kodzie HTML jest używana przez `ClassicMovie` atrybut w przykładowej aplikacji. Aby dodać weryfikację klienta przy użyciu tej metody:
 
-1. Utwórz klasę adaptera atrybutów dla niestandardowego atrybutu walidacji. Utwórz klasę z [AttributeAdapterBase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2). Utwórz `AddValidation` metodę, która dodaje `data-` atrybuty do renderowanych danych wyjściowych, jak pokazano w tym przykładzie:
+1. Utwórz klasę adaptera atrybutów dla niestandardowego atrybutu walidacji. Utwórz klasę z <xref:Microsoft.AspNetCore.Mvc.DataAnnotations.AttributeAdapterBase%601> . Utwórz `AddValidation` metodę, która dodaje `data-` atrybuty do renderowanych danych wyjściowych, jak pokazano w tym przykładzie:
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttributeAdapter.cs?name=snippet_ClassicMovieAttributeAdapter)]
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 0753ef0f1cde7bbb45ecc09b97fecb5ce364811c
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: 58a87bc5413523fdf052a9e1c41196bb8b0ab457
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024655"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99529972"
 ---
-# <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
+# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
 Autorzy [Pranav Krishnamoorthy](https://github.com/pranavkm) i [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -191,7 +191,7 @@ Składniki podrzędne mogą być rozprowadzone wyłącznie jako sposób użycia 
 @RenderWelcomeInfo
 
 @code {
-    RenderFragment RenderWelcomeInfo = __builder =>
+    private RenderFragment RenderWelcomeInfo = __builder =>
     {
         <div>
             <p>Welcome to your new app!</p>
@@ -221,12 +221,12 @@ Ta funkcja może teraz zostać wywołana z niepowiązanego składnika. Ta techni
 <div class="chat">
     @foreach (var message in messages)
     {
-        @DisplayChatMessage(message)
+        @ChatMessageDisplay(message)
     }
 </div>
 
 @code {
-    RenderFragment<ChatMessage> DisplayChatMessage = message => __builder =>
+    private RenderFragment<ChatMessage> ChatMessageDisplay = message => __builder =>
     {
         <div class="chat-message">
             <span class="author">@message.Author</span>
@@ -237,6 +237,17 @@ Ta funkcja może teraz zostać wywołana z niepowiązanego składnika. Ta techni
 ```
 
 Takie podejście umożliwia ponowne korzystanie z logiki renderowania bez narzutu na składnik. Nie ma jednak możliwości odświeżenia poddrzewa interfejsu użytkownika niezależnie od tego, czy nie ma możliwości pominięcia renderowania tego poddrzewa interfejsu użytkownika podczas jego nadrzędnego renderowania, ponieważ nie ma granicy składnika.
+
+Dla niestatycznego pola, metody lub właściwości, do których nie można odwoływać się inicjatora pola, na przykład `TitleTemplate` w poniższym przykładzie, użyj właściwości zamiast pola dla <xref:Microsoft.AspNetCore.Components.RenderFragment> :
+
+```csharp
+protected RenderFragment DisplayTitle => __builder =>
+{
+    <div>
+        @TitleTemplate
+    </div>   
+};
+```
 
 #### <a name="dont-receive-too-many-parameters"></a>Nie odbieraj zbyt wielu parametrów
 

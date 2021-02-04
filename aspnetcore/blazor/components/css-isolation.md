@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 92545eab4004f6b67080f79d64b94bb424d5a102
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 0748f606314963788e6733ca2ae2ca2123d839b3
+ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96320086"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99529985"
 ---
-# <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorIzolacja ASP.NET Core CSS
+# <a name="aspnet-core-blazor-css-isolation"></a>BlazorIzolacja ASP.NET Core CSS
 
 Autor [Dave Brock](https://twitter.com/daveabrock)
 
@@ -34,11 +34,19 @@ Izolacja CSS upraszcza rozmiary CSS aplikacji, uniemożliwiając zależności od
 
 ## <a name="enable-css-isolation"></a>Włącz izolację CSS 
 
-Aby zdefiniować Style specyficzne dla składnika, należy utworzyć `.razor.css` plik pasujący do nazwy `.razor` pliku składnika. Ten `.razor.css` plik jest *plikiem CSS z zakresem*. 
+Aby zdefiniować Style specyficzne dla składnika, Utwórz `.razor.css` plik pasujący do nazwy `.razor` pliku dla składnika w tym samym folderze. `.razor.css`Plik to *plik CSS z zakresem*. 
 
-Dla `MyComponent` składnika, który ma `MyComponent.razor` plik, Utwórz plik obok składnika o nazwie `MyComponent.razor.css` . `MyComponent`W `.razor.css` nazwie pliku **nie** jest rozróżniana wielkość liter.
+W przypadku `Example` składnika w `Example.razor` pliku Utwórz plik obok składnika o nazwie `Example.razor.css` . `Example.razor.css`Plik musi znajdować się w tym samym folderze co `Example` składnik ( `Example.razor` ). W `Example` nazwie podstawowej pliku **nie** jest rozróżniana wielkość liter.
 
-Aby na przykład dodać izolację CSS do `Counter` składnika w domyślnym Blazor szablonie projektu, Dodaj nowy plik o nazwie `Counter.razor.css` obok `Counter.razor` pliku, a następnie Dodaj następujący kod CSS:
+`Pages/Example.razor`:
+
+```razor
+@page "/example"
+
+<h1>Scoped CSS Example</h1>
+```
+
+`Pages/Example.razor.css`:
 
 ```css
 h1 { 
@@ -47,10 +55,10 @@ h1 {
 }
 ```
 
-Style zdefiniowane w programie `Counter.razor.css` są stosowane tylko do renderowanych danych wyjściowych `Counter` składnika. Wszystkie `h1` deklaracje CSS zdefiniowane w innym miejscu w aplikacji nie powodują konfliktu ze `Counter` stylami.
+**Style zdefiniowane w programie `Example.razor.css` są stosowane tylko do renderowanych danych wyjściowych `Example` składnika.** Izolacja CSS jest stosowana do elementów HTML w pasującym Razor pliku. Wszystkie `h1` deklaracje CSS zdefiniowane w innym miejscu w aplikacji nie powodują konfliktu ze `Example` stylami składnika.
 
 > [!NOTE]
-> W celu zagwarantowania izolacji stylu podczas tworzenia grupowania `@import` Razor bloki nie są obsługiwane w przypadku plików CSS z zakresem.
+> W celu zagwarantowania izolacji stylu podczas tworzenia grupowania nie jest obsługiwane Importowanie stylów CSS w Razor blokach kodu.
 
 ## <a name="css-isolation-bundling"></a>Tworzenie izolacji CSS
 
@@ -59,7 +67,7 @@ Izolacja CSS występuje w czasie kompilacji. W trakcie tego procesu program Blaz
 Te pliki statyczne są domyślnie przywoływane z ścieżki katalogu głównego aplikacji. W aplikacji odwołuje się do powiązanego pliku, sprawdzając odwołanie wewnątrz `<head>` tagu wygenerowanego kodu HTML:
 
 ```html
-<link href="MyProjectName.styles.css" rel="stylesheet">
+<link href="ProjectName.styles.css" rel="stylesheet">
 ```
 
 W ramach powiązanego pliku każdy składnik jest skojarzony z identyfikatorem zakresu. Dla każdego składnika z stylem atrybut HTML jest dołączany w formacie `b-<10-character-string>` . Identyfikator jest unikatowy i różny dla każdej aplikacji. W wyrenderowanym `Counter` składniku Blazor dołącza identyfikator zakresu do `h1` elementu:
@@ -68,7 +76,7 @@ W ramach powiązanego pliku każdy składnik jest skojarzony z identyfikatorem z
 <h1 b-3xxtam6d07>
 ```
 
-`MyProjectName.styles.css`Plik używa identyfikatora zakresu do grupowania deklaracji stylu ze składnikiem. Poniższy przykład zawiera styl dla poprzedniego `<h1>` elementu:
+`ProjectName.styles.css`Plik używa identyfikatora zakresu do grupowania deklaracji stylu ze składnikiem. Poniższy przykład zawiera styl dla poprzedniego `<h1>` elementu:
 
 ```css
 /* /Pages/Counter.razor.rz.scp.css */
@@ -77,7 +85,7 @@ h1[b-3xxtam6d07] {
 }
 ```
 
-W czasie kompilacji pakiet projektu jest tworzony przy użyciu konwencji `{STATIC WEB ASSETS BASE PATH}/MyProject.lib.scp.css` , gdzie symbol zastępczy `{STATIC WEB ASSETS BASE PATH}` jest ścieżką bazową statycznych elementów zawartości sieci Web.
+W czasie kompilacji pakiet projektu jest tworzony przy użyciu konwencji `{STATIC WEB ASSETS BASE PATH}/Project.lib.scp.css` , gdzie symbol zastępczy `{STATIC WEB ASSETS BASE PATH}` jest ścieżką bazową statycznych elementów zawartości sieci Web.
 
 Jeśli są wykorzystywane inne projekty, takie jak pakiety NuGet lub [ Razor biblioteki klas](xref:blazor/components/class-libraries), plik pakietu:
 
@@ -90,7 +98,7 @@ Domyślnie izolacja CSS dotyczy tylko składnika, który został skojarzony z fo
 
 Poniższy przykład pokazuje składnik nadrzędny o nazwie `Parent` ze składnikiem podrzędnym o nazwie `Child` .
 
-`Parent.razor`:
+`Pages/Parent.razor`:
 
 ```razor
 @page "/parent"
@@ -102,13 +110,15 @@ Poniższy przykład pokazuje składnik nadrzędny o nazwie `Parent` ze składnik
 </div>
 ```
 
-`Child.razor`:
+`Shared/Child.razor`:
 
 ```razor
 <h1>Child Component</h1>
 ```
 
-Zaktualizuj `h1` deklarację w `Parent.razor.css` Combinator, `::deep` Aby wyrównać, że `h1` Deklaracja stylu musi być stosowana do składnika nadrzędnego i jego elementów podrzędnych:
+Zaktualizuj `h1` deklarację w `Parent.razor.css` Combinator, `::deep` Aby wyrównać, że `h1` Deklaracja stylu musi być stosowana do składnika nadrzędnego i jego elementów podrzędnych.
+
+`Pages/Parent.razor.css`:
 
 ```css
 ::deep h1 { 
@@ -118,26 +128,27 @@ Zaktualizuj `h1` deklarację w `Parent.razor.css` Combinator, `::deep` Aby wyró
 
 `h1`Styl ma teraz zastosowanie do `Parent` składników i `Child` bez konieczności tworzenia ODDZIELNEgo pliku CSS z zakresem dla składnika podrzędnego.
 
-> [!NOTE]
-> `::deep`Combinator działa tylko z elementami podrzędnymi. Następująca struktura HTML stosuje `h1` Style do składników zgodnie z oczekiwaniami:
-> 
-> ```razor
-> <div>
->     <h1>Parent</h1>
->
->     <Child />
-> </div>
-> ```
->
-> W tym scenariuszu ASP.NET Core stosuje identyfikator zakresu składnika nadrzędnego do `div` elementu, dzięki czemu przeglądarka wie o dziedziczeniu stylów ze składnika nadrzędnego.
->
-> Jednak wykluczenie `div` elementu powoduje usunięcie relacji elementu podrzędnego, a styl **nie** zostanie zastosowany do składnika podrzędnego:
->
-> ```razor
-> <h1>Parent</h1>
->
-> <Child />
-> ```
+`::deep`Combinator działa tylko z elementami podrzędnymi. Poniższe znaczniki stosują `h1` Style do składników zgodnie z oczekiwaniami. Identyfikator zakresu składnika nadrzędnego jest stosowany do `div` elementu, dzięki czemu przeglądarka wie o dziedziczeniu stylów ze składnika nadrzędnego.
+
+`Pages/Parent.razor`:
+
+```razor
+<div>
+    <h1>Parent</h1>
+
+    <Child />
+</div>
+```
+
+Jednak wykluczenie `div` elementu powoduje usunięcie relacji elementu podrzędnego. W poniższym przykładzie styl **nie** jest stosowany do składnika podrzędnego.
+
+`Pages/Parent.razor`:
+
+```razor
+<h1>Parent</h1>
+
+<Child />
+```
 
 ## <a name="css-preprocessor-support"></a>Obsługa preprocesora CSS
 
@@ -155,11 +166,28 @@ Domyślnie identyfikatory zakresów używają formatu `b-<10-character-string>` 
 
 ```xml
 <ItemGroup>
-    <None Update="MyComponent.razor.css" CssScope="my-custom-scope-identifier" />
+  <None Update="Pages/Example.razor.css" CssScope="my-custom-scope-identifier" />
 </ItemGroup>
 ```
 
-W poprzednim przykładzie, CSS Wygenerowano dla `MyComponent.Razor.css` zmiany jego identyfikatora zakresu z `b-<10-character-string>` do `my-custom-scope-identifier` .
+W poprzednim przykładzie, CSS Wygenerowano dla `Example.Razor.css` zmiany jego identyfikatora zakresu z `b-<10-character-string>` do `my-custom-scope-identifier` .
+
+Identyfikatory zakresów umożliwiają uzyskanie dziedziczenia z plikami CSS z zakresem. W poniższym przykładzie pliku projektu `BaseComponent.razor.css` plik zawiera typowe style między składnikami. `DerivedComponent.razor.css`Plik dziedziczy te style.
+
+```xml
+<ItemGroup>
+  <None Update="Pages/BaseComponent.razor.css" CssScope="my-custom-scope-identifier" />
+  <None Update="Pages/DerivedComponent.razor.css" CssScope="my-custom-scope-identifier" />
+</ItemGroup>
+```
+
+Użyj operatora wieloznacznego ( `*` ), aby udostępnić identyfikatory zakresów dla wielu plików:
+
+```xml
+<ItemGroup>
+  <None Update="Pages/*.razor.css" CssScope="my-custom-scope-identifier" />
+</ItemGroup>
+```
 
 ### <a name="change-base-path-for-static-web-assets"></a>Zmień ścieżkę podstawową dla statycznych zasobów sieci Web
 
@@ -181,7 +209,7 @@ Aby zrezygnować z Blazor publikowania i ładowania plików objętych zakresem w
 </PropertyGroup>
 ```
 
-## <a name="no-locrazor-class-library-rcl-support"></a>Razor Obsługa biblioteki klas (RCL)
+## <a name="razor-class-library-rcl-support"></a>Razor Obsługa biblioteki klas (RCL)
 
 Gdy [ Razor Biblioteka klas (RCL)](xref:razor-pages/ui-class) zapewnia odizolowane style, `<link>` atrybut znacznika `href` wskazuje `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` , gdzie symbole zastępcze są:
 
@@ -192,6 +220,8 @@ W poniższym przykładzie:
 
 * Ścieżka podstawowa statycznego elementu zawartości sieci Web to `_content/ClassLib` .
 * Nazwa zestawu biblioteki klas to `ClassLib` .
+
+`wwwroot/index.html` ( Blazor WebAssembly ) lub `Pages_Host.cshtml` (Blazor Server):
 
 ```html
 <link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">

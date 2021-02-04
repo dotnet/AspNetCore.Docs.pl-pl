@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 62c9d1a58e0f771d91e2bc57f39ec5ebb25baaed
+ms.sourcegitcommit: 37186f76e4a50d7fb7389026dd0e5e234b51ebb2
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035869"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99541371"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -36,7 +36,7 @@ Konfiguracja w ASP.NET Core jest wykonywana przy użyciu co najmniej jednego [do
 
 * Pliki ustawień, takie jak *appsettings.json*
 * Zmienne środowiskowe
-* W usłudze Azure Key Vault
+* Azure Key Vault
 * Azure App Configuration
 * Argumenty wiersza polecenia
 * Niestandardowi dostawcy, instalowani lub utworzony
@@ -98,7 +98,7 @@ Domyślna <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvide
 
 [!INCLUDE[](~/includes/bind.md)]
 
-Przy użyciu konfiguracji [domyślnej](#default) , *appsettings.json* a *appSettings.* `Environment` pliki *. JSON* są włączone z [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Zmiany wprowadzone w *appsettings.json* i *appSettings.* `Environment` plik *. JSON* ***po** _ uruchomienia aplikacji jest odczytywany przez [dostawcę konfiguracji JSON](#jcp).
+Przy użyciu konfiguracji [domyślnej](#default) , *appsettings.json* a *appSettings.* `Environment` pliki *. JSON* są włączone z [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Zmiany wprowadzone w *appsettings.json* i *appSettings.* `Environment` plik *. JSON* ***po*** uruchomieniu aplikacji jest odczytywany przez [dostawcę konfiguracji JSON](#jcp).
 
 Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON, zobacz [dostawca konfiguracji JSON](#jcp) w tym dokumencie.
 
@@ -112,7 +112,7 @@ Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON
 
 Wskazówki dotyczące danych konfiguracyjnych:
 
-Nigdy nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu. Za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets) można przechowywać wpisy tajne.
+* Nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu. Za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets) można przechowywać wpisy tajne.
 * Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.
 * Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.
 
@@ -347,7 +347,7 @@ W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET
 
 | Dostawca | Zapewnia konfigurację z |
 | -------- | ----------------------------------- |
-| [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) | W usłudze Azure Key Vault |
+| [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) | Azure Key Vault |
 | [Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure App Configuration |
 | [Dostawca konfiguracji wiersza polecenia](#clcp) | Parametry wiersza polecenia |
 | [Niestandardowy dostawca konfiguracji](#custom-configuration-provider) | Źródło niestandardowe |
@@ -449,13 +449,13 @@ Powyższy kod ma następujące działanie:
   * `reloadOnChange: true` : Plik zostanie ponownie załadowany podczas zapisywania zmian.
 * Odczytuje [domyślnych dostawców konfiguracji](#default) przed *MyConfig.jsna* pliku. Ustawienia w *MyConfig.js* ustawienia przesłania pliku w domyślnych dostawcach konfiguracji, w tym [dostawca konfiguracji zmiennych środowiskowych](#evcp) i [dostawca konfiguracji wiersza polecenia](#clcp).
 
-Zazwyczaj ***nie** należy przeznaczać wartości niestandardowych plików JSON, które są zastępowane przez [dostawcę konfiguracji zmiennych środowiskowych](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).
+Zwykle ***nie*** chcesz, aby niestandardowy plik JSON zastępujący wartości ustawione w [zmiennej środowiskowej dostawcy konfiguracji](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).
 
 Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-W powyższym kodzie ustawienia w _MyConfig.jsna * i dla  *konfiguracji*. `Environment` .. pliki *JSON* :
+W powyższym kodzie ustawienia w *MyConfig.jsna* i  *konfiguracji*. `Environment` .. pliki *JSON* :
 
 * Zastąp ustawienia w *appsettings.json* i *AppSettings*. `Environment` .. pliki *JSON* .
 * Są zastępowane przez ustawienia [dostawcy konfiguracji zmiennych środowiskowych](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).
@@ -727,7 +727,7 @@ Poniższy kod przedstawia dane konfiguracji w `Startup` metodach:
 
 Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-no-locrazor-pages"></a>Konfiguracja dostępu na Razor stronach
+## <a name="access-configuration-in-razor-pages"></a>Konfiguracja dostępu na Razor stronach
 
 Poniższy kod przedstawia dane konfiguracji na Razor stronie:
 
@@ -805,7 +805,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Kod źródłowy konfiguracji](https://github.com/dotnet/extensions/tree/master/src/Configuration)
+* [Kod źródłowy konfiguracji](https://github.com/dotnet/runtime/tree/master/src/libraries/Microsoft.Extensions.Configuration)
 * <xref:fundamentals/configuration/options>
 * <xref:blazor/fundamentals/configuration>
 
@@ -815,7 +815,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 Konfiguracja aplikacji w ASP.NET Core jest oparta na parach klucz-wartość określonych przez *dostawców konfiguracji*. Dostawcy konfiguracji odczytują dane konfiguracji do par klucz-wartość z różnych źródeł konfiguracji:
 
-* W usłudze Azure Key Vault
+* Azure Key Vault
 * Azure App Configuration
 * Argumenty wiersza polecenia
 * Dostawcy niestandardowi (instalowani lub utworzony)
@@ -975,7 +975,7 @@ W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET
 
 | Dostawca | Zapewnia konfigurację z&hellip; |
 | -------- | ----------------------------------- |
-| [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) (tematy dotyczące *zabezpieczeń* ) | W usłudze Azure Key Vault |
+| [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) (tematy dotyczące *zabezpieczeń* ) | Azure Key Vault |
 | [Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app) (dokumentacja platformy Azure) | Azure App Configuration |
 | [Dostawca konfiguracji wiersza polecenia](#command-line-configuration-provider) | Parametry wiersza polecenia |
 | [Niestandardowy dostawca konfiguracji](#custom-configuration-provider) | Źródło niestandardowe |
@@ -1839,7 +1839,7 @@ public class Startup
 
 Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Konfiguracja dostępu na Razor stronie stron lub widoku MVC
+## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Konfiguracja dostępu na Razor stronie stron lub widoku MVC
 
 Aby uzyskać dostęp do ustawień konfiguracji na Razor stronie stron lub widoku MVC, Dodaj [dyrektywę using](xref:mvc/views/razor#using) ([odwołanie w C#: Using](/dotnet/csharp/language-reference/keywords/using-directive)) dla [ przestrzeni nazwMicrosoft.Extensions.Configwersja](xref:Microsoft.Extensions.Configuration) i wstrzyknąć <xref:Microsoft.Extensions.Configuration.IConfiguration> do strony lub widoku.
 

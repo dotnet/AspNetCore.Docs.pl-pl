@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 51f76bc33d2da6097d26c1ffe17b1c93046a7b88
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 03debcb211a8cb8f0ebd6d5e67fbc8de7b574e27
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052464"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99551661"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
 
@@ -164,7 +164,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Wymagania dotyczące routingu atrybutów
 
-`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Przykład:
+`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Na przykład:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -379,7 +379,7 @@ Rozważmy następujący kod w akcji kontrolera:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Przykład:
+`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Na przykład:
 
 ```json
 {
@@ -440,3 +440,4 @@ Ten `[Consumes]` atrybut jest stosowany do obu akcji. `PostJson`Akcja obsługuje
 * <xref:web-api/advanced/formatting>
 * <xref:tutorials/web-api-help-pages-using-swagger>
 * <xref:mvc/controllers/routing>
+* [Microsoft Learn: Tworzenie interfejsu API sieci Web za pomocą ASP.NET Core](/learn/modules/build-web-api-aspnet-core/)

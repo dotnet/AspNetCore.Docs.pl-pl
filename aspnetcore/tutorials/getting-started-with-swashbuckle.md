@@ -18,16 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 68601333cbd49a1d667337021de246a73f536600
-ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
+ms.openlocfilehash: df9c78770f3494b1ae9e0d3604926d77cb1e67bb
+ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/04/2021
-ms.locfileid: "99551643"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99578324"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
-
-Autorzy [Shayne Boyer](https://twitter.com/spboyer) i [Scott Addie](https://twitter.com/Scott_Addie)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 

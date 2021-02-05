@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a6f1c88b8e93c0d8ccfebca482895ebab8d18a81
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c60191cc8822dd875db613fb70516beb08a659d8
+ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506919"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99578285"
 ---
-# <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
+# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
 Autor [Daniel Roth](https://github.com/danroth27)
 
@@ -38,7 +38,7 @@ Podstawowy Blazor model hostingu działa po stronie klienta w przeglądarce w ze
 
 ![::: No-Loc (Blazor webassembly):::: w wątku interfejsu użytkownika w przeglądarce zostanie uruchomiona aplikacja No-Loc (Blazor)::: App.](hosting-models/_static/blazor-webassembly.png)
 
-Gdy Blazor WebAssembly aplikacja zostanie utworzona do wdrożenia bez zaplecza ASP.NET Core aplikacji do obsłużynia swoich plików, aplikacja jest nazywana aplikacją *autonomiczną* Blazor WebAssembly . Gdy aplikacja zostanie utworzona na potrzeby wdrożenia z aplikacją zaplecza do obsługi swoich plików, aplikacja jest nazywana *hostowaną* Blazor WebAssembly aplikacją. Aplikacja hostowana Blazor WebAssembly zwykle współdziała z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor-webassembly> ).
+Gdy Blazor WebAssembly aplikacja zostanie utworzona do wdrożenia bez zaplecza ASP.NET Core aplikacji do obsłużynia swoich plików, aplikacja jest nazywana aplikacją *autonomiczną* Blazor WebAssembly . Gdy aplikacja zostanie utworzona na potrzeby wdrożenia z aplikacją zaplecza do obsługi swoich plików, aplikacja jest nazywana *hostowaną* Blazor WebAssembly aplikacją. Aplikacja hostowana Blazor WebAssembly zwykle współdziała z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor> ).
 
 `blazor.webassembly.js`Skrypt jest dostarczany przez strukturę i dojścia:
 
@@ -161,4 +161,4 @@ W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy u
 * <xref:blazor/tooling>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
-* <xref:tutorials/signalr-blazor-webassembly>
+* <xref:tutorials/signalr-blazor>

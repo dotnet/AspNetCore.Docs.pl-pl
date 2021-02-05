@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/call-javascript-from-dotnet
 ms.openlocfilehash: ca42b611a61fc394655e396f914e8e050c578e6a
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/03/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "99530089"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor

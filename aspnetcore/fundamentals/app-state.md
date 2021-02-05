@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/app-state
 ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.sourcegitcommit: c1839f2992b003c92cd958244a2e0771ae928786
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "93051411"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Zarządzanie sesjami i stanami na platformie ASP.NET Core
@@ -49,7 +49,7 @@ Stan może być przechowywany przy użyciu kilku metod. Każde podejście zosta�
 | [HttpContext. Items](#httpcontextitems) | Kod aplikacji po stronie serwera |
 | [Cache](#cache) | Kod aplikacji po stronie serwera |
 
-## <a name="no-loccookies"></a>Cookiewolumin
+## <a name="cookies"></a>Cookiewolumin
 
 Cookies Przechowuj dane między żądaniami. Ze względu na cookie to, że s są wysyłane przy każdym żądaniu, ich rozmiar powinien być minimalny. W idealnym przypadku tylko identyfikator powinien być przechowywany w elemencie cookie z danymi przechowywanymi w aplikacji. Większość przeglądarek ogranicza cookie rozmiar do 4096 bajtów. cookieDla każdej domeny są dostępne tylko ograniczoną liczbę s.
 
@@ -288,7 +288,7 @@ Oprogramowanie pośredniczące sesji może nie być w stanie przerwać sesji, je
 
 Zalecane podejście do sprawdzenia pod kątem błędów jest wywoływane `await feature.Session.CommitAsync` , gdy aplikacja jest gotowa do zapisu w sesji. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> zgłasza wyjątek, jeśli magazyn zapasowy jest niedostępny. Jeśli `CommitAsync` to się nie powiedzie, aplikacja może przetworzyć wyjątek. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*> zgłasza w tych samych warunkach, gdy magazyn danych jest niedostępny.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalR i stan sesji
+## <a name="signalr-and-session-state"></a>SignalR i stan sesji
 
 SignalR aplikacje nie powinny używać stanu sesji do przechowywania informacji. SignalR aplikacje mogą przechowywać stan dla połączenia w `Context.Items` centrum. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
@@ -320,7 +320,7 @@ Stan może być przechowywany przy użyciu kilku metod. Każde podejście zosta�
 | [Cache](#cache) | Kod aplikacji po stronie serwera |
 | [Wstrzykiwanie zależności](#dependency-injection) | Kod aplikacji po stronie serwera |
 
-## <a name="no-loccookies"></a>Cookiewolumin
+## <a name="cookies"></a>Cookiewolumin
 
 Cookies Przechowuj dane między żądaniami. Ze względu na cookie to, że s są wysyłane przy każdym żądaniu, ich rozmiar powinien być minimalny. W idealnym przypadku tylko identyfikator powinien być przechowywany w elemencie cookie z danymi przechowywanymi w aplikacji. Większość przeglądarek ogranicza cookie rozmiar do 4096 bajtów. cookieDla każdej domeny są dostępne tylko ograniczoną liczbę s.
 
@@ -599,7 +599,7 @@ Użyj [iniekcji zależności](xref:fundamentals/dependency-injection) , aby udos
 
   Zalecanym podejściem do sprawdzenia pod kątem błędów jest wywoływanie `await feature.Session.CommitAsync();` kodu aplikacji, gdy aplikacja zakończy zapisywanie w sesji. `CommitAsync` zgłasza wyjątek, jeśli magazyn zapasowy jest niedostępny. Jeśli `CommitAsync` to się nie powiedzie, aplikacja może przetworzyć wyjątek. `LoadAsync` zgłasza w tych samych warunkach, w których magazyn danych jest niedostępny.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalR i stan sesji
+## <a name="signalr-and-session-state"></a>SignalR i stan sesji
 
 SignalR aplikacje nie powinny używać stanu sesji do przechowywania informacji. SignalR aplikacje mogą przechowywać stan dla połączenia w `Context.Items` centrum. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 

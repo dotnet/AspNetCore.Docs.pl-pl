@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 3591ba18351b89e2d5dfaef796777273c97ce98b
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: f19d25006009723a8e69f24af92155f65c2195fe
+ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751621"
+ms.lasthandoff: 02/07/2021
+ms.locfileid: "99804464"
 ---
-# <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
@@ -70,7 +70,9 @@ Deweloperzy mogą wykonywać wywołania [`StateHasChanged`](#state-changes) w wy
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> Ustawia parametry dostarczone przez element nadrzędny składnika w drzewie renderowania lub z parametrów trasy. Zastępując metodę, kod dewelopera może współdziałać bezpośrednio z <xref:Microsoft.AspNetCore.Components.ParameterView> parametrami.
 
-W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> przypisuje `Param` wartość parametru do, `value` Jeśli analizowanie parametru trasy dla programu `Param` zakończyło się pomyślnie. Gdy `value` nie jest `null` , wartość jest wyświetlana przez `SetParametersAsyncExample` składnik.
+W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A?displayProperty=nameWithType> przypisuje `Param` wartość parametru do, `value` Jeśli analizowanie parametru trasy dla programu `Param` zakończyło się pomyślnie. Gdy `value` nie jest `null` , wartość jest wyświetlana przez składnik.
+
+Chociaż [dopasowanie parametrów trasy nie uwzględnia wielkości liter](xref:blazor/fundamentals/routing#route-parameters), <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A> w szablonie trasy są uwzględniane tylko nazwy parametrów z uwzględnieniem wielkości liter. Poniższy przykład jest wymagany do korzystania z `/{Param?}` nie, aby `/{param?}` można było pobrać wartość. Jeśli `/{param?}` jest używana w tym scenariuszu, <xref:Microsoft.AspNetCore.Components.ParameterView.TryGetValue%2A> zwraca `false` i `message` nie jest ustawiona na ciąg.
 
 `Pages/SetParametersAsyncExample.razor`:
 
@@ -91,11 +93,14 @@ W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.ParameterView.Tr
     {
         if (parameters.TryGetValue<string>(nameof(Param), out var value))
         {
-            message = $"The value of 'Param' is {value}.";
-        }
-        else 
-        {
-            message = "The value of 'Param' is null.";
+            if (value is null)
+            {
+                message = "The value of 'Param' is null.";
+            }
+            else
+            {
+                message = $"The value of 'Param' is {value}.";
+            }
         }
 
         await base.SetParametersAsync(parameters);
@@ -432,6 +437,6 @@ W poniższym przykładzie:
 }
 ```
 
-## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server zdarzenia ponownego połączenia
+## <a name="blazor-server-reconnection-events"></a>Blazor Server zdarzenia ponownego połączenia
 
 Zdarzenia cyklu życia składnika omówione w tym artykule działają niezależnie od [ Blazor Server programów obsługi zdarzeń ponownego połączenia](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui). Gdy Blazor Server aplikacja utraci SignalR połączenie z klientem, wszystkie aktualizacje interfejsu użytkownika są przerywane. Aktualizacje interfejsu użytkownika są wznawiane po ponownym nawiązaniu połączenia. Aby uzyskać więcej informacji na temat zdarzeń i konfiguracji obsługi obwodów, zobacz <xref:blazor/fundamentals/additional-scenarios> .

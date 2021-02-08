@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 74886eae7431045e56de535b5221040bd56cdc2d
-ms.sourcegitcommit: 610936e4d3507f7f3d467ed7859ab9354ec158ba
+ms.openlocfilehash: c53263ea48bc2900fd811f6e159aca97cdff26f7
+ms.sourcegitcommit: 50d3e939a90c5480df480f651dda032901468dd5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98751571"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99819032"
 ---
-# <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
+# <a name="aspnet-core-blazor-routing"></a>BlazorRouting ASP.NET Core
 
 Autor [Luke Latham](https://github.com/guardrex)
 

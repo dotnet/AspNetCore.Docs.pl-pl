@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: ad4184fce494ba06acf7e583a42a54d04d37ea20
-ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
+ms.openlocfilehash: 266781d0abc564952e124bc6eca3805c07592251
+ms.sourcegitcommit: 50d3e939a90c5480df480f651dda032901468dd5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96556648"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99819058"
 ---
-# <a name="introduction-to-no-locidentity-on-aspnet-core"></a>Wprowadzenie do Identity ASP.NET Core
+# <a name="introduction-to-identity-on-aspnet-core"></a>Wprowadzenie do Identity ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -39,7 +39,7 @@ Użytkownicy mogą utworzyć konto z informacjami logowania przechowywanymi w Id
 
 [!INCLUDE[](~/includes/requireAuth.md)]
 
-[ Identity Kod źródłowy](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) jest dostępny w serwisie GitHub. [Szkielet Identity ](xref:security/authentication/scaffold-identity) i Wyświetl wygenerowane pliki w celu przejrzenia interakcji z szablonem Identity .
+[ Identity Kod źródłowy](https://github.com/dotnet/AspNetCore/tree/main/src/Identity) jest dostępny w serwisie GitHub. [Szkielet Identity ](xref:security/authentication/scaffold-identity) i Wyświetl wygenerowane pliki w celu przejrzenia interakcji z szablonem Identity .
 
 Identity jest zazwyczaj konfigurowany przy użyciu bazy danych SQL Server do przechowywania nazw użytkowników, haseł i danych profilu. Alternatywnie można użyć innego magazynu trwałego, na przykład Azure Table Storage.
 
@@ -60,14 +60,14 @@ W tym temacie dowiesz się, jak używać Identity do rejestrowania, logowania i 
 
 Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych kont użytkowników.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Wybierz kolejno pozycje **Plik** > **Nowy** > **Projekt**.
 * Wybierz **ASP.NET Core aplikacji sieci Web**. Nazwij projekt **WebApp1** tak, aby miał tę samą przestrzeń nazw co pobieranie projektu. Kliknij przycisk **OK**.
 * Wybierz **aplikację sieci Web** ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -91,13 +91,13 @@ Wygenerowany projekt jest udostępniany [ASP.NET Core Identity](xref:security/au
 
 Zastosuj migracje, aby zainicjować bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 
 `PM> Update-Database`
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W przypadku korzystania z oprogramowania SQLite migracja nie jest konieczna.
 
@@ -119,7 +119,7 @@ Uruchom aplikację i zarejestruj użytkownika. W zależności od rozmiaru ekranu
 
 <a name="pw"></a>
 
-### <a name="configure-no-locidentity-services"></a>Konfigurowanie Identity usług
+### <a name="configure-identity-services"></a>Konfigurowanie Identity usług
 
 Usługi są dodawane do programu `ConfigureServices` . Typowym wzorcem jest wywoływanie wszystkich `Add{Service}` metod, a następnie wywoływanie wszystkich `services.Configure{Service}` metod.
 
@@ -157,11 +157,11 @@ Aby uzyskać więcej informacji na temat programów `IdentityOptions` i `Startup
 
 ## <a name="scaffold-register-login-logout-and-registerconfirmation"></a>Rejestrowanie szkieletów, logowanie, wylogowywanie i RegisterConfirmation
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dodaj `Register` pliki, `Login` , `LogOut` i `RegisterConfirmation` . Postępuj zgodnie z informacjami o [tożsamości szkieletowej w Razor projekcie z instrukcjami autoryzacji](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) w celu wygenerowania kodu pokazanego w tej sekcji.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 
@@ -214,7 +214,7 @@ Wpis jest określony na *stronie/Shared/_LoginPartial. cshtml*:
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
-## <a name="test-no-locidentity"></a>Badan Identity
+## <a name="test-identity"></a>Badan Identity
 
 Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron głównych. Aby przetestować Identity , Dodaj [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) :
 
@@ -222,20 +222,20 @@ Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron g
 
 Jeśli użytkownik jest zalogowany, Wyloguj się. Uruchom aplikację i wybierz łącze **prywatność** . Nastąpi przekierowanie do strony logowania.
 
-### <a name="explore-no-locidentity"></a>Przeglądać Identity
+### <a name="explore-identity"></a>Przeglądać Identity
 
 Aby poznać Identity więcej szczegółów:
 
 * [Utwórz źródło interfejsu użytkownika pełnej tożsamości](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Przejrzyj Źródło poszczególnych stron i przechodzenie przez debuger.
 
-## <a name="no-locidentity-components"></a>Identity Komponentów
+## <a name="identity-components"></a>Identity Komponentów
 
 Wszystkie Identity zależne pakiety NuGet są zawarte w [ASP.NET Core udostępnionej platformie](xref:aspnetcore-3.0#use-the-aspnet-core-shared-framework).
 
 Podstawowym pakietem Identity programu jest [Microsoft. AspNetCore. Identity ](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Ten pakiet zawiera podstawowy zestaw interfejsów dla programu ASP.NET Core Identity i jest dołączany przez program `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
 
-## <a name="migrating-to-no-locaspnet-core-identity"></a>Migrowanie do programu ASP.NET Core Identity
+## <a name="migrating-to-aspnet-core-identity"></a>Migrowanie do programu ASP.NET Core Identity
 
 Aby uzyskać więcej informacji i wskazówek dotyczących migrowania istniejącego Identity magazynu, zobacz [Migrowanie Identity uwierzytelniania i ](xref:migration/identity).
 
@@ -243,7 +243,7 @@ Aby uzyskać więcej informacji i wskazówek dotyczących migrowania istniejące
 
 Zobacz [Konfiguracja](#pw) dla przykładu, który ustawia minimalne wymagania dotyczące hasła.
 
-## <a name="adddefaultno-locidentity-and-addno-locidentity"></a>ADDDEFAULT Identity i AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>ADDDEFAULT Identity i AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> wprowadzono w ASP.NET Core 2,1. Wywołanie `AddDefaultIdentity` jest podobne do wywołania następujących:
 
@@ -253,7 +253,7 @@ Zobacz [Konfiguracja](#pw) dla przykładu, który ustawia minimalne wymagania do
 
 Aby uzyskać więcej informacji, zobacz [ADDDEFAULT Identity Source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
-## <a name="prevent-publish-of-static-no-locidentity-assets"></a>Zapobiegaj publikowaniu Identity zasobów statycznych
+## <a name="prevent-publish-of-static-identity-assets"></a>Zapobiegaj publikowaniu Identity zasobów statycznych
 
 Aby uniemożliwić publikowanie statycznych Identity zasobów (arkuszy stylów i plików JavaScript dla Identity interfejsu użytkownika) w katalogu głównym sieci Web, Dodaj następującą `ResolveStaticWebAssetsInputsDependsOn` Właściwość i `RemoveIdentityAssets` obiekt docelowy do pliku projektu aplikacji:
 
@@ -300,7 +300,7 @@ W tym temacie dowiesz się, jak używać Identity do rejestrowania, logowania i 
 
 <a name="adi"></a>
 
-## <a name="adddefaultno-locidentity-and-addno-locidentity"></a>ADDDEFAULT Identity i AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>ADDDEFAULT Identity i AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> wprowadzono w ASP.NET Core 2,1. Wywołanie `AddDefaultIdentity` jest podobne do wywołania następujących:
 
@@ -314,14 +314,14 @@ Aby uzyskać więcej informacji, zobacz [ADDDEFAULT Identity Source](https://git
 
 Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych kont użytkowników.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Wybierz kolejno pozycje **Plik** > **Nowy** > **Projekt**.
 * Wybierz **ASP.NET Core aplikacji sieci Web**. Nazwij projekt **WebApp1** tak, aby miał tę samą przestrzeń nazw co pobieranie projektu. Kliknij przycisk **OK**.
 * Wybierz **aplikację sieci Web** ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -339,7 +339,7 @@ Wygenerowany projekt jest udostępniany [ASP.NET Core Identity](xref:security/au
 
 Zastosuj migracje, aby zainicjować bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 
@@ -347,7 +347,7 @@ Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef database update
@@ -363,7 +363,7 @@ Uruchom aplikację i zarejestruj użytkownika. W zależności od rozmiaru ekranu
 
 <a name="pw"></a>
 
-### <a name="configure-no-locidentity-services"></a>Konfigurowanie Identity usług
+### <a name="configure-identity-services"></a>Konfigurowanie Identity usług
 
 Usługi są dodawane do programu `ConfigureServices` . Typowym wzorcem jest wywoływanie wszystkich `Add{Service}` metod, a następnie wywoływanie wszystkich `services.Configure{Service}` metod.
 
@@ -379,11 +379,11 @@ Aby uzyskać więcej informacji, zobacz [ Identity klasy opcji](/dotnet/api/micr
 
 Postępuj zgodnie z informacjami o [tożsamości szkieletowej w Razor projekcie z instrukcjami autoryzacji](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) w celu wygenerowania kodu pokazanego w tej sekcji.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dodaj pliki rejestru, logowania i wylogowywania.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 
@@ -431,7 +431,7 @@ Wpis jest określony na *stronie/Shared/_LoginPartial. cshtml*:
 
 [!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-no-locidentity"></a>Badan Identity
+## <a name="test-identity"></a>Badan Identity
 
 Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron głównych. Aby przetestować Identity , Dodaj [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) stronę prywatność.
 
@@ -439,20 +439,20 @@ Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron g
 
 Jeśli użytkownik jest zalogowany, Wyloguj się. Uruchom aplikację i wybierz łącze **prywatność** . Nastąpi przekierowanie do strony logowania.
 
-### <a name="explore-no-locidentity"></a>Przeglądać Identity
+### <a name="explore-identity"></a>Przeglądać Identity
 
 Aby poznać Identity więcej szczegółów:
 
 * [Utwórz źródło interfejsu użytkownika pełnej tożsamości](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Przejrzyj Źródło poszczególnych stron i przechodzenie przez debuger.
 
-## <a name="no-locidentity-components"></a>Identity Komponentów
+## <a name="identity-components"></a>Identity Komponentów
 
 Wszystkie Identity zależne pakiety NuGet są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
 
 Podstawowym pakietem Identity programu jest [Microsoft. AspNetCore. Identity ](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Ten pakiet zawiera podstawowy zestaw interfejsów dla programu ASP.NET Core Identity i jest dołączany przez program `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
 
-## <a name="migrating-to-no-locaspnet-core-identity"></a>Migrowanie do programu ASP.NET Core Identity
+## <a name="migrating-to-aspnet-core-identity"></a>Migrowanie do programu ASP.NET Core Identity
 
 Aby uzyskać więcej informacji i wskazówek dotyczących migrowania istniejącego Identity magazynu, zobacz [Migrowanie Identity uwierzytelniania i ](xref:migration/identity).
 

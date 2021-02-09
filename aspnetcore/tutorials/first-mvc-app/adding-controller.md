@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 1f8291cca1923d42eeb1ce689b268a23b60537ba
-ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
+ms.openlocfilehash: 47bb9b96bd5565a3a67f3cbdf9a4b6bc1f987447
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/07/2021
-ms.locfileid: "99804668"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975264"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -49,7 +49,7 @@ W aplikacji MVC widok wyświetla tylko informacje. Kontroler obsługuje i reaguj
 
 Dane trasy są wyjaśnione w dalszej części samouczka.
 
-wzorzec architektury MVC oddziela aplikację do trzech głównych grup składników: modeli, widoków i kontrolerów. Ten wzorzec pozwala uzyskać rozdzielenie obaw: Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę w jednym aspekcie implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
+Wzorzec architektury MVC oddziela aplikację do trzech głównych grup składników: modeli, widoków i kontrolerów. Ten wzorzec pozwala uzyskać rozdzielenie obaw: Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę w jednym aspekcie implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
 
 Te koncepcje są wprowadzane i przedstawiane w tej serii samouczków podczas kompilowania aplikacji filmowej. Projekt MVC zawiera foldery dla *kontrolerów* i *widoków*.
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 28fe6a114f767246f49ac275d02c28f4572ce4e4
-ms.sourcegitcommit: 19a004ff2be73876a9ef0f1ac44d0331849ad159
+ms.openlocfilehash: 64eb69ba597b1e48489733275ac3bed96c6c3241
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/07/2021
-ms.locfileid: "99804516"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975238"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
@@ -545,7 +545,7 @@ function jsInteropCall() {
 
 ### <a name="intermediate-language-il-trimming"></a>Przycinanie języka pośredniego (IL)
 
-[Przycinanie nieużywanych zestawów z Blazor WebAssembly aplikacji](xref:blazor/host-and-deploy/configure-trimmer) zmniejsza rozmiar aplikacji przez usunięcie nieużywanego kodu w danych binarnych aplikacji. Domyślnie element dostosowujący jest wykonywany podczas publikowania aplikacji. Aby skorzystać z przycinania, Opublikuj aplikację do wdrożenia przy użyciu [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia z opcją [-c |--Configuration](/dotnet/core/tools/dotnet-publish#options) ustawioną na `Release` :
+Przycinanie nieużywanych zestawów z Blazor WebAssembly aplikacji zmniejsza rozmiar aplikacji przez usunięcie nieużywanego kodu w danych binarnych aplikacji. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-trimmer>.
 
 ::: moniker-end
 
@@ -555,11 +555,11 @@ function jsInteropCall() {
 
 [Łączenie Blazor WebAssembly aplikacji](xref:blazor/host-and-deploy/configure-linker) zmniejsza rozmiar aplikacji przez przycinanie nieużywanego kodu w plikach binarnych aplikacji. Domyślnie konsolidator języka pośredniego (IL) jest włączony tylko w przypadku kompilowania w `Release` konfiguracji. Aby z tego skorzystać, Opublikuj aplikację do wdrożenia przy użyciu [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia z opcją [-c |--Configuration](/dotnet/core/tools/dotnet-publish#options) ustawioną na `Release` :
 
-::: moniker-end
-
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+::: moniker-end
 
 ### <a name="use-systemtextjson"></a>Użyj System.Text.Jsna
 

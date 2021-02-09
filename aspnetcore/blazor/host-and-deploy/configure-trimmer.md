@@ -5,7 +5,7 @@ description: Dowiedz się, jak kontrolować konsolidator języka pośredniego (I
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/14/2020
+ms.date: 02/08/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,33 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-trimmer
-ms.openlocfilehash: 337b188d3c0aeac9c5c635ebca265b9a35c6904d
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 41887638f13a08d375075e8377da19d1d0098c4b
+ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93055805"
+ms.lasthandoff: 02/09/2021
+ms.locfileid: "99975221"
 ---
-# <a name="configure-the-trimmer-for-aspnet-core-no-locblazor"></a><span data-ttu-id="769c1-103">Skonfiguruj element dostosowujący dla ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="769c1-103">Configure the Trimmer for ASP.NET Core Blazor</span></span>
+# <a name="configure-the-trimmer-for-aspnet-core-blazor"></a><span data-ttu-id="e7829-103">Skonfiguruj element dostosowujący dla ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="e7829-103">Configure the Trimmer for ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="769c1-104">Autor [Pranav Krishnamoorthy](https://github.com/pranavkm)</span><span class="sxs-lookup"><span data-stu-id="769c1-104">By [Pranav Krishnamoorthy](https://github.com/pranavkm)</span></span>
+<span data-ttu-id="e7829-104">Blazor WebAssembly wykonuje przycinanie [języka pośredniego (IL)](/dotnet/standard/managed-code#intermediate-language--execution) , aby zmniejszyć rozmiar opublikowanych danych wyjściowych.</span><span class="sxs-lookup"><span data-stu-id="e7829-104">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) trimming to reduce the size of the published output.</span></span> <span data-ttu-id="e7829-105">Domyślnie przycinanie odbywa się podczas publikowania aplikacji.</span><span class="sxs-lookup"><span data-stu-id="e7829-105">By default, trimming occurs when publishing an app.</span></span>
 
-<span data-ttu-id="769c1-105">Blazor WebAssembly wykonuje przycinanie [języka pośredniego (IL)](/dotnet/standard/managed-code#intermediate-language--execution) , aby zmniejszyć rozmiar opublikowanych danych wyjściowych.</span><span class="sxs-lookup"><span data-stu-id="769c1-105">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) trimming to reduce the size of the published output.</span></span>
+<span data-ttu-id="e7829-106">Przycinanie może mieć szkodliwe skutki.</span><span class="sxs-lookup"><span data-stu-id="e7829-106">Trimming may have detrimental effects.</span></span> <span data-ttu-id="e7829-107">W aplikacjach, które używają odbicia, element dostosowujący często nie może określić typów wymaganych do odbicia w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="e7829-107">In apps that use reflection, the Trimmer often can't determine the required types for reflection at runtime.</span></span> <span data-ttu-id="e7829-108">Aby przyciąć aplikacje używające odbicia, należy uzyskać informacje o typach wymaganych do odbicia w kodzie aplikacji oraz w pakietach lub strukturach, od których zależy aplikacja.</span><span class="sxs-lookup"><span data-stu-id="e7829-108">To trim apps that use reflection, the Trimmer must be informed about required types for reflection in both the app's code and in the packages or frameworks that the app depends on.</span></span> <span data-ttu-id="e7829-109">Element dostosowujący nie może również reagować na dynamiczne zachowanie aplikacji w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="e7829-109">The Trimmer is also unable to react to an app's dynamic behavior at runtime.</span></span> <span data-ttu-id="e7829-110">Aby upewnić się, że przycięta aplikacja działa prawidłowo po wdrożeniu, należy regularnie testować opublikowane dane wyjściowe.</span><span class="sxs-lookup"><span data-stu-id="e7829-110">To ensure the trimmed app works correctly once deployed, test published output frequently while developing.</span></span>
 
-<span data-ttu-id="769c1-106">Przycinanie aplikacji jest zoptymalizowane pod kątem rozmiaru, ale mogą one mieć szkodliwe skutki.</span><span class="sxs-lookup"><span data-stu-id="769c1-106">Trimming an app optimizes for size but may have detrimental effects.</span></span> <span data-ttu-id="769c1-107">Aplikacje korzystające z odbicia lub powiązane funkcje dynamiczne mogą być przerywane po przycięciu, ponieważ element dostosowujący nie wie o zachowaniu dynamicznego i nie może w ogóle określić, które typy są wymagane do odbicia w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="769c1-107">Apps that use reflection or related dynamic features may break when trimmed because the trimmer doesn't know about dynamic behavior and can't determine in general which types are required for reflection at runtime.</span></span> <span data-ttu-id="769c1-108">Aby przyciąć takie aplikacje, należy uzyskać informacje o wszelkich typach wymaganych przez odbicie w kodzie oraz w pakietach lub strukturach, od których zależy aplikacja.</span><span class="sxs-lookup"><span data-stu-id="769c1-108">To trim such apps, the trimmer must be informed about any types required by reflection in the code and in packages or frameworks that the app depends on.</span></span>
+<span data-ttu-id="e7829-111">Aby skonfigurować element dostosowujący, zobacz artykuł [Opcje przycinania](/dotnet/core/deploying/trimming-options) w dokumentacji .NET podstawy, która zawiera wskazówki dotyczące następujących tematów:</span><span class="sxs-lookup"><span data-stu-id="e7829-111">To configure the Trimmer, see the [Trimming options](/dotnet/core/deploying/trimming-options) article in the .NET Fundamentals documentation, which includes guidance on the following subjects:</span></span>
 
-<span data-ttu-id="769c1-109">Aby upewnić się, że przycięta aplikacja działa prawidłowo po wdrożeniu, ważne jest, aby regularnie testować publikowane dane wyjściowe.</span><span class="sxs-lookup"><span data-stu-id="769c1-109">To ensure the trimmed app works correctly once deployed, it's important to test published output frequently while developing.</span></span>
+* <span data-ttu-id="e7829-112">Wyłącz przycinanie dla całej aplikacji z `<PublishTrimmed>` właściwością w pliku projektu.</span><span class="sxs-lookup"><span data-stu-id="e7829-112">Disable trimming for the entire app with the `<PublishTrimmed>` property in the project file.</span></span>
+* <span data-ttu-id="e7829-113">Kontroluj, jak agresywnie nieużywane IL jest odrzucane przez element dostosowujący.</span><span class="sxs-lookup"><span data-stu-id="e7829-113">Control how aggressively unused IL is discarded by the Trimmer.</span></span>
+* <span data-ttu-id="e7829-114">Zatrzymaj element dostosowujący z przycinania określonych zestawów.</span><span class="sxs-lookup"><span data-stu-id="e7829-114">Stop the Trimmer from trimming specific assemblies.</span></span>
+* <span data-ttu-id="e7829-115">Zestawy "główne" do przycinania.</span><span class="sxs-lookup"><span data-stu-id="e7829-115">"Root" assemblies for trimming.</span></span>
+* <span data-ttu-id="e7829-116">Ostrzeżenia powierzchni dla typów odbite przez ustawienie `<SuppressTrimAnalysisWarnings>` właściwości na `false` w pliku projektu.</span><span class="sxs-lookup"><span data-stu-id="e7829-116">Surface warnings for reflected types by setting the `<SuppressTrimAnalysisWarnings>` property to `false` in the project file.</span></span>
+* <span data-ttu-id="e7829-117">Obcinanie symboli formantów i degugger.</span><span class="sxs-lookup"><span data-stu-id="e7829-117">Control symbol trimming and degugger support.</span></span>
+* <span data-ttu-id="e7829-118">Ustaw funkcje dostosowujące dla funkcji biblioteki struktury przycinania.</span><span class="sxs-lookup"><span data-stu-id="e7829-118">Set Trimmer features for trimming framework library features.</span></span>
 
-<span data-ttu-id="769c1-110">Przycinanie aplikacji .NET można wyłączyć, ustawiając właściwość programu `PublishTrimmed` MSBuild na wartość `false` w pliku projektu aplikacji:</span><span class="sxs-lookup"><span data-stu-id="769c1-110">Trimming for .NET apps can be disabled by setting the `PublishTrimmed` MSBuild property to `false` in the app's project file:</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="e7829-119">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="e7829-119">Additional resources</span></span>
 
-```xml
-<PropertyGroup>
-  <PublishTrimmed>false</PublishTrimmed>
-</PropertyGroup>
-```
-<span data-ttu-id="769c1-111">Dodatkowe opcje konfigurowania elementu dostosowującego można znaleźć w [opcjach przycinania](/dotnet/core/deploying/trimming-options).</span><span class="sxs-lookup"><span data-stu-id="769c1-111">Additional options to configure the trimmer can be found at [Trimming options](/dotnet/core/deploying/trimming-options).</span></span>
-
-## <a name="additional-resources"></a><span data-ttu-id="769c1-112">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="769c1-112">Additional resources</span></span>
-
-* [<span data-ttu-id="769c1-113">Przycinanie samodzielnych wdrożeń i plików wykonywalnych</span><span class="sxs-lookup"><span data-stu-id="769c1-113">Trim self-contained deployments and executables</span></span>](/dotnet/core/deploying/trim-self-contained)
+* [<span data-ttu-id="e7829-120">Przycinanie samodzielnych wdrożeń i plików wykonywalnych</span><span class="sxs-lookup"><span data-stu-id="e7829-120">Trim self-contained deployments and executables</span></span>](/dotnet/core/deploying/trim-self-contained)
 * <xref:blazor/webassembly-performance-best-practices#intermediate-language-il-trimming>

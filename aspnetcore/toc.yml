@@ -105,9 +105,9 @@
         - name: Usługa SignalR za pomocą języka TypeScript
           displayName: tutorial
           uid: tutorials/signalr-typescript-webpack
-        - name: Usługa SignalR za pomocą zestawu WebAssembly Blazor
+        - name: Sygnalizujący z Blazor
           displayName: tutorial
-          uid: tutorials/signalr-blazor-webassembly
+          uid: tutorials/signalr-blazor
     - name: Aplikacje zdalnego wywołania procedury
       items:
         - name: Wprowadzenie do usługi gRPC
@@ -308,8 +308,8 @@
           items:
             - name: Kompilowanie aplikacji platformy Blazor z listą zadań do wykonania
               uid: tutorials/build-a-blazor-app
-            - name: Usługa SignalR za pomocą zestawu WebAssembly Blazor
-              uid: tutorials/signalr-blazor-webassembly
+            - name: Sygnalizujący z Blazor
+              uid: tutorials/signalr-blazor
         - name: Struktura projektu
           uid: blazor/project-structure
         - name: Podstawy
@@ -625,8 +625,8 @@
           uid: tutorials/signalr
         - name: Usługa SignalR za pomocą języka TypeScript
           uid: tutorials/signalr-typescript-webpack
-        - name: Usługa SignalR za pomocą zestawu WebAssembly Blazor
-          uid: tutorials/signalr-blazor-webassembly
+        - name: Sygnalizujący z Blazor
+          uid: tutorials/signalr-blazor
     - name: Przykłady
       href: 'https://github.com/aspnet/SignalR-samples'
       displayName: signalr

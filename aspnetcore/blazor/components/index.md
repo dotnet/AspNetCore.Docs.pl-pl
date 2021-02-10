@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: efc73022d0bd8c29595f9bed1c06fe07002eb54a
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 111512916cb7f0a4fc1f17648e2f9c69e366dff3
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530102"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107054"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -268,7 +268,7 @@ Aby uzyskać informacje dotyczące przechwytywania wszystkich parametrów trasy 
 
 ### <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą zawierać *Parametry składnika*, które są zdefiniowane przy użyciu publicznej prostej lub złożonej właściwości w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą zawierać *Parametry składnika*, które są zdefiniowane przy użyciu publicznej prostej lub złożonej właściwości w klasie składnika z [ `[Parameter]` atrybutem](xref:Microsoft.AspNetCore.Components.ParameterAttribute). Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 `Components/ChildComponent.razor`:
 
@@ -396,7 +396,7 @@ Renderowane `<input>` elementy korzystające z obu metod są identyczne:
        size="50">
 ```
 
-Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutu z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> właściwością ustawioną na `true` :
+Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu [ `[Parameter]` atrybutu](xref:Microsoft.AspNetCore.Components.ParameterAttribute) z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> właściwością ustawioną na `true` :
 
 ```razor
 @code {
@@ -584,7 +584,10 @@ Zarejestruj `NotifierService` :
 }
 ```
 
-W poprzednim przykładzie `NotifierService` wywołuje `OnNotify` metodę składnika poza Blazor kontekstem synchronizacji. `InvokeAsync` służy do przełączania do poprawnego kontekstu i kolejki renderowania. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/rendering>.
+W powyższym przykładzie:
+
+* `NotifierService` wywołuje `OnNotify` metodę składnika poza Blazor kontekstem synchronizacji. `InvokeAsync` służy do przełączania do poprawnego kontekstu i kolejki renderowania. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/rendering>.
+* Składnik implementuje <xref:System.IDisposable> i `OnNotify` delegat nie jest subskrybowany w `Dispose` metodzie, która jest wywoływana przez platformę, gdy składnik zostanie usunięty. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/lifecycle#component-disposal-with-idisposable>.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>Użyj \@ klawisza, aby kontrolować zachowywanie elementów i składników
 
@@ -772,7 +775,7 @@ Aby uzyskać dodatkowe informacje, zobacz [ Blazor dwukierunkowy błąd powiąza
 
 ## <a name="apply-an-attribute"></a>Zastosuj atrybut
 
-Atrybuty mogą być stosowane do Razor składników z [`@attribute`][7] dyrektywą. Poniższy przykład stosuje [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybut do klasy składnika:
+Atrybuty mogą być stosowane do Razor składników z [`@attribute`][7] dyrektywą. Poniższy przykład stosuje [ `[Authorize]` atrybut](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) do klasy składnika:
 
 ```razor
 @page "/"

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: bd42ba41c6f599d7c0308febbbde71e0d060cc84
-ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
+ms.openlocfilehash: d42136de00ccc9b7565c5ae088e1ecf4560a63c5
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99578298"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106885"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -148,8 +148,9 @@ Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, stanowi krytyczny wsp�
 
 Blazor oddziela logikę renderowania składników od sposobu stosowania aktualizacji interfejsu użytkownika. *Blazor Server* zapewnia obsługę składników hostingu Razor na serwerze w aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika są obsługiwane przez [SignalR](xref:signalr/introduction) połączenie.
 
-Obsługa środowiska uruchomieniowego:
+Środowisko uruchomieniowe pozostaje na serwerze i dojściach:
 
+* Wykonywanie kodu w języku C# aplikacji.
 * Wysyłanie zdarzeń interfejsu użytkownika z przeglądarki do serwera programu.
 * Stosowanie aktualizacji interfejsu użytkownika do renderowanego składnika, który jest wysyłany z powrotem przez serwer.
 

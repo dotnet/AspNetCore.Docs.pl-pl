@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 1a4d4116b8a6d9266bbacbbdd8f20dc49b4e1db0
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 27701d175c86cdf4b74a9e6332b30b4d55806650
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253975"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107041"
 ---
-# <a name="aspnet-core-no-locblazor-component-rendering"></a>BlazorRenderowanie składników ASP.NET Core
+# <a name="aspnet-core-blazor-component-rendering"></a>BlazorRenderowanie składników ASP.NET Core
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -109,18 +109,20 @@ Rozważmy następujący `Counter` składnik, który aktualizuje liczbę cztery r
 
 Ze względu na sposób, w jaki zadania są zdefiniowane w programie .NET, odbiorca <xref:System.Threading.Tasks.Task> może obserwować tylko ostateczne zakończenie, a nie pośrednie Stany asynchroniczne. W związku z tym, <xref:Microsoft.AspNetCore.Components.ComponentBase> można wyzwolić ponowne renderowanie tylko wtedy, gdy <xref:System.Threading.Tasks.Task> jest on zwracany po raz pierwszy i kiedy <xref:System.Threading.Tasks.Task> kończy. Nie może on wiedzieć, aby przerenderować w innych punktach pośrednich. Jeśli chcesz, aby były renderowane w punktach pośrednich, użyj <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> .
 
-### <a name="receiving-a-call-from-something-external-to-the-no-locblazor-rendering-and-event-handling-system"></a>Otrzymywanie wywołania od czegoś zewnętrznego do Blazor systemu obsługi renderowania i zdarzeń
+### <a name="receiving-a-call-from-something-external-to-the-blazor-rendering-and-event-handling-system"></a>Otrzymywanie wywołania od czegoś zewnętrznego do Blazor systemu obsługi renderowania i zdarzeń
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase> wie tylko o własnych metodach cyklu życia i Blazor zdarzeniach wyzwalanych przez użytkownika. <xref:Microsoft.AspNetCore.Components.ComponentBase> nie wie o innych zdarzeniach, które mogą wystąpić w kodzie. Na przykład wszystkie zdarzenia w języku C# wywoływane przez niestandardowy magazyn danych są nieznane do Blazor . Aby zdarzenia wyzwalające ponowne renderowanie w celu wyświetlenia zaktualizowanych wartości w interfejsie użytkownika, użyj polecenia <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> .
 
 W innym przypadku użycia należy wziąć pod uwagę Poniższy `Counter` składnik, który używa <xref:System.Timers.Timer?displayProperty=fullName> programu, aby zaktualizować licznik w regularnych odstępach czasu i wywołania <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> w celu zaktualizowania interfejsu użytkownika.
 
-`Pages/Counter.razor`:
+`Pages/CounterWithTimerDisposal.razor`:
 
 ```razor
-@page "/counter"
+@page "/counter-with-timer-disposal"
 @using System.Timers
 @implements IDisposable
+
+<h1>Counter with <code>Timer</code> disposal</h1>
 
 <p>Current count: @currentCount</p>
 
@@ -134,7 +136,7 @@ W innym przypadku użycia należy wziąć pod uwagę Poniższy `Counter` składn
         timer.Start();
     }
 
-    void OnTimerCallback()
+    private void OnTimerCallback()
     {
         _ = InvokeAsync(() =>
         {
@@ -143,11 +145,14 @@ W innym przypadku użycia należy wziąć pod uwagę Poniższy `Counter` składn
         });
     }
 
-    void IDisposable.Dispose() => timer.Dispose();
+    public void IDisposable.Dispose() => timer.Dispose();
 }
 ```
 
-W poprzednim przykładzie, `OnTimerCallback` musi wywołać, <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> ponieważ Blazor nie ma informacji o zmianach `currentCount` w wywołaniu wywołania zwrotnego. `OnTimerCallback` działa poza Blazor zarządzanym przepływem renderowania lub powiadomieniem o zdarzeniu.
+W powyższym przykładzie:
+
+* `OnTimerCallback` musi wywołać <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> Blazor , ponieważ nie ma informacji o zmianach `currentCount` w wywołaniu zwrotnym. `OnTimerCallback` działa poza Blazor zarządzanym przepływem renderowania lub powiadomieniem o zdarzeniu.
+* Składnik implementuje <xref:System.IDisposable> , gdzie <xref:System.Timers.Timer> jest usuwany, gdy struktura wywołuje `Dispose` metodę. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/lifecycle#component-disposal-with-idisposable>.
 
 Podobnie, ponieważ wywołanie zwrotne jest wywoływane poza Blazor kontekstem synchronizacji, konieczne jest Zawijanie logiki w programie, <xref:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync%2A?displayProperty=nameWithType> Aby przenieść ją do kontekstu synchronizacji modułu renderowania. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> można wywołać tylko z kontekstu synchronizacji modułu renderowania i zgłasza wyjątek w przeciwnym razie. Jest to równoważne kierowaniu do wątku interfejsu użytkownika w innych strukturach interfejsu użytkownika.
 

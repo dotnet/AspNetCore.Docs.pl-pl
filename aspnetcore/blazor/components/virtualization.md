@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 72b33bc3c2861380551915b1e8caab49122e8fab
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 5e058c33dcf52faf722b27e361491dd8dbc47dc1
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99529920"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107028"
 ---
 # <a name="aspnet-core-blazor-component-virtualization"></a>BlazorWirtualizacja składników ASP.NET Core
 
@@ -156,6 +156,8 @@ Wysokość każdego elementu w pikselach można ustawić za pomocą <xref:Micros
     ...
 </Virtualize>
 ```
+
+Domyślnie `Virtualize` składnik mierzy rzeczywistą wielkość renderowania *po wykonaniu* początkowej renderowania. Użyj <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> , aby zapewnić dokładny rozmiar elementu z wyprzedzeniem, aby pomóc w dokładnym początkowej wydajności renderowania i zapewnić poprawną pozycję przewijania na potrzeby ponownych prób ładowania strony. Jeśli wartość domyślna <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A> powoduje, że niektóre elementy mają być renderowane poza aktualnie widocznym widokiem, zostanie wyzwolone drugie ponowne renderowanie. Aby prawidłowo zachować położenie przewijania przeglądarki na liście zwirtualizowanej, początkowy rendering musi być prawidłowy. W przeciwnym razie użytkownicy mogą wyświetlić błędne elementy. 
 
 ## <a name="overscan-count"></a>Liczba przeskanowania
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: c60191cc8822dd875db613fb70516beb08a659d8
-ms.sourcegitcommit: 20a41c8e40a2e69e99291e2fe18caa04c02e7109
+ms.openlocfilehash: adc3b7b1b33438f2d0024bf78830e412a330ad45
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99578285"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106859"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -160,5 +160,5 @@ W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy u
 
 * <xref:blazor/tooling>
 * <xref:signalr/introduction>
-* <xref:blazor/fundamentals/additional-scenarios>
+* <xref:blazor/fundamentals/signalr>
 * <xref:tutorials/signalr-blazor>

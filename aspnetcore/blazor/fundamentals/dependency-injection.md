@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 6f41cc102411377f144dd8e12f7942031c59619a
-ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
+ms.openlocfilehash: 30edffedf1faf96ed54d5380762c8558e478966c
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "99975222"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106924"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -119,7 +119,7 @@ Poniższy przykład pokazuje, jak używać [`@inject`](xref:mvc/views/razor#inje
 
 [!code-razor[](dependency-injection/samples_snapshot/CustomerList.razor?highlight=2-3,20)]
 
-Wewnętrznie wygenerowana Właściwość ( `DataRepository` ) używa [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybutu. Zazwyczaj ten atrybut nie jest używany bezpośrednio. Jeśli klasa podstawowa jest wymagana dla składników i właściwości wstrzykiwane są również wymagane dla klasy bazowej, należy ręcznie dodać [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybut:
+Wewnętrznie wygenerowana Właściwość ( `DataRepository` ) używa [ `[Inject]` atrybutu](xref:Microsoft.AspNetCore.Components.InjectAttribute). Zazwyczaj ten atrybut nie jest używany bezpośrednio. Jeśli klasa podstawowa jest wymagana dla składników i właściwości wstrzykiwane są również wymagane dla klasy bazowej, należy ręcznie dodać [ `[Inject]` atrybut](xref:Microsoft.AspNetCore.Components.InjectAttribute):
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -144,7 +144,7 @@ W składnikach pochodnych klasy bazowej [`@inject`](xref:mvc/views/razor#inject)
 
 ## <a name="use-di-in-services"></a>Korzystanie z usług DI w
 
-Złożone usługi mogą wymagać dodatkowych usług. W poniższym przykładzie `DataAccess` wymaga <xref:System.Net.Http.HttpClient> usługi domyślnej. [`@inject`](xref:mvc/views/razor#inject) (lub [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybut) nie jest dostępny do użytku w usługach. Zamiast tego należy użyć *iniekcji konstruktora* . Wymagane usługi są dodawane przez dodanie parametrów do konstruktora usługi. Gdy program DI tworzy usługę, rozpoznaje usługi, których wymaga w konstruktorze i udostępnia je odpowiednio. W poniższym przykładzie Konstruktor odbiera <xref:System.Net.Http.HttpClient> przez di. <xref:System.Net.Http.HttpClient> jest domyślną usługą.
+Złożone usługi mogą wymagać dodatkowych usług. W poniższym przykładzie `DataAccess` wymaga <xref:System.Net.Http.HttpClient> usługi domyślnej. [`@inject`](xref:mvc/views/razor#inject)(lub [ `[Inject]` atrybut](xref:Microsoft.AspNetCore.Components.InjectAttribute)) nie jest dostępny do użytku w usługach. Zamiast tego należy użyć *iniekcji konstruktora* . Wymagane usługi są dodawane przez dodanie parametrów do konstruktora usługi. Gdy program DI tworzy usługę, rozpoznaje usługi, których wymaga w konstruktorze i udostępnia je odpowiednio. W poniższym przykładzie Konstruktor odbiera <xref:System.Net.Http.HttpClient> przez di. <xref:System.Net.Http.HttpClient> jest domyślną usługą.
 
 ```csharp
 using System.Net.Http;
@@ -180,7 +180,7 @@ Dostępne są dwie wersje <xref:Microsoft.AspNetCore.Components.OwningComponentB
 
 * <xref:Microsoft.AspNetCore.Components.OwningComponentBase> jest abstrakcyjnym, jednorazowym elementem podrzędnym <xref:Microsoft.AspNetCore.Components.ComponentBase> typu z <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> właściwością chronioną typu <xref:System.IServiceProvider> . Ten dostawca może służyć do rozpoznawania usług objętych zakresem czasu istnienia składnika.
 
-  Program DI Services wprowadzany do składnika przy użyciu [`@inject`](xref:mvc/views/razor#inject) [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybutu lub nie jest tworzony w zakresie składnika. Aby można było użyć zakresu składnika, usługi muszą zostać rozwiązane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> lub <xref:System.IServiceProvider.GetService%2A> . Wszystkie usługi rozpoznane przy użyciu <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> dostawcy mają swoje zależności z tego samego zakresu.
+  Program DI Services wprowadzany do składnika przy użyciu [`@inject`](xref:mvc/views/razor#inject) [ `[Inject]` atrybutu](xref:Microsoft.AspNetCore.Components.InjectAttribute) lub nie jest tworzony w zakresie składnika. Aby można było użyć zakresu składnika, usługi muszą zostać rozwiązane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> lub <xref:System.IServiceProvider.GetService%2A> . Wszystkie usługi rozpoznane przy użyciu <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> dostawcy mają swoje zależności z tego samego zakresu.
 
   [!code-razor[](dependency-injection/samples_snapshot/Preferences.razor?highlight=3,20-21)]
 

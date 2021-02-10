@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: d97caeffc6e8beebddb01a5bd126d61ba988de65
-ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
+ms.openlocfilehash: fad569ab06735600299d8051a258651e329db8ce
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98689295"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107184"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -119,11 +119,11 @@ Aby zapewnić możliwość korzystania z plików statycznych na podstawie autory
   
   [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-25)]
 
-  W poprzednim kodzie zasady autoryzacji rezerwowej wymagają, aby **Wszyscy** użytkownicy mogli je uwierzytelnić. Punkty końcowe, takie jak kontrolery, Razor strony itp. określają własne wymagania dotyczące autoryzacji, nie używają rezerwowych zasad autoryzacji. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu autoryzacji, a nie rezerwowych zasad autoryzacji.
+  W powyższym kodzie rezerwowe zasady autoryzacji wymagają uwierzytelnienia ***wszystkich*** użytkowników. Punkty końcowe, takie jak kontrolery, Razor strony itp. określają własne wymagania dotyczące autoryzacji, nie używają rezerwowych zasad autoryzacji. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu autoryzacji, a nie rezerwowych zasad autoryzacji.
 
   <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> dodaje <xref:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement> do bieżącego wystąpienia, które wymusza, że bieżący użytkownik jest uwierzytelniony.
 
-  Zasoby statyczne w obszarze `wwwroot` są publicznie dostępne, ponieważ domyślne oprogramowanie pośredniczące ( `app.UseStaticFiles();` ) jest wywoływane przed `UseAuthentication` . Statyczne zasoby w folderze _MyStaticFiles * wymagają uwierzytelniania. [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) demonstruje ten sposób.
+  Zasoby statyczne w obszarze `wwwroot` są publicznie dostępne, ponieważ domyślne oprogramowanie pośredniczące ( `app.UseStaticFiles();` ) jest wywoływane przed `UseAuthentication` . Statyczne zasoby w folderze *MyStaticFiles* wymagają uwierzytelniania. [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) demonstruje ten sposób.
 
 Alternatywnym podejściem do obsługiwania plików na podstawie autoryzacji jest:
 
@@ -469,7 +469,7 @@ Jeśli plik o nazwie Default nie istnieje w katalogu *MyStaticFiles* , *http:// 
 
 Zobacz [typy zawartości MIME](https://www.iana.org/assignments/media-types/media-types.xhtml).
 
-Aby uzyskać informacje na temat używania niestandardowego <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> lub do konfigurowania <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> innych Blazor aplikacji serwerowych, zobacz <xref:blazor/fundamentals/additional-scenarios#static-files> .
+Aby uzyskać informacje na temat używania niestandardowego <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> lub do konfigurowania <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> innych Blazor aplikacji serwerowych, zobacz <xref:blazor/fundamentals/static-files> .
 
 ## <a name="non-standard-content-types"></a>Niestandardowe typy zawartości
 

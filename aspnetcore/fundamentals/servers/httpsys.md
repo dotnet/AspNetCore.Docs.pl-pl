@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 9c65abd5a055bb677a14921296316e7e03760bc2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ad37f8434b6025c5f3ec97dc52987f5660a64edc
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96855368"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106677"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -62,7 +62,7 @@ HTTP.sys jest przydatne w przypadku wdrożeń, w których:
 
   ![HTTP.sys komunikują się bezpośrednio z Internetem](httpsys/_static/httpsys-to-internet.png)
 
-* Wdrożenie wewnętrzne wymaga, aby funkcja była niedostępna w Kestrel, taka jak [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth).
+* Wdrożenie wewnętrzne wymaga, aby funkcja była niedostępna w Kestrel. Aby uzyskać więcej informacji, zobacz [Kestrel a HTTP.sys](xref:fundamentals/servers/index#kestrel-vs-httpsys)
 
   ![HTTP.sys komunikuje się bezpośrednio z siecią wewnętrzną](httpsys/_static/httpsys-to-internal.png)
 
@@ -278,7 +278,7 @@ W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z ż�
 
 Dodatkowe funkcje protokołu HTTP/2 w HTTP.sys obsługują gRPC, w tym obsługę przyczep z odpowiedziami i wysyłanie ramek resetowania.
 
-Wymagania dotyczące uruchamiania gRPC z HTTP.SYS:
+Wymagania dotyczące uruchamiania gRPC z HTTP.sys:
 
 * Windows 10, kompilacja systemu operacyjnego 19041,508 lub nowsza
 * Połączenie TLS 1,2 lub nowsze

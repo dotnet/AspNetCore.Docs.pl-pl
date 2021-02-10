@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: fcf06295deb41f304b92caa82535a1197c909898
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: 63e6fc49283aec567f6a9d5bc05b7445fb38c33c
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238234"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100106846"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -71,7 +71,7 @@ W poprzednim poleceniu `-o|--output` opcja powoduje utworzenie nowego folderu dl
 
 Opcjonalnie można skonfigurować PWA dla aplikacji utworzonej przy użyciu szablonu hostowanego ASP.NET Core. Scenariusz PWA jest niezależny od modelu hostingu.
 
-## <a name="convert-an-existing-no-locblazor-webassembly-app-into-a-pwa"></a>Konwertowanie istniejącej Blazor WebAssembly aplikacji do PWA
+## <a name="convert-an-existing-blazor-webassembly-app-into-a-pwa"></a>Konwertowanie istniejącej Blazor WebAssembly aplikacji do PWA
 
 Przekonwertuj istniejącą Blazor WebAssembly aplikację do PWA zgodnie ze wskazówkami w tej sekcji.
 
@@ -406,4 +406,4 @@ Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Rozwiązywanie problemów z integralnością skryptu programu PowerShell](xref:blazor/host-and-deploy/webassembly#troubleshoot-integrity-powershell-script)
-* [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/signalr#signalr-cross-origin-negotiation-for-authentication)

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: ee30ef89c5d7aeae83f23a81eb02235397c89ac2
-ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+ms.openlocfilehash: 79457d55e0dcda342bc0017bb386c23525666657
+ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99238310"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100107197"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -403,7 +403,7 @@ Filtry zasobów są przydatne do krótkiego obwodu większości potoku. Na przyk
 Przykłady filtru zasobów:
 
 * [Filtr zasobów o krótkim obwodzie](#short-circuiting-resource-filter) pokazano wcześniej.
-* [DisableFormValueModelBindingAttribute](https://github.com/aspnet/Entropy/blob/rel/2.0.0-preview2/samples/Mvc.FileUpload/Filters/DisableFormValueModelBindingAttribute.cs):
+* [DisableFormValueModelBindingAttribute](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.FileUpload/Filters/DisableFormValueModelBindingAttribute.cs):
 
   * Uniemożliwia powiązanie modelu z dostępem do danych formularza.
   * Służy do przekazywania dużych plików w celu uniemożliwienia odczytywania danych formularza do pamięci.
@@ -558,11 +558,11 @@ Na przykład następujący filtr jest zawsze uruchamiany i ustawia wynik akcji (
 `IFilterFactory.IsReusable`:
 
 * Jest wskazówką dla fabryki, że wystąpienie filtru utworzone przez fabrykę może być ponownie używane poza zakresem żądania, który został utworzony w ramach.
-* **Nie** powinna być używana z filtrem, który zależy od usług z okresem istnienia innym niż singleton.
+* ***Nie*** powinien być używany z filtrem, który zależy od usług z okresem istnienia innym niż pojedynczy.
 
 Środowisko uruchomieniowe ASP.NET Core nie gwarantuje:
 
-Oznacza, że zostanie utworzone pojedyncze wystąpienie filtru.
+* Zostanie utworzone pojedyncze wystąpienie filtru.
 * Filtr nie zostanie ponownie żądany z kontenera DI w pewnym momencie.
 
 > [!WARNING] 
@@ -763,7 +763,7 @@ Ta sekwencja pokazuje:
 * Filtr metody jest zagnieżdżony w obrębie filtru kontrolera.
 * Filtr kontrolera jest zagnieżdżony w obrębie filtru globalnego.
 
-### <a name="controller-and-no-locrazor-page-level-filters"></a>Filtry na Razor poziomie kontrolera i strony
+### <a name="controller-and-razor-page-level-filters"></a>Filtry na Razor poziomie kontrolera i strony
 
 Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy podstawowej, obejmuje metody [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)i [Controller. OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 
  `OnActionExecuted` . Te metody:

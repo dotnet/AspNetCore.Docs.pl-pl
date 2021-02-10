@@ -16,7 +16,7 @@ Potrzebna jest podstawowa znajomość usługi [git i GitHub.com](https://guides.
 * Jeśli do żądania ściągnięcia jest przypisana etykieta "CLA-Required", [Wypełnij umowę licencyjną dotyczącą udziału (CLA)](https://cla.dotnetfoundation.org/).
 * Odpowiedź na opinię żądania ściągnięcia.
 
-Przykład, w którym ten proces przeprowadził publikację nowego artykułu, zobacz artykuł [dotyczący problemu &num; 67](https://github.com/dotnet/docs/issues/67) i [żądania ściągnięcia &num; 798](https://github.com/dotnet/docs/pull/798) w repozytorium dokumentacji platformy .NET. Nowy artykuł zawiera [dokument dokumentu](https://docs.microsoft.com/dotnet/articles/csharp/codedoc).
+Przykład, w którym ten proces przeprowadził publikację nowego artykułu, zobacz artykuł [dotyczący problemu 1477](https://github.com/dotnet/docs/issues/1477) i [żądania ściągnięcia 18955](https://github.com/dotnet/docs/pull/18955) w repozytorium dokumentacji platformy .NET. W nowym artykule jest [używane pokrycie kodu dla testów jednostkowych](/dotnet/core/testing/unit-testing-code-coverage).
 
 ## <a name="docs-authoring-pack-extension-in-visual-studio-code"></a>Rozszerzenie docs Authoring Pack w Visual Studio Code
 

@@ -16,7 +16,7 @@
   Aby rozwiązać ten problem:
 
   1. W Azure Portal uzyskaj dostęp do [manifestu aplikacji](/azure/active-directory/develop/reference-app-manifest).
-  1. Ustaw [`allowPublicClient`](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute) atrybut na `null` lub `true` .
+  1. Ustaw [ `allowPublicClient` atrybut](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute) na `null` lub `true` .
 
 ::: moniker-end
 

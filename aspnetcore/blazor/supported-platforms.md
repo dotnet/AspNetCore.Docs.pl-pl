@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: fe0734dbf6eb2647fa6c9b6f336063b9ec091139
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 948c3e3f66da4727731b37491ae5c5470cfb36fe
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054960"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280719"
 ---
-# <a name="aspnet-core-no-locblazor-supported-platforms"></a>ASP.NET Core Blazor obsługiwane platformy
-
-Autor [Luke Latham](https://github.com/guardrex)
+# <a name="aspnet-core-blazor-supported-platforms"></a>ASP.NET Core Blazor obsługiwane platformy
 
 ::: moniker range=">= aspnetcore-5.0"
 

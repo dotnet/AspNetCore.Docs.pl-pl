@@ -4,7 +4,7 @@ author: jamesnk
 description: Dowiedz się, jak tworzyć komunikaty protobuf dla aplikacji .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/23/2020
+ms.date: 02/12/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b70a5ee00405eecfce900b86dc631a54682dce1a
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: adb048c9b20e172ef8a7bc13f9b56928b1d4bf77
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058899"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280293"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>Tworzenie komunikatów protobuf dla aplikacji platformy .NET
 
@@ -48,6 +48,8 @@ message Person {
 ```
 
 Poprzednia definicja komunikatu określa trzy pola jako pary nazwa-wartość. Podobnie jak we właściwościach typu .NET, każde pole ma nazwę i typ. Typ pola może być [typem wartości skalarnej protobuf](#scalar-value-types), np. `int32` lub innym komunikatem.
+
+[Przewodnik stylu protobuf](https://developers.google.com/protocol-buffers/docs/style) zaleca używanie `underscore_separated_names` nazw pól. Nowe wiadomości protobuf utworzone dla aplikacji .NET powinny być zgodne z wytycznymi dotyczącymi stylu protobuf. Narzędzia .NET automatycznie generują typy .NET, które używają standardów nazewnictwa platformy .NET. Na przykład `first_name` pole protobuf generuje `FirstName` Właściwość platformy .NET.
 
 Oprócz nazwy, każde pole w definicji komunikatu ma unikatowy numer. Numery pól są używane do identyfikowania pól, gdy komunikat jest serializowany do protobuf. Serializowanie niewielkiej liczby jest szybsze niż Serializowanie całej nazwy pola. Ponieważ numery pól identyfikują pole, ważne jest, aby zachować ostrożność przy ich zmianie. Aby uzyskać więcej informacji na temat zmieniania komunikatów protobuf, zobacz <xref:grpc/versioning> .
 

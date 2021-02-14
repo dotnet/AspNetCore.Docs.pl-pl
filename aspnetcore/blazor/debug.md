@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 5bdfcc5660b4c897d3552d4cf25e43dade71541c
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: aed9e800074dc72a2b55b816a2710722470cd7d1
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252516"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280058"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
-
-[Daniel Roth](https://github.com/danroth27)
+# <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
 Blazor WebAssembly aplikacje mogą być debugowane przy użyciu narzędzi deweloperskich przeglądarki w przeglądarkach opartych na chromie (Edge/Chrome). Możesz również debugować aplikację przy użyciu następujących zintegrowanych środowisk projektowych (środowisk IDE):
 
@@ -88,7 +86,7 @@ Po zaktualizowaniu `launchSettings.json` plik powinien wyglądać podobnie do po
 
 Wartości zastępcze protokołu WebSockets Protocol ( `wsProtocol` ), hosta ( `url.hostname` ), portu ( `url.port` ) i kontrolera URI w uruchomionej przeglądarce ( `browserInspectUri` ) są udostępniane przez platformę.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
 
@@ -192,7 +190,7 @@ Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplika
 > [!NOTE]
 > Punkty przerwania **nie** są trafiania podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
 
-## <a name="debug-hosted-no-locblazor-webassembly"></a>Debuguj hostowane Blazor WebAssembly
+## <a name="debug-hosted-blazor-webassembly"></a>Debuguj hostowane Blazor WebAssembly
 
 1. Otwórz Blazor WebAssembly folder rozwiązania aplikacji hostowanej w vs Code.
 
@@ -238,7 +236,7 @@ Następujące opcje konfiguracji uruchamiania są obsługiwane dla `blazorwasm` 
 
 ## <a name="example-launch-configurations"></a>Przykładowe konfiguracje uruchamiania
 
-### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>Uruchamianie i debugowanie aplikacji autonomicznej Blazor WebAssembly
+### <a name="launch-and-debug-a-standalone-blazor-webassembly-app"></a>Uruchamianie i debugowanie aplikacji autonomicznej Blazor WebAssembly
 
 ```json
 {
@@ -259,7 +257,7 @@ Następujące opcje konfiguracji uruchamiania są obsługiwane dla `blazorwasm` 
 }
 ```
 
-### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Uruchamianie i debugowanie hostowanej Blazor WebAssembly aplikacji przy użyciu przeglądarki Microsoft Edge
+### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Uruchamianie i debugowanie hostowanej Blazor WebAssembly aplikacji przy użyciu przeglądarki Microsoft Edge
 
 Domyślna konfiguracja przeglądarki w przeglądarce Google Chrome. W przypadku korzystania z przeglądarki Microsoft Edge na potrzeby debugowania ustaw wartość `browser` `edge` . Aby użyć programu Google Chrome, nie ustawiaj `browser` opcji lub ustaw wartość opcji na `chrome` .
 

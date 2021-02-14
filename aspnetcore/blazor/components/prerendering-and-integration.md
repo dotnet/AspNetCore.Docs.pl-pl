@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d120440c292d15b7741260ed31af92d60db2261c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97506984"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280067"
 ---
-# <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>Wyprerender i Zintegruj Razor składniki ASP.NET Core
-
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+# <a name="prerender-and-integrate-aspnet-core-razor-components"></a>Wyprerender i Zintegruj Razor składniki ASP.NET Core
 
 ::: zone pivot="webassembly"
 
@@ -284,7 +282,7 @@ Istniejące Razor strony lub aplikacja MVC mogą integrować Razor składniki na
 
 1. Integruj składniki na dowolną stronę lub widok. Aby uzyskać więcej informacji, zobacz [składniki renderowania ze strony lub widoku](#render-components-from-a-page-or-view) .
 
-## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>Używanie składników rutowanych w Razor aplikacji stron
+## <a name="use-routable-components-in-a-razor-pages-app"></a>Używanie składników rutowanych w Razor aplikacji stron
 
 *Ta sekcja dotyczy dodawania składników, które są bezpośrednio trasowane z żądań użytkowników.*
 
@@ -343,7 +341,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Przykład:
+1. Dodaj składniki routingu do aplikacji. Na przykład:
 
    ```razor
    @page "/counter"
@@ -422,7 +420,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
    });
    ```
 
-1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Przykład:
+1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Na przykład:
 
    ```razor
    @page "/counter"

@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 5901a1cb693dfe8e34e62ce2a28456bcf584221c
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: a17b16563ac12d634e6bdc32638991f45e2a66d5
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252269"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280679"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a>Narzędzia dla ASP.NET Core Blazor
-
-Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
+# <a name="tooling-for-aspnet-core-blazor"></a>Narzędzia dla ASP.NET Core Blazor
 
 ::: zone pivot="windows"
 
@@ -37,7 +35,7 @@ Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://gith
 
 1. Tworzenie nowego projektu.
 
-1. Wybierz pozycję **Blazor aplikacja**. Wybierz pozycję **Dalej**.
+1. Wybierz pozycję **Blazor aplikacja**. Wybierz opcję **Dalej**.
 
 1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
 
@@ -111,11 +109,11 @@ Aby uzyskać więcej informacji, zobacz wskazówki dostarczone przez producenta 
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  .
 
-   Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon **Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon **Blazor Server aplikacji** . Wybierz pozycję **Dalej**.
+   Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon **Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon **Blazor Server aplikacji** . Wybierz opcję **Dalej**.
 
    Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* (autonomicznych i hostowanych) i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
-1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz pozycję **Dalej**.
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz opcję **Dalej**.
 
 1. W przypadku środowiska hostowanego Blazor WebAssembly zaznacz pole wyboru **hostowane ASP.NET Core** .
 
@@ -127,11 +125,11 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
 
 ::: zone-end
 
-## <a name="use-visual-studio-code-for-cross-platform-no-locblazor-development"></a>Używanie Visual Studio Code do tworzenia aplikacji dla wielu platform Blazor
+## <a name="use-visual-studio-code-for-cross-platform-blazor-development"></a>Używanie Visual Studio Code do tworzenia aplikacji dla wielu platform Blazor
 
 [Visual Studio Code](https://code.visualstudio.com/) to środowisko programistyczne (IDE) platformy Open Source, które może służyć do tworzenia Blazor aplikacji. Użyj interfejsu wiersza polecenia platformy .NET, aby utworzyć nową Blazor aplikację do tworzenia przy użyciu Visual Studio Code. Aby uzyskać więcej informacji, zobacz [wersję systemu Linux w tym artykule](?pivots=linux).
 
-## <a name="no-locblazor-template-options"></a>Blazor Opcje szablonu
+## <a name="blazor-template-options"></a>Blazor Opcje szablonu
 
 BlazorStruktura zawiera szablony służące do tworzenia nowych aplikacji dla każdego z dwóch Blazor modeli hostingu. Szablony są używane do tworzenia nowych Blazor projektów i rozwiązań, niezależnie od narzędzi wybranych do Blazor programowania (Visual Studio, Visual Studio dla komputerów Mac, Visual Studio Code lub interfejsu wiersza polecenia platformy .NET):
 

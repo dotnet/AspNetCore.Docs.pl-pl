@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 9b667ff83bf6dd9b400805eff403c8c3f5c7b82a
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 1fb9d75ca1613a7098840efd3ecb86ee90f4064c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107093"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280234"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor kaskadowe wartości i parametry
-
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
 *Wartości kaskadowe i parametry* zapewniają convienent sposób przepływu danych w dół hierarchii składników z składnika nadrzędnego do dowolnej liczby składników decendent. W przeciwieństwie do [parametrów składnika](xref:blazor/components/index#component-parameters), wartości kaskadowych i parametrów nie wymagają przypisania atrybutu dla każdego składnika potomnego, w którym są używane dane. Kaskadowe wartości i parametry umożliwiają również współrzędną ze sobą składników w hierarchii składników.
 

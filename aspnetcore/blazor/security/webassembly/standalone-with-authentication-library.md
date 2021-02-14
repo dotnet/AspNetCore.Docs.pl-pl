@@ -5,7 +5,7 @@ description: Dowiedz się, jak zabezpieczyć Blazor WebAssembly aplikację auton
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/27/2020
+ms.date: 02/10/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,35 +19,33 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 3da9ea045de996602ead052f6f13ffc999273a50
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: a198606caf55232c221f1d1f1224918d3f87f04c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252490"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280889"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Zabezpieczanie ASP.NET Core Blazor WebAssembly autonomicznej aplikacji przy użyciu biblioteki uwierzytelniania
-
-Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Zabezpieczanie ASP.NET Core Blazor WebAssembly autonomicznej aplikacji przy użyciu biblioteki uwierzytelniania
 
 *W przypadku Azure Active Directory (AAD) i Azure Active Directory B2C (AAD B2C) nie postępuj zgodnie ze wskazówkami w tym temacie. Zobacz tematy dotyczące usługi AAD i AAD B2C w tym węźle spisu treści.*
 
-Aby utworzyć [autonomiczną Blazor WebAssembly aplikację](xref:blazor/hosting-models#blazor-webassembly) korzystającą z [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) biblioteki, postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia.
+Aby utworzyć [autonomiczną Blazor WebAssembly aplikację](xref:blazor/hosting-models#blazor-webassembly) korzystającą z [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) biblioteki, postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia. W przypadku dodawania obsługi uwierzytelniania programu zapoznaj się z poniższymi sekcjami tego artykułu, aby uzyskać wskazówki dotyczące konfigurowania i konfigurowania aplikacji.
 
 > [!NOTE]
 > IdentityDostawca (IP) musi używać [OpenID Connect Connect (OIDC)](https://openid.net/connect/). Na przykład adres IP w serwisie Facebook nie jest zgodny z OIDC, więc wskazówki zawarte w tym temacie nie działają z adresem IP w usłudze Facebook. Aby uzyskać więcej informacji, zobacz <xref:blazor/security/webassembly/index#authentication-library>.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
 1. Po wybraniu szablonu **Blazor WebAssembly aplikacji** w oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Zmień** w obszarze **uwierzytelnianie**.
 
-1. Wybierz opcję **konta poszczególnych użytkowników** z opcją **Zapisz konta użytkowników w aplikacji** , aby przechowywać użytkowników w ramach aplikacji przy użyciu [Identity](xref:security/authentication/identity) systemu ASP.NET Core.
+1. Wybierz pozycję **indywidualne konta użytkowników** z opcją **Zapisz konta użytkowników w aplikacji** , aby użyć systemu ASP.NET Core [Identity](xref:security/authentication/identity) . Wybranie tej opcji powoduje dodanie obsługi uwierzytelniania i nie powoduje przechowywania użytkowników w bazie danych. Poniższe sekcje tego artykułu zawierają szczegółowe informacje.
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/interfejs wiersza polecenia platformy .NET Core](#tab/visual-studio-code+netcore-cli)
 
-Utwórz nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania w pustym folderze. Określ `Individual` mechanizm uwierzytelniania z `-au|--auth` opcją zapisania użytkowników w aplikacji przy użyciu [Identity](xref:security/authentication/identity) systemu ASP.NET Core:
+Utwórz nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania w pustym folderze. Określ `Individual` mechanizm uwierzytelniania przy `-au|--auth` użyciu opcji używania [Identity](xref:security/authentication/identity) systemu ASP.NET Core. Wybranie tej opcji powoduje dodanie obsługi uwierzytelniania i nie powoduje przechowywania użytkowników w bazie danych. Poniższe sekcje tego artykułu zawierają szczegółowe informacje.
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual -o {APP NAME}
@@ -67,7 +65,7 @@ Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
 1. W kroku **Skonfiguruj nową Blazor WebAssembly aplikację** wybierz pozycję **uwierzytelnianie indywidualne (w aplikacji)** na liście rozwijanej **uwierzytelnianie** .
 
-1. Aplikacja jest tworzona dla poszczególnych użytkowników przechowywanych w aplikacji z ASP.NET Core [Identity](xref:security/authentication/identity) .
+1. Aplikacja zostanie utworzona, aby używać ASP.NET Core [Identity](xref:security/authentication/identity) i nie powoduje przechowywania użytkowników w bazie danych. Poniższe sekcje tego artykułu zawierają szczegółowe informacje.
 
 ---
 
@@ -88,6 +86,8 @@ Dla symbolu zastępczego `{VERSION}` Najnowsza stabilna wersja pakietu, która p
 ## <a name="authentication-service-support"></a>Obsługa usługi uwierzytelniania
 
 Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi przy użyciu <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> metody rozszerzenia dostarczonej przez [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) pakiet. Ta metoda konfiguruje usługi wymagane przez aplikację do współpracy z Identity dostawcą (IP).
+
+Dla nowej aplikacji podaj wartości dla `{AUTHORITY}` `{CLIENT ID}` symboli zastępczych i w poniższej konfiguracji. Podaj inne wartości konfiguracyjne, które są wymagane do użycia z adresem IP aplikacji. Przykład dotyczy usługi Google, która wymaga `PostLogoutRedirectUri` , `RedirectUri` i `ResponseType` . W przypadku dodawania uwierzytelniania do aplikacji ręcznie Dodaj następujący kod i konfigurację do aplikacji z wartościami dla symboli zastępczych i innych wartości konfiguracyjnych.
 
 `Program.cs`:
 
@@ -131,7 +131,9 @@ Obsługa uwierzytelniania dla aplikacji autonomicznych jest oferowana przy użyc
 
 Blazor WebAssemblySzablon automatycznie konfiguruje domyślne zakresy dla `openid` i `profile` .
 
-Blazor WebAssemblySzablon nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API. Aby zainicjować obsługę administracyjną tokenu dostępu w ramach przepływu logowania, Dodaj zakres do domyślnych zakresów tokenów <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> :
+Blazor WebAssemblySzablon nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API. Aby zainicjować obsługę administracyjną tokenu dostępu w ramach przepływu logowania, Dodaj zakres do domyślnych zakresów tokenów <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> . W przypadku dodawania uwierzytelniania do aplikacji należy ręcznie dodać poniższy kod i skonfigurować identyfikator URI zakresu.
+
+`Program.cs`:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>

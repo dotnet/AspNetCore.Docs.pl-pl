@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: adc3b7b1b33438f2d0024bf78830e412a330ad45
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: 780161090d376f08b849fadb47127810d6661d0c
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100106859"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100279754"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
-
-Autor [Daniel Roth](https://github.com/danroth27)
 
 Blazorto platforma internetowa służąca do uruchamiania programu w przeglądarce w programie .NET Runtime [](https://webassembly.org/)( *Blazor WebAssembly* ) lub po stronie serwera w ASP.NET Core ( *Blazor Server* ). Niezależnie od modelu hostingu modele aplikacji i składników *są takie same*.
 

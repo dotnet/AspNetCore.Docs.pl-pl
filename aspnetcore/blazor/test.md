@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 67ebfcd322ae08acf2fddae9bd6101f13fa77e7e
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054869"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280704"
 ---
-# <a name="test-components-in-aspnet-core-no-locblazor"></a>Testowanie składników w ASP.NET Core Blazor
+# <a name="test-components-in-aspnet-core-blazor"></a>Testowanie składników w ASP.NET Core Blazor
 
-[Egil Hansen](https://egilhansen.com/)
+Autor: [Egil Hansen](https://egilhansen.com/)
 
 Testowanie jest ważnym aspektem tworzenia stabilnych i konserwowanych oprogramowania.
 
@@ -68,8 +68,8 @@ Poniższa tabela zawiera podsumowanie różnic między dwoma podejściami do tes
 | -------------------------------- | -------------------------------- | --------------------------------------- |
 | Zakres testu                       | Blazor tylko składnik ( Razor /c #) | Blazor składnik ( Razor /c #) z CSS/JS |
 | Czas wykonywania testu              | )                     | Sekundy                                 |
-| Dostęp do wystąpienia składnika | Yes                              | Nie                                      |
-| Poufne dla środowiska     | Nie                               | Yes                                     |
+| Dostęp do wystąpienia składnika | Tak                              | Nie                                      |
+| Poufne dla środowiska     | Nie                               | Tak                                     |
 | Niezawodność                      | Bardziej niezawodne                    | Mniej niezawodne                           |
 
 ## <a name="choose-the-most-appropriate-test-approach"></a>Wybierz najbardziej odpowiednie podejście testowe

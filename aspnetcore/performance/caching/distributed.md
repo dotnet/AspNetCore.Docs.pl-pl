@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 6d87c8de66bf5600189465b96dee903841106b6f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6f89046f2e1805111dd81b3282253a72a7c6ea09
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061148"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100281019"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Rozproszone buforowanie w ASP.NET Core
 
@@ -129,12 +129,12 @@ Aby uzyskać więcej informacji, zobacz [Pamięć podręczna Azure Cache for Red
 
 [NCache](https://github.com/Alachisoft/NCache) to rozproszona pamięć podręczna rozproszonej w pamięci, opracowana natywnie w .NET i .NET Core. NCache działa lokalnie i skonfigurowano jako klaster rozproszonej pamięci podręcznej dla aplikacji ASP.NET Core działającej na platformie Azure lub na innych platformach hostingowych.
 
-Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [Przewodnik po NCache wprowadzenie dla systemu Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/).
+Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [przewodnik wprowadzenie dla systemu Windows (.NET i .NET Core)](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/).
 
 Aby skonfigurować NCache:
 
 1. Zainstaluj pakiet [NuGet NCache Open Source](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/).
-1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html).
+1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html).
 1. Dodaj następujący kod do pliku `Startup.ConfigureServices`:
 
    ```csharp
@@ -156,7 +156,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 
@@ -299,12 +299,12 @@ Aby zainstalować Redis na komputerze lokalnym:
 
 [NCache](https://github.com/Alachisoft/NCache) to rozproszona pamięć podręczna rozproszonej w pamięci, opracowana natywnie w .NET i .NET Core. NCache działa lokalnie i skonfigurowano jako klaster rozproszonej pamięci podręcznej dla aplikacji ASP.NET Core działającej na platformie Azure lub na innych platformach hostingowych.
 
-Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [Przewodnik po NCache wprowadzenie dla systemu Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/).
+Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [przewodnik wprowadzenie dla systemu Windows (.NET i .NET Core)](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/).
 
 Aby skonfigurować NCache:
 
 1. Zainstaluj pakiet [NuGet NCache Open Source](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/).
-1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html).
+1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html).
 1. Dodaj następujący kod do pliku `Startup.ConfigureServices`:
 
    ```csharp
@@ -326,7 +326,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 
@@ -475,12 +475,12 @@ Aby zainstalować Redis na komputerze lokalnym:
 
 [NCache](https://github.com/Alachisoft/NCache) to rozproszona pamięć podręczna rozproszonej w pamięci, opracowana natywnie w .NET i .NET Core. NCache działa lokalnie i skonfigurowano jako klaster rozproszonej pamięci podręcznej dla aplikacji ASP.NET Core działającej na platformie Azure lub na innych platformach hostingowych.
 
-Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [Przewodnik po NCache wprowadzenie dla systemu Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/).
+Aby zainstalować i skonfigurować NCache na komputerze lokalnym, zobacz [przewodnik wprowadzenie dla systemu Windows (.NET i .NET Core)](https://www.alachisoft.com/resources/docs/ncache/getting-started-guide-windows/).
 
 Aby skonfigurować NCache:
 
 1. Zainstaluj pakiet [NuGet NCache Open Source](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/).
-1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html).
+1. Skonfiguruj klaster pamięci podręcznej w programie [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache/admin-guide/client-config.html).
 1. Dodaj następujący kod do pliku `Startup.ConfigureServices`:
 
    ```csharp
@@ -502,7 +502,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 

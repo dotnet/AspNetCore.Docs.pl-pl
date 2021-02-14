@@ -19,16 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/rendering
-ms.openlocfilehash: 27701d175c86cdf4b74a9e6332b30b4d55806650
-ms.sourcegitcommit: 04ad9cd26fcaa8bd11e261d3661f375f5f343cdc
+ms.openlocfilehash: e1222981d4af3f4e233cdc0c57bb96a71972af15
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/10/2021
-ms.locfileid: "100107041"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280045"
 ---
 # <a name="aspnet-core-blazor-component-rendering"></a>BlazorRenderowanie składników ASP.NET Core
-
-[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 Składniki *muszą być* renderowane, gdy są one najpierw dodawane do hierarchii składników przez ich składnik nadrzędny. Jest to jedyny czas, który musi być renderowany przez składnik.
 

@@ -20,16 +20,14 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 5b7a6fefd13d7255fbe3ae7010df48c6211fa755
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 811ec08eb457fcf0697a64dc4990d29082454f73
+ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97854341"
+ms.lasthandoff: 02/12/2021
+ms.locfileid: "100280864"
 ---
-# <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
-
-[Steve Sanderson](https://github.com/SteveSandersonMS) i [Luke Latham](https://github.com/guardrex)
+# <a name="aspnet-core-blazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
 ::: zone pivot="webassembly"
 
@@ -71,12 +69,12 @@ Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 <h2 id="server-side-storage-wasm">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszystkie urządzenia aplikacja może używać niezależnego magazynu po stronie serwera, dostępnego za pośrednictwem internetowego interfejsu API. Dostępne są następujące opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w każdej nowej sesji przeglądarki.
 
@@ -180,12 +178,12 @@ Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 <h2 id="server-side-storage-server">Magazyn po stronie serwera</h2>
 
-W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne opcje:
+W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urządzenia aplikacja może korzystać z magazynu po stronie serwera. Dostępne są następujące opcje:
 
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w dowolnym nowym obwodie.
 

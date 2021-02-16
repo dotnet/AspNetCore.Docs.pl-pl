@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 823c24620b369874fdbc3e314b5b08952df83c8b
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 7b4438b4003916488c17d389b9817b5e09d1086c
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280105"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536223"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -285,16 +285,168 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
-Zgodnie z Konwencją wartość atrybutu, która składa się z kodu C#, jest przypisywana do parametru przy użyciu [ Razor zastrzeżonego `@` symbolu](xref:mvc/views/razor#razor-syntax):
+Przypisz pola, właściwości i metody w języku C# do parametrów składnika jako wartości atrybutów HTML przy użyciu [ Razor zastrzeżonego `@` symbolu](xref:mvc/views/razor#razor-syntax):
 
-* Pole nadrzędne lub właściwość: `Title="@{FIELD OR PROPERTY}` , gdzie symbol zastępczy `{FIELD OR PROPERTY}` jest polem języka C# lub właściwością składnika nadrzędnego.
-* Wynik metody: `Title="@{METHOD}"` , gdzie symbol zastępczy `{METHOD}` jest metodą języka C# składnika nadrzędnego.
-* [Wyrażenie niejawne lub jawne](xref:mvc/views/razor#implicit-razor-expressions): `Title="@({EXPRESSION})"` , gdzie symbol zastępczy `{EXPRESSION}` jest wyrażeniem języka C#.
+* Aby przypisać pole składnika nadrzędnego, właściwość lub metodę do parametru składnika podrzędnego, prefiks pola, właściwości lub nazwy metody z `@` symbolem. Aby przypisać wynik [niejawnego wyrażenia języka C#](xref:mvc/views/razor#implicit-razor-expressions) do parametru, poprzedź wyrażenie niejawne `@` symbolem.
+
+  Poniższy składnik nadrzędny wyświetla cztery wystąpienia poprzedniego `ChildComponent` składnika i ustawia ich `Title` wartości parametrów na:
+
+  * Wartość `title` pola.
+  * Wynik `GetTitle` metody języka C#.
+  * Bieżąca data lokalna w formacie długim <xref:System.DateTime.ToLongDateString%2A> .
+  * `person` `Name` Właściwość obiektu.
+
+  `Pages/ParentComponent.razor`:
+  
+  ```razor
+  <ChildComponent Title="@title">
+      Title from field.
+  </ChildComponent>
+  
+  <ChildComponent Title="@GetTitle()">
+      Title from method.
+  </ChildComponent>
+  
+  <ChildComponent Title="@DateTime.Now.ToLongDateString()">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  <ChildComponent Title="@person.Name">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  @code {
+      private string title = "Panel Title from Parent";
+      private Person person = new Person();
+      
+      private string GetTitle()
+      {
+          return "Panel Title from Parent";
+      }
+      
+      private class Person
+      {
+          public string Name { get; set; } = "Dr. Who";
+      }
+  }
+  ```
+  
+  W przeciwieństwie do Razor stron ( `.cshtml` ), Blazor nie można wykonać asynchronicznej pracy w Razor wyrażeniu podczas renderowania składnika. Jest to spowodowane tym, że Blazor jest przeznaczony do renderowania interakcyjnych interfejsów użytkownika. W interaktywnym interfejsie użytkownika ekran musi zawsze wyświetlać coś, dlatego nie ma sensu blokowania przepływu renderowania. Zamiast tego zadania asynchroniczne są wykonywane w ramach jednego z [asynchronicznych zdarzeń cyklu życia](xref:blazor/components/lifecycle). Po każdym asynchronicznym zdarzeniu cyklu życia składnik może być ponownie renderowany. Następująca Razor składnia **nie** jest obsługiwana:
+  
+  ```razor
+  <ChildComponent Title="@await ...">
+      ...
+  </ChildComponent>
+  ```
+  
+  Kod w powyższym przykładzie generuje *błąd kompilatora* , jeśli aplikacja została skompilowana:
+  
+  > Operatora "await" można używać tylko w metodzie asynchronicznej. Rozważ oznaczenie tej metody za pomocą modyfikatora "Async" i zmianę zwracanego typu na "Task".
+
+  Aby uzyskać wartość `Title` parametru w powyższym przykładzie asynchronicznie, składnik może użyć [ `OnInitializedAsync` zdarzenia cyklu życia](xref:blazor/components/lifecycle#component-initialization-methods), jak pokazano na poniższym przykładzie:
+  
+  ```razor
+  <ChildComponent Title="@title">
+      Title from implicit Razor expression.
+  </ChildComponent>
+  
+  @code {
+      private string title;
+      
+      protected override async Task OnInitializedAsync()
+      {
+          title = await ...;
+      }
+  }
+  ```
+  
+* Aby przypisać wynik [jawnego wyrażenia języka C#](xref:mvc/views/razor#explicit-razor-expressions) w składniku nadrzędnym do parametru składnika podrzędnego, umieść wyrażenie w nawiasach z `@` prefiksem symbolu.
+
+  Poniższy składnik podrzędny ma <xref:System.DateTime> parametr składnika `ShowItemsSinceDate` .
+  
+  `Shared/ChildComponent.razor`:
+  
+  ```razor
+  <div class="panel panel-default">
+      <div class="panel-heading">Explicit DateTime Expression Example</div>
+      <div class="panel-body">
+          <p>@ChildContent</p>
+          <p>One week ago date: @ShowItemsSinceDate</p>
+      </div>
+  </div>
+
+  @code {
+      [Parameter]
+      public DateTime ShowItemsSinceDate { get; set; }
+
+      [Parameter]
+      public RenderFragment ChildContent { get; set; }
+  }
+  ```
+  
+  Poniższy składnik nadrzędny oblicza datę z jawnym wyrażeniem języka C#, które jest tydzień w przeszłości do przypisania do parametru elementu podrzędnego `ShowItemsSinceDate` .
+  
+  `Pages/ParentComponent.razor`:
+
+  ```razor
+  <ChildComponent ShowItemsSinceDate="@(DateTime.Now - TimeSpan.FromDays(7))">
+      Title from explicit Razor expression.
+  </ChildComponent>
+  ```
+
+  Użycie wyrażenia Explicit do łączenia tekstu z wynikiem wyrażenia w celu przypisania do parametru **nie** jest obsługiwane. Poniższy przykład dąży do łączenia tekstu "SKU-" z numerem zapasowym produktu ( `SKU` Właściwość "jednostka składowania") udostępnianą przez obiekt składnika nadrzędnego `product` . Chociaż ta składnia jest obsługiwana na Razor stronie ( `.cshtml` ), nie jest ona prawidłowa do przypisania do parametru elementu podrzędnego `Title` .
+  
+  ```razor
+  <ChildComponent Title="SKU-@(product.SKU)">
+      Title from composed Razor expression. This doesn't compile.
+  </ChildComponent>
+  ```
+  
+  Kod w powyższym przykładzie generuje *błąd kompilatora* , jeśli aplikacja została skompilowana:
+  
+  > Atrybuty składnika nie obsługują złożonej zawartości (mieszanego języka C# i znaczników).
+  
+  Aby obsługiwać przypisanie wartości złożonej, użyj metody, pola lub właściwości. W poniższym przykładzie jest wykonywana concatination "SKU-" oraz numeru giełdowego produktu w metodzie C# `GetTitle` :
+  
+  ```razor
+  <ChildComponent Title="@GetTitle()">
+      Composed title from method.
+  </ChildComponent>
+  
+  @code {
+      private Product product = new Product();
+
+      private string GetTitle() => $"SKU-{product.SKU}";
+      
+      private class Product
+      {
+          public string SKU { get; set; } = "12345";
+      }
+  }
+  ```
   
 Aby uzyskać więcej informacji, zobacz [ Razor Informacje o składni dla ASP.NET Core](xref:mvc/views/razor).
 
 > [!WARNING]
 > Nie należy tworzyć składników, które zapisują do własnych *parametrów składników*, zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
+
+#### <a name="component-parameters-should-be-auto-properties"></a>Parametry składnika powinny być właściwościami autowypełnianymi
+
+Parametry składnika powinny być zadeklarowane jako *Właściwości autoproperties*, co oznacza, że nie powinny zawierać logiki niestandardowej w swoich metodach pobierających lub setter. Na przykład następująca `StartData` Właściwość jest właściwością autoproperty:
+
+```csharp
+[Parameter]
+public DateTime StartData { get; set; }
+```
+
+Nie umieszczaj logiki niestandardowej w `get` `set` metodzie lub, ponieważ parametry składnika są przeznaczone wyłącznie do użycia jako kanał składnika nadrzędnego do przepływu informacji do składnika podrzędnego. Jeśli Metoda ustawiająca właściwości składnika podrzędnego zawiera logikę powodującą odtwarzanie składnika nadrzędnego, nieskończona pętla renderowania.
+
+Jeśli konieczne jest przekształcenie odebranej wartości parametru:
+
+* Pozostaw Właściwość parametru jako czystą Właściwość autoproperty, aby reprezentować dostarczone dane pierwotne.
+* Utwórz inną właściwość lub metodę, która dostarcza przekształcone dane na podstawie właściwości parametru.
+
+Można przesłonić, `OnParametersSetAsync` Jeśli chcesz przekształcić otrzymany parametr za każdym razem, gdy zostaną odebrane nowe dane.
 
 ## <a name="child-content"></a>Zawartość podrzędna
 

@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować aplikację ASP.NET Core przy użyc
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/24/2020
+ms.date: 1/29/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 62c9d1a58e0f771d91e2bc57f39ec5ebb25baaed
-ms.sourcegitcommit: 37186f76e4a50d7fb7389026dd0e5e234b51ebb2
+ms.openlocfilehash: 0f069b049889f7caade493e238ac7a23db5e79af
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/04/2021
-ms.locfileid: "99541371"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536327"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -232,9 +232,30 @@ setx Logging__1__Name=ToConsole
 setx Logging__1__Level=Information
 ```
 
-### <a name="environment-variables-set-in-launchsettingsjson"></a>Zmienne środowiskowe ustawione w launchSettings.jsna
+### <a name="environment-variables-set-in-generated-launchsettingsjson"></a>Zmienne środowiskowe ustawione w wygenerowanym launchSettings.jsna
 
-Zmienne środowiskowe ustawione w *launchSettings.jsna* zastępują te ustawienia w środowisku systemowym.
+Zmienne środowiskowe ustawione w *launchSettings.jsna* zastępują te ustawienia w środowisku systemowym. Na przykład szablony sieci Web ASP.NET Core generują *launchSettings.jsw* pliku, który ustawia konfigurację punktu końcowego na:
+
+```json
+"applicationUrl": "https://localhost:5001;http://localhost:5000"
+```
+
+Konfigurowanie `applicationUrl` `ASPNETCORE_URLS` ustawień zmienna środowiskowa i zastąpień ustawionych w środowisku.
+
+### <a name="escape-environment-variables-on-linux"></a>Zmienne środowiskowe ucieczki w systemie Linux
+
+W systemie Linux wartość zmiennych środowiskowych adresów URL musi być Ucieczka, aby `systemd` można było ją przeanalizować. Korzystanie z narzędzia systemu Linux, `systemd-escape` które daje `http:--localhost:5001`
+ 
+ ```cmd
+ groot@terminus:~$ systemd-escape http://localhost:5001
+ http:--localhost:5001
+ ```
+
+### <a name="display-environment-variables"></a>Wyświetl zmienne środowiskowe
+
+Poniższy kod wyświetla zmienne środowiskowe i wartości podczas uruchamiania aplikacji, które mogą być przydatne podczas debugowania ustawień środowiska:
+
+[!code-csharp[](~/fundamentals/configuration/index/samples_snippets/5.x/Program.cs?name=snippet)]
 
 <a name="clcp"></a>
 
@@ -556,6 +577,38 @@ W poprzednim kodzie `config.AddInMemoryCollection(Dict)` jest dodawany po [domy�
 
 Zobacz [Powiąż tablicę](#boa) z innym przykładem przy użyciu `MemoryConfigurationProvider` .
 
+::: moniker-end
+::: moniker range=">= aspnetcore-5.0"
+
+<a name="kestrel"></a>
+
+## <a name="kestrel-endpoint-configuration"></a>Konfiguracja punktu końcowego Kestrel
+
+Konfiguracja określonego punktu końcowego Kestrel zastępuje wszystkie konfiguracje punktów końcowych [między serwerami](xref:fundamentals/servers/index) . Konfiguracje punktu końcowego między serwerami obejmują:
+
+  * [UseUrls](xref:fundamentals/host/web-host#server-urls)
+  * `--urls` w [wierszu polecenia](xref:fundamentals/configuration/index#command-line)
+  * [Zmienna środowiskowa](xref:fundamentals/configuration/index#environment-variables)`ASPNETCORE_URLS`
+
+Rozważmy następujący *appsettings.json* plik używany w aplikacji internetowej ASP.NET Core:
+
+[!code-json[](~/fundamentals/configuration/index/samples_snippets/5.x/appsettings.json?highlight=2-8)]
+
+Gdy poprzednio wyróżnione znaczniki są używane w aplikacji internetowej ASP.NET Core ***i*** aplikacja jest uruchamiana w wierszu polecenia z następującą konfiguracją punktu końcowego między serwerami:
+
+`dotnet run --urls="https://localhost:7777"`
+
+Kestrel wiąże się z punktem końcowym skonfigurowanym pod kątem Kestrel w *appsettings.json* pliku ( `https://localhost:9999` ), a nie `https://localhost:7777` .
+
+Rozważmy określony punkt końcowy Kestrel skonfigurowany jako zmienna środowiskowa:
+
+`set Kestrel__Endpoints__Https__Url=https://localhost:8888`
+
+W poprzedniej zmiennej środowiskowej, `Https` jest nazwą Kestrel określonego punktu końcowego. Poprzedni *appsettings.json* plik definiuje również określony punkt końcowy Kestrel o nazwie `Https` . [Domyślnie](#default-configuration)zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp) są odczytywane po *appSettings.* `Environment` *. JSON*, w związku z tym, poprzednia zmienna środowiskowa jest używana w `Https` punkcie końcowym.
+
+::: moniker-end
+::: moniker range=">= aspnetcore-3.0"
+
 ## <a name="getvalue"></a>GetValue
 
 [`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) wyodrębnia pojedynczą wartość z konfiguracji z określonym kluczem i konwertuje ją na określony typ:
@@ -773,7 +826,7 @@ Przed skonfigurowaniem i uruchomieniem aplikacji *host* zostanie skonfigurowany 
 
 ## <a name="default-host-configuration"></a>Domyślna konfiguracja hosta
 
-Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej podczas korzystania z [hosta sieci Web](xref:fundamentals/host/web-host), zobacz [wersję ASP.NET Core 2,2 tego tematu](?view=aspnetcore-2.2).
+Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej podczas korzystania z [hosta sieci Web](xref:fundamentals/host/web-host), zobacz [wersję ASP.NET Core 2,2 tego tematu](?view=aspnetcore-2.2&preserve-view=true).
 
 * Konfiguracja hosta jest poświadczona z:
   * Zmienne środowiskowe poprzedzone znakiem `DOTNET_` (na przykład `DOTNET_ENVIRONMENT` ) przy użyciu [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables). Prefiks ( `DOTNET_` ) jest usuwany, gdy są ładowane pary klucz-wartość konfiguracji.

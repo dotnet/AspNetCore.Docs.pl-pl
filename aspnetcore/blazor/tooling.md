@@ -5,7 +5,7 @@ description: Dowiedz się więcej o narzędziach dostępnych do kompilowania Bla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/28/2020
+ms.date: 02/11/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: a17b16563ac12d634e6bdc32638991f45e2a66d5
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 6b61d9a4645d273b0c78fae0388d569771c43a2d
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280679"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536249"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>Narzędzia dla ASP.NET Core Blazor
 
@@ -49,6 +49,8 @@ ms.locfileid: "100280679"
 
 Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .
 
+Podczas wykonywania hostowanej Blazor WebAssembly aplikacji Uruchom aplikację z **`Server`** projektu rozwiązania.
+
 ::: zone-end
 
 ::: zone pivot="linux"
@@ -70,11 +72,11 @@ Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu pr
    ```
 
    W przypadku środowiska hostowanego Blazor WebAssembly Dodaj opcję hostowaną ( `-ho` lub `--hosted` ) do polecenia:
-   
+
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1 -ho
    ```
-   
+
    Aby uzyskać Blazor Server środowisko, wykonaj następujące polecenie w powłoce poleceń:
 
    ```dotnetcli
@@ -86,6 +88,57 @@ Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu pr
 1. Otwórz `WebApplication1` folder w Visual Studio Code.
 
 1. Żądania IDE służące do dodawania zasobów do kompilowania i debugowania projektu. Wybierz pozycję **Tak**.
+
+   **Hostowana Blazor WebAssembly Konfiguracja uruchamiania i zadania**
+
+   W przypadku Blazor WebAssembly rozwiązań hostowanych Dodaj (lub Przenieś) `.vscode` folder z `launch.json` `tasks.json` plikami i do folderu nadrzędnego rozwiązania, który jest folderem zawierającym typowe nazwy folderów projektu `Client` , `Server` i `Shared` . Zaktualizuj lub potwierdź, że konfiguracja w `launch.json` plikach i `tasks.json` wykonuje hostowaną Blazor WebAssembly aplikację z **`Server`** projektu.
+
+   **`.vscode/launch.json`** ( `launch` Konfiguracja):
+
+   ```json
+   ...
+   "cwd": "${workspaceFolder}/{SERVER APP FOLDER}",
+   ...
+   ```
+
+   W poprzedniej konfiguracji dla bieżącego katalogu roboczego ( `cwd` ) `{SERVER APP FOLDER}` symbol zastępczy jest **`Server`** folderem projektu, zwykle " `Server` ".
+
+   Jeśli zostanie użyta przeglądarka Microsoft Edge i Google Chrome nie jest zainstalowana w systemie, Dodaj dodatkową właściwość `"browser": "edge"` do konfiguracji.
+
+   Przykładem dla folderu projektu `Server` i, który duplikuje program Microsoft Edge jako przeglądarkę dla przebiegów debugowania, zamiast domyślnej przeglądarki Google Chrome:
+
+   ```json
+   ...
+   "cwd": "${workspaceFolder}/Server",
+   "browser": "edge"
+   ...
+   ```
+
+   **`.vscode/tasks.json`**(argumenty [ `dotnet` polecenia](/dotnet/core/tools/dotnet) ):
+
+   ```json
+   ...
+   "${workspaceFolder}/{SERVER APP FOLDER}/{PROJECT NAME}.csproj",
+   ...
+   ```
+
+   W poprzednim argumencie:
+
+   * `{SERVER APP FOLDER}`Symbol zastępczy jest **`Server`** folderem projektu, zwykle " `Server` ".
+   * `{PROJECT NAME}`Symbol zastępczy jest nazwą aplikacji, na przykład na podstawie nazwy rozwiązania, a po niej " `.Server` " w aplikacji wygenerowanej na podstawie Blazor szablonu projektu.
+
+   Poniższy przykład z [samouczka dotyczącego używania SignalR z Blazor WebAssembly aplikacją](xref:tutorials/signalr-blazor) używa nazwy folderu projektu `Server` i nazwy projektu `BlazorWebAssemblySignalRApp.Server` :
+
+   ```json
+   ...
+   "args": [
+     "build",
+       "${workspaceFolder}/Server/BlazorWebAssemblySignalRApp.Server.csproj",
+       "/property:GenerateFullPaths=true",
+       "/consoleloggerparameters:NoSummary"
+   ],
+   ...
+   ```
 
 1. Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.
 
@@ -122,6 +175,8 @@ Aby uzyskać więcej informacji, zobacz wskazówki dostarczone przez producenta 
 1. Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom **aplikację z**  >  przyciskiem Uruchom **debugowanie** lub Uruchom (&#9654;), aby uruchomić aplikację *z debugerem*.
 
 Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu. Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .
+
+Podczas wykonywania hostowanej Blazor WebAssembly aplikacji Uruchom aplikację z **`Server`** projektu rozwiązania.
 
 ::: zone-end
 

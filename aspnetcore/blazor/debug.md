@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: aed9e800074dc72a2b55b816a2710722470cd7d1
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 9214fa10a2bf7d53a4cb12263a3fa69bded84b29
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280058"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100536236"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -162,6 +162,8 @@ Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplika
 
 <h2 id="vscode">Debuguj autonomiczne Blazor WebAssembly</h2>
 
+Aby uzyskać informacje dotyczące konfigurowania VS Code zasobów w `.vscode` folderze, zobacz Wskazówki dotyczące systemu operacyjnego **Linux** w temacie <xref:blazor/tooling> .
+
 1. Otwórz aplikację autonomiczną Blazor WebAssembly w vs Code.
 
    Użytkownik może otrzymać powiadomienie, że do włączenia debugowania jest wymagana dodatkowa konfiguracja:
@@ -197,6 +199,8 @@ Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplika
 1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak**.
 
    > Brak wymaganych zasobów do skompilowania i debugowania w "{APPLICATION NAME}". Dodać je?
+
+   Aby uzyskać informacje dotyczące konfigurowania VS Code zasobów w `.vscode` folderze, zobacz Wskazówki dotyczące systemu operacyjnego **Linux** w temacie <xref:blazor/tooling> .
 
 1. W palecie poleceń w górnej części okna wybierz projekt *serwera* w ramach rozwiązania hostowanego.
 

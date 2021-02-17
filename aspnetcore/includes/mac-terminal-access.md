@@ -11,14 +11,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: 1029b758b9adffb1869b5112e488cec4744bea55
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: cc421e92ad9b635ac795ae06a4b9a1daf821f89c
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100552339"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564092"
 ---
-### <a name="accessing-a-command-terminal-on-visual-studios-for-mac"></a>Uzyskiwanie dostępu do terminalu poleceń w programie Visual Studios for Mac
+### <a name="accessing-a-command-terminal-on-mac"></a>Uzyskiwanie dostępu do terminalu poleceń na komputerze Mac
 
 Dostęp do terminalu poleceń na komputerze Mac po raz pierwszy wymaga konfiguracji następujących ustawień:
 

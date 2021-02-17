@@ -1,19 +1,39 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 1161f7731898221e51a4c7f9f246269b83c6ae80
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552407"
+---
 ::: moniker range=">= aspnetcore-3.0"
 
-Uruchom szkielet tożsamości:
+Uruchamianie Identity szkieletu:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt > **Dodaj** > **nowy element szkieletowy**.
-* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję Dodaj **tożsamość** > **Add**.
-* W oknie dialogowym **Dodawanie tożsamości** wybierz odpowiednie opcje.
-  * Wybierz istniejącą stronę układu, aby plik układu nie został zastąpiony nieprawidłowym znacznikiem. Gdy zostanie wybrany istniejący plik * \_ Layout. cshtml* , **nie** zostanie on nadpisany. Przykład:
-    * `~/Pages/Shared/_Layout.cshtml`w przypadku Razor Pages lub projektów serwera Blazor z istniejącą infrastrukturą Razor Pages
-    * `~/Views/Shared/_Layout.cshtml`w przypadku projektów MVC lub projektów serwera Blazor z istniejącą infrastrukturą MVC
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt > **Dodaj** > **nowy element szkieletowy**.
+* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję **Identity** > **Dodaj**.
+* W oknie **dialogowym Identity Dodawanie** wybierz odpowiednie opcje.
+  * Wybierz istniejącą stronę układu, aby plik układu nie został zastąpiony nieprawidłowym znacznikiem. Gdy zostanie wybrany istniejący plik *\_ Layout. cshtml* , **nie** zostanie on nadpisany. Na przykład:
+    * `~/Pages/Shared/_Layout.cshtml` dla Razor stron lub Blazor Server projektów z istniejącą Razor infrastrukturą stron
+    * `~/Views/Shared/_Layout.cshtml` dla projektów MVC lub Blazor Server projektów z istniejącą infrastrukturą MVC
 * Aby użyć istniejącego kontekstu danych, wybierz co najmniej jeden plik do przesłonięcia. Musisz wybrać co najmniej jeden plik, aby dodać kontekst danych.
   * Wybierz klasę kontekstu danych.
   * Wybierz pozycję **Dodaj**.
-* Aby utworzyć nowy kontekst użytkownika i ewentualnie utworzyć niestandardową klasę użytkownika dla tożsamości:
+* Aby utworzyć nowy kontekst użytkownika i ewentualnie utworzyć niestandardową klasę użytkownika dla Identity :
   * Wybierz **+** przycisk, aby utworzyć nową **klasę kontekstu danych**. Zaakceptuj wartość domyślną lub określ klasę (na przykład `MyApplication.Data.ApplicationDbContext` ).
   * Wybierz pozycję **Dodaj**.
 
@@ -38,7 +58,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
-Uruchom następujące polecenie, aby wyświetlić listę opcji szkieletu tożsamości:
+Uruchom następujące polecenie, aby wyświetlić listę Identity opcji szkieletu:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
@@ -46,19 +66,19 @@ dotnet aspnet-codegenerator identity -h
 
 [!INCLUDE[](~/includes/scaffoldTFM.md)]
 
-W folderze projektu uruchom program do tworzenia szkieletu tożsamości z żądanymi opcjami. Na przykład, aby skonfigurować tożsamość przy użyciu domyślnego interfejsu użytkownika i minimalnej liczby plików, uruchom następujące polecenie. Użyj prawidłowej w pełni kwalifikowanej nazwy dla kontekstu bazy danych:
+W folderze projektu uruchom program do tworzenia Identity szkieletu z żądanymi opcjami. Na przykład, aby skonfigurować tożsamość przy użyciu domyślnego interfejsu użytkownika i minimalnej liczby plików, uruchom następujące polecenie. Użyj prawidłowej w pełni kwalifikowanej nazwy dla kontekstu bazy danych:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login"
 ```
 
-Program PowerShell używa średnika jako separatora poleceń. W przypadku korzystania z programu PowerShell wpisz średniki na liście plików lub Umieść listę plików w podwójnych cudzysłowach. Przykład:
+Program PowerShell używa średnika jako separatora poleceń. W przypadku korzystania z programu PowerShell wpisz średniki na liście plików lub Umieść listę plików w podwójnych cudzysłowach. Na przykład:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-W przypadku uruchomienia szkieletu tożsamości bez określenia `--files` flagi lub `--useDefaultUI` flagi wszystkie dostępne strony interfejsu użytkownika tożsamości zostaną utworzone w projekcie.
+W przypadku uruchomienia Identity szkieletu bez określenia `--files` flagi lub `--useDefaultUI` flagi wszystkie dostępne Identity strony interfejsu użytkownika zostaną utworzone w projekcie.
 
 ---
 
@@ -66,20 +86,20 @@ W przypadku uruchomienia szkieletu tożsamości bez określenia `--files` flagi 
 
 ::: moniker range="< aspnetcore-3.0"
 
-Uruchom szkielet tożsamości:
+Uruchamianie Identity szkieletu:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt > **Dodaj** > **nowy element szkieletowy**.
-* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję Dodaj **tożsamość** > **Add**.
-* W oknie dialogowym **Dodawanie tożsamości** wybierz odpowiednie opcje.
-  * Wybierz istniejącą stronę układu lub plik układu zostanie zastąpiony nieprawidłowym znacznikiem. Gdy zostanie wybrany istniejący plik * \_ Layout. cshtml* , **nie** zostanie on nadpisany. Przykład:
-    * `~/Pages/Shared/_Layout.cshtml`dla Razor Pages
-    * `~/Views/Shared/_Layout.cshtml`dla projektów MVC
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt > **Dodaj** > **nowy element szkieletowy**.
+* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję **Identity** > **Dodaj**.
+* W oknie **dialogowym Identity Dodawanie** wybierz odpowiednie opcje.
+  * Wybierz istniejącą stronę układu lub plik układu zostanie zastąpiony nieprawidłowym znacznikiem. Gdy zostanie wybrany istniejący plik *\_ Layout. cshtml* , **nie** zostanie on nadpisany. Na przykład:
+    * `~/Pages/Shared/_Layout.cshtml` dla Razor stron
+    * `~/Views/Shared/_Layout.cshtml` dla projektów MVC
 * Aby użyć istniejącego kontekstu danych, wybierz co najmniej jeden plik do przesłonięcia. Musisz wybrać co najmniej jeden plik, aby dodać kontekst danych.
   * Wybierz klasę kontekstu danych.
   * Wybierz pozycję **Dodaj**.
-* Aby utworzyć nowy kontekst użytkownika i ewentualnie utworzyć niestandardową klasę użytkownika dla tożsamości:
+* Aby utworzyć nowy kontekst użytkownika i ewentualnie utworzyć niestandardową klasę użytkownika dla Identity :
   * Wybierz **+** przycisk, aby utworzyć nową **klasę kontekstu danych**. Zaakceptuj wartość domyślną lub określ klasę (na przykład `MyApplication.Data.ApplicationDbContext` ).
   * Wybierz pozycję **Dodaj**.
 
@@ -100,25 +120,25 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-Uruchom następujące polecenie, aby wyświetlić listę opcji szkieletu tożsamości:
+Uruchom następujące polecenie, aby wyświetlić listę Identity opcji szkieletu:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-W folderze projektu uruchom program do tworzenia szkieletu tożsamości z żądanymi opcjami. Na przykład, aby skonfigurować tożsamość przy użyciu domyślnego interfejsu użytkownika i minimalnej liczby plików, uruchom następujące polecenie. Użyj prawidłowej w pełni kwalifikowanej nazwy dla kontekstu bazy danych:
+W folderze projektu uruchom program do tworzenia Identity szkieletu z żądanymi opcjami. Na przykład, aby skonfigurować tożsamość przy użyciu domyślnego interfejsu użytkownika i minimalnej liczby plików, uruchom następujące polecenie. Użyj prawidłowej w pełni kwalifikowanej nazwy dla kontekstu bazy danych:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login"
 ```
 
-Program PowerShell używa średnika jako separatora poleceń. W przypadku korzystania z programu PowerShell wpisz średniki na liście plików lub Umieść listę plików w podwójnych cudzysłowach. Przykład:
+Program PowerShell używa średnika jako separatora poleceń. W przypadku korzystania z programu PowerShell wpisz średniki na liście plików lub Umieść listę plików w podwójnych cudzysłowach. Na przykład:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-W przypadku uruchomienia szkieletu tożsamości bez określenia `--files` flagi lub `--useDefaultUI` flagi wszystkie dostępne strony interfejsu użytkownika tożsamości zostaną utworzone w projekcie.
+W przypadku uruchomienia Identity szkieletu bez określenia `--files` flagi lub `--useDefaultUI` flagi wszystkie dostępne Identity strony interfejsu użytkownika zostaną utworzone w projekcie.
 
 ---
 

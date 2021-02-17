@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 92bfda330399b43871b3ae0e6b609726f7ad4a91
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97485995"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564053"
 ---
-# <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -42,7 +42,7 @@ Klasy modelu są znane jako klasy POCO (od "**P** Lain-**O** LD **k** LR **O** b
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt *Razor PagesMovie* > **Dodaj**  >  **Nowy folder**. Nazwij *modele* folderów.
 1. Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >  **klasę**. Nazwij *film* klasy.
@@ -144,7 +144,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Utwórz folder *stron/filmów* :
    1. Kliknij prawym przyciskiem myszy folder *strony* > **Dodaj** > **Nowy folder**.
@@ -161,7 +161,7 @@ W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia s
 1. Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
    1. Z listy rozwijanej **Klasa modelu** wybierz pozycję **film ( Razor PagesMovie. models)**.
    1. W wierszu **klasy kontekstu danych** wybierz **+** znak (plus).
-      1. W oknie dialogowym **Dodawanie kontekstu danych** nazwa klasy *Razor PagesMovie. Data. Razor PagesMovieContext* jest generowany.
+      1. W oknie dialogowym **Dodawanie kontekstu danych** `RazorPagesMovie.Data.RazorPagesMovieContext` jest generowana nazwa klasy.
    1. Wybierz pozycję **Dodaj**.
 
    ![Obraz z poprzednich instrukcji.](model/_static/3/arp.png)
@@ -226,7 +226,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
    ![Obraz z poprzednich instrukcji.](model/_static/add_scaffoldMac.png)
 
 1. Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
-   1. W **klasie DbContext, aby użyć:** Row, nazwij klasę *Razor PagesMovie. Data. Razor PagesMovieContext*.
+   1. W **klasie DbContext, aby użyć:** Row, nadaj jej nazwę Class `RazorPagesMovie.Data.RazorPagesMovieContext` .
    1. Wybierz pozycję **Zakończ**.
 
    ![Obraz z poprzednich instrukcji.](model/_static/5/arpMac.png)
@@ -243,7 +243,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 ### <a name="files-created"></a>Utworzone pliki
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
@@ -288,7 +288,7 @@ Funkcja migracji w Entity Framework Core zapewnia sposób:
 * Utwórz początkowy schemat bazy danych.
 * Uaktualnij przyrostowo schemat bazy danych, aby zachować synchronizację z modelem danych aplikacji.  Istniejące dane w bazie danych są zachowywane.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji okno **konsoli Menedżera pakietów** (PMC) służy do:
 
@@ -327,7 +327,7 @@ Zignoruj ostrzeżenie, ponieważ zostanie ono rozkierowane w późniejszym kroku
 
 `update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -401,7 +401,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt **Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele* folderów.
 
@@ -510,7 +510,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -623,7 +623,7 @@ Po wybraniu oprogramowania SQLite kod wygenerowany przez szablon jest gotowy do 
 
 ### <a name="files-created"></a>Utworzone pliki
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
@@ -663,7 +663,7 @@ Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -702,7 +702,7 @@ Polecenie migrations generuje kod, aby utworzyć początkowy schemat bazy danych
 
 `update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku  *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -773,7 +773,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt **Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele* folderów.
 
@@ -896,7 +896,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -1006,7 +1006,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -1045,7 +1045,7 @@ Powyższe polecenia generują następujące ostrzeżenie: "nie określono typu d
 
 Zignoruj ostrzeżenie, ponieważ zostanie ono rozkierowane w późniejszym kroku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 

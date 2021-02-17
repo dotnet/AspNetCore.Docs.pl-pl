@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 4e7c0e9b0a164e0181af5d6baaedf0669c1c06aa
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552531"
+---
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -20,18 +40,18 @@
 
 ::: moniker-end
 
-### <a name="cookies-and-site-data"></a>Pliki cookie i dane lokacji
+### <a name="cookies-and-site-data"></a>Cookies i dane lokacji
 
-Pliki cookie i dane lokacji mogą być utrwalane między aktualizacjami aplikacji i zakłócają testowanie i rozwiązywanie problemów. W przypadku wprowadzania zmian w kodzie aplikacji należy wyczyścić następujące zmiany dotyczące konta użytkownika i konfiguracji aplikacji dostawcy:
+Cookiedane i lokacje mogą być utrwalane między aktualizacjami aplikacji i zakłócają testowanie i rozwiązywanie problemów. W przypadku wprowadzania zmian w kodzie aplikacji należy wyczyścić następujące zmiany dotyczące konta użytkownika i konfiguracji aplikacji dostawcy:
 
-* Pliki cookie logowania użytkownika
-* Pliki cookie aplikacji
+* Logowanie użytkownika cookie
+* Aplikacje cookie s
 * Buforowane i przechowywane dane lokacji
 
-Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zakłócania testowania i rozwiązywania problemów jest:
+Jednym z metod zapobiegania powstawaniu cookie danych i wymawianiu przez proces testowania i rozwiązywania problemów jest:
 
 * Konfigurowanie przeglądarki
-  * Użyj przeglądarki do testowania, który można skonfigurować, aby usunąć wszystkie pliki cookie i dane z lokacji za każdym razem, gdy przeglądarka zostanie zamknięta.
+  * Użyj przeglądarki do testowania, który można skonfigurować, aby usunąć wszystkie cookie i dane witryny za każdym razem, gdy przeglądarka zostanie zamknięta.
   * Upewnij się, że przeglądarka została ZAMKNIĘTA ręcznie lub przez IDE w celu dowolnych zmian w konfiguracji aplikacji, użytkownika testowego lub dostawcy.
 * Użyj polecenia niestandardowego, aby otworzyć przeglądarkę w trybie incognito lub prywatnym w programie Visual Studio:
   * Otwórz okno dialogowe **Przeglądaj z programem** Visual Studio. 
@@ -51,7 +71,7 @@ Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zak�
 
 ### <a name="run-the-server-app"></a>Uruchom aplikację serwera
 
-Podczas testowania i rozwiązywania problemów z hostowaną aplikacją Blazor upewnij się, że aplikacja jest uruchamiana z **`Server`** projektu. Na przykład w programie Visual Studio upewnij się, że projekt serwera został wyróżniony w **Eksplorator rozwiązań** przed uruchomieniem aplikacji, korzystając z następujących metod:
+Podczas testowania i rozwiązywania problemów z hostowaną Blazor aplikacją upewnij się, że aplikacja jest uruchamiana z **`Server`** projektu. Na przykład w programie Visual Studio upewnij się, że projekt serwera został wyróżniony w **Eksplorator rozwiązań** przed uruchomieniem aplikacji, korzystając z następujących metod:
 
 * Wybierz przycisk **Run** (Uruchom).
 * Użyj **debugowania**  >  **Rozpocznij debugowanie** z menu.

@@ -1,3 +1,23 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 5964554c36e2242b70faee390374828acd2bd860
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100552534"
+---
 Podczas pracy z interfejsem API serwera zarejestrowanym w usłudze AAD, a rejestracja w usłudze AAD aplikacji znajduje się w dzierżawie, która korzysta z [niezweryfikowanej domeny wydawcy](/azure/active-directory/develop/howto-configure-publisher-domain), identyfikator URI aplikacji interfejsu API serwera nie `api://{SERVER API APP CLIENT ID OR CUSTOM VALUE}` jest, ale zamiast tego jest w formacie `https://{TENANT}.onmicrosoft.com/{SERVER API APP CLIENT ID OR CUSTOM VALUE}` . W takim przypadku domyślny zakres tokenu dostępu w `Program.Main` ( `Program.cs` ) *`Client`* aplikacji wygląda podobnie do poniższego:
 
 ```csharp

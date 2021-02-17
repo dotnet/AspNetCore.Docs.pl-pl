@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e70f3143159a1817e326a95b30e7369a5c9ab025
+ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052776"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100564015"
 ---
-# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR hosting i skalowanie
+# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR hosting i skalowanie
 
 Autorzy [Andrew Stanton-pielęgniarki](https://twitter.com/anurse), [Brady Gastera](https://twitter.com/bradygaster)i [Tomasz Dykstra](https://github.com/tdykstra)
 
@@ -46,13 +46,13 @@ Aby uzyskać wskazówki dotyczące konfigurowania Azure App Service dla programu
 
 ## <a name="tcp-connection-resources"></a>Zasoby połączenia TCP
 
-Liczba współbieżnych połączeń TCP, które może obsługiwać serwer sieci Web, jest ograniczona. Klienci standardowi HTTP korzystają z połączeń *tymczasowych* . Te połączenia można zamknąć, gdy klient przechodzi w stan bezczynności i zostanie otwarty ponownie później. Z drugiej strony SignalR połączenie jest *trwałe* . SignalR połączenia pozostają otwarte nawet wtedy, gdy klient przejdzie w stan bezczynności. W aplikacji o dużym natężeniu ruchu, która obsługuje wielu klientów, te trwałe połączenia mogą spowodować, że serwery osiągnął maksymalną liczbę połączeń.
+Liczba współbieżnych połączeń TCP, które może obsługiwać serwer sieci Web, jest ograniczona. Klienci standardowi HTTP korzystają z połączeń *tymczasowych* . Te połączenia można zamknąć, gdy klient przechodzi w stan bezczynności i zostanie otwarty ponownie później. Z drugiej strony SignalR połączenie jest *trwałe*. SignalR połączenia pozostają otwarte nawet wtedy, gdy klient przejdzie w stan bezczynności. W aplikacji o dużym natężeniu ruchu, która obsługuje wielu klientów, te trwałe połączenia mogą spowodować, że serwery osiągnął maksymalną liczbę połączeń.
 
 Połączenia trwałe zużywają także dodatkową pamięć, aby śledzić każde połączenie.
 
 Duże wykorzystanie zasobów związanych z połączeniami przez SignalR program może mieć wpływ na inne aplikacje sieci Web, które są hostowane na tym samym serwerze. W przypadku SignalR otwarcia i przechowywania ostatnich dostępnych połączeń TCP inne aplikacje sieci Web na tym samym serwerze również nie będą miały dostępnych połączeń.
 
-Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Przykład:
+Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Na przykład:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -70,7 +70,7 @@ Aplikacja, która korzysta SignalR z programu, musi śledzić wszystkie połącz
 
 Opcjami rozwiązywania tego problemu jest [ SignalR usługa platformy Azure](#azure-signalr-service) i [Redis plan](#redis-backplane).
 
-## <a name="azure-no-locsignalr-service"></a>Usługa platformy Azure SignalR
+## <a name="azure-signalr-service"></a>Usługa platformy Azure SignalR
 
 Usługa platformy Azure SignalR to serwer proxy, a nie plan. Za każdym razem, gdy klient inicjuje połączenie z serwerem, klient zostaje przekierowany do programu w celu nawiązania połączenia z usługą. Ten proces przedstawiono na poniższym diagramie:
 
@@ -201,10 +201,11 @@ Aby uzyskać więcej informacji o równoważeniu obciążenia i sesjach Nginx, z
 Aby uzyskać więcej informacji na temat ASP.NET Core za pomocą Nginx, zobacz następujący artykuł:
 * <xref:host-and-deploy/linux-nginx>
 
-## <a name="third-party-no-locsignalr-backplane-providers"></a>Dostawcy rozwiązań innych firm SignalR
+## <a name="third-party-signalr-backplane-providers"></a>Dostawcy rozwiązań innych firm SignalR
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
+* [Rebus](https://github.com/rebus-org/Rebus.SignalR)
 
 ## <a name="next-steps"></a>Następne kroki
 

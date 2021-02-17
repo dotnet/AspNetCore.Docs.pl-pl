@@ -1,8 +1,28 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 5c7412028a81233a0aedacfbe451014eeca4adc1
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551263"
+---
 Platforma ASP. NET Core oferuje następujące zalety:
 
 * Ujednolicony scenariusz na potrzeby tworzenia internetowego interfejsu użytkownika i internetowych interfejsów API.
 * Zaprojektowane pod kątem testowania.
-* [Razor Pages](xref:razor-pages/index) sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i bardziej produktywne.
+* [ Razor Strony](xref:razor-pages/index) umożliwiają łatwiejsze i wydajniejsze kodowanie scenariuszy ukierunkowanych na strony.
 * [Blazor](xref:blazor/index) umożliwia używanie języka C# w przeglądarce obok języka JavaScript. Udostępnianie logiki aplikacji po stronie serwera i klienta, która jest zapisywana przy użyciu platformy .NET.
 * Możliwość programowania i uruchamiania w systemach Windows, macOS i Linux.
 * Open source i [koncentracja na społeczności](https://live.asp.net/).

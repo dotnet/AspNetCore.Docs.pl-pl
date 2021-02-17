@@ -1,19 +1,39 @@
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: cf20722e8c8669fb17af8db032d4064ca2be2f4c
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551339"
+---
 > [!NOTE]
 > 
-> <span data-ttu-id="17e99-101">**Ograniczenia rozwiązania SQLite**</span><span class="sxs-lookup"><span data-stu-id="17e99-101">**SQLite limitations**</span></span>
+> <span data-ttu-id="c325d-101">**Ograniczenia rozwiązania SQLite**</span><span class="sxs-lookup"><span data-stu-id="c325d-101">**SQLite limitations**</span></span>
 >
-> <span data-ttu-id="17e99-102">Ten samouczek używa funkcji *migracji* Entity Framework Core, jeśli jest to możliwe.</span><span class="sxs-lookup"><span data-stu-id="17e99-102">This tutorial uses the Entity Framework Core *migrations* feature where possible.</span></span> <span data-ttu-id="17e99-103">Migracja aktualizuje schemat bazy danych, aby pasował do zmian w modelu danych.</span><span class="sxs-lookup"><span data-stu-id="17e99-103">Migrations updates the database schema to match changes in the data model.</span></span> <span data-ttu-id="17e99-104">Jednak tylko te zmiany są obsługiwane przez aparat bazy danych, a możliwości zmiany schematu oprogramowania SQLite są ograniczone.</span><span class="sxs-lookup"><span data-stu-id="17e99-104">However, migrations only does the kinds of changes that the database engine supports, and SQLite's schema change capabilities are limited.</span></span> <span data-ttu-id="17e99-105">Na przykład, Dodawanie kolumny jest obsługiwane, ale usuwanie kolumny nie jest obsługiwane.</span><span class="sxs-lookup"><span data-stu-id="17e99-105">For example, adding a column is supported, but removing a column is not supported.</span></span> <span data-ttu-id="17e99-106">Jeśli migracja zostanie utworzona w celu usunięcia kolumny, `ef migrations add` polecenie zakończy się pomyślnie, ale `ef database update` polecenie zakończy się niepowodzeniem.</span><span class="sxs-lookup"><span data-stu-id="17e99-106">If a migration is created to remove a column, the `ef migrations add` command succeeds but the `ef database update` command fails.</span></span> 
+> <span data-ttu-id="c325d-102">Ten samouczek używa funkcji *migracji* Entity Framework Core, jeśli jest to możliwe.</span><span class="sxs-lookup"><span data-stu-id="c325d-102">This tutorial uses the Entity Framework Core *migrations* feature where possible.</span></span> <span data-ttu-id="c325d-103">Migracja aktualizuje schemat bazy danych, aby pasował do zmian w modelu danych.</span><span class="sxs-lookup"><span data-stu-id="c325d-103">Migrations updates the database schema to match changes in the data model.</span></span> <span data-ttu-id="c325d-104">Jednak tylko te zmiany są obsługiwane przez aparat bazy danych, a możliwości zmiany schematu oprogramowania SQLite są ograniczone.</span><span class="sxs-lookup"><span data-stu-id="c325d-104">However, migrations only does the kinds of changes that the database engine supports, and SQLite's schema change capabilities are limited.</span></span> <span data-ttu-id="c325d-105">Na przykład, Dodawanie kolumny jest obsługiwane, ale usuwanie kolumny nie jest obsługiwane.</span><span class="sxs-lookup"><span data-stu-id="c325d-105">For example, adding a column is supported, but removing a column is not supported.</span></span> <span data-ttu-id="c325d-106">Jeśli migracja zostanie utworzona w celu usunięcia kolumny, `ef migrations add` polecenie zakończy się pomyślnie, ale `ef database update` polecenie zakończy się niepowodzeniem.</span><span class="sxs-lookup"><span data-stu-id="c325d-106">If a migration is created to remove a column, the `ef migrations add` command succeeds but the `ef database update` command fails.</span></span> 
 >
-> <span data-ttu-id="17e99-107">Obejście ograniczeń oprogramowania SQLite polega na ręcznym pisaniu kodu migracji w celu przetworzenia odbudowy tabeli, gdy coś w tabeli ulegnie zmianie.</span><span class="sxs-lookup"><span data-stu-id="17e99-107">The workaround for the SQLite limitations is to manually write migrations code to perform a table rebuild when something in the table changes.</span></span> <span data-ttu-id="17e99-108">Kod będzie `Up` `Down` zawierać metody i dla migracji i będzie obejmował:</span><span class="sxs-lookup"><span data-stu-id="17e99-108">The code would go in the `Up` and `Down` methods for a migration and would involve:</span></span>
+> <span data-ttu-id="c325d-107">Obejście ograniczeń oprogramowania SQLite polega na ręcznym pisaniu kodu migracji w celu przetworzenia odbudowy tabeli, gdy coś w tabeli ulegnie zmianie.</span><span class="sxs-lookup"><span data-stu-id="c325d-107">The workaround for the SQLite limitations is to manually write migrations code to perform a table rebuild when something in the table changes.</span></span> <span data-ttu-id="c325d-108">Kod będzie `Up` `Down` zawierać metody i dla migracji i będzie obejmował:</span><span class="sxs-lookup"><span data-stu-id="c325d-108">The code would go in the `Up` and `Down` methods for a migration and would involve:</span></span>
 >
-> * <span data-ttu-id="17e99-109">Tworzenie nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="17e99-109">Creating a new table.</span></span>
-> * <span data-ttu-id="17e99-110">Kopiowanie danych ze starej tabeli do nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="17e99-110">Copying data from the old table to the new table.</span></span>
-> * <span data-ttu-id="17e99-111">Porzucenie starej tabeli.</span><span class="sxs-lookup"><span data-stu-id="17e99-111">Dropping the old table.</span></span>
-> * <span data-ttu-id="17e99-112">Zmiana nazwy nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="17e99-112">Renaming the new table.</span></span>
+> * <span data-ttu-id="c325d-109">Tworzenie nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="c325d-109">Creating a new table.</span></span>
+> * <span data-ttu-id="c325d-110">Kopiowanie danych ze starej tabeli do nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="c325d-110">Copying data from the old table to the new table.</span></span>
+> * <span data-ttu-id="c325d-111">Porzucenie starej tabeli.</span><span class="sxs-lookup"><span data-stu-id="c325d-111">Dropping the old table.</span></span>
+> * <span data-ttu-id="c325d-112">Zmiana nazwy nowej tabeli.</span><span class="sxs-lookup"><span data-stu-id="c325d-112">Renaming the new table.</span></span>
 >
-> <span data-ttu-id="17e99-113">Pisanie kodu specyficznego dla bazy danych tego typu jest poza zakresem tego samouczka.</span><span class="sxs-lookup"><span data-stu-id="17e99-113">Writing database-specific code of this type is outside the scope of this tutorial.</span></span> <span data-ttu-id="17e99-114">Zamiast tego ten samouczek opuszcza i ponownie tworzy bazę danych za każdym razem, gdy próba zastosowania migracji zakończy się niepowodzeniem.</span><span class="sxs-lookup"><span data-stu-id="17e99-114">Instead, this tutorial drops and re-creates the database whenever an attempt to apply a migration would fail.</span></span> <span data-ttu-id="17e99-115">Więcej informacji można znaleźć w następujących zasobach:</span><span class="sxs-lookup"><span data-stu-id="17e99-115">For more information, see the following resources:</span></span>
+> <span data-ttu-id="c325d-113">Pisanie kodu specyficznego dla bazy danych tego typu jest poza zakresem tego samouczka.</span><span class="sxs-lookup"><span data-stu-id="c325d-113">Writing database-specific code of this type is outside the scope of this tutorial.</span></span> <span data-ttu-id="c325d-114">Zamiast tego ten samouczek opuszcza i ponownie tworzy bazę danych za każdym razem, gdy próba zastosowania migracji zakończy się niepowodzeniem.</span><span class="sxs-lookup"><span data-stu-id="c325d-114">Instead, this tutorial drops and re-creates the database whenever an attempt to apply a migration would fail.</span></span> <span data-ttu-id="c325d-115">Więcej informacji można znaleźć w następujących zasobach:</span><span class="sxs-lookup"><span data-stu-id="c325d-115">For more information, see the following resources:</span></span>
 >
-> * [<span data-ttu-id="17e99-116">Ograniczenia dostawcy bazy danych EF Core SQLite</span><span class="sxs-lookup"><span data-stu-id="17e99-116">SQLite EF Core Database Provider Limitations</span></span>](/ef/core/providers/sqlite/limitations)
-> * [<span data-ttu-id="17e99-117">Dostosowywanie kodu migracji</span><span class="sxs-lookup"><span data-stu-id="17e99-117">Customize migration code</span></span>](/ef/core/managing-schemas/migrations/#customize-migration-code)
-> * [<span data-ttu-id="17e99-118">Wstępne wypełnianie danych</span><span class="sxs-lookup"><span data-stu-id="17e99-118">Data seeding</span></span>](/ef/core/modeling/data-seeding)
-> * [<span data-ttu-id="17e99-119">Instrukcja ALTER TABLE w programie SQLite</span><span class="sxs-lookup"><span data-stu-id="17e99-119">SQLite ALTER TABLE statement</span></span>](https://sqlite.org/lang_altertable.html)
+> * [<span data-ttu-id="c325d-116">Ograniczenia dostawcy bazy danych EF Core SQLite</span><span class="sxs-lookup"><span data-stu-id="c325d-116">SQLite EF Core Database Provider Limitations</span></span>](/ef/core/providers/sqlite/limitations)
+> * [<span data-ttu-id="c325d-117">Dostosowywanie kodu migracji</span><span class="sxs-lookup"><span data-stu-id="c325d-117">Customize migration code</span></span>](/ef/core/managing-schemas/migrations/#customize-migration-code)
+> * [<span data-ttu-id="c325d-118">Wstępne wypełnianie danych</span><span class="sxs-lookup"><span data-stu-id="c325d-118">Data seeding</span></span>](/ef/core/modeling/data-seeding)
+> * [<span data-ttu-id="c325d-119">Instrukcja ALTER TABLE w programie SQLite</span><span class="sxs-lookup"><span data-stu-id="c325d-119">SQLite ALTER TABLE statement</span></span>](https://sqlite.org/lang_altertable.html)

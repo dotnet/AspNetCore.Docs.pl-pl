@@ -1,22 +1,42 @@
-<span data-ttu-id="79682-101">Platforma ASP. NET Core oferuje następujące zalety:</span><span class="sxs-lookup"><span data-stu-id="79682-101">ASP.NET Core provides the following benefits:</span></span>
+---
+no-loc:
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+ms.openlocfilehash: 5c7412028a81233a0aedacfbe451014eeca4adc1
+ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100551263"
+---
+<span data-ttu-id="b42e7-101">Platforma ASP. NET Core oferuje następujące zalety:</span><span class="sxs-lookup"><span data-stu-id="b42e7-101">ASP.NET Core provides the following benefits:</span></span>
 
-* <span data-ttu-id="79682-102">Ujednolicony scenariusz na potrzeby tworzenia internetowego interfejsu użytkownika i internetowych interfejsów API.</span><span class="sxs-lookup"><span data-stu-id="79682-102">A unified story for building web UI and web APIs.</span></span>
-* <span data-ttu-id="79682-103">Zaprojektowane pod kątem testowania.</span><span class="sxs-lookup"><span data-stu-id="79682-103">Architected for testability.</span></span>
-* <span data-ttu-id="79682-104">[Razor Pages](xref:razor-pages/index) sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i bardziej produktywne.</span><span class="sxs-lookup"><span data-stu-id="79682-104">[Razor Pages](xref:razor-pages/index) makes coding page-focused scenarios easier and more productive.</span></span>
-* <span data-ttu-id="79682-105">[Blazor](xref:blazor/index) umożliwia używanie języka C# w przeglądarce obok języka JavaScript.</span><span class="sxs-lookup"><span data-stu-id="79682-105">[Blazor](xref:blazor/index) lets you use C# in the browser alongside JavaScript.</span></span> <span data-ttu-id="79682-106">Udostępnianie logiki aplikacji po stronie serwera i klienta, która jest zapisywana przy użyciu platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="79682-106">Share server-side and client-side app logic all written with .NET.</span></span>
-* <span data-ttu-id="79682-107">Możliwość programowania i uruchamiania w systemach Windows, macOS i Linux.</span><span class="sxs-lookup"><span data-stu-id="79682-107">Ability to develop and run on Windows, macOS, and Linux.</span></span>
-* <span data-ttu-id="79682-108">Open source i [koncentracja na społeczności](https://live.asp.net/).</span><span class="sxs-lookup"><span data-stu-id="79682-108">Open-source and [community-focused](https://live.asp.net/).</span></span>
-* <span data-ttu-id="79682-109">Integracja [nowoczesnych struktur po stronie klienta](xref:blazor/index) i programistycznych przepływów pracy.</span><span class="sxs-lookup"><span data-stu-id="79682-109">Integration of [modern, client-side frameworks](xref:blazor/index) and development workflows.</span></span>
-* <span data-ttu-id="79682-110">Obsługa hostingu zdalnych wywołań procedur (RPC) za pomocą usługi [gRPC](xref:grpc/index).</span><span class="sxs-lookup"><span data-stu-id="79682-110">Support for hosting Remote Procedure Call (RPC) services using [gRPC](xref:grpc/index).</span></span>
-* <span data-ttu-id="79682-111">Gotowy do pracy w chmurze, oparty na środowisku [system konfiguracji](xref:fundamentals/configuration/index).</span><span class="sxs-lookup"><span data-stu-id="79682-111">A cloud-ready, environment-based [configuration system](xref:fundamentals/configuration/index).</span></span>
-* <span data-ttu-id="79682-112">Wbudowane [wstrzykiwanie zależności](xref:fundamentals/dependency-injection).</span><span class="sxs-lookup"><span data-stu-id="79682-112">Built-in [dependency injection](xref:fundamentals/dependency-injection).</span></span>
-* <span data-ttu-id="79682-113">Uproszczony, modułowy potok żądań HTTP zapewniający [wysoką wydajność](https://github.com/aspnet/benchmarks).</span><span class="sxs-lookup"><span data-stu-id="79682-113">A lightweight, [high-performance](https://github.com/aspnet/benchmarks), and modular HTTP request pipeline.</span></span>
-* <span data-ttu-id="79682-114">Możliwość hostowania w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="79682-114">Ability to host on the following:</span></span>
-  * [<span data-ttu-id="79682-115">Kestrel</span><span class="sxs-lookup"><span data-stu-id="79682-115">Kestrel</span></span>](xref:fundamentals/servers/kestrel)
-  * [<span data-ttu-id="79682-116">IIS</span><span class="sxs-lookup"><span data-stu-id="79682-116">IIS</span></span>](xref:host-and-deploy/iis/index)
-  * [<span data-ttu-id="79682-117">HTTP.sys</span><span class="sxs-lookup"><span data-stu-id="79682-117">HTTP.sys</span></span>](xref:fundamentals/servers/httpsys)
-  * [<span data-ttu-id="79682-118">Nginx</span><span class="sxs-lookup"><span data-stu-id="79682-118">Nginx</span></span>](xref:host-and-deploy/linux-nginx)
-  * [<span data-ttu-id="79682-119">Apache</span><span class="sxs-lookup"><span data-stu-id="79682-119">Apache</span></span>](xref:host-and-deploy/linux-apache)
-  * [<span data-ttu-id="79682-120">Docker</span><span class="sxs-lookup"><span data-stu-id="79682-120">Docker</span></span>](xref:host-and-deploy/docker/index)
-* <span data-ttu-id="79682-121">[Przechowywanie wersji równoległych](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).</span><span class="sxs-lookup"><span data-stu-id="79682-121">[Side-by-side versioning](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).</span></span>
-* <span data-ttu-id="79682-122">Narzędzia, które upraszczają tworzenie nowoczesnych aplikacji internetowych.</span><span class="sxs-lookup"><span data-stu-id="79682-122">Tooling that simplifies modern web development.</span></span>
+* <span data-ttu-id="b42e7-102">Ujednolicony scenariusz na potrzeby tworzenia internetowego interfejsu użytkownika i internetowych interfejsów API.</span><span class="sxs-lookup"><span data-stu-id="b42e7-102">A unified story for building web UI and web APIs.</span></span>
+* <span data-ttu-id="b42e7-103">Zaprojektowane pod kątem testowania.</span><span class="sxs-lookup"><span data-stu-id="b42e7-103">Architected for testability.</span></span>
+* <span data-ttu-id="b42e7-104">[ Razor Strony](xref:razor-pages/index) umożliwiają łatwiejsze i wydajniejsze kodowanie scenariuszy ukierunkowanych na strony.</span><span class="sxs-lookup"><span data-stu-id="b42e7-104">[Razor Pages](xref:razor-pages/index) makes coding page-focused scenarios easier and more productive.</span></span>
+* <span data-ttu-id="b42e7-105">[Blazor](xref:blazor/index) umożliwia używanie języka C# w przeglądarce obok języka JavaScript.</span><span class="sxs-lookup"><span data-stu-id="b42e7-105">[Blazor](xref:blazor/index) lets you use C# in the browser alongside JavaScript.</span></span> <span data-ttu-id="b42e7-106">Udostępnianie logiki aplikacji po stronie serwera i klienta, która jest zapisywana przy użyciu platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="b42e7-106">Share server-side and client-side app logic all written with .NET.</span></span>
+* <span data-ttu-id="b42e7-107">Możliwość programowania i uruchamiania w systemach Windows, macOS i Linux.</span><span class="sxs-lookup"><span data-stu-id="b42e7-107">Ability to develop and run on Windows, macOS, and Linux.</span></span>
+* <span data-ttu-id="b42e7-108">Open source i [koncentracja na społeczności](https://live.asp.net/).</span><span class="sxs-lookup"><span data-stu-id="b42e7-108">Open-source and [community-focused](https://live.asp.net/).</span></span>
+* <span data-ttu-id="b42e7-109">Integracja [nowoczesnych struktur po stronie klienta](xref:blazor/index) i programistycznych przepływów pracy.</span><span class="sxs-lookup"><span data-stu-id="b42e7-109">Integration of [modern, client-side frameworks](xref:blazor/index) and development workflows.</span></span>
+* <span data-ttu-id="b42e7-110">Obsługa hostingu zdalnych wywołań procedur (RPC) za pomocą usługi [gRPC](xref:grpc/index).</span><span class="sxs-lookup"><span data-stu-id="b42e7-110">Support for hosting Remote Procedure Call (RPC) services using [gRPC](xref:grpc/index).</span></span>
+* <span data-ttu-id="b42e7-111">Gotowy do pracy w chmurze, oparty na środowisku [system konfiguracji](xref:fundamentals/configuration/index).</span><span class="sxs-lookup"><span data-stu-id="b42e7-111">A cloud-ready, environment-based [configuration system](xref:fundamentals/configuration/index).</span></span>
+* <span data-ttu-id="b42e7-112">Wbudowane [wstrzykiwanie zależności](xref:fundamentals/dependency-injection).</span><span class="sxs-lookup"><span data-stu-id="b42e7-112">Built-in [dependency injection](xref:fundamentals/dependency-injection).</span></span>
+* <span data-ttu-id="b42e7-113">Uproszczony, modułowy potok żądań HTTP zapewniający [wysoką wydajność](https://github.com/aspnet/benchmarks).</span><span class="sxs-lookup"><span data-stu-id="b42e7-113">A lightweight, [high-performance](https://github.com/aspnet/benchmarks), and modular HTTP request pipeline.</span></span>
+* <span data-ttu-id="b42e7-114">Możliwość hostowania w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="b42e7-114">Ability to host on the following:</span></span>
+  * [<span data-ttu-id="b42e7-115">Kestrel</span><span class="sxs-lookup"><span data-stu-id="b42e7-115">Kestrel</span></span>](xref:fundamentals/servers/kestrel)
+  * [<span data-ttu-id="b42e7-116">IIS</span><span class="sxs-lookup"><span data-stu-id="b42e7-116">IIS</span></span>](xref:host-and-deploy/iis/index)
+  * [<span data-ttu-id="b42e7-117">HTTP.sys</span><span class="sxs-lookup"><span data-stu-id="b42e7-117">HTTP.sys</span></span>](xref:fundamentals/servers/httpsys)
+  * [<span data-ttu-id="b42e7-118">Nginx</span><span class="sxs-lookup"><span data-stu-id="b42e7-118">Nginx</span></span>](xref:host-and-deploy/linux-nginx)
+  * [<span data-ttu-id="b42e7-119">Apache</span><span class="sxs-lookup"><span data-stu-id="b42e7-119">Apache</span></span>](xref:host-and-deploy/linux-apache)
+  * [<span data-ttu-id="b42e7-120">Docker</span><span class="sxs-lookup"><span data-stu-id="b42e7-120">Docker</span></span>](xref:host-and-deploy/docker/index)
+* <span data-ttu-id="b42e7-121">[Przechowywanie wersji równoległych](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).</span><span class="sxs-lookup"><span data-stu-id="b42e7-121">[Side-by-side versioning](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).</span></span>
+* <span data-ttu-id="b42e7-122">Narzędzia, które upraszczają tworzenie nowoczesnych aplikacji internetowych.</span><span class="sxs-lookup"><span data-stu-id="b42e7-122">Tooling that simplifies modern web development.</span></span>

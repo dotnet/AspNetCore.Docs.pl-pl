@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 8c9d0d9c24e0ce81925ccde463bcf085531b665e
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: fa1060ae1a046a40d55e9fef4a094aa9e51a18af
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024742"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101174"
 ---
-# <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>Część 4 z serii samouczków na Razor stronach
+# <a name="part-4-of-tutorial-series-on-razor-pages"></a>Część 4 z serii samouczków na Razor stronach
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https://twitter.com/joeaudette)
 
@@ -36,7 +36,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https:/
 
 `RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
@@ -48,7 +48,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https:/
 
 System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` klucz. W przypadku lokalnego projektowania konfiguracja pobiera parametry połączenia z *appsettings.json* pliku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Wygenerowane parametry połączenia są podobne do następujących:
 
@@ -62,7 +62,7 @@ Wygenerowane parametry połączenia są podobne do następujących:
 
 Gdy aplikacja jest wdrażana na serwerze testowym lub produkcyjnym, zmienna środowiskowa może służyć do ustawiania parametrów połączenia na serwerze testowym lub produkcyjnym bazy danych. Aby uzyskać więcej informacji, zobacz [Konfiguracja](xref:fundamentals/configuration/index).
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
@@ -142,7 +142,7 @@ W poprzednim kodzie `Main` Metoda została zmodyfikowana w celu wykonania nastę
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj `seedData.Initialize` metodę, przekazując do niej wystąpienie kontekstu bazy danych.
-* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
+* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
 
 Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony:
 
@@ -151,7 +151,7 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Usuń wszystkie rekordy z bazy danych. Korzystanie z linków do usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 
@@ -190,7 +190,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 `RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
@@ -202,7 +202,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` klucz. W przypadku lokalnego projektowania konfiguracja pobiera parametry połączenia z *appsettings.json* pliku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Wygenerowane parametry połączenia będą podobne do następujących:
 
@@ -216,7 +216,7 @@ Wygenerowane parametry połączenia będą podobne do następujących:
 
 Gdy aplikacja jest wdrażana na serwerze testowym lub produkcyjnym, zmienna środowiskowa może służyć do ustawiania parametrów połączenia na serwerze testowym lub produkcyjnym bazy danych. Aby uzyskać więcej informacji, zobacz [Konfiguracja](xref:fundamentals/configuration/index) .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
@@ -296,7 +296,7 @@ W poprzednim kodzie `Main` Metoda została zmodyfikowana w celu wykonania nastę
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj `seedData.Initialize` metodę, przekazując do niej wystąpienie kontekstu bazy danych.
-* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
+* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
 
 Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony:
 
@@ -305,7 +305,7 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Usuń wszystkie rekordy z bazy danych. Użyj linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox).
 * Wymuś inicjalizację aplikacji przez wywołanie metod w `Startup` klasie, więc metoda inicjatora jest uruchamiana. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Zatrzymaj i uruchom ponownie usługi IIS przy użyciu dowolnej z następujących metod:
@@ -343,7 +343,7 @@ Aplikacja pokazuje dane z rozrzutu:
 
 `RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-17)]
 
@@ -360,7 +360,7 @@ Aby uzyskać więcej informacji na temat metod używanych w programie `Configure
 
 System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` klucz. W przypadku lokalnego projektowania konfiguracja pobiera parametry połączenia z *appsettings.json* pliku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Wygenerowane parametry połączenia będą podobne do następujących:
 
@@ -378,7 +378,7 @@ Wygenerowane parametry połączenia będą podobne do następujących:
 
 Gdy aplikacja jest wdrażana na serwerze testowym lub produkcyjnym, zmienna środowiskowa może służyć do ustawiania parametrów połączenia na serwerze testowym lub produkcyjnym bazy danych. Aby uzyskać więcej informacji, zobacz [Konfiguracja](xref:fundamentals/configuration/index) .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
@@ -440,7 +440,7 @@ W poprzednim kodzie `Main` Metoda została zmodyfikowana w celu wykonania nastę
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj `seedData.Initialize` metodę, przekazując do niej wystąpienie kontekstu bazy danych.
-* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
+* Usuń kontekst, gdy metoda inicjatora zostanie zakończona. [Instrukcja using](/dotnet/csharp/language-reference/keywords/using-statement) gwarantuje, że kontekst zostanie usunięty.
 
 Aplikacja produkcyjna nie będzie wywoływana `Database.Migrate` . Jest on dodawany do poprzedniego kodu, aby zapobiec następującemu wyjątku, gdy `Update-Database` nie został uruchomiony:
 
@@ -449,7 +449,7 @@ Logowanie użytkownika "Nazwa użytkownika" nie powiodło się.
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Usuń wszystkie rekordy z bazy danych. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Wymuś inicjalizację aplikacji przez wywołanie metod w `Startup` klasie, więc metoda inicjatora jest uruchamiana. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Można to zrobić przy użyciu następujących metod:

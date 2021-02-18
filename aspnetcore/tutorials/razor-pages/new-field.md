@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 2961fcaa8bbb93527eb80f5aa7b18ef04761fb50
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 852c26f89b229d89797d9ce6fce2983319defe9c
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486164"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101149"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -41,7 +41,7 @@ W tej sekcji [Entity Framework](/ef/core/get-started/aspnetcore/new-db) migracje
 
 W przypadku automatycznego tworzenia bazy danych przy użyciu narzędzia EF Code First Code First:
 
-* Dodaje [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
+* Dodaje [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
 * Jeśli klasy modelu nie są zsynchronizowane z bazą danych, EF zgłasza wyjątek.
 
 Automatyczne Weryfikowanie, czy schemat i model są zsynchronizowane ułatwiają znajdowanie niespójnych problemów z kodem bazy danych.
@@ -89,7 +89,7 @@ Zobacz [ukończony plik SeedData.cs](https://github.com/dotnet/AspNetCore.Docs/b
 
 Skompiluj rozwiązanie.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 <a name="pmc"></a>
 
@@ -121,7 +121,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 1. Wybierz bazę danych w SSOX.
 1. Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 1. Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-1. Wybierz pozycję **OK**.
+1. Wybierz przycisk **OK**.
 1. W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
    ```powershell
@@ -182,7 +182,7 @@ W tej sekcji [Entity Framework](/ef/core/get-started/aspnetcore/new-db) migracje
 
 W przypadku automatycznego tworzenia bazy danych przy użyciu narzędzia EF Code First Code First:
 
-* Dodaje [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
+* Dodaje [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
 * Jeśli klasy modelu nie są zsynchronizowane z bazą danych, EF zgłasza wyjątek.
 
 Automatyczne Weryfikowanie, czy schemat i model są zsynchronizowane ułatwiają znajdowanie niespójnych problemów z kodem bazy danych.
@@ -230,7 +230,7 @@ Zobacz [ukończony plik SeedData.cs](https://github.com/dotnet/AspNetCore.Docs/b
 
 Skompiluj rozwiązanie.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 <a name="pmc"></a>
 
@@ -262,7 +262,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz pozycję **OK**.
+* Wybierz przycisk **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -323,7 +323,7 @@ W tej sekcji [Entity Framework](/ef/core/get-started/aspnetcore/new-db) migracje
 
 W przypadku automatycznego tworzenia bazy danych przy użyciu narzędzia EF Code First Code First:
 
-* Dodaje [`__EFMigrationsHistory`](https://docs.microsoft.com/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
+* Dodaje [`__EFMigrationsHistory`](/ef/core/managing-schemas/migrations/history-table) tabelę do bazy danych, aby sprawdzić, czy schemat bazy danych jest zsynchronizowany z klasami modelu, z których została wygenerowana.
 * Jeśli klasy modelu nie są zsynchronizowane z bazą danych, EF zgłasza wyjątek.
 
 Automatyczne Weryfikowanie, czy schemat i model są zsynchronizowane ułatwiają znajdowanie niespójnych problemów z kodem bazy danych.
@@ -370,7 +370,7 @@ Zobacz [ukończony plik SeedData.cs](https://github.com/dotnet/AspNetCore.Docs/b
 
 Skompiluj rozwiązanie.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 <a name="pmc"></a>
 
@@ -402,7 +402,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 * Wybierz bazę danych w SSOX.
 * Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję **Usuń**.
 * Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Wybierz pozycję **OK**.
+* Wybierz przycisk **OK**.
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell

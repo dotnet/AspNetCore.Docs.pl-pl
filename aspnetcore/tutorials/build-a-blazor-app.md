@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 939841ca7214e212a2f197ea1e00b0f6152c471e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: d984023a1c46c5383d47a1634c54e61747b83d60
+ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280506"
+ms.lasthandoff: 02/18/2021
+ms.locfileid: "101101213"
 ---
 # <a name="build-a-blazor-todo-list-app"></a>Tworzenie aplikacji z listą zadań do wykonania Blazor
 
@@ -117,7 +117,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
 
    Zapisz plik `Shared/NavMenu.razor`.
 
-1. Skompiluj i uruchom aplikację, wykonując [`dotnet watch run`](/aspnet/core/tutorials/dotnet-watch) polecenie w powłoce poleceń z `TodoList` folderu. Po uruchomieniu aplikacji przejdź do strony Nowa strona do zrobienia, wybierając **`Todo`** link na pasku nawigacyjnym aplikacji, który ładuje stronę `/todo` .
+1. Skompiluj i uruchom aplikację, wykonując [`dotnet watch run`](xref:tutorials/dotnet-watch) polecenie w powłoce poleceń z `TodoList` folderu. Po uruchomieniu aplikacji przejdź do strony Nowa strona do zrobienia, wybierając **`Todo`** link na pasku nawigacyjnym aplikacji, który ładuje stronę `/todo` .
 
    Pozostaw aplikację, na której działa powłoka poleceń. Za każdym razem, gdy plik jest zapisywany, aplikacja zostanie automatycznie ponownie skompilowana. Przeglądarka tymczasowo utraci połączenie z aplikacją podczas kompilowania i ponownego uruchamiania. Strona w przeglądarce zostanie automatycznie załadowana ponownie po ponownym nawiązaniu połączenia.
 

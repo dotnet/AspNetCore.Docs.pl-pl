@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 1f7c7db857090ff0a174d37b86e1265bab40b4fd
-ms.sourcegitcommit: f77a7467651bab61b24261da9dc5c1dd75fc1fa9
+ms.openlocfilehash: 43b243c946384be55019b39bf558182e1e95de90
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/17/2021
-ms.locfileid: "100564085"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110199"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -268,8 +268,8 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
 * W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
-* Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. inMemory** .
-* W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. inMemory** .
+* Wybierz kartę **Przeglądaj** , a następnie wprowadź `Microsoft.EntityFrameworkCore.InMemory` w polu wyszukiwania.
+* Wybierz `Microsoft.EntityFrameworkCore.InMemory` w okienku po lewej stronie.
 * Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
 
 ![Menedżer pakietów NuGet](first-web-api/_static/5/vsNuGet.png)
@@ -323,8 +323,8 @@ Uruchom następujące polecenia:
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet tool install -g dotnet-aspnet-codegenerator
-dotnet tool update -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
@@ -1501,3 +1501,4 @@ Więcej informacji można znaleźć w następujących zasobach:
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* [Microsoft Learn: Tworzenie interfejsu API sieci Web za pomocą ASP.NET Core](/learn/modules/build-web-api-aspnet-core/)

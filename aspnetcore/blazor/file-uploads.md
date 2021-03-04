@@ -17,20 +17,16 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.date: 10/27/2020
+ms.date: 02/18/2021
 uid: blazor/file-uploads
-ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 26dada3a749a114fc27da89897701076378eef11
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "94691173"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109770"
 ---
-# <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core Blazor operacje przekazywania plików
-
-Autorzy [Daniel Roth](https://github.com/danroth27) i [Pranav Krishnamoorthy](https://github.com/pranavkm)
-
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+# <a name="aspnet-core-blazor-file-uploads"></a>ASP.NET Core Blazor operacje przekazywania plików
 
 Użyj `InputFile` składnika do odczytywania danych z pliku przeglądarki w kodzie .NET, w tym do przekazywania plików.
 
@@ -51,61 +47,379 @@ Aby odczytać dane z pliku wybranego przez użytkownika:
 
 Składnik, który odbiera plik obrazu, może wywołać `RequestImageFileAsync` wygodną metodę na pliku, aby zmienić rozmiar danych obrazu w środowisku uruchomieniowym JavaScript przeglądarki, zanim obraz zostanie przesłany do aplikacji.
 
-Poniższy przykład ilustruje przekazywanie wielu plików obrazu w składniku. `InputFileChangeEventArgs.GetMultipleFiles` umożliwia odczytywanie wielu plików. Określ maksymalną liczbę plików, które należy odczytać, aby uniemożliwić złośliwemu użytkownikowi przekazanie większej liczby plików niż oczekiwano. `InputFileChangeEventArgs.File` zezwala na odczytywanie pierwszego i tylko pliku, jeśli przekazywanie plików nie obsługuje wielu plików.
+Poniższy przykład ilustruje przekazywanie wielu plików w składniku. `InputFileChangeEventArgs.GetMultipleFiles` umożliwia odczytywanie wielu plików. Określ maksymalną liczbę plików, które należy odczytać, aby uniemożliwić złośliwemu użytkownikowi przekazanie większej liczby plików niż oczekiwano. `InputFileChangeEventArgs.File` zezwala na odczytywanie pierwszego i tylko pliku, jeśli przekazywanie plików nie obsługuje wielu plików.
 
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs> znajduje się w <xref:Microsoft.AspNetCore.Components.Forms?displayProperty=fullName> przestrzeni nazw, co jest zazwyczaj jedną z przestrzeni nazw w pliku aplikacji `_Imports.razor` .
 
+`Pages/UploadFiles.razor`:
+
 ```razor
-<h3>Upload PNG images</h3>
+@page "/upload-files"
+@using System.IO
+
+<h3>Upload Files</h3>
 
 <p>
-    <InputFile OnChange="@OnInputFileChange" multiple />
+    <label>
+        Max file size:
+        <input type="number" @bind="maxFileSize" />
+    </label>
 </p>
 
-@if (imageDataUrls.Count > 0)
-{
-    <h4>Images</h4>
+<p>
+    <label>
+        Max allowed files:
+        <input type="number" @bind="maxAllowedFiles" />
+    </label>
+</p>
 
-    <div class="card" style="width:30rem;">
-        <div class="card-body">
-            @foreach (var imageDataUrl in imageDataUrls)
+<p>
+    <label>
+        Upload up to @maxAllowedFiles files of up to @maxFileSize bytes each:
+        <InputFile OnChange="@LoadFiles" multiple />
+    </label>
+</p>
+
+<p>@exceptionMessage</p>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+
+<ul>
+    @foreach (var (file, content) in loadedFiles)
+    {
+        <li>
+            <ul>
+                <li>Name: @file.Name</li>
+                <li>Last modified: @file.LastModified.ToString()</li>
+                <li>Size (bytes): @file.Size</li>
+                <li>Content type: @file.ContentType</li>
+                <li>Content: @content</li>
+            </ul>
+        </li>
+    }
+</ul>
+
+@code {
+    private Dictionary<IBrowserFile, string> loadedFiles =
+        new Dictionary<IBrowserFile, string>();
+    private long maxFileSize = 1024 * 15;
+    private int maxAllowedFiles = 3;
+    private bool isLoading;
+    string exceptionMessage;
+
+    async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+        loadedFiles.Clear();
+        exceptionMessage = string.Empty;
+
+        try
+        {
+            foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
             {
-                <img class="rounded m-1" src="@imageDataUrl" />
+                using var reader = 
+                    new StreamReader(file.OpenReadStream(maxFileSize));
+
+                loadedFiles.Add(file, await reader.ReadToEndAsync());
             }
+        }
+        catch (Exception ex)
+        {
+            exceptionMessage = ex.Message;
+        }
+
+        isLoading = false;
+    }
+}
+```
+
+`IBrowserFile` zwraca metadane [uwidocznione przez przeglądarkę](https://developer.mozilla.org/docs/Web/API/File#Instance_properties) jako właściwości. Te metadane mogą być przydatne do wstępnej weryfikacji.
+
+## <a name="upload-files-to-a-server"></a>Przekazywanie plików na serwer
+
+Poniższy przykład ilustruje przekazywanie plików na serwer przy użyciu hostowanego Blazor WebAssembly rozwiązania.
+
+> [!WARNING]
+> Należy zachować ostrożność, zapewniając użytkownikom możliwość przekazywania plików na serwer. Aby uzyskać więcej informacji, zobacz <xref:mvc/models/file-uploads#security-considerations>.
+
+Następująca `UploadResult` Klasa w **`Shared`** projekcie zachowuje wynik przekazanego pliku. Gdy przekazywanie pliku na serwer nie powiedzie się, kod błędu jest zwracany w programie `ErrorCode` na potrzeby wyświetlania użytkownikowi. Na serwerze są generowane bezpieczne przechowywane nazwy plików dla każdego pliku i zwracane do klienta w programie w `StoredFileName` celu wyświetlenia. Pliki są zmieniane między klientem a serwerem przy użyciu nazwy niebezpiecznej/niezaufanego pliku w programie `FileName` .
+
+`UploadResult.cs`:
+
+```csharp
+public class UploadResult
+{
+    public bool Uploaded { get; set; }
+
+    public string FileName { get; set; }
+
+    public string StoredFileName { get; set; }
+
+    public int ErrorCode { get; set; }
+}
+```
+
+Następujący `UploadFiles` składnik w **`Client`** projekcie:
+
+* Zezwala użytkownikom na przekazywanie plików z klienta programu.
+* Wyświetla niezaufaną/niebezpieczną nazwę pliku dostarczoną przez klienta w interfejsie użytkownika, ponieważ automatycznie koduje Razor ciągi. **Nie ufaj nazwom plików dostarczanym przez klientów w innych scenariuszach.**
+
+`Pages/UploadFiles.razor`:
+
+```razor
+@page "/upload-files"
+@using System.Linq
+@using Microsoft.Extensions.Logging
+@inject HttpClient Http
+@inject ILogger<UploadFiles> logger
+
+<h1>Upload Files</h1>
+
+<p>
+    <label>
+        Upload up to @maxAllowedFiles files:
+        <InputFile OnChange="@OnInputFileChange" multiple />
+    </label>
+</p>
+
+@if (files.Count > 0)
+{
+    <div class="card">
+        <div class="card-body">
+            <ul>
+                @foreach (var file in files)
+                {
+                    <li>
+                        File: @file.Name
+                        <br>
+                        @if (FileUpload(uploadResults, file.Name, logger,
+                            out var result))
+                        {
+                            <span>
+                                Stored File Name: @result.StoredFileName
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+                                There was an error uploading the file
+                                (Error: @result.ErrorCode).
+                            </span>
+                        }
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 }
 
 @code {
-    private IList<string> imageDataUrls = new List<string>();
+    private IList<File> files = new List<File>();
+    private IList<UploadResult> uploadResults = new List<UploadResult>();
+    private int maxAllowedFiles = 3;
+    private bool shouldRender;
+
+    protected override bool ShouldRender() => shouldRender;
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
-        var maxAllowedFiles = 3;
-        var format = "image/png";
+        shouldRender = false;
+        long maxFileSize = 1024 * 1024 * 15;
+        var upload = false;
 
-        foreach (var imageFile in e.GetMultipleFiles(maxAllowedFiles))
+        using var content = new MultipartFormDataContent();
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
         {
-            var resizedImageFile = await imageFile.RequestImageFileAsync(format, 
-                100, 100);
-            var buffer = new byte[resizedImageFile.Size];
-            await resizedImageFile.OpenReadStream().ReadAsync(buffer);
-            var imageDataUrl = 
-                $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-            imageDataUrls.Add(imageDataUrl);
+            if (uploadResults.SingleOrDefault(
+                f => f.FileName == file.Name) is null)
+            {
+                var fileContent = new StreamContent(file.OpenReadStream());
+
+                files.Add(
+                    new File()
+                    {
+                        Name = file.Name,
+                    });
+
+                if (file.Size < maxFileSize)
+                {
+                    content.Add(
+                        content: fileContent,
+                        name: "\"files\"",
+                        fileName: file.Name);
+
+                    upload = true;
+                }
+                else
+                {
+                    logger.LogInformation("{FileName} not uploaded", file.Name);
+
+                    uploadResults.Add(
+                        new UploadResult()
+                        {
+                            FileName = file.Name,
+                            ErrorCode = 6,
+                            Uploaded = false,
+                        });
+                }
+            }
         }
+
+        if (upload)
+        {
+            var response = await Http.PostAsync("/Filesave", content);
+
+            var newUploadResults = await response.Content
+                .ReadFromJsonAsync<IList<UploadResult>>();
+
+            uploadResults = uploadResults.Concat(newUploadResults).ToList();
+        }
+
+        shouldRender = true;
+    }
+
+    private static bool FileUpload(IList<UploadResult> uploadResults,
+        string fileName, ILogger<UploadFiles> logger, out UploadResult result)
+    {
+        result = uploadResults.SingleOrDefault(f => f.FileName == fileName);
+
+        if (result is null)
+        {
+            logger.LogInformation("{FileName} not uploaded", fileName);
+            result = new UploadResult();
+            result.ErrorCode = 5;
+        }
+
+        return result.Uploaded;
+    }
+
+    private class File
+    {
+        public string Name { get; set; }
     }
 }
 ```
 
-`IBrowserFile` zwraca metadane [uwidocznione przez przeglądarkę](https://developer.mozilla.org/docs/Web/API/File#Instance_properties) jako właściwości. Te metadane mogą być przydatne do wstępnej weryfikacji. Na przykład zobacz [ `FileUpload.razor` i `FilePreview.razor` przykładowe składniki](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/file-uploads/samples/).
+Aby użyć poniższego kodu, należy utworzyć `Development/unsafe_uploads` folder w katalogu głównym **`Server`** projektu.
+
+Poniższy `FilesaveController` kontroler w **`Server`** projekcie zapisuje przekazane pliki z klienta programu.
+
+> [!WARNING]
+> Przykład zapisuje pliki bez skanowania ich zawartości. W większości scenariuszy produkcyjnych interfejs API skanera chroniącego przed wirusami i złośliwym oprogramowaniem jest używany na plikach przed udostępnieniem ich do pobrania lub użycia przez inne systemy. Aby uzyskać więcej informacji na temat zagadnień związanych z zabezpieczeniami podczas przekazywania plików na serwer, zobacz <xref:mvc/models/file-uploads#security-considerations> .
+
+`Controllers/FilesaveController.cs`:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+[ApiController]
+[Route("[controller]")]
+public class FilesaveController : ControllerBase
+{
+    private readonly IWebHostEnvironment env;
+    private readonly ILogger<FilesaveController> logger;
+
+    public FilesaveController(IWebHostEnvironment env, 
+        ILogger<FilesaveController> logger)
+    {
+        this.env = env;
+        this.logger = logger;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<IList<UploadResult>>> PostFile(
+        [FromForm] IEnumerable<IFormFile> files)
+    {
+        var maxAllowedFiles = 3;
+        long maxFileSize = 1024 * 1024 * 15;
+        var filesProcessed = 0;
+        var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
+        IList<UploadResult> uploadResults = new List<UploadResult>();
+
+        foreach (var file in files)
+        {
+            var uploadResult = new UploadResult();
+            string trustedFileNameForFileStorage;
+            var untrustedFileName = file.FileName;
+            uploadResult.FileName = untrustedFileName;
+            var trustedFileNameForDisplay = 
+                WebUtility.HtmlEncode(untrustedFileName);
+
+            if (filesProcessed < maxAllowedFiles)
+            {
+                if (file.Length == 0)
+                {
+                    logger.LogInformation("{FileName} length is 0", 
+                        trustedFileNameForDisplay);
+                    uploadResult.ErrorCode = 1;
+                }
+                else if (file.Length > maxFileSize)
+                {
+                    logger.LogInformation("{FileName} of {Length} bytes is " +
+                        "larger than the limit of {Limit} bytes", 
+                        trustedFileNameForDisplay, file.Length, maxFileSize);
+                    uploadResult.ErrorCode = 2;
+                }
+                else
+                {
+                    try
+                    {
+                        trustedFileNameForFileStorage = Path.GetRandomFileName();
+                        var path = Path.Combine(env.ContentRootPath, 
+                            env.EnvironmentName, "unsafe_uploads", 
+                            trustedFileNameForFileStorage);
+                        using MemoryStream ms = new();
+                        await file.CopyToAsync(ms);
+                        await System.IO.File.WriteAllBytesAsync(path, ms.ToArray());
+                        logger.LogInformation("{FileName} saved at {Path}", 
+                            trustedFileNameForDisplay, path);
+                        uploadResult.Uploaded = true;
+                        uploadResult.StoredFileName = trustedFileNameForFileStorage;
+                    }
+                    catch (IOException ex)
+                    {
+                        logger.LogError("{FileName} error on upload: {Message}", 
+                            trustedFileNameForDisplay, ex.Message);
+                        uploadResult.ErrorCode = 3;
+                    }
+                }
+
+                filesProcessed++;
+            }
+            else
+            {
+                logger.LogInformation("{FileName} not uploaded because the " +
+                    "request exceeded the allowed {Count} of files", 
+                    trustedFileNameForDisplay, maxAllowedFiles);
+                uploadResult.ErrorCode = 4;
+            }
+
+            uploadResults.Add(uploadResult);
+        }
+
+        return new CreatedResult(resourcePath, uploadResults);
+    }
+}
+```
 
 ## <a name="file-streams"></a>Strumienie plików
 
-W Blazor WebAssembly aplikacji dane są przesyłane strumieniowo bezpośrednio do kodu .NET w przeglądarce.
+W programie Blazor WebAssembly dane plików są przesyłane strumieniowo bezpośrednio do kodu .NET w przeglądarce.
 
-W Blazor Server aplikacji dane plików są przesyłane strumieniowo przez SignalR połączenie do kodu platformy .NET na serwerze, ponieważ plik jest odczytywany ze strumienia. [`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) umożliwia skonfigurowanie parametrów przekazywania plików dla programu Blazor Server .
+W programie Blazor Server dane plików są przesyłane strumieniowo SignalR do kodu platformy .NET na serwerze, ponieważ plik jest odczytywany ze strumienia. [`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) umożliwia skonfigurowanie parametrów przekazywania plików dla programu Blazor Server .
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

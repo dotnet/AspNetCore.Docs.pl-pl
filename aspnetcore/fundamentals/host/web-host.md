@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 98be96bf60441cf09a315dbd1c60e109a7a08afe
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: fa9b1941d6dcda30855a4729dfa1cd78f897d9b6
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253114"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109978"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core hosta sieci Web
 
@@ -32,7 +32,7 @@ ASP.NET Core aplikacje konfigurują i uruchamiają *hosta*. Host jest odpowiedzi
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W tym artykule omówiono hosta sieci Web, który jest dostępny tylko w celu zapewnienia zgodności z poprzednimi wersjami. [Host ogólny](xref:fundamentals/host/generic-host) jest zalecany dla wszystkich typów aplikacji.
+W tym artykule omówiono hosta sieci Web, który jest dostępny tylko w celu zapewnienia zgodności z poprzednimi wersjami. Szablony ASP.NET Core tworzą [hosta ogólnego platformy .NET](<xref:fundamentals/host/generic-host>), który jest zalecany dla wszystkich typów aplikacji.
 
 ::: moniker-end
 

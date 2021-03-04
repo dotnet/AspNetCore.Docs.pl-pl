@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 9214fa10a2bf7d53a4cb12263a3fa69bded84b29
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 0421fd0509fbd89e4635dc7d80a584508627b52c
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536236"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109783"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -58,6 +58,13 @@ Debugowanie wymaga jednej z następujących przeglądarek:
 * Microsoft Edge (wersja 80 lub nowsza)
 
 Upewnij się, że zapory lub serwery proxy nie blokują komunikacji z serwerem proxy debugowania ( `NodeJS` proces). Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja zapory](#firewall-configuration) .
+
+Użytkownicy Visual Studio Code muszą mieć następujące rozszerzenia:
+
+* [C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
+* [ Blazor Rozszerzenie debugowania WASM](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion) (przy użyciu języka C# dla rozszerzenia Visual Studio Code wersja 1.23.9 lub nowsza)
+
+Po otwarciu projektu w VS Code może zostać wyświetlone powiadomienie, że do włączenia debugowania jest wymagana dodatkowa konfiguracja. Jeśli jest to wymagane, Zainstaluj wymagane rozszerzenia z Visual Studio Marketplace. Aby sprawdzić zainstalowane rozszerzenia, Otwórz rozszerzenia **widoku**  >   na pasku menu lub wybierz ikonę **rozszerzenia** na pasku bocznym **działania** .
 
 Visual Studio dla komputerów Mac wymaga wersji 8,8 (kompilacja 1532) lub nowszej:
 
@@ -173,7 +180,8 @@ Aby uzyskać informacje dotyczące konfigurowania VS Code zasobów w `.vscode` f
    Jeśli otrzymasz powiadomienie:
 
    * Upewnij się, że zainstalowano najnowszą wersję [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) . Aby sprawdzić zainstalowane rozszerzenia, Otwórz rozszerzenia **widoku**  >   na pasku menu lub wybierz ikonę **rozszerzenia** na pasku bocznym **działania** .
-   * Upewnij się, że debugowanie JavaScript Preview jest włączone. Otwórz ustawienia na pasku menu (  >    >  **Ustawienia** preferencji plików). Wyszukaj przy użyciu słów kluczowych `debug preview` . Upewnij się, że w wynikach wyszukiwania znajduje się pole wyboru **debuguj > JavaScript: Użyj opcji Podgląd** jest zaznaczone. Jeśli opcja Włącz debugowanie podglądu nie istnieje, Uaktualnij do najnowszej wersji VS Code lub zainstaluj [rozszerzenie debugera JavaScript](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) (vs Code w wersji 1,46 lub starszej).
+   * Podczas używania [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) w **wersji 1.23.9 lub nowszej** upewnij się, że zainstalowano najnowsze [ Blazor rozszerzenie debugowania WASM](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.blazorwasm-companion) . Aby sprawdzić zainstalowane rozszerzenia, Otwórz rozszerzenia **widoku**  >   na pasku menu lub wybierz ikonę **rozszerzenia** na pasku bocznym **działania** .
+   * Upewnij się, że debugowanie JavaScript Preview jest włączone. Otwórz ustawienia na pasku menu (  >    >  **Ustawienia** preferencji plików). Wyszukaj przy użyciu słów kluczowych `debug preview` . W wynikach wyszukiwania Ustaw lub upewnij się, że pole wyboru **debuguj > JavaScript: Użyj podglądu** jest zaznaczone. Jeśli opcja Włącz debugowanie podglądu nie istnieje, Uaktualnij do najnowszej wersji VS Code lub zainstaluj [rozszerzenie debugera JavaScript](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) (vs Code w wersji 1,46 lub starszej).
    * Załaduj ponownie okno.
 
 1. Rozpocznij debugowanie przy użyciu skrótu klawiaturowego <kbd>F5</kbd> lub elementu menu.

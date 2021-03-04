@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: 56f5a5caeea7581e26f8d8cec9662f439cd24b9e
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 5a860fe398dff2e12671b6854a80bbab3120499b
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060719"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109484"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core testowanie obciążenia/obciążeniowego
 
@@ -49,3 +49,4 @@ Poniższa lista zawiera narzędzia do oceny wydajności sieci Web innych firm z 
 * [Moje przepięcio zachodnie wiatru](https://websurge.west-wind.com/)
 * [W ramach](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
+* [NBomber](https://github.com/PragmaticFlow/NBomber)

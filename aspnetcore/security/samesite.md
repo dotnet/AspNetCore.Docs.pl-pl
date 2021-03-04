@@ -19,14 +19,14 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: f1aa388015bd540a6fda263eac53753ada63bf79
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: e06c73edfc999053e0aa37f05d984a2b428f69a9
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94673994"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109939"
 ---
-# <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>Pracuj z SameSite cookie s w ASP.NET Core
+# <a name="work-with-samesite-cookies-in-aspnet-core"></a>Pracuj z SameSite cookie s w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -42,13 +42,13 @@ To `SameSite=Lax` ustawienie działa w przypadku większości aplikacji cookie .
 
 Każdy składnik ASP.NET Core, który emituje cookie s, musi zdecydować, czy SameSite jest odpowiednie.
 
-## <a name="samesite-and-no-locidentity"></a>SameSite i Identity
+## <a name="samesite-and-identity"></a>SameSite i Identity
 
 [!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="samesite-test-sample-code"></a>Przykładowy kod testu SameSite
 
- ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
+::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
 
 Następujące przykłady można pobrać i przetestować:
 
@@ -62,7 +62,6 @@ Następujące przykłady można pobrać i przetestować:
 ::: moniker range=">= aspnetcore-3.0"
 
 Można pobrać i przetestować następujący przykład:
-
 
 | Przykład               | Dokument |
 | ----------------- | ------------ |
@@ -227,7 +226,7 @@ Program Edge obsługuje stary Standard SameSite. Wersja brzegowa 44 nie ma żadn
 
 Flagi SameSite są ustawiane na `edge://flags/#same-site-by-default-cookies` stronie. Nie odnaleziono problemów ze zgodnością z funkcją chromu.
 
-### <a name="test-with-no-locelectron"></a>Testuj z Electron
+### <a name="test-with-electron"></a>Testuj z Electron
 
 Wersje programu Electron obejmują starsze wersje chromu. Na przykład wersja Electron użyta przez zespoły to chrom 66, który wykazuje starsze zachowanie. Należy przeprowadzić własne testy zgodności z Electron używaną wersją produktu. Zapoznaj się z tematem [Obsługa starszych przeglądarek](#sob) w następnej sekcji.
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 012c8794b3d239ce93ac942000c7ec4f71d06cbf
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a942c7848c77444d185ff73338a98a4205451992
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280009"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109731"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor formularzy i walidacji
 
@@ -1011,7 +1011,7 @@ Aby upewnić się, że wynik walidacji jest prawidłowo skojarzony z polem przy 
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class CustomValidator : ValidationAttribute
+public class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -1031,22 +1031,84 @@ private class CustomValidator : ValidationAttribute
 
 ## <a name="custom-validation-class-attributes"></a>Niestandardowe atrybuty klasy walidacji
 
-Niestandardowe nazwy klas walidacji są przydatne podczas integrowania z strukturami CSS, takimi jak [Bootstrap](https://getbootstrap.com/). Aby określić niestandardowe nazwy klas walidacji, Utwórz klasę pochodną `FieldCssClassProvider` i ustaw klasę dla tego <xref:Microsoft.AspNetCore.Components.Forms.EditContext> wystąpienia:
+Niestandardowe nazwy klas walidacji są przydatne podczas integrowania z strukturami CSS, takimi jak [Bootstrap](https://getbootstrap.com/).
+
+Aby określić niestandardowe nazwy klas walidacji:
+
+* Podaj Style CSS dla niestandardowej walidacji. W poniższym przykładzie określono prawidłowe i nieprawidłowe style:
+
+```css
+.validField {
+    border-color: lawngreen;
+}
+
+.invalidField {
+    background-color: tomato;
+}
+```
+
+* Utwórz klasę pochodną `FieldCssClassProvider` , która sprawdza obecność komunikatów sprawdzania poprawności pola i stosuje odpowiedni prawidłowy lub nieprawidłowy styl:
 
 ```csharp
-var editContext = new EditContext(model);
-editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+using System.Linq;
+using Microsoft.AspNetCore.Components.Forms;
 
-...
-
-private class MyFieldClassProvider : FieldCssClassProvider
+public class MyFieldClassProvider : FieldCssClassProvider
 {
     public override string GetFieldCssClass(EditContext editContext, 
         in FieldIdentifier fieldIdentifier)
     {
         var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
 
-        return isValid ? "good field" : "bad field";
+        return isValid ? "validField" : "invalidField";
+    }
+}
+```
+
+* Ustaw klasę w <xref:Microsoft.AspNetCore.Components.Forms.EditContext> wystąpieniu formularza:
+
+```razor
+...
+
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmit">
+    ...
+</EditForm>
+
+...
+
+@code {
+    private EditContext editContext;
+    private Model model = new Model();
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+        editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+    }
+
+    private void HandleValidSubmit()
+    {
+        ...
+    }
+}
+```
+
+Poprzedni przykład sprawdza poprawność wszystkich pól formularza i stosuje styl do każdego pola. Jeśli formularz powinien stosować tylko niestandardowe style do podzbioru pól, należy `MyFieldClassProvider` warunkowo zastosować style. Poniższy przykład stosuje tylko styl do `Identifier` pola:
+
+```csharp
+public class MyFieldClassProvider : FieldCssClassProvider
+{
+    public override string GetFieldCssClass(EditContext editContext,
+        in FieldIdentifier fieldIdentifier)
+    {
+        if (fieldIdentifier.FieldName == "Identifier")
+        {
+            var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
+
+            return isValid ? "validField" : "invalidField";
+        }
+
+        return string.Empty;
     }
 }
 ```

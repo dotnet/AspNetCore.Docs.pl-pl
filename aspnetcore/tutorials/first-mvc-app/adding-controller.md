@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 47bb9b96bd5565a3a67f3cbdf9a4b6bc1f987447
-ms.sourcegitcommit: ef8d8c79993a6608bf597ad036edcf30b231843f
+ms.openlocfilehash: 1a13fe31859b9ed41edc746ba450f552bc07f344
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/09/2021
-ms.locfileid: "99975264"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110212"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -44,8 +44,8 @@ Aplikacje oparte na MVC zawierają:
 
 W aplikacji MVC widok wyświetla tylko informacje. Kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. Na przykład kontroler obsługuje segmenty adresu URL i wartości ciągu zapytania i przekazuje te wartości do modelu. Model może używać tych wartości do wykonywania zapytań w bazie danych. Na przykład:
 
-* `Https://localhost:5001/Home/Privacy`: określa `Home`  kontroler i `Privacy` akcję.
-* `Https://localhost:5001/Movies/Edit/5`: to żądanie edycji filmu o IDENTYFIKATORze 5 przy użyciu `Movies` kontrolera i `Edit` akcji, które opisano w dalszej części tego samouczka.
+* `https://localhost:5001/Home/Privacy`: określa `Home` kontroler i `Privacy` akcję.
+* `https://localhost:5001/Movies/Edit/5`: to żądanie edycji filmu o IDENTYFIKATORze 5 przy użyciu `Movies` kontrolera i `Edit` akcji, które opisano w dalszej części tego samouczka.
 
 Dane trasy są wyjaśnione w dalszej części samouczka.
 

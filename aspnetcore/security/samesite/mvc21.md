@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 61878af0f9af72284b43ffd46cca42b0cf043326
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8f819d283e136a63ad9f82d6432a93866210b36b
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051554"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102110108"
 ---
-# <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>Przykład ASP.NET Core SameSite 2,1 MVC cookie
+# <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>Przykład ASP.NET Core SameSite 2,1 MVC cookie
 
 ASP.NET Core 2,1 ma wbudowaną obsługę atrybutu [SameSite](https://www.owasp.org/index.php/SameSite) , ale został on zapisany w oryginalnym standardzie. [Zachowanie poprawek](https://github.com/dotnet/aspnetcore/issues/8212) zostało zmienione tak, `SameSite.None` Aby wyemitować atrybut sameSite o wartości `None` , a nie nie emitować wartości wcale. Jeśli nie chcesz emitować wartości, możesz ustawić `SameSite` Właściwość na wartość cookie -1.
 
@@ -36,7 +36,7 @@ ASP.NET Core 2,1 ma wbudowaną obsługę atrybutu [SameSite](https://www.owasp.o
 
 Poniżej przedstawiono przykład sposobu pisania atrybutu SameSite w cookie :
 
-```c#
+```csharp
 var cookieOptions = new CookieOptions
 {
     // Set the secure flag, which Chrome's changes will require for SameSite none.
@@ -56,11 +56,11 @@ var cookieOptions = new CookieOptions
 Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 ```
 
-## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>Ustawianie Cookie stanu uwierzytelniania i sesji cookie
+## <a name="setting-cookie-authentication-and-session-state-cookies"></a>Ustawianie Cookie stanu uwierzytelniania i sesji cookie
 
 Cookie uwierzytelnianie, stan sesji i [różne inne składniki](../samesite.md?view=aspnetcore-2.1) ustawiają opcje sameSiteymi za pomocą Cookie opcji, na przykład
 
-```c#
+```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -87,13 +87,13 @@ W przypadku uruchomienia [przykładowego projektu](https://github.com/blowdart/A
 
 Po kliknięciu przycisku "Utwórz SameSite" w powyższym obrazie można zobaczyć cookie , że został utworzony przez próbkę Cookie , która ma wartość atrybutu SameSite `Lax` , odpowiadającą wartości ustawionej w [przykładowym kodzie](#sampleCode).
 
-## <a name="intercepting-no-loccookies"></a><a name="interception"></a>Przechwytywanie cookie s
+## <a name="intercepting-cookies"></a><a name="interception"></a>Przechwytywanie cookie s
 
 W celu przechwycenia elementu cookie s, aby dostosować wartość Brak zgodnie z obsługą agenta przeglądarki użytkownika, należy użyć `CookiePolicy` oprogramowania pośredniczącego. Ta wartość musi być umieszczona w potoku żądania HTTP **przed** wszelkimi składnikami, które zapisują cookie i konfigurują w ramach `ConfigureServices()` .
 
-Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Przykład:
+Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Na przykład:
 
-```c#
+```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     if (env.IsDevelopment())
@@ -121,9 +121,9 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Przykład:
+Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Na przykład:
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.Configure<CookiePolicyOptions>(options =>
@@ -159,7 +159,7 @@ Funkcja pomocnika `CheckSameSite(HttpContext, CookieOptions)` :
 
 ## <a name="targeting-net-framework"></a>.NET Framework określania wartości docelowej
 
-ASP.NET Core i system. Web (ASP.NET Classic) mają niezależne implementacje SameSite. Poprawki SameSite KB dla .NET Framework nie są wymagane w przypadku używania ASP.NET Core, ani do programu System. Web SameSite minimalne wymagania wersji platformy (.NET 4.7.2) mają zastosowanie do ASP.NET Core.
+ASP.NET Core i system. Web (ASP.NET 4. x) mają niezależne implementacje SameSite. Poprawki SameSite KB dla .NET Framework nie są wymagane w przypadku używania ASP.NET Core, ani do programu System. Web SameSite minimalne wymagania wersji platformy (.NET Framework 4.7.2) mają zastosowanie do ASP.NET Core.
 
 ASP.NET Core na platformie .NET wymaga aktualizacji zależności pakietów NuGet w celu uzyskania odpowiednich poprawek.
 

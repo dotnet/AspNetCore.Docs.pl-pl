@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 524a1f85838d083ed2f01afd96601bcd5e6ce12b
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 2a5add79d60ddcbb1afdb9489fa16da692a7d6bd
+ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280975"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102109666"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
@@ -139,7 +139,7 @@ Dla wywołań z metod .NET do języka JavaScript:
 
 Wykonaj następujące środki ostrożności, aby zabezpieczyć się przed poprzednimi scenariuszami:
 
-* Zawijaj wywołania programu JS Interop w [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instrukcjach, aby uwzględnić błędy, które mogą wystąpić podczas wywołań. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors#javascript-interop>.
+* Zawijaj wywołania programu JS Interop w [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instrukcjach, aby uwzględnić błędy, które mogą wystąpić podczas wywołań. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors?pivots=server#javascript-interop-server>.
 * Sprawdź poprawność danych zwróconych przez wywołania międzyoperacyjności JS, w tym komunikaty o błędach, przed podjęciem jakiejkolwiek akcji.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Metody .NET wywoływane z przeglądarki
@@ -302,7 +302,7 @@ Interakcje między klientem a serwerem są rejestrowane w dziennikach serwera z 
 
 Gdy na serwerze wystąpi błąd, struktura powiadamia klienta i rozłączy sesję. Domyślnie klient otrzymuje ogólny komunikat o błędzie, który można zobaczyć w narzędziach deweloperskich w przeglądarce.
 
-Błąd po stronie klienta nie zawiera stosu wywołań i nie zawiera szczegółów dotyczących przyczyny błędu, ale Dzienniki serwera zawierają takie informacje. W celach programistycznych informacje o poufnych informacjach o błędzie można udostępnić klientowi, [włączając szczegółowe błędy](xref:blazor/fundamentals/handle-errors#blazor-server-detailed-circuit-errors).
+Błąd po stronie klienta nie obejmuje stosu wywołań i nie zawiera szczegółów dotyczących przyczyny błędu, ale Dzienniki serwera zawierają takie informacje. W celach programistycznych informacje o poufnych informacjach o błędzie można udostępnić klientowi, [włączając szczegółowe błędy](xref:blazor/fundamentals/handle-errors#blazor-server-detailed-circuit-errors).
 
 > [!WARNING]
 > Ujawnienie informacji o błędach klientom w Internecie stanowi zagrożenie bezpieczeństwa, które należy zawsze uniknąć.

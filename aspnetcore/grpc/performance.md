@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 622c6ba042c5832f99bba379fadd9aba7d7163f2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 386359adfe0e876fa5c067dc82153fd3de0f3fba
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060407"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118944"
 ---
 # <a name="performance-best-practices-with-grpc"></a>Najlepsze rozwiązania w zakresie wydajności z gRPC
 
@@ -105,7 +105,7 @@ Dostępne są dwie opcje efektywnego równoważenia obciążenia gRPC:
 
 ### <a name="client-side-load-balancing"></a>Równoważenie obciążenia po stronie klienta
 
-Za pomocą równoważenia obciążenia po stronie klienta Klient zna informacje o punktach końcowych. Dla każdego wywołania gRPC wybiera inny punkt końcowy do wysłania wywołania. Równoważenie obciążenia po stronie klienta jest dobrym rozwiązaniem, gdy opóźnienie jest ważne. Między klientem a usługą nie istnieje serwer proxy, dlatego wywołanie jest wysyłane bezpośrednio do usługi. Minusem do równoważenia obciążenia po stronie klienta polega na tym, że każdy klient musi śledzić dostępne punkty końcowe, których należy użyć.
+Za pomocą równoważenia obciążenia po stronie klienta Klient zna informacje o punktach końcowych. Dla każdego wywołania gRPC wybiera inny punkt końcowy do wysłania wywołania. Równoważenie obciążenia po stronie klienta jest dobrym rozwiązaniem, gdy opóźnienie jest ważne. Nie ma serwera proxy między klientem a usługą, dlatego wywołanie jest wysyłane bezpośrednio do usługi. Minusem do równoważenia obciążenia po stronie klienta polega na tym, że każdy klient musi śledzić dostępne punkty końcowe, które powinny być używane.
 
 Referencyjna równoważenia obciążenia klienta jest techniką, w której stan równoważenia obciążenia jest przechowywany w centralnej lokalizacji. Klienci okresowo wysyłają zapytanie do centralnej lokalizacji, aby uzyskać informacje do użycia podczas podejmowania decyzji dotyczących równoważenia obciążenia.
 

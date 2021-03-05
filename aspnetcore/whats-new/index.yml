@@ -5,18 +5,20 @@ metadata:
   title: ASP.NET Core dokumentacja — co nowego?
   description: Więcej informacji na temat nowej i zaktualizowanej zawartości znajduje się w dokumentacji ASP.NET Core.
   ms.topic: landing-page
-  ms.date: 02/01/2021
-  ms.openlocfilehash: 0b7f3ab27f31417b3e6b17bf9d4c31ec96129f1e
-  ms.sourcegitcommit: 75db2f684a9302b0be7925eab586aa091c6bd19f
+  ms.date: 03/04/2021
+  ms.openlocfilehash: a4ef3edbf260c6f2ee34ac739884bd9a605bd396
+  ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
   ms.translationtype: MT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 02/01/2021
-  ms.locfileid: "99238290"
+  ms.lasthandoff: 03/04/2021
+  ms.locfileid: "102119009"
 landingContent:
 - title: Znajdź aktualizacje ASP.NET Core docs
   linkLists:
   - linkListType: whats-new
     links:
+    - text: Luty 2021 r.
+      url: 2021-02.md
     - text: Styczeń 2021 r.
       url: 2021-01.md
     - text: Grudzień 2020 r.
@@ -27,8 +29,6 @@ landingContent:
       url: 2020-10.md
     - text: Wrzesień 2020
       url: 2020-09.md
-    - text: Sierpień 2020 r.
-      url: 2020-08.md
 - title: Zapoznaj się z tematem tworzenie ASP.NET Core dokumentów
   linkLists:
   - linkListType: overview

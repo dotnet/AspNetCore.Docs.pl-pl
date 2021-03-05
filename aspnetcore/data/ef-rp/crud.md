@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 4a48fb094888d51aa6f881c82e4f20ffbc84c8e2
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: c424f2a46fb62af6283ffa3a02c4134bbe35ffc9
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901174"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118931"
 ---
-# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Jan P Kowalski](https://twitter.com/thereformedprog)i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -376,7 +376,7 @@ Kod szkieletowy używa następującego wzorca do tworzenia, edytowania i usuwani
 
 Strony indeks i szczegóły pobierają i wyświetlają żądane dane za pomocą metody HTTP GET `OnGetAsync`
 
-## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync a FirstOrDefaultAsync
+## <a name="singleordefaultasync-vs-firstordefaultasync"></a>`SingleOrDefaultAsync` lokalne. `FirstOrDefaultAsync`
 
 Wygenerowany kod używa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_), który jest ogólnie preferowany względem [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_).
 
@@ -565,7 +565,7 @@ Powyższy kod pobiera wybraną jednostkę, a następnie wywołuje metodę [Remov
 * Przechwycono wyjątek bazy danych.
 * Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-### <a name="update-the-delete-no-locrazor-page"></a>Aktualizowanie strony usuwania Razor
+### <a name="update-the-delete-razor-page"></a>Aktualizowanie strony usuwania Razor
 
 Dodaj następujący wyróżniony komunikat o błędzie do Razor strony usuwania.
 <!--

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 5d228af00ee34e7f8ca60a5085872fdb93842367
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 5fa7bc15bac2609c89fea54f8a788aaf9f5ad055
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057502"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102119035"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatowanie danych odpowiedzi w ASP.NET Core Web API
 
@@ -132,7 +132,7 @@ Poprzedni kod serializacji wyników przy użyciu `XmlSerializer` .
 
 W przypadku korzystania z powyższego kodu metody kontrolera zwracają odpowiedni format na podstawie nagłówka żądania `Accept` .
 
-### <a name="configure-systemtextjson-based-formatters"></a>Konfigurowanie System.Text.Jsna podstawie elementów formatujących
+### <a name="configure-systemtextjson-based-formatters"></a>Konfigurowanie `System.Text.Json` opartych na programie formatującego
 
 Funkcje dla elementów `System.Text.Json` formatujących opartych na programie można skonfigurować przy użyciu polecenia <xref:Microsoft.AspNetCore.Mvc.JsonOptions.JsonSerializerOptions?displayProperty=fullName> . Domyślne formatowanie to camelCase. Następujący wyróżniony kod PascalCase formatowanie:
 

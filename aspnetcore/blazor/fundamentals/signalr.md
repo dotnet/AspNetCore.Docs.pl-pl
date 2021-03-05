@@ -5,7 +5,7 @@ description: Dowiedz się, jak konfigurować połączenia i zarządzać nimi Bla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/27/2021
+ms.date: 02/25/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,38 +19,107 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/signalr
-ms.openlocfilehash: 3198f45819020ca551617aa12a146f2b8a9a9f8e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+zone_pivot_groups: blazor-hosting-models
+ms.openlocfilehash: 63dfd93fbc42a869211bc5cd481a8dbee6eb6c91
+ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279855"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "102118918"
 ---
 # <a name="aspnet-core-blazor-signalr-guidance"></a>Blazor SignalR Wskazówki dotyczące ASP.NET Core
+
+::: zone pivot="webassembly"
+
+W tym artykule wyjaśniono, jak konfigurować SignalR połączenia w aplikacjach i zarządzać nimi Blazor .
+
+Ogólne wskazówki dotyczące konfiguracji ASP.NET Core SignalR można znaleźć w tematach w <xref:signalr/introduction> obszarze dokumentacji. Aby skonfigurować SignalR [dodanie do Blazor WebAssembly rozwiązania hostowanego](xref:tutorials/signalr-blazor), zobacz <xref:signalr/configuration#configure-server-options> .
+
+## <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalR negocjowanie między źródłami na potrzeby uwierzytelniania
+
+Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, takich jak cookie nagłówki uwierzytelniania s lub http:
+
+* Służy <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> do ustawiania <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> żądań między źródłami [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) .
+
+  `IncludeRequestCredentialsMessageHandler.cs`:
+
+  ```csharp
+  using System.Net.Http;
+  using System.Threading;
+  using System.Threading.Tasks;
+  using Microsoft.AspNetCore.Components.WebAssembly.Http;
+
+  public class IncludeRequestCredentialsMessageHandler : DelegatingHandler
+  {
+      protected override Task<HttpResponseMessage> SendAsync(
+          HttpRequestMessage request, CancellationToken cancellationToken)
+      {
+          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+          return base.SendAsync(request, cancellationToken);
+      }
+  }
+  ```
+
+* Jeśli utworzono połączenie z centrum, przypisz <xref:System.Net.Http.HttpMessageHandler> do <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> opcji:
+
+  ```csharp
+  HubConnectionBuilder hubConnecton;
+
+  ...
+
+  hubConnecton = new HubConnectionBuilder()
+      .WithUrl(new Uri(NavigationManager.ToAbsoluteUri("/chathub")), options =>
+      {
+          options.HttpMessageHandlerFactory = innerHandler => 
+              new IncludeRequestCredentialsMessageHandler { InnerHandler = innerHandler };
+      }).Build();
+  ```
+
+  Poprzedni przykład konfiguruje adres URL połączenia centrum do bezwzględnego adresu URI w `/chathub` , który jest adresem URL używanym w [ SignalR Blazor samouczku with](xref:tutorials/signalr-blazor) w `Index` składniku ( `Pages/Index.razor` ). Identyfikator URI można również ustawić za pośrednictwem ciągu, na przykład `https://signalr.example.com` , lub za pomocą [konfiguracji](xref:blazor/fundamentals/configuration).
+
+Aby uzyskać więcej informacji, zobacz <xref:signalr/configuration#configure-additional-options>.
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="render-mode"></a>Tryb renderowania
+
+Jeśli Blazor WebAssembly aplikacja, która korzysta z programu SignalR jest skonfigurowana do PreRender na serwerze, renderowanie wstępne występuje przed nawiązaniem połączenia z serwerem. Aby uzyskać więcej informacji, zobacz następujące artykuły:
+
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
+* <xref:blazor/components/prerendering-and-integration>
+
+::: moniker-end
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
+
+* <xref:signalr/introduction>
+* <xref:signalr/configuration>
+
+::: zone-end
+
+::: zone pivot="server"
+
+W tym artykule wyjaśniono, jak konfigurować SignalR połączenia w aplikacjach i zarządzać nimi Blazor .
 
 Ogólne wskazówki dotyczące konfiguracji ASP.NET Core SignalR można znaleźć w tematach w <xref:signalr/introduction> obszarze dokumentacji. Aby skonfigurować SignalR [dodanie do Blazor WebAssembly rozwiązania hostowanego](xref:tutorials/signalr-blazor), zobacz <xref:signalr/configuration#configure-server-options> .
 
 ## <a name="circuit-handler-options"></a>Opcje procedury obsługi obwodu
 
-*Ta sekcja ma zastosowanie do Blazor Server .*
-
 Skonfiguruj Blazor Server obwód z <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> pokazanymi w poniższej tabeli.
 
 | Opcja | Domyślne | Opis |
 | --- | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors> | `false` | Wysyłaj szczegółowe komunikaty o wyjątkach do języka JavaScript, gdy wystąpił nieobsługiwany wyjątek w obwodzie lub kiedy wywołanie metody .NET za pomocą kodu JS Interop spowoduje wyjątek. |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | 100 | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors> | `false` | Wysyłaj szczegółowe komunikaty o wyjątkach do języka JavaScript, gdy wystąpił nieobsługiwany wyjątek w obwodzie lub gdy metoda .NET nie wywoływana za pomocą kodu JS Interop powoduje wyjątek. |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | 100 | Maksymalna liczba odłączonych obwodów, które serwer przechowuje w pamięci w danym momencie. |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | 3 minuty | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout> | 1 minuta | Maksymalny czas oczekiwania serwera przed upływem limitu czasu asynchronicznego wywołania funkcji JavaScript. |
-| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches> | 10 | Maksymalna liczba niepotwierdzonych partii renderowania, które serwer przechowuje w pamięci na obwód w danym momencie do obsługi niezawodnego ponownego łączenia. Po osiągnięciu limitu serwer przestaje tworzyć nowe partie renderowania do momentu potwierdzenia co najmniej jednej partii przez klienta. |
+| <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches> | 10 | Maksymalna liczba niepotwierdzonych partii renderowania, które serwer przechowuje w pamięci na obwód w danym momencie do obsługi niezawodnego ponownego łączenia. Po osiągnięciu limitu serwer przestaje tworzyć nowe partie renderowania do momentu potwierdzenia, że co najmniej jedna partia zostanie potwierdzona przez klienta. |
 
-Skonfiguruj opcje w programie `Startup.ConfigureServices` przy użyciu opcji delegat <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> . Poniższy przykład przypisuje domyślne wartości opcji pokazanych w powyższej tabeli:
+Skonfiguruj opcje w programie `Startup.ConfigureServices` przy użyciu opcji delegat <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> . Poniższy przykład przypisuje domyślne wartości opcji pokazanych w powyższej tabeli. Upewnij się, że `Startup.cs` używa <xref:System> przestrzeni nazw ( `using System;` ).
+
+`Startup.ConfigureServices`:
 
 ```csharp
-using System;
-
-...
-
 services.AddServerSideBlazor(options =>
 {
     options.DetailedErrors = false;
@@ -61,13 +130,11 @@ services.AddServerSideBlazor(options =>
 });
 ```
 
-Aby skonfigurować <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext> , użyj <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> z <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A> . Aby uzyskać opisy opcji, zobacz <xref:signalr/configuration#configure-server-options> . Poniższy przykład przypisuje domyślne wartości opcji:
+Aby skonfigurować <xref:Microsoft.AspNetCore.SignalR.HubConnectionContext> , użyj <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> z <xref:Microsoft.Extensions.DependencyInjection.ServerSideBlazorBuilderExtensions.AddHubOptions%2A> . Aby uzyskać opisy opcji, zobacz <xref:signalr/configuration#configure-server-options> . Poniższy przykład przypisuje domyślne wartości opcji. Upewnij się, że `Startup.cs` używa <xref:System> przestrzeni nazw ( `using System;` ).
+
+`Startup.ConfigureServices`:
 
 ```csharp
-using System;
-
-...
-
 services.AddServerSideBlazor()
     .AddHubOptions(options =>
     {
@@ -81,46 +148,13 @@ services.AddServerSideBlazor()
     });
 ```
 
-## <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalR negocjowanie między źródłami na potrzeby uwierzytelniania
-
-*Ta sekcja ma zastosowanie do Blazor WebAssembly .*
-
-Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, takich jak cookie nagłówki uwierzytelniania s lub http:
-
-* Użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> do ustawienia <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> na żądania między źródłami [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) :
-
-  ```csharp
-  public class IncludeRequestCredentialsMessageHandler : DelegatingHandler
-  {
-      protected override Task<HttpResponseMessage> SendAsync(
-          HttpRequestMessage request, CancellationToken cancellationToken)
-      {
-          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
-          return base.SendAsync(request, cancellationToken);
-      }
-  }
-  ```
-
-* Przypisz <xref:System.Net.Http.HttpMessageHandler> do <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> opcji:
-
-  ```csharp
-  var connection = new HubConnectionBuilder()
-      .WithUrl(new Uri("http://signalr.example.com"), options =>
-      {
-          options.HttpMessageHandlerFactory = innerHandler => 
-              new IncludeRequestCredentialsMessageHandler { InnerHandler = innerHandler };
-      }).Build();
-  ```
-
-Aby uzyskać więcej informacji, zobacz <xref:signalr/configuration#configure-additional-options>.
-
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Odzwierciedlanie stanu połączenia w interfejsie użytkownika
-
-*Ta sekcja ma zastosowanie do Blazor Server .*
 
 Gdy klient wykryje, że połączenie zostało utracone, do użytkownika jest wyświetlany domyślny interfejs użytkownika, podczas gdy klient próbuje ponownie nawiązać połączenie. Jeśli ponowne połączenie nie powiedzie się, użytkownik otrzymuje opcję ponowienia próby.
 
-Aby dostosować interfejs użytkownika, zdefiniuj element z elementu `id` `components-reconnect-modal` na `<body>` `_Host.cshtml` Razor stronie:
+Aby dostosować interfejs użytkownika, zdefiniuj element z elementu `id` `components-reconnect-modal` na `<body>` `_Host.cshtml` Razor stronie.
+
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -128,7 +162,9 @@ Aby dostosować interfejs użytkownika, zdefiniuj element z elementu `id` `compo
 </div>
 ```
 
-Dodaj następujący do arkusza stylów aplikacji ( `wwwroot/css/app.css` lub `wwwroot/css/site.css` ):
+Dodaj następujące style CSS do arkusza stylów witryny.
+
+`wwwroot/css/site.css`:
 
 ```css
 #components-reconnect-modal {
@@ -140,36 +176,20 @@ Dodaj następujący do arkusza stylów aplikacji ( `wwwroot/css/app.css` lub `ww
 }
 ```
 
-W poniższej tabeli opisano klasy CSS stosowane do `components-reconnect-modal` elementu.
+W poniższej tabeli opisano klasy CSS stosowane do `components-reconnect-modal` elementu przez Blazor platformę.
 
 | Klasa CSS                       | Wskazuje&hellip; |
 | ------------------------------- | ----------------- |
 | `components-reconnect-show`     | Utracono połączenie. Klient próbuje ponownie nawiązać połączenie. Pokaż modalne. |
 | `components-reconnect-hide`     | Aktywne połączenie zostanie ponownie nawiązane z serwerem. Ukryj modalne. |
-| `components-reconnect-failed`   | Ponowne połączenie nie powiodło się, prawdopodobnie z powodu błędu sieci. Aby spróbować ponownie nawiązać połączenie, wywołaj polecenie `window.Blazor.reconnect()` . |
-| `components-reconnect-rejected` | Odrzucono ponowne połączenie. Serwer został osiągnięty, ale odmówił połączenia, a stan użytkownika na serwerze został utracony. Aby ponownie załadować aplikację, wywołaj polecenie `location.reload()` . Ten stan połączenia może skutkować tym, że:<ul><li>Wystąpił awaria w obwodzie po stronie serwera.</li><li>Klient jest odłączony wystarczająco długo, aby serwer mógł porzucić stan użytkownika. Wystąpienia składników, z którymi łączy się użytkownik, są usuwane.</li><li>Serwer zostanie uruchomiony ponownie lub proces roboczy aplikacji zostanie odtworzony.</li></ul> |
+| `components-reconnect-failed`   | Ponowne połączenie nie powiodło się, prawdopodobnie z powodu błędu sieci. Aby spróbować ponownie nawiązać połączenie, wywołaj polecenie `window.Blazor.reconnect()` JavaScript. |
+| `components-reconnect-rejected` | Odrzucono ponowne połączenie. Serwer został osiągnięty, ale odmówił połączenia, a stan użytkownika na serwerze został utracony. Aby ponownie załadować aplikację, zadzwoń do `location.reload()` języka JavaScript. Ten stan połączenia może skutkować tym, że:<ul><li>Wystąpił awaria w obwodzie po stronie serwera.</li><li>Klient jest odłączony wystarczająco długo, aby serwer mógł porzucić stan użytkownika. Wystąpienia składników użytkownika są usuwane.</li><li>Serwer zostanie uruchomiony ponownie lub proces roboczy aplikacji zostanie odtworzony.</li></ul> |
 
 ## <a name="render-mode"></a>Tryb renderowania
 
-::: moniker range=">= aspnetcore-5.0"
-
-*Ta sekcja ma zastosowanie do hostowanych Blazor WebAssembly i Blazor Server .*
-
-Blazor aplikacje są domyślnie skonfigurowane w taki sposób, aby wyprerender interfejs użytkownika na serwerze. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-*Ta sekcja ma zastosowanie do Blazor Server .*
-
-Blazor Server aplikacje są domyślnie skonfigurowane, aby skonfigurować interfejs użytkownika na serwerze przed nawiązaniem połączenia z serwerem. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
-
-::: moniker-end
+Domyślnie aplikacje uruchamiają Blazor Server interfejs użytkownika na serwerze przed nawiązaniem połączenia z serwerem. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="initialize-the-blazor-circuit"></a>Inicjowanie Blazor obwodu
-
-*Ta sekcja ma zastosowanie do Blazor Server .*
 
 Skonfiguruj ręczne uruchamianie Blazor Server [ SignalR obwodu](xref:blazor/hosting-models#circuits) aplikacji w `Pages/_Host.cshtml` pliku:
 
@@ -180,11 +200,10 @@ Gdy `autostart` jest wyłączone, dowolny aspekt aplikacji, która nie zależy o
 
 ### <a name="initialize-blazor-when-the-document-is-ready"></a>Inicjuj Blazor , gdy dokument jest gotowy
 
-Aby zainicjować Blazor aplikację, gdy dokument jest gotowy:
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -198,11 +217,12 @@ Aby zainicjować Blazor aplikację, gdy dokument jest gotowy:
 
 ### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a>Łańcuch z `Promise` wynikami ręcznego uruchamiania
 
-Aby wykonać dodatkowe zadania, takie jak Inicjalizacja międzyoperacyjna JS, użyj `then` do łańcucha z `Promise` wynikami ręcznego Blazor uruchamiania aplikacji:
+Aby wykonać dodatkowe zadania, takie jak Inicjalizacja międzyoperacyjna JS, użyj [`then`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) do łańcucha z [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) wynikami ręcznego Blazor uruchamiania aplikacji.
+
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -214,15 +234,14 @@ Aby wykonać dodatkowe zadania, takie jak Inicjalizacja międzyoperacyjna JS, u�
 </body>
 ```
 
-### <a name="configure-the-signalr-client"></a>Konfigurowanie SignalR klienta programu
+### <a name="configure-signalr-client-logging"></a>Konfigurowanie SignalR rejestrowania klientów
 
-#### <a name="logging"></a>Rejestrowanie
+W konstruktorze klienta Przekaż `configureSignalR` obiekt konfiguracji, który wywołuje `configureLogging` z poziomu dziennika.
 
-Aby skonfigurować SignalR Rejestrowanie klienta, należy przekazać obiekt konfiguracji ( `configureSignalR` ), który wywołuje `configureLogging` z poziomem rejestrowania w konstruktorze klienta:
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -250,11 +269,12 @@ Aby zmodyfikować zdarzenia połączenia, zarejestruj wywołania zwrotne dla nas
 * Porzucone użycie połączeń `onConnectionDown` .
 * Nawiązane/ponownie nawiązane połączenia `onConnectionUp` .
 
-**Oba** `onConnectionDown` elementy i `onConnectionUp` muszą być określone:
+**`onConnectionDown`Należy określić oba elementy i `onConnectionUp` .**
+
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -271,11 +291,12 @@ Aby zmodyfikować zdarzenia połączenia, zarejestruj wywołania zwrotne dla nas
 
 ### <a name="adjust-the-reconnection-retry-count-and-interval"></a>Dostosuj liczbę ponownych prób ponownego połączenia i interwał
 
-Aby dostosować liczbę ponownych prób ponownego połączenia i interwał, ustaw liczbę ponownych prób ( `maxRetries` ) i okres w milisekundach dozwolony dla każdej próbnej próby ( `retryIntervalMilliseconds` ):
+Aby dostosować liczbę ponownych prób ponownego połączenia i interwał, ustaw liczbę ponownych prób ( `maxRetries` ) i okres w milisekundach dozwolony dla każdej próbnej próby ( `retryIntervalMilliseconds` ).
+
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -292,11 +313,12 @@ Aby dostosować liczbę ponownych prób ponownego połączenia i interwał, usta
 
 ## <a name="hide-or-replace-the-reconnection-display"></a>Ukryj lub Zastąp ekran ponownego połączenia
 
-Aby ukryć ekran ponowne połączenie, ustaw dla programu obsługi ponownego połączenia `_reconnectionDisplay` pusty obiekt ( `{}` lub `new Object()` ):
+Aby ukryć ekran ponowne połączenie, ustaw dla programu obsługi ponownego połączenia `_reconnectionDisplay` pusty obiekt ( `{}` lub `new Object()` ).
+
+`Pages/_Host.cshtml`:
 
 ```cshtml
 <body>
-
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -321,7 +343,9 @@ Symbol zastępczy `{ELEMENT ID}` jest identyfikatorem elementu HTML do wyświetl
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Dostosuj opóźnienie przed wyświetleniem ekranu ponownego połączenia przez ustawienie `transition-delay` właściwości w kodzie CSS aplikacji ( `wwwroot/css/site.css` ) dla elementu modalnego. W poniższym przykładzie ustawiono opóźnienie przejścia z 500 ms (domyślnie) do 1 000 MS (1 sekunda):
+Dostosuj opóźnienie przed wyświetleniem ekranu ponownego połączenia przez ustawienie `transition-delay` właściwości w CSS witryny dla elementu modalnego. W poniższym przykładzie ustawiono opóźnienie przejścia z 500 ms (domyślnie) do 1 000 MS (1 sekunda).
+
+`wwwroot/css/site.css`:
 
 ```css
 #components-reconnect-modal {
@@ -339,43 +363,6 @@ window.addEventListener('pagehide', () => {
 });
 ```
 
-<!-- HOLD for reactivation at 5x
-
-THIS WILL BE MOVED TO ANOTHER TOPIC WHEN RE-ACTIVATED.
-
-## Influence HTML `<head>` tag elements
-
-*This section applies to the upcoming ASP.NET Core 5.0 release of Blazor WebAssembly and Blazor Server.*
-
-When rendered, the `Title`, `Link`, and `Meta` components add or update data in the HTML `<head>` tag elements:
-
-```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions.Head
-
-<Title Value="{TITLE}" />
-<Link href="{URL}" rel="stylesheet" />
-<Meta content="{DESCRIPTION}" name="description" />
-```
-
-In the preceding example, placeholders for `{TITLE}`, `{URL}`, and `{DESCRIPTION}` are string values, Razor variables, or Razor expressions.
-
-The following characteristics apply:
-
-* Server-side prerendering is supported.
-* The `Value` parameter is the only valid parameter for the `Title` component.
-* HTML attributes provided to the `Meta` and `Link` components are captured in [additional attributes](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) and passed through to the rendered HTML tag.
-* For multiple `Title` components, the title of the page reflects the `Value` of the last `Title` component rendered.
-* If multiple `Meta` or `Link` components are included with identical attributes, there's exactly one HTML tag rendered per `Meta` or `Link` component. Two `Meta` or `Link` components can't refer to the same rendered HTML tag.
-* Changes to the parameters of existing `Meta` or `Link` components are reflected in their rendered HTML tags.
-* When the `Link` or `Meta` components are no longer rendered and thus disposed by the framework, their rendered HTML tags are removed.
-
-When one of the framework components is used in a child component, the rendered HTML tag influences any other child component of the parent component as long as the child component containing the framework component is rendered. The distinction between using the one of these framework components in a child component and placing a an HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
-
-* Can be modified by application state. A hard-coded HTML tag can't be modified by application state.
-* Is removed from the HTML `<head>` when the parent component is no longer rendered.
-
--->
-
 ::: moniker-end
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
@@ -384,3 +371,5 @@ When one of the framework components is used in a child component, the rendered 
 * <xref:signalr/configuration>
 * <xref:blazor/security/server/threat-mitigation>
 * [Blazor Server zdarzenia ponownego połączenia i zdarzenia cyklu życia składnika](xref:blazor/components/lifecycle#blazor-server-reconnection-events)
+
+::: zone-end

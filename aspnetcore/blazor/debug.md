@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 0421fd0509fbd89e4635dc7d80a584508627b52c
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: adf22001e7d9b8ee4f36456cd4b07d2791a7331f
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109783"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395153"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -48,7 +48,7 @@ Obecnie *nie* można:
 * Przerwij w przypadku nieobsłużonych wyjątków.
 * Punkty przerwania trafień podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
 * Debuguj w scenariuszach nielokalnych (na przykład [podsystem Windows dla systemu Linux (WSL)](/windows/wsl/) lub [Visual Studio Codespaces](/visualstudio/codespaces/overview/what-is-vsonline)).
-* Automatycznie Kompiluj ponownie aplikację zaplecza `*Server*` hostowanego Blazor rozwiązania podczas debugowania, na przykład uruchamiając aplikację w programie [`dotnet watch run`](xref:tutorials/dotnet-watch) .
+* Automatycznie Kompiluj ponownie aplikację zaplecza `*Server*` hostowanego Blazor WebAssembly rozwiązania podczas debugowania, na przykład uruchamiając aplikację w programie [`dotnet watch run`](xref:tutorials/dotnet-watch) .
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -97,7 +97,7 @@ Wartości zastępcze protokołu WebSockets Protocol ( `wsProtocol` ), hosta ( `u
 
 Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
 
-1. Utwórz nową aplikację hostowaną ASP.NET Core Blazor WebAssembly .
+1. Utwórz nowe rozwiązanie hostowane Blazor WebAssembly .
 1. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację w debugerze.
 
    > [!NOTE]
@@ -202,7 +202,7 @@ Aby uzyskać informacje dotyczące konfigurowania VS Code zasobów w `.vscode` f
 
 ## <a name="debug-hosted-blazor-webassembly"></a>Debuguj hostowane Blazor WebAssembly
 
-1. Otwórz Blazor WebAssembly folder rozwiązania aplikacji hostowanej w vs Code.
+1. Otwórz **`Client`** folder projektu folderu rozwiązania hostowanego Blazor w vs Code.
 
 1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak**.
 

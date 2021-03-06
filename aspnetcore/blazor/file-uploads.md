@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 02/18/2021
 uid: blazor/file-uploads
-ms.openlocfilehash: 26dada3a749a114fc27da89897701076378eef11
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: a31821f03efd39d774a4a3c61d027983a1783e2d
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109770"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395126"
 ---
 # <a name="aspnet-core-blazor-file-uploads"></a>ASP.NET Core Blazor operacje przekazywania plików
 
@@ -419,7 +419,7 @@ public class FilesaveController : ControllerBase
 
 W programie Blazor WebAssembly dane plików są przesyłane strumieniowo bezpośrednio do kodu .NET w przeglądarce.
 
-W programie Blazor Server dane plików są przesyłane strumieniowo SignalR do kodu platformy .NET na serwerze, ponieważ plik jest odczytywany ze strumienia. [`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) umożliwia skonfigurowanie parametrów przekazywania plików dla programu Blazor Server .
+W programie Blazor Server dane plików są przesyłane strumieniowo SignalR do kodu platformy .NET na serwerze, ponieważ plik jest odczytywany ze strumienia. <xref:Microsoft.AspNetCore.Components.Forms.RemoteBrowserFileStreamOptions> umożliwia skonfigurowanie parametrów przekazywania plików dla programu Blazor Server .
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

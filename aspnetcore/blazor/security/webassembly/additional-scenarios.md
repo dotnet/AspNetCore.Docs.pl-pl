@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 6c3d2f93e43cf3660a12f1c8cef1d381b587f5ea
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: c2b2a6f049846dc2e4894b4cab8b0a1aa34762f9
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280543"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394853"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -57,7 +57,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("ServerAPI"));
 ```
 
-W przypadku Blazor aplikacji na podstawie Blazor WebAssembly szablonu hostowanego projektu identyfikatory URI żądania są domyślnie w podstawowym identyfikatorze URI aplikacji. W związku z tym <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> elementu w aplikacji wygenerowanej na podstawie szablonu projektu.
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure)identyfikatory URI żądania są domyślnie w podstawowym identyfikatorze URI aplikacji. W związku z tym <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> elementu w aplikacji wygenerowanej na podstawie szablonu projektu.
 
 Skonfigurowana konfiguracja służy <xref:System.Net.Http.HttpClient> do podejmowania autoryzowanych żądań przy użyciu [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) wzorca:
 
@@ -118,7 +118,7 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-W przypadku Blazor aplikacji opartej na Blazor WebAssembly szablonie projektu hostowanego <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
 
 Skonfigurowany <xref:System.Net.Http.HttpClient> jest używany do autoryzacji żądań za pomocą [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) wzorca. Gdy klient jest tworzony przy użyciu <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) pakietu (pakiet), <xref:System.Net.Http.HttpClient> jest podano wystąpienia, które zawierają tokeny dostępu podczas wykonywania żądań do interfejsu API serwera. Jeśli identyfikator URI żądania jest względnym identyfikatorem URI, tak jak w poniższym przykładzie ( `ExampleAPIMethod` ), jest on połączony z, <xref:System.Net.Http.HttpClient.BaseAddress> gdy aplikacja kliencka wysyła żądanie:
 
@@ -169,7 +169,7 @@ builder.Services.AddScoped(sp => new HttpClient(
     });
 ```
 
-W przypadku Blazor aplikacji na podstawie Blazor WebAssembly szablonu hostowanego projektu <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> domyślnie przypisywany jest następujący element:
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> jest domyślnie przypisany do następujących:
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * Adres URL `authorizedUrls` tablicy.
@@ -230,7 +230,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-W przypadku Blazor aplikacji opartej na Blazor WebAssembly szablonie projektu hostowanego <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
 
 `FetchData` składnik ( `Pages/FetchData.razor` ):
 
@@ -260,7 +260,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-W przypadku Blazor aplikacji na podstawie Blazor WebAssembly szablonu hostowanego projektu <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> domyślnie przypisywany jest następujący element:
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> jest domyślnie przypisany do następujących:
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * Adres URL `authorizedUrls` tablicy.
@@ -276,7 +276,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
     client => client.BaseAddress = new Uri("https://www.example.com/base"));
 ```
 
-W przypadku Blazor aplikacji opartej na Blazor WebAssembly szablonie projektu hostowanego <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+W przypadku rozwiązania hostowanego Blazor opartego na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
 
 Poprzednia rejestracja jest uzupełnieniem istniejącej bezpiecznej rejestracji domyślnej <xref:System.Net.Http.HttpClient> .
 
@@ -373,7 +373,7 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-Rozwiązanie hostowane Blazor oparte na Blazor szablonie projektu hostowanego używa tego samego adresu podstawowego dla aplikacji klienta i serwera. Aplikacja kliencka <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> jest domyślnie ustawiona na identyfikator URI `builder.HostEnvironment.BaseAddress` . Konfiguracja mechanizmu CORS **nie** jest wymagana w domyślnej konfiguracji hostowanej aplikacji utworzonej na podstawie Blazor szablonu hostowanego projektu. Dodatkowe aplikacje klienckie, które nie są hostowane przez projekt serwera **i nie współdzielą adresu podstawowego** aplikacji serwera, wymagają konfiguracji CORS w projekcie serwera.
+Rozwiązanie hostowane Blazor oparte na [ Blazor WebAssembly szablonie projektu](xref:blazor/project-structure) używa tego samego adresu podstawowego dla aplikacji klienta i serwera. Aplikacja kliencka <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> jest domyślnie ustawiona na identyfikator URI `builder.HostEnvironment.BaseAddress` . Konfiguracja mechanizmu CORS **nie** jest wymagana w domyślnej konfiguracji rozwiązania hostowanego Blazor . Dodatkowe aplikacje klienckie, które nie są hostowane przez projekt serwera **i nie współdzielą adresu podstawowego** aplikacji serwera, wymagają konfiguracji CORS w projekcie serwera.
 
 Aby uzyskać więcej informacji, zobacz <xref:security/cors> i składnik Tester żądania HTTP aplikacji przykładowej ( `Components/HTTPRequestTester.razor` ).
 
@@ -476,7 +476,7 @@ Poniższy przykład pokazuje, jak:
 
 Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji przed przekierowaniem przeglądarki do adresu IP. Może to być przypadek, gdy używasz kontenera stanu i chcesz przywrócić stan po pomyślnym uwierzytelnieniu. Możesz użyć niestandardowego obiektu stanu uwierzytelniania, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego, a następnie przywrócić ten stan po pomyślnym ukończeniu operacji uwierzytelniania. Poniższy przykład demonstruje podejście.
 
-W aplikacji jest tworzona Klasa kontenera stanu z właściwościami do przechowywania wartości stanu aplikacji. W poniższym przykładzie kontener jest używany do utrzymania wartości licznika domyślnego składnika szablonu projektu `Counter` ( `Pages/Counter.razor` ). Metody serializacji i deserializacji kontenera są oparte na <xref:System.Text.Json> .
+W aplikacji jest tworzona Klasa kontenera stanu z właściwościami do przechowywania wartości stanu aplikacji. W poniższym przykładzie kontener jest używany do utrzymania wartości licznika domyślnego składnika [ Blazor szablonu projektu](xref:blazor/project-structure) `Counter` ( `Pages/Counter.razor` ). Metody serializacji i deserializacji kontenera są oparte na <xref:System.Text.Json> .
 
 ```csharp
 using System.Text.Json;
@@ -819,12 +819,12 @@ Aby uzyskać dodatkowy przykład, który działa z grupami zabezpieczeń usługi
 
 ## <a name="support-prerendering-with-authentication"></a>Obsługa prerenderowania przy użyciu uwierzytelniania
 
-Po zastosowaniu wskazówek w jednej z Blazor WebAssembly tematów aplikacji hostowanych należy wykonać następujące instrukcje, aby utworzyć aplikację, która:
+Po przeprowadzeniu wskazówek w jednej z Blazor WebAssembly tematów dotyczących aplikacji zabezpieczeń należy wykonać następujące instrukcje, aby utworzyć aplikację, która:
 
 * Wstępnie renderuje ścieżki, dla których autoryzacja nie jest wymagana.
 * Nie określa ścieżek PreRender, dla których wymagana jest autoryzacja.
 
-W *`Client`* `Program` klasie aplikacji ( `Program.cs` ), typowe rejestracje usługi w ramach programu w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):
+W **`Client`** `Program` klasie aplikacji ( `Program.cs` ), typowe rejestracje usługi w ramach programu w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):
 
 ```csharp
 public class Program
@@ -880,7 +880,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.cshtml` stronę w folderze aplikacji serwera `Pages` . Wklej zawartość z *`Client`* `wwwroot/index.html` pliku aplikacji do `Pages/_Host.cshtml` pliku. Aktualizuj zawartość pliku:
+W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.cshtml` stronę w folderze aplikacji serwera `Pages` . Wklej zawartość z **`Client`** `wwwroot/index.html` pliku aplikacji do `Pages/_Host.cshtml` pliku. Aktualizuj zawartość pliku:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -974,7 +974,7 @@ Chociaż to podejście wymaga dodatkowego skoku sieci przez serwer w celu wywoł
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a>Korzystanie z punktów końcowych OpenID Connect Connect (OIDC) v 2.0
 
-Biblioteka uwierzytelniania i Blazor Szablony projektów korzystają z punktów końcowych OpenID Connect Connect (OIDC) v 1.0. Aby użyć punktu końcowego v 2.0, skonfiguruj opcję okaziciela JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> . W poniższym przykładzie skonfigurowano usługi AAD dla programu v 2.0 przez dołączenie `v2.0` segmentu do <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> Właściwości:
+Biblioteka uwierzytelniania i [ Blazor Szablony projektów](xref:blazor/project-structure) korzystają z punktów końcowych OPENID Connect Connect (OIDC) v 1.0. Aby użyć punktu końcowego v 2.0, skonfiguruj opcję okaziciela JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> . W poniższym przykładzie skonfigurowano usługi AAD dla programu v 2.0 przez dołączenie `v2.0` segmentu do <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> Właściwości:
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(

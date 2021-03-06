@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 997d4dec05ddb6b9d0acb5ed36a6510c0836a4fb
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: b9e95afc2ccff95c6acd215a70c8b0f92fb1b8c0
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280500"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394736"
 ---
 # <a name="use-graph-api-with-aspnet-core-blazor-webassembly"></a>Użyj interfejs API programu Graph z ASP.NET Core Blazor WebAssembly
 
@@ -36,7 +36,7 @@ ms.locfileid: "100280500"
 
 [Microsoft Graph SDK](/graph/sdks/sdks-overview) zostały zaprojektowane w celu uproszczenia tworzenia wysokiej jakości, wydajnych i odpornych aplikacji, które mają dostęp Microsoft Graph.
 
-Przykłady w tej sekcji wymagają odwołań do pakietów dla następujących pakietów w pliku projektu autonomicznej lub *`Client`* pliku projektu aplikacji:
+Przykłady w tej sekcji wymagają odwołań do pakietów dla następujących pakietów w pliku projektu autonomicznej lub **`Client`** pliku projektu aplikacji:
 
 * [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 * [`Microsoft.Graph`](https://www.nuget.org/packages/Microsoft.Graph)
@@ -48,7 +48,7 @@ Następujące klasy narzędzi i konfiguracja są używane w każdej z poniższyc
 
 Po dodaniu zakresów interfejsu API Microsoft Graph w obszarze usługi AAD Azure Portal:
 
-* Dodaj następującą `GraphClientExtensions.cs` klasę do aplikacji autonomicznej lub *`Client`* aplikacji hostowanego Blazor rozwiązania.
+* Dodaj następującą `GraphClientExtensions.cs` klasę do aplikacji autonomicznej lub **`Client`** aplikacji hostowanego Blazor rozwiązania.
 * Podaj wymagane zakresy do <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> właściwości <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> w `AuthenticateRequestAsync` metodzie. W poniższym przykładzie `User.Read` zakres jest określony, aby dopasować przykłady w dalszej części tego artykułu.
 
 ```csharp
@@ -291,7 +291,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 
 W przykładach w tej sekcji użyto nazwy <xref:System.Net.Http.HttpClient> do interfejs API programu Graph, aby uzyskać numer telefonu komórkowego użytkownika w celu przetworzenia wywołania.
 
-Przykłady w tej sekcji wymagają odwołania do pakietu [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) w pliku projektu autonomicznej lub *`Client`* pliku projektu aplikacji.
+Przykłady w tej sekcji wymagają odwołania do pakietu [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) w pliku projektu autonomicznej lub **`Client`** pliku projektu aplikacji.
 
 Utwórz następującą klasę i konfigurację projektu do pracy z interfejs API programu Graph. W każdej z poniższych podsekcji tego artykułu są używane następujące klasy i konfiguracje:
 

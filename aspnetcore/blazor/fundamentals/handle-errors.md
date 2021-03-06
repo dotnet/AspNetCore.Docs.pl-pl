@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 96f4d7fcacf1f8eb03ffe83ba18b353e5588448e
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: d4c8054afc3818d58bc2a047a0aa74613ae6047b
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109714"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395100"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
 
@@ -40,7 +40,7 @@ Gdy Blazor aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje sz
 * Podczas tworzenia pasek kieruje użytkownika do konsoli przeglądarki, gdzie można zobaczyć wyjątek.
 * W środowisku produkcyjnym pasek powiadamia użytkownika o wystąpieniu błędu i zaleca odświeżenie przeglądarki.
 
-Interfejs użytkownika dla tego środowiska obsługi błędów jest częścią Blazor szablonów projektu.
+Interfejs użytkownika dla tego środowiska obsługi błędów jest częścią [ Blazor szablonów projektu](xref:blazor/project-structure).
 
 W Blazor WebAssembly aplikacji Dostosuj środowisko w `wwwroot/index.html` pliku:
 
@@ -257,7 +257,7 @@ Gdy Blazor aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje sz
 * Podczas tworzenia pasek kieruje użytkownika do konsoli przeglądarki, gdzie można zobaczyć wyjątek.
 * W środowisku produkcyjnym pasek powiadamia użytkownika o wystąpieniu błędu i zaleca odświeżenie przeglądarki.
 
-Interfejs użytkownika dla tego środowiska obsługi błędów jest częścią Blazor szablonów projektu.
+Interfejs użytkownika dla tego środowiska obsługi błędów jest częścią [ Blazor szablonów projektu](xref:blazor/project-structure).
 
 W Blazor Server aplikacji Dostosuj środowisko w `Pages/_Host.cshtml` pliku:
 

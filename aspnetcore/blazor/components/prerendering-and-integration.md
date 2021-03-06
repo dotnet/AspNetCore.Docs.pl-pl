@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: d120440c292d15b7741260ed31af92d60db2261c
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a86b50abff9c5ec52aab2bdb7eb6d563a5197d1a
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280067"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395178"
 ---
 # <a name="prerender-and-integrate-aspnet-core-razor-components"></a>Wyprerender i Zintegruj Razor składniki ASP.NET Core
 
@@ -39,7 +39,7 @@ Razor składniki można zintegrować Razor ze stronami i aplikacjami MVC w hosto
 
 Aby skonfigurować renderowanie w Blazor WebAssembly aplikacji:
 
-1. Hostowanie Blazor WebAssembly aplikacji w aplikacji ASP.NET Core. Aplikację autonomiczną Blazor WebAssembly można dodać do rozwiązania ASP.NET Core lub można użyć hostowanej Blazor WebAssembly aplikacji utworzonej na podstawie Blazor szablonu hostowanego projektu.
+1. Hostowanie Blazor WebAssembly aplikacji w aplikacji ASP.NET Core. Aplikację autonomiczną Blazor WebAssembly można dodać do rozwiązania ASP.NET Core lub można użyć aplikacji hostowanej Blazor WebAssembly utworzonej na podstawie [ Blazor WebAssembly szablonu projektu](xref:blazor/project-structure).
 
 1. Usuń domyślny plik statyczny `wwwroot/index.html` z Blazor WebAssembly projektu klienta.
 
@@ -76,7 +76,7 @@ Aby skonfigurować renderowanie w Blazor WebAssembly aplikacji:
 
    * Zadzwoń do `UseDeveloperExceptionPage` programu App Builder w środowisku deweloperskim.
    * Zadzwoń do `UseBlazorFrameworkFiles` programu App Builder.
-   * Zmień wartość Fallback ze `index.html` strony ( `endpoints.MapFallbackToFile("index.html");` ) na `_Host.cshtml` stronę.
+   * Zmień wartość Fallback z `index.html` pliku ( `endpoints.MapFallbackToFile("index.html");` ) na `_Host.cshtml` stronę: `endpoints.MapFallbackToPage("/_Host");` .
 
    ```csharp
    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

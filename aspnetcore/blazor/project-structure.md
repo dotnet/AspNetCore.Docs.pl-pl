@@ -19,20 +19,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/project-structure
-ms.openlocfilehash: 94b5a3d8c0f5b94ecac32e6fc5f94efeb8337f37
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: fe42c2d43b79ea959bb0ba8e5b96e6c865b2a416
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280351"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394879"
 ---
 # <a name="aspnet-core-blazor-project-structure"></a>BlazorStruktura projektu ASP.NET Core
 
-W tym artykule opisano pliki i foldery wchodzące w skład Blazor aplikacji wygenerowanej na podstawie Blazor szablonów projektu.
+W tym artykule opisano pliki i foldery wchodzące w skład Blazor aplikacji wygenerowanej z jednego z Blazor szablonów projektu struktury. Aby uzyskać informacje na temat używania narzędzi do tworzenia aplikacji na Blazor podstawie Blazor szablonu projektu, zobacz <xref:blazor/tooling> . Aby uzyskać informacje na temat Blazor modeli hostingu Blazor WebAssembly i Blazor Server , zobacz <xref:blazor/hosting-models> .
 
 ## Blazor WebAssembly
 
-Blazor WebAssemblySzablon ( `blazorwasm` ) tworzy początkowe pliki i strukturę katalogów dla Blazor WebAssembly aplikacji. Aplikacja jest wypełniana kodem demonstracyjnym `FetchData` składnika, który ładuje dane ze statycznego zasobu, `weather.json` oraz interakcję użytkownika ze `Counter` składnikiem.
+Blazor WebAssembly szablon projektu: `blazorwasm`
+
+Blazor WebAssemblySzablon tworzy początkowe pliki i strukturę katalogów dla Blazor WebAssembly aplikacji. Aplikacja jest wypełniana kodem demonstracyjnym `FetchData` składnika, który ładuje dane ze statycznego zasobu, `weather.json` oraz interakcję użytkownika ze `Counter` składnikiem.
 
 * `Pages` folder: zawiera składniki/strony z obsługą routingu ( `.razor` ), które tworzą Blazor aplikację. Trasy dla każdej strony są określone za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy. Szablon zawiera następujące składniki:
   * `Counter` składnik ( `Counter.razor` ): implementuje stronę licznika.
@@ -104,7 +106,9 @@ Blazor WebAssemblySzablon ( `blazorwasm` ) tworzy początkowe pliki i strukturę
 
 ## Blazor Server
 
-Blazor ServerSzablon ( `blazorserver` ) tworzy początkowe pliki i strukturę katalogów dla Blazor Server aplikacji. Aplikacja jest wypełniana kodem demonstracyjnym `FetchData` składnika, który ładuje dane z zarejestrowanej usługi, `WeatherForecastService` i interakcję użytkownika ze `Counter` składnikiem.
+Blazor Server szablon projektu: `blazorserver`
+
+Blazor ServerSzablon tworzy początkowe pliki i strukturę katalogów dla Blazor Server aplikacji. Aplikacja jest wypełniana kodem demonstracyjnym `FetchData` składnika, który ładuje dane z zarejestrowanej usługi, `WeatherForecastService` i interakcję użytkownika ze `Counter` składnikiem.
 
 * `Data` folder: zawiera `WeatherForecast` klasę i implementację `WeatherForecastService` , która zapewnia przykładowe dane pogodowe do `FetchData` składnika aplikacji.
 
@@ -158,3 +162,8 @@ Blazor ServerSzablon ( `blazorserver` ) tworzy początkowe pliki i strukturę ka
   * `Configure`: Konfiguruje potok obsługi żądania aplikacji:
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> jest wywoływana w celu skonfigurowania punktu końcowego dla połączenia w czasie rzeczywistym z przeglądarką. Połączenie jest tworzone przy użyciu [SignalR](xref:signalr/introduction) , który jest strukturą do dodawania funkcji sieci Web w czasie rzeczywistym do aplikacji.
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) jest wywoływana w celu skonfigurowania strony głównej aplikacji ( `Pages/_Host.cshtml` ) i włączenia nawigacji.
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
+
+* <xref:blazor/tooling>
+* <xref:blazor/hosting-models>

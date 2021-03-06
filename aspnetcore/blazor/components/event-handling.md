@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: f6a93eb9d95182d29a60cc1a5c48122b9166aa84
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 4c574a630176010ab30006b53c42e5cad7f93a54
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280151"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395191"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>BlazorObsługa zdarzeń ASP.NET Core
 
@@ -128,7 +128,10 @@ Obsługiwane <xref:System.EventArgs> są przedstawione w poniższej tabeli.
 
 Więcej informacji można znaleźć w następujących zasobach:
 
-* [ `EventArgs` klasy w źródle odwołania ASP.NET Core (gałąź dotnet/aspnetcore `master` )](https://github.com/dotnet/aspnetcore/tree/master/src/Components/Web/src/Web). `master`Gałąź reprezentuje interfejs API w środowisku deweloperskim dla *następnej* wersji ASP.NET Core. Dla bieżącej wersji wybierz odpowiednią gałąź repozytorium GitHub (na przykład `release/3.1` ).
+* [`EventArgs` klasy w źródle odwołania ASP.NET Core (gałąź dotnet/aspnetcore `main` )](https://github.com/dotnet/aspnetcore/tree/main/src/Components/Web/src/Web)
+
+  [!INCLUDE[](~/blazor/includes/aspnetcore-repo-ref-source-links.md)]
+
 * [Powiadomienia MDN Web docs: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers): zawiera informacje o tym, które elementy HTML obsługują każde wydarzenie dom.
 
 ## <a name="lambda-expressions"></a>Wyrażenia lambda
@@ -174,7 +177,7 @@ Typowym scenariuszem ze składnikami zagnieżdżonymi jest uruchomienie metody s
 
 `ChildComponent`W aplikacji przykładowej ( `Components/ChildComponent.razor` ) pokazano, jak `onclick` program obsługi przycisku został skonfigurowany tak, aby otrzymać <xref:Microsoft.AspNetCore.Components.EventCallback> delegata z przykładu `ParentComponent` . <xref:Microsoft.AspNetCore.Components.EventCallback>Typ ma wartość `MouseEventArgs` , która jest odpowiednia dla `onclick` zdarzenia z urządzenia peryferyjnego:
 
-[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
+[!code-razor[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 `ParentComponent`Ustawia element podrzędny <xref:Microsoft.AspNetCore.Components.EventCallback%601> ( `OnClickCallback` ) na jego `ShowMessage` metodę.
 

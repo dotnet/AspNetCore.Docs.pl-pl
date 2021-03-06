@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 6b61d9a4645d273b0c78fae0388d569771c43a2d
-ms.sourcegitcommit: a49c47d5a573379effee5c6b6e36f5c302aa756b
+ms.openlocfilehash: 19270bb74326dccfee9466b7c1fa61daeab805a2
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100536249"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394463"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>Narzędzia dla ASP.NET Core Blazor
 
@@ -125,7 +125,7 @@ Podczas wykonywania hostowanej Blazor WebAssembly aplikacji Uruchom aplikację z
    W poprzednim argumencie:
 
    * `{SERVER APP FOLDER}`Symbol zastępczy jest **`Server`** folderem projektu, zwykle " `Server` ".
-   * `{PROJECT NAME}`Symbol zastępczy jest nazwą aplikacji, na przykład na podstawie nazwy rozwiązania, a po niej " `.Server` " w aplikacji wygenerowanej na podstawie Blazor szablonu projektu.
+   * `{PROJECT NAME}`Symbol zastępczy jest nazwą aplikacji, na przykład na podstawie nazwy rozwiązania, a po niej " `.Server` " w aplikacji wygenerowanej na podstawie [ Blazor szablonu projektu](xref:blazor/project-structure).
 
    Poniższy przykład z [samouczka dotyczącego używania SignalR z Blazor WebAssembly aplikacją](xref:tutorials/signalr-blazor) używa nazwy folderu projektu `Server` i nazwy projektu `BlazorWebAssemblySignalRApp.Server` :
 
@@ -191,7 +191,7 @@ BlazorStruktura zawiera szablony służące do tworzenia nowych aplikacji dla ka
 * Blazor WebAssembly szablon projektu: `blazorwasm`
 * Blazor Server szablon projektu: `blazorserver`
 
-Aby uzyskać więcej informacji na temat Blazor modeli hostingu, zobacz <xref:blazor/hosting-models> .
+Aby uzyskać więcej informacji na temat Blazor modeli hostingu, zobacz <xref:blazor/hosting-models> . Aby uzyskać więcej informacji na temat Blazor szablonów projektów, zobacz <xref:blazor/project-structure> .
 
 Opcje szablonu są dostępne przez przekazanie opcji pomocy ( `-h` lub `--help` ) do [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia CLI w powłoce poleceń:
 
@@ -199,3 +199,8 @@ Opcje szablonu są dostępne przez przekazanie opcji pomocy ( `-h` lub `--help` 
 dotnet new blazorwasm -h
 dotnet new blazorserver -h
 ```
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/project-structure>

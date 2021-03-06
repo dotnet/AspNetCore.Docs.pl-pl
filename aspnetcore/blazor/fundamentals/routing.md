@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 55e2cbc01af7352facad7121c05c754e9d438ae3
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: ee6de9a13a69154eef6b677663091667d391452f
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279891"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395061"
 ---
 # <a name="aspnet-core-blazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -59,7 +59,7 @@ W środowisku uruchomieniowym <xref:Microsoft.AspNetCore.Components.RouteView> s
 * Odbiera <xref:Microsoft.AspNetCore.Components.RouteData> od siebie wraz <xref:Microsoft.AspNetCore.Components.Routing.Router> z dowolnymi parametrami trasy.
 * Renderuje określony składnik przy użyciu [układu](xref:blazor/layouts), w tym wszelkich dalszych zagnieżdżonych układów.
 
-Opcjonalnie można określić <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> parametr z klasą układu dla składników, które nie określają układu z [ `@layout` dyrektywą](xref:blazor/layouts#specify-a-layout-in-a-component). BlazorSzablony projektu struktury określają `MainLayout` składnik ( `Shared/MainLayout.razor` ) jako domyślny układ aplikacji. Aby uzyskać więcej informacji na temat układów, zobacz <xref:blazor/layouts> .
+Opcjonalnie można określić <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> parametr z klasą układu dla składników, które nie określają układu z [ `@layout` dyrektywą](xref:blazor/layouts#apply-a-layout-to-a-component). [ Blazor Szablony projektu](xref:blazor/project-structure) struktury określają `MainLayout` składnik ( `Shared/MainLayout.razor` ) jako domyślny układ aplikacji. Aby uzyskać więcej informacji na temat układów, zobacz <xref:blazor/layouts> .
 
 Składniki obsługują wiele szablonów tras przy użyciu wielu [ `@page` dyrektyw](xref:mvc/views/razor#page). Poniższy przykładowy składnik ładuje się na żądania dla `/BlazorRoute` i `/DifferentBlazorRoute` .
 
@@ -102,7 +102,7 @@ W `App` składniku Ustaw zawartość niestandardową w <xref:Microsoft.AspNetCor
 
 ::: moniker-end
 
-Dowolne elementy są obsługiwane jako zawartość `<NotFound>` tagów, takich jak inne składniki interaktywne. Aby zastosować domyślny układ do <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> zawartości, zobacz <xref:blazor/layouts#default-layout> .
+Dowolne elementy są obsługiwane jako zawartość `<NotFound>` tagów, takich jak inne składniki interaktywne. Aby zastosować domyślny układ do <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> zawartości, zobacz <xref:blazor/layouts#apply-a-layout-to-arbitrary-content-layoutview-component> .
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Kierowanie do składników z wielu zestawów
 
@@ -230,7 +230,7 @@ Rozważmy poniższy `Example` składnik, który może odbierać parametr trasy z
 
 ::: moniker-end
 
-Aby zezwolić *`Server`* aplikacji hostowanego Blazor WebAssembly rozwiązania na kierowanie żądania z kropką w `param` parametrze trasy, należy dodać szablon "rezerwowy" trasy pliku z opcjonalnym parametrem w `Startup.Configure` .
+Aby zezwolić **`Server`** aplikacji hostowanego Blazor WebAssembly rozwiązania na kierowanie żądania z kropką w `param` parametrze trasy, należy dodać szablon "rezerwowy" trasy pliku z opcjonalnym parametrem w `Startup.Configure` .
 
 `Startup.cs`:
 
@@ -371,7 +371,7 @@ Poniższy `NavMenu` składnik tworzy [`Bootstrap`](https://getbootstrap.com/docs
 ::: moniker-end
 
 > [!NOTE]
-> `NavMenu`Składnik ( `NavMenu.razor` ) znajduje się w `Shared` folderze aplikacji wygenerowanej na podstawie Blazor szablonów projektu.
+> `NavMenu`Składnik ( `NavMenu.razor` ) znajduje się w `Shared` folderze aplikacji wygenerowanej na podstawie [ Blazor szablonów projektu](xref:blazor/project-structure).
 
 Dostępne są dwie <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> Opcje, które można przypisać do `Match` atrybutu `<NavLink>` elementu:
 

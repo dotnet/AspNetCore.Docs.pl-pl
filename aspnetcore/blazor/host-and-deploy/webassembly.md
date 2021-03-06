@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: c50cae5231abba7cf2a7aaf5806cab33c6434ec9
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: fbd6698eeb65ef9ab6263d389f1f50ffcac8be79
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102109692"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394996"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -54,11 +54,11 @@ Blazor korzysta z hosta, aby zapewnić odpowiednie skompresowane pliki. W przypa
   
     > [!NOTE]
     > Regresja jest obecna w wersji zminimalizowanego `decode.js` skryptu ( `decode.min.js` ) w [repozytorium usługi GitHub Google/brotli](https://github.com/google/brotli). Do momentu rozwiązania problemu [TypeError w decode.min.js (Google/brotli #881)](https://github.com/google/brotli/issues/881) należy zastosować jedną z następujących metod:
-    > 
+    >
     > * Tymczasowo Użyj unminified wersji skryptu.
     > * Automatycznie zminifikować skrypt w czasie kompilacji za pomocą narzędzia minifikacja innej firmy, zgodnego z ASP.NET Core.
     > * Użyj [pakietu npm](https://www.npmjs.com/package/brotli).
-    > 
+    >
     > Przykładowy kod w tej sekcji używa wersji **unminified** skryptu ( `decode.js` ).
 
   * Zaktualizuj aplikację, aby użyć dekodera. Zmień adiustację wewnątrz tagu zamykającego `<body>` w `wwwroot/index.html` następujący sposób:
@@ -131,9 +131,11 @@ Podczas wdrażania na serwerze usług IIS można użyć modułu ponownego zapisy
 
 Aplikacja kliencka Blazor WebAssembly jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folderze aplikacji serwerowej wraz z wszelkimi innymi statycznymi zasobami sieci Web aplikacji serwera. Te dwie aplikacje są wdrażane razem. Wymagany jest serwer sieci Web, który umożliwia hostowanie aplikacji ASP.NET Core. W przypadku wdrożenia hostowanego program Visual Studio zawiera szablon projektu **Blazor WebAssembly aplikacji** ( `blazorwasm` szablon przy użyciu [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia) z **`Hosted`** wybraną opcją ( `-ho|--hosted` przy użyciu `dotnet new` polecenia).
 
-Aby uzyskać więcej informacji na temat ASP.NET Core hostingu i wdrażania aplikacji, zobacz <xref:host-and-deploy/index> .
+Aby uzyskać więcej informacji, zobacz następujące artykuły:
 
-Aby uzyskać informacje na temat wdrażania do Azure App Service, zobacz <xref:tutorials/publish-to-azure-webapp-using-vs> .
+* ASP.NET Core hosting i wdrażanie aplikacji: <xref:host-and-deploy/index>
+* Wdrożenie do Azure App Service: <xref:tutorials/publish-to-azure-webapp-using-vs>
+* Blazor Szablony projektu: <xref:blazor/project-structure>
 
 ## <a name="hosted-deployment-with-multiple-blazor-webassembly-apps"></a>Hostowane wdrożenie z wieloma Blazor WebAssembly aplikacjami
 
@@ -169,7 +171,7 @@ Użyj istniejącego rozwiązania hostowanego Blazor lub Utwórz nowe rozwiązani
     * `Server` system32\drivers\etc
     * `Shared` system32\drivers\etc
     * `{SOLUTION NAME}.sln` rozszerzeniem
-    
+
     Symbol zastępczy `{SOLUTION NAME}` jest nazwą rozwiązania.
 
   * Utwórz Blazor WebAssembly aplikację o nazwie `SecondBlazorApp.Client` w `SecondClient` folderze z Blazor WebAssembly szablonu projektu.

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 9a14a8e16d8e50b47c479cf4d973459fbf61cec7
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a840e5d54d48441e10c2a58af591a530c8fd7de9
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280363"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394892"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -299,7 +299,7 @@ Jeśli warunki autoryzacji nie są określone, program <xref:Microsoft.AspNetCor
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Składnik może być używany w `NavMenu` składniku ( `Shared/NavMenu.razor` ) do wyświetlania elementu listy ( `<li>...</li>` ) dla [ `NavLink` składnika](xref:blazor/fundamentals/routing#navlink-and-navmenu-components) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), ale należy zauważyć, że to podejście powoduje jedynie usunięcie elementu listy z renderowanych danych wyjściowych. Nie uniemożliwia użytkownikowi przechodzenia do składnika.
 
-Aplikacje utworzone na podstawie Blazor szablonu projektu, który obejmuje uwierzytelnianie, używają `LoginDisplay` składnika, który zależy od `AuthorizeView` składnika. `AuthorizeView`Składnik selektywnie wyświetla zawartość dla Identity pracy powiązanej z użytkownikami. Poniższy przykład pochodzi z Blazor WebAssembly szablonu projektu.
+Aplikacje utworzone na podstawie [ Blazor szablonu projektu](xref:blazor/project-structure) , który obejmuje uwierzytelnianie, używają `LoginDisplay` składnika, który zależy od `AuthorizeView` składnika. `AuthorizeView`Składnik selektywnie wyświetla zawartość dla Identity pracy powiązanej z użytkownikami. Poniższy przykład pochodzi z [ Blazor WebAssembly szablonu projektu](xref:blazor/project-structure).
 
 `Shared/LoginDisplay.razor`:
 
@@ -329,7 +329,7 @@ Aplikacje utworzone na podstawie Blazor szablonu projektu, który obejmuje uwier
 }
 ```
 
-Poniższy przykład pochodzi z Blazor Server szablonu projektu i korzysta z ASP.NET Core Identity punktów końcowych w `Identity` obszarze aplikacji do Identity pracy związanej z przetwarzaniem.
+Poniższy przykład pochodzi z [ Blazor Server szablonu projektu](xref:blazor/project-structure) i korzysta z ASP.NET Core Identity punktów końcowych w `Identity` obszarze aplikacji do Identity pracy związanej z przetwarzaniem.
 
 `Shared/LoginDisplay.razor`:
 
@@ -442,7 +442,7 @@ Jeśli ani <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> ni
 * Autoryzacja asynchroniczna jest w toku, co zazwyczaj oznacza, że proces uwierzytelniania użytkownika jest w toku. [`<Authorizing>`](xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing?displayProperty=nameWithType)Zostanie wyświetlona Adiustacja elementu.
 * Nie znaleziono zawartości. [`<NotFound>`](xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound?displayProperty=nameWithType)Zostanie wyświetlona Adiustacja elementu.
 
-W domyślnym Blazor Server szablonie projektu `App` składnik ( `App.razor` ) demonstruje sposób ustawiania zawartości niestandardowej:
+W domyślnym [ Blazor Server szablonie projektu](xref:blazor/project-structure) `App` składnik ( `App.razor` ) demonstruje sposób ustawiania zawartości niestandardowej:
 
 ```razor
 <CascadingAuthenticationState>

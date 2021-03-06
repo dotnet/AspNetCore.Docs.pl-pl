@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 6a8fd8e3498dda9b7c10834791e64df6276e2823
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 8a593654fa31e643e7c239f361f035589c75ce98
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253023"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395256"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hostowanie ASP.NET Core w systemie Linux za pomocą Nginx
 
@@ -46,13 +46,9 @@ Ten przewodnik:
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-1. Dostęp do serwera z systemem Ubuntu 16,04 przy użyciu konta użytkownika standardowego z uprawnieniami sudo.
-1. Zainstaluj środowisko uruchomieniowe platformy .NET Core na serwerze.
-   1. Odwiedź [stronę pobieranie platformy .NET Core](https://dotnet.microsoft.com/download/dotnet-core).
-   1. Wybierz najnowszą wersję programu .NET Core niebędącą podglądem.
-   1. Pobierz najnowszą wersję środowiska uruchomieniowego bez podglądu w tabeli w obszarze **Uruchamianie aplikacji — środowisko uruchomieniowe**.
-   1. Wybierz łącze **instrukcje dotyczące Menedżera pakietów** systemu Linux i postępuj zgodnie z instrukcjami Ubuntu dla używanej wersji programu Ubuntu.
-1. Istniejąca aplikacja ASP.NET Core.
+* Dostęp do serwera z systemem Ubuntu 16,04 przy użyciu konta użytkownika standardowego z uprawnieniami sudo.
+* Najnowsza wersja [środowiska uruchomieniowego platformy .NET](/dotnet/core/install/linux) , która nie jest zainstalowana na serwerze.
+* Istniejąca aplikacja ASP.NET Core.
 
 W dowolnym momencie w przyszłości po uaktualnieniu struktury udostępnionej ponownie uruchom ASP.NET Core aplikacje hostowane przez serwer.
 

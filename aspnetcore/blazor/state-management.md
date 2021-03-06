@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 811ec08eb457fcf0697a64dc4990d29082454f73
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: fee4473aede3fd213314c51a18284b4e4ad95b2b
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280864"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394671"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -254,7 +254,7 @@ Wybór zależy od lokalizacji magazynu przeglądarki, która ma być używana. W
 
 `@using`Dyrektywa może zostać umieszczona w `_Imports.razor` pliku aplikacji zamiast w składniku. Użycie `_Imports.razor` pliku sprawia, że przestrzeń nazw jest dostępna dla większych segmentów aplikacji lub całej aplikacji.
 
-Aby zachować `currentCount` wartość w `Counter` składniku aplikacji na podstawie Blazor Server szablonu projektu, zmodyfikuj `IncrementCount` metodę, która ma być używana `ProtectedSessionStore.SetAsync` :
+Aby zachować `currentCount` wartość w `Counter` składniku aplikacji na podstawie [ Blazor Server szablonu projektu](xref:blazor/project-structure), zmodyfikuj `IncrementCount` metodę, która ma być używana `ProtectedSessionStore.SetAsync` :
 
 ```csharp
 private async Task IncrementCount()
@@ -502,7 +502,7 @@ Wybór zależy od lokalizacji magazynu przeglądarki, która ma być używana. W
 
 `@using`Instrukcja może zostać umieszczona w `_Imports.razor` pliku, a nie w składniku. Użycie `_Imports.razor` pliku sprawia, że przestrzeń nazw jest dostępna dla większych segmentów aplikacji lub całej aplikacji.
 
-Aby zachować `currentCount` wartość w `Counter` składniku aplikacji na podstawie Blazor Server szablonu projektu, zmodyfikuj `IncrementCount` metodę, która ma być używana `ProtectedSessionStore.SetAsync` :
+Aby zachować `currentCount` wartość w `Counter` składniku aplikacji na podstawie [ Blazor Server szablonu projektu](xref:blazor/project-structure), zmodyfikuj `IncrementCount` metodę, która ma być używana `ProtectedSessionStore.SetAsync` :
 
 ```csharp
 private async Task IncrementCount()

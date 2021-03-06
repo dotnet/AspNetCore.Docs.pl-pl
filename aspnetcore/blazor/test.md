@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 67ebfcd322ae08acf2fddae9bd6101f13fa77e7e
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 1a7b1114934f4fe7006d60bdbd0f06792d2c6935
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280704"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394554"
 ---
 # <a name="test-components-in-aspnet-core-blazor"></a>Testowanie składników w ASP.NET Core Blazor
 
@@ -100,7 +100,7 @@ bUnit współpracuje z strukturami testowania ogólnego przeznaczenia, takimi ja
 > [!NOTE]
 > Koncepcje testowe i implementacje testów w różnych strukturach testów są podobne, ale nie są identyczne. Wskazówki można znaleźć w dokumentacji platformy testowej.
 
-Poniżej przedstawiono strukturę testu bUnit na `Counter` składniku w aplikacji na podstawie Blazor szablonu projektu. `Counter`Składnik wyświetla i zwiększa licznik na podstawie użytkownika wybierającego przycisk na stronie:
+Poniżej przedstawiono strukturę testu bUnit na `Counter` składniku w aplikacji na podstawie [ Blazor szablonu projektu](xref:blazor/project-structure). `Counter`Składnik wyświetla i zwiększa licznik na podstawie użytkownika wybierającego przycisk na stronie:
 
 ```razor
 @page "/counter"

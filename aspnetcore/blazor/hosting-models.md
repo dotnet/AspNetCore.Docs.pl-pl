@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 780161090d376f08b849fadb47127810d6661d0c
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 8dd11251358bbeea444661970fadf19cb1390fd3
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100279754"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394931"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -36,7 +36,7 @@ Podstawowy Blazor model hostingu działa po stronie klienta w przeglądarce w ze
 
 ![::: No-Loc (Blazor webassembly):::: w wątku interfejsu użytkownika w przeglądarce zostanie uruchomiona aplikacja No-Loc (Blazor)::: App.](hosting-models/_static/blazor-webassembly.png)
 
-Gdy Blazor WebAssembly aplikacja zostanie utworzona do wdrożenia bez zaplecza ASP.NET Core aplikacji do obsłużynia swoich plików, aplikacja jest nazywana aplikacją *autonomiczną* Blazor WebAssembly . Gdy aplikacja zostanie utworzona na potrzeby wdrożenia z aplikacją zaplecza do obsługi swoich plików, aplikacja jest nazywana *hostowaną* Blazor WebAssembly aplikacją. Aplikacja hostowana Blazor WebAssembly zwykle współdziała z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor> ).
+Gdy Blazor WebAssembly aplikacja zostanie utworzona do wdrożenia bez zaplecza ASP.NET Core aplikacji do obsłużynia swoich plików, aplikacja jest nazywana aplikacją *autonomiczną* Blazor WebAssembly . Gdy aplikacja zostanie utworzona na potrzeby wdrożenia z aplikacją zaplecza do obsługi swoich plików, aplikacja jest nazywana *hostowaną* Blazor WebAssembly aplikacją. Aplikacja hostowana Blazor WebAssembly **`Client`** zwykle współdziała z aplikacją zaplecza za **`Server`** pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor> ).
 
 `blazor.webassembly.js`Skrypt jest dostarczany przez strukturę i dojścia:
 
@@ -59,7 +59,7 @@ Blazor WebAssemblyModel hostingu ma następujące ograniczenia:
 
 Aby utworzyć Blazor WebAssembly aplikację, zobacz <xref:blazor/tooling> .
 
-Model hostowanej Blazor aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). W przypadku obsługi platformy Docker w programie Visual Studio kliknij prawym przyciskiem myszy `Server` projekt rozwiązania hostowanego, Blazor WebAssembly a następnie wybierz polecenie **Dodaj**  >  **obsługę platformy Docker**.
+Model hostowanej Blazor aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). W przypadku obsługi platformy Docker w programie Visual Studio kliknij prawym przyciskiem myszy **`Server`** projekt rozwiązania hostowanego, Blazor WebAssembly a następnie wybierz polecenie **Dodaj**  >  **obsługę platformy Docker**.
 
 ## Blazor Server
 
@@ -157,6 +157,7 @@ W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy u
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/tooling>
+* <xref:blazor/project-structure>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/signalr>
 * <xref:tutorials/signalr-blazor>

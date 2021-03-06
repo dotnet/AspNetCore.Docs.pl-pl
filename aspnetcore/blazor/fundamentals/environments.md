@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: a5ead59e467da331b585e8daefb1d7d259c7edba
-ms.sourcegitcommit: 422e8444b9f5cedc373be5efe8032822db54fcaf
+ms.openlocfilehash: 86484fe2e2ce8e20e397a78f118d8b1bbe0cc88a
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101101051"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102395113"
 ---
 # <a name="aspnet-core-blazor-environments"></a>BlazorŚrodowiska ASP.NET Core
 
@@ -33,7 +33,7 @@ ms.locfileid: "101101051"
 
 Podczas lokalnego uruchamiania aplikacji środowisko jest domyślnie opracowywane. Gdy aplikacja zostanie opublikowana, środowisko jest domyślne dla środowiska produkcyjnego.
 
-Aplikacja po stronie klienta Blazor ( *`Client`* ) rozwiązania hostowanego Blazor WebAssembly określa środowisko z *`Server`* aplikacji rozwiązania za pośrednictwem oprogramowania pośredniczącego, które komunikuje środowisko z przeglądarką. *`Server`* Aplikacja dodaje nagłówek o nazwie `blazor-environment` z środowiskiem jako wartość nagłówka. *`Client`* Aplikacja odczytuje nagłówek. *`Server`* Aplikacja rozwiązania jest aplikacją ASP.NET Core, więc więcej informacji na temat konfigurowania środowiska znajduje się w temacie <xref:fundamentals/environments> .
+Aplikacja po stronie klienta Blazor ( **`Client`** ) rozwiązania hostowanego Blazor WebAssembly określa środowisko z **`Server`** aplikacji rozwiązania za pośrednictwem oprogramowania pośredniczącego, które komunikuje środowisko z przeglądarką. **`Server`** Aplikacja dodaje nagłówek o nazwie `blazor-environment` z środowiskiem jako wartość nagłówka. **`Client`** Aplikacja odczytuje nagłówek. **`Server`** Aplikacja rozwiązania jest aplikacją ASP.NET Core, więc więcej informacji na temat konfigurowania środowiska znajduje się w temacie <xref:fundamentals/environments> .
 
 W przypadku aplikacji autonomicznej Blazor WebAssembly uruchomionej lokalnie serwer programistyczny dodaje `blazor-environment` nagłówek, aby określić środowisko programistyczne. Aby określić środowisko dla innych środowisk hostingu, Dodaj `blazor-environment` nagłówek.
 

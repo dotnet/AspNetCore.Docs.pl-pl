@@ -11,12 +11,12 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
-ms.openlocfilehash: eefd16dca126c9bce1efa2cdc90d4201bac09b91
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: f58da78475d65cbb70b0b177e1b0443535e97d55
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102193822"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102402299"
 ---
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
@@ -29,6 +29,7 @@ ms.locfileid: "102193822"
   * W zależności od wymagań scenariusza brakujące lub nieprawidłowe uprawnienia, wystąpienie, identyfikator dzierżawy, domena dzierżawy, identyfikator klienta lub identyfikator URI przekierowania uniemożliwiają aplikacji uwierzytelnianie klientów.
   * Nieprawidłowy zakres tokenów dostępu uniemożliwia klientom dostęp do punktów końcowych interfejsu API sieci Web serwera.
   * Nieprawidłowe lub brakujące uprawnienia interfejsu API serwera uniemożliwiają klientom dostęp do punktów końcowych interfejsu API sieci Web serwera.
+  * Uruchamianie aplikacji na innym porcie niż skonfigurowany w identyfikatorze URI przekierowania dla Identity rejestracji aplikacji dostawcy.
   
   W sekcjach konfiguracji wskazówek tego artykułu przedstawiono przykłady poprawnej konfiguracji. Uważnie Sprawdź każdą sekcję artykułu w poszukiwaniu nieodpowiedniej konfiguracji aplikacji i adresu IP.
   
@@ -112,7 +113,7 @@ Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uakt
 
 ### <a name="run-the-server-app"></a>Uruchom aplikację serwera
 
-Podczas testowania i rozwiązywania problemów z hostowaną Blazor aplikacją upewnij się, że aplikacja jest uruchamiana z **`Server`** projektu. Na przykład w programie Visual Studio upewnij się, że projekt serwera został wyróżniony w **Eksplorator rozwiązań** przed uruchomieniem aplikacji, korzystając z następujących metod:
+Podczas testowania i rozwiązywania problemów z hostowanym Blazor rozwiązaniem upewnij się, że aplikacja jest uruchamiana z **`Server`** projektu. Na przykład w programie Visual Studio upewnij się, że projekt serwera został wyróżniony w **Eksplorator rozwiązań** przed uruchomieniem aplikacji, korzystając z następujących metod:
 
 * Wybierz przycisk **Run** (Uruchom).
 * Użyj **debugowania**  >  **Rozpocznij debugowanie** z menu.

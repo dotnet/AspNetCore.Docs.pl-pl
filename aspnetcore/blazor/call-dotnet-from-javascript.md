@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 45ddcc9e006df2c5e86a7859efc76882b269a496
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: 64268fc5e9f05bc3c8d912781b5ffdd3610cbf99
+ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100280394"
+ms.lasthandoff: 03/06/2021
+ms.locfileid: "102394567"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET Core Blazor
 
@@ -64,7 +64,7 @@ Kod JavaScript obsługiwany przez klienta wywołuje metodę języka C# .NET.
 
 `wwwroot/exampleJsInterop.js`:
 
-[!code-javascript[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
+[!code-javascript[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
 Po **`Trigger .NET static method ReturnArrayAsync`** wybraniu przycisku Sprawdź dane wyjściowe konsoli w narzędziach deweloperskich sieci Web w przeglądarce.
 
@@ -136,17 +136,17 @@ Gdy **`Trigger .NET instance method HelloHelper.SayHello`** przycisk jest zaznac
 
 `JsInteropClasses/ExampleJsInterop.cs`:
 
-[!code-csharp[](./common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
 `wwwroot/exampleJsInterop.js`:
 
-[!code-javascript[](./common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
+[!code-javascript[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
 Nazwa jest przenoszona do `HelloHelper` konstruktora, który ustawia `HelloHelper.Name` Właściwość. Gdy funkcja JavaScript `sayHello` jest wykonywana, `HelloHelper.SayHello` zwraca `Hello, {Name}!` komunikat, który jest zapisywana w konsoli przez funkcję JavaScript.
 
 `JsInteropClasses/HelloHelper.cs`:
 
-[!code-csharp[](./common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
+[!code-csharp[](~/blazor/common/samples/5.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
 Dane wyjściowe konsoli w narzędziach deweloperskich sieci Web w przeglądarce:
 
@@ -519,4 +519,4 @@ W przypadku izolacji JS program JS współdziała z domyślną obsługą języka
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor` przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałęzi wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [ `InteropComponent.razor` przykład ( `main` gałąź repozytorium usługi GitHub/AspNetCore)](https://github.com/dotnet/AspNetCore/blob/main/src/Components/test/testassets/BasicTestApp/InteropComponent.razor): `main` gałąź reprezentuje bieżące programowanie jednostki produktu dla następnej wersji ASP.NET Core. Aby wybrać gałąź dla innej wersji (na przykład `release/5.0` ), Użyj listy rozwijanej **Przełącz gałęzie lub znaczniki** , aby wybrać gałąź.

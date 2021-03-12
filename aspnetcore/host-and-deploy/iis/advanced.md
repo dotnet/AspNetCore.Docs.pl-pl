@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/advanced
-ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: de3abb7b5f89e3b84da38a8eabb183f9551cc1f9
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93058619"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588922"
 ---
 # <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>Zaawansowana konfiguracja modułu ASP.NET Core i usług IIS
 
@@ -89,7 +89,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
   Klucze ochrony danych używane przez aplikacje ASP.NET Core są przechowywane w rejestrze zewnętrznym dla aplikacji. Aby utrzymać klucze dla danej aplikacji, należy utworzyć klucze rejestru dla puli aplikacji.
 
-  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt ochrony danych Provision-AutoGenKeys.ps1 programu PowerShell](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) może być używany dla każdej puli aplikacji używanej w aplikacji ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
+  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt ochrony danych Provision-AutoGenKeys.ps1 programu PowerShell](https://github.com/dotnet/AspNetCore/blob/main/src/DataProtection/Provision-AutoGenKeys.ps1) może być używany dla każdej puli aplikacji używanej w aplikacji ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
 
   W scenariuszach farmy sieci Web aplikacja może być skonfigurowana pod kątem używania ścieżki UNC do przechowywania tego dzwonka klucza ochrony danych. Domyślnie klucze nie są szyfrowane. Upewnij się, że uprawnienia do pliku dla udziału sieciowego są ograniczone do konta systemu Windows, w którym działa aplikacja. Certyfikat x509 może służyć do ochrony kluczy w spoczynku. Rozważ zastosowanie mechanizmu umożliwiającego użytkownikom przekazywanie certyfikatów. Umieść certyfikaty w zaufanym magazynie certyfikatów użytkownika i upewnij się, że są one dostępne na wszystkich komputerach, na których działa aplikacja użytkownika. Aby uzyskać więcej informacji, zobacz <xref:security/data-protection/configuration/overview>.
 
@@ -183,7 +183,7 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -198,7 +198,7 @@ Izolacja puli aplikacji jest określana przez model hostingu:
 
 Okno dialogowe **Dodaj witrynę sieci Web** usług IIS domyślnie umożliwia pojedynczej puli aplikacji na aplikację. Po podaniu **nazwy witryny** tekst zostanie automatycznie przeniesiony do pola tekstowego **Pula aplikacji** . Nowa pula aplikacji jest tworzona przy użyciu nazwy lokacji, gdy zostanie dodana lokacja.
 
-## <a name="application-pool-no-locidentity"></a>Pula aplikacji Identity
+## <a name="application-pool-identity"></a>Pula aplikacji Identity
 
 Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj `ApplicationPoolIdentity` :
 
@@ -220,7 +220,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Wybierz pozycję **OK**.
+1. Wybierz przycisk **OK**.
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -291,10 +291,10 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
   1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-  1. Domyślny **tryb uruchamiania** to `OnDemand` . Ustaw **tryb uruchamiania** na `AlwaysRunning` . Wybierz pozycję **OK**.
+  1. Domyślny **tryb uruchamiania** to `OnDemand` . Ustaw **tryb uruchamiania** na `AlwaysRunning` . Wybierz przycisk **OK**.
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
   1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web**  >  .
-  1. Ustawienie domyślnego **wstępnego ładowania jest włączone** `False` . Ustaw **funkcję wstępnego ładowania** na `True` . Wybierz pozycję **OK**.
+  1. Ustawienie domyślnego **wstępnego ładowania jest włączone** `False` . Ustaw **funkcję wstępnego ładowania** na `True` . Wybierz przycisk **OK**.
 
 * Przy użyciu `web.config` , Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku aplikacji `web.config` :
 
@@ -317,7 +317,7 @@ Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczy
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
 1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-1. Domyślny **limit czasu bezczynności (w minutach)** to `20` minuty. Ustaw **limit czasu bezczynności (w minutach)** na `0` (zero). Wybierz pozycję **OK**.
+1. Domyślny **limit czasu bezczynności (w minutach)** to `20` minuty. Ustaw **limit czasu bezczynności (w minutach)** na `0` (zero). Wybierz przycisk **OK**.
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](xref:host-and-deploy/iis/out-of-process-hosting) aplikacji, użyj jednej z następujących metod:

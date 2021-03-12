@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 539ddb118279adb3a53394cdb0c2e5169092ebc0
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059016"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589234"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Buforowanie odpowiedzi w ASP.NET Core
 
 [John Luo](https://github.com/JunTaoLuo), [Rick Anderson](https://twitter.com/RickAndMSFT)i [Steve Smith](https://ardalis.com/)
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/response/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Buforowanie odpowiedzi zmniejsza liczbę żądań wysyłanych przez klienta lub serwer proxy do serwera sieci Web. Buforowanie odpowiedzi zmniejsza również ilość pracy wykonywanej przez serwer sieci Web w celu wygenerowania odpowiedzi. Buforowanie odpowiedzi jest kontrolowane przez nagłówki, które określają sposób, w jaki klient, serwer proxy i oprogramowanie pośredniczące buforują odpowiedzi.
 
@@ -48,12 +48,12 @@ Wspólne `Cache-Control` dyrektywy przedstawiono w poniższej tabeli.
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Pamięć podręczna może przechowywać odpowiedź. |
 | [użytek](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Odpowiedź nie może być przechowywana w udostępnionej pamięci podręcznej. Prywatna pamięć podręczna może przechowywać i ponownie używać odpowiedzi. |
 | [maks. wiek](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Klient nie akceptuje odpowiedzi, której wiek jest większy niż określona liczba sekund. Przykłady: `max-age=60` (60 sekund), `max-age=2592000` (1 miesiąc) |
-| [nie-pamięć podręczna](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Na** żądanie: pamięć podręczna nie może używać zapisanej odpowiedzi w celu spełnienia żądania. Serwer pierwotny ponownie generuje odpowiedź dla klienta, a oprogramowanie pośredniczące aktualizuje zapisaną odpowiedź w jej pamięci podręcznej.<br><br>**W odpowiedzi** : nie można używać odpowiedzi dla kolejnych żądań bez sprawdzania poprawności na serwerze źródłowym. |
-| [bez sklepu](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Żądania: pamięć** podręczna nie może przechowywać żądania.<br><br>**Odpowiedzi** : pamięć podręczna nie może przechowywać żadnej części odpowiedzi. |
+| [nie-pamięć podręczna](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Na** żądanie: pamięć podręczna nie może używać zapisanej odpowiedzi w celu spełnienia żądania. Serwer pierwotny ponownie generuje odpowiedź dla klienta, a oprogramowanie pośredniczące aktualizuje zapisaną odpowiedź w jej pamięci podręcznej.<br><br>**W odpowiedzi**: nie można używać odpowiedzi dla kolejnych żądań bez sprawdzania poprawności na serwerze źródłowym. |
+| [bez sklepu](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Żądania: pamięć** podręczna nie może przechowywać żądania.<br><br>**Odpowiedzi**: pamięć podręczna nie może przechowywać żadnej części odpowiedzi. |
 
 W poniższej tabeli przedstawiono inne nagłówki pamięci podręcznej, które odgrywają rolę w buforowanie.
 
-| Header                                                     | Funkcja |
+| Nagłówek                                                     | Funkcja |
 | ---------------------------------------------------------- | -------- |
 | [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | Oszacowanie czasu (w sekundach), po którym odpowiedź została wygenerowana lub pomyślnie zweryfikowana na serwerze pochodzenia. |
 | [Wygasł](https://tools.ietf.org/html/rfc7234#section-5.3) | Czas, po którym odpowiedź jest uważana za przestarzałą. |
@@ -72,7 +72,7 @@ Nie ma kontroli nad tym zachowaniem buforowania podczas korzystania z [oprogramo
 
 ### <a name="in-memory-caching"></a>Buforowanie w pamięci
 
-Buforowanie w pamięci używa pamięci serwera do przechowywania buforowanych danych. Ten typ buforowania jest odpowiedni dla jednego serwera lub wielu serwerów używających *sesji programu Sticky Notes* . Sesje programu Sticky Notes oznaczają, że żądania od klienta są zawsze kierowane do tego samego serwera w celu przetworzenia.
+Buforowanie w pamięci używa pamięci serwera do przechowywania buforowanych danych. Ten typ buforowania jest odpowiedni dla jednego serwera lub wielu serwerów używających *sesji programu Sticky Notes*. Sesje programu Sticky Notes oznaczają, że żądania od klienta są zawsze kierowane do tego samego serwera w celu przetworzenia.
 
 Aby uzyskać więcej informacji, zobacz <xref:performance/caching/memory>.
 

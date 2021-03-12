@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: 617c042c628dc431391f39c2ecb2d2f9c9463fa5
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 3f03d774a2223dc1fc08adcbc85cdc9a2b63dea0
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "95417594"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588896"
 ---
 # <a name="grpc-for-net-configuration"></a>Konfiguracja programu gRPC for .NET
 
@@ -62,10 +62,14 @@ Konfiguracja klienta gRPC jest ustawiona na `GrpcChannelOptions` . W poniższej 
 | DisposeHttpClient | `false` | Jeśli jest ustawiona na, `true` a `HttpMessageHandler` lub `HttpClient` jest określona, lub `HttpHandler` `HttpClient` odpowiednio, jest usuwana, gdy `GrpcChannel` zostanie usunięty. |
 | LoggerFactory | `null` | `LoggerFactory`Używany przez klienta do rejestrowania informacji o wywołaniach gRPC. `LoggerFactory`Wystąpienie może zostać rozpoznane z iniekcji zależności lub utworzone za pomocą `LoggerFactory.Create` . Przykłady konfigurowania rejestrowania znajdują się w temacie <xref:grpc/diagnostics#grpc-client-logging> . |
 | MaxSendMessageSize | `null` | Maksymalny rozmiar wiadomości w bajtach, które mogą być wysyłane z klienta. Próba wysłania komunikatu, który przekracza skonfigurowany maksymalny rozmiar komunikatu, spowoduje wyjątek. Po ustawieniu na wartość `null` rozmiar komunikatu jest nieograniczony. |
-| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | Maksymalny rozmiar komunikatu w bajtach, który może zostać odebrany przez klienta. Jeśli klient odbiera komunikat, który przekracza ten limit, zgłasza wyjątek. Zwiększenie tej wartości umożliwia klientowi otrzymywanie większych komunikatów, ale może mieć negatywny wpływ na użycie pamięci. Po ustawieniu na wartość `null` rozmiar komunikatu jest nieograniczony. |
+| MaxReceiveMessageSize | 4 MB | Maksymalny rozmiar komunikatu w bajtach, który może zostać odebrany przez klienta. Jeśli klient odbiera komunikat, który przekracza ten limit, zgłasza wyjątek. Zwiększenie tej wartości umożliwia klientowi otrzymywanie większych komunikatów, ale może mieć negatywny wpływ na użycie pamięci. Po ustawieniu na wartość `null` rozmiar komunikatu jest nieograniczony. |
 | Poświadczenia | `null` | `ChannelCredentials`Wystąpienie. Poświadczenia służą do dodawania metadanych uwierzytelniania do wywołań gRPC. |
 | CompressionProviders | gzip | Kolekcja dostawców kompresji służąca do kompresowania i dekompresowania komunikatów. Niestandardowych dostawców kompresji można utworzyć i dodać do kolekcji. Domyślnie skonfigurowane dostawcy obsługują kompresję w formacie **gzip** . |
 | ThrowOperationCanceledOnCancellation | `false` | Jeśli jest ustawiona na, klienci zgłaszają w `true` <xref:System.OperationCanceledException> przypadku anulowania wywołania lub przekroczenia jego terminu ostatecznego. |
+| MaxRetryAttempts | 5 | Maksymalna liczba ponownych prób. Ta wartość ogranicza wszelkie wartości ponownych prób i operacji zabezpieczania, które zostały określone w konfiguracji usługi. Ustawienie tej samej wartości nie powoduje włączenia ponownych prób. Ponowne próby są włączone w konfiguracji usługi, którą można wykonać przy użyciu `ServiceConfig` . `null`Wartość powoduje usunięcie maksymalnego limitu ponownych prób. Aby uzyskać więcej informacji na temat ponownych prób, zobacz <xref:grpc/retries> . |
+| MaxRetryBufferSize | 16 MB | Maksymalny rozmiar buforu w bajtach, który może być używany do przechowywania wysłanych komunikatów podczas ponawiania lub zabezpieczania wywołań. W przypadku przekroczenia limitu bufora nie są podejmowane żadne kolejne próby i wszystkie wywołania hedgingu, ale jeden z nich zostanie anulowane. Ten limit jest stosowany dla wszystkich wywołań wykonywanych przy użyciu kanału. `null`Wartość powoduje usunięcie maksymalnego limitu rozmiaru buforu ponowień. |
+| <span style="word-break:normal;word-wrap:normal">MaxRetryBufferPerCallSize</span> | 1 MB | Maksymalny rozmiar buforu w bajtach, który może być używany do przechowywania wysłanych komunikatów podczas ponawiania lub zabezpieczania wywołań. W przypadku przekroczenia limitu bufora nie są podejmowane żadne kolejne próby i wszystkie wywołania hedgingu, ale jeden z nich zostanie anulowane. Ten limit jest stosowany do jednego wywołania. `null`Wartość powoduje usunięcie maksymalnego limitu rozmiaru buforu ponowień dla wywołania. |
+| Konfiguracja ServiceConfig | `null` | Konfiguracja usługi dla kanału gRPC. Konfiguracja usługi może służyć do konfigurowania [ponownych prób gRPC](xref:grpc/retries). |
 
 Następujący kod:
 

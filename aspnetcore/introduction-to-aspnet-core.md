@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 3e41336d084e25319f8b1ab4c4ab3175b758d23d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93052230"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588805"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
 
@@ -198,8 +198,8 @@ Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET do ASP.NET Core 
 
 Wiele artykułów i samouczków zawiera linki do kodu przykładowego.
 
-1. [Pobierz plik zip repozytorium ASP.NET](https://codeload.github.com/dotnet/AspNetCore.Docs/zip/master).
-1. Rozpakuj plik *Docs-master.zip*.
+1. [Pobierz plik zip repozytorium ASP.NET](https://codeload.github.com/dotnet/AspNetCore.Docs/zip/main).
+1. Rozpakuj plik *Docs-main.zip* .
 1. Adres URL linku do przykładu pomoże Ci przejść do katalogu przykładu.
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Dyrektywy preprocesora w przykładowym kodzie
@@ -244,7 +244,7 @@ Wcześniejszy fragment kodu w języku C# jest przywoływany w pliku markdown tem
 
 Licencjobiorca może bezpiecznie zignorować (lub usunąć) `#region` `#endregion` dyrektywy i, które są otaczające kod. Nie zmieniaj kodu w ramach tych dyrektyw, jeśli planujesz uruchamiać przykładowe scenariusze opisane w temacie. Kod możesz swobodnie modyfikować, eksperymentując z innymi scenariuszami.
 
-Aby uzyskać więcej informacji, zobacz [Współtworzenie dokumentacji platformy ASP.NET: fragmenty kodu](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
+Aby uzyskać więcej informacji, zobacz [Współtworzenie dokumentacji platformy ASP.NET: fragmenty kodu](https://github.com/dotnet/AspNetCore.Docs/blob/main/CONTRIBUTING.md#code-snippets).
 
 ## <a name="next-steps"></a>Następne kroki
 

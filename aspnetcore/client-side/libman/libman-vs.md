@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: ae2bc34edaea2df6f329e47b00c7c02cc59d03bd
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054713"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589273"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Używanie LibMan z ASP.NET Core w programie Visual Studio
 
@@ -36,7 +36,7 @@ Program Visual Studio ma wbudowaną obsługę [LibMan](xref:client-side/libman/i
 * Okno dialogowe wyszukiwania służące do znajdowania bibliotek i dodawania plików do projektu.
 * Edytowanie obsługi *libman.jsw* &mdash; pliku manifestu LibMan.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(jak pobrać)](xref:index#how-to-download-a-sample)
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/client-side/libman/samples/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -81,7 +81,7 @@ Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
   |Folder *stron* w projekcie                 |*Strony/jQuery/*       |
 
 * Kliknij przycisk **Zainstaluj** , aby pobrać pliki, na konfigurację w *libman.jsna*.
-* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Przykład:
+* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Na przykład:
 
   ```console
   Restore operation started...
@@ -172,7 +172,7 @@ Aby ręcznie przywrócić pliki biblioteki:
 Podczas gdy operacja przywracania jest uruchomiona:
 
 * Ikona centrum stanu zadań (TSC) na pasku stanu programu Visual Studio zostanie animowana i zostanie *rozpoczęta operacja przywracania*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
+* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
 
   ```console
   Restore operation started...
@@ -197,7 +197,7 @@ Aby zapobiec przypadkowemu usunięciu plików nienależących do biblioteki, ope
 Podczas gdy operacja czyszczenia jest uruchomiona:
 
 * Ikona TSC na pasku stanu programu Visual Studio będzie animowana i zostanie *rozpoczęta operacja odczytywania bibliotek klienckich*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
+* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
 
 ```console
 Clean libraries operation started...

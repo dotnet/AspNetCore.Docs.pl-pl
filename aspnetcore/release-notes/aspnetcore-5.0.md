@@ -18,18 +18,18 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 5caa412773bf9c8e3bed5ebc529d48b886de6956
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 64e068194744d6c5495d8ecaf31076c7a1c1f349
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253075"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585802"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>Co nowego w ASP.NET Core 5,0
 
 W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 5,0 z linkami do odpowiedniej dokumentacji.
 
-## <a name="aspnet-core-mvc-and-no-locrazor-improvements"></a>ASP.NET Core MVC i Razor ulepszenia
+## <a name="aspnet-core-mvc-and-razor-improvements"></a>ASP.NET Core MVC i Razor ulepszenia
 
 ### <a name="model-binding-datetime-as-utc"></a>Element DateTime powiązania modelu jako czas UTC
 
@@ -154,7 +154,7 @@ Popraw postrzeganą wydajność renderowania składników przy użyciu Blazor wb
 
 Blazor zdarzenia obsługują teraz `ontoggle` zdarzenie dom. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling#event-argument-types>.
 
-### <a name="set-ui-focus-in-no-locblazor-apps"></a>Ustawianie fokusu interfejsu użytkownika w Blazor aplikacjach
+### <a name="set-ui-focus-in-blazor-apps"></a>Ustawianie fokusu interfejsu użytkownika w Blazor aplikacjach
 
 Użyj `FocusAsync` metody wygodnej dla odwołań do elementów, aby ustawić fokus interfejsu użytkownika dla tego elementu. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling#focus-an-element>.
 
@@ -188,15 +188,15 @@ Wszystkie parametry trasy, które przechwytują ścieżki między wieloma granic
 
 Blazor WebAssemblyUlepszono debugowanie aplikacji w ASP.NET Core 5,0. Ponadto debugowanie jest teraz obsługiwane w Visual Studio dla komputerów Mac. Aby uzyskać więcej informacji, zobacz <xref:blazor/debug>.
 
-### <a name="microsoft-no-locidentity-v20-and-msal-v20"></a>Microsoft Identity v 2.0 i MSAL v 2.0
+### <a name="microsoft-identity-v20-and-msal-v20"></a>Microsoft Identity v 2.0 i MSAL v 2.0
 
 Blazor zabezpieczenia wykorzystują teraz oprogramowanie Microsoft Identity v 2.0 ( [`Microsoft.Identity.Web`](https://www.nuget.org/packages/Microsoft.Identity.Web) i [`Microsoft.Identity.Web.UI`](https://www.nuget.org/packages/Microsoft.Identity.Web.UI) ) oraz MSAL v 2.0. Aby uzyskać więcej informacji, zobacz tematy w [ Blazor zabezpieczeniach i Identity węźle](xref:blazor/security/index).
 
-### <a name="protected-browser-storage-for-no-locblazor-server"></a>Magazyn chronionej przeglądarki dla programu Blazor Server
+### <a name="protected-browser-storage-for-blazor-server"></a>Magazyn chronionej przeglądarki dla programu Blazor Server
 
 Blazor Server aplikacje mogą teraz korzystać z wbudowanej obsługi przechowywania stanu aplikacji w przeglądarce chronionej przed naruszeniem przy użyciu ASP.NET Core ochrony danych. Dane mogą być przechowywane w lokalnym magazynie przeglądarki lub w magazynie sesji. Aby uzyskać więcej informacji, zobacz <xref:blazor/state-management>.
 
-### <a name="no-locblazor-webassembly-prerendering"></a>Blazor WebAssembly Renderowanie prerenderingu
+### <a name="blazor-webassembly-prerendering"></a>Blazor WebAssembly Renderowanie prerenderingu
 
 Ulepszono integrację składników między modelami hostingu, a Blazor WebAssembly aplikacje mogą teraz wygenerowania danych wyjściowych na serwerze. <!-- UNCOMMENT AFTER https://github.com/dotnet/AspNetCore.Docs/pull/19887 MERGES: For more information, see <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps> and <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>. -->
 
@@ -224,19 +224,19 @@ Więcej informacji gRPC można znaleźć w temacie <xref:grpc/index> .
 
 ## SignalR
 
-### <a name="no-locsignalr-hub-filters"></a>SignalR Filtry centrum
+### <a name="signalr-hub-filters"></a>SignalR Filtry centrum
 
 SignalR Filtry centrów o nazwie potoki centrów w ASP.NET SignalR , to funkcja, która umożliwia uruchamianie kodu przed wywołaniem i po wywołaniu metod centrów. Uruchamianie kodu przed i po wywołaniu metody Hub jest podobne do sposobu, w jaki oprogramowanie pośredniczące ma możliwość uruchomienia kodu przed i po żądaniu HTTP. Typowe zastosowania obejmują rejestrowanie, obsługę błędów i walidację argumentów.
 
 Aby uzyskać więcej informacji, zobacz [Używanie filtrów centrum w SignalR ASP.NET Core ](xref:signalr/hub-filters).
 
-### <a name="no-locsignalr-parallel-hub-invocations"></a>SignalR równoległe wywołania koncentratora
+### <a name="signalr-parallel-hub-invocations"></a>SignalR równoległe wywołania koncentratora
 
 ASP.NET Core SignalR może teraz obsługiwać równoległe wywołania koncentratora. Zachowanie domyślne można zmienić, aby umożliwić klientom wywoływanie więcej niż jednej metody centrum w danej chwili:
 
 [!code-csharp[](~/release-notes/sample/StartupSignalRhubs.cs?name=snippet)]
 
-### <a name="added-messagepack-support-in-no-locsignalr-java-client"></a>Dodano obsługę MessagePack w SignalR kliencie Java
+### <a name="added-messagepack-support-in-signalr-java-client"></a>Dodano obsługę MessagePack w SignalR kliencie Java
 
 Nowy pakiet, [com. Microsoft. signaler. MessagePack](https://mvnrepository.com/artifact/com.microsoft.signalr.messagepack), dodaje obsługę MessagePack do SignalR klienta Java. Aby użyć protokołu MessagePack Hub, Dodaj `.withHubProtocol(new MessagePackHubProtocol())` do konstruktora połączeń:
 
@@ -278,7 +278,7 @@ See [Update SignalR code](xref:migration/31-to-50#signalr) for migration instruc
         });
   ```
 
-### <a name="no-lockestrel-endpoint-specific-options-via-configuration"></a>Kestrel Opcje specyficzne dla punktu końcowego za pośrednictwem konfiguracji
+### <a name="kestrel-endpoint-specific-options-via-configuration"></a>Kestrel Opcje specyficzne dla punktu końcowego za pośrednictwem konfiguracji
 
 Dodano pomoc techniczną do konfigurowania Kestrel opcji specyficznych dla punktu końcowego za pośrednictwem [konfiguracji](xref:fundamentals/configuration/index). Konfiguracje specyficzne dla punktu końcowego obejmują:
 
@@ -353,13 +353,13 @@ Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania do
    ```
    <!-- review: KeepAlivePingInterval not found in RC1. Try testing with RC1. See https://github.com/dotnet/aspnetcore/pull/22565/files see C:/Users/riande/source/repos/WebApplication128/WebApplication128 -->
 
-### <a name="containers"></a>Containers
+### <a name="containers"></a>Kontenery
 
 Przed rozpoczęciem programu .NET 5,0, kompilowanie i publikowanie *pliku dockerfile* dla aplikacji ASP.NET Core wymaga pobrania całego zestaw .NET Core SDK i ASP.NET Core obrazu. W tej wersji jest zmniejszana liczba bajtów obrazów zestawu SDK, a bajty pobierane dla ASP.NET Core obrazu są w znacznym stopniu eliminowane. Aby uzyskać więcej informacji, zobacz [ten komentarz dotyczący problemu](https://github.com/dotnet/dotnet-docker/issues/1814#issuecomment-625294750)w serwisie GitHub.
 
 ## <a name="authentication-and-authorization"></a>Uwierzytelnianie i autoryzacja
 
-### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Azure Active Directory uwierzytelnianie z firmą Microsoft. Identity . Witrynę
+### <a name="azure-active-directory-authentication-with-microsoftidentityweb"></a>Azure Active Directory uwierzytelnianie z firmą Microsoft. Identity . Witrynę
 
 Szablony projektów ASP.NET Core teraz integrują się z usługą <xref:Microsoft.Identity.Web?displayProperty=fullName> w celu obsługi uwierzytelniania przy użyciu usługi [Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD). [Microsoft. Identity .. Pakiet internetowy](https://www.nuget.org/packages/Microsoft.Identity.Web/) oferuje następujące informacje:
 
@@ -374,7 +374,7 @@ Szablony projektów ASP.NET Core teraz integrują się z usługą <xref:Microsof
 
 ### <a name="custom-handling-of-authorization-failures"></a>Niestandardowa obsługa niepowodzeń autoryzacji
 
-Niestandardowa obsługa niepowodzeń autoryzacji jest teraz łatwiejsza przy użyciu nowego interfejsu [IAuthorizationMiddlewareResultHandler](https://github.com/dotnet/aspnetcore/blob/v5.0.0-rc.1.20451.17/src/Security/Authorization/Policy/src/IAuthorizationMiddlewareResultHandler.cs) , który jest wywoływany przez [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) [autoryzacji](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) . Domyślna implementacja pozostaje taka sama, ale obsługa niestandardowa może być zarejestrowana w [iniekcja zależności, która umożliwia niestandardowe odpowiedzi HTTP na podstawie przyczyny niepowodzenia autoryzacji. Zapoznaj się z [tym przykładem](https://github.com/dotnet/aspnetcore/blob/master/src/Security/samples/CustomAuthorizationFailureResponse/Authorization/SampleAuthorizationMiddlewareResultHandler.cs) , który pokazuje użycie `IAuthorizationMiddlewareResultHandler` .
+Niestandardowa obsługa niepowodzeń autoryzacji jest teraz łatwiejsza przy użyciu nowego interfejsu [IAuthorizationMiddlewareResultHandler](https://github.com/dotnet/aspnetcore/blob/v5.0.0-rc.1.20451.17/src/Security/Authorization/Policy/src/IAuthorizationMiddlewareResultHandler.cs) , który jest wywoływany przez [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) [autoryzacji](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) . Domyślna implementacja pozostaje taka sama, ale obsługa niestandardowa może być zarejestrowana w [iniekcja zależności, która umożliwia niestandardowe odpowiedzi HTTP na podstawie przyczyny niepowodzenia autoryzacji. Zapoznaj się z [tym przykładem](https://github.com/dotnet/aspnetcore/blob/main/src/Security/samples/CustomAuthorizationFailureResponse/Authorization/SampleAuthorizationMiddlewareResultHandler.cs) , który pokazuje użycie `IAuthorizationMiddlewareResultHandler` .
 
 ### <a name="authorization-when-using-endpoint-routing"></a>Autoryzacja w przypadku korzystania z routingu punktu końcowego
 
@@ -390,7 +390,7 @@ Zobacz [uwierzytelnianie Kerberos i kontrola dostępu oparta na rolach (RBAC)](x
 
 Dane JSON mogą być odczytywane i zapisywane przy `HttpRequest` `HttpResponse` użyciu <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> metod New i `WriteAsJsonAsync` Extension. Te metody rozszerzające używają [System.Text.Jsna](xref:System.Text.Json) serializatorze do obsługi danych JSON. Nowa `HasJsonContentType` Metoda rozszerzenia może również sprawdzić, czy żądanie ma typ zawartości JSON.
 
-Metody rozszerzenia JSON można łączyć z [routingiem punktów końcowych](xref:fundamentals/routing) w celu utworzenia interfejsów API JSON w stylu programowania wywoływanych ***Route do Code** _. Jest to nowa opcja dla deweloperów, którzy chcą w prosty sposób tworzyć podstawowe interfejsy API JSON. Na przykład aplikacja sieci Web, która ma tylko kilku punktów końcowych, może wybrać użycie trasy do kodu, a nie pełnej funkcjonalności ASP.NET Core MVC:
+Metody rozszerzenia JSON można łączyć z [routingiem punktów końcowych](xref:fundamentals/routing) w celu utworzenia interfejsów API JSON w stylu programowania wywołującego ***trasę do kodu***. Jest to nowa opcja dla deweloperów, którzy chcą w prosty sposób tworzyć podstawowe interfejsy API JSON. Na przykład aplikacja sieci Web, która ma tylko kilku punktów końcowych, może wybrać użycie trasy do kodu, a nie pełnej funkcjonalności ASP.NET Core MVC:
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>
@@ -450,7 +450,7 @@ public class Program
 
 W programie .NET 5 uruchomienie [czujka dotnet](xref:tutorials/dotnet-watch) w projekcie ASP.NET Core powoduje uruchomienie domyślnej przeglądarki i autoodowieżanie przeglądarki w miarę wprowadzania zmian w kodzie. Oznacza to, że możesz:
 
-_ Otwórz projekt ASP.NET Core w edytorze tekstu.
+* Otwórz projekt ASP.NET Core w edytorze tekstu.
 * Uruchom polecenie `dotnet watch`.
 * Należy skoncentrować się na zmianach kodu, gdy narzędzia obsługują ponowne kompilowanie, ponowny Start i ładowanie aplikacji.
 

@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - IHubContext
 uid: signalr/hubcontext
-ms.openlocfilehash: 0b1940dc85634051e8a566c6859f51c130b69269
-ms.sourcegitcommit: 1b7f2e1aabf43fa93b920cad36515d7336bfc2df
+ms.openlocfilehash: 2b2939a7692a195c6dc1b8421433a723310b4bd6
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93066736"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589208"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>Wysyłanie komunikatów spoza centrum
 
@@ -33,16 +33,16 @@ Autor [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
 SignalRCentrum to podstawowe streszczenie służące do wysyłania komunikatów do klientów podłączonych do SignalR serwera programu. Możliwe jest również wysyłanie komunikatów z innych miejsc w aplikacji przy użyciu `IHubContext` usługi. W tym artykule wyjaśniono, jak uzyskać dostęp do programu w SignalR `IHubContext` celu wysyłania powiadomień do klientów spoza centrum.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/hubcontext/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="get-an-instance-of-no-locihubcontext"></a>Pobierz wystąpienie elementu IHubContext
+## <a name="get-an-instance-of-ihubcontext"></a>Pobierz wystąpienie elementu IHubContext
 
 W ASP.NET Core SignalR można uzyskać dostęp do wystąpienia `IHubContext` przez iniekcję zależności. Można wstrzyknąć wystąpienie `IHubContext` do kontrolera, oprogramowania pośredniczącego lub innej usługi. Użyj wystąpienia, aby wysyłać komunikaty do klientów.
 
 > [!NOTE]
 > Różni się to od ASP.NET 4. x SignalR , które były używane GlobalHost w celu zapewnienia dostępu do programu `IHubContext` . ASP.NET Core ma strukturę iniekcji zależności, która eliminuje potrzebę tego globalnej pojedynczej.
 
-### <a name="inject-an-instance-of-no-locihubcontext-in-a-controller"></a>Wstrzyknąć wystąpienie elementu IHubContext w kontrolerze
+### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>Wstrzyknąć wystąpienie elementu IHubContext w kontrolerze
 
 Można wstrzyknąć wystąpienie `IHubContext` do kontrolera przez dodanie go do konstruktora:
 
@@ -52,7 +52,7 @@ Teraz, mając dostęp do wystąpienia `IHubContext` , można wywołać metody ce
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=21-25)]
 
-### <a name="get-an-instance-of-no-locihubcontext-in-middleware"></a>Pobierz wystąpienie w oprogramowaniu IHubContext pośredniczącym
+### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>Pobierz wystąpienie w oprogramowaniu IHubContext pośredniczącym
 
 Uzyskaj dostęp do tego `IHubContext` potoku w ramach oprogramowania pośredniczącego, takiego jak:
 
@@ -73,7 +73,7 @@ app.Use(async (context, next) =>
 > [!NOTE]
 > Gdy metody piasty są wywoływane spoza `Hub` klasy, nie istnieje obiekt wywołujący skojarzony z wywołaniem. W związku z tym nie ma dostępu do `ConnectionId` `Caller` właściwości, i `Others` .
 
-### <a name="get-an-instance-of-no-locihubcontext-from-ihost"></a>Pobierz wystąpienie z IHubContext IHost
+### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>Pobierz wystąpienie z IHubContext IHost
 
 Dostęp do programu `IHubContext` z hosta sieci Web jest przydatny do integracji z obszarami poza ASP.NET Core, na przykład przy użyciu platform wtrysku zależności innych firm:
 

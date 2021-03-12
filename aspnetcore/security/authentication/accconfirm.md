@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f71ae5e619b875c03401fa78320582c406875401
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052321"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586114"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -57,7 +57,7 @@ Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. 
 * Wybierz link `Click here to confirm your account`.
 * Wybierz łącze **logowania** i zaloguj się przy użyciu tych samych poświadczeń.
 * Wybierz `Hello YourEmail@provider.com!` link, który przekierowuje Cię do `/Identity/Account/Manage/PersonalData` strony.
-* Wybierz kartę **dane osobowe** po lewej stronie, a następnie wybierz pozycję **Usuń** .
+* Wybierz kartę **dane osobowe** po lewej stronie, a następnie wybierz pozycję **Usuń**.
 
 ### <a name="configure-an-email-provider"></a>Konfigurowanie dostawcy poczty e-mail
 
@@ -65,13 +65,13 @@ W tym samouczku [SendGrid](https://sendgrid.com) jest używany do wysyłania wia
 
 Konto SendGrid może wymagać [dodania nadawcy](https://sendgrid.com/docs/ui/sending-email/senders/).
 
-Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs* :
+Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs*:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -139,7 +139,7 @@ Dodaj następujący kod do `ConfigureServices` metody w pliku *Startup.cs* :
 Postępuj zgodnie z instrukcjami dla [szkieletu Identity ](xref:security/authentication/scaffold-identity) i szkieletu `RegisterConfirmation` .
 
 <!-- .NET 5 fixes this, see
-https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+https://github.com/dotnet/aspnetcore/blob/main/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
 -->
 
 [!INCLUDE[](~/includes/disableVer.md)]
@@ -156,7 +156,7 @@ Uruchom aplikację internetową, a następnie przetestuj potwierdzenie konta i p
 
 ### <a name="test-password-reset"></a>Resetowanie hasła do testu
 
-* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj** .
+* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj**.
 * Wybierz link **Zaloguj** i wybierz łącze nie **pamiętasz hasła?**
 * Wprowadź adres e-mail, który został użyty do zarejestrowania konta.
 * Zostanie wysłana wiadomość e-mail z linkiem służącym do resetowania hasła. Sprawdź swój adres e-mail i kliknij link, aby zresetować hasło. Po pomyślnym zresetowaniu hasła możesz zalogować się przy użyciu adresu e-mail i nowego hasła.
@@ -241,7 +241,7 @@ Włączenie potwierdzenia konta w witrynie z użytkownikami powoduje zablokowani
 
 [.NET Core 2,2 SDK lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Tworzenie aplikacji sieci Web i szkieletu Identity
+## <a name="create-a-web--app-and-scaffold-identity"></a>Tworzenie aplikacji sieci Web i szkieletu Identity
 
 Uruchom następujące polecenia, aby utworzyć aplikację sieci Web z uwierzytelnianiem.
 
@@ -267,7 +267,7 @@ Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. 
 
 Zwróć uwagę na to, że `EmailConfirmed` pole tabeli ma wartość `False` .
 
-Możesz chcieć ponownie użyć tej wiadomości e-mail w następnym kroku, gdy aplikacja wyśle wiadomość e-mail z potwierdzeniem. Kliknij prawym przyciskiem myszy wiersz i wybierz polecenie **Usuń** . Usunięcie aliasu e-mail ułatwia wykonanie następujących czynności.
+Możesz chcieć ponownie użyć tej wiadomości e-mail w następnym kroku, gdy aplikacja wyśle wiadomość e-mail z potwierdzeniem. Kliknij prawym przyciskiem myszy wiersz i wybierz polecenie **Usuń**. Usunięcie aliasu e-mail ułatwia wykonanie następujących czynności.
 
 <a name="prevent-login-at-registration"></a>
 
@@ -287,13 +287,13 @@ Aktualizuj `Startup.ConfigureServices`  , aby wymagać potwierdzonej wiadomości
 
 W tym samouczku [SendGrid](https://sendgrid.com) jest używany do wysyłania wiadomości e-mail. Aby wysłać wiadomość e-mail, musisz mieć konto SendGrid i klucz. Możesz użyć innych dostawców poczty e-mail. Program zawiera ASP.NET Core 2. x `System.Net.Mail` , który umożliwia wysyłanie wiadomości e-mail z aplikacji. Zalecamy użycie SendGrid lub innej usługi poczty e-mail do wysyłania wiadomości e-mail. Protokół SMTP jest trudny do poprawnego zabezpieczania i konfigurowania.
 
-Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs* :
+Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs*:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
@@ -356,7 +356,7 @@ Dodaj następujący kod do `ConfigureServices` metody w pliku *Startup.cs* :
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>Włącz potwierdzenie konta i odzyskiwanie hasła
 
-Szablon zawiera kod służący do potwierdzenia konta i odzyskiwania hasła. Znajdź `OnPostAsync` metodę w *obszarach/ Identity /Pages/Account/register.cshtml.cs* .
+Szablon zawiera kod służący do potwierdzenia konta i odzyskiwania hasła. Znajdź `OnPostAsync` metodę w *obszarach/ Identity /Pages/Account/register.cshtml.cs*.
 
 Zablokuj automatyczne logowanie nowo zarejestrowanych użytkowników, dodając komentarz do następującego wiersza:
 
@@ -386,7 +386,7 @@ Zostanie wyświetlona strona zarządzanie z wybraną kartą **profil** . **Wiado
 
 ### <a name="test-password-reset"></a>Resetowanie hasła do testu
 
-* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj** .
+* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj**.
 * Wybierz link **Zaloguj** i wybierz łącze nie **pamiętasz hasła?**
 * Wprowadź adres e-mail, który został użyty do zarejestrowania konta.
 * Zostanie wysłana wiadomość e-mail z linkiem służącym do resetowania hasła. Sprawdź swój adres e-mail i kliknij link, aby zresetować hasło. Po pomyślnym zresetowaniu hasła możesz zalogować się przy użyciu adresu e-mail i nowego hasła.

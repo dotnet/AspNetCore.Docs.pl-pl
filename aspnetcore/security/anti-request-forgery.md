@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 3bb3c059eafa8e948fe2e719207927c009902e59
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 5d6f2915dd9b27142ac7d8ac55e68c6a26e41f81
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057450"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585789"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Uniemożliwiaj ataki między witrynami (XSRF/CSRF) w ASP.NET Core
 
@@ -85,7 +85,7 @@ Jednak luki w zabezpieczeniach CSRF są zasadniczo problemem z aplikacją sieci 
 
 Cookieuwierzytelnianie oparte na programie to popularna forma uwierzytelniania. Systemy uwierzytelniania oparte na tokenach zwiększają popularność, szczególnie w przypadku aplikacji jednostronicowych (aplikacji jednostronicowych).
 
-### <a name="no-loccookie-based-authentication"></a>Cookieuwierzytelnianie oparte na usłudze
+### <a name="cookie-based-authentication"></a>Cookieuwierzytelnianie oparte na usłudze
 
 Gdy użytkownik jest uwierzytelniany przy użyciu nazwy użytkownika i hasła, zostanie wystawiony token zawierający bilet uwierzytelniania, który może być używany do uwierzytelniania i autoryzacji. Token jest przechowywany jako cookie towarzyszący każdemu żądania przez klienta. Generowanie i sprawdzanie poprawności cookie jest wykonywane przez Cookie oprogramowanie pośredniczące uwierzytelniania. [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index) deserializacji podmiotu zabezpieczeń użytkownika do zaszyfrowanego cookie . Na kolejnych żądaniach oprogramowanie pośredniczące sprawdza, czy cookie ponownie tworzy podmiot zabezpieczeń i przypisuje podmiotowi zabezpieczeń do właściwości [użytkownika](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user) [HttpContext](/dotnet/api/microsoft.aspnetcore.http.httpcontext).
 
@@ -487,9 +487,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/anti-request-forgery/sample/AngularSample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/anti-request-forgery/sample/AngularSample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="windows-authentication-and-antiforgery-no-loccookies"></a>Uwierzytelnianie systemu Windows i antysfałszowane cookie s
+## <a name="windows-authentication-and-antiforgery-cookies"></a>Uwierzytelnianie systemu Windows i antysfałszowane cookie s
 
 W przypadku korzystania z uwierzytelniania systemu Windows punkty końcowe aplikacji muszą być chronione przed atakami CSRF w taki sam sposób jak w przypadku usługi cookie s.  Przeglądarka niejawnie wysyła kontekst uwierzytelniania do serwera, dlatego punkty końcowe muszą być chronione przed atakami CSRF.
 

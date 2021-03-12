@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 320805c0d40bf06cee384e6d98caea5c420d45bc
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3bd34f677271ddfc00e6e65ddf3a5e3c10eec863
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061473"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588786"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrowanie z interfejsu API sieci Web ASP.NET do ASP.NET Core
 
@@ -31,7 +31,7 @@ Przez [Scott Addie](https://twitter.com/scott_addie) i [Steve Smith](https://ard
 
 Internetowy interfejs API ASP.NET 4. x to usługa HTTP, która dociera do szerokiego zakresu klientów, w tym przeglądarek i urządzeń przenośnych. ASP.NET Core łączy modele aplikacji MVC i Web API ASP.NET 4. x w jeden model programowania znany jako ASP.NET Core MVC. W tym artykule przedstawiono kroki wymagane do przeprowadzenia migracji z interfejsu API sieci Web ASP.NET 4. x do ASP.NET Core MVC.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/migration/webapi/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -63,16 +63,16 @@ W poniższych sekcjach przedstawiono migrację projektu interfejsu API sieci Web
 
 Utwórz nowe puste rozwiązanie w programie Visual Studio i Dodaj projekt interfejsu API sieci Web ASP.NET 4. x do migracji:
 
-1. Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
-1. Wybierz szablon **pustego rozwiązania** i wybierz pozycję **dalej** .
-1. Nazwij rozwiązanie *WebAPIMigration* . Wybierz pozycję **Utwórz** .
+1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+1. Wybierz szablon **pustego rozwiązania** i wybierz pozycję **dalej**.
+1. Nazwij rozwiązanie *WebAPIMigration*. Wybierz przycisk **Utwórz**.
 1. Dodaj istniejący projekt *ProductsApp* do rozwiązania.
 
 Dodaj nowy projekt interfejsu API do migracji do:
 
 1. Dodaj nowy projekt **aplikacji sieci Web ASP.NET Core** do rozwiązania.
-1. W oknie dialogowym **Konfigurowanie nowego projektu** Nazwij projekt *ProductsCore* , a następnie wybierz pozycję **Utwórz** .
-1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz** .
+1. W oknie dialogowym **Konfigurowanie nowego projektu** Nazwij projekt *ProductsCore*, a następnie wybierz pozycję **Utwórz**.
+1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz**.
 1. Usuń przykładowe pliki *WeatherForecast.cs* i *controllers/WeatherForecastController. cs* z nowego projektu *ProductsCore* .
 
 Rozwiązanie zawiera teraz dwa projekty. W poniższych sekcjach opisano Migrowanie zawartości projektu *ProductsApp* do projektu *ProductsCore* .
@@ -83,7 +83,7 @@ ASP.NET Core nie używa folderu *App_Start* ani pliku *Global. asax* . Ponadto p
 
 Klasa `Startup`:
 
-* Zastępuje *Global. asax* .
+* Zastępuje *Global. asax*.
 * Obsługuje wszystkie zadania uruchamiania aplikacji.
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
@@ -181,9 +181,9 @@ W poniższych sekcjach przedstawiono migrację projektu interfejsu API sieci Web
 
 Wykonaj następujące kroki w programie Visual Studio:
 
-* Przejdź do pozycji **plik**  >  **Nowy**  >  **projekt**  >  **Inne typy projektów**  >  **Visual Studio** . Wybierz pozycję **puste rozwiązanie** i nazwij rozwiązanie *WebAPIMigration* . Kliknij przycisk **OK** .
+* Przejdź do pozycji **plik**  >  **Nowy**  >  **projekt**  >  **Inne typy projektów**  >  **Visual Studio**. Wybierz pozycję **puste rozwiązanie** i nazwij rozwiązanie *WebAPIMigration*. Kliknij przycisk **OK** .
 * Dodaj istniejący projekt *ProductsApp* do rozwiązania.
-* Dodaj nowy projekt **aplikacji sieci Web ASP.NET Core** do rozwiązania. Wybierz platformę docelową **platformy .NET Core** z listy rozwijanej i wybierz szablon projektu **interfejsu API** . Nazwij projekt *ProductsCore* , a następnie kliknij przycisk **OK** .
+* Dodaj nowy projekt **aplikacji sieci Web ASP.NET Core** do rozwiązania. Wybierz platformę docelową **platformy .NET Core** z listy rozwijanej i wybierz szablon projektu **interfejsu API** . Nazwij projekt *ProductsCore*, a następnie kliknij przycisk **OK** .
 
 Rozwiązanie zawiera teraz dwa projekty. W poniższych sekcjach opisano Migrowanie zawartości projektu *ProductsApp* do projektu *ProductsCore* .
 
@@ -196,7 +196,7 @@ ASP.NET Core nie używa:
 
 Klasa `Startup`:
 
-* Zastępuje *Global. asax* .
+* Zastępuje *Global. asax*.
 * Obsługuje wszystkie zadania uruchamiania aplikacji.
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.

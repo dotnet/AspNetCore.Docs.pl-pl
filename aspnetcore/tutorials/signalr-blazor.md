@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 50e5f2d5b1f9d0bf229bc57e6a1f599f9574b27c
-ms.sourcegitcommit: 1436bd4d70937d6ec3140da56d96caab33c4320b
+ms.openlocfilehash: e9bb79eb5bd8f56fe8014981de76e210eb35c2de
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2021
-ms.locfileid: "102395230"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589533"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor"></a>Użyj ASP.NET Core SignalR z Blazor
 
@@ -40,7 +40,7 @@ Ten samouczek uczy się podstaw tworzenia aplikacji w czasie rzeczywistym przy u
 
 Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/signalr-blazor/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 

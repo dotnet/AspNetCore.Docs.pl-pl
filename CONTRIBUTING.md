@@ -12,7 +12,7 @@ Potrzebna jest podstawowa znajomość usługi [git i GitHub.com](https://guides.
 
 * Otwórz [problem](https://github.com/dotnet/AspNetCore.Docs/issues/new) z opisem tego, co chcesz zrobić, na przykład zmieniając istniejący artykuł lub Utwórz nowy. Często żądamy konspektu dla nowej sugestii tematu. Zaczekaj na zatwierdzenie przez zespół przed zainwestowaniem dużo czasu.
 * Rozwidlenie repozytorium [ASPNET/docs](https://github.com/dotnet/AspNetCore.Docs/) i utworzenie gałęzi dla zmian.
-* Prześlij żądanie ściągnięcia do wzorca ze zmianami.
+* Prześlij żądanie ściągnięcia do *głównej* gałęzi ze zmianami.
 * Jeśli do żądania ściągnięcia jest przypisana etykieta "CLA-Required", [Wypełnij umowę licencyjną dotyczącą udziału (CLA)](https://cla.dotnetfoundation.org/).
 * Odpowiedź na opinię żądania ściągnięcia.
 
@@ -24,11 +24,11 @@ Jeśli używasz Visual Studio Code do współtworzenia dokumentacji ASP.NET, mo�
 
 ## <a name="markdown-syntax"></a>Składnia promocji
 
-Artykuły są zapisywane w [DocFxej promocji](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), która jest nadzbiorem promocji z [obsługą usługi GitHub (GFM)](https://guides.github.com/features/mastering-markdown/). Aby zapoznać się z przykładami składni DFM dla funkcji interfejsu użytkownika często używanych w dokumentacji ASP.NET, zobacz artykuł [Metadata and promocji — szablon](https://github.com/dotnet/docs/blob/master/styleguide/template.md) w przewodniku po stylu repozytorium .NET docs. 
+Artykuły są zapisywane w [DocFxej promocji](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), która jest nadzbiorem promocji z [obsługą usługi GitHub (GFM)](https://guides.github.com/features/mastering-markdown/). Aby zapoznać się z przykładami składni DFM dla funkcji interfejsu użytkownika często używanych w dokumentacji ASP.NET, zobacz artykuł [Metadata and promocji — szablon](https://github.com/dotnet/docs/blob/main/styleguide/template.md) w przewodniku po stylu repozytorium .NET docs. 
 
 ## <a name="folder-structure-conventions"></a>Konwencje struktury folderów
 
-Dla każdego pliku z promocji, może istnieć folder obrazów i folderu dla przykładowego kodu. Jeśli artykuł ma [podstawowe znaczenie/konfiguracja/index. MD](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/fundamentals/configuration/index.md), obrazy znajdują się w tematach [podstawowe/konfiguracja/indeks/ \_ statyczny](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static) , a pliki projektu aplikacji przykładowych znajdują się w temacie [podstawy/konfiguracja/indeks/przykład](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample). Obraz w pliku *Fundamentals/Configuration/index. MD* jest renderowany przy użyciu następującej promocji:
+Dla każdego pliku z promocji, może istnieć folder obrazów i folderu dla przykładowego kodu. Jeśli artykuł ma [podstawowe znaczenie/konfiguracja/index. MD](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/fundamentals/configuration/index.md), obrazy znajdują się w tematach [podstawowe/konfiguracja/indeks/ \_ statyczny](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/configuration/index/_static) , a pliki projektu aplikacji przykładowych znajdują się w temacie [podstawy/konfiguracja/indeks/przykład](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/configuration/index/sample). Obraz w pliku *Fundamentals/Configuration/index. MD* jest renderowany przy użyciu następującej promocji:
 
 ```md
 ![description of image for alt attribute](configuration/index/_static/imagename.png)
@@ -149,7 +149,7 @@ DocFX wymaga:
 
 ## <a name="voice-and-tone"></a>Głos i dźwięk
 
-Naszym celem jest pisanie dokumentacji, która jest łatwa do zrozumienia przez szerszego grona odbiorców. W tym celu wprowadziliśmy wskazówki dotyczące pisania stylu, który poprosił naszych współautorów. Aby uzyskać więcej informacji, zobacz [wytyczne dotyczące głosu i tonu](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) w repozytorium .NET.
+Naszym celem jest pisanie dokumentacji, która jest łatwa do zrozumienia przez szerszego grona odbiorców. W tym celu wprowadziliśmy wskazówki dotyczące pisania stylu, który poprosił naszych współautorów. Aby uzyskać więcej informacji, zobacz [wytyczne dotyczące głosu i tonu](https://github.com/dotnet/docs/blob/main/styleguide/voice-tone.md) w repozytorium .NET.
 
 ## <a name="microsoft-writing-style-guide"></a>Przewodnik redakcyjno-stylistyczny firmy Microsoft
 
@@ -157,4 +157,4 @@ Naszym celem jest pisanie dokumentacji, która jest łatwa do zrozumienia przez 
 
 ## <a name="redirects"></a>Przekierowuje
 
-W przypadku usunięcia artykułu zmień jego nazwę lub przenieś go do innego folderu, a następnie utwórz przekierowanie, aby osoby, które zakładkęą ten artykuł, nie otrzymają błędu *404* . Dodaj przekierowania do [głównego pliku przekierowania](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json).
+W przypadku usunięcia artykułu zmień jego nazwę lub przenieś go do innego folderu, a następnie utwórz przekierowanie, aby osoby, które zakładkęą ten artykuł, nie otrzymają błędu *404* . Dodaj przekierowania do [głównego pliku przekierowania](https://github.com/dotnet/AspNetCore.Docs/blob/main/.openpublishing.redirection.json).

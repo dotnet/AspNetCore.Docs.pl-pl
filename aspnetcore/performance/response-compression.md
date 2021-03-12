@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 239f9e84d068bfd75c84ccf16f0e74cdbbbebfb2
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056975"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586322"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Kompresja odpowiedzi w ASP.NET Core
 
@@ -32,7 +32,7 @@ ms.locfileid: "93056975"
 
 Przepustowość sieci jest ograniczonym zasobem. Zmniejszenie rozmiaru odpowiedzi zwykle zwiększa czas odpowiedzi aplikacji, często znacząco. Jednym ze sposobów zmniejszenia rozmiaru ładunku jest kompresowanie odpowiedzi aplikacji.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Kiedy używać oprogramowania pośredniczącego kompresji odpowiedzi
 
@@ -74,7 +74,7 @@ Algorytmy kompresji są uzależnione od kompromisu między szybkością kompresj
 
 W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforowania i otrzymywania zawartości skompresowanej.
 
-| Header             | Rola |
+| Nagłówek             | Rola |
 | ------------------ | ---- |
 | `Accept-Encoding`  | Wysyłany z klienta do serwera w celu wskazania schematów kodowania zawartości akceptowalnych dla klienta. |
 | `Content-Encoding` | Wysyłany z serwera do klienta, aby wskazać kodowanie zawartości ładunku. |
@@ -83,7 +83,7 @@ W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforow
 | `Content-Type`     | Określa typ MIME zawartości. Należy określić dla każdej odpowiedzi `Content-Type` . Oprogramowanie pośredniczące sprawdza tę wartość, aby określić, czy odpowiedź powinna być skompresowana. Oprogramowanie pośredniczące określa zestaw [domyślnych typów MIME](#mime-types) , które mogą być kodowane, ale można zastąpić lub dodać typy MIME. |
 | `Vary`             | W przypadku wysłania przez serwer z wartością `Accept-Encoding` do klientów i serwerów proxy `Vary` nagłówek wskazuje na klienta lub serwer proxy, który powinien buforować (Zróżnicuj) odpowiedzi na podstawie wartości `Accept-Encoding` nagłówka żądania. Wynik zwrócenia zawartości z `Vary: Accept-Encoding` nagłówkiem polega na tym, że skompresowane i nieskompresowane odpowiedzi są buforowane osobno. |
 
-Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
+Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
 
 * Kompresja odpowiedzi aplikacji przy użyciu strumienia gzip i niestandardowych dostawców kompresji.
 * Jak dodać typ MIME do domyślnej listy typów MIME do kompresji.
@@ -92,7 +92,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Oprogramowanie pośredniczące kompresji odpowiedzi jest dostarczane przez pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) , który jest niejawnie uwzględniony w aplikacjach ASP.NET Core.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -234,7 +234,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -278,7 +278,7 @@ Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler
 
 Przepustowość sieci jest ograniczonym zasobem. Zmniejszenie rozmiaru odpowiedzi zwykle zwiększa czas odpowiedzi aplikacji, często znacząco. Jednym ze sposobów zmniejszenia rozmiaru ładunku jest kompresowanie odpowiedzi aplikacji.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Kiedy używać oprogramowania pośredniczącego kompresji odpowiedzi
 
@@ -320,7 +320,7 @@ Algorytmy kompresji są uzależnione od kompromisu między szybkością kompresj
 
 W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforowania i otrzymywania zawartości skompresowanej.
 
-| Header             | Rola |
+| Nagłówek             | Rola |
 | ------------------ | ---- |
 | `Accept-Encoding`  | Wysyłany z klienta do serwera w celu wskazania schematów kodowania zawartości akceptowalnych dla klienta. |
 | `Content-Encoding` | Wysyłany z serwera do klienta, aby wskazać kodowanie zawartości ładunku. |
@@ -329,7 +329,7 @@ W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforow
 | `Content-Type`     | Określa typ MIME zawartości. Należy określić dla każdej odpowiedzi `Content-Type` . Oprogramowanie pośredniczące sprawdza tę wartość, aby określić, czy odpowiedź powinna być skompresowana. Oprogramowanie pośredniczące określa zestaw [domyślnych typów MIME](#mime-types) , które mogą być kodowane, ale można zastąpić lub dodać typy MIME. |
 | `Vary`             | W przypadku wysłania przez serwer z wartością `Accept-Encoding` do klientów i serwerów proxy `Vary` nagłówek wskazuje na klienta lub serwer proxy, który powinien buforować (Zróżnicuj) odpowiedzi na podstawie wartości `Accept-Encoding` nagłówka żądania. Wynik zwrócenia zawartości z `Vary: Accept-Encoding` nagłówkiem polega na tym, że skompresowane i nieskompresowane odpowiedzi są buforowane osobno. |
 
-Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
+Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
 
 * Kompresja odpowiedzi aplikacji przy użyciu strumienia gzip i niestandardowych dostawców kompresji.
 * Jak dodać typ MIME do domyślnej listy typów MIME do kompresji.
@@ -338,7 +338,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -479,7 +479,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -523,7 +523,7 @@ Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler
 
 Przepustowość sieci jest ograniczonym zasobem. Zmniejszenie rozmiaru odpowiedzi zwykle zwiększa czas odpowiedzi aplikacji, często znacząco. Jednym ze sposobów zmniejszenia rozmiaru ładunku jest kompresowanie odpowiedzi aplikacji.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>Kiedy używać oprogramowania pośredniczącego kompresji odpowiedzi
 
@@ -565,7 +565,7 @@ Algorytmy kompresji są uzależnione od kompromisu między szybkością kompresj
 
 W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforowania i otrzymywania zawartości skompresowanej.
 
-| Header             | Rola |
+| Nagłówek             | Rola |
 | ------------------ | ---- |
 | `Accept-Encoding`  | Wysyłany z klienta do serwera w celu wskazania schematów kodowania zawartości akceptowalnych dla klienta. |
 | `Content-Encoding` | Wysyłany z serwera do klienta, aby wskazać kodowanie zawartości ładunku. |
@@ -574,7 +574,7 @@ W poniższej tabeli opisano nagłówki dotyczące żądania, wysyłania, buforow
 | `Content-Type`     | Określa typ MIME zawartości. Należy określić dla każdej odpowiedzi `Content-Type` . Oprogramowanie pośredniczące sprawdza tę wartość, aby określić, czy odpowiedź powinna być skompresowana. Oprogramowanie pośredniczące określa zestaw [domyślnych typów MIME](#mime-types) , które mogą być kodowane, ale można zastąpić lub dodać typy MIME. |
 | `Vary`             | W przypadku wysłania przez serwer z wartością `Accept-Encoding` do klientów i serwerów proxy `Vary` nagłówek wskazuje na klienta lub serwer proxy, który powinien buforować (Zróżnicuj) odpowiedzi na podstawie wartości `Accept-Encoding` nagłówka żądania. Wynik zwrócenia zawartości z `Vary: Accept-Encoding` nagłówkiem polega na tym, że skompresowane i nieskompresowane odpowiedzi są buforowane osobno. |
 
-Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
+Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/response-compression/samples). Przykład ilustruje:
 
 * Kompresja odpowiedzi aplikacji przy użyciu strumienia gzip i niestandardowych dostawców kompresji.
 * Jak dodać typ MIME do domyślnej listy typów MIME do kompresji.
@@ -583,7 +583,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i [dostawcy kompresji gzip](#gzip-compression-provider):
 
@@ -684,7 +684,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 

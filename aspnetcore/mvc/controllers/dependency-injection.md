@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 1282cd984584be423fba755e64e5d2f1afd2af89
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3654e008733c57b4cd4cd34a52b747af2258be1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060615"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589078"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Wstrzykiwanie zależności do kontrolerów w ASP.NET Core
 
@@ -32,7 +32,7 @@ Autorzy [Shadi Namrouti](https://github.com/shadinamrouti), [Rick Anderson](http
 
 ASP.NET Core kontrolery MVC żądają zależności jawnie za pośrednictwem konstruktorów. ASP.NET Core ma wbudowaną obsługę [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Dzięki temu aplikacje są łatwiejsze do testowania i konserwowania.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/dependency-injection/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="constructor-injection"></a>Iniekcja konstruktora
 
@@ -66,7 +66,7 @@ Uruchom aplikację i zostanie wyświetlony komunikat z uwzględnieniem czasu.
 
 Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy wprowadzać bezpośrednio <xref:Microsoft.Extensions.Configuration.IConfiguration> do kontrolera.
 
-Utwórz klasę, która reprezentuje opcje. Przykład:
+Utwórz klasę, która reprezentuje opcje. Na przykład:
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -96,7 +96,7 @@ Autorzy [Shadi Namrouti](https://github.com/shadinamrouti), [Rick Anderson](http
 
 ASP.NET Core kontrolery MVC żądają zależności jawnie za pośrednictwem konstruktorów. ASP.NET Core ma wbudowaną obsługę [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Dzięki temu aplikacje są łatwiejsze do testowania i konserwowania.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/dependency-injection/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="constructor-injection"></a>Iniekcja konstruktora
 
@@ -130,7 +130,7 @@ Uruchom aplikację i zostanie wyświetlony komunikat z uwzględnieniem czasu.
 
 Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy wprowadzać bezpośrednio <xref:Microsoft.Extensions.Configuration.IConfiguration> do kontrolera.
 
-Utwórz klasę, która reprezentuje opcje. Przykład:
+Utwórz klasę, która reprezentuje opcje. Na przykład:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: a4e1fd780947cfa5f09fb1e03964595fa09f0f18
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 2d921a0c72fb7c03cd88966077e2d33e4b19ffa1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061421"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585919"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity w projekcie ASP.NET Core
+# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity w projekcie ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -36,7 +36,7 @@ W tym artykule pokazano, jak:
 
 Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, ale instrukcje są podobne dla aplikacji sieci web ASP.NET Core MVC.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/add-user-data) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -52,13 +52,13 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 
 ::: moniker-end
 
-## <a name="create-a-no-locrazor-web-app"></a>Tworzenie Razor aplikacji sieci Web
+## <a name="create-a-razor-web-app"></a>Tworzenie Razor aplikacji sieci Web
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy**  >  **projekt** . Nadaj projektowi nazwę **WebApp1** , jeśli chcesz dopasować ją do przestrzeni nazw [przykładowego kodu pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) .
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy**  >  **projekt**. Nadaj projektowi nazwę **WebApp1** , jeśli chcesz dopasować ją do przestrzeni nazw [przykładowego kodu pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) .
 * Wybierz pozycję **ASP.NET Core aplikację sieci Web** > **OK**
 * Na liście rozwijanej wybierz pozycję **ASP.NET Core 3,0**
 * Wybierz **aplikację sieci Web** > **OK**
@@ -68,7 +68,7 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 
 ::: moniker range="< aspnetcore-3.0"
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy**  >  **projekt** . Nadaj projektowi nazwę **WebApp1** , jeśli chcesz dopasować ją do przestrzeni nazw [przykładowego kodu pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) .
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy**  >  **projekt**. Nadaj projektowi nazwę **WebApp1** , jeśli chcesz dopasować ją do przestrzeni nazw [przykładowego kodu pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) .
 * Wybierz pozycję **ASP.NET Core aplikację sieci Web** > **OK**
 * Na liście rozwijanej wybierz pozycję **ASP.NET Core 2,2**
 * Wybierz **aplikację sieci Web** > **OK**
@@ -85,20 +85,20 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-no-locidentity-scaffolder"></a>Uruchamianie Identity szkieletu
+## <a name="run-the-identity-scaffolder"></a>Uruchamianie Identity szkieletu
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt > **Dodaj**  >  **nowy element szkieletowy** .
-* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję **Identity**  >  **Dodaj** .
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt > **Dodaj**  >  **nowy element szkieletowy**.
+* W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję **Identity**  >  **Dodaj**.
 * W oknie **dialogowym Identity Dodawanie** następujące opcje:
   * Wybierz istniejący plik układu  *~/Pages/Shared/_Layout. cshtml*
   * Wybierz następujące pliki do przesłonięcia:
     * **Konto/rejestr**
     * **Konto/Zarządzanie/indeks**
-  * Wybierz **+** przycisk, aby utworzyć nową **klasę kontekstu danych** . Zaakceptuj typ ( **WebApp1. models. WebApp1Context** , jeśli projekt jest nazwany **WebApp1** ).
-  * Wybierz **+** przycisk, aby utworzyć nową **klasę użytkownika** . Zaakceptuj typ ( **WebApp1User** , jeśli projekt ma nazwę **WebApp1** ) > **Dodaj** .
-* Wybierz pozycję **Dodaj** .
+  * Wybierz **+** przycisk, aby utworzyć nową **klasę kontekstu danych**. Zaakceptuj typ (**WebApp1. models. WebApp1Context** , jeśli projekt jest nazwany **WebApp1**).
+  * Wybierz **+** przycisk, aby utworzyć nową **klasę użytkownika**. Zaakceptuj typ (**WebApp1User** , jeśli projekt ma nazwę **WebApp1**) > **Dodaj**.
+* Wybierz pozycję **Dodaj**.
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
@@ -141,9 +141,9 @@ Postępuj zgodnie z instrukcjami w sekcji [migracje, UseAuthentication i układ]
   * Wybierz przycisk **Pobierz** i zbadaj *PersonalData.js* pliku.
   * Przetestuj przycisk **Usuń** , który spowoduje usunięcie zalogowanego użytkownika.
 
-## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>Dodawanie niestandardowych danych użytkownika do Identity bazy danych
+## <a name="add-custom-user-data-to-the-identity-db"></a>Dodawanie niestandardowych danych użytkownika do Identity bazy danych
 
-Zaktualizuj `IdentityUser` klasę pochodną o właściwościach niestandardowych. Jeśli nazwa projektu WebApp1, plik ma nazwę *obszary/ Identity /Data/WebApp1User.cs* . Zaktualizuj plik przy użyciu następującego kodu:
+Zaktualizuj `IdentityUser` klasę pochodną o właściwościach niestandardowych. Jeśli nazwa projektu WebApp1, plik ma nazwę *obszary/ Identity /Data/WebApp1User.cs*. Zaktualizuj plik przy użyciu następującego kodu:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -241,7 +241,7 @@ Przetestuj aplikację:
 * Wyświetlanie niestandardowych danych użytkownika na `/Identity/Account/Manage` stronie.
 * Pobierz i Przejrzyj dane osobowe użytkowników ze `/Identity/Account/Manage/PersonalData` strony.
 
-## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Dodawanie oświadczeń do Identity korzystania z IUserClaimsPrincipalFactory<ApplicationUser>
+## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Dodawanie oświadczeń do Identity korzystania z IUserClaimsPrincipalFactory<ApplicationUser>
 
 > [!NOTE]
 > Ta sekcja nie jest rozszerzeniem poprzedniego samouczka. Aby zastosować następujące kroki do aplikacji skompilowanej przy użyciu samouczka, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/18797)w usłudze GitHub.

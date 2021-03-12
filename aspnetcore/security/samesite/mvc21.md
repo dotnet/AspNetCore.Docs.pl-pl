@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 8f819d283e136a63ad9f82d6432a93866210b36b
-ms.sourcegitcommit: a1db01b4d3bd8c57d7a9c94ce122a6db68002d66
+ms.openlocfilehash: a7b7ce0d0fff2953097f29a2b6d2c5a539cac3a5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102110108"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586530"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>Przykład ASP.NET Core SameSite 2,1 MVC cookie
 
@@ -154,7 +154,7 @@ Funkcja pomocnika `CheckSameSite(HttpContext, CookieOptions)` :
 
 * Jest wywoływana, gdy cookie s jest dołączany do żądania lub usuwany z żądania.
 * Sprawdza, czy `SameSite` Właściwość jest ustawiona na `None` .
-* Jeśli `SameSite` jest ustawiona na `None` , a bieżący agent użytkownika jest znany jako nieobsługujący wartości atrybutu none. Sprawdzanie jest wykonywane przy użyciu klasy [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) :
+* Jeśli `SameSite` jest ustawiona na `None` , a bieżący agent użytkownika jest znany jako nieobsługujący wartości atrybutu none. Sprawdzanie jest wykonywane przy użyciu klasy [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) :
   * Ustawia, `SameSite` aby nie emitować wartości przez ustawienie właściwości na `(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>.NET Framework określania wartości docelowej

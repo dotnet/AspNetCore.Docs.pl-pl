@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 2ac7a130d223b21330d0a797c1d460fc0cf467d7
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 18b2c6ce27132844402f88b2817a07e3588d81c1
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901213"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586270"
 ---
 # <a name="continuous-integration-and-deployment"></a>Ciągła integracja i ciągłe wdrażanie
 
@@ -65,7 +65,7 @@ W tej sekcji wykonasz następujące zadania:
 1. Opublikuj lokalne repozytorium Git w nowo utworzonym repozytorium GitHub. Uruchom następujące polecenie:
 
     ```console
-    git push -u origin master
+    git push -u origin main
     ```
 
 1. Otwórz okno przeglądarki i przejdź do `https://github.com/<GitHub_username>/simple-feed-reader/` . Sprawdź, czy kod jest wyświetlany w repozytorium GitHub.
@@ -111,14 +111,14 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Wybierz źródło — GitHub](media/cicd/vsts-select-source.png)
 
-1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Przykład:
+1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Na przykład:
 
     ![Nazwa połączenia GitHub](media/cicd/vsts-repo-authz.png)
 
 1. Jeśli na koncie usługi GitHub jest włączone uwierzytelnianie dwuskładnikowe, wymagany jest osobisty token dostępu. W takim przypadku kliknij link **Autoryzuj przy użyciu osobistego tokenu dostępu usługi GitHub** . Zobacz [oficjalne instrukcje tworzenia tokenu dostępu osobistego usługi GitHub](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) , aby uzyskać pomoc. Wymagany jest tylko zakres uprawnień do *repozytorium* . W przeciwnym razie kliknij przycisk **Autoryzuj przy użyciu protokołu OAuth** .
 1. Po wyświetleniu monitu zaloguj się do konta usługi GitHub. Następnie wybierz pozycję Autoryzuj, aby udzielić dostępu do Twojej organizacji usługi Azure DevOps. Jeśli to się powiedzie, zostanie utworzony nowy punkt końcowy usługi.
 1. Kliknij przycisk wielokropka obok przycisku **repozytorium** . Wybierz z listy *<GitHub_username>repozytorium/Simple-Feed-Reader* . Kliknij przycisk **Wybierz** .
-1. Wybierz gałąź domyślną (*Master*) z **gałęzi domyślnej dla listy rozwijanej ręczne i zaplanowane kompilacje** . Kliknij przycisk **Kontynuuj**. Zostanie wyświetlona strona Wybieranie szablonu.
+1. Wybierz gałąź domyślną (*główną*) z **gałęzi domyślnej dla listy rozwijanej ręczne i zaplanowane kompilacje** . Kliknij przycisk **Kontynuuj**. Zostanie wyświetlona strona Wybieranie szablonu.
 
 ### <a name="create-the-build-definition"></a>Tworzenie definicji kompilacji
 
@@ -128,11 +128,11 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
 1. Zostaną wyświetlone wyniki wyszukiwania szablonu. Umieść kursor nad szablonem **ASP.NET Core** i kliknij przycisk **Zastosuj** .
 1. Zostanie wyświetlona karta **zadania** w definicji kompilacji. Kliknij kartę **wyzwalacze** .
-1. Zaznacz pole wyboru **Włącz ciągłą integrację** . W sekcji **filtry gałęzi** upewnij się, że na liście rozwijanej **typ** jest ustawiona wartość *include*. Ustaw listę rozwijaną **Specyfikacja gałęzi** z *główną*.
+1. Zaznacz pole wyboru **Włącz ciągłą integrację** . W sekcji **filtry gałęzi** upewnij się, że na liście rozwijanej **typ** jest ustawiona wartość *include*. Ustaw listę rozwijaną **Specyfikacja gałęzi** na *Main*.
 
     ![Włącz ustawienia ciągłej integracji](media/cicd/vsts-enable-ci.png)
 
-    Te ustawienia powodują, że kompilacja jest wyzwalana, gdy jakakolwiek zmiana jest wypychana do domyślnej gałęzi (*Master*) repozytorium GitHub. Ciągła integracja jest testowana w usłudze [GitHub i automatycznie wdrażana](#commit-changes-to-github-and-automatically-deploy-to-azure) w usłudze Azure.
+    Te ustawienia powodują, że kompilacja jest wyzwalana, gdy jakakolwiek zmiana zostanie wypchnięte do domyślnej gałęzi (*głównej*) repozytorium GitHub. Ciągła integracja jest testowana w usłudze [GitHub i automatycznie wdrażana](#commit-changes-to-github-and-automatically-deploy-to-azure) w usłudze Azure.
 
 1. Kliknij przycisk **zapisz & kolejkę** i wybierz opcję **Zapisz** :
 
@@ -176,7 +176,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     Po włączeniu tej opcji wdrożenie odbywa się za każdym razem, gdy dostępna jest nowa kompilacja.
 1. Po prawej stronie zostanie wyświetlony panel **wyzwalacz ciągłego wdrażania** . Kliknij przycisk Przełącz, aby włączyć tę funkcję. Nie jest konieczne włączenie **wyzwalacza żądania ściągnięcia**.
-1. Kliknij przycisk **Dodaj** listę rozwijaną w sekcji **filtry gałęzi kompilacji** . Wybierz opcję **domyślne rozgałęzienie definicji kompilacji** . Ten filtr powoduje, że wersja jest wyzwalana tylko dla kompilacji z domyślnej gałęzi repozytorium GitHub (*Master*).
+1. Kliknij przycisk **Dodaj** listę rozwijaną w sekcji **filtry gałęzi kompilacji** . Wybierz opcję **domyślne rozgałęzienie definicji kompilacji** . Ten filtr powoduje, że wersja jest wyzwalana tylko dla kompilacji z domyślnej gałęzi repozytorium GitHub (*głównej*).
 1. Kliknij przycisk **Zapisz**. Kliknij przycisk **OK** w oknie dialogowym **zapisuje** modalne okno dialogowe.
 1. Kliknij pole **środowisko 1** . Panel **środowiska** pojawia się po prawej stronie. Zmień tekst *środowiska 1* w polu tekstowym **Nazwa środowiska** na środowisko *produkcyjne*.
 
@@ -211,13 +211,13 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
     git commit -a -m "upgraded to V4"
     ```
 
-1. Wypchnij zmiany w gałęzi domyślnej (*głównej*) do *źródła* zdalnego w repozytorium GitHub. W poniższym poleceniu Zastąp symbol zastępczy `{BRANCH}` domyślną gałęzią (Użyj `master` ):
+1. Wypchnij zmiany w gałęzi domyślnej (*głównej*) do *źródła* zdalnego w repozytorium GitHub. W poniższym poleceniu Zastąp symbol zastępczy `{BRANCH}` domyślną gałęzią (Użyj `main` ):
 
     ```console
     git push origin {BRANCH}
     ```
 
-    Zatwierdzenie pojawia się w domyślnej gałęzi repozytorium GitHub (*Master*):
+    Zatwierdzenie pojawia się w domyślnej gałęzi repozytorium GitHub (*głównej*):
 
     ![Zatwierdzenie GitHub w gałęzi domyślnej (główny)](media/cicd/github-commit.png)
 

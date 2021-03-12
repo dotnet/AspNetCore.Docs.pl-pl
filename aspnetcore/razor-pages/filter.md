@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: a6d25c1b88e09560c1aad9aefd9148f7fe293909
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 178e6348d2d50dae34feea6a0ed261de01037136
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93056832"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586140"
 ---
-# <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>Metody filtrowania dla Razor stron w ASP.NET Core
+# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Metody filtrowania dla Razor stron w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -44,7 +44,7 @@ Razor Filtry stron:
 
 Podczas gdy konstruktory stron i oprogramowanie pośredniczące umożliwiają wykonywanie kodu niestandardowego przed wykonaniem metody obsługi, tylko Razor filtry strony umożliwiają dostęp do <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> i strony. Oprogramowanie pośredniczące ma dostęp do programu `HttpContext` , ale nie do "kontekstu strony". Filtry mają <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> parametr pochodny, który zapewnia dostęp do `HttpContext` . Oto przykład dla filtru strony: [implementuje atrybut filtru](#ifa) , który dodaje nagłówek do odpowiedzi, co nie można wykonać za pomocą konstruktorów lub oprogramowania pośredniczącego. Dostęp do kontekstu strony, który obejmuje dostęp do wystąpień strony i jej modelu, jest dostępny tylko w przypadku wykonywania filtrów, programów obsługi lub treści Razor strony.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/filter/3.1sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Razor Filtry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
@@ -61,7 +61,7 @@ Razor Filtry stron oferują następujące metody, które mogą być stosowane gl
 
 Implementowanie synchronicznej lub asynchronicznej wersji interfejsu filtru **, a** **nie** obu. Struktura sprawdza najpierw, czy filtr implementuje interfejs asynchroniczny, a jeśli tak, wywołuje to. Jeśli nie, wywołuje metody interfejsu synchronicznego. W przypadku implementacji obu interfejsów są wywoływane tylko metody asynchroniczne. Ta sama reguła dotyczy zastąpień na stronach, implementuje synchroniczną lub asynchroniczną wersję przesłonięcia, a nie obu.
 
-## <a name="implement-no-locrazor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
+## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
 Poniższy kod implementuje `IAsyncPageFilter` :
 
@@ -85,7 +85,7 @@ Poniższy kod włącza `SamplePageFilter` :
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
-## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
+## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
 
 Poniższy kod przesłania asynchroniczne Razor filtry stron:
 
@@ -135,7 +135,7 @@ Razor Filtry stron:
 
 Kod można uruchomić przed wykonaniem metody obsługi przy użyciu konstruktora stron lub oprogramowania pośredniczącego, ale tylko Razor filtry strony mają dostęp do elementu [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext). Filtry mają parametr pochodny [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) , który zapewnia dostęp do `HttpContext` . Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/filter/sample/PageFilter) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Razor Filtry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
@@ -153,7 +153,7 @@ Razor Filtry stron oferują następujące metody, które mogą być stosowane gl
 > [!NOTE]
 > Implementowanie synchronicznej lub asynchronicznej wersji interfejsu filtru **, a nie** obu. Struktura sprawdza najpierw, czy filtr implementuje interfejs asynchroniczny, a jeśli tak, wywołuje to. Jeśli nie, wywołuje metody interfejsu synchronicznego. W przypadku implementacji obu interfejsów są wywoływane tylko metody asynchroniczne. Ta sama reguła dotyczy zastąpień na stronach, implementuje synchroniczną lub asynchroniczną wersję przesłonięcia, a nie obu.
 
-## <a name="implement-no-locrazor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
+## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
 Poniższy kod implementuje `IAsyncPageFilter` :
 
@@ -181,7 +181,7 @@ Poniższy kod włącza `SamplePageFilter` :
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
-## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
+## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
 
 Poniższy kod przesłania synchroniczne Razor filtry stron:
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 1027887738740d50c30e24e800c0402b1ce4ad02
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: aeff3fd06719095660d1b3bb794ef74a8549f761
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854668"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102585763"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>Testowanie interfejsów API sieci Web za pomocą HttpRepl
 
@@ -39,14 +39,14 @@ Pętla HTTP Read-eval-Print (REPL) to:
 Obsługiwane są następujące [czasowniki http](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) :
 
 * [USUNIĘTY](#test-http-delete-requests)
-* [GET](#test-http-get-requests)
+* [Pobierz](#test-http-get-requests)
 * [MTP](#test-http-head-requests)
 * [Opcje](#test-http-options-requests)
 * [WYSŁANA](#test-http-patch-requests)
 * [POUBOJOWEGO](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
-Aby wykonać te czynności, [Wyświetl lub Pobierz przykładowy ASP.NET Core internetowy interfejs API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
+Aby wykonać te czynności, [Wyświetl lub Pobierz przykładowy ASP.NET Core internetowy interfejs API](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/http-repl/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -145,7 +145,7 @@ Połącz się z interfejsem API sieci Web, uruchamiając następujące polecenie
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Przykład:
+`<ROOT URI>` jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Na przykład:
 
 ```console
 httprepl https://localhost:5001
@@ -157,7 +157,7 @@ Alternatywnie Uruchom następujące polecenie w dowolnym momencie, gdy HttpRepl 
 connect <ROOT URI>
 ```
 
-Przykład:
+Na przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001
@@ -171,7 +171,7 @@ Powyższe polecenie Connect podejmie próbę automatycznego znalezienia opisu Op
 connect <ROOT URI> --openapi <OPENAPI DESCRIPTION ADDRESS>
 ```
 
-Przykład:
+Na przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --openapi /swagger/v1/swagger.json
@@ -185,7 +185,7 @@ Określenie `--verbose` opcji za pomocą `connect` polecenia spowoduje wygenerow
 connect <ROOT URI> --verbose
 ```
 
-Przykład:
+Na przykład:
 
 ```console
 (Disconnected)> connect https://localhost:5001 --verbose
@@ -230,7 +230,7 @@ https://localhost:5001/fruits> ls
 https://localhost:5001/fruits>
 ```
 
-Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Przykład:
+Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Na przykład:
 
 ```console
 https://localhost:5001/> ui
@@ -274,7 +274,7 @@ Plik *. httpreplprefs* jest ładowany podczas uruchamiania i nie jest monitorowa
 
 ### <a name="view-the-settings"></a>Wyświetl ustawienia
 
-Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Przykład:
+Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Na przykład:
 
 ```console
 https://localhost:5001/> pref get
@@ -312,7 +312,7 @@ Jeśli określone klucze kolorów nie są ustawione, brane są więcej kluczy og
 
 ### <a name="set-indentation-size"></a>Ustaw rozmiar wcięcia
 
-Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Przykład:
+Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Na przykład:
 
 ```json
 [
@@ -406,7 +406,7 @@ Domyślnie HttpRepl ma zestaw ścieżek względnych, których używa, aby znale�
 - *openapi.jsna*
 - */openapi.jsna*
 
-Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
+Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -414,13 +414,13 @@ pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 
 Zamiast całkowicie zastąpić listę domyślną, można również zmodyfikować listę, dodając lub usuwając ścieżki.
 
-Aby dodać jedną lub więcej ścieżek wyszukiwania do listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
+Aby dodać jedną lub więcej ścieżek wyszukiwania do listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
 
 ```console
 pref set swagger.addToSearchPaths "openapi/v2/openapi.json|openapi/v3/openapi.json"
 ```
 
-Aby usunąć jedną lub więcej ścieżek wyszukiwania z listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
+Aby usunąć jedną lub więcej ścieżek wyszukiwania z listy domyślnej, ustaw `swagger.addToSearchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
 
 ```console
 pref set swagger.removeFromSearchPaths "swagger.json|/swagger.json"
@@ -540,7 +540,7 @@ Aby wydać żądanie HTTP POST:
     https://localhost:5001/people> post -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
 
     ```json
     {
@@ -636,7 +636,7 @@ Aby wydać żądanie HTTP PUT:
     https://localhost:5001/fruits> put 2 -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
 
     ```json
     {
@@ -842,7 +842,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących metod:
 
-* Ustaw wartość inline z żądaniem HTTP. Przykład:
+* Ustaw wartość inline z żądaniem HTTP. Na przykład:
 
     ```console
     https://localhost:5001/people> post -h Content-Type=application/json
@@ -850,13 +850,13 @@ Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących 
     
     W przypadku wcześniejszego podejścia każdy unikatowy nagłówek żądania HTTP wymaga własnej `-h` opcji.
 
-* Ustaw przed wysłaniem żądania HTTP. Przykład:
+* Ustaw przed wysłaniem żądania HTTP. Na przykład:
 
     ```console
     https://localhost:5001/people> set header Content-Type application/json
     ```
     
-    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Przykład:
+    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Na przykład:
     
     ```console
     https://localhost:5001/people> set header Content-Type
@@ -987,14 +987,14 @@ Domyślnie wyświetlanie wysyłanego żądania HTTP jest pomijane. Istnieje moż
 
 ### <a name="enable-request-display"></a>Włącz wyświetlanie żądań
 
-Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Przykład:
+Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Na przykład:
 
 ```console
 https://localhost:5001/people> echo on
 Request echoing is on
 ```
 
-Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Przykład:
+Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Na przykład:
 
 ```console
 https://localhost:5001/people> post
@@ -1032,7 +1032,7 @@ https://localhost:5001/people>
 
 ### <a name="disable-request-display"></a>Wyłącz wyświetlanie żądań
 
-Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Przykład:
+Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Na przykład:
 
 ```console
 https://localhost:5001/people> echo off
@@ -1041,7 +1041,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Uruchamianie skryptu
 
-Jeśli często wykonujesz ten sam zestaw poleceń HttpRepl, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku przyjmują ten sam formularz, co polecenia wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Przykład:
+Jeśli często wykonujesz ten sam zestaw poleceń HttpRepl, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku przyjmują ten sam formularz, co polecenia wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Na przykład:
 
 1. Utwórz plik tekstowy zawierający zestaw poleceń rozdzielanych znakami nowego wiersza. Aby to zilustrować, rozważ plik *people-script.txt* zawierający następujące polecenia:
 
@@ -1053,7 +1053,7 @@ Jeśli często wykonujesz ten sam zestaw poleceń HttpRepl, Rozważ przechowywan
     get 1
     ```
 
-1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Przykład:
+1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Na przykład:
 
     ```console
     https://localhost:5001/> run C:\http-repl-scripts\people-script.txt

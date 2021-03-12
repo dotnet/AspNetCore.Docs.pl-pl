@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: f1c7acba0b7fb7dc07da576b188e580328ff4b89
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 6d82611eb2176126652d0d6c8db3779cde70dab5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "96901161"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586244"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdróż aplikację w App Service
 
@@ -141,10 +141,10 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     git remote add azure-prod GIT_DEPLOYMENT_URL
     ```
 
-    b. Wypchnij lokalną gałąź domyślną (*Master*) do domyślnego rozgałęzienia zdalnego *Azure-prod* (*Master*).
+    b. Wypchnij lokalną gałąź domyślną (*główną*) do domyślnej gałęzi *platformy Azure-prod* (*głównej*).
 
     ```console
-    git push azure-prod master
+    git push azure-prod main
     ```
 
     Zostanie wyświetlony monit o utworzenie wcześniej utworzonych poświadczeń wdrożenia. Obserwuj dane wyjściowe w powłoce poleceń. Platforma Azure kompiluje aplikację ASP.NET Core zdalnie.
@@ -214,10 +214,10 @@ Miejsca wdrożenia obsługują przemieszczanie zmian bez wpływu na działanie a
     git remote add azure-staging <Git_staging_deployment_URL>
     ```
 
-    b. Wypchnij lokalną gałąź domyślną (*Master*) do domyślnej gałęzi zdalnej (*Master*) na *platformie Azure* .
+    b. Wypchnij lokalną gałąź domyślną (*główną*) do gałęzi domyślnej dla zdalnego *rozmieszczenia platformy Azure* (*głównej*).
 
     ```console
-    git push azure-staging master
+    git push azure-staging main
     ```
 
     Zaczekaj, aż platforma Azure utworzy i wdroży aplikację.

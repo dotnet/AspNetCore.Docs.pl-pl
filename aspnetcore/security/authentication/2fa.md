@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: 1ee9e656c2e631c9b5588149e0a75e07108baff1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1f77f3f4b7e9dd558e9869992e2f1f4d185e5b10
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051268"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586855"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Uwierzytelnianie dwuskładnikowe za pomocą wiadomości SMS w ASP.NET Core
 
@@ -35,7 +35,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [szwajcarski-dewelope
 
 W tym samouczku pokazano, jak skonfigurować uwierzytelnianie dwuskładnikowe (funkcji 2FA) przy użyciu wiadomości SMS. Instrukcje są podane dla [Twilio](https://www.twilio.com/) i [ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/), ale można użyć dowolnego innego dostawcy programu SMS. Przed rozpoczęciem tego samouczka zalecamy ukończenie [potwierdzeń konta i odzyskiwania hasła](xref:security/authentication/accconfirm) .
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/2fa/sample/Web2FA). [Jak pobrać](xref:index#how-to-download-a-sample).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/2fa/sample/Web2FA). [Jak pobrać](xref:index#how-to-download-a-sample).
 
 ## <a name="create-a-new-aspnet-core-project"></a>Utwórz nowy projekt ASP.NET Core
 
@@ -49,11 +49,11 @@ Utwórz konto programu SMS, na przykład z [Twilio](https://www.twilio.com/) lub
 
 **Twilio**
 
-Na karcie Pulpit nawigacyjny konta usługi Twilio Skopiuj **Identyfikator SID konta** i **token uwierzytelniania** .
+Na karcie Pulpit nawigacyjny konta usługi Twilio Skopiuj **Identyfikator SID konta** i **token uwierzytelniania**.
 
 **ASPSMS:**
 
-W ustawieniach konta przejdź do **userKey** i skopiuj go wraz z **hasłem** .
+W ustawieniach konta przejdź do **userKey** i skopiuj go wraz z **hasłem**.
 
 Te wartości zostaną później zapisane za pomocą narzędzia Menedżer kluczy tajnych w kluczach `SMSAccountIdentification` i `SMSAccountPassword` .
 
@@ -73,7 +73,7 @@ Użyjemy [wzorca opcji](xref:fundamentals/configuration/options) , aby uzyskać 
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-Ustaw `SMSAccountIdentification` opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SMSAccountIdentification` opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -100,7 +100,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>Konfigurowanie uruchamiania do użycia `SMSoptions`
 
-Dodaj `SMSoptions` do kontenera usługi w `ConfigureServices` metodzie w *Startup.cs* :
+Dodaj `SMSoptions` do kontenera usługi w `ConfigureServices` metodzie w *Startup.cs*:
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
@@ -118,7 +118,7 @@ Otwórz plik widoku views */Manage/index. cshtml* Razor i Usuń znaki komentarza
 
 ![Zarządzanie widokiem — naciśnięcie linku "Dodaj"](2fa/_static/login2fa2.png)
 
-* Dodaj numer telefonu, który będzie otrzymywał kod weryfikacyjny, a następnie naciśnij pozycję **Wyślij kod weryfikacyjny** .
+* Dodaj numer telefonu, który będzie otrzymywał kod weryfikacyjny, a następnie naciśnij pozycję **Wyślij kod weryfikacyjny**.
 
 ![Strona dodawania numeru telefonu](2fa/_static/login2fa3.png)
 
@@ -142,7 +142,7 @@ Jeśli nie otrzymasz wiadomości tekstowej, zobacz stronę dziennika Twilio.
 
 * Zaloguj się.
 
-* Konto użytkownika mogło korzystać z uwierzytelniania dwuskładnikowego, więc należy podać drugi czynnik uwierzytelniania. W tym samouczku włączono weryfikację telefonu. Wbudowane szablony umożliwiają również skonfigurowanie poczty e-mail jako drugiego czynnika. Można skonfigurować dodatkowe dwa czynniki do uwierzytelniania, takie jak kody QR. Naciśnij pozycję **Prześlij** .
+* Konto użytkownika mogło korzystać z uwierzytelniania dwuskładnikowego, więc należy podać drugi czynnik uwierzytelniania. W tym samouczku włączono weryfikację telefonu. Wbudowane szablony umożliwiają również skonfigurowanie poczty e-mail jako drugiego czynnika. Można skonfigurować dodatkowe dwa czynniki do uwierzytelniania, takie jak kody QR. Naciśnij pozycję **Prześlij**.
 
 ![Wyślij widok kodu weryfikacyjnego](2fa/_static/login2fa7.png)
 

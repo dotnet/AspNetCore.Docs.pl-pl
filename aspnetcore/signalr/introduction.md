@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 1810fef903362addcef4a6c9ec53264604f58d2b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5e3a96d38424b895fa8f34897a4f0a1d818ff479
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051476"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588090"
 ---
-# <a name="introduction-to-aspnet-core-no-locsignalr"></a>Wprowadzenie do ASP.NET Core SignalR
+# <a name="introduction-to-aspnet-core-signalr"></a>Wprowadzenie do ASP.NET Core SignalR
 
-## <a name="what-is-no-locsignalr"></a>Co to jest SignalR ?
+## <a name="what-is-signalr"></a>Co to jest SignalR ?
 
 ASP.NET Core SignalR to Biblioteka open source, która upraszcza Dodawanie funkcji sieci Web w czasie rzeczywistym do aplikacji. Funkcja sieci Web w czasie rzeczywistym umożliwia serwerowi natychmiastowe wypychanie zawartości do klientów.
 
@@ -48,7 +48,7 @@ Poniżej przedstawiono niektóre funkcje programu SignalR dla programu ASP.NET C
 * Wysyła komunikaty do określonych klientów lub grup klientów.
 * Skaluje się do obsługi zwiększania ruchu.
 
-Źródło jest hostowane w [ SignalR repozytorium w serwisie GitHub](https://github.com/dotnet/AspNetCore/tree/master/src/SignalR).
+Źródło jest hostowane w [ SignalR repozytorium w serwisie GitHub](https://github.com/dotnet/AspNetCore/tree/main/src/SignalR).
 
 ## <a name="transports"></a>Transporty
 

@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 1b5c89c1beaf36912766b3e08b9f16c4d33945f8
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050852"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588064"
 ---
-# <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
+# <a name="aspnet-core-signalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -34,15 +34,15 @@ Autor [Rachel Appel](https://twitter.com/rachelappel)
 
 SignalRBiblioteka klienta ASP.NET Core JavaScript umożliwia deweloperom Wywoływanie kodu centrum po stronie serwera.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/javascript-client/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-no-locsignalr-client-package"></a>Zainstaluj SignalR pakiet klienta
+## <a name="install-the-signalr-client-package"></a>Zainstaluj SignalR pakiet klienta
 
 SignalRBiblioteka klienta JavaScript jest dostarczana jako pakiet [npm](https://www.npmjs.com/) . W poniższych sekcjach opisano różne sposoby instalowania biblioteki klienta programu.
 
 ### <a name="install-with-npm"></a>Zainstaluj za pomocą npm
 
-W przypadku programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu** .
+W przypadku programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu**.
 
 ```bash
 npm init -y
@@ -51,7 +51,7 @@ npm install @microsoft/signalr
 
 npm instaluje zawartość pakietu w folderze *node_modules \\ @microsoft\signalr\dist\browser* . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
-Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
+Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -59,7 +59,7 @@ Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Użyj Content Delivery Network (CDN)
 
-Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Przykład:
+Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Na przykład:
 
 [!code-html[](javascript-client/samples/3.x/SignalRChat/Pages/Index.cshtml?name=snippet_CDN)]
 
@@ -106,7 +106,7 @@ W poniższym przykładzie nazwa metody w centrum to `SendMessage` . Drugi i trze
 
 `invoke`Metoda zwraca [obietnicę](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)języka JavaScript. `Promise`Zostanie rozwiązany z wartością zwracaną (jeśli istnieje), gdy metoda zwraca serwer. Jeśli metoda na serwerze zgłasza błąd, `Promise` zostaje odrzucona z komunikatem o błędzie. Użyj `async` `await` metod i lub `Promise` i `then` , `catch` Aby obsłużyć te przypadki.
 
-Klienci języka JavaScript mogą również wywoływać metody publiczne w centrach [send](/javascript/api/%40microsoft/signalr/hubconnection#send-string--any---) za pomocą metody send `HubConnection` . W przeciwieństwie do `invoke` metody `send` Metoda nie czeka na odpowiedź z serwera. `send`Metoda zwraca kod JavaScript `Promise` . `Promise`Jest rozpoznawany, gdy wiadomość została wysłana na serwer. Jeśli wystąpi błąd podczas wysyłania komunikatu, `Promise` zostanie on odrzucony z komunikatem o błędzie. Użyj `async` `await` metod i lub `Promise` i `then` , `catch` Aby obsłużyć te przypadki.
+Klienci języka JavaScript mogą również wywoływać metody publiczne w centrach [](/javascript/api/%40microsoft/signalr/hubconnection#send-string--any---) za pomocą metody send `HubConnection` . W przeciwieństwie do `invoke` metody `send` Metoda nie czeka na odpowiedź z serwera. `send`Metoda zwraca kod JavaScript `Promise` . `Promise`Jest rozpoznawany, gdy wiadomość została wysłana na serwer. Jeśli wystąpi błąd podczas wysyłania komunikatu, `Promise` zostanie on odrzucony z komunikatem o błędzie. Użyj `async` `await` metod i lub `Promise` i `then` , `catch` Aby obsłużyć te przypadki.
 
 > [!NOTE]
 > Użycie `send` nie czeka na odebranie komunikatu przez serwer. W związku z tym nie można zwrócić danych ani błędów z serwera.
@@ -302,15 +302,15 @@ Autor [Rachel Appel](https://twitter.com/rachelappel)
 
 SignalRBiblioteka klienta ASP.NET Core JavaScript umożliwia deweloperom Wywoływanie kodu centrum po stronie serwera.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/javascript-client/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/javascript-client/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-no-locsignalr-client-package"></a>Zainstaluj SignalR pakiet klienta
+## <a name="install-the-signalr-client-package"></a>Zainstaluj SignalR pakiet klienta
 
 SignalRBiblioteka klienta JavaScript jest dostarczana jako pakiet [npm](https://www.npmjs.com/) . W poniższych sekcjach opisano różne sposoby instalowania biblioteki klienta programu.
 
 ### <a name="install-with-npm"></a>Zainstaluj za pomocą npm
 
-W przypadku korzystania z programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu** .
+W przypadku korzystania z programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu**.
 
 ```bash
 npm init -y
@@ -319,7 +319,7 @@ npm install @aspnet/signalr
 
 npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\dist\browser* . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
-Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
+Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -327,7 +327,7 @@ Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Użyj Content Delivery Network (CDN)
 
-Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Przykład:
+Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Na przykład:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>

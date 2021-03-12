@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 1cf3029452f87a396847f969f0f3136a75874752
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 2bc093af63f305dd9808e37011223043646852d5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057333"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588051"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Wykonywanie żądań HTTP przy użyciu IHttpClientFactory w ASP.NET Core
 
@@ -39,7 +39,7 @@ ms.locfileid: "99057333"
 * Zarządza buforowaniem i okresem istnienia `HttpClientMessageHandler` wystąpień podstawowych. Automatyczne zarządzanie pozwala uniknąć typowych problemów z usługą DNS (Domain Name System) występujących podczas ręcznego zarządzania `HttpClient` okresami istnienia.
 * Dodaje konfigurowalne środowisko rejestrowania (za pośrednictwem programu `ILogger` ) dla wszystkich żądań wysyłanych przez klientów utworzonych przez fabrykę.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 Przykładowy kod w tym temacie używa <xref:System.Text.Json> do deserializacji zawartości JSON zwróconej w odpowiedziach http. Aby zapoznać się z przykładami używanymi przez `Json.NET` `ReadAsAsync<T>` program i, użyj selektora wersji, aby wybrać wersję 2. x tego tematu.
 
@@ -218,7 +218,7 @@ W poprzednim kodzie `CreateItemAsync` Metoda:
 * Wywołuje <xref:System.Net.Http.HttpClient.PostAsync%2A> wysyłanie zawartości JSON do określonego adresu URL. Jest to względny adres URL, który zostanie dodany do [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress).
 * Wywołuje, <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A> Aby zgłosić wyjątek, jeśli kod stanu odpowiedzi nie wskazuje powodzenia.
 
-`HttpClient` obsługuje również inne typy zawartości. Przykład: <xref:System.Net.Http.MultipartContent> i <xref:System.Net.Http.StreamContent>. Aby zapoznać się z pełną listą obsługiwanych zawartości, zobacz <xref:System.Net.Http.HttpContent> .
+`HttpClient` obsługuje również inne typy zawartości. Na przykład <xref:System.Net.Http.MultipartContent> i <xref:System.Net.Http.StreamContent>. Aby zapoznać się z pełną listą obsługiwanych zawartości, zobacz <xref:System.Net.Http.HttpContent> .
 
 Poniższy przykład przedstawia żądanie HTTP PUT:
 
@@ -283,7 +283,7 @@ Następująca procedura delegowania wykorzystuje i używa `IOperationScoped` do 
 
 [!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Handlers/OperationHandler.cs?name=snippet_Class&highlight=13)]
 
-W obszarze [ `HttpRequestsSample` pobieranie](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] Przejdź do `/Operation` strony i Odśwież stronę. Wartość zakresu żądania zmienia się dla każdego żądania, ale wartość zakresu procedury obsługi zmienia się co 5 sekund.
+W obszarze [ `HttpRequestsSample` pobieranie](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples/3.x/HttpRequestsSample)] Przejdź do `/Operation` strony i Odśwież stronę. Wartość zakresu żądania zmienia się dla każdego żądania, ale wartość zakresu procedury obsługi zmienia się co 5 sekund.
 
 Programy obsługi mogą zależeć od usług dowolnego zakresu. Usługi, które są zależne od programów obsługi, są usuwane, gdy program obsługi zostanie usunięty.
 
@@ -380,7 +380,7 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="no-loccookies"></a>Cookiewolumin
+### <a name="cookies"></a>Cookiewolumin
 
 `HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 
@@ -462,7 +462,7 @@ Propagacja nagłówka to ASP.NET Core oprogramowanie pośredniczące do propagow
 * Zarządza buforowaniem i okresem istnienia podstawowych `HttpClientMessageHandler` wystąpień, aby uniknąć typowych problemów z usługą DNS występujących podczas ręcznego zarządzania `HttpClient` okresami istnienia.
 * Dodaje konfigurowalne środowisko rejestrowania (za pośrednictwem programu `ILogger` ) dla wszystkich żądań wysyłanych przez klientów utworzonych przez fabrykę.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="consumption-patterns"></a>Wzorce zużycia
 
@@ -698,7 +698,7 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="no-loccookies"></a>Cookiewolumin
+### <a name="cookies"></a>Cookiewolumin
 
 `HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 
@@ -763,7 +763,7 @@ W poniższym przykładzie:
 * Zarządza buforowaniem i okresem istnienia podstawowych `HttpClientMessageHandler` wystąpień, aby uniknąć typowych problemów z usługą DNS występujących podczas ręcznego zarządzania `HttpClient` okresami istnienia.
 * Dodaje konfigurowalne środowisko rejestrowania (za pośrednictwem programu `ILogger` ) dla wszystkich żądań wysyłanych przez klientów utworzonych przez fabrykę.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/http-requests/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -1006,7 +1006,7 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="no-loccookies"></a>Cookiewolumin
+### <a name="cookies"></a>Cookiewolumin
 
 `HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 

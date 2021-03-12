@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 175614c426c564ce91068e18035ce05311432698
-ms.sourcegitcommit: ebc5beccba5f3f7619de20baa58ad727d2a3d18c
+ms.openlocfilehash: ed41657b364c7f845491b3e452db8a4d5c5aa389
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98689243"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587180"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
 
@@ -34,7 +34,7 @@ W tym artykule omówiono procedurę używania plików przenośnych obiektów (PO
 
 **Uwaga:** Rdzeń sadu nie jest produktem firmy Microsoft. W związku z tym firma Microsoft nie zapewnia wsparcia dla tej funkcji.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/3.x/POLocalization) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/localization/sample/3.x/POLocalization) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-po-file"></a>Co to jest plik ZZ?
 
@@ -249,7 +249,7 @@ W tym artykule omówiono procedurę używania plików przenośnych obiektów (PO
 
 **Uwaga:** Rdzeń sadu nie jest produktem firmy Microsoft. W związku z tym firma Microsoft nie zapewnia wsparcia dla tej funkcji.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/POLocalization) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/localization/sample/2.x/POLocalization) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-po-file"></a>Co to jest plik ZZ?
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 348b0fe4da6037933aabdb5b400d36ca073a146a
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 0f4fcceefdef946a5f29633c069cbb64ec345a3d
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320099"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586959"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Logika kontrolera testów jednostkowych w ASP.NET Core
 
@@ -42,7 +42,7 @@ Jeśli piszesz filtry niestandardowe i trasy, przetestuj je jednostkowo, a nie j
 
 Aby zademonstrować testy jednostkowe kontrolera, przejrzyj następujący kontroler w przykładowej aplikacji. 
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/testing/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Kontroler Home wyświetla listę sesji burzy mózgów i umożliwia tworzenie nowych sesji burzy mózgów przy użyciu żądania POST:
 
@@ -90,7 +90,7 @@ Wywołane wywołania, które nie są wywoływane, są zwykle ignorowane, ale wyw
 > [!NOTE]
 > Biblioteka MOQ używana w tym przykładzie umożliwia mieszanie możliwej do zweryfikowania lub "ścisłych", imitacje z niemożliwymi do zweryfikowania makietami (nazywanymi również "luźnymi" fragmentami lub wycinkami). Dowiedz się więcej o [dostosowywaniu zachowań makiety za pomocą MOQ](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior).
 
-[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
+[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -197,7 +197,7 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 [Kontrolery](xref:mvc/controllers/actions) odgrywają centralną rolę w dowolnej aplikacji ASP.NET Core MVC. W związku z tym należy mieć pewność, że kontrolery zachowują się zgodnie z oczekiwaniami. Testy automatyczne mogą wykrywać błędy, zanim aplikacja zostanie wdrożona w środowisku produkcyjnym.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/testing/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="unit-tests-of-controller-logic"></a>Testy jednostkowe logiki kontrolera
 
@@ -253,7 +253,7 @@ Wywołane wywołania, które nie są wywoływane, są zwykle ignorowane, ale wyw
 > [!NOTE]
 > Biblioteka MOQ używana w tym przykładzie umożliwia mieszanie możliwej do zweryfikowania lub "ścisłych", imitacje z niemożliwymi do zweryfikowania makietami (nazywanymi również "luźnymi" fragmentami lub wycinkami). Dowiedz się więcej o [dostosowywaniu zachowań makiety za pomocą MOQ](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior).
 
-[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
+[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -356,7 +356,7 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/integration-tests>
 * [Tworzenie i uruchamianie testów jednostkowych za pomocą programu Visual Studio](/visualstudio/test/unit-test-your-code)

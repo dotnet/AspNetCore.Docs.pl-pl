@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 3c28b6c736f07c0d0483152eeec4300a5a92224c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f1f5dfcb9595270a9659a02141f7d1eba5c44ef
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052113"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587700"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -34,9 +34,9 @@ Przez [Jan Luo](https://github.com/JunTaoLuo)
 
 W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego buforowania odpowiedzi w aplikacji ASP.NET Core. Oprogramowanie pośredniczące określa, kiedy odpowiedzi są buforowane, przechowuje odpowiedzi i obsługuje odpowiedzi z pamięci podręcznej. Wprowadzenie do buforowania HTTP i [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybutu można znaleźć w temacie [buforowanie odpowiedzi](xref:performance/caching/response).
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Oprogramowanie pośredniczące buforowania odpowiedzi jest niejawnie dostępne dla aplikacji ASP.NET Core za pośrednictwem udostępnionej platformy.
 
@@ -111,7 +111,7 @@ Użycie pojedynczej wartości równej `*` w w programie `VaryByQueryKeys` zmieni
 
 Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają wpływ na buforowanie odpowiedzi.
 
-| Header | Szczegóły |
+| Nagłówek | Szczegóły |
 | ------ | ------- |
 | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
 | `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: Request Cache-Control dyrektywy](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
@@ -181,9 +181,9 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 
 W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego buforowania odpowiedzi w aplikacji ASP.NET Core. Oprogramowanie pośredniczące określa, kiedy odpowiedzi są buforowane, przechowuje odpowiedzi i obsługuje odpowiedzi z pamięci podręcznej. Wprowadzenie do buforowania HTTP i [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybutu można znaleźć w temacie [buforowanie odpowiedzi](xref:performance/caching/response).
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Użyj pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) lub Dodaj odwołanie do pakietu do pakietu [Microsoft. AspNetCore. ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) .
 
@@ -255,7 +255,7 @@ Użycie pojedynczej wartości równej `*` w w programie `VaryByQueryKeys` zmieni
 
 Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają wpływ na buforowanie odpowiedzi.
 
-| Header | Szczegóły |
+| Nagłówek | Szczegóły |
 | ------ | ------- |
 | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
 | `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: Request Cache-Control dyrektywy](https://tools.ietf.org/html/rfc7234#section-5.2.1). |

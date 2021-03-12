@@ -19,20 +19,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 0e220d72fe9ef4ada402b449ef20e31324f7bcd2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9a3102e4451bbc5cd9ff15e88bebd4e4f2c115f4
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060121"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588103"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET Core SignalR
+# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET Core SignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/authn-and-authz/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>Uwierzytelnianie użytkowników łączących się z SignalR centrum
+## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>Uwierzytelnianie użytkowników łączących się z SignalR centrum
 
 SignalR można go używać z [uwierzytelnianiem ASP.NET Core](xref:security/authentication/identity) , aby skojarzyć użytkownika z każdym połączeniem. W centrum dane uwierzytelniania są dostępne z poziomu właściwości [HubConnectionContext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) . Uwierzytelnianie umożliwia centrum wywoływanie metod we wszystkich połączeniach skojarzonych z użytkownikiem. Aby uzyskać więcej informacji, zobacz [Zarządzanie użytkownikami i grupami w programie SignalR ](xref:signalr/groups). Wiele połączeń może być skojarzonych z pojedynczym użytkownikiem.
 
@@ -90,7 +90,7 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="no-loccookie-authentication"></a>Cookie ponowne
+### <a name="cookie-authentication"></a>Cookie ponowne
 
 W aplikacji opartej na przeglądarce cookie uwierzytelnianie umożliwia istniejące poświadczenia użytkownika w celu automatycznego przechodzenia do SignalR połączeń. W przypadku korzystania z klienta przeglądarki nie jest wymagana dodatkowa konfiguracja. Jeśli użytkownik jest zalogowany do aplikacji, SignalR połączenie automatycznie dziedziczy to uwierzytelnianie.
 
@@ -131,7 +131,7 @@ Na serwerze uwierzytelnianie tokenu okaziciela jest konfigurowane przy użyciu [
 > [!NOTE]
 > Ciąg zapytania jest używany w przeglądarkach podczas nawiązywania połączenia z usługą WebSockets i zdarzeń Server-Sent ze względu na ograniczenia interfejsu API przeglądarki. W przypadku korzystania z protokołu HTTPS wartości ciągu zapytania są zabezpieczane przez połączenie TLS. Jednak wiele serwerów rejestruje wartości ciągu zapytania. Aby uzyskać więcej informacji, zobacz [zagadnienia dotyczące SignalR zabezpieczeń w ASP.NET Core ](xref:signalr/security). SignalR używa nagłówków do przesyłania tokenów w środowiskach, które je obsługują (takich jak klienci .NET i Java).
 
-#### <a name="no-locidentity-server-jwt-authentication"></a>Identity Uwierzytelnianie JWT serwera
+#### <a name="identity-server-jwt-authentication"></a>Identity Uwierzytelnianie JWT serwera
 
 W przypadku korzystania z Identity serwera Dodaj <xref:Microsoft.Extensions.Options.PostConfigureOptions%601> usługę do projektu:
 
@@ -173,7 +173,7 @@ services.TryAddEnumerable(
         ConfigureJwtBearerOptions>());
 ```
 
-### <a name="no-loccookies-vs-bearer-tokens"></a>Cookietokeny s i Bearer 
+### <a name="cookies-vs-bearer-tokens"></a>Cookietokeny s i Bearer 
 
 Cookies są specyficzne dla przeglądarek. Wysyłanie ich z innych rodzajów klientów zwiększa złożoność w porównaniu do wysyłania tokenów okaziciela. W związku z tym cookie uwierzytelnianie nie jest zalecane, chyba że aplikacja wymaga tylko uwierzytelnienia użytkowników z poziomu klienta przeglądarki. Uwierzytelnianie tokenów okaziciela jest zalecanym rozwiązaniem w przypadku korzystania z klientów innych niż klient przeglądarki.
 

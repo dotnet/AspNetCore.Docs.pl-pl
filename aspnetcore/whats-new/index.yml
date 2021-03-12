@@ -6,12 +6,12 @@ metadata:
   description: Więcej informacji na temat nowej i zaktualizowanej zawartości znajduje się w dokumentacji ASP.NET Core.
   ms.topic: landing-page
   ms.date: 03/04/2021
-  ms.openlocfilehash: 514c66eb130ac2d32ce0c3b9a14f62263d54076d
-  ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+  ms.openlocfilehash: 5982d49321739b637e8a7352145da18c69705c88
+  ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
   ms.translationtype: MT
   ms.contentlocale: pl-PL
   ms.lasthandoff: 03/10/2021
-  ms.locfileid: "102585711"
+  ms.locfileid: "102605662"
 landingContent:
 - title: Znajdź aktualizacje ASP.NET Core docs
   linkLists:
@@ -62,7 +62,7 @@ landingContent:
     - text: Informacje o wersji ASP.NET Core
       url: ../release-notes/aspnetcore-3.1.md
     - text: Informacje o wersji kompilatora C# (Roslyn)
-      url: https://github.com/dotnet/roslyn/tree/master/docs/ide
+      url: https://github.com/dotnet/roslyn/tree/main/docs/ide
     - text: Informacje o wersji programu Visual Studio
       url: /visualstudio/releases/2019/release-notes
     - text: Informacje o wersji Visual Studio dla komputerów Mac

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
-ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
+ms.openlocfilehash: f3bd2d3eac97e0fd64d1e3a98a9d1750f7a607a8
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/05/2021
-ms.locfileid: "97878415"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588376"
 ---
 # <a name="areas-in-aspnet-core"></a>Obszary w ASP.NET Core
 
@@ -44,7 +44,7 @@ Rozważ użycie obszarów w projekcie, gdy:
 * Aplikacja składa się z wielu składników funkcjonalnych wysokiego poziomu, które można logicznie oddzielić.
 * Chcesz podzielić aplikację na partycje, tak aby każdy obszar funkcjonalny mógł działać niezależnie.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([jak pobrać](xref:index#how-to-download-a-sample)). Przykład pobierania zawiera podstawową aplikację do testowania obszarów.
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples) ([jak pobrać](xref:index#how-to-download-a-sample)). Przykład pobierania zawiera podstawową aplikację do testowania obszarów.
 
 Jeśli używasz Razor stron, zobacz [obszary ze Razor stronami](#areas-with-razor-pages) w tym dokumencie.
 
@@ -122,7 +122,7 @@ Aby uzyskać więcej informacji, zobacz [Routing obszaru](xref:mvc/controllers/r
 
 ### <a name="link-generation-with-mvc-areas"></a>Generowanie linków z obszarami MVC
 
-Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) pokazuje generowanie linków z określonym obszarem:
+Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples) pokazuje generowanie linków z określonym obszarem:
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -166,9 +166,9 @@ Poniższy kod zmienia domyślny folder obszaru z `"Areas"` na `"MyAreas"` :
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a>Obszary ze Razor stronami
+## <a name="areas-with-razor-pages"></a>Obszary ze Razor stronami
 
-Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):
+Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples):
 
 * Project name (Nazwa projektu)
   * Obszary
@@ -183,9 +183,9 @@ Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze
           * Informacje
           * Indeks
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
+### <a name="link-generation-with-razor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
 
-Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
+Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -199,7 +199,7 @@ Dla poprzedniego kodu:
 
 * Link wygenerowany z `<a asp-page="/Manage/About">` jest prawidłowy tylko wtedy, gdy ostatnie żądanie dotyczyło strony w `Services` obszarze. Na przykład, `/Services/Manage/` , `/Services/Manage/Index` lub `/Services/Manage/About` .
 * Link wygenerowany z `<a asp-page="/About">` jest prawidłowy tylko wtedy, gdy ostatnie żądanie dotyczyło strony w `/Home` .
-* Kod pochodzi z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples/RPareas).
+* Kod pochodzi z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/31samples/RPareas).
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>Importowanie przestrzeni nazw i pomocników tagów przy użyciu pliku _ViewImports
 
@@ -226,7 +226,7 @@ W poprzednim pliku przestrzeń nazw i `@addTagHelper` dyrektywa są importowane 
 
 Aby uzyskać więcej informacji, zobacz [Zarządzanie zakresem pomocnika tagów](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) i [Importowanie wspólnych dyrektyw](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
+### <a name="shared-layout-for-razor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
 
 Aby udostępnić wspólny układ całej aplikacji, Przenieś *_ViewStart. cshtml* do folderu głównego aplikacji.
 
@@ -246,7 +246,7 @@ Rozważ użycie obszarów w projekcie, gdy:
 * Aplikacja składa się z wielu składników funkcjonalnych wysokiego poziomu, które można logicznie oddzielić.
 * Chcesz podzielić aplikację na partycje, tak aby każdy obszar funkcjonalny mógł działać niezależnie.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([jak pobrać](xref:index#how-to-download-a-sample)). Przykład pobierania zawiera podstawową aplikację do testowania obszarów.
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples) ([jak pobrać](xref:index#how-to-download-a-sample)). Przykład pobierania zawiera podstawową aplikację do testowania obszarów.
 
 Jeśli używasz Razor stron, zobacz [obszary ze Razor stronami](#areas-with-razor-pages) w tym dokumencie.
 
@@ -323,7 +323,7 @@ Aby uzyskać więcej informacji, zobacz [Routing obszaru](xref:mvc/controllers/r
 
 ### <a name="link-generation-with-mvc-areas"></a>Generowanie linków z obszarami MVC
 
-Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) pokazuje generowanie linków z określonym obszarem:
+Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples) pokazuje generowanie linków z określonym obszarem:
 
 [!code-cshtml[](areas/samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -353,9 +353,9 @@ Poniższy kod zmienia domyślny folder obszaru z `"Areas"` na `"MyAreas"` :
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a>Obszary ze Razor stronami
+## <a name="areas-with-razor-pages"></a>Obszary ze Razor stronami
 
-Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):
+Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples):
 
 * Project name (Nazwa projektu)
   * Obszary
@@ -370,9 +370,9 @@ Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze
           * Informacje
           * Indeks
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
+### <a name="link-generation-with-razor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
 
-Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
+Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -388,7 +388,7 @@ Dla poprzedniego kodu:
 
 * Link wygenerowany z `<a asp-page="/Manage/About">` jest prawidłowy tylko wtedy, gdy ostatnie żądanie dotyczyło strony w `Services` obszarze. Na przykład, `/Services/Manage/` , `/Services/Manage/Index` lub `/Services/Manage/About` .
 * Link wygenerowany z `<a asp-page="/About">` jest prawidłowy tylko wtedy, gdy ostatnie żądanie dotyczyło strony w `/Home` .
-* Kod pochodzi z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas).
+* Kod pochodzi z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/controllers/areas/samples/RPareas).
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>Importowanie przestrzeni nazw i pomocników tagów przy użyciu pliku _ViewImports
 
@@ -415,7 +415,7 @@ W poprzednim pliku przestrzeń nazw i `@addTagHelper` dyrektywa są importowane 
 
 Aby uzyskać więcej informacji, zobacz [Zarządzanie zakresem pomocnika tagów](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) i [Importowanie wspólnych dyrektyw](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
+### <a name="shared-layout-for-razor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
 
 Aby udostępnić wspólny układ całej aplikacji, Przenieś *_ViewStart. cshtml* do folderu głównego aplikacji.
 

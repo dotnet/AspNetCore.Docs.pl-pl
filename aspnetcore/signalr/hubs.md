@@ -19,24 +19,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 872b88cc3c87137365de8c50a37bf5dd5fd9fe10
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050943"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587869"
 ---
-# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>Korzystanie z koncentratorów w programie SignalR dla ASP.NET Core
+# <a name="use-hubs-in-signalr-for-aspnet-core"></a>Korzystanie z koncentratorów w programie SignalR dla ASP.NET Core
 
 Autor [Rachel Appel](https://twitter.com/rachelappel) i [Jan Griffin](https://twitter.com/1kevgriff)
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(jak pobrać)](xref:index#how-to-download-a-sample)
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/hubs/sample/ ) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-no-locsignalr-hub"></a>Co to jest SignalR centrum
+## <a name="what-is-a-signalr-hub"></a>Co to jest SignalR centrum
 
 SignalRInterfejs API centrów umożliwia wywoływanie metod na podłączonych klientach z serwera. W kodzie serwera należy zdefiniować metody, które są wywoływane przez klienta. W kodzie klienta należy zdefiniować metody, które są wywoływane z serwera programu. SignalR zajmuje się wszystkimi wszystkimi scenami, które zapewniają możliwość komunikacji między klientem i serwerem w czasie rzeczywistym.
 
-## <a name="configure-no-locsignalr-hubs"></a>Konfigurowanie SignalR centrów
+## <a name="configure-signalr-hubs"></a>Konfigurowanie SignalR centrów
 
 SignalROprogramowanie pośredniczące wymaga pewnych usług, które są konfigurowane przez wywołanie metody `services.AddSignalR` .
 
@@ -156,7 +156,7 @@ Ten interfejs może służyć do refaktoryzacji poprzedniego `ChatHub` przykład
 
 Użycie `Hub<IChatClient>` umożliwia sprawdzenie w czasie kompilacji metod klienta. Zapobiega to problemom spowodowanym użyciem ciągów Magic, ponieważ `Hub<T>` może zapewnić tylko dostęp do metod zdefiniowanych w interfejsie.
 
-Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Przykład:
+Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Na przykład:
 
 ```csharp
 public interface IClient
@@ -192,7 +192,7 @@ Wyjątki zgłoszone w metodach centrum są wysyłane do klienta, który wywoła�
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Przykład:
+Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Na przykład:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
@@ -200,7 +200,7 @@ Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking
 
 Nieoczekiwane wyjątki często zawierają informacje poufne, takie jak nazwa serwera bazy danych w wyjątku wyzwalanym w przypadku niepowodzenia połączenia z bazą danych. SignalR Domyślnie nie uwidacznia tych szczegółowych komunikatów o błędach jako miary zabezpieczeń. Aby uzyskać więcej informacji o tym, dlaczego szczegóły wyjątku są pomijane, zobacz artykuł dotyczący [zagadnień dotyczących zabezpieczeń](xref:signalr/security#exceptions) .
 
-Jeśli *masz wyjątkowe warunki, które chcesz* propagować do klienta, możesz użyć `HubException` klasy. W przypadku zgłoszenia `HubException` z poziomu metody centrum program SignalR **will** wyśle do klienta cały komunikat, który nie został zmodyfikowany.
+Jeśli *masz wyjątkowe warunki, które chcesz* propagować do klienta, możesz użyć `HubException` klasy. W przypadku zgłoszenia `HubException` z poziomu metody centrum program SignalR  wyśle do klienta cały komunikat, który nie został zmodyfikowany.
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 

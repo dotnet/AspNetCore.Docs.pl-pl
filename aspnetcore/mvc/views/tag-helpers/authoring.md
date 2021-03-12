@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e0c9f450e4eded49694cbbb0e9fa2614a221ab14
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060927"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586829"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Tworzenie pomocników tagów w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>Wprowadzenie do pomocników tagów
 
@@ -37,13 +37,13 @@ Ten samouczek zawiera wprowadzenie do programowania pomocników tagów. [Wprowad
 
 Pomocnik tagu jest klasą, która implementuje `ITagHelper` interfejs. Jednak podczas tworzenia pomocnika tagów zwykle pochodzi od `TagHelper` , dlatego zapewnia dostęp do `Process` metody.
 
-1. Utwórz nowy projekt ASP.NET Core o nazwie **AuthoringTagHelpers** . Nie będziesz potrzebować uwierzytelniania dla tego projektu.
+1. Utwórz nowy projekt ASP.NET Core o nazwie **AuthoringTagHelpers**. Nie będziesz potrzebować uwierzytelniania dla tego projektu.
 
-1. Utwórz folder do przechowywania pomocników tagów o nazwie *TagHelpers* . Folder *TagHelpers* *nie* jest wymagany, ale jest odpowiednią Konwencją. Teraz zacznij pisać kilka prostych pomocników tagów.
+1. Utwórz folder do przechowywania pomocników tagów o nazwie *TagHelpers*. Folder *TagHelpers* *nie* jest wymagany, ale jest odpowiednią Konwencją. Teraz zacznij pisać kilka prostych pomocników tagów.
 
 ## <a name="a-minimal-tag-helper"></a>Minimalny pomocnik tagów
 
-W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Przykład:
+W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Na przykład:
 
 ```html
 <email>Support</email>
@@ -61,7 +61,7 @@ Oznacza to, że tag zakotwiczony, który tworzy to łącze e-mail. Możesz to zr
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * Pomocnicy tagów używają konwencji nazewnictwa, która jest przeznaczona dla elementów nazwy klasy głównej (minus *TagHelper* część nazwy klasy). W tym przykładzie nazwą główną **EmailTagHelper** jest *adres e-mail* , więc `<email>` tag będzie przeznaczony. Ta konwencja nazewnictwa powinna współpracować z większością pomocników tagów, w dalszej części zaprezentowano sposób jego zastąpienia.
+   * Pomocnicy tagów używają konwencji nazewnictwa, która jest przeznaczona dla elementów nazwy klasy głównej (minus *TagHelper* część nazwy klasy). W tym przykładzie nazwą główną **EmailTagHelper** jest *adres e-mail*, więc `<email>` tag będzie przeznaczony. Ta konwencja nazewnictwa powinna współpracować z większością pomocników tagów, w dalszej części zaprezentowano sposób jego zastąpienia.
 
    * `EmailTagHelper`Klasa pochodzi od `TagHelper` . `TagHelper`Klasa zawiera metody i właściwości do pisania pomocników tagów.
 
@@ -71,7 +71,7 @@ Oznacza to, że tag zakotwiczony, który tworzy to łącze e-mail. Możesz to zr
 
    * Parametr danych wyjściowych do `Process` (i `ProcessAsync` ) zawiera stanowy element HTML reprezentatywny dla oryginalnego źródła używanego do generowania tagu HTML i zawartości.
 
-   * Nasza nazwa klasy ma sufiks **TagHelper** , co *nie* jest wymagane, ale jest uznawana za Konwencję najlepszych rozwiązań. Można zadeklarować klasę jako:
+   * Nasza nazwa klasy ma sufiks **TagHelper**, co *nie* jest wymagane, ale jest uznawana za Konwencję najlepszych rozwiązań. Można zadeklarować klasę jako:
 
    ```csharp
    public class Email : TagHelper
@@ -94,7 +94,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
     [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
-Aby dodać pomocnika tagów do widoku przy użyciu FQN, należy najpierw dodać FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ), a następnie **nazwę zestawu** ( *AuthoringTagHelpers* , niekoniecznie `namespace` ). Większość deweloperów woli używać składni wieloznacznej. [Wprowadzenie do](intro.md) pomocników tagów prowadzi do szczegółów dotyczących dodawania, usuwania, hierarchii i symboli wieloznacznych.
+Aby dodać pomocnika tagów do widoku przy użyciu FQN, należy najpierw dodać FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ), a następnie **nazwę zestawu** (*AuthoringTagHelpers*, niekoniecznie `namespace` ). Większość deweloperów woli używać składni wieloznacznej. [Wprowadzenie do](intro.md) pomocników tagów prowadzi do szczegółów dotyczących dodawania, usuwania, hierarchii i symboli wieloznacznych.
 
 1. Zaktualizuj znaczniki w pliku *views/Home/Contact. cshtml* przy użyciu następujących zmian:
 

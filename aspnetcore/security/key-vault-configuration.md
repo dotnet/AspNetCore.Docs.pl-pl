@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4b035fe59b8576eb387ddce67943386ccab55492
-ms.sourcegitcommit: 8dfcd2b4be936950c228b4d98430622a04254cd7
+ms.openlocfilehash: ab3a462a3e09113e96c6bdd0c034bff3e0bebdfa
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/26/2020
-ms.locfileid: "97792082"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588298"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault dostawcę konfiguracji w programie ASP.NET Core
 
@@ -37,7 +37,7 @@ W tym dokumencie wyjaśniono, jak za pomocą dostawcy konfiguracji [Azure Key Va
 * Kontrolowanie dostępu do poufnych danych konfiguracyjnych.
 * Spełnienie wymagania dotyczącego sprawdzania poprawności sprzętowych modułów zabezpieczeń FIPS 140-2 Level 2 (HSM) podczas przechowywania danych konfiguracyjnych.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/key-vault-configuration/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>Pakiety
 
@@ -384,7 +384,7 @@ W tym dokumencie wyjaśniono, jak za pomocą dostawcy konfiguracji [Key Vault Mi
 * Kontrolowanie dostępu do poufnych danych konfiguracyjnych.
 * Spełnienie wymagania dotyczącego sprawdzania poprawności sprzętowych modułów zabezpieczeń FIPS 140-2 Level 2 (HSM) podczas przechowywania danych konfiguracyjnych.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/key-vault-configuration/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>Pakiety
 

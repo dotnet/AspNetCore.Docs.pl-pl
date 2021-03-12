@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: d6fa7e4524a8afdc23d4ad46354d9d8b395656a3
-ms.sourcegitcommit: e311cfb77f26a0a23681019bd334929d1aaeda20
+ms.openlocfilehash: 412f95e67fa35e952a907db328395183f1698b9e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "99530193"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587219"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor stronach
 
@@ -33,7 +33,7 @@ Autor [Kirka Larkin](https://github.com/serpent5)
 
 W tym artykule wyjaśniono, jak sprawdzić poprawność danych wprowadzonych przez użytkownika w aplikacji ASP.NET Core MVC lub Razor Pages.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="model-state"></a>Stan modelu
 
@@ -419,7 +419,7 @@ Poprzednie podejście nie zapobiega weryfikacji po stronie klienta ASP.NET Core 
 
 W tym artykule wyjaśniono, jak sprawdzić poprawność danych wprowadzonych przez użytkownika w aplikacji ASP.NET Core MVC lub Razor Pages.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="model-state"></a>Stan modelu
 
@@ -439,7 +439,7 @@ Walidacja jest automatyczna, ale warto powtórzyć ją ręcznie. Na przykład mo
 
 ## <a name="validation-attributes"></a>Atrybuty walidacji
 
-Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości modelu. W poniższym przykładzie z [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) przedstawiono klasę modelu, która ma adnotację z atrybutami walidacji. Ten `[ClassicMovie]` atrybut jest niestandardowym atrybutem walidacji, a inne są wbudowane. Niepokazywany jest `[ClassicMovie2]` , który pokazuje alternatywny sposób implementacji atrybutu niestandardowego.
+Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości modelu. W poniższym przykładzie z [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/validation/sample) przedstawiono klasę modelu, która ma adnotację z atrybutami walidacji. Ten `[ClassicMovie]` atrybut jest niestandardowym atrybutem walidacji, a inne są wbudowane. Niepokazywany jest `[ClassicMovie2]` , który pokazuje alternatywny sposób implementacji atrybutu niestandardowego.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/Movie.cs?name=snippet_ModelClass)]
 

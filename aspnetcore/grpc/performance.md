@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 386359adfe0e876fa5c067dc82153fd3de0f3fba
-ms.sourcegitcommit: 3982ff9dabb5b12aeb0a61cde2686b5253364f5d
+ms.openlocfilehash: 5d19ace2e844f2159c1ba0e8bc92960bcf00d54e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102118944"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586998"
 ---
 # <a name="performance-best-practices-with-grpc"></a>Najlepsze rozwiązania w zakresie wydajności z gRPC
 
@@ -205,3 +205,30 @@ Należy pamiętać o dodatkowej złożoności i ograniczeniach użycia wywołań
 1. Strumień może zostać przerwany przez usługę lub błąd połączenia. Jeśli wystąpi błąd, logika jest wymagana do ponownego uruchomienia strumienia.
 2. `RequestStream.WriteAsync` nie jest bezpieczna w przypadku wielowątkowości. W danym momencie może być zapisany tylko jeden komunikat w strumieniu. Wysyłanie komunikatów z wielu wątków za pośrednictwem pojedynczego strumienia wymaga kolejki producent/odbiorca, która jest taka sama jak <xref:System.Threading.Channels.Channel%601> w przypadku komunikatów.
 3. Metoda przesyłania strumieniowego gRPC jest ograniczona do odebrania jednego typu komunikatu i wysłania jednego typu wiadomości. Na przykład `rpc StreamingCall(stream RequestMessage) returns (stream ResponseMessage)` odbiera `RequestMessage` i wysyła `ResponseMessage` . Protobuf obsługę komunikatów nieznanych lub warunkowych przy użyciu `Any` i może obejść `oneof` to ograniczenie.
+
+## <a name="send-binary-payloads"></a>Wyślij binarne ładunki
+
+Ładunki binarne są obsługiwane w protobuf z `bytes` typem wartości skalarnej. Wygenerowana właściwość w języku C# używa `ByteString` jako typ właściwości.
+
+```protobuf
+syntax = "proto3";
+
+message PayloadResponse {
+    bytes data = 1;
+}  
+```
+
+`ByteString` wystąpienia są tworzone przy użyciu `ByteString.CopyFrom(byte[] data)` . Ta metoda przydziela nowe `ByteString` i nowe `byte[]` . Dane są kopiowane do nowej tablicy bajtów.
+
+Dodatkowe alokacje i kopie można uniknąć przy użyciu `UnsafeByteOperations.UnsafeWrap(ReadOnlyMemory<byte> bytes)` programu w celu utworzenia `ByteString` wystąpień.
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = UnsafeByteOperations.UnsafeWrap(data);
+```
+
+Bajty nie są kopiowane `UnsafeByteOperations.UnsafeWrap` , dlatego nie mogą być modyfikowane, gdy `ByteString` jest używany.
+
+`UnsafeByteOperations.UnsafeWrap` wymaga usługi [Google. protobuf](https://www.nuget.org/packages/Google.Protobuf/) w wersji 3.15.0 lub nowszej.

@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
-ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
+ms.openlocfilehash: 60471232b3373039404b27c4afd1a1725d4d21eb
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/09/2021
-ms.locfileid: "98058288"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586868"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
+# <a name="razor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)i [Dan Vicarel](https://github.com/Rabadash8820)
 
@@ -34,7 +34,7 @@ Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerz
 
 RazorJęzykiem domyślnym jest HTML. Renderowanie kodu HTML z Razor znaczników nie różni się od renderowania kodu HTML z pliku HTML. Znaczniki HTML w plikach *. cshtml* Razor są renderowane przez serwer bez zmian.
 
-## <a name="no-locrazor-syntax"></a>Razor obowiązuje
+## <a name="razor-syntax"></a>Razor obowiązuje
 
 Razor obsługuje język C# i używa `@` symbolu do przejścia z HTML do języka c#. Razor oblicza wyrażenia języka C# i renderuje je w danych wyjściowych w formacie HTML.
 
@@ -58,7 +58,7 @@ Atrybuty i zawartość HTML zawierające adresy e-mail nie traktują `@` symbolu
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-no-locrazor-expressions"></a>Wyrażenia niejawne Razor
+## <a name="implicit-razor-expressions"></a>Wyrażenia niejawne Razor
 
 Wyrażenia niejawne Razor zaczynają się od `@` kodu C#:
 
@@ -86,7 +86,7 @@ Poprzedni kod generuje błąd kompilatora podobny do jednego z następujących:
 
 Wywołania metody ogólnej muszą być opakowane w [jawne Razor wyrażenie](#explicit-razor-expressions) lub [ Razor blok kodu](#razor-code-blocks).
 
-## <a name="explicit-no-locrazor-expressions"></a>RazorWyrażenia jawne
+## <a name="explicit-razor-expressions"></a>RazorWyrażenia jawne
 
 RazorWyrażenia jawne składają się z `@` symbolu z wyrównanym nawiasem. W celu renderowania czasu ostatniego tygodnia Razor używane są następujące znaczniki:
 
@@ -157,7 +157,7 @@ Kod renderuje następujący HTML:
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a>Razor bloki kodu
+## <a name="razor-code-blocks"></a>Razor bloki kodu
 
 Razor bloki kodu zaczynają się od `@` i są ujęte w nawiasy `{}` . W przeciwieństwie do wyrażeń, kod C# wewnątrz bloków kodu nie jest renderowany. Bloki kodu i wyrażenia w widoku mają ten sam zakres i są zdefiniowane w kolejności:
 
@@ -789,11 +789,11 @@ Odwołania do składników ( `@ref` ) umożliwiają odwoływanie się do wystąp
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/templated-components#generic-typed-components>.
+`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/templated-components>.
 
 ::: moniker-end
 
-## <a name="templated-no-locrazor-delegates"></a>Delegaty z szablonami Razor
+## <a name="templated-razor-delegates"></a>Delegaty z szablonami Razor
 
 Razor Szablony umożliwiają zdefiniowanie fragmentu interfejsu użytkownika w następującym formacie:
 
@@ -904,9 +904,9 @@ Istnieją trzy dyrektywy, które odnoszą się do [pomocników tagów](xref:mvc/
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Usuwa pomocników tagów, które zostały wcześniej dodane z widoku. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Określa prefiks tagu w celu włączenia obsługi pomocnika tagów i zapewnienia jawnego użycia pomocnika tagów. |
 
-## <a name="no-locrazor-reserved-keywords"></a>Razor zastrzeżone słowa kluczowe
+## <a name="razor-reserved-keywords"></a>Razor zastrzeżone słowa kluczowe
 
-### <a name="no-locrazor-keywords"></a>Razor służąc
+### <a name="razor-keywords"></a>Razor służąc
 
 * `page` (Wymaga ASP.NET Core 2,1 lub nowszego)
 * `namespace`
@@ -918,7 +918,7 @@ Istnieją trzy dyrektywy, które odnoszą się do [pomocników tagów](xref:mvc/
 
 Razor Słowa kluczowe są wyprowadzane z `@(Razor Keyword)` (na przykład `@(functions)` ).
 
-### <a name="c-no-locrazor-keywords"></a>RazorSłowa kluczowe języka C#
+### <a name="c-razor-keywords"></a>RazorSłowa kluczowe języka C#
 
 * `case`
 * `do`
@@ -937,11 +937,11 @@ Razor Słowa kluczowe są wyprowadzane z `@(Razor Keyword)` (na przykład `@(fun
 
 RazorSłowa kluczowe języka C# muszą mieć podwójne ucieczki z `@(@C# Razor Keyword)` (na przykład `@(@case)` ). Pierwszy `@` wyprowadza Razor Analizator. Drugi `@` wyprowadza analizator składni języka C#.
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Zastrzeżone słowa kluczowe, które nie są używane przez Razor
+### <a name="reserved-keywords-not-used-by-razor"></a>Zastrzeżone słowa kluczowe, które nie są używane przez Razor
 
 * `class`
 
-## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a>Sprawdzanie Razor klasy języka C# wygenerowanej dla widoku
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Sprawdzanie Razor klasy języka C# wygenerowanej dla widoku
 
 ::: moniker range=">= aspnetcore-2.1"
 

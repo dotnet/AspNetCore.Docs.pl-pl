@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: f8cdbbffae9b291923a6d425fef5526b0ec88f61
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 78b192cb2240046d16b1b766954ed4ca5229d888
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253192"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586712"
 ---
-# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Wprowadzenie do Razor stron w ASP.NET Core
+# <a name="introduction-to-razor-pages-in-aspnet-core"></a>Wprowadzenie do Razor stron w ASP.NET Core
 
 
 [Rick Anderson](https://twitter.com/RickAndMSFT) i [Ryan Nowak](https://github.com/rynowak)
@@ -78,9 +78,9 @@ Ten dokument zawiera wprowadzenie do Razor stron. Nie jest to samouczek krok po 
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a>Tworzenie Razor projektu stron
+## <a name="create-a-razor-pages-project"></a>Tworzenie Razor projektu stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobacz Wprowadzenie do [ Razor stron](xref:tutorials/razor-pages/razor-pages-start) Razor .
 
@@ -94,7 +94,7 @@ Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobac
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor Page
+## <a name="razor-pages"></a>Razor Page
 
 Razor Strony są włączone w *Startup.cs*:
 
@@ -134,7 +134,7 @@ Uwagi:
 
 Razor Strony są przeznaczone do tworzenia wspólnych wzorców używanych z przeglądarkami sieci Web, które są łatwe do wdrożenia podczas kompilowania aplikacji. [Powiązania modelu](xref:mvc/models/model-binding), [pomocników tagów](xref:mvc/views/tag-helpers/intro)i pomocników HTML same *działają* z właściwościami zdefiniowanymi w Razor klasie Page. Weź pod uwagę stronę implementującą podstawowy formularz "contact us" (kontakt z nami) dla `Contact` modelu:
 
-Przykłady w tym dokumencie `DbContext` są inicjowane w pliku [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) .
+Przykłady w tym dokumencie `DbContext` są inicjowane w pliku [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) .
 
 Baza danych w pamięci wymaga `Microsoft.EntityFrameworkCore.InMemory` pakietu NuGet.
 
@@ -369,13 +369,13 @@ Razor Strony powracają do wywoływania `OnGet` procedury obsługi, jeśli nie `
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF i Razor strony
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF i Razor strony
 
 Razor Strony są chronione przez [weryfikację przed fałszerstwem](xref:security/anti-request-forgery). [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) wprowadza do elementów formularza HTML tokeny zabezpieczające przed fałszerstwem.
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
 
 Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml* i *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku widoków konwencjonalnych Razor .
 
@@ -614,13 +614,13 @@ Użyj, <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> Aby ustawić
 
 Aby wstępnie skompilować widoki, zobacz [ Razor przeglądanie kompilacji](xref:mvc/views/view-compilation).
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Określ, że Razor strony znajdują się w katalogu głównym zawartości
+### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Określ, że Razor strony znajdują się w katalogu głównym zawartości
 
 Domyślnie Razor strony są umieszczane w katalogu */Pages* . Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> , aby określić, że Razor strony znajdują się w [katalogu głównym zawartości](xref:fundamentals/index#content-root) <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> aplikacji:
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Określ, że Razor strony znajdują się w niestandardowym katalogu głównym
+### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Określ, że Razor strony znajdują się w niestandardowym katalogu głównym
 
 Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> , aby określić, że Razor strony znajdują się w niestandardowym katalogu głównym w aplikacji (podaj ścieżkę względną):
 
@@ -630,7 +630,7 @@ Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilder
 
 * Zobacz Rozpoczynanie [pracy ze Razor stronami](xref:tutorials/razor-pages/razor-pages-start), które kompilują się w tym wprowadzeniu.
 * [Autoryzuj atrybut i Razor strony](xref:security/authorization/simple#aarp)
-* [Pobieranie lub wyświetlanie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
+* [Pobieranie lub wyświetlanie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
 * [Razor odwołanie do składni dla ASP.NET Core](xref:mvc/views/razor)
 * <xref:mvc/controllers/areas>
@@ -661,9 +661,9 @@ Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilder
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a>Tworzenie Razor projektu stron
+## <a name="create-a-razor-pages-project"></a>Tworzenie Razor projektu stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobacz Wprowadzenie do [ Razor stron](xref:tutorials/razor-pages/razor-pages-start) Razor .
 
@@ -679,7 +679,7 @@ Uruchom `dotnet new webapp` polecenie w wierszu polecenia.
 
 ---
 
-## <a name="no-locrazor-pages"></a>Razor Page
+## <a name="razor-pages"></a>Razor Page
 
 Razor Strony są włączone w *Startup.cs*:
 
@@ -719,7 +719,7 @@ Uwagi:
 
 Razor Strony są przeznaczone do tworzenia wspólnych wzorców używanych z przeglądarkami sieci Web, które są łatwe do wdrożenia podczas kompilowania aplikacji. [Powiązania modelu](xref:mvc/models/model-binding), [pomocników tagów](xref:mvc/views/tag-helpers/intro)i pomocników HTML same *działają* z właściwościami zdefiniowanymi w Razor klasie Page. Weź pod uwagę stronę implementującą podstawowy formularz "contact us" (kontakt z nami) dla `Contact` modelu:
 
-Przykłady w tym dokumencie `DbContext` są inicjowane w pliku [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) .
+Przykłady w tym dokumencie `DbContext` są inicjowane w pliku [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) .
 
 [!code-csharp[](index/sample/RazorPagesContacts/Startup.cs?highlight=15-16)]
 
@@ -879,13 +879,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF i Razor strony
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF i Razor strony
 
 Nie trzeba pisać kodu do [weryfikacji przed fałszerstwem](xref:security/anti-request-forgery). Generowanie i sprawdzanie poprawności tokenów antysfałszowanych są automatycznie dołączane do Razor stron.
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
 
 Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml*, *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku Razor widoków konwencjonalnych.
 
@@ -1109,11 +1109,11 @@ Obecnie można użyć, `RazorPagesOptions` Aby ustawić katalog główny dla str
 
 Aby wstępnie skompilować widoki, zobacz [ Razor przeglądanie kompilacji](xref:mvc/views/view-compilation) .
 
-[Pobierz lub Wyświetl przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample).
+[Pobierz lub Wyświetl przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/sample).
 
 Zobacz Rozpoczynanie [pracy ze Razor stronami](xref:tutorials/razor-pages/razor-pages-start), które kompilują się w tym wprowadzeniu.
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Określ, że Razor strony znajdują się w katalogu głównym zawartości
+### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Określ, że Razor strony znajdują się w katalogu głównym zawartości
 
 Domyślnie Razor strony są umieszczane w katalogu */Pages* . Dodaj [program with Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) do [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) , aby określić, że Razor strony znajdują się w [katalogu głównym zawartości](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) aplikacji:
 
@@ -1126,7 +1126,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Określ, że Razor strony znajdują się w niestandardowym katalogu głównym
+### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Określ, że Razor strony znajdują się w niestandardowym katalogu głównym
 
 Dodaj element [with Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) do [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) , aby określić, że Razor strony znajdują się w niestandardowym katalogu głównym w aplikacji (podaj ścieżkę względną):
 

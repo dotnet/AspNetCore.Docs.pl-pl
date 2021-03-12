@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: dfc134b97bb0976bc682a53d536cd27785550c7d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f89191cff1faa5b55ee9031a6a6d0749a74e43c0
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059666"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587544"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Safelist IP klienta dla ASP.NET Core
 
@@ -43,7 +43,7 @@ W każdym przypadku ciąg zawierający zatwierdzone adresy IP klienta jest przec
 
 Dostęp jest dozwolony, jeśli tablica zawiera adres IP. W przeciwnym razie zwracany jest kod stanu zabroniony protokołu HTTP 403.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/ip-safelist/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="ip-address-safelist"></a>Adres IP Safelist
 
@@ -68,7 +68,7 @@ Oprogramowanie pośredniczące analizuje ciąg w tablicę i wyszukuje zdalny adr
 
 ## <a name="action-filter"></a>Filtr akcji
 
-Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Przykład:
+Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
@@ -103,9 +103,9 @@ W przykładowej aplikacji filtr akcji jest stosowany do `Get` metody akcji kontr
 
 * Zlecenie żądania HTTP inne niż GET, `AdminSafeListMiddleware` oprogramowanie pośredniczące sprawdza adres IP klienta.
 
-## <a name="no-locrazor-pages-filter"></a>Razor Filtr stron
+## <a name="razor-pages-filter"></a>Razor Filtr stron
 
-Jeśli chcesz, aby dla aplikacji stron była oparta safelista kontrola dostępu Razor , użyj Razor filtru stron. Przykład:
+Jeśli chcesz, aby dla aplikacji stron była oparta safelista kontrola dostępu Razor , użyj Razor filtru stron. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 

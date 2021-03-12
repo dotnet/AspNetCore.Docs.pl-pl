@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: c32d20d4616650db004c78fb4d8ea9a4d5a3beab
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 90bde63ac94ba3fd29a067962989cf773ec613db
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98252802"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587244"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -34,7 +34,7 @@ Przez [Steve Kowalski](https://ardalis.com/) i [Rutger burzy](https://github.com
 
 ASP.NET Core obsługuje przekazywanie co najmniej jednego pliku przy użyciu powiązania z buforowanym modelem dla mniejszych plików i przesyłania strumieniowego z buforem dla większych plików.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>Zagadnienia dotyczące bezpieczeństwa
 
@@ -238,7 +238,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)
@@ -409,7 +409,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 >
 > Nie używaj ani nie ufaj `FileName` właściwości <xref:Microsoft.AspNetCore.Http.IFormFile> bez sprawdzania poprawności. `FileName`Właściwość powinna być używana tylko do celów wyświetlania i tylko po kodowaniu html.
 >
-> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)
@@ -758,7 +758,7 @@ Przykłady w tym temacie polegają na zapełnieniu <xref:System.IO.MemoryStream>
 
 ASP.NET Core obsługuje przekazywanie co najmniej jednego pliku przy użyciu powiązania z buforowanym modelem dla mniejszych plików i przesyłania strumieniowego z buforem dla większych plików.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>Zagadnienia dotyczące bezpieczeństwa
 
@@ -962,7 +962,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)
@@ -1133,7 +1133,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 >
 > Nie używaj ani nie ufaj `FileName` właściwości <xref:Microsoft.AspNetCore.Http.IFormFile> bez sprawdzania poprawności. `FileName`Właściwość powinna być używana tylko do celów wyświetlania i tylko po kodowaniu html.
 >
-> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)
@@ -1493,7 +1493,7 @@ Przykłady w tym temacie polegają na zapełnieniu <xref:System.IO.MemoryStream>
 
 ASP.NET Core obsługuje przekazywanie co najmniej jednego pliku przy użyciu powiązania z buforowanym modelem dla mniejszych plików i przesyłania strumieniowego z buforem dla większych plików.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>Zagadnienia dotyczące bezpieczeństwa
 
@@ -1697,7 +1697,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)
@@ -1868,7 +1868,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 >
 > Nie używaj ani nie ufaj `FileName` właściwości <xref:Microsoft.AspNetCore.Http.IFormFile> bez sprawdzania poprawności. `FileName`Właściwość powinna być używana tylko do celów wyświetlania i tylko po kodowaniu html.
 >
-> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
+> Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
 > * [Walidacja](#validation)

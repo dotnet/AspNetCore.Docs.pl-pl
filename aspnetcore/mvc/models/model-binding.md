@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 4de34a75da932b41190caa8434ac5be8cc0710fd
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 5eaedf6dbe5df59848b9cf8a5bda67add48db2a6
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981937"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102586946"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Powiązanie modelu w ASP.NET Core
 
@@ -31,7 +31,7 @@ ms.locfileid: "94981937"
 
 W tym artykule wyjaśniono, co to jest powiązanie modelu, jak to działa i jak dostosować jego zachowanie.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/model-binding/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="what-is-model-binding"></a>Co to jest powiązanie modelu
 
@@ -67,7 +67,7 @@ Struktura następnie wywołuje `GetById` metodę, przekazując wartość 2 dla `
 
 W poprzednim przykładzie elementy docelowe powiązań modelu to parametry metody, które są typami prostymi. Elementy docelowe mogą być również właściwościami typu złożonego. Po pomyślnym powiązaniu każdej właściwości [Walidacja modelu](xref:mvc/models/validation) jest wykonywana dla tej właściwości. Rekord danych powiązanych z modelem oraz wszelkie błędy powiązań lub walidacji są przechowywane w [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) lub [PageModel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState). Aby dowiedzieć się, czy ten proces zakończył się pomyślnie, aplikacja sprawdza flagę [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) .
 
-## <a name="targets"></a>Obiekty docelowe
+## <a name="targets"></a>Targets (Obiekty docelowe)
 
 Powiązanie modelu próbuje znaleźć wartości dla następujących rodzajów obiektów docelowych:
 
@@ -165,7 +165,7 @@ Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców 
 * Utwórz klasę implementującą `IValueProviderFactory` .
 * Zarejestruj klasę fabryki w `Startup.ConfigureServices` .
 
-Aplikacja Przykładowa zawiera [dostawcę wartości](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) i przykład [fabryki](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) , który pobiera wartości z cookie s. Oto kod rejestracji w programie `Startup.ConfigureServices` :
+Aplikacja Przykładowa zawiera [dostawcę wartości](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) i przykład [fabryki](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) , który pobiera wartości z cookie s. Oto kod rejestracji w programie `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -205,7 +205,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
 * [Wartość logiczna](xref:System.ComponentModel.BooleanConverter)
-* [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
+* [Byte, bajty](xref:System.ComponentModel.ByteConverter) [](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
@@ -214,7 +214,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
+* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)
@@ -280,11 +280,11 @@ Dostępne są kilka wbudowanych atrybutów do kontrolowania powiązania modelu t
 * `[BindNever]`
 
 > [!WARNING]
-> Te atrybuty wpływają na powiązanie modelu, gdy dane formularza ogłoszonego są źródłem wartości. **Nie mają** one wpływu na wejściowe elementy formatujące, które przetwarzają ogłoszone treści JSON i XML. Dane wejściowe są wyjaśnione [w dalszej części tego artykułu](#input-formatters).
+> Te atrybuty wpływają na powiązanie modelu, gdy dane formularza ogłoszonego są źródłem wartości. ***Nie*** wpływają one na wejściowe elementy formatujące, które przetwarzają ogłoszone treści kodu JSON i XML. Dane wejściowe są wyjaśnione [w dalszej części tego artykułu](#input-formatters).
 
 ### <a name="bind-attribute"></a>[Bind] — atrybut
 
-Można zastosować do klasy lub parametru metody. Określa, które właściwości modelu powinny być dołączone do powiązania modelu. `[Bind]` nie _*_ma wpływu na_*_ wejściowe elementy formatujące.
+Można zastosować do klasy lub parametru metody. Określa, które właściwości modelu powinny być dołączone do powiązania modelu. `[Bind]` nie ***ma wpływu na*** wejściowe elementy formatujące.
 
 W poniższym przykładzie tylko określone właściwości `Instructor` modelu są powiązane, gdy wywoływana jest jakakolwiek procedura obsługi lub metoda działania:
 
@@ -300,11 +300,11 @@ W poniższym przykładzie tylko określone właściwości `Instructor` modelu s�
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszach _create *. Nie działa prawidłowo w scenariuszach edycji, ponieważ wykluczone właściwości mają ustawioną wartość null lub wartość domyślną, a nie jako pozostawione bez zmian. W celu zapewnienia obrony przed przekroczeniem, zaleca się, aby zamiast `[Bind]` atrybutu. Aby uzyskać więcej informacji, zobacz [temat Security uwagi dotyczący przefinalizowania](xref:data/ef-mvc/crud#security-note-about-overposting).
+Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszach *tworzenia* scenariuszy. Nie działa prawidłowo w scenariuszach edycji, ponieważ wykluczone właściwości mają ustawioną wartość null lub wartość domyślną, a nie jako pozostawione bez zmian. W celu zapewnienia obrony przed przekroczeniem, zaleca się, aby zamiast `[Bind]` atrybutu. Aby uzyskać więcej informacji, zobacz [temat Security uwagi dotyczący przefinalizowania](xref:data/ef-mvc/crud#security-note-about-overposting).
 
 ### <a name="modelbinder-attribute"></a>[ModelBinder] — atrybut
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> można zastosować do typów, właściwości lub parametrów. Umożliwia określenie typu spinacza modelu używanego do powiązania określonego wystąpienia lub typu. Przykład:
+<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> można zastosować do typów, właściwości lub parametrów. Umożliwia określenie typu spinacza modelu używanego do powiązania określonego wystąpienia lub typu. Na przykład:
 
 ```C#
 [HttpPost]
@@ -339,7 +339,7 @@ Można stosować tylko do właściwości modelu, a nie do parametrów metody. Un
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -384,7 +384,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 
@@ -471,7 +471,7 @@ Natomiast wartości pochodzące z danych formularza są przekształcane z uwzgl�
 Aby dostawca wartości ASP.NET Core trasy i dostawca wartości ciągu zapytania były poddawane konwersji zależnej od kultury:
 
 * Dziedzicz po <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
-* Skopiuj kod z [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) lub [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)
+* Skopiuj kod z [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) lub [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)
 * Zastąp [wartość kultury](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30) przekazaną do konstruktora dostawcy wartości wartością [CultureInfo. CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture)
 * Zastąp domyślną fabrykę dostawcy wartości w opcjach MVC nowym:
 
@@ -580,7 +580,7 @@ Nazwa tego atrybutu jest zgodna ze wzorcem atrybutów powiązania modelu, które
 
 W tym artykule wyjaśniono, co to jest powiązanie modelu, jak to działa i jak dostosować jego zachowanie.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/models/model-binding/samples) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="what-is-model-binding"></a>Co to jest powiązanie modelu
 
@@ -616,7 +616,7 @@ Struktura następnie wywołuje `GetById` metodę, przekazując wartość 2 dla `
 
 W poprzednim przykładzie elementy docelowe powiązań modelu to parametry metody, które są typami prostymi. Elementy docelowe mogą być również właściwościami typu złożonego. Po pomyślnym powiązaniu każdej właściwości [Walidacja modelu](xref:mvc/models/validation) jest wykonywana dla tej właściwości. Rekord danych powiązanych z modelem oraz wszelkie błędy powiązań lub walidacji są przechowywane w [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) lub [PageModel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState). Aby dowiedzieć się, czy ten proces zakończył się pomyślnie, aplikacja sprawdza flagę [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) .
 
-## <a name="targets"></a>Obiekty docelowe
+## <a name="targets"></a>Targets (Obiekty docelowe)
 
 Powiązanie modelu próbuje znaleźć wartości dla następujących rodzajów obiektów docelowych:
 
@@ -714,7 +714,7 @@ Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców 
 * Utwórz klasę implementującą `IValueProviderFactory` .
 * Zarejestruj klasę fabryki w `Startup.ConfigureServices` .
 
-Aplikacja Przykładowa zawiera [dostawcę wartości](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) i przykład [fabryki](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) , który pobiera wartości z cookie s. Oto kod rejestracji w programie `Startup.ConfigureServices` :
+Aplikacja Przykładowa zawiera [dostawcę wartości](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) i przykład [fabryki](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) , który pobiera wartości z cookie s. Oto kod rejestracji w programie `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -754,7 +754,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
 * [Wartość logiczna](xref:System.ComponentModel.BooleanConverter)
-* [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
+* [Byte, bajty](xref:System.ComponentModel.ByteConverter) [](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
@@ -763,7 +763,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
+* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)
@@ -867,7 +867,7 @@ Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszac
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -912,7 +912,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 
@@ -958,7 +958,7 @@ Natomiast wartości pochodzące z danych formularza są przekształcane z uwzgl�
 Aby dostawca wartości ASP.NET Core trasy i dostawca wartości ciągu zapytania były poddawane konwersji zależnej od kultury:
 
 * Dziedzicz po <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
-* Skopiuj kod z [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) lub [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)
+* Skopiuj kod z [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) lub [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/main/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)
 * Zastąp [wartość kultury](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30) przekazaną do konstruktora dostawcy wartości wartością [CultureInfo. CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture)
 * Zastąp domyślną fabrykę dostawcy wartości w opcjach MVC nowym:
 

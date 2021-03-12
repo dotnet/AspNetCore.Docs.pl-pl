@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: d39db59b0fc273fe4193a4864f302ecd3f4ad348
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 2e49c545b0d343475ce44a636a6ae66324f9d3bf
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060914"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587206"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Pomocnik tagu kotwicy w ASP.NET Core
 
@@ -33,7 +33,7 @@ Według [Peterowi Kellner](https://peterkellner.net) i [Scott Addie](https://git
 
 Aby zapoznać się z omówieniem pomocników tagów, zobacz <xref:mvc/views/tag-helpers/intro> .
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 *SpeakerController* jest używany w przykładach w tym dokumencie:
 
@@ -53,7 +53,7 @@ Wygenerowany kod HTML:
 <a href="/Speaker">All Speakers</a>
 ```
 
-Jeśli `asp-controller` atrybut jest określony i `asp-action` nie jest, wartość domyślna `asp-action` to akcja kontrolera skojarzona z aktualnie wykonywanym widokiem. Jeśli `asp-action` zostanie pominięty z poprzedniego znacznika, a pomocnik tagu kotwicy jest używany w widoku indeksu *HomeController* ( *Index* */Home* ), wygenerowany kod HTML jest:
+Jeśli `asp-controller` atrybut jest określony i `asp-action` nie jest, wartość domyślna `asp-action` to akcja kontrolera skojarzona z aktualnie wykonywanym widokiem. Jeśli `asp-action` zostanie pominięty z poprzedniego znacznika, a pomocnik tagu kotwicy jest używany w widoku indeksu *HomeController*(  */Home*), wygenerowany kod HTML jest:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -83,7 +83,7 @@ Rozważmy następującą akcję kontrolera:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-Przy użyciu domyślnego szablonu trasy zdefiniowanego w *Startup.Configuruj* :
+Przy użyciu domyślnego szablonu trasy zdefiniowanego w *Startup.Configuruj*:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -139,7 +139,7 @@ W poniższym znaczniku `asp-route` atrybut odwołuje się do nazwanej trasy:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-Pomocnik tagu kotwicy generuje trasę bezpośrednio do tej akcji kontrolera przy użyciu adresu URL */Speaker/Evaluations* . Wygenerowany kod HTML:
+Pomocnik tagu kotwicy generuje trasę bezpośrednio do tej akcji kontrolera przy użyciu adresu URL */Speaker/Evaluations*. Wygenerowany kod HTML:
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -185,7 +185,7 @@ Tagi skrótów są przydatne podczas tworzenia aplikacji po stronie klienta. Mog
 
 Atrybut [obszaru ASP](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) ustawia nazwę obszaru używaną do ustawiania odpowiedniej trasy. W poniższych przykładach przedstawiono sposób, w jaki `asp-area` atrybut powoduje ponowne mapowanie tras.
 
-#### <a name="usage-in-no-locrazor-pages"></a>Użycie na Razor stronach
+#### <a name="usage-in-razor-pages"></a>Użycie na Razor stronach
 
 Razor Obszary stron są obsługiwane w ASP.NET Core 2,1 lub nowszych.
 
@@ -247,13 +247,13 @@ Wygenerowany kod HTML:
 ```
 
 > [!TIP]
-> Aby obsługiwać obszary w aplikacji MVC, szablon trasy musi zawierać odwołanie do obszaru, jeśli istnieje. Ten szablon jest reprezentowany przez drugi parametr `routes.MapRoute` wywołania metody w *Startup.Configuruj* :
+> Aby obsługiwać obszary w aplikacji MVC, szablon trasy musi zawierać odwołanie do obszaru, jeśli istnieje. Ten szablon jest reprezentowany przez drugi parametr `routes.MapRoute` wywołania metody w *Startup.Configuruj*:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>ASP — protokół
 
-Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Przykład:
+Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Na przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -267,7 +267,7 @@ Nazwa hosta w przykładzie jest localhost. Pomocnik tagu kotwicy używa domeny p
 
 ### <a name="asp-host"></a>ASP — Host
 
-Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Przykład:
+Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Na przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: f9fad5a63c76a3b21341a12fd40baafcdf2c9dac
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b7515bcd8b15199770a4245469d00d10da5566f8
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059731"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605690"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Co nowego w ASP.NET Core 2,0
 
 W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 2,0 z linkami do odpowiedniej dokumentacji.
 
-## <a name="no-locrazor-pages"></a>Razor Page
+## <a name="razor-pages"></a>Razor Page
 
 Razor Strony są nową funkcją ASP.NET Core MVC, która sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i bardziej produktywne.
 
@@ -76,7 +76,7 @@ Nowe szablony są dostępne do konfigurowania uwierzytelniania dla aplikacji sie
 
 Aby uzyskać informacje o stanie planowanej dokumentacji, zobacz problem z usługą [GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="no-locidentity-update"></a>Identity aktualizacji
+## <a name="identity-update"></a>Identity aktualizacji
 
 Ułatwiamy tworzenie bezpiecznych interfejsów API sieci Web za pomocą Identity programu w ASP.NET Core 2,0. Możesz uzyskać tokeny dostępu do uzyskiwania dostępu do interfejsów API sieci Web przy użyciu [biblioteki uwierzytelniania firmy Microsoft (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client).
 
@@ -140,7 +140,7 @@ Razor Widok sprzed kompilacji jest domyślnie włączony podczas publikowania, z
 
 Aby uzyskać więcej informacji, zobacz [ Razor przeglądanie kompilacji i wstępnej kompilacji w ASP.NET Core](xref:mvc/views/view-compilation).
 
-## <a name="no-locrazor-support-for-c-71"></a>Razor Obsługa języka C# 7,1
+## <a name="razor-support-for-c-71"></a>Razor Obsługa języka C# 7,1
 
 RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i Pattern-Matching z typami ogólnymi. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
 
@@ -148,7 +148,7 @@ RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilat
 <LangVersion>latest</LangVersion>
 ```
 
-Aby uzyskać informacje o stanie funkcji języka C# 7,1, zobacz [repozytorium GitHub Roslyn](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md).
+Aby uzyskać informacje o stanie funkcji języka C# 7,1, zobacz [repozytorium GitHub Roslyn](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md).
 
 ## <a name="other-documentation-updates-for-20"></a>Inne aktualizacje dokumentacji dotyczące 2,0
 

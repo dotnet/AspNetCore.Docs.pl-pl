@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 92941d21820de90eb2ae8fb76c21c588ed9f1ffb
-ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
+ms.openlocfilehash: bdfaf50895612e739eb5ca068a76755f97cf24c2
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98024759"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588077"
 ---
-# <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRKlient Java ASP.NET Core
+# <a name="aspnet-core-signalr-java-client"></a>SignalRKlient Java ASP.NET Core
 
 Autor [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
@@ -34,9 +34,9 @@ Klient Java umożliwia łączenie się z serwerem ASP.NET Core SignalR przy uży
 
 Przykładowa aplikacja konsoli Java, do której odwołuje się ten artykuł, używa SignalR klienta Java.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/signalr/java-client/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-no-locsignalr-java-client-package"></a>Zainstaluj SignalR pakiet klienta Java
+## <a name="install-the-signalr-java-client-package"></a>Zainstaluj SignalR pakiet klienta Java
 
 *Sygnał-1.0.0* plik JAR umożliwia klientom łączenie się z SignalR koncentratorami. Aby znaleźć najnowszy numer wersji pliku JAR, zobacz [wyniki wyszukiwania Maven](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr).
 

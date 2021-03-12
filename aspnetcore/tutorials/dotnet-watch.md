@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 84cae3b3babe28c2ebf6dba50023b020112d1bb3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060043"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587583"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu obserwatora plików
 
@@ -32,7 +32,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Victor Hurdugaci](ht
 
 W tym samouczku jest wykorzystywany istniejący internetowy interfejs API z dwoma punktami końcowymi: jeden, który zwraca sumę i jeden z nich zwraca produkt. Metoda produktu zawiera usterkę, która została rozwiązana w tym samouczku.
 
-Pobierz [przykładową aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample). Składa się z dwóch projektów: *webapp* (ASP.NET Core Web API) i *WebAppTests* (testy jednostkowe dla internetowego interfejsu API).
+Pobierz [przykładową aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/dotnet-watch/sample). Składa się z dwóch projektów: *webapp* (ASP.NET Core Web API) i *WebAppTests* (testy jednostkowe dla internetowego interfejsu API).
 
 W powłoce poleceń przejdź do folderu *webapp* . Uruchom następujące polecenie:
 
@@ -81,7 +81,7 @@ Przejdź do interfejsu API produktu ( `http://localhost:<port number>/api/math/p
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Uruchamianie poleceń interfejs wiersza polecenia platformy .NET Core przy użyciu `dotnet watch`
 
-Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Przykład:
+Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Na przykład:
 
 | Polecenie | Polecenie z zegarkiem |
 | ---- | ----- |
@@ -219,7 +219,3 @@ Niektóre opcje konfiguracji mogą być przesyłane `dotnet watch` przez zmienne
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Domyślnie program `dotnet watch` optymalizuje kompilację, unikając niektórych operacji, takich jak uruchamianie przywracania lub ponowne ocenianie zestawu obserwowanych plików podczas każdej zmiany pliku. W przypadku ustawienia wartości "1" lub "true" te optymalizacje są wyłączone. |
 | `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna*. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` próbuje odświeżyć przeglądarki po wykryciu zmian plików. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. To zachowanie jest również pomijane, jeśli `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` jest ustawiona. |
-
-## <a name="dotnet-watch-in-github"></a>`dotnet-watch` w witrynie GitHub
-
-`dotnet-watch` jest częścią [repozytorium dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)usługi GitHub.

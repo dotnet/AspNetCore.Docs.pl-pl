@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 124f23caa4a757f63a80dfea627304204ba2cdca
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 184901ad0bb6188ed908d41dabf2433c5ca7c1ce
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061434"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587167"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>Pomocnik tagów częściowych w ASP.NET Core
 
@@ -32,7 +32,7 @@ Przez [Scott Addie](https://github.com/scottaddie)
 
 Aby zapoznać się z omówieniem pomocników tagów, zobacz <xref:mvc/views/tag-helpers/intro> .
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="overview"></a>Omówienie
 
@@ -67,7 +67,7 @@ Następujące oznakowanie używa jawnej ścieżki, wskazując, że *_ProductPart
 
 Ten `for` atrybut przypisuje [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) do oceny względem bieżącego modelu. A `ModelExpression` wnioskuje `@Model.` składnię. Na przykład, `for="Product"` można użyć zamiast `for="@Model.Product"` . To domyślne zachowanie wnioskowania jest zastępowane przy użyciu `@` symbolu do zdefiniowania wyrażenia wbudowanego.
 
-Następujące znaczniki są ładowane *_ProductPartial. cshtml* :
+Następujące znaczniki są ładowane *_ProductPartial. cshtml*:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 

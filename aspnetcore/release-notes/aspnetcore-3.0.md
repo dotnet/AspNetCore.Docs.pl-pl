@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 161d6aeefe1882b86ce97cdcfa7e5b23048693f0
-ms.sourcegitcommit: 7e394a8527c9818caebb940f692ae4fcf2f1b277
+ms.openlocfilehash: fe68c54ff16751058a3eeee3880a11657344c40a
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99217508"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605675"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Co nowego w ASP.NET Core 3,0
 
@@ -53,11 +53,11 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/index>.
 
 Blazor oddziela logikę renderowania składników od sposobu stosowania aktualizacji interfejsu użytkownika. Blazor Server zapewnia obsługę składników hostingu Razor na serwerze w aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika są obsługiwane przez SignalR połączenie. Blazor Server jest obsługiwany w ASP.NET Core 3,0.
 
-### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssembly Przeglądania
+### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly Przeglądania
 
 Blazor Aplikacje można również uruchamiać bezpośrednio w przeglądarce przy użyciu środowiska uruchomieniowego .NET opartego na zestawie. Blazor WebAssembly jest w wersji zapoznawczej i *nie* jest obsługiwany w ASP.NET Core 3,0. Blazor WebAssembly będzie obsługiwany w przyszłej wersji ASP.NET Core.
 
-### <a name="no-locrazor-components"></a>Razor komponentów
+### <a name="razor-components"></a>Razor komponentów
 
 Blazor aplikacje są zbudowane ze składników. Składniki to samodzielne fragmenty interfejsu użytkownika (UI), takie jak strona, okno dialogowe lub formularz. Składniki to normalne klasy .NET, które definiują logikę renderowania interfejsu użytkownika i obsługę zdarzeń po stronie klienta. Możesz tworzyć rozbudowane interaktywne aplikacje sieci Web bez języka JavaScript.
 
@@ -324,14 +324,14 @@ ASP.NET Core 3,0 teraz <xref:System.Text.Json> domyślnie używa dla serializacj
 
 Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [dodawanie Newtonsoft.Jsna podstawie obsługi formatu JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
-## <a name="new-no-locrazor-directives"></a>Nowe Razor dyrektywy
+## <a name="new-razor-directives"></a>Nowe Razor dyrektywy
 
 Poniższa lista zawiera nowe Razor dyrektywy:
 
 * [`@attribute`](xref:mvc/views/razor#attribute): `@attribute` Dyrektywa stosuje dany atrybut do klasy wygenerowanej strony lub widoku. Na przykład `@attribute [Authorize]`.
 * [`@implements`](xref:mvc/views/razor#implements): `@implements` Dyrektywa implementuje interfejs dla wygenerowanej klasy. Na przykład `@implements IDisposable`.
 
-## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 obsługuje uwierzytelnianie i autoryzację dla interfejsów API sieci Web i aplikacji jednostronicowych
+## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 obsługuje uwierzytelnianie i autoryzację dla interfejsów API sieci Web i aplikacji jednostronicowych
 
 ASP.NET Core 3,0 oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API sieci Web. ASP.NET Core Identityuwierzytelnianie i przechowywanie użytkowników jest łączone z [ Identity Server4](https://identityserver.io/) w celu zaimplementowania programu OpenID Connect Connect.
 
@@ -407,7 +407,7 @@ Aby uzyskać więcej informacji, zobacz <xref:security/authentication/windowsaut
 Szablony interfejsu użytkownika sieci Web ( Razor strony, MVC z kontrolerem i widokami) mają następujące usunięte:
 
 * cookieInterfejs użytkownika zgody nie jest już uwzględniony. Aby włączyć cookie funkcję wyrażania zgody w aplikacji wygenerowanej przez szablon ASP.NET Core 3,0, zobacz <xref:security/gdpr> .
-* Skrypty i powiązane zasoby statyczne są teraz przywoływane jako pliki lokalne zamiast używać sieci CDN. Aby uzyskać więcej informacji, zobacz [skrypty i powiązane zasoby statyczne są teraz odwołujące się do plików lokalnych zamiast używania sieci CDN w oparciu o bieżące środowisko (ASPNET/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
+* Skrypty i powiązane zasoby statyczne są teraz przywoływane jako pliki lokalne zamiast używać sieci CDN. Aby uzyskać więcej informacji, zobacz [skrypty i powiązane zasoby statyczne są teraz odwołujące się do plików lokalnych zamiast używania sieci CDN w oparciu o bieżące środowisko (#14350 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
 Szablon kątowy został zaktualizowany do użycia kątowy 8.
 

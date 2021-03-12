@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 1355fdaeae58b6f4e0cf8d41a74b1c28aee0e8fe
-ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
+ms.openlocfilehash: 0ce89d2dee3fb2054655c003daddfda2ffa52696
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/16/2021
-ms.locfileid: "98253088"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587285"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -53,7 +53,7 @@ System routingu punktu końcowego opisany w tym dokumencie ma zastosowanie do AS
 * Selektor wersji dla poprzedniej wersji.
 * Wybierz pozycję [ASP.NET Core 2,1 Routing](?view=aspnetcore-2.1).
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples/3.x) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Próbki pobierania dla tego dokumentu są włączane przez konkretną `Startup` klasę. Aby uruchomić określony przykład, zmodyfikuj *program.cs* w celu wywołania żądanej `Startup` klasy.
 
@@ -261,7 +261,7 @@ Oprogramowanie pośredniczące terminalu może być skutecznym narzędziem, ale 
 
 Rozważ integrację z routingiem przed zapisaniem oprogramowania pośredniczącego terminalu.
 
-Istniejące oprogramowanie pośredniczące, które integruje się z usługą [map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) lub <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> zwykle może być przełączane do punktu końcowego z obsługą routingu. [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) demonstruje wzorzec dla:
+Istniejące oprogramowanie pośredniczące, które integruje się z usługą [map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) lub <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> zwykle może być przełączane do punktu końcowego z obsługą routingu. [MapHealthChecks](https://github.com/dotnet/AspNetCore/blob/main/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) demonstruje wzorzec dla:
 * Napisz metodę rozszerzenia <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> .
 * Utwórz zagnieżdżony potok oprogramowania pośredniczącego przy użyciu programu <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*> .
 * Dołącz oprogramowanie pośredniczące do nowego potoku. W takim przypadku <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> .
@@ -345,7 +345,7 @@ Ze względu na rodzaje rozszerzalności udostępniane przez usługę Routing nie
 
 ### <a name="route-template-precedence-and-endpoint-selection-order"></a>Kolejność zaznaczania szablonu i punktu końcowego
 
-[Pierwszeństwo szablonu trasy](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16) to system, który przypisuje każdemu szablonowi trasy wartość na podstawie ich określonego. Pierwszeństwo szablonu trasy:
+[Pierwszeństwo szablonu trasy](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Template/RoutePrecedence.cs#L16) to system, który przypisuje każdemu szablonowi trasy wartość na podstawie ich określonego. Pierwszeństwo szablonu trasy:
 
 * Pozwala uniknąć konieczności dostosowywania kolejności punktów końcowych w typowych przypadkach.
 * Podejmuje próbę dopasowania częstych oczekiwań związanych z routingiem.
@@ -360,7 +360,7 @@ Szczegóły dotyczące sposobu działania pierwszeństwa są powiązane ze sposo
 * Segment złożony jest uznawany za określony jako segment parametru z ograniczeniem.
 * Catch-wszystkie parametry są najmniej określone. Aby uzyskać ważne informacje dotyczące przechwytywania wszystkich tras, zobacz temat **catch-all** w [dokumentacji dotyczącej szablonu trasy](#rtr) .
 
-Zapoznaj się z [kodem źródłowym w witrynie GitHub](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) , aby uzyskać odwołanie do dokładnych wartości.
+Zapoznaj się z [kodem źródłowym w witrynie GitHub](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) , aby uzyskać odwołanie do dokładnych wartości.
 
 <a name="lg"></a>
 
@@ -586,7 +586,7 @@ Niestandardowe ograniczenia trasy można utworzyć przez implementację <xref:Mi
 
 Niestandardowe ograniczenia trasy są rzadko zbędne. Przed wdrożeniem niestandardowego ograniczenia trasy należy rozważyć alternatywy, takie jak powiązanie modelu.
 
-Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
+Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/main/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
 Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
 
@@ -947,7 +947,7 @@ app.UseEndpoints(endpoints =>
 
 **Rozważ** napisanie własnych <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . `EndpointDataSource` to element podstawowy niskiego poziomu służący do deklarowania i aktualizowania kolekcji punktów końcowych. `EndpointDataSource` to zaawansowany interfejs API używany przez kontrolery i Razor strony.
 
-Testy routingu mają [podstawowy przykład](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) źródła danych, które nie są aktualizowane.
+Testy routingu mają [podstawowy przykład](https://github.com/dotnet/AspNetCore/blob/main/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) źródła danych, które nie są aktualizowane.
 
 **Nie** należy próbować rejestrować `EndpointDataSource` domyślnie. Wymagaj od użytkowników zarejestrowania struktury w programie <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> . Wyznaczanie trasy polega na tym, że nic nie jest uwzględniane domyślnie, a `UseEndpoints` to miejsce do rejestrowania punktów końcowych.
 
@@ -1029,7 +1029,7 @@ Więcej informacji na temat <xref:Microsoft.AspNetCore.Routing.IRouter> routingu
 > [!IMPORTANT]
 > Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC, zobacz <xref:mvc/controllers/routing> . Aby uzyskać informacje na temat Konwencji routingu na Razor stronach, zobacz <xref:razor-pages/razor-pages-conventions> .
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>Podstawy routingu
 
@@ -1565,7 +1565,7 @@ Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słowni
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
+<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples).
 
 Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 
@@ -1611,7 +1611,7 @@ services.AddMvc()
 > [!IMPORTANT]
 > Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC, zobacz <xref:mvc/controllers/routing> . Aby uzyskać informacje na temat Konwencji routingu na Razor stronach, zobacz <xref:razor-pages/razor-pages-conventions> .
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>Podstawy routingu
 
@@ -1971,7 +1971,7 @@ Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słowni
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
+<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/routing/samples).
 
 Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 

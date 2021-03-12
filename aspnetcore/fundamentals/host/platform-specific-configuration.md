@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: b39215a70f990afeb7d3fe0a62981113b154354e
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93061057"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588246"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Używanie zestawów startowych hostingu w ASP.NET Core
 
@@ -34,7 +34,7 @@ Autor [Pavel Krymets](https://github.com/pakrym)
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja (uruchamianie hostingu) dodaje usprawnienia do aplikacji podczas uruchamiania z zestawu zewnętrznego. Na przykład biblioteka zewnętrzna może użyć implementacji uruchamiania hostingu, aby zapewnić dodatkowym dostawcom konfiguracji lub usługom aplikację.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup — atrybut
 
@@ -106,7 +106,7 @@ Utwórz uruchamianie hostingu przy użyciu jednego z następujących typów proj
 
 Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka zawiera `HostingStartup` atrybut.
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
@@ -123,7 +123,7 @@ Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwó
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
@@ -244,7 +244,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 Gdy są obecne wiele asemblerów uruchamiania, ich <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> metody są wykonywane w kolejności, w jakiej są wymienione zestawy.
 
-## <a name="activation"></a>Aktywacja
+## <a name="activation"></a>Uaktywnienie
 
 Opcje hostingu aktywacji uruchamiania są następujące:
 
@@ -352,7 +352,7 @@ W przykładowej aplikacji (projekt *RuntimeStore* ) Kompilowanie magazynu środo
 
 Przykłady sposobu ustawiania zmiennych środowiskowych dla różnych systemów operacyjnych znajdują się w temacie [Używanie wielu środowisk](xref:fundamentals/environments).
 
-**Wdrażanie**
+**Wdrożenie**
 
 Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, aplikacja Przykładowa tworzy folder *wdrożenia* w opublikowanych danych wyjściowych zawierający:
 
@@ -387,7 +387,7 @@ Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony
 
 ## <a name="sample-code"></a>Przykładowy kod
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
 
 * Dwa zestawy startowe hostingu (biblioteki klas) ustawiają parę par klucz-wartość konfiguracji w pamięci:
   * Pakiet NuGet (*HostingStartupPackage*)
@@ -460,7 +460,7 @@ dotnet nuget locals all --clear
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja (uruchamianie hostingu) dodaje usprawnienia do aplikacji podczas uruchamiania z zestawu zewnętrznego. Na przykład biblioteka zewnętrzna może użyć implementacji uruchamiania hostingu, aby zapewnić dodatkowym dostawcom konfiguracji lub usługom aplikację.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="hostingstartup-attribute"></a>HostingStartup — atrybut
 
@@ -504,7 +504,7 @@ Utwórz uruchamianie hostingu przy użyciu jednego z następujących typów proj
 
 Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka zawiera `HostingStartup` atrybut.
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp* i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
@@ -521,7 +521,7 @@ Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwó
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
 * Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
@@ -630,7 +630,7 @@ Zestaw startowy obsługujący hosting można również ustawić przy użyciu ust
 
 Gdy są obecne wiele asemblerów uruchamiania, ich <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> metody są wykonywane w kolejności, w jakiej są wymienione zestawy.
 
-## <a name="activation"></a>Aktywacja
+## <a name="activation"></a>Uaktywnienie
 
 Opcje hostingu aktywacji uruchamiania są następujące:
 
@@ -738,7 +738,7 @@ W przykładowej aplikacji (projekt *RuntimeStore* ) Kompilowanie magazynu środo
 
 Przykłady sposobu ustawiania zmiennych środowiskowych dla różnych systemów operacyjnych znajdują się w temacie [Używanie wielu środowisk](xref:fundamentals/environments).
 
-**Wdrażanie**
+**Wdrożenie**
 
 Aby ułatwić wdrożenie uruchamiania hostingu w środowisku wielokomputerowym, aplikacja Przykładowa tworzy folder *wdrożenia* w opublikowanych danych wyjściowych zawierający:
 
@@ -773,7 +773,7 @@ Rozszerzanie uruchamiania hostingu może być dostarczone przez zestaw wdrożony
 
 ## <a name="sample-code"></a>Przykładowy kod
 
-[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
+[Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)) pokazuje hosting scenariuszy implementacji uruchamiania:
 
 * Dwa zestawy startowe hostingu (biblioteki klas) ustawiają parę par klucz-wartość konfiguracji w pamięci:
   * Pakiet NuGet (*HostingStartupPackage*)

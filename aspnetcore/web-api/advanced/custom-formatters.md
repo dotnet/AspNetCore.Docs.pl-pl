@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: e4d73fdc0db3faeace5d68b3d71718315e68cae3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 91c9c6513d7c8df671e283508ecc276768d79539
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058925"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587830"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>Niestandardowe elementy formatujące w ASP.NET Core Web API
 
@@ -34,7 +34,7 @@ Struktura zawiera wbudowane, wejściowe i wyjściowe elementy formatujące dla J
 
 W tym artykule pokazano, jak dodać obsługę dodatkowych formatów, tworząc niestandardowe elementy formatujące. Aby zapoznać się z przykładem niestandardowego programu formatującego wprowadzanie tekstu, zobacz [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) w witrynie GitHub.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>Kiedy używać niestandardowych elementów formatujących
 
@@ -57,7 +57,7 @@ Aby utworzyć program formatujący:
 * Zastąp <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> metody i.
 * Zastąp <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> `WriteResponseBodyAsync` metody i.
 
-Poniższy kod przedstawia `VcardOutputFormatter` klasę z [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples):
+Poniższy kod przedstawia `VcardOutputFormatter` klasę z [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples):
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_Class)]
   
@@ -75,7 +75,7 @@ W konstruktorze Określ prawidłowe typy nośników i kodowania przez dodanie do
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ctor)]
 
-Klasa programu formatującego **nie** może użyć iniekcji konstruktora dla jego zależności. Na przykład `ILogger<VcardOutputFormatter>` nie można dodać jako parametru do konstruktora. Aby uzyskać dostęp do usług, należy użyć obiektu kontekstu, który jest przesyłany do metod. Przykład kodu w tym artykule i [przykład](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) pokazują, jak to zrobić.
+Klasa programu formatującego **nie** może użyć iniekcji konstruktora dla jego zależności. Na przykład `ILogger<VcardOutputFormatter>` nie można dodać jako parametru do konstruktora. Aby uzyskać dostęp do usług, należy użyć obiektu kontekstu, który jest przesyłany do metod. Przykład kodu w tym artykule i [przykład](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples) pokazują, jak to zrobić.
 
 ### <a name="override-canreadtype-and-canwritetype"></a>Przesłoń element overridetype i element unwritetype
 
@@ -129,13 +129,13 @@ Elementy formatujące są oceniane w kolejności, w jakiej je wstawiasz. Pierwsz
 
 ## <a name="the-complete-vcardinputformatter-class"></a>Kompletna `VcardInputFormatter` Klasa
 
-Poniższy kod przedstawia `VcardInputFormatter` klasę z [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples):
+Poniższy kod przedstawia `VcardInputFormatter` klasę z [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples):
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardInputFormatter.cs?name=snippet_Class)]
 
 ## <a name="test-the-app"></a>Testowanie aplikacji
 
-[Uruchom przykładową aplikację dla tego artykułu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples), która implementuje podstawowe elementy formatujące dane wejściowe i wyjściowe w formacie vCard. Aplikacja odczytuje i zapisuje wizytówki vCard podobne do następujących:
+[Uruchom przykładową aplikację dla tego artykułu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/advanced/custom-formatters/samples), która implementuje podstawowe elementy formatujące dane wejściowe i wyjściowe w formacie vCard. Aplikacja odczytuje i zapisuje wizytówki vCard podobne do następujących:
 
 ```
 BEGIN:VCARD

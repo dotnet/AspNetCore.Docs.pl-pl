@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 44211ac7fa2acc7a7a9471ef362cff02f94fa2b6
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93059458"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588272"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core i Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -30,7 +30,7 @@ Zgodnie z [dobrymi](https://github.com/attrib75)
 
 ## <a name="using-entity-framework-6-with-aspnet-core"></a>Używanie Entity Framework 6 z ASP.NET Core
 
-[Entity Framework Core](/ef/) należy używać w przypadku nowych rozwiązań programistycznych. [Przykład pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample) używa [Entity Framework 6 (Ef6)](/ef/ef6), który może służyć do migrowania zamykania aplikacji do ASP.NET Core.
+[Entity Framework Core](/ef/) należy używać w przypadku nowych rozwiązań programistycznych. [Przykład pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/entity-framework-6/3.xsample) używa [Entity Framework 6 (Ef6)](/ef/ef6), który może służyć do migrowania zamykania aplikacji do ASP.NET Core.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
@@ -48,7 +48,7 @@ W tym artykule pokazano, jak używać Entity Framework 6 w aplikacji ASP.NET Cor
 
 Aby użyć Entity Framework 6, projekt musi zostać skompilowany w oparciu o .NET Framework, ponieważ Entity Framework 6 nie obsługuje programu .NET Core. Jeśli potrzebujesz funkcji międzyplatformowych, musisz przeprowadzić uaktualnienie do [Entity Framework Core](/ef/).  
 
-Zalecanym sposobem użycia Entity Framework 6 w aplikacji ASP.NET Core jest umieszczenie EF6 kontekstu i klas modelu w projekcie biblioteki klas, który jest przeznaczony dla .NET Framework. Dodaj odwołanie do biblioteki klas z projektu ASP.NET Core. Zobacz przykładowe [rozwiązanie programu Visual Studio z Ef6 i projektami ASP.NET Core](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/).  
+Zalecanym sposobem użycia Entity Framework 6 w aplikacji ASP.NET Core jest umieszczenie EF6 kontekstu i klas modelu w projekcie biblioteki klas, który jest przeznaczony dla .NET Framework. Dodaj odwołanie do biblioteki klas z projektu ASP.NET Core. Zobacz przykładowe [rozwiązanie programu Visual Studio z Ef6 i projektami ASP.NET Core](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/entity-framework-6/sample/).    
 
 Nie można umieścić kontekstu EF6 w projekcie ASP.NET Core, ponieważ projekty .NET Core nie obsługują wszystkich funkcji, które EF6 polecenia, takie jak *enable-migrations* .    
 
@@ -86,7 +86,7 @@ Następnie można uzyskać wystąpienie kontekstu na kontrolerach za pomocą DI.
 
 ## <a name="sample-application"></a>Przykładowa aplikacja   
 
-Aby uzyskać działającą przykładową aplikację, zobacz [przykładowe rozwiązanie Visual Studio](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/) , które jest dołączone do tego artykułu.  
+Aby uzyskać działającą przykładową aplikację, zobacz [przykładowe rozwiązanie Visual Studio](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/entity-framework-6/sample/) , które jest dołączone do tego artykułu.    
 
 Ten przykład można utworzyć od podstaw, wykonując następujące kroki w programie Visual Studio:    
 

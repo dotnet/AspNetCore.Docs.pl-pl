@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 1485e1a97e51bb4d12d0d74ca1550e5cf18258d8
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 561f41dd9d50df0651c060fac4f75d9d59244029
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93053790"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605649"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Ciągłe wdrażanie na platformie Azure za pomocą programu Visual Studio i rozwiązania Git na platformie ASP.NET Core
 
@@ -42,7 +42,7 @@ Zobacz również [Tworzenie pierwszego potoku za pomocą Azure Pipelines](/azure
 
 W tym samouczku założono, że zainstalowano następujące oprogramowanie:
 
-* [Program Visual Studio](https://visualstudio.microsoft.com)
+* [Visual Studio](https://visualstudio.microsoft.com)
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 * [Git](https://git-scm.com/downloads) dla systemu Windows
 
@@ -112,7 +112,7 @@ Git to rozproszony system kontroli wersji, którego można użyć do wdrożenia 
 
    ![Blok ustawień: blok źródła wdrożenia: Wybierz blok źródłowy](azure-continuous-deployment/_static/deployment-options.png)
 
-1. Wybierz pozycję **OK**.
+1. Wybierz przycisk **OK**.
 
 1. Jeśli nie skonfigurowano wcześniej poświadczeń wdrażania do publikowania aplikacji internetowej lub innej aplikacji App Service, skonfiguruj je teraz:
 
@@ -172,7 +172,7 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
 
 1. Wprowadź następujące polecenie w oknie polecenia:
 
-   `git push -u Azure-SampleApp master`
+   `git push -u Azure-SampleApp main`
 
 1. Wprowadź hasło **poświadczeń wdrożenia** platformy Azure utworzone wcześniej na platformie Azure.
 
@@ -183,8 +183,8 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
    remote: Running post deployment command(s)...
    remote: Deployment successful.
    To https://username@samplewebappdemo01.scm.azurewebsites.net:443/SampleWebAppDemo01.git
-   * [new branch]      master -> master
-   Branch master set up to track remote branch master from Azure-SampleApp.
+   * [new branch]      main -> main
+   Branch main set up to track remote branch main from Azure-SampleApp.
    ```
 
    > [!NOTE]
@@ -232,7 +232,7 @@ Po wprowadzeniu zmian w kodzie lokalnym należy ponownie opublikować:
 > [!NOTE]
 > Alternatywnie wypchnij zmiany z **okna polecenia** , otwierając **okno wiersza polecenia**, zmieniając katalog projektu i wprowadzając polecenie git. Przykład:
 > 
-> `git push -u Azure-SampleApp master`
+> `git push -u Azure-SampleApp main`
 
 ## <a name="view-the-updated-web-app-in-azure"></a>Wyświetlanie zaktualizowanej aplikacji sieci Web na platformie Azure
 

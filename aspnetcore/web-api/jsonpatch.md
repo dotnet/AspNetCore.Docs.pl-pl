@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4ed44a0fca9e0834a78e433cdd48cbd153c58666
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060550"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102587856"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
@@ -38,7 +38,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
 
     ```csharp
     services
@@ -68,7 +68,7 @@ Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktual
 
 ## <a name="json-patch"></a>Poprawka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji* . Każda operacja identyfikuje określony typ zmiany. Przykłady takich zmian obejmują dodanie elementu tablicy lub zastępowanie wartości właściwości.
+[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany. Przykłady takich zmian obejmują dodanie elementu tablicy lub zastępowanie wartości właściwości.
 
 Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
 
@@ -251,7 +251,7 @@ Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa 
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples). ([Jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/jsonpatch/samples). ([Jak pobrać](xref:index#how-to-download-a-sample)).
 
 Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
 
@@ -266,7 +266,7 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
 * [IETF RFC 6901 JSON Format ścieżki poprawek](https://tools.ietf.org/html/rfc6901)
 * [Dokumentacja poprawek JSON](https://jsonpatch.com/). Zawiera linki do zasobów do tworzenia dokumentów poprawek JSON.
-* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/main/src/Features/JsonPatch/src)
 
 ::: moniker-end
 
@@ -280,7 +280,7 @@ Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktual
 
 ## <a name="json-patch"></a>Poprawka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji* . Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
+[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
 
 Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
 
@@ -463,7 +463,7 @@ Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa 
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2). ([Jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/web-api/jsonpatch/samples/2.2). ([Jak pobrać](xref:index#how-to-download-a-sample)).
 
 Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
 
@@ -478,6 +478,6 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
 * [IETF RFC 6901 JSON Format ścieżki poprawek](https://tools.ietf.org/html/rfc6901)
 * [Dokumentacja poprawek JSON](https://jsonpatch.com/). Zawiera linki do zasobów do tworzenia dokumentów poprawek JSON.
-* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/main/src/Features/JsonPatch/src)
 
 ::: moniker-end

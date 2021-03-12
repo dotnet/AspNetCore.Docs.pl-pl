@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: bdeccf81a3bb620c2e1fe15a798d5a83375842c8
-ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
+ms.openlocfilehash: 15d011e88ab291173668a0b6dc5f46e97fdfeff0
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96556544"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102605714"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core oprogramowanie pośredniczące
 
@@ -258,7 +258,7 @@ W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:123
 | Żądanie                       | Reakcja                     |
 | ----------------------------- | ---------------------------- |
 | localhost: 1234                | Witaj od delegata innego niż mapowanie. |
-| localhost: 1234/? Branch = Master | Używane gałęzie = Master         |
+| localhost: 1234/? Branch = Main | Użycie gałęzi = main         |
 
 <xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> oddziałuje również potok żądania na podstawie wyniku danego predykatu. W przeciwieństwie `MapWhen` do programu, gałąź ta jest ponownie przyłączona do głównego potoku, jeśli nie jest ona krótka lub nie zawiera terminalu pośredniczącego:
 
@@ -455,7 +455,7 @@ W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:123
 | Żądanie                       | Reakcja                     |
 | ----------------------------- | ---------------------------- |
 | localhost: 1234                | Witaj od delegata innego niż mapowanie. |
-| localhost: 1234/? Branch = Master | Używane gałęzie = Master         |
+| localhost: 1234/? Branch = Main | Użycie gałęzi = main         |
 
 `Map` obsługuje zagnieżdżanie, na przykład:
 

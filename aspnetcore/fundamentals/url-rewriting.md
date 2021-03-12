@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 55993f951bfe910fb179fdb25b8d04f81d4ee2c9
-ms.sourcegitcommit: 83524f739dd25fbfa95ee34e95342afb383b49fe
+ms.openlocfilehash: 44e6570090de9c5f3550d18a30fcde758fb16f85
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99057463"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588526"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -47,7 +47,7 @@ Ponowne zapisywanie adresu URL to czynność modyfikacji adresów URL żądań n
 > [!NOTE]
 > Ponowne zapisywanie adresów URL może zmniejszyć wydajność aplikacji. Jeśli to możliwe, należy ograniczyć liczbę i złożoność reguł.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>Przekierowywanie adresów URL i ponowne zapisywanie adresów URL
 
@@ -77,7 +77,7 @@ Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL,
 
 ## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do ponownego zapisywania adresów URL
 
-Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
+Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego ponownego zapisywania adresów URL
 
@@ -399,7 +399,7 @@ Ponowne zapisywanie adresu URL to czynność modyfikacji adresów URL żądań n
 > [!NOTE]
 > Ponowne zapisywanie adresów URL może zmniejszyć wydajność aplikacji. Jeśli to możliwe, należy ograniczyć liczbę i złożoność reguł.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>Przekierowywanie adresów URL i ponowne zapisywanie adresów URL
 
@@ -429,7 +429,7 @@ Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL,
 
 ## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do ponownego zapisywania adresów URL
 
-Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
+Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego ponownego zapisywania adresów URL
 

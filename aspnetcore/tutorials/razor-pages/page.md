@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: a6efbb22f8b6280bd636cd1575d8a4a2bca0bb06
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 049e7764766a4d5d535f7d7959a3554b040607c5
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486177"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588506"
 ---
-# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
+# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,13 +34,13 @@ Ten samouczek służy do badania Razor stron utworzonych przez tworzenie szkiele
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ::: moniker-end
 
@@ -118,9 +118,9 @@ Rozważ następujące znaczniki ze *stron/filmów/pliku Index . cshtml* :
 
 Poprzedni wyróżniony znacznik jest przykładem Razor przejścia do języka C#. `{`Znaki i `}` należy ująć w blok kodu w języku C#.
 
-`PageModel`Klasa bazowa zawiera `ViewData` Właściwość słownika, która może służyć do przekazywania danych do widoku. Obiekty są dodawane do `ViewData` słownika przy użyciu znaku ***wartość** _ wzorca. W poprzednim przykładzie `Title` Właściwość jest dodawana do `ViewData` słownika.
+`PageModel`Klasa bazowa zawiera `ViewData` Właściwość słownika, która może służyć do przekazywania danych do widoku. Obiekty są dodawane do `ViewData` słownika przy użyciu wzorca ***wartości klucza*** . W poprzednim przykładzie `Title` Właściwość jest dodawana do `ViewData` słownika.
 
-`Title`Właściwość jest używana w pliku _Pages/shared/_Layout. cshtml *. Poniższy znacznik pokazuje pierwsze kilka wierszy pliku *_Layout. cshtml* .
+`Title`Właściwość jest używana w pliku *Pages/Shared/_Layout. cshtml* . Poniższy znacznik pokazuje pierwsze kilka wierszy pliku *_Layout. cshtml* .
 
 <!-- We need a snapshot copy of layout because we are changing in the next step. -->
 
@@ -148,7 +148,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
    Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-helpers/intro). W tym przypadku jest to [pomocnik tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper). `asp-page="/Movies/Index"`Atrybut i wartość pomocnika tagów tworzą link do `/Movies/Index` Razor strony. `asp-area`Wartość atrybutu jest pusta, dlatego obszar nie jest używany w łączu. Aby uzyskać więcej informacji, zobacz [obszary](xref:mvc/controllers/areas) .
 
-1. Zapisz zmiany i przetestuj aplikację, wybierając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
+1. Zapisz zmiany i przetestuj aplikację, wybierając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
 1. Przetestuj linki **Home**, **RpMovie**, **Create**, **Edit** i **delete** . Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
@@ -182,13 +182,13 @@ Jeśli nie ma błędów modelu:
 * Dane są zapisywane.
 * Przeglądarka zostanie przekierowana na Index stronę.
 
-### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
+### <a name="the-create-razor-page"></a>Strona tworzenie Razor
 
 Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Program Visual Studio wyświetla następujące znaczniki w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 
@@ -323,7 +323,7 @@ Zastąp poprzedni element następującym znacznikiem.
 
 Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-helpers/intro). W tym przypadku jest to [pomocnik tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper). `asp-page="/Movies/Index"`Atrybut i wartość pomocnika tagów tworzą link do `/Movies/Index` Razor strony. `asp-area`Wartość atrybutu jest pusta, dlatego obszar nie jest używany w łączu. Aby uzyskać więcej informacji, zobacz [obszary](xref:mvc/controllers/areas) .
 
-Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
+Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
 Przetestuj inne linki (**Narzędzia główne**, **RpMovie**, **Utwórz**, **Edytuj** i **Usuń**). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
@@ -354,13 +354,13 @@ Jeśli występują jakieś błędy modelu, formularz jest ponownie wyświetlany 
 
 Jeśli nie ma żadnych błędów modelu, dane zostaną zapisane i przeglądarka zostanie przekierowana na Index stronę.
 
-### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
+### <a name="the-create-razor-page"></a>Strona tworzenie Razor
 
 Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Program Visual Studio Wyświetla `<form method="post">` tag w wyróżnionej pogrubionej czcionce używanej przez pomocników tagów:
 

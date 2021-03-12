@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 412f95e67fa35e952a907db328395183f1698b9e
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 21f2a65bd93c08f16de988381e648768debde438
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587219"
+ms.locfileid: "102605597"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor stronach
 
@@ -90,7 +90,7 @@ Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zast�
 
 W przypadku zastosowania do `Name` Właściwości komunikat o błędzie utworzony przez poprzedni kod powinien mieć wartość "nazwa musi zawierać się w przedziale od 6 do 8".
 
-Aby dowiedzieć się, które parametry są przesyłane do `String.Format` komunikatu o błędzie określonego atrybutu, zobacz [kod źródłowy adnotacji](https://github.com/dotnet/runtime/tree/master/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations)danych.
+Aby dowiedzieć się, które parametry są przesyłane do `String.Format` komunikatu o błędzie określonego atrybutu, zobacz [kod źródłowy adnotacji](https://github.com/dotnet/runtime/tree/main/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations)danych.
 
 ## <a name="non-nullable-reference-types-and-required-attribute"></a>Niedopuszczające wartości null typy odwołań i atrybut [Required]
 

@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: aaf930eee351ed757be60f648bce88b182d52799
-ms.sourcegitcommit: da5a5bed5718a9f8db59356ef8890b4b60ced6e9
+ms.openlocfilehash: 8e5f216a354b1ed7559b433d3a4867627bf60df3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98710797"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589780"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
 
@@ -43,7 +43,7 @@ Na końcu serii będziesz mieć aplikację, która zarządza i wyświetla dane f
 > * Pracuj z bazą danych.
 > * Dodaj wyszukiwanie i sprawdzanie poprawności.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -223,7 +223,7 @@ Na końcu serii będziesz mieć aplikację, która zarządza i wyświetla dane f
 > * Pracuj z bazą danych.
 > * Dodaj wyszukiwanie i sprawdzanie poprawności.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/first-mvc-app/start-mvc/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 

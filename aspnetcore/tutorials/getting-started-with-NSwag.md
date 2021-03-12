@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 78d58d4d544c33862cf502ce63e83560e8009c65
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 882bbe659990cb8ea66110fccb85b8c6197df3f7
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93060576"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588578"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Wprowadzenie do NSwag i ASP.NET Core
 
@@ -31,13 +31,13 @@ ms.locfileid: "93060576"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.0"
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 
@@ -59,7 +59,7 @@ Aby użyć oprogramowania [NSwag](https://github.com/RicoSuter/NSwag) ASP.NET Co
 
 Aby zainstalować pakiet NuGet NSwag, należy użyć jednej z następujących metod:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
@@ -205,7 +205,7 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-2.0"
 

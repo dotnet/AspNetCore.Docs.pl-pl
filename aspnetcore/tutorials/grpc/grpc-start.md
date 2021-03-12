@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 9388a2f814008ebb50171f85b8baccf6dadfac27
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: fed25eeacf57504810d41fcf002dcaa9927a21af
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93057027"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588604"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Samouczek: Tworzenie gRPC klienta i serwera w ASP.NET Core
 
@@ -32,7 +32,7 @@ W tym samouczku pokazano, jak utworzyć klienta programu .NET Core [gRPC](https:
 
 Na koniec będziesz mieć klienta gRPC, który komunikuje się z usługą gRPC Greeter.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/grpc/grpc-start/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W tym samouczku zostały wykonane następujące czynności:
 
@@ -59,7 +59,7 @@ W tym samouczku zostały wykonane następujące czynności:
 
 ## <a name="create-a-grpc-service"></a>Tworzenie usługi gRPC
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**. Alternatywnie z menu **plik** programu Visual Studio wybierz pozycję **Nowy**  >  **projekt**.
 * W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **Usługa gRPC** i wybierz pozycję **dalej**:
@@ -133,7 +133,7 @@ info: Microsoft.Hosting.Lifetime[0]
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>Tworzenie klienta gRPC w aplikacji konsolowej .NET
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Otwórz drugie wystąpienie programu Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
 * W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **aplikacja konsoli (.NET Core)** , a następnie wybierz pozycję **dalej**.
@@ -164,7 +164,7 @@ Projekt klienta gRPC wymaga następujących pakietów:
 * [Google. protobuf](https://www.nuget.org/packages/Google.Protobuf/), który zawiera interfejsy API komunikatów protobuf dla języka C#.
 * [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/), która zawiera obsługę narzędzi C# dla plików protobuf. Pakiet narzędzi nie jest wymagany w czasie wykonywania, dlatego zależność jest oznaczona za pomocą `PrivateAssets="All"` .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Zainstaluj pakiety przy użyciu konsoli Menedżera pakietów (PMC) lub Zarządzaj pakietami NuGet.
 
@@ -220,7 +220,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 * Edytuj plik projektu *GrpcGreeterClient. csproj* :
 
-  # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+  # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
   Kliknij prawym przyciskiem myszy projekt i wybierz polecenie **Edytuj plik projektu**.
 
@@ -265,7 +265,7 @@ Klient Greeter wywołuje metodę asynchroniczną `SayHello` . `SayHello`Zostanie
 
 ## <a name="test-the-grpc-client-with-the-grpc-greeter-service"></a>Testowanie klienta gRPC za pomocą usługi gRPC Greeter
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W usłudze Greeter naciśnij klawisz, `Ctrl+F5` Aby uruchomić serwer bez debugera.
 * W `GrpcGreeterClient` projekcie naciśnij klawisz, `Ctrl+F5` Aby uruchomić klienta bez debugera.

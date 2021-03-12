@@ -18,24 +18,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: c89098bf0b2c4396f9856aca2be9967af5df0cb7
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f1c4366e4e4afa3dd86a816a649ad0a8b2ce817b
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051905"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588630"
 ---
-# <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla programu ASP.NET Core Identity
+# <a name="custom-storage-providers-for-aspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla programu ASP.NET Core Identity
 
 Przez [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niestandardowego dostawcy magazynu i połączenie go z aplikacją. W tym temacie opisano sposób tworzenia niestandardowego dostawcy magazynu dla programu ASP.NET Core Identity . Dotyczy to ważnych koncepcji tworzenia własnego dostawcy magazynu, ale nie jest to przewodnik krok po kroku.
 
-[Wyświetl lub Pobierz przykład z witryny GitHub](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
+[Wyświetl lub Pobierz przykład z witryny GitHub](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
 
 ## <a name="introduction"></a>Wprowadzenie
 
-Domyślnie ASP.NET Core Identity System przechowuje informacje o użytkowniku w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Przykład:
+Domyślnie ASP.NET Core Identity System przechowuje informacje o użytkowniku w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Na przykład:
 
 * Używasz [usługi Azure Table Storage](/azure/storage/) lub innego magazynu danych.
 * Tabele bazy danych mają inną strukturę. 
@@ -51,7 +51,7 @@ Korzystając z interfejs wiersza polecenia platformy .NET Core, Dodaj `-au Indiv
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-no-locaspnet-core-identity-architecture"></a>ASP.NET Core IdentityArchitektura
+## <a name="the-aspnet-core-identity-architecture"></a>ASP.NET Core IdentityArchitektura
 
 ASP.NET Core Identity składa się z klas o nazwie menedżerowie i sklepy. *Menedżerowie* są klasami wysokiego poziomu, których deweloperzy aplikacji używają do wykonywania operacji, takich jak tworzenie Identity użytkownika. *Magazyny* są klasy niższego poziomu, które określają, jak są utrwalane jednostki, takie jak użytkownicy i role. Sklepy są zgodne ze wzorcem repozytorium i są ściśle powiązane z mechanizmem trwałości. Menedżerowie są niezależni od sklepów, co oznacza, że można zastąpić mechanizm trwałości bez zmiany kodu aplikacji (z wyjątkiem konfiguracji).
 
@@ -65,7 +65,7 @@ Podczas tworzenia nowego wystąpienia `UserManager` lub `RoleManager` podania ty
 
 [Zmień konfigurację aplikacji, aby używała nowego dostawcy magazynu](#reconfigure-app-to-use-a-new-storage-provider) pokazuje, jak utworzyć wystąpienie `UserManager` i `RoleManager` przy użyciu dostosowanego magazynu.
 
-## <a name="no-locaspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
+## <a name="aspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
 
 [ASP.NET Core Identity](https://github.com/aspnet/identity) typy danych są szczegółowo opisane w następujących sekcjach:
 
@@ -150,7 +150,7 @@ Utwórz `UserStore` klasę, która dostarcza metody dla wszystkich operacji na d
 * [IUserTwoFactorStore](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1)
 * [IUserLockoutStore](/dotnet/api/microsoft.aspnetcore.identity.iuserlockoutstore-1)
 
-Opcjonalne interfejsy dziedziczą z `IUserStore<TUser>` . W [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs)widzisz częściowo zaimplementowany przykładowy magazyn użytkowników.
+Opcjonalne interfejsy dziedziczą z `IUserStore<TUser>` . W [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs)widzisz częściowo zaimplementowany przykładowy magazyn użytkowników.
 
 W ramach `UserStore` klasy używane są klasy dostępu do danych, które zostały utworzone w celu wykonania operacji. Są one przenoszone przy użyciu iniekcji zależności. Na przykład w SQL Server z implementacją Dapper `UserStore` Klasa ma `CreateAsync` metodę, która używa wystąpienia `DapperUsersTable` do wstawienia nowego rekordu:
 
@@ -181,7 +181,7 @@ W ramach `UserStore` klasy używane są klasy dostępu do danych, które został
 * **IQueryableUserStore**  
  Interfejs [IQueryableUserStore &lt; TUser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiuje elementy członkowskie, które są implementowane w celu udostępnienia magazynu użytkownika queryable.
 
-Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Przykład:
+Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Na przykład:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -195,7 +195,7 @@ public class UserStore : IUserStore<IdentityUser>,
 }
 ```
 
-### <a name="no-locidentityuserclaim-no-locidentityuserlogin-and-no-locidentityuserrole"></a>IdentityUserClaim, Identity UserLogin i Identity UserRole
+### <a name="identityuserclaim-identityuserlogin-and-identityuserrole"></a>IdentityUserClaim, Identity UserLogin i Identity UserRole
 
 `Microsoft.AspNet.Identity.EntityFramework`Przestrzeń nazw zawiera implementacje klas [ Identity UserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1), [ Identity UserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)i [ Identity UserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1) . Jeśli używasz tych funkcji, możesz chcieć utworzyć własne wersje tych klas i zdefiniować właściwości aplikacji. Czasami jednak wydajniejsze jest, aby nie ładować tych jednostek do pamięci podczas wykonywania podstawowych operacji (takich jak dodawanie lub usuwanie roszczeń użytkownika). Zamiast tego klasy magazynu zaplecza mogą wykonywać te operacje bezpośrednio w źródle danych. Na przykład `UserStore.GetClaimsAsync` Metoda może wywołać `userClaimTable.FindByUserId(user.Id)` metodę, aby wykonać zapytanie bezpośrednio względem tej tabeli i zwrócić listę oświadczeń.
 
@@ -250,4 +250,4 @@ public void ConfigureServices(IServiceCollection services)
 ## <a name="references"></a>Odwołania
 
 * [Niestandardowi dostawcy magazynu dla ASP.NET 4. x Identity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.NET Core Identity](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): To repozytorium zawiera linki do dostawców sklepu obsługiwanego przez społeczność.
+* [ASP.NET Core Identity](https://github.com/dotnet/AspNetCore/tree/main/src/Identity): To repozytorium zawiera linki do dostawców sklepu obsługiwanego przez społeczność.

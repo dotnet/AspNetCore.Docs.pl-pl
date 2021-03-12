@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 4d4e50f8acea73859f5e839616f13f90a42291c4
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 61ff4edfaedb22ea88d6bb0be2390ff734879942
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97486229"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588441"
 ---
-# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -37,7 +37,7 @@ Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają 
 
 Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.  
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W tym samouczku zostały wykonane następujące czynności:
 
@@ -66,9 +66,9 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ---
 
-## <a name="create-a-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
+## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**. Aby uzyskać więcej informacji, zobacz [Tworzenie nowego projektu w programie Visual Studio](/visualstudio/ide/create-new-project).
 
@@ -125,7 +125,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
     1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
     1. Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję programu .NET 5. x.
-    1. Wybierz pozycję **Dalej**.
+    1. Wybierz opcję **Dalej**.
 
 1. Nadaj projektowi nazwę *Razor PagesMovie* i wybierz pozycję **Utwórz**.
 
@@ -185,7 +185,7 @@ Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają 
 
 Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.  
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W tym samouczku zostały wykonane następujące czynności:
 
@@ -214,9 +214,9 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ---
 
-## <a name="create-a-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
+## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej**.
@@ -267,7 +267,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej**.
 
 * Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -327,7 +327,7 @@ Aby uzyskać bardziej zaawansowane wprowadzenie do deweloperów, którzy znają 
 
 Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmów.  
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/razor-pages/razor-pages-start) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W tym samouczku zostały wykonane następujące czynności:
 
@@ -356,9 +356,9 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ---
 
-## <a name="create-a-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
+## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 
@@ -411,7 +411,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
   * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
   * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej**.
 
 * Nazwij projekt **Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -423,7 +423,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 

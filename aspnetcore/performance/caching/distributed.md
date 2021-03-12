@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 6f89046f2e1805111dd81b3282253a72a7c6ea09
-ms.sourcegitcommit: 1166b0ff3828418559510c661e8240e5c5717bb7
+ms.openlocfilehash: a4fd179772a26ffd20fa79cef4720cd5a4746ab3
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 02/12/2021
-ms.locfileid: "100281019"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102588617"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Rozproszone buforowanie w ASP.NET Core
 
@@ -44,7 +44,7 @@ Dane przechowywane w pamięci podręcznej są dystrybuowane:
 
 Konfiguracja rozproszonej pamięci podręcznej jest specyficzna dla implementacji. W tym artykule opisano sposób konfigurowania SQL Server i rozproszonej pamięci podręcznej Redis. Dostępne są również implementacje innych firm, takie jak [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache w witrynie GitHub](https://github.com/Alachisoft/NCache)). Niezależnie od tego, która implementacja została wybrana, aplikacja współdziała z pamięcią podręczną przy użyciu <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> interfejsu.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -211,7 +211,7 @@ Dane przechowywane w pamięci podręcznej są dystrybuowane:
 
 Konfiguracja rozproszonej pamięci podręcznej jest specyficzna dla implementacji. W tym artykule opisano sposób konfigurowania SQL Server i rozproszonej pamięci podręcznej Redis. Dostępne są również implementacje innych firm, takie jak [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache w witrynie GitHub](https://github.com/Alachisoft/NCache)). Niezależnie od tego, która implementacja została wybrana, aplikacja współdziała z pamięcią podręczną przy użyciu <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> interfejsu.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -381,7 +381,7 @@ Dane przechowywane w pamięci podręcznej są dystrybuowane:
 
 Konfiguracja rozproszonej pamięci podręcznej jest specyficzna dla implementacji. W tym artykule opisano sposób konfigurowania SQL Server i rozproszonej pamięci podręcznej Redis. Dostępne są również implementacje innych firm, takie jak [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([NCache w witrynie GitHub](https://github.com/Alachisoft/NCache)). Niezależnie od tego, która implementacja została wybrana, aplikacja współdziała z pamięcią podręczną przy użyciu <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> interfejsu.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/performance/caching/distributed/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 

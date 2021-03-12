@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: ffa2a7c73e00ccfb5dd726a084352c0b80cc41b0
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 8574bc06b7c27fbb8caf834754188dba67bcb4e3
+ms.sourcegitcommit: acfe51c35497a204f75c2a61125c9408c04493e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586972"
+ms.locfileid: "102605700"
 ---
 # <a name="aspnet-core-module"></a>Moduł ASP.NET Core
 

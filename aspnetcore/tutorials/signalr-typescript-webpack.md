@@ -18,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 9d52b72c669a9345cc7c5386876db22af55a97c7
+ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93056845"
+ms.lasthandoff: 03/10/2021
+ms.locfileid: "102589754"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
+# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
 
 Autorzy [Sébastien Sougnez](https://twitter.com/ssougnez) i [Scott Addie](https://twitter.com/Scott_Addie)
 
 [Pakiet WebPack](https://webpack.js.org/) umożliwia deweloperom tworzenie i kompilowanie zasobów po stronie klienta aplikacji sieci Web. W tym samouczku pokazano, jak używać pakietu WebPack w ASP.NET Core SignalR aplikacji sieci Web, której klient został zapisany w języku [TypeScript](https://www.typescriptlang.org/).
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Tworzenie szkieletu aplikacji Starter ASP.NET Core SignalR
@@ -40,13 +40,13 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 > * Konfigurowanie SignalR serwera
 > * Włącz komunikację między klientem a serwerem
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 3.0 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -63,7 +63,7 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
@@ -75,7 +75,7 @@ Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Pa
 
 Konfiguracja programu Visual Studio została ukończona.
 
-1. Użyj opcji menu **plik**  >  **Nowy**  >  **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** . Wybierz pozycję **Dalej**.
+1. Użyj opcji menu **plik**  >  **Nowy**  >  **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** . Wybierz opcję **Dalej**.
 1. Nadaj nazwę projekt *SignalR WebPack*, a następnie wybierz pozycję **Utwórz**.
 1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 3,1* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz**.
 
@@ -259,7 +259,7 @@ W aplikacji jest obecnie wyświetlany podstawowy formularz służący do wysyła
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 
@@ -303,7 +303,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 2,2 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -320,7 +320,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
@@ -496,7 +496,7 @@ W aplikacji jest obecnie wyświetlany prosty formularz służący do wysyłania 
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 

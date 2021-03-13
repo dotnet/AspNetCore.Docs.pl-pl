@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 807cffb2f9b3bf89ff06c62e76d51d4040b8d91a
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: fb5ef59a74a768a1c202b49872b8a10327c96ff8
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589013"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413460"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -151,7 +151,7 @@ Poprzedni kod umożliwia przeglądanie katalogów folderu *wwwroot/images* przy 
 
 ## <a name="serve-default-documents"></a>Obsługuj dokumenty domyślne
 
-Ustawienie strony domyślnej umożliwia odwiedzającym punkt startowy w witrynie. Aby udostępnić stronę domyślną z `wwwroot` bez w pełni kwalifikowanego identyfikatora URI, wywołaj <xref:Owin.DefaultFilesExtensions.UseDefaultFiles%2A> metodę:
+Ustawienie strony domyślnej umożliwia odwiedzającym punkt startowy w witrynie. Aby udostępnić stronę domyślną z `wwwroot` bez w pełni kwalifikowanego identyfikatora URI, wywołaj <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A> metodę:
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupEmpty.cs?name=snippet_Configure&highlight=15)]
 

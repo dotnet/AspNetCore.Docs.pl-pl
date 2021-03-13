@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 059ddc18d0c531efaba8aab916ddbb27b42b5e2c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7961890becc8f4513e0750f28341c9d4cf94e7ad
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053556"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413340"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrowanie z ASP.NET do ASP.NET Core
 
 Autor [Tomasz Levin](https://isaaclevin.com)
 
-Ten artykuł służy jako Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET do ASP.NET Core.
+Ten artykuł służy jako Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET do ASP.NET Core. Zapoznaj się z artykułem eksportowanie [istniejących aplikacji ASP.NET do platformy .NET Core](https://aka.ms/aspnet-porting-ebook) w celu uzyskania kompleksowego przewodnika dotyczącego przenoszenia.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -66,7 +66,7 @@ ASP.NET Core wprowadzono nowy mechanizm uruchamiania aplikacji. Punkt wejścia d
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-Takie podejście Couples aplikację i serwer, na który jest wdrażana w sposób, który zakłóca implementację. W celu oddzielenia [Owin](https://owin.org/) został wprowadzony w celu zapewnienia bardziej przejrzystego sposobu używania wielu struktur. OWIN zapewnia potok do dodawania tylko wymaganych modułów. Środowisko hostingu wykonuje funkcję [uruchamiania](xref:fundamentals/startup) , aby skonfigurować usługi i potok żądania aplikacji. `Startup` rejestruje zestaw programów pośredniczących w aplikacji. Dla każdego żądania aplikacja wywołuje każdy składnik pośredniczący ze wskaźnikiem głównym połączonej listy z istniejącym zestawem programów obsługi. Każdy składnik pośredniczący może dodać jeden lub więcej programów obsługi do potoku obsługi żądania. Jest to realizowane przez zwrócenie odwołania do programu obsługi, który jest nowym szefem listy. Każdy program obsługi jest odpowiedzialny za zapamiętywanie i wywoływanie kolejnej procedury obsługi na liście. W przypadku ASP.NET Core punkt wejścia do aplikacji jest `Startup` i nie ma już zależności od elementu *Global. asax* . W przypadku korzystania z programu OWIN z .NET Framework należy użyć podobnej do poniższej postaci potoku:
+Takie podejście Couples aplikację i serwer, na który jest wdrażana w sposób, który zakłóca implementację. W celu oddzielenia [Owin](https://owin.org/) został wprowadzony w celu zapewnienia bardziej przejrzystego sposobu używania wielu struktur. OWIN zapewnia potok do dodawania tylko wymaganych modułów. Środowisko hostingu wykonuje funkcję [uruchamiania](xref:fundamentals/startup) , aby skonfigurować usługi i potok żądania aplikacji. `Startup` rejestruje zestaw programów pośredniczących w aplikacji. Dla każdego żądania aplikacja wywołuje każdy składnik pośredniczący ze wskaźnikiem głównym połączonej listy z istniejącym zestawem programów obsługi. Każdy składnik pośredniczący może dodać jeden lub więcej programów obsługi do potoku obsługi żądania. Jest to realizowane przez zwrócenie odwołania do programu obsługi, który jest nowym szefem listy. Każdy program obsługi jest odpowiedzialny za zapamiętywanie i wywoływanie kolejnej procedury obsługi na liście. W przypadku ASP.NET Core punkt wejścia do aplikacji jest `Startup` i nie ma już zależności od elementu *Global. asax*. W przypadku korzystania z programu OWIN z .NET Framework należy użyć podobnej do poniższej postaci potoku:
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
@@ -104,7 +104,7 @@ ASP.NET Core może przechowywać dane konfiguracyjne dla aplikacji w dowolnym pl
 
 [!code-json[](samples/appsettings-sample.json)]
 
-Załadowanie tego pliku do wystąpienia `IConfiguration` wewnątrz aplikacji odbywa się w *Startup.cs* :
+Załadowanie tego pliku do wystąpienia `IConfiguration` wewnątrz aplikacji odbywa się w *Startup.cs*:
 
 [!code-csharp[](samples/startup-builder.cs)]
 
@@ -140,7 +140,7 @@ Wstrzyknięcie w `IProductRepository` razie konieczności:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Ponieważ iniekcja zależności jest częścią ASP.NET Core, możesz dodać swoją usługę w `ConfigureServices` metodzie *Startup.cs* :
+Ponieważ iniekcja zależności jest częścią ASP.NET Core, możesz dodać swoją usługę w `ConfigureServices` metodzie *Startup.cs*:
 
 [!code-csharp[](samples/configure-services.cs)]
 
@@ -155,7 +155,7 @@ Ważną częścią programowania w sieci Web jest możliwość obsłużynia stat
 
 W ASP.NET pliki statyczne są przechowywane w różnych katalogach i przywoływane w widokach.
 
-W ASP.NET Core pliki statyczne są przechowywane w "katalogu głównym sieci Web" ( *&lt; &gt; /wwwroot zawartości* ), chyba że zostały skonfigurowane inaczej. Pliki są ładowane do potoku żądania przez wywołanie `UseStaticFiles` metody rozszerzenia z `Startup.Configure` :
+W ASP.NET Core pliki statyczne są przechowywane w "katalogu głównym sieci Web" (*&lt; &gt; /wwwroot zawartości*), chyba że zostały skonfigurowane inaczej. Pliki są ładowane do potoku żądania przez wywołanie `UseStaticFiles` metody rozszerzenia z `Startup.Configure` :
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -167,9 +167,13 @@ Na przykład zasób obrazu w folderze *wwwroot/images* jest dostępny dla przegl
 > [!NOTE]
 > Aby uzyskać bardziej szczegółowe informacje na temat obsługi plików statycznych w ASP.NET Core, zobacz [pliki statyczne](xref:fundamentals/static-files).
 
-## <a name="multi-value-no-loccookies"></a>Wiele wartości cookie s
+## <a name="multi-value-cookies"></a>Wiele wartości cookie s
 
 W ASP.NET Core nie są obsługiwane [wiele wartości cookie s](xref:System.Web.HttpCookie.Values) . Utwórz jedną cookie na wartość.
+
+## <a name="authentication-cookies-are-not-compressed-in-aspnet-core"></a>Uwierzytelnianie cookie s nie jest kompresowane w ASP.NET Core
+
+[!INCLUDE[](~/includes/cookies-not-compressed.md)]
 
 ## <a name="partial-app-migration"></a>Migracja częściowej aplikacji
 

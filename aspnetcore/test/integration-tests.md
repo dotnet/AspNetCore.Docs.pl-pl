@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 47d204a0cde258fda8c9c9b78043046e719d8f18
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 50c3f04c4add9d3dec032b5f2e95ce503466693e
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102588038"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413382"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Testy integracji w ASP.NET Core
 
@@ -347,7 +347,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="disable-shadow-copying"></a>Wyłącz kopiowanie w tle
 
-Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit przez dołączenie *xunit.runner.jsw* pliku z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zobacz [Configuring xUnit with JSON](https://xunit.github.io/docs/configuring-with-json.html).
+Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit przez dołączenie *xunit.runner.jsw* pliku z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją xUnit](https://xunit.net/docs/configuration-files).
 
 Dodaj *xunit.runner.js* do pliku głównego projektu testowego z następującą zawartością:
 

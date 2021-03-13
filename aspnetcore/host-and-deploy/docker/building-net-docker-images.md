@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: b29ce03366e5c0e815de0874f5b96efb9ba5326c
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 32e721035df8bd9e746ad4db6bb2753c358f3dac
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102585958"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413499"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Obrazy platformy Docker dla ASP.NET Core
 
@@ -64,15 +64,17 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 * `dotnet/aspnet`
 
+   Przykład używa tego obrazu do uruchamiania aplikacji. Obraz zawiera ASP.NET Core środowiska uruchomieniowego i bibliotek, które są zoptymalizowane pod kątem uruchamiania aplikacji w środowisku produkcyjnym. Obraz jest stosunkowo mały, zaprojektowany z myślą o szybkości wdrażania i uruchamiania aplikacji, dlatego Optymalizacja wydajności sieci z poziomu rejestru platformy Docker do hosta platformy Docker jest zoptymalizowana. Tylko pliki binarne i zawartość, które są konieczne do uruchomienia aplikacji, są kopiowane do kontenera. Zawartość jest gotowa do uruchomienia, co pozwoli na najszybszy czas od `docker run` do uruchomienia aplikacji. W modelu platformy Docker nie jest wymagana kompilacja kodu dynamicznego.
+   
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
 * `dotnet/core/aspnet`
 
-::: moniker-end
-
    Przykład używa tego obrazu do uruchamiania aplikacji. Obraz zawiera ASP.NET Core środowiska uruchomieniowego i bibliotek, które są zoptymalizowane pod kątem uruchamiania aplikacji w środowisku produkcyjnym. Obraz jest stosunkowo mały, zaprojektowany z myślą o szybkości wdrażania i uruchamiania aplikacji, dlatego Optymalizacja wydajności sieci z poziomu rejestru platformy Docker do hosta platformy Docker jest zoptymalizowana. Tylko pliki binarne i zawartość, które są konieczne do uruchomienia aplikacji, są kopiowane do kontenera. Zawartość jest gotowa do uruchomienia, co pozwoli na najszybszy czas od `docker run` do uruchomienia aplikacji. W modelu platformy Docker nie jest wymagana kompilacja kodu dynamicznego.
+   
+::: moniker-end
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -216,7 +218,7 @@ W niektórych scenariuszach może zajść potrzeba wdrożenia aplikacji w konten
 
 * Przejdź do `http://localhost:5000` strony głównej.
 
-Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, Utwórz nowy *pliku dockerfile* i Użyj `docker build .` polecenia, aby skompilować kontener.
+Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, Utwórz nowy *pliku dockerfile* i Użyj `docker build .` polecenia, aby skompilować obraz.
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -226,6 +228,8 @@ WORKDIR /app
 COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
+
+Aby wyświetlić nowy obraz, użyj `docker images` polecenia.
 
 ### <a name="the-dockerfile"></a>Pliku dockerfile
 

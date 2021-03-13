@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 0f1f5dfcb9595270a9659a02141f7d1eba5c44ef
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 11473bbf8b4e2d67d15798a5d87ee01761682f9a
+ms.sourcegitcommit: 07e7ee573fe4e12be93249a385db745d714ff6ae
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587700"
+ms.lasthandoff: 03/12/2021
+ms.locfileid: "103413473"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -49,7 +49,7 @@ Skonfiguruj aplikację do korzystania z oprogramowania pośredniczącego z <xref
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
 
 > [!WARNING]
-> <xref:Owin.CorsExtensions.UseCors%2A> musi być wywoływana przed <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> użyciem [oprogramowania pośredniczącego CORS](xref:security/cors).
+> <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors%2A> musi być wywoływana przed <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> użyciem [oprogramowania pośredniczącego CORS](xref:security/cors).
 
 Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejnych żądaniach:
 

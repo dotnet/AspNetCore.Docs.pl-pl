@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: c90ac92cf0866b78bcdb11663e76c116d714ca5d
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: eeae0ef44fc9b8a92da40481f5dbc7422ed8d43c
+ms.sourcegitcommit: d5fa39765959738eed4bcf5ee0b207cefddb4873
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589065"
+ms.lasthandoff: 03/14/2021
+ms.locfileid: "103460446"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -509,10 +509,6 @@ Trasy atrybutu można także łączyć z dziedziczeniem. Jest to zaawansowane po
 `[Route("[controller]/[action]", Name="[controller]_[action]")]`generuje unikatową nazwę trasy dla każdej akcji:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet5)]
-
-Zastępowanie tokenu dotyczy również nazw tras zdefiniowanych przez trasy atrybutów.
-`[Route("[controller]/[action]", Name="[controller]_[action]")]`
-generuje unikatową nazwę trasy dla każdej akcji.
 
 Aby dopasować ogranicznik zamiany tokenu literału `[` lub  `]` , należy to zrobić, powtarzając znak ( `[[` lub `]]` ).
 

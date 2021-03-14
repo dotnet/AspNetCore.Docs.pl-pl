@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 0ffe4ed251eed551b2799c1a66424ba31137dc18
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 19e20923d5f4cd2bf8671df7558995d34da2cdf6
+ms.sourcegitcommit: d5fa39765959738eed4bcf5ee0b207cefddb4873
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102589520"
+ms.lasthandoff: 03/14/2021
+ms.locfileid: "103460433"
 ---
 # <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
@@ -129,7 +129,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 ### <a name="add-search-by-genre-to-the-razor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
 
-1. Aktualizowanie *Index . cshtml* [ `<form>` element] ( https://developer.mozilla.org/docs/Web/HTML/Element/form) jak wyróżniono w następującej adjustacji):
+1. Zaktualizuj [ `<form>` element](https://developer.mozilla.org/docs/Web/HTML/Element/form) *Index . cshtml* jako wyróżniony w następującej postaci:
 
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 

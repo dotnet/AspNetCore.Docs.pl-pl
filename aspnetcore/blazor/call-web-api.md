@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 9ac17e7c22b23ced7a8f12a6ef0d456f6244318b
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: 451b6f60a1e5f560606adb4fbaf8596d9d57ec64
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102586764"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557818"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET Core Blazor
 
@@ -129,7 +129,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
   Wywołania do <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> zwrócenia <xref:System.Net.Http.HttpResponseMessage> . Aby zdeserializować zawartość JSON z komunikatu odpowiedzi, należy użyć `ReadFromJsonAsync<T>` metody rozszerzenia:
   
   ```csharp
-  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
+  var content = await response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: Wysyła żądanie HTTP PUT, w tym zawartość zakodowaną w formacie JSON.
@@ -160,7 +160,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
   Wywołania do <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> zwrócenia <xref:System.Net.Http.HttpResponseMessage> . Aby zdeserializować zawartość JSON z komunikatu odpowiedzi, należy użyć <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> metody rozszerzenia:
   
   ```csharp
-  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
+  var content = await response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 <xref:System.Net.Http> zawiera dodatkowe metody rozszerzające do wysyłania żądań HTTP i otrzymywania odpowiedzi HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> służy do wysyłania żądania HTTP DELETE do internetowego interfejsu API.

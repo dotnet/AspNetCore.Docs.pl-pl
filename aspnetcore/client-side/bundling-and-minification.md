@@ -4,7 +4,7 @@ author: scottaddie
 description: Dowiedz się, jak zoptymalizować zasoby statyczne w ASP.NET Core aplikacji sieci Web przez zastosowanie technik tworzenia i minifikacja.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 09/02/2020
+ms.date: 03/14/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: d594bbf277907e22b0299b0451e480e9d533d506
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "93054843"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557806"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Łączenie i zminifikować zasobów statycznych w ASP.NET Core
 
@@ -35,11 +35,11 @@ W tym artykule wyjaśniono zalety stosowania funkcji tworzenia i minifikacja, w 
 
 Tworzenie i minifikacja to dwie różne optymalizacje wydajności, które można zastosować w aplikacji sieci Web. Używane razem, grupując i minifikacja poprawić wydajność poprzez zmniejszenie liczby żądań serwera i zmniejszenie rozmiaru żądanych zasobów statycznych.
 
-Zgrupowanie i minifikacja przede wszystkim zwiększy czas ładowania żądania pierwszej strony. Po zażądaniu strony sieci Web przeglądarka buforuje statyczne zasoby (JavaScript, CSS i obrazy). W związku z tym, zgrupowanie i minifikacja nie poprawia wydajności podczas żądania tej samej strony lub stron w tej samej lokacji, w której zażądają tych samych zasobów. Jeśli Nagłówek Expires nie jest poprawnie ustawiony na elementach zawartości i jeśli nie jest używane minifikacja i nie jest używany, heurystyka Aktualności przeglądarki Oznacz zasoby jako przestarzałe po kilku dniach. Ponadto przeglądarka wymaga żądania weryfikacji dla każdego elementu zawartości. W takim przypadku zgrupowanie i minifikacja zapewnia poprawę wydajności nawet po pierwszym żądaniu strony.
+Zgrupowanie i minifikacja przede wszystkim zwiększy czas ładowania żądania pierwszej strony. Po zażądaniu strony sieci Web przeglądarka buforuje statyczne zasoby (JavaScript, CSS i obrazy). Dlatego zgrupowanie i minifikacja nie poprawiaj wydajności podczas żądania tej samej strony lub stron w tej samej lokacji, w której zażądają tych samych zasobów. Jeśli Nagłówek Expires nie jest poprawnie ustawiony na elementach zawartości i jeśli nie jest używane minifikacja i nie jest używany, heurystyka Aktualności przeglądarki Oznacz zasoby jako przestarzałe po kilku dniach. Ponadto przeglądarka wymaga żądania weryfikacji dla każdego elementu zawartości. W takim przypadku zgrupowanie i minifikacja zapewnia poprawę wydajności nawet po pierwszym żądaniu strony.
 
 ### <a name="bundling"></a>Tworzenia pakietów
 
-Tworzenie pakietów pozwala łączyć wiele plików w jeden plik. Zgrupowanie zmniejsza liczbę żądań serwera, które są niezbędne do renderowania zasobów sieci Web, takich jak strona sieci Web. Można utworzyć dowolną liczbę pojedynczych pakietów przeznaczonych dla CSS, JavaScript itd. Mniejsza liczba plików oznacza mniejszą liczbę żądań HTTP z przeglądarki do serwera lub z usługi dostarczającej aplikację. Powoduje to zwiększenie wydajności pierwszej strony.
+Tworzenie pakietów pozwala łączyć wiele plików w jeden plik. Zgrupowanie zmniejsza liczbę żądań serwera, które są niezbędne do renderowania zasobów sieci Web, takich jak strona sieci Web. Można utworzyć dowolną liczbę pojedynczych pakietów przeznaczonych dla CSS, JavaScript itd. Mniej plików oznacza mniejszą liczbę żądań HTTP z przeglądarki do serwera lub z usługi dostarczającej aplikację. Powoduje to zwiększenie wydajności pierwszej strony.
 
 ### <a name="minification"></a>Minifikacja
 
@@ -47,11 +47,24 @@ Minifikacja usuwa zbędne znaki z kodu bez zmiany funkcjonalności. Wynikiem jes
 
 Weź pod uwagę następującą funkcję języka JavaScript:
 
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/js/site.js)]
+```javascript
+AddAltToImg = function (imageTagAndImageID, imageContext) {
+    ///<signature>
+    ///<summary> Adds an alt tab to the image
+    // </summary>
+    //<param name="imgElement" type="String">The image selector.</param>
+    //<param name="ContextForImage" type="String">The image context.</param>
+    ///</signature>
+    var imageElement = $(imageTagAndImageID, imageContext);
+    imageElement.attr('alt', imageElement.attr('id').replace(/ID/, ''));
+}
+```
 
 Minifikacja zmniejsza funkcję do następujących:
 
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/js/site.min.js)]
+```javascript
+AddAltToImg=function(t,a){var r=$(t,a);r.attr("alt",r.attr("id").replace(/ID/,""))};
+```
 
 Oprócz usuwania komentarzy i niepotrzebnych białych znaków, nazwy następujących parametrów i zmiennych zostały zmienione w następujący sposób:
 
@@ -71,66 +84,13 @@ Akcja | Z B/M | Bez B/M | Zmiana
 Przeniesiono KB | 156 | 264,68 | 70%
 Czas ładowania (MS) | 885 | 2360   | 167%
 
-Przeglądarki są dość szczegółowe w odniesieniu do nagłówków żądań HTTP. Metryka całkowita liczba wysłanych bajtów osiągnęła znaczącą redukcję podczas grupowania. Czas ładowania przedstawia znaczącą poprawę, jednak ten przykład jest uruchamiany lokalnie. W przypadku korzystania z funkcji grupowania i minifikacja z zasobami transferowanymi za pośrednictwem sieci są osiągane większe zyski wydajności.
+Przeglądarki są dość pełne w odniesieniu do nagłówków żądań HTTP. Metryka całkowita liczba wysłanych bajtów osiągnęła znaczącą redukcję podczas grupowania. Czas ładowania przedstawia znaczącą poprawę, jednak ten przykład jest uruchamiany lokalnie. W przypadku korzystania z funkcji grupowania i minifikacja z zasobami transferowanymi za pośrednictwem sieci są osiągane większe zyski wydajności.
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Wybierz strategię tworzenia i minifikacja
 
-RazorSzablony projektu MVC i Pages zapewniają rozwiązanie do tworzenia i minifikacja składające się z pliku konfiguracji JSON. Narzędzia innych firm, takie jak [grunt](xref:client-side/using-grunt) Task Runner, spełniają te same zadania o nieco większej złożoności. Narzędzie innej firmy jest doskonałym rozwiązaniem, gdy przepływ pracy deweloperskiej wymaga przetwarzania poza dzieleniem i minifikacja, &mdash; takim jak zaznaczanie błędów i Optymalizacja obrazu. Korzystając z konstrukcji i minifikacja w czasie projektowania, pliki zminimalizowanego są tworzone przed wdrożeniem aplikacji. Przydzielenie i minifikacja przed wdrożeniem zapewnia zalety mniejszego obciążenia serwera. Należy jednak pamiętać, że konstrukcja czasu projektowania i minifikacja zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
+ASP.NET Core jest zgodna z programem weboptimize, minifikacja i rozwiązaniem Open Source. Aby uzyskać instrukcje dotyczące konfigurowania i przykładowych projektów, zobacz temat [Weboptimize](https://github.com/ligershark/WebOptimizer). ASP.NET Core nie zapewnia natywnego tworzenia i minifikacja rozwiązania.
 
-## <a name="configure-bundling-and-minification"></a>Konfigurowanie grupowania i minifikacja
-
-> [!NOTE]
-> Aby to działało, należy dodać do projektu pakiet NuGet [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) .
-
-::: moniker range="<= aspnetcore-2.0"
-
-W ASP.NET Core 2,0 lub starszych szablon projektu MVC i Razor Pages udostępnia *bundleconfig.js* pliku konfiguracji, który definiuje opcje dla każdego pakietu:
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
-W ASP.NET Core 2,1 lub nowszej Dodaj nowy plik JSON o nazwie *bundleconfig.json*, do Razor elementu głównego projektu MVC lub Pages. Dołącz następujący kod JSON do tego pliku jako punkt początkowy:
-
-::: moniker-end
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
-
-*bundleconfig.jsw* pliku definiuje opcje dla każdego pakietu. W poprzednim przykładzie została zdefiniowana jedna konfiguracja pakietu dla plików niestandardowych JavaScript (*wwwroot/js/site.js*) i arkusza stylów (*wwwroot/CSS/site. css*).
-
-Opcje konfiguracji obejmują:
-
-* `outputFileName`: Nazwa pliku pakietu do wyprowadzenia. Może zawierać ścieżkę względną z *bundleconfig.js* pliku. **Wymagane**
-* `inputFiles`: Tablica plików do powiązania ze sobą. Są to względne ścieżki do pliku konfiguracji. **opcjonalne**, * pusta wartość powoduje pusty plik wyjściowy. Obsługiwane są wzorce [obsługi symboli wieloznacznych](https://www.tldp.org/LDP/abs/html/globbingref.html) .
-* `minify`: Opcje minifikacja dla typu danych wyjściowych. **opcjonalne**, *domyślne — `minify: { enabled: true }`*
-  * Opcje konfiguracji są dostępne dla każdego typu pliku wyjściowego.
-    * [Minifier CSS](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
-    * [Minifier JavaScript](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
-    * [Minifier HTML](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: Flaga oznaczająca, czy dodać wygenerowane pliki do pliku projektu. **opcjonalne**, *Domyślnie-false*
-* `sourceMap`: Flaga oznaczająca, czy generować mapę źródłową dla powiązanego pliku. **opcjonalne**, *Domyślnie-false*
-* `sourceMapRootPath`: Ścieżka katalogu głównego do przechowywania wygenerowanego pliku mapy źródłowej.
-
-## <a name="add-files-to-workflow"></a>Dodaj pliki do przepływu pracy
-
-Rozważmy przykład, w którym dodatkowy *niestandardowy plik CSS* został dodany podobny do poniższego:
-
-[!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
-
-Aby zminifikować *niestandardowy. css* i powiązać go z plikiem *site. css* w pliku *site. min. css* , Dodaj ścieżkę względną do *bundleconfig.jsna*:
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
-
-> [!NOTE]
-> Alternatywnie można użyć następującego wzorca obsługi symboli wieloznacznych:
->
-> ```json
-> "inputFiles": ["wwwroot/**/!(*.min).css" ]
-> ```
->
-> Ten wzorzec obsługi symboli wieloznacznych dopasowuje wszystkie pliki CSS i wyklucza wzorzec pliku zminimalizowanego.
-
-Skompiluj aplikację. Otwórz *witrynę site. min. css* i zwróć uwagę na zawartość *Custom. css* , która jest dołączana na końcu pliku.
+Narzędzia innych firm, takie jak [Gulp](https://gulpjs.com) i [WebPack](https://webpack.js.org), zapewniają automatyzację przepływu pracy do tworzenia i minifikacja, a także Zaznaczanie błędów i optymalizację obrazu. Korzystając z konstrukcji i minifikacja w czasie projektowania, pliki zminimalizowanego są tworzone przed wdrożeniem aplikacji. Przydzielenie i minifikacja przed wdrożeniem zapewnia zalety mniejszego obciążenia serwera. Należy jednak pamiętać, że konstrukcja czasu projektowania i minifikacja zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
 
 ## <a name="environment-based-bundling-and-minification"></a>Tworzenie i minifikacja oparte na środowisku
 
@@ -142,13 +102,25 @@ Następujący `environment` tag renderuje nieprzetworzone pliki CSS podczas dzia
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=21-24)]
+```cshtml
+<environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</environment>
+```
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=9-12)]
+```cshtml
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
@@ -156,70 +128,31 @@ Poniższy `environment` tag renderuje powiązane i zminimalizowanego pliki CSS, 
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=5&range=25-30)]
+```cshtml
+<environment exclude="Development">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-cshtml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/Pages/_Layout.cshtml?highlight=3&range=13-18)]
+```cshtml
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+```
 
 ::: moniker-end
 
-## <a name="consume-bundleconfigjson-from-gulp"></a>Korzystanie z bundleconfig.jsna podstawie Gulp
-
-Istnieją przypadki, w których aplikacja i przepływy pracy minifikacja aplikacji wymagają dodatkowego przetwarzania. Przykładami są Optymalizacja obrazu, Busting pamięci podręcznej i przetwarzanie zasobów sieci CDN. Aby spełnić te wymagania, można skonwertować przepływ pracy tworzenia i minifikacja w celu użycia Gulp.
-
-### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Ręcznie przekonwertuj przepływ pracy tworzenia i minifikacjaów, aby użyć Gulp
-
-Dodaj *package.js* do pliku, w następujący `devDependencies` sposób, do katalogu głównego projektu:
-
-> [!WARNING]
-> `gulp-uglify`Moduł nie obsługuje języka ECMAScript (ES) 2015/ES6 i nowszych. Zainstaluj [Gulp-Terser](https://www.npmjs.com/package/gulp-terser) zamiast `gulp-uglify` używać ES2015/ES6 lub nowszego.
-
-[!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
-
-Zainstaluj zależności, uruchamiając następujące polecenie na tym samym poziomie co *package.jsna*:
-
-```bash
-npm i
-```
-
-Zainstaluj interfejs wiersza polecenia Gulp jako zależność globalną:
-
-```bash
-npm i -g gulp-cli
-```
-
-Skopiuj poniższy *gulpfile.js* plik do katalogu głównego projektu:
-
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-11,14-)]
-
-### <a name="run-gulp-tasks"></a>Uruchamianie zadań Gulp
-
-Aby wyzwolić zadanie Gulp minifikacja przed kompilacją projektu w programie Visual Studio:
-
-1. Zainstaluj pakiet NuGet [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) .
-1. Dodaj następujący [element docelowy programu MSBuild](/visualstudio/msbuild/msbuild-targets) do pliku projektu:
-
-    [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
-
-W tym przykładzie wszystkie zadania zdefiniowane w `MyPreCompileTarget` miejscu docelowym są uruchamiane przed wstępnie zdefiniowanym `Build` elementem docelowym. Dane wyjściowe podobne do następujących pojawiają się w oknie danych wyjściowych programu Visual Studio:
-
-```console
-1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-1>[14:17:49] Using gulpfile C:\BuildBundlerMinifierApp\gulpfile.js
-1>[14:17:49] Starting 'min:js'...
-1>[14:17:49] Starting 'min:css'...
-1>[14:17:49] Starting 'min:html'...
-1>[14:17:49] Finished 'min:js' after 83 ms
-1>[14:17:49] Finished 'min:css' after 88 ms
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-```
-
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Korzystanie z Grunt](xref:client-side/using-grunt)
 * [Używanie wielu środowisk](xref:fundamentals/environments)
 * [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro)

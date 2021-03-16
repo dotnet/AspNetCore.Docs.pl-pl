@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 789cd1a867bc8c17401bbac5c02951b4bd2999b6
-ms.sourcegitcommit: 54fe1ae5e7d068e27376d562183ef9ddc7afc432
+ms.openlocfilehash: f80c574ddb85c50713e36c7a2cceb826863c7321
+ms.sourcegitcommit: 00368bb6a5420983beaced5b62dabc1f94abdeba
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/10/2021
-ms.locfileid: "102587661"
+ms.lasthandoff: 03/16/2021
+ms.locfileid: "103557845"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -34,7 +34,7 @@ Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą AS
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -82,7 +82,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
-* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Wybierz szablon **internetowego interfejsu API ASP.NET Core** i kliknij przycisk **dalej**.
 * Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
 * W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 5,0** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.
 
@@ -553,7 +553,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -1038,7 +1038,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range="< aspnetcore-3.0"
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
